@@ -14,6 +14,8 @@ source files, headers, and information.
 $ make
 ```
 
+Branch Note: this branch of Zork is being used as a reference translation, in conjunction with a second translation being carried out from Fortran using a more up-to-date version of f2c (or maybe a better Fortran-to-C translator); and will be subject to a round of major recoding to bring it up to sync with our locally-maintained version of both this branch and the Fortran branch. Both will be merged.
+
 ## History of the C Implementation of Dungeon
 
 This version of dungeon has been modified from FORTRAN to C.  The
