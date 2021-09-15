@@ -3,7 +3,7 @@
 #include "funcs.h"
 
 #ifdef __AMOS__
-#include <moncal.h>
+#   include <moncal.h>
 #endif
 
 /* This function should return TRUE_ if it's OK for people to play the
@@ -15,35 +15,34 @@
  */
 
 #ifdef NONBUSINESS
-#ifdef BSD4_2
-#include <sys/timeb.h>
-#else /* ! BSD4_2 */
-#include <time.h>
-#endif /* ! BSD4_2 */
-#endif /* NONBUSINESS */
+#   ifdef BSD4_2
+#      include <sys/timeb.h>
+#   else
+#      include <time.h>
+#   endif
+#endif
 
-logical protected()
-{
+logical protected() {
 #ifndef NONBUSINESS
 
-    return TRUE_;
+   return TRUE_;
 
 #else /* NONBUSINESS */
 
-    time_t t;
-    struct tm *q;
+   time_t t;
+   struct tm *q;
 
-    (void)time(&t);
-    q = localtime(&t);
+   (void)time(&t);
+   q = localtime(&t);
 
-    /* Return TRUE_ if it's Sunday or Saturday or before 9 or after 5 */
+/* Return TRUE_ if it's Sunday or Saturday or before 9 or after 5 */
 
-    if (q->tm_wday == 0 || q->tm_wday == 6)
-	return TRUE_;
-    else if (q->tm_hour < 9 || q->tm_hour >= 17)
-	return TRUE_;
-    else
-	return FALSE_;
+   if (q->tm_wday == 0 || q->tm_wday == 6)
+      return TRUE_;
+   else if (q->tm_hour < 9 || q->tm_hour >= 17)
+      return TRUE_;
+   else
+      return FALSE_;
 
 #endif /* NONBUSINESS */
 
@@ -59,23 +58,22 @@ logical protected()
  * you want to use gdt.
  */
 
-#ifndef WIZARDID
-#define WIZARDID (0)
-#endif
+#   ifndef WIZARDID
+#      define WIZARDID (0)
+#   endif
 
-logical wizard()
-{
-#ifdef __AMOS__
-    if (jobidx()->jobusr == 0x102)
-	return TRUE_;
-#else
-#ifdef unix
-    if (getuid() == 0 || getuid() == WIZARDID)
-	return TRUE_;
-#endif
-#endif
+logical wizard() {
+#   ifdef __AMOS__
+   if (jobidx()->jobusr == 0x102)
+      return TRUE_;
+#   else
+#      ifdef unix
+   if (getuid() == 0 || getuid() == WIZARDID)
+      return TRUE_;
+#      endif
+#   endif
 
-    return TRUE_;
+   return TRUE_;
 }
 
 #endif

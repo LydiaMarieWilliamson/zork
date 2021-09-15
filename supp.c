@@ -3,13 +3,13 @@
 #include <stdio.h>
 
 #ifdef unix
-#include <sys/types.h>
+#   include <sys/types.h>
 #endif
 
 #ifdef BSD4_2
-#include <sys/time.h>
+#   include <sys/time.h>
 #else /* ! BSD4_2 */
-#include <time.h>
+#   include <time.h>
 #endif /* ! BSD4_2 */
 
 #include "funcs.h"
@@ -26,14 +26,13 @@ extern int rand P((void));
  */
 
 extern time_t time P((time_t *));
-extern struct tm *localtime ();
+extern struct tm *localtime();
 
 /* Terminate the game */
 
-void exit_()
-{
-    fprintf(stderr, "The game is over.\n");
-    exit(0);
+void exit_() {
+   fprintf(stderr, "The game is over.\n");
+   exit(0);
 }
 
 /* Get time in hours, minutes and seconds */
@@ -43,22 +42,23 @@ integer *hrptr;
 integer *minptr;
 integer *secptr;
 {
-	time_t timebuf;
-	struct tm *tmptr;
+   time_t timebuf;
+   struct tm *tmptr;
 
-	time(&timebuf);
-	tmptr = localtime(&timebuf);
-	
-	*hrptr  = tmptr->tm_hour;
-	*minptr = tmptr->tm_min;
-	*secptr = tmptr->tm_sec;
+   time(&timebuf);
+   tmptr = localtime(&timebuf);
+
+   *hrptr = tmptr->tm_hour;
+   *minptr = tmptr->tm_min;
+   *secptr = tmptr->tm_sec;
 }
+
 /* Random number generator */
 
 integer rnd_(maxval)
 integer maxval;
 {
-	return rand() % maxval;
+   return rand() % maxval;
 }
 
 /* Terminal support routines for dungeon */
@@ -87,23 +87,31 @@ integer maxval;
  */
 
 #ifndef MORE_NONE
-#ifndef MORE_24
-#ifndef MORE_TERMCAP
-#ifndef MORE_TERMINFO
-#ifndef MORE_AMOS
-#ifdef __AMOS__
-#define MORE_AMOS
-#else /* ! __AMOS__ */
-#ifdef unix
-#define MORE_TERMCAP
-#else /* ! unix */
-#define MORE_NONE
-#endif /* ! unix */
-#endif /* ! __AMOS__ */
-#endif /* ! MORE_AMOS */
-#endif /* ! MORE_TERMINFO */
-#endif /* ! MORE_TERMCAP */
-#endif /* ! MORE_24 */
+#   ifndef MORE_24
+#      ifndef MORE_TERMCAP
+#         ifndef MORE_TERMINFO
+#            ifndef MORE_AMOS
+#               ifdef __AMOS__
+#                  define MORE_AMOS
+#               else
+      /* ! __AMOS__ */
+#                  ifdef unix
+#                     define MORE_TERMCAP
+#                  else
+      /* ! unix */
+#                     define MORE_NONE
+#                  endif
+       /* ! unix */
+#               endif
+       /* ! __AMOS__ */
+#            endif
+       /* ! MORE_AMOS */
+#         endif
+       /* ! MORE_TERMINFO */
+#      endif
+       /* ! MORE_TERMCAP */
+#   endif
+       /* ! MORE_24 */
 #endif /* ! MORE_NONE */
 
 #ifdef MORE_TERMCAP
@@ -114,21 +122,24 @@ extern int tgetnum P((const char *));
 
 #else /* ! MORE_TERMCAP */
 
-#ifdef MORE_TERMINFO
+#   ifdef MORE_TERMINFO
 
-#include <cursesX.h>
-#include <term.h>
+#      include <cursesX.h>
+#      include <term.h>
 extern void setupterm P((const char *, int, int));
 
-#else /* ! MORE_TERMINFO */
+#   else
+      /* ! MORE_TERMINFO */
 
-#ifdef MORE_AMOS
+#      ifdef MORE_AMOS
 
-#include <moncal.h>
-#include <unistd.h>
+#         include <moncal.h>
+#         include <unistd.h>
 
-#endif /* MORE_AMOS */
-#endif /* ! MORE_TERMINFO */
+#      endif
+       /* MORE_AMOS */
+#   endif
+       /* ! MORE_TERMINFO */
 #endif /* ! MORE_TERMCAP */
 
 /* Initialize the more waiting facility (determine how many rows the
@@ -138,73 +149,76 @@ extern void setupterm P((const char *, int, int));
 static integer crows;
 static integer coutput;
 
-void more_init()
-{
+void more_init() {
 #ifdef MORE_NONE
 
-    crows = 0;
+   crows = 0;
 
 #else /* ! MORE_NONE */
-#ifdef MORE_24
+#   ifdef MORE_24
 
-    crows = 24;
+   crows = 24;
 
-#else /* ! MORE_24 */
-#ifdef MORE_TERMCAP
+#   else
+      /* ! MORE_24 */
+#      ifdef MORE_TERMCAP
 
-    char buf[2048];
-    char *term;
+   char buf[2048];
+   char *term;
 
-    term = getenv("TERM");
-    if (term == NULL)
-	crows = 0;
-    else {
-	tgetent(buf, term);
-	crows = tgetnum("li");
-    }
+   term = getenv("TERM");
+   if (term == NULL)
+      crows = 0;
+   else {
+      tgetent(buf, term);
+      crows = tgetnum("li");
+   }
 
-#else /* ! MORE_TERMCAP */
-#ifdef MORE_TERMINFO
+#      else
+      /* ! MORE_TERMCAP */
+#         ifdef MORE_TERMINFO
 
-    int i;
+   int i;
 
-    setupterm(NULL, 1, &i);
-    if (i != 1)
-        crows = 0;
-    else
-	crows = lines;
+   setupterm(NULL, 1, &i);
+   if (i != 1)
+      crows = 0;
+   else
+      crows = lines;
 
-#else /* ! MORE_TERMINFO */
-#ifdef MORE_AMOS
+#         else
+      /* ! MORE_TERMINFO */
+#            ifdef MORE_AMOS
 
-    trm_char st;
+   trm_char st;
 
-    if (isatty(fileno(stdin)) == 0)
-	crows = 0;
-    else {
-	    trmchr(&st, 0);
-	    crows = st.row;
-    }
+   if (isatty(fileno(stdin)) == 0)
+      crows = 0;
+   else {
+      trmchr(&st, 0);
+      crows = st.row;
+   }
 
-#else /* ! MORE_AMOS */
+#            else
+      /* ! MORE_AMOS */
 
-    This should be impossible
-
-#endif /* ! MORE_AMOS */
-#endif /* ! MORE_TERMINFO */
-#endif /* ! MORE_TERMCAP */
-#endif /* ! MORE_24 */
+   This should be impossible
+#            endif
+       /* ! MORE_AMOS */
+#         endif
+       /* ! MORE_TERMINFO */
+#      endif
+       /* ! MORE_TERMCAP */
+#   endif
+       /* ! MORE_24 */
 #endif /* ! MORE_NONE */
 }
-
 /* The program wants to output a line to the terminal.  If z is not
  * NULL it is a simple string which is output here; otherwise it
  * needs some sort of formatting, and is output after this function
  * returns (if all computers had vprintf I would just it, but they
  * probably don't).
- */
-
-void more_output(z)
+ */ void more_output(z)
 const char *z;
 {
 /* pager code remarked out to allow streamed input and output */
@@ -217,15 +231,14 @@ const char *z;
 	coutput = 0;
     }
 */
-    if (z != NULL)
-	printf("%s\n", z);
+   if (z != NULL)
+      printf("%s\n", z);
 
-    coutput++;
+   coutput++;
 }
 
 /* The terminal is waiting for input (clear the number of output lines) */
 
-void more_input()
-{
-    coutput = 0;
+void more_input() {
+   coutput = 0;
 }
