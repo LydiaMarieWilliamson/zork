@@ -1,32 +1,30 @@
 // VAPPLI- MAIN VERB PROCESSING ROUTINE
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
 
-logical vappli_(ri)
-integer ri;
-{
+Bool vappli_(int ri) {
 // Initialized data
 
-   const integer mxnop = 39;
-   const integer mxsmp = 99;
+   const int mxnop = 39;
+   const int mxsmp = 99;
 
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer melee;
-   logical f;
-   integer i, j, av;
-   integer rmk;
-   integer odi2 = 0, odo2 = 0;
+   int melee;
+   Bool f;
+   int i, j, av;
+   int rmk;
+   int odi2 = 0, odo2 = 0;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
 
    if (prsvec_1.prso > 220) {
@@ -184,7 +182,7 @@ L5:
 // ALL VERB PROCESSORS RETURN HERE TO DECLARE FAILURE.
 
 L10:
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!LOSE.
    return ret_val;
 
@@ -857,7 +855,7 @@ L56000:
    }
    rspeak_(516);
 // 						!NOTHING TO FILL WITH.
-   prsvec_1.prswon = FALSE_;
+   prsvec_1.prswon = false;
 // 						!YOU LOSE.
    return ret_val;
 
@@ -1350,15 +1348,15 @@ L87500:
 
 // DECLARATIONS
 
-logical clockd_() {
+Bool clockd_(void) {
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer i;
+   int i;
 
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME NO ACTION.
    i__1 = cevent_1.clnt;
    for (i = 1; i <= i__1; ++i) {
@@ -1375,7 +1373,7 @@ logical clockd_() {
       }
 // 						!TIMER EXPIRED?
    L50:
-      ret_val = TRUE_;
+      ret_val = true;
       cevapp_(cevent_1.cactio[i - 1]);
 // 						!DO ACTION.
    L100:

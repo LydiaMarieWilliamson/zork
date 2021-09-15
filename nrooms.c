@@ -1,31 +1,29 @@
 // RAPPL2- SPECIAL PURPOSE ROOM ROUTINES, PART 2
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
 
-static void ewtell_ P((integer, integer));
-static void lookto_ P((integer, integer, integer, integer, integer));
+static void ewtell_(int, int);
+static void lookto_(int, int, int, int, int);
 
-logical rappl2_(ri)
-integer ri;
-{
+Bool rappl2_(int ri) {
 // Initialized data
 
-   const integer newrms = 38;
+   const int newrms = 38;
 
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer i;
-   integer j;
+   int i;
+   int j;
 
-   ret_val = TRUE_;
+   ret_val = true;
    switch (ri - newrms + 1) {
       case 1:
          goto L38000;
@@ -240,7 +238,7 @@ L50000:
       goto L50100;
    }
 // 						!WALK IN?
-   cevent_1.cflag[cindex_1.cevfol - 1] = TRUE_;
+   cevent_1.cflag[cindex_1.cevfol - 1] = true;
 // 						!MASTER FOLLOWS.
    cevent_1.ctick[cindex_1.cevfol - 1] = -1;
    return ret_val;
@@ -432,18 +430,12 @@ L60100:
 
 // DECLARATIONS
 
-static void lookto_(nrm, srm, nt, st, ht)
-integer nrm;
-integer srm;
-integer nt;
-integer st;
-integer ht;
-{
+static void lookto_(int nrm, int srm, int nt, int st, int ht) {
 // System generated locals
-   integer i__1;
+   int i__1;
 
 // Local variables
-   integer i, m1, dir, mrbf;
+   int i, m1, dir, mrbf;
 
    rspeak_(ht);
 // 						!DESCRIBE HALL.
@@ -515,16 +507,13 @@ L200:
 
 // DECLARATIONS
 
-static void ewtell_(rm, st)
-integer rm;
-integer st;
-{
+static void ewtell_(int rm, int st) {
 // System generated locals
-   integer i__1;
+   int i__1;
 
 // Local variables
-   integer i;
-   logical m1;
+   int i;
+   Bool m1;
 
 // NOTE THAT WE ARE EAST OR WEST OF MIRROR, AND
 // MIRROR MUST BE N-S.

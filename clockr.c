@@ -1,28 +1,26 @@
 // CEVAPP- CLOCK EVENT APPLICABLES
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
 
-static void litint_ P((integer, integer *, integer, const integer *, integer));
+static void litint_(int, int *, int, const int *, int);
 
-void cevapp_(ri)
-integer ri;
-{
+void cevapp_(int ri) {
 // Initialized data
 
-   static const integer cndtck[10] = { 50, 20, 10, 5, 0, 156, 156, 156, 157, 0 };
-   static const integer lmptck[12] = { 50, 30, 20, 10, 4, 0, 154, 154, 154, 154, 155, 0 };
+   static const int cndtck[10] = { 50, 20, 10, 5, 0, 156, 156, 156, 157, 0 };
+   static const int lmptck[12] = { 50, 30, 20, 10, 4, 0, 154, 154, 154, 154, 155, 0 };
 
 // System generated locals
-   integer i__1, i__2;
+   int i__1, i__2;
 
 // Local variables
-   logical f;
-   integer i, j, bc, br;
+   Bool f;
+   int i, j, bc, br;
 
    if (ri == 0) {
       return;
@@ -202,9 +200,9 @@ L6250:
 // 						!INSERT DEAD BALLOON.
    advs_1.avehic[play_1.winner - 1] = 0;
 // 						!NOT IN VEHICLE.
-   cevent_1.cflag[cindex_1.cevbal - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevbal - 1] = false;
 // 						!DISABLE INTERRUPTS.
-   cevent_1.cflag[cindex_1.cevbrn - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevbrn - 1] = false;
    findex_1.binff = 0;
    findex_1.btief = 0;
    return;
@@ -412,7 +410,7 @@ L8100:
    newsta_(oindex_1.sslot, 0, 0, 0, 0);
 // 						!KILL SLOT.
    objcts_1.oflag2[oindex_1.safe - 1] |= OPENBT;
-   findex_1.safef = TRUE_;
+   findex_1.safef = true;
 // 						!INDICATE SAFE BLOWN.
    return;
 
@@ -488,8 +486,8 @@ L9300:
 // 						!INSERT DEAD BALLOON.
    findex_1.btief = 0;
    findex_1.binff = 0;
-   cevent_1.cflag[cindex_1.cevbal - 1] = FALSE_;
-   cevent_1.cflag[cindex_1.cevbrn - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevbal - 1] = false;
+   cevent_1.cflag[cindex_1.cevbrn - 1] = false;
    jigsup_(113);
 // 						!DEAD
    return;
@@ -565,7 +563,7 @@ L14000:
 // CEV15--	END GAME HERALD.
 
 L15000:
-   findex_1.endgmf = TRUE_;
+   findex_1.endgmf = true;
 // 						!WE'RE IN ENDGAME.
    rspeak_(119);
 // 						!INFORM OF ENDGAME.
@@ -585,7 +583,7 @@ L16000:
 
 L17000:
    if (play_1.here == rindex_1.bktwi) {
-      cevent_1.cflag[cindex_1.cevzgi - 1] = TRUE_;
+      cevent_1.cflag[cindex_1.cevzgi - 1] = true;
    }
 // 						!IF IN TWI, GNOME.
    if (play_1.here == rindex_1.bkvau) {
@@ -597,7 +595,7 @@ L17000:
 // CEV18--	ENTER GNOME OF ZURICH
 
 L18000:
-   cevent_1.cflag[cindex_1.cevzgo - 1] = TRUE_;
+   cevent_1.cflag[cindex_1.cevzgo - 1] = true;
 // 						!EXITS, TOO.
    newsta_(oindex_1.zgnom, 0, rindex_1.bktwi, 0, 0);
 // 						!PLACE IN TWI.
@@ -655,21 +653,21 @@ L20200:
 
    objcts_1.oflag1[oindex_1.lamp - 1] = (objcts_1.oflag1[oindex_1.lamp - 1] | LITEBT) & ~ONBT;
    objcts_1.oflag2[oindex_1.lamp - 1] |= TCHBT;
-   cevent_1.cflag[cindex_1.cevlnt - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevlnt - 1] = false;
 // 						!LAMP IS GOOD AS NEW.
    cevent_1.ctick[cindex_1.cevlnt - 1] = 350;
    findex_1.orlamp = 0;
    objcts_1.oflag2[oindex_1.sword - 1] |= TCHBT;
-   hack_1.swdact = TRUE_;
+   hack_1.swdact = true;
    hack_1.swdsta = 0;
 
-   hack_1.thfact = FALSE_;
+   hack_1.thfact = false;
 // 						!THIEF GONE.
-   findex_1.endgmf = TRUE_;
+   findex_1.endgmf = true;
 // 						!ENDGAME RUNNING.
-   cevent_1.cflag[cindex_1.cevmat - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevmat - 1] = false;
 // 						!MATCHES GONE,
-   cevent_1.cflag[cindex_1.cevcnd - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevcnd - 1] = false;
 // 						!CANDLES GONE.
 
    scrupd_(rooms_1.rval[rindex_1.crypt - 1]);
@@ -687,9 +685,9 @@ L20200:
 // CEV21--	MIRROR CLOSES.
 
 L21000:
-   findex_1.mrpshf = FALSE_;
+   findex_1.mrpshf = false;
 // 						!BUTTON IS OUT.
-   findex_1.mropnf = FALSE_;
+   findex_1.mropnf = false;
 // 						!MIRROR IS CLOSED.
    if (play_1.here == rindex_1.mrant) {
       rspeak_(728);
@@ -708,7 +706,7 @@ L22000:
       rspeak_(730);
    }
 // 						!DESCRIBE.
-   findex_1.wdopnf = FALSE_;
+   findex_1.wdopnf = false;
 // 						!CLOSED.
    return;
 
@@ -739,11 +737,11 @@ L24000:
       rspeak_(811);
    }
 // 						!WONT GO TO CELLS.
-   findex_1.follwf = FALSE_;
+   findex_1.follwf = false;
    return;
 
 L24100:
-   findex_1.follwf = TRUE_;
+   findex_1.follwf = true;
 // 						!FOLLOWING.
    i = 812;
 // 						!ASSUME CATCHES UP.
@@ -768,13 +766,7 @@ L24100:
 
 // DECLARATIONS
 
-static void litint_(obj, ctr, cev, ticks, tickln)
-integer obj;
-integer *ctr;
-integer cev;
-const integer *ticks;
-integer tickln;
-{
+static void litint_(int obj, int *ctr, int cev, const int *ticks, int tickln) {
 // Parameter adjustments
    --ticks;
 

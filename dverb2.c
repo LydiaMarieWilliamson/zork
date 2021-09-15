@@ -1,6 +1,6 @@
 // SAVE- SAVE GAME STATE
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -10,14 +10,14 @@
 
 // DECLARATIONS
 
-static integer cxappl_ P((integer));
+static int cxappl_(int);
 
-void savegm_() {
+void savegm_(void) {
 // Local variables
-   integer i;
+   int i;
    FILE *e;
 
-   prsvec_1.prswon = FALSE_;
+   prsvec_1.prswon = false;
 // 						!DISABLE GAME.
 // Note: save file format is different for PDP vs. non-PDP versions
 
@@ -30,60 +30,60 @@ void savegm_() {
 #define do_uio(i, zbuf, cbytes) \
 	(void) fwrite((const char *)(zbuf), (cbytes), (i), e)
 
-   do_uio(1, &vers_1.vmaj, sizeof(integer));
-   do_uio(1, &vers_1.vmin, sizeof(integer));
-   do_uio(1, &vers_1.vedit, sizeof(integer));
+   do_uio(1, &vers_1.vmaj, sizeof(int));
+   do_uio(1, &vers_1.vmin, sizeof(int));
+   do_uio(1, &vers_1.vedit, sizeof(int));
 
-   do_uio(1, &play_1.winner, sizeof(integer));
-   do_uio(1, &play_1.here, sizeof(integer));
-   do_uio(1, &hack_1.thfpos, sizeof(integer));
-   do_uio(1, &play_1.telflg, sizeof(logical));
-   do_uio(1, &hack_1.thfflg, sizeof(logical));
-   do_uio(1, &hack_1.thfact, sizeof(logical));
-   do_uio(1, &hack_1.swdact, sizeof(logical));
-   do_uio(1, &hack_1.swdsta, sizeof(integer));
-   do_uio(64, &puzzle_1.cpvec[0], sizeof(integer));
+   do_uio(1, &play_1.winner, sizeof(int));
+   do_uio(1, &play_1.here, sizeof(int));
+   do_uio(1, &hack_1.thfpos, sizeof(int));
+   do_uio(1, &play_1.telflg, sizeof(Bool));
+   do_uio(1, &hack_1.thfflg, sizeof(Bool));
+   do_uio(1, &hack_1.thfact, sizeof(Bool));
+   do_uio(1, &hack_1.swdact, sizeof(Bool));
+   do_uio(1, &hack_1.swdsta, sizeof(int));
+   do_uio(64, &puzzle_1.cpvec[0], sizeof(int));
 
-   do_uio(1, &i, sizeof(integer));
-   do_uio(1, &state_1.moves, sizeof(integer));
-   do_uio(1, &state_1.deaths, sizeof(integer));
-   do_uio(1, &state_1.rwscor, sizeof(integer));
-   do_uio(1, &state_1.egscor, sizeof(integer));
-   do_uio(1, &state_1.mxload, sizeof(integer));
-   do_uio(1, &state_1.ltshft, sizeof(integer));
-   do_uio(1, &state_1.bloc, sizeof(integer));
-   do_uio(1, &state_1.mungrm, sizeof(integer));
-   do_uio(1, &state_1.hs, sizeof(integer));
-   do_uio(1, &screen_1.fromdr, sizeof(integer));
-   do_uio(1, &screen_1.scolrm, sizeof(integer));
-   do_uio(1, &screen_1.scolac, sizeof(integer));
+   do_uio(1, &i, sizeof(int));
+   do_uio(1, &state_1.moves, sizeof(int));
+   do_uio(1, &state_1.deaths, sizeof(int));
+   do_uio(1, &state_1.rwscor, sizeof(int));
+   do_uio(1, &state_1.egscor, sizeof(int));
+   do_uio(1, &state_1.mxload, sizeof(int));
+   do_uio(1, &state_1.ltshft, sizeof(int));
+   do_uio(1, &state_1.bloc, sizeof(int));
+   do_uio(1, &state_1.mungrm, sizeof(int));
+   do_uio(1, &state_1.hs, sizeof(int));
+   do_uio(1, &screen_1.fromdr, sizeof(int));
+   do_uio(1, &screen_1.scolrm, sizeof(int));
+   do_uio(1, &screen_1.scolac, sizeof(int));
 
-   do_uio(220, &objcts_1.odesc1[0], sizeof(integer));
-   do_uio(220, &objcts_1.odesc2[0], sizeof(integer));
-   do_uio(220, &objcts_1.oflag1[0], sizeof(integer));
-   do_uio(220, &objcts_1.oflag2[0], sizeof(integer));
-   do_uio(220, &objcts_1.ofval[0], sizeof(integer));
-   do_uio(220, &objcts_1.otval[0], sizeof(integer));
-   do_uio(220, &objcts_1.osize[0], sizeof(integer));
-   do_uio(220, &objcts_1.ocapac[0], sizeof(integer));
-   do_uio(220, &objcts_1.oroom[0], sizeof(integer));
-   do_uio(220, &objcts_1.oadv[0], sizeof(integer));
-   do_uio(220, &objcts_1.ocan[0], sizeof(integer));
+   do_uio(220, &objcts_1.odesc1[0], sizeof(int));
+   do_uio(220, &objcts_1.odesc2[0], sizeof(int));
+   do_uio(220, &objcts_1.oflag1[0], sizeof(int));
+   do_uio(220, &objcts_1.oflag2[0], sizeof(int));
+   do_uio(220, &objcts_1.ofval[0], sizeof(int));
+   do_uio(220, &objcts_1.otval[0], sizeof(int));
+   do_uio(220, &objcts_1.osize[0], sizeof(int));
+   do_uio(220, &objcts_1.ocapac[0], sizeof(int));
+   do_uio(220, &objcts_1.oroom[0], sizeof(int));
+   do_uio(220, &objcts_1.oadv[0], sizeof(int));
+   do_uio(220, &objcts_1.ocan[0], sizeof(int));
 
-   do_uio(200, &rooms_1.rval[0], sizeof(integer));
-   do_uio(200, &rooms_1.rflag[0], sizeof(integer));
+   do_uio(200, &rooms_1.rval[0], sizeof(int));
+   do_uio(200, &rooms_1.rflag[0], sizeof(int));
 
-   do_uio(4, &advs_1.aroom[0], sizeof(integer));
-   do_uio(4, &advs_1.ascore[0], sizeof(integer));
-   do_uio(4, &advs_1.avehic[0], sizeof(integer));
-   do_uio(4, &advs_1.astren[0], sizeof(integer));
-   do_uio(4, &advs_1.aflag[0], sizeof(integer));
+   do_uio(4, &advs_1.aroom[0], sizeof(int));
+   do_uio(4, &advs_1.ascore[0], sizeof(int));
+   do_uio(4, &advs_1.avehic[0], sizeof(int));
+   do_uio(4, &advs_1.astren[0], sizeof(int));
+   do_uio(4, &advs_1.aflag[0], sizeof(int));
 
-   do_uio(46, &flags[0], sizeof(logical));
-   do_uio(22, &switch_[0], sizeof(integer));
-   do_uio(4, &vill_1.vprob[0], sizeof(integer));
-   do_uio(25, &cevent_1.cflag[0], sizeof(logical));
-   do_uio(25, &cevent_1.ctick[0], sizeof(integer));
+   do_uio(46, &flags[0], sizeof(Bool));
+   do_uio(22, &switch_[0], sizeof(int));
+   do_uio(4, &vill_1.vprob[0], sizeof(int));
+   do_uio(25, &cevent_1.cflag[0], sizeof(Bool));
+   do_uio(25, &cevent_1.ctick[0], sizeof(int));
 
 #undef do_uio
 
@@ -102,12 +102,12 @@ L100:
 
 // DECLARATIONS
 
-void rstrgm_() {
+void rstrgm_(void) {
 // Local variables
-   integer i, j, k;
+   int i, j, k;
    FILE *e;
 
-   prsvec_1.prswon = FALSE_;
+   prsvec_1.prswon = false;
 // 						!DISABLE GAME.
 // Note: save file format is different for PDP vs. non-PDP versions
 
@@ -117,64 +117,64 @@ void rstrgm_() {
 #define do_uio(i, zbuf, cbytes) \
 	(void)fread((char *)(zbuf), (cbytes), (i), e)
 
-   do_uio(1, &i, sizeof(integer));
-   do_uio(1, &j, sizeof(integer));
-   do_uio(1, &k, sizeof(integer));
+   do_uio(1, &i, sizeof(int));
+   do_uio(1, &j, sizeof(int));
+   do_uio(1, &k, sizeof(int));
 
    if (i != vers_1.vmaj | j != vers_1.vmin) {
       goto L200;
    }
 
-   do_uio(1, &play_1.winner, sizeof(integer));
-   do_uio(1, &play_1.here, sizeof(integer));
-   do_uio(1, &hack_1.thfpos, sizeof(integer));
-   do_uio(1, &play_1.telflg, sizeof(logical));
-   do_uio(1, &hack_1.thfflg, sizeof(logical));
-   do_uio(1, &hack_1.thfact, sizeof(logical));
-   do_uio(1, &hack_1.swdact, sizeof(logical));
-   do_uio(1, &hack_1.swdsta, sizeof(integer));
-   do_uio(64, &puzzle_1.cpvec[0], sizeof(integer));
+   do_uio(1, &play_1.winner, sizeof(int));
+   do_uio(1, &play_1.here, sizeof(int));
+   do_uio(1, &hack_1.thfpos, sizeof(int));
+   do_uio(1, &play_1.telflg, sizeof(Bool));
+   do_uio(1, &hack_1.thfflg, sizeof(Bool));
+   do_uio(1, &hack_1.thfact, sizeof(Bool));
+   do_uio(1, &hack_1.swdact, sizeof(Bool));
+   do_uio(1, &hack_1.swdsta, sizeof(int));
+   do_uio(64, &puzzle_1.cpvec[0], sizeof(int));
 
-   do_uio(1, &time_1.pltime, sizeof(integer));
-   do_uio(1, &state_1.moves, sizeof(integer));
-   do_uio(1, &state_1.deaths, sizeof(integer));
-   do_uio(1, &state_1.rwscor, sizeof(integer));
-   do_uio(1, &state_1.egscor, sizeof(integer));
-   do_uio(1, &state_1.mxload, sizeof(integer));
-   do_uio(1, &state_1.ltshft, sizeof(integer));
-   do_uio(1, &state_1.bloc, sizeof(integer));
-   do_uio(1, &state_1.mungrm, sizeof(integer));
-   do_uio(1, &state_1.hs, sizeof(integer));
-   do_uio(1, &screen_1.fromdr, sizeof(integer));
-   do_uio(1, &screen_1.scolrm, sizeof(integer));
-   do_uio(1, &screen_1.scolac, sizeof(integer));
+   do_uio(1, &time_1.pltime, sizeof(int));
+   do_uio(1, &state_1.moves, sizeof(int));
+   do_uio(1, &state_1.deaths, sizeof(int));
+   do_uio(1, &state_1.rwscor, sizeof(int));
+   do_uio(1, &state_1.egscor, sizeof(int));
+   do_uio(1, &state_1.mxload, sizeof(int));
+   do_uio(1, &state_1.ltshft, sizeof(int));
+   do_uio(1, &state_1.bloc, sizeof(int));
+   do_uio(1, &state_1.mungrm, sizeof(int));
+   do_uio(1, &state_1.hs, sizeof(int));
+   do_uio(1, &screen_1.fromdr, sizeof(int));
+   do_uio(1, &screen_1.scolrm, sizeof(int));
+   do_uio(1, &screen_1.scolac, sizeof(int));
 
-   do_uio(220, &objcts_1.odesc1[0], sizeof(integer));
-   do_uio(220, &objcts_1.odesc2[0], sizeof(integer));
-   do_uio(220, &objcts_1.oflag1[0], sizeof(integer));
-   do_uio(220, &objcts_1.oflag2[0], sizeof(integer));
-   do_uio(220, &objcts_1.ofval[0], sizeof(integer));
-   do_uio(220, &objcts_1.otval[0], sizeof(integer));
-   do_uio(220, &objcts_1.osize[0], sizeof(integer));
-   do_uio(220, &objcts_1.ocapac[0], sizeof(integer));
-   do_uio(220, &objcts_1.oroom[0], sizeof(integer));
-   do_uio(220, &objcts_1.oadv[0], sizeof(integer));
-   do_uio(220, &objcts_1.ocan[0], sizeof(integer));
+   do_uio(220, &objcts_1.odesc1[0], sizeof(int));
+   do_uio(220, &objcts_1.odesc2[0], sizeof(int));
+   do_uio(220, &objcts_1.oflag1[0], sizeof(int));
+   do_uio(220, &objcts_1.oflag2[0], sizeof(int));
+   do_uio(220, &objcts_1.ofval[0], sizeof(int));
+   do_uio(220, &objcts_1.otval[0], sizeof(int));
+   do_uio(220, &objcts_1.osize[0], sizeof(int));
+   do_uio(220, &objcts_1.ocapac[0], sizeof(int));
+   do_uio(220, &objcts_1.oroom[0], sizeof(int));
+   do_uio(220, &objcts_1.oadv[0], sizeof(int));
+   do_uio(220, &objcts_1.ocan[0], sizeof(int));
 
-   do_uio(200, &rooms_1.rval[0], sizeof(integer));
-   do_uio(200, &rooms_1.rflag[0], sizeof(integer));
+   do_uio(200, &rooms_1.rval[0], sizeof(int));
+   do_uio(200, &rooms_1.rflag[0], sizeof(int));
 
-   do_uio(4, &advs_1.aroom[0], sizeof(integer));
-   do_uio(4, &advs_1.ascore[0], sizeof(integer));
-   do_uio(4, &advs_1.avehic[0], sizeof(integer));
-   do_uio(4, &advs_1.astren[0], sizeof(integer));
-   do_uio(4, &advs_1.aflag[0], sizeof(integer));
+   do_uio(4, &advs_1.aroom[0], sizeof(int));
+   do_uio(4, &advs_1.ascore[0], sizeof(int));
+   do_uio(4, &advs_1.avehic[0], sizeof(int));
+   do_uio(4, &advs_1.astren[0], sizeof(int));
+   do_uio(4, &advs_1.aflag[0], sizeof(int));
 
-   do_uio(46, &flags[0], sizeof(logical));
-   do_uio(22, &switch_[0], sizeof(integer));
-   do_uio(4, &vill_1.vprob[0], sizeof(integer));
-   do_uio(25, &cevent_1.cflag[0], sizeof(logical));
-   do_uio(25, &cevent_1.ctick[0], sizeof(integer));
+   do_uio(46, &flags[0], sizeof(Bool));
+   do_uio(22, &switch_[0], sizeof(int));
+   do_uio(4, &vill_1.vprob[0], sizeof(int));
+   do_uio(25, &cevent_1.cflag[0], sizeof(Bool));
+   do_uio(25, &cevent_1.ctick[0], sizeof(int));
 
    (void)fclose(e);
 
@@ -196,11 +196,11 @@ L200:
 
 // DECLARATIONS
 
-logical walk_() {
+Bool walk_(void) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    if (play_1.winner != aindex_1.player || lit_(play_1.here) || prob_(25, 25)) {
       goto L500;
@@ -355,16 +355,14 @@ L900:
 
 // DECLARATIONS
 
-static integer cxappl_(ri)
-integer ri;
-{
+static int cxappl_(int ri) {
 // System generated locals
-   integer ret_val, i__1;
+   int ret_val, i__1;
 
 // Local variables
-   integer i, j, k;
-   integer nxt;
-   integer ldir;
+   int i, j, k;
+   int nxt;
+   int ldir;
 
    ret_val = 0;
 // 						!NO RETURN.
@@ -433,7 +431,7 @@ L5000:
 // C3- CHIMNEY FUNCTION
 
 L3000:
-   findex_1.litldf = FALSE_;
+   findex_1.litldf = false;
 // 						!ASSUME HEAVY LOAD.
    j = 0;
    i__1 = objcts_1.olnt;
@@ -455,7 +453,7 @@ L3000:
       return ret_val;
    }
 // 						!NO LAMP?
-   findex_1.litldf = TRUE_;
+   findex_1.litldf = true;
 // 						!HE CAN DO IT.
    if ((objcts_1.oflag2[oindex_1.door - 1] & OPENBT) == 0) {
       objcts_1.oflag2[oindex_1.door - 1] &= ~TCHBT;
@@ -470,7 +468,7 @@ L4000:
       goto L2500;
    }
 // 						!IF FLIPPED, GO SPIN.
-   findex_1.frobzf = FALSE_;
+   findex_1.frobzf = false;
 // 						!OTHERWISE, NOT AN EXIT.
    return ret_val;
 
@@ -479,7 +477,7 @@ L6000:
       goto L2500;
    }
 // 						!IF FLIPPED, GO SPIN.
-   findex_1.frobzf = TRUE_;
+   findex_1.frobzf = true;
 // 						!OTHERWISE, AN EXIT.
    return ret_val;
 
@@ -493,7 +491,7 @@ L7000:
 // C8-	FROBOZZ FLAG (MRGO)
 
 L8000:
-   findex_1.frobzf = FALSE_;
+   findex_1.frobzf = false;
 // 						!ASSUME CANT MOVE.
    if (findex_1.mloc != curxt_1.xroom1) {
       goto L8100;
@@ -552,7 +550,7 @@ L9000:
    return ret_val;
 
 L9100:
-   findex_1.frobzf = FALSE_;
+   findex_1.frobzf = false;
 // 						!NOT HERE,
    curxt_1.xstrng = 817;
 // 						!LOSE.
@@ -562,7 +560,7 @@ L9100:
 // C10-	FROBOZZ FLAG (MIRROR EXIT)
 
 L10000:
-   findex_1.frobzf = FALSE_;
+   findex_1.frobzf = false;
 // 						!ASSUME CANT.
    ldir = (prsvec_1.prso - xsrch_1.xnorth) / xsrch_1.xnorth * 45;
 // 						!XLATE DIR TO DEGREES.
@@ -597,7 +595,7 @@ L10200:
 // 						!IF S.
    rspeak_(818);
 // 						!CLOSE DOOR.
-   findex_1.wdopnf = FALSE_;
+   findex_1.wdopnf = false;
    ret_val = curxt_1.xroom1;
    return ret_val;
 
@@ -614,7 +612,7 @@ L11000:
 // C12-	FROBZF (PUZZLE ROOM MAIN ENTRANCE)
 
 L12000:
-   findex_1.frobzf = TRUE_;
+   findex_1.frobzf = true;
 // 						!ALWAYS ENTER.
    findex_1.cphere = 10;
 // 						!SET SUBSTATE.
@@ -631,7 +629,7 @@ L13000:
 // C14-	FROBZF (PUZZLE ROOM TRANSITIONS)
 
 L14000:
-   findex_1.frobzf = FALSE_;
+   findex_1.frobzf = false;
 // 						!ASSSUME LOSE.
    if (prsvec_1.prso != xsrch_1.xup) {
       goto L14100;
@@ -649,7 +647,7 @@ L14000:
 // 						!LADDER HERE?
    rspeak_(882);
 // 						!YOU WIN.
-   findex_1.frobzf = TRUE_;
+   findex_1.frobzf = true;
 // 						!LET HIM OUT.
    return ret_val;
 
@@ -657,7 +655,7 @@ L14100:
    if (findex_1.cphere != 52 || prsvec_1.prso != xsrch_1.xwest || !findex_1.cpoutf) {
       goto L14200;
    }
-   findex_1.frobzf = TRUE_;
+   findex_1.frobzf = true;
 // 						!YES, LET HIM OUT.
    return ret_val;
 

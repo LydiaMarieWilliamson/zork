@@ -1,6 +1,6 @@
 // TAKE-- BASIC TAKE SEQUENCE
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -9,18 +9,16 @@
 
 // TAKE AN OBJECT (FOR VERBS TAKE, PUT, DROP, READ, ETC.)
 
-logical take_(flg)
-logical flg;
-{
+Bool take_(Bool flg) {
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer oa;
-   integer x;
+   int oa;
+   int x;
 
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME LOSES.
    oa = objcts_1.oactio[prsvec_1.prso - 1];
 // 						!GET OBJECT ACTION.
@@ -74,7 +72,7 @@ L600:
    return ret_val;
 
 L700:
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!AT LAST.
    if (oappli_(oa, 0)) {
       return ret_val;
@@ -99,17 +97,15 @@ L700:
 
 // DECLARATIONS
 
-logical drop_(z)
-logical z;
-{
+Bool drop_(Bool z) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   logical f;
-   integer i, x;
+   Bool f;
+   int i, x;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    x = objcts_1.ocan[prsvec_1.prso - 1];
 // 						!GET CONTAINER.
@@ -188,17 +184,15 @@ L1000:
 
 // DECLARATIONS
 
-logical put_(flg)
-logical flg;
-{
+Bool put_(Bool flg) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer j;
-   integer svi, svo;
+   int j;
+   int svi, svo;
 
-   ret_val = FALSE_;
+   ret_val = false;
    if (prsvec_1.prso <= star_1.strbit && prsvec_1.prsi <= star_1.strbit) {
       goto L200;
    }
@@ -206,7 +200,7 @@ logical flg;
       rspeak_(560);
    }
 // 						!STAR
-   ret_val = TRUE_;
+   ret_val = true;
    return ret_val;
 
 L200:
@@ -241,7 +235,7 @@ L500:
    }
 // 						!ALREADY INSIDE.
    rspsb2_(564, objcts_1.odesc2[prsvec_1.prso - 1], objcts_1.odesc2[prsvec_1.prsi - 1]);
-   ret_val = TRUE_;
+   ret_val = true;
    return ret_val;
 
 L600:
@@ -315,26 +309,24 @@ L1000:
 // 						!NO, GIVE OBJECT A SHOT.
    newsta_(prsvec_1.prso, 2, 0, prsvec_1.prsi, 0);
 // 						!CONTAINED INSIDE.
-   ret_val = TRUE_;
+   ret_val = true;
    return ret_val;
 
 }
 
 // VALUAC- HANDLES VALUABLES/EVERYTHING
 
-void valuac_(v)
-integer v;
-{
+void valuac_(int v) {
 // System generated locals
-   integer i__1;
+   int i__1;
 
 // Local variables
-   logical f;
-   integer i;
-   logical f1;
-   integer savep, saveh;
+   Bool f;
+   int i;
+   Bool f1;
+   int savep, saveh;
 
-   f = TRUE_;
+   f = true;
 // 						!ASSUME NO ACTIONS.
    i = 579;
 // 						!ASSUME NOT LIT.
@@ -363,7 +355,7 @@ integer v;
       if ((objcts_1.oflag1[prsvec_1.prso - 1] & TAKEBT) == 0 && (objcts_1.oflag2[prsvec_1.prso - 1] & TRYBT) == 0) {
          goto L500;
       }
-      f = FALSE_;
+      f = false;
       rspsub_(580, objcts_1.odesc2[prsvec_1.prso - 1]);
       f1 = take_(1);
       if (saveh != play_1.here) {
@@ -384,7 +376,7 @@ L1000:
       if (objcts_1.oadv[prsvec_1.prso - 1] != play_1.winner || savep == v && objcts_1.otval[prsvec_1.prso - 1] <= 0) {
          goto L1500;
       }
-      f = FALSE_;
+      f = false;
       rspsub_(580, objcts_1.odesc2[prsvec_1.prso - 1]);
       f1 = drop_(1);
       if (saveh != play_1.here) {
@@ -406,7 +398,7 @@ L2000:
       if (objcts_1.oadv[prsvec_1.prso - 1] != play_1.winner || prsvec_1.prso == prsvec_1.prsi || savep == v && objcts_1.otval[prsvec_1.prso - 1] <= 0 || (objcts_1.oflag1[prsvec_1.prso - 1] & VISIBT) == 0) {
          goto L2500;
       }
-      f = FALSE_;
+      f = false;
       rspsub_(580, objcts_1.odesc2[prsvec_1.prso - 1]);
       f1 = put_(1);
       if (saveh != play_1.here) {

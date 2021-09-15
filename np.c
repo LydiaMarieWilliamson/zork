@@ -1,6 +1,6 @@
 // RDLINE-	READ INPUT LINE
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -11,14 +11,11 @@
 
 // This declaration is here since many systems don't have <stdlib.h>
 
-extern int system P((const char *));
+extern int system(const char *);
 
-static logical lex_ P((char *, integer *, integer *, logical));
+static Bool lex_(char *, int *, int *, Bool);
 
-void rdline_(buffer, who)
-char *buffer;
-integer who;
-{
+void rdline_(char *buffer, int who) {
 // Local variables
    char *z, *zlast;
 
@@ -65,22 +62,19 @@ L90:
 
 // THIS ROUTINE DETAILS ON BIT 0 OF PRSFLG
 
-logical parse_(inbuf, vbflag)
-char *inbuf;
-logical vbflag;
-{
+Bool parse_(char *inbuf, Bool vbflag) {
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer outbuf[40], outlnt;
+   int outbuf[40], outlnt;
 
 // Parameter adjustments
    --inbuf;
 
 // Function Body
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME FAILS.
    prsvec_1.prsa = 0;
 // 						!ZERO OUTPUTS.
@@ -117,7 +111,7 @@ L200:
 // SUCCESSFUL PARSE OR SUCCESSFUL VALIDATION
 
 L300:
-   ret_val = TRUE_;
+   ret_val = true;
 L350:
    orphan_(0, 0, 0, 0, 0);
 // 						!CLEAR ORPHANS.
@@ -135,13 +129,7 @@ L100:
 
 // DECLARATIONS
 
-void orphan_(o1, o2, o3, o4, o5)
-integer o1;
-integer o2;
-integer o3;
-integer o4;
-integer o5;
-{
+void orphan_(int o1, int o2, int o3, int o4, int o5) {
    orphs_1.oflag = o1;
 // 						!SET UP NEW ORPHANS.
    orphs_1.oact = o2;
@@ -154,12 +142,7 @@ integer o5;
 
 // THIS ROUTINE DETAILS ON BIT 1 OF PRSFLAG
 
-static logical lex_(inbuf, outbuf, op, vbflag)
-char *inbuf;
-integer *outbuf;
-integer *op;
-logical vbflag;
-{
+static Bool lex_(char *inbuf, int *outbuf, int *op, Bool vbflag) {
 // Initialized data
 
    static const char dlimit[9] = { 'A', 'Z', 'A' - 1,
@@ -168,12 +151,12 @@ logical vbflag;
    };
 
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer i;
+   int i;
    char j;
-   integer k, j1, j2, cp;
+   int k, j1, j2, cp;
 
 // Parameter adjustments
    --outbuf;
@@ -187,7 +170,7 @@ logical vbflag;
 // L100:
    }
 
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME LEX FAILS.
    *op = -1;
 // 						!OUTPUT PTR.
@@ -248,7 +231,7 @@ L1000:
       *op += -2;
    }
 // 						!ANY LAST WORD?
-   ret_val = TRUE_;
+   ret_val = true;
    return ret_val;
 
 // LEGITIMATE CHARACTERS: LETTER, DIGIT, OR HYPHEN.

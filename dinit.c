@@ -1,6 +1,6 @@
 // INIT-- DUNGEON INITIALIZATION SUBROUTINE
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -15,7 +15,7 @@
 
 // This is here to avoid depending on the existence of <stdlib.h>
 
-extern void srand P((unsigned int));
+extern void srand(unsigned int);
 
 FILE *dbfile;
 
@@ -37,17 +37,13 @@ I need a definition for TEXTFILE
 #ifndef LOCALTEXTFILE
 #   define LOCALTEXTFILE "dtextc.dat"
 #endif
-// Read a single two byte integer from the index file
+// Read a single two byte int from the index file
 #define rdint(indxfile) \
     (ch = getc(indxfile), \
      ((ch > 127) ? (ch - 256) : (ch)) * 256 + getc(indxfile))
 // Read a number of two byte integers from the index file
-static void rdints(c, pi, indxfile)
-integer c;
-integer *pi;
-FILE *indxfile;
-{
-   integer ch; // Local variable for rdint
+static void rdints(int c, int *pi, FILE *indxfile) {
+   int ch; // Local variable for rdint
 
    while (c-- != 0)
       *pi++ = rdint(indxfile);
@@ -55,12 +51,8 @@ FILE *indxfile;
 
 // Read a partial array of integers.  These are stored as index,value pairs.
 
-static void rdpartialints(c, pi, indxfile)
-integer c;
-integer *pi;
-FILE *indxfile;
-{
-   integer ch; // Local variable for rdint
+static void rdpartialints(int c, int *pi, FILE *indxfile) {
+   int ch; // Local variable for rdint
 
    while (1) {
       int i;
@@ -81,26 +73,22 @@ FILE *indxfile;
 
 // Read a number of one byte flags from the index file
 
-static void rdflags(c, pf, indxfile)
-integer c;
-logical *pf;
-FILE *indxfile;
-{
+static void rdflags(int c, Bool *pf, FILE *indxfile) {
    while (c-- != 0)
       *pf++ = getc(indxfile);
 }
 
-logical init_() {
+Bool init_(void) {
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer xmax, r2max, dirmax, recno;
-   integer i, j, k;
-   register integer ch;
+   int xmax, r2max, dirmax, recno;
+   int i, j, k;
+   register int ch;
    register FILE *indxfile;
-   integer mmax, omax, rmax, vmax, amax, cmax, fmax, smax;
+   int mmax, omax, rmax, vmax, amax, cmax, fmax, smax;
 
    more_init();
 
@@ -127,7 +115,7 @@ logical init_() {
 // NOW START INITIALIZATION PROPER
 
 L10000:
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME INIT FAILS.
    mmax = 1050;
 // 						!SET UP ARRAY LIMITS.
@@ -175,11 +163,11 @@ L10000:
    orphs_1.oslot = 0;
    orphs_1.oprep = 0;
    orphs_1.oname = 0;
-   hack_1.thfflg = FALSE_;
+   hack_1.thfflg = false;
 // 						!THIEF NOT INTRODUCED BUT
-   hack_1.thfact = TRUE_;
+   hack_1.thfact = true;
 // 						!IS ACTIVE.
-   hack_1.swdact = FALSE_;
+   hack_1.swdact = false;
 // 						!SWORD IS INACTIVE.
    hack_1.swdsta = 0;
 // 						!SWORD IS OFF.
@@ -195,7 +183,7 @@ L10000:
    i__1 = cmax;
    for (i = 1; i <= i__1; ++i) {
 // 						!CLEAR CLOCK EVENTS
-      cevent_1.cflag[i - 1] = FALSE_;
+      cevent_1.cflag[i - 1] = false;
       cevent_1.ctick[i - 1] = 0;
       cevent_1.cactio[i - 1] = 0;
 // L5:
@@ -204,16 +192,16 @@ L10000:
    i__1 = fmax;
    for (i = 1; i <= i__1; ++i) {
 // 						!CLEAR FLAGS.
-      flags[i - 1] = FALSE_;
+      flags[i - 1] = false;
 // L10:
    }
-   findex_1.buoyf = TRUE_;
+   findex_1.buoyf = true;
 // 						!SOME START AS TRUE.
-   findex_1.egyptf = TRUE_;
-   findex_1.cagetf = TRUE_;
-   findex_1.mr1f = TRUE_;
-   findex_1.mr2f = TRUE_;
-   findex_1.follwf = TRUE_;
+   findex_1.egyptf = true;
+   findex_1.cagetf = true;
+   findex_1.mr1f = true;
+   findex_1.mr2f = true;
+   findex_1.follwf = true;
    i__1 = smax;
    for (i = 1; i <= i__1; ++i) {
 // 						!CLEAR SWITCHES.
@@ -425,7 +413,7 @@ L10000:
    play_1.here = advs_1.aroom[play_1.winner - 1];
    hack_1.thfpos = objcts_1.oroom[oindex_1.thief - 1];
    state_1.bloc = objcts_1.oroom[oindex_1.ballo - 1];
-   ret_val = TRUE_;
+   ret_val = true;
 
    return ret_val;
 // INIT, PAGE 6

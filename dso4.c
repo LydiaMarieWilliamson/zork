@@ -1,23 +1,18 @@
 // ROBADV-- STEAL WINNER'S VALUABLES
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
 
-integer robadv_(adv, nr, nc, na)
-integer adv;
-integer nr;
-integer nc;
-integer na;
-{
+int robadv_(int adv, int nr, int nc, int na) {
 // System generated locals
-   integer ret_val, i__1;
+   int ret_val, i__1;
 
 // Local variables
-   integer i;
+   int i;
 
    ret_val = 0;
 // 						!COUNT OBJECTS
@@ -39,18 +34,12 @@ integer na;
 
 // DECLARATIONS
 
-integer robrm_(rm, pr, nr, nc, na)
-integer rm;
-integer pr;
-integer nr;
-integer nc;
-integer na;
-{
+int robrm_(int rm, int pr, int nr, int nc, int na) {
 // System generated locals
-   integer ret_val, i__1, i__2;
+   int ret_val, i__1, i__2;
 
 // Local variables
-   integer i;
+   int i;
 
 // OBJECTS
 
@@ -84,15 +73,12 @@ integer na;
 
 // DECLARATIONS
 
-logical winnin_(vl, hr)
-integer vl;
-integer hr;
-{
+Bool winnin_(int vl, int hr) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer ps, vs;
+   int ps, vs;
 
 // OBJECTS
 
@@ -128,17 +114,14 @@ integer hr;
 
 // DECLARATIONS
 
-integer fights_(h, flg)
-integer h;
-logical flg;
-{
+int fights_(int h, Bool flg) {
 // Initialized data
 
-   const integer smin = 2;
-   const integer smax = 7;
+   const int smin = 2;
+   const int smax = 7;
 
 // System generated locals
-   integer ret_val;
+   int ret_val;
 
    ret_val = smin + ((smax - smin) * advs_1.ascore[h - 1] + state_1.mxscor / 2) / state_1.mxscor;
    if (flg) {
@@ -151,14 +134,12 @@ logical flg;
 
 // DECLARATIONS
 
-integer vilstr_(v)
-integer v;
-{
+int vilstr_(int v) {
 // System generated locals
-   integer ret_val, i__1, i__2, i__3;
+   int ret_val, i__1, i__2, i__3;
 
 // Local variables
-   integer i;
+   int i;
 
    ret_val = objcts_1.ocapac[v - 1];
    if (ret_val <= 0) {
@@ -167,7 +148,7 @@ integer v;
    if (v != oindex_1.thief || !findex_1.thfenf) {
       goto L100;
    }
-   findex_1.thfenf = FALSE_;
+   findex_1.thfenf = false;
 // 						!THIEF UNENGROSSED.
    ret_val = min(ret_val, 2);
 // 						!NO BETTER THAN 2.

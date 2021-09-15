@@ -1,20 +1,17 @@
 // GHERE--	IS GLOBAL ACTUALLY IN THIS ROOM?
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
 
-logical ghere_(obj, rm)
-integer obj;
-integer rm;
-{
+Bool ghere_(int obj, int rm) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    switch (obj - star_1.strbit) {
       case 1:
@@ -147,11 +144,9 @@ L11000:
 
 // DECLARATIONS
 
-integer mrhere_(rm)
-integer rm;
-{
+int mrhere_(int rm) {
 // System generated locals
-   integer ret_val, i__1;
+   int ret_val, i__1;
 
    if (rm < rindex_1.mrae || rm > rindex_1.mrdw) {
       goto L100;

@@ -1,6 +1,6 @@
 // RESIDENT SUBROUTINES FOR DUNGEON
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -14,7 +14,7 @@
 
 extern FILE *dbfile;
 
-static void rspsb2nl_ P((integer, integer, integer, logical));
+static void rspsb2nl_(int, int, int, Bool);
 
 // RSPEAK-- OUTPUT RANDOM MESSAGE ROUTINE
 
@@ -22,9 +22,7 @@ static void rspsb2nl_ P((integer, integer, integer, logical));
 
 // 	CALL RSPEAK(MSGNUM)
 
-void rspeak_(n)
-integer n;
-{
+void rspeak_(int n) {
    rspsb2nl_(n, 0, 0, 1);
 }
 
@@ -34,10 +32,7 @@ integer n;
 
 // 	CALL RSPSUB(MSGNUM,SUBNUM)
 
-void rspsub_(n, s1)
-integer n;
-integer s1;
-{
+void rspsub_(int n, int s1) {
    rspsb2nl_(n, s1, 0, 1);
 }
 
@@ -47,22 +42,13 @@ integer s1;
 
 // 	CALL RSPSB2(MSGNUM,SUBNUM1,SUBNUM2)
 
-void rspsb2_(n, s1, s2)
-integer n;
-integer s1;
-integer s2;
-{
+void rspsb2_(int n, int s1, int s2) {
    rspsb2nl_(n, s1, s2, 1);
 }
 
 // rspsb2nl_ Display a substitutable message with an optional newline
 
-static void rspsb2nl_(n, y, z, nl)
-integer n;
-integer y;
-integer z;
-logical nl;
-{
+static void rspsb2nl_(int n, int y, int z, Bool nl) {
    const char *zkey = "IanLanceTaylorJr";
    long x;
 
@@ -76,7 +62,7 @@ logical nl;
       return;
    }
 // 						!ANYTHING TO DO?
-   play_1.telflg = TRUE_;
+   play_1.telflg = true;
 // 						!SAID SOMETHING.
 
    x = ((-x) - 1) * 8;
@@ -89,7 +75,7 @@ logical nl;
       more_output(NULL);
 
    while (1) {
-      integer i;
+      int i;
 
       i = getc(dbfile);
       if (i == EOF) {
@@ -127,11 +113,11 @@ logical nl;
 
 // DECLARATIONS
 
-logical objact_() {
+Bool objact_(void) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    if (prsvec_1.prsi == 0) {
       goto L100;
@@ -153,7 +139,7 @@ L100:
 // 						!YES, LET IT HANDLE.
 
 L200:
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!LOSES.
    return ret_val;
 }
@@ -164,10 +150,7 @@ L200:
 
 // 	CALL BUG(NO,PAR)
 
-void bug_(a, b)
-integer a;
-integer b;
-{
+void bug_(int a, int b) {
 // Local variables
 
    more_output(NULL);
@@ -186,13 +169,7 @@ integer b;
 
 // 	CALL NEWSTA(OBJECT,STRING,NEWROOM,NEWCON,NEWADV)
 
-void newsta_(o, r, rm, cn, ad)
-integer o;
-integer r;
-integer rm;
-integer cn;
-integer ad;
-{
+void newsta_(int o, int r, int rm, int cn, int ad) {
    rspeak_(r);
    objcts_1.oroom[o - 1] = rm;
    objcts_1.ocan[o - 1] = cn;
@@ -203,18 +180,15 @@ integer ad;
 
 // DECLARATIONS
 
-logical qhere_(obj, rm)
-integer obj;
-integer rm;
-{
+Bool qhere_(int obj, int rm) {
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer i;
+   int i;
 
-   ret_val = TRUE_;
+   ret_val = true;
    if (objcts_1.oroom[obj - 1] == rm) {
       return ret_val;
    }
@@ -228,7 +202,7 @@ integer rm;
       }
 // L100:
    }
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!NOT PRESENT.
    return ret_val;
 }
@@ -237,17 +211,15 @@ integer rm;
 
 // DECLARATIONS
 
-logical qempty_(obj)
-integer obj;
-{
+Bool qempty_(int obj) {
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer i;
+   int i;
 
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME LOSE.
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
@@ -257,7 +229,7 @@ integer obj;
 // 						!INSIDE TARGET?
 // L100:
    }
-   ret_val = TRUE_;
+   ret_val = true;
    return ret_val;
 }
 
@@ -265,20 +237,18 @@ integer obj;
 
 // DECLARATIONS
 
-void jigsup_(desc)
-integer desc;
-{
+void jigsup_(int desc) {
 // Initialized data
 
-   static const integer rlist[9] = { 8, 6, 36, 35, 34, 4, 34, 6, 5 };
+   static const int rlist[9] = { 8, 6, 36, 35, 34, 4, 34, 6, 5 };
 
 // System generated locals
-   integer i__1;
+   int i__1;
 
 // Local variables
-   integer nonofl;
-   logical f;
-   integer i, j;
+   int nonofl;
+   Bool f;
+   int i, j;
 
    rspeak_(desc);
 // 						!DESCRIBE SAD STATE.
@@ -332,7 +302,7 @@ L100:
 // 						!CHARGE TEN POINTS.
    f = moveto_(rindex_1.fore1, play_1.winner);
 // 						!REPOSITION HIM.
-   findex_1.egyptf = TRUE_;
+   findex_1.egyptf = true;
 // 						!RESTORE COFFIN.
    if (objcts_1.oadv[oindex_1.coffi - 1] == play_1.winner) {
       newsta_(oindex_1.coffi, 0, rindex_1.egypt, 0, 0);
@@ -429,14 +399,12 @@ L1100:
 
 // DECLARATIONS
 
-integer oactor_(obj)
-integer obj;
-{
+int oactor_(int obj) {
 // System generated locals
-   integer ret_val = 1, i__1;
+   int ret_val = 1, i__1;
 
 // Local variables
-   integer i;
+   int i;
 
    i__1 = advs_1.alnt;
    for (i = 1; i <= i__1; ++i) {
@@ -458,15 +426,12 @@ integer obj;
 
 // DECLARATIONS
 
-logical prob_(g, b)
-integer g;
-integer b;
-{
+Bool prob_(int g, int b) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer i;
+   int i;
 
    i = g;
 // 						!ASSUME GOOD LUCK.
@@ -484,18 +449,16 @@ integer b;
 // RMDESC PRINTS A DESCRIPTION OF THE CURRENT ROOM.
 // IT IS ALSO THE PROCESSOR FOR VERBS 'LOOK' AND 'EXAMINE'.
 
-logical rmdesc_(full)
-integer full;
-{
+Bool rmdesc_(int full) {
 // System generated locals
-   logical ret_val, L__1;
+   Bool ret_val, L__1;
 
 // Local variables
-   integer i, ra;
+   int i, ra;
 
 // FULL=	0/1/2/3=	SHORT/OBJ/ROOM/FULL
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    if (prsvec_1.prso < xsrch_1.xmin) {
       goto L50;
@@ -523,7 +486,7 @@ L100:
 // 						!LIT?
    rspeak_(430);
 // 						!WARN OF GRUE.
-   ret_val = FALSE_;
+   ret_val = false;
    return ret_val;
 
 L300:
@@ -594,17 +557,15 @@ L600:
 
 // DECLARATIONS
 
-logical rappli_(ri)
-integer ri;
-{
+Bool rappli_(int ri) {
 // Initialized data
 
-   const integer newrms = 38;
+   const int newrms = 38;
 
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    if (ri == 0) {
       return ret_val;

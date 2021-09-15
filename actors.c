@@ -1,27 +1,25 @@
 // AAPPLI- APPLICABLES FOR ADVENTURERS
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
 
-logical aappli_(ri)
-integer ri;
-{
+Bool aappli_(int ri) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   logical f;
-   integer i;
+   Bool f;
+   int i;
 
    if (ri == 0) {
       goto L10;
    }
 // 						!IF ZERO, NO APP.
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    switch (ri) {
       case 1:
@@ -35,7 +33,7 @@ integer ri;
 // COMMON FALSE RETURN.
 
 L10:
-   ret_val = FALSE_;
+   ret_val = false;
    return ret_val;
 
 // A1--	ROBOT.  PROCESS MOST COMMANDS GIVEN TO ROBOT.
@@ -45,7 +43,7 @@ L1000:
 
       goto L1200;
    }
-   cevent_1.cflag[cindex_1.cevsph - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevsph - 1] = false;
 // 						!ROBOT RAISED CAGE.
    play_1.winner = aindex_1.player;
 // 						!RESET FOR PLAYER.
@@ -57,7 +55,7 @@ L1000:
 // 						!INSTALL ROBOT IN ROOM.
    advs_1.aroom[aindex_1.arobot - 1] = rindex_1.cager;
 // 						!ALSO MOVE ROBOT/ADV.
-   findex_1.cagesf = TRUE_;
+   findex_1.cagesf = true;
 // 						!CAGE SOLVED.
    objcts_1.oflag1[oindex_1.robot - 1] &= ~NDSCBT;
    objcts_1.oflag1[oindex_1.spher - 1] |= TAKEBT;
@@ -126,17 +124,17 @@ L2200:
 
 // DECLARATIONS
 
-void thiefd_() {
+void thiefd_(void) {
 // System generated locals
-   integer i__1, i__2;
+   int i__1, i__2;
 
 // Local variables
-   integer i, j, nr;
-   logical once;
-   integer rhere;
+   int i, j, nr;
+   Bool once;
+   int rhere;
 
 // 						!SET UP DETAIL FLAG.
-   once = FALSE_;
+   once = false;
 // 						!INIT FLAG.
 L1025:
    rhere = objcts_1.oroom[oindex_1.thief - 1];
@@ -199,7 +197,7 @@ L1100:
 // 						!ABORT IF NO STILLETTO.
    newsta_(oindex_1.thief, 583, hack_1.thfpos, 0, 0);
 // 						!INSERT THIEF INTO ROOM.
-   hack_1.thfflg = TRUE_;
+   hack_1.thfflg = true;
 // 						!THIEF IS ANNOUNCED.
    return;
 
@@ -247,7 +245,7 @@ L1250:
       return;
    }
 // 						!70% CHANCE TO DO NOTHING.
-   hack_1.thfflg = TRUE_;
+   hack_1.thfflg = true;
    i__1 = -oindex_1.thief;
    i__2 = -oindex_1.thief;
    nr = robrm_(hack_1.thfpos, 100, 0, 0, i__1) + robadv_(play_1.winner, 0, 0, i__2);
@@ -331,7 +329,7 @@ L1500:
 
 L1700:
    if (objcts_1.oadv[oindex_1.rope - 1] == -oindex_1.thief) {
-      findex_1.domef = FALSE_;
+      findex_1.domef = false;
    }
    if (once) {
       goto L1800;
@@ -346,7 +344,7 @@ L1750:
    if ((rooms_1.rflag[hack_1.thfpos - 1] & RLAND + RSACRD + REND) != RLAND) {
       goto L1750;
    }
-   hack_1.thfflg = FALSE_;
+   hack_1.thfflg = false;
 // 						!NOT ANNOUNCED.
    goto L1025;
 // 						!ONCE MORE.

@@ -1,4 +1,4 @@
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -7,10 +7,8 @@
 
 // GTTIME-- GET TOTAL TIME PLAYED
 
-void gttime_(t)
-integer *t;
-{
-   integer h, m, s;
+void gttime_(int *t) {
+   int h, m, s;
 
    itime_(&h, &m, &s);
    *t = h * 60 + m - (time_1.shour * 60 + time_1.smin);
@@ -25,16 +23,12 @@ integer *t;
 
 // DECLARATIONS
 
-logical opncls_(obj, so, sc)
-integer obj;
-integer so;
-integer sc;
-{
+Bool opncls_(int obj, int so, int sc) {
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    if (prsvec_1.prsa == vindex_1.closew) {
       goto L100;
@@ -44,7 +38,7 @@ integer sc;
       goto L50;
    }
 // 						!OPEN?
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!LOSE
    return ret_val;
 
@@ -77,17 +71,15 @@ L200:
 
 // DECLARATIONS
 
-logical lit_(rm)
-integer rm;
-{
+Bool lit_(int rm) {
 // System generated locals
-   integer i__1, i__2;
-   logical ret_val;
+   int i__1, i__2;
+   Bool ret_val;
 
 // Local variables
-   integer i, j, oa;
+   int i, j, oa;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS
    if ((rooms_1.rflag[rm - 1] & RLIGHT) != 0) {
       return ret_val;
@@ -133,7 +125,7 @@ integer rm;
    L1000:
       ;
    }
-   ret_val = FALSE_;
+   ret_val = false;
    return ret_val;
 }
 
@@ -141,16 +133,12 @@ integer rm;
 
 // DECLARATIONS
 
-integer weight_(rm, cn, ad)
-integer rm;
-integer cn;
-integer ad;
-{
+int weight_(int rm, int cn, int ad) {
 // System generated locals
-   integer ret_val, i__1;
+   int ret_val, i__1;
 
 // Local variables
-   integer i, j;
+   int i, j;
 
    ret_val = 0;
    i__1 = objcts_1.olnt;

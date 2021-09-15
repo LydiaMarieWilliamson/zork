@@ -2,7 +2,7 @@
 // 	ALL VERBS IN THIS ROUTINE MUST BE INDEPENDANT
 // 	OF OBJECT ACTIONS
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -10,38 +10,36 @@
 #include "funcs.h"
 #include "vars.h"
 
-logical sverbs_(ri)
-integer ri;
-{
+Bool sverbs_(int ri) {
 // Initialized data
 
-   const integer mxnop = 39;
-   const integer mxjoke = 64;
-   static const integer jokes[25] = { 4, 5, 3, 304, 305, 306, 307, 308, 309, 310, 311,
+   const int mxnop = 39;
+   const int mxjoke = 64;
+   static const int jokes[25] = { 4, 5, 3, 304, 305, 306, 307, 308, 309, 310, 311,
       312, 313, 5314, 5319, 324, 325, 883, 884, 120, 120, 0, 0, 0, 0
    };
-   static const integer answer[14] = { 0, 1, 2, 3, 4, 4, 4, 4, 5, 5, 5, 6, 7, 7 };
+   static const int answer[14] = { 0, 1, 2, 3, 4, 4, 4, 4, 5, 5, 5, 6, 7, 7 };
    static const char *const ansstr[14] = { "TEMPLE", "FOREST", "30003", "FLASK", "RUB", "FONDLE",
       "CARRES", "TOUCH", "BONES", "BODY", "SKELE", "RUSTYKNIFE",
       "NONE", "NOWHER"
    };
 
 // System generated locals
-   integer i__1, i__2;
-   logical ret_val;
+   int i__1, i__2;
+   Bool ret_val;
 
 // Local variables
-   logical f;
+   Bool f;
    const char *z, *z2;
-   integer i, j;
-   integer k;
-   integer l;
+   int i, j;
+   int k;
+   int l;
    char ch[1 * 6];
-   integer cp, wp;
+   int cp, wp;
    char pp1[1 * 6], pp2[1 * 6];
-   integer odi2 = 0, odo2 = 0;
+   int odi2 = 0, odo2 = 0;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    if (prsvec_1.prso != 0) {
       odo2 = objcts_1.odesc2[prsvec_1.prso - 1];
@@ -134,7 +132,7 @@ integer ri;
 // ALL VERB PROCESSORS RETURN HERE TO DECLARE FAILURE.
 
 //L10:
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!LOSE.
    return ret_val;
 
@@ -195,25 +193,25 @@ L69000:
 // V70--	BRIEF.  SET FLAG.
 
 L1000:
-   findex_1.brieff = TRUE_;
+   findex_1.brieff = true;
 // 						!BRIEF DESCRIPTIONS.
-   findex_1.superf = FALSE_;
+   findex_1.superf = false;
    rspeak_(326);
    return ret_val;
 
 // V71--	VERBOSE.  CLEAR FLAGS.
 
 L2000:
-   findex_1.brieff = FALSE_;
+   findex_1.brieff = false;
 // 						!LONG DESCRIPTIONS.
-   findex_1.superf = FALSE_;
+   findex_1.superf = false;
    rspeak_(327);
    return ret_val;
 
 // V72--	SUPERBRIEF.  SET FLAG.
 
 L3000:
-   findex_1.superf = TRUE_;
+   findex_1.superf = true;
    rspeak_(328);
    return ret_val;
 
@@ -242,7 +240,7 @@ L4100:
 L5000:
    more_output(NULL);
    printf("V%1d.%1d%c\n", vers_1.vmaj, vers_1.vmin, vers_1.vedit);
-   play_1.telflg = TRUE_;
+   play_1.telflg = true;
    return ret_val;
 
 // V75--	SWIM.  ALWAYS A JOKE.
@@ -285,9 +283,9 @@ L8000:
 L8100:
    newsta_(oindex_1.cyclo, 337, 0, 0, 0);
 // 						!CYCLOPS FLEES.
-   findex_1.cyclof = TRUE_;
+   findex_1.cyclof = true;
 // 						!SET ALL FLAGS.
-   findex_1.magicf = TRUE_;
+   findex_1.magicf = true;
    objcts_1.oflag2[oindex_1.cyclo - 1] &= ~FITEBT;
    return ret_val;
 
@@ -298,7 +296,7 @@ L9000:
       goto L9100;
    }
 // 						!IN RIDDLE ROOM?
-   findex_1.riddlf = TRUE_;
+   findex_1.riddlf = true;
 // 						!YES, SOLVED IT.
    rspeak_(338);
    return ret_val;
@@ -570,7 +568,7 @@ L21000:
    if (j != 1)
       printf("s");
    printf(".\n");
-   play_1.telflg = TRUE_;
+   play_1.telflg = true;
    return ret_val;
 
 // V91--	LEAP.  USUALLY A JOKE, WITH A CATCH.
@@ -630,7 +628,7 @@ L23100:
    return ret_val;
 
 L23200:
-   findex_1.grunlf = FALSE_;
+   findex_1.grunlf = false;
 // 						!GRATE NOW LOCKED.
    rspeak_(214);
    exits_1.travel[rooms_1.rexit[play_1.here - 1]] = 214;
@@ -652,7 +650,7 @@ L24000:
    return ret_val;
 
 L24200:
-   findex_1.grunlf = TRUE_;
+   findex_1.grunlf = true;
 // 						!UNLOCK GRATE.
    rspeak_(217);
    exits_1.travel[rooms_1.rexit[play_1.here - 1]] = 217;
@@ -770,9 +768,9 @@ L26400:
    if ((rooms_1.rflag[rindex_1.tstrs - 1] & RSEEN) == 0) {
       goto L26575;
    }
-   findex_1.spellf = TRUE_;
+   findex_1.spellf = true;
 // 						!TELL HIM.
-   play_1.telflg = TRUE_;
+   play_1.telflg = true;
    more_output(NULL);
    printf("A hollow voice replies:  \"%.6s %.6s\".\n", pp1, ch);
 
@@ -799,7 +797,7 @@ L26600:
 // 						!WRONG.
 // L26700:
    }
-   findex_1.spellf = TRUE_;
+   findex_1.spellf = true;
 // 						!IT WORKS.
    rspeak_(859);
    cevent_1.ctick[cindex_1.cevste - 1] = 1;
@@ -860,7 +858,7 @@ L27100:
 L27400:
    rspeak_(826);
 // 						!ALL OVER.
-   cevent_1.cflag[cindex_1.cevinq - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevinq - 1] = false;
 // 						!LOSE.
    return ret_val;
 
@@ -888,7 +886,7 @@ L27500:
 L27600:
    rspeak_(827);
 // 						!QUIZ OVER,
-   cevent_1.cflag[cindex_1.cevinq - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevinq - 1] = false;
    objcts_1.oflag2[oindex_1.qdoor - 1] |= OPENBT;
    return ret_val;
 

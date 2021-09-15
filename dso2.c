@@ -1,6 +1,6 @@
 // MOVETO- MOVE PLAYER TO NEW ROOM
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -8,20 +8,17 @@
 #include "funcs.h"
 #include "vars.h"
 
-logical moveto_(nr, who)
-integer nr;
-integer who;
-{
+Bool moveto_(int nr, int who) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer j;
-   logical lhr;
-   logical lnr, nlv;
-   integer bits;
+   int j;
+   Bool lhr;
+   Bool lnr, nlv;
+   int bits;
 
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME FAILS.
    lhr = (rooms_1.rflag[play_1.here - 1] & RLAND) != 0;
    lnr = (rooms_1.rflag[nr - 1] & RLAND) != 0;
@@ -61,7 +58,7 @@ L100:
    }
 
 L500:
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!MOVE SHOULD SUCCEED.
    if ((rooms_1.rflag[nr - 1] & RMUNG) == 0) {
       goto L600;
@@ -94,19 +91,17 @@ L800:
 
 // DECLARATIONS
 
-void score_(flg)
-logical flg;
-{
+void score_(Bool flg) {
 // Initialized data
 
-   static const integer rank[10] = { 20, 19, 18, 16, 12, 8, 4, 2, 1, 0 };
-   static const integer erank[5] = { 20, 15, 10, 5, 0 };
+   static const int rank[10] = { 20, 19, 18, 16, 12, 8, 4, 2, 1, 0 };
+   static const int erank[5] = { 20, 15, 10, 5, 0 };
 
 // System generated locals
-   integer i__1;
+   int i__1;
 
 // Local variables
-   integer i, as;
+   int i, as;
 
    as = advs_1.ascore[play_1.winner - 1];
 
@@ -160,9 +155,7 @@ L80:
 
 // DECLARATIONS
 
-void scrupd_(n)
-integer n;
-{
+void scrupd_(int n) {
    if (findex_1.endgmf) {
       goto L100;
    }
@@ -174,7 +167,7 @@ integer n;
    if (advs_1.ascore[play_1.winner - 1] < state_1.mxscor - state_1.deaths * 10) {
       return;
    }
-   cevent_1.cflag[cindex_1.cevegh - 1] = TRUE_;
+   cevent_1.cflag[cindex_1.cevegh - 1] = true;
 // 						!TURN ON END GAME
    cevent_1.ctick[cindex_1.cevegh - 1] = 15;
    return;

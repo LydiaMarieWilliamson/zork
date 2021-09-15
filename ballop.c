@@ -1,19 +1,17 @@
 // BALLOP-	BALLOON FUNCTION
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
 
-logical ballop_(arg)
-integer arg;
-{
+Bool ballop_(int arg) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    if (arg != 2) {
       goto L200;
@@ -75,7 +73,7 @@ L275:
       state_1.bloc = curxt_1.xroom1;
    }
 L10:
-   ret_val = FALSE_;
+   ret_val = false;
    return ret_val;
 
 L300:
@@ -117,7 +115,7 @@ L600:
    if (!findex_1.blabf) {
       newsta_(oindex_1.blabe, 0, 0, oindex_1.ballo, 0);
    }
-   findex_1.blabf = TRUE_;
+   findex_1.blabf = true;
    findex_1.binff = prsvec_1.prso;
    cevent_1.ctick[cindex_1.cevbal - 1] = 3;
    rspeak_(551);

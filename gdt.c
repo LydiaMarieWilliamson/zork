@@ -1,6 +1,6 @@
 // GDT- GAME DEBUGGING TOOL
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -12,22 +12,22 @@
 
 #ifdef ALLOW_GDT
 
-void gdt_() {
+void gdt_(void) {
 // Initialized data
 
-   const integer cmdmax = 38;
+   const int cmdmax = 38;
    const char *dbgcmd = "DRDODADCDXDHDLDVDFDSAFHENRNTNCNDRRRTRCRDTKEXARAOAAACAXAVD2DNANDMDTAHDPPDDZAZ";
-   static const integer argtyp[38] = { 2, 2, 2, 2, 2, 0, 0, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0,
+   static const int argtyp[38] = { 2, 2, 2, 2, 2, 0, 0, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 1, 0, 3, 3, 3, 3, 1, 3, 2, 2, 1, 2, 1, 0, 0, 0, 0, 1
    };
 
 // System generated locals
-   integer i__1, i__2;
+   int i__1, i__2;
 
 // Local variables
-   integer i, j, k, l, l1;
+   int i, j, k, l, l1;
    char cmd[3];
-   integer fmax, smax;
+   int fmax, smax;
    char buf[80];
    char *z;
 
@@ -447,9 +447,9 @@ L21000:
 // NR-- NO ROBBER
 
 L22000:
-   hack_1.thfflg = FALSE_;
+   hack_1.thfflg = false;
 // 						!DISABLE ROBBER.
-   hack_1.thfact = FALSE_;
+   hack_1.thfact = false;
    newsta_(oindex_1.thief, 0, 0, 0, 0);
 // 						!VANISH THIEF.
    more_output("No robber.");
@@ -458,7 +458,7 @@ L22000:
 // NT-- NO TROLL
 
 L23000:
-   findex_1.trollf = TRUE_;
+   findex_1.trollf = true;
    newsta_(oindex_1.troll, 0, 0, 0, 0);
    more_output("No troll.");
    goto L2000;
@@ -466,7 +466,7 @@ L23000:
 // NC-- NO CYCLOPS
 
 L24000:
-   findex_1.cyclof = TRUE_;
+   findex_1.cyclof = true;
    newsta_(oindex_1.cyclo, 0, 0, 0, 0);
    more_output("No cyclops.");
    goto L2000;
@@ -481,14 +481,14 @@ L25000:
 // RR-- RESTORE ROBBER
 
 L26000:
-   hack_1.thfact = TRUE_;
+   hack_1.thfact = true;
    more_output("Restored robber.");
    goto L2000;
 
 // RT-- RESTORE TROLL
 
 L27000:
-   findex_1.trollf = FALSE_;
+   findex_1.trollf = false;
    newsta_(oindex_1.troll, 0, rindex_1.mtrol, 0, 0);
    more_output("Restored troll.");
    goto L2000;
@@ -496,8 +496,8 @@ L27000:
 // RC-- RESTORE CYCLOPS
 
 L28000:
-   findex_1.cyclof = FALSE_;
-   findex_1.magicf = FALSE_;
+   findex_1.cyclof = false;
+   findex_1.magicf = false;
    newsta_(oindex_1.cyclo, 0, rindex_1.mcycl, 0, 0);
    more_output("Restored cyclops.");
    goto L2000;

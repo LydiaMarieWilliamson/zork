@@ -1,23 +1,21 @@
 // LIGHTP-	LIGHT PROCESSOR
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
 
-logical lightp_(obj)
-integer obj;
-{
+Bool lightp_(int obj) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer flobts;
-   integer i;
+   int flobts;
+   int i;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS
    flobts = FLAMBT + LITEBT + ONBT;
    if (obj != oindex_1.candl) {
@@ -48,7 +46,7 @@ L19100:
       i = 514;
    }
 // 						!IF ON, DIFFERENT.
-   cevent_1.cflag[cindex_1.cevcnd - 1] = FALSE_;
+   cevent_1.cflag[cindex_1.cevcnd - 1] = false;
 // 						!DISABLE COUNTDOWN.
    objcts_1.oflag1[oindex_1.candl - 1] &= ~ONBT;
    rspeak_(i);
@@ -73,7 +71,7 @@ L19300:
 // 						!ANY FLAME?
    rspeak_(516);
 // 						!NO, LOSE.
-   prsvec_1.prswon = FALSE_;
+   prsvec_1.prswon = false;
    return ret_val;
 
 L19400:
@@ -87,7 +85,7 @@ L19400:
    }
 // 						!IF ON, JOKE.
    objcts_1.oflag1[oindex_1.candl - 1] |= ONBT;
-   cevent_1.cflag[cindex_1.cevcnd - 1] = TRUE_;
+   cevent_1.cflag[cindex_1.cevcnd - 1] = true;
 // 						!RESUME COUNTDOWN.
    rspeak_(i);
    return ret_val;
@@ -151,6 +149,6 @@ L20500:
 // HERE FOR FALSE RETURN
 
 L10:
-   ret_val = FALSE_;
+   ret_val = false;
    return ret_val;
 }

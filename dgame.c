@@ -1,6 +1,6 @@
 // GAME- MAIN COMMAND LOOP FOR DUNGEON
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -10,15 +10,15 @@
 
 // Do all systems have <string.h>?  Don't use it, just in case
 
-extern int strcmp P((const char *, const char *));
+extern int strcmp(const char *, const char *);
 
-static logical xvehic_ P((integer));
-static void xendmv_ P((logical));
+static Bool xvehic_(int);
+static void xendmv_(Bool);
 
-void game_() {
+void game_(void) {
 // Local variables
-   logical f;
-   integer i;
+   Bool f;
+   int i;
 
 // START UP, DESCRIBE CURRENT LOCATION.
 
@@ -32,7 +32,7 @@ void game_() {
 L100:
    play_1.winner = aindex_1.player;
 // 						!PLAYER MOVING.
-   play_1.telflg = FALSE_;
+   play_1.telflg = false;
 // 						!ASSUME NOTHING TOLD.
    if (prsvec_1.prscon <= 1) {
       rdline_(input_1.inbuf, 1);
@@ -102,9 +102,9 @@ L1000:
 
    rspeak_(571);
 // 						!KILL THE ECHO.
-   findex_1.echof = TRUE_;
+   findex_1.echof = true;
    objcts_1.oflag2[oindex_1.bar - 1] &= ~SCRDBT;
-   prsvec_1.prswon = TRUE_;
+   prsvec_1.prswon = true;
 // 						!FAKE OUT PARSER.
    prsvec_1.prscon = 1;
 // 						!FORCE NEW INPUT.
@@ -122,7 +122,7 @@ L1300:
 
 L1400:
    more_output(input_1.inbuf);
-   play_1.telflg = TRUE_;
+   play_1.telflg = true;
 // 						!INDICATE OUTPUT.
    goto L1000;
 // 						!MORE ECHO ROOM.
@@ -202,11 +202,9 @@ L2900:
 
 // DECLARATIONS
 
-static void xendmv_(flag)
-logical flag;
-{
+static void xendmv_(Bool flag) {
 // Local variables
-   logical f;
+   Bool f;
 
    if (!(flag)) {
       rspeak_(341);
@@ -238,16 +236,14 @@ logical flag;
 
 // DECLARATIONS
 
-static logical xvehic_(n)
-integer n;
-{
+static Bool xvehic_(int n) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer av;
+   int av;
 
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME LOSES.
    av = advs_1.avehic[play_1.winner - 1];
 // 						!GET VEHICLE.

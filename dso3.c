@@ -1,6 +1,6 @@
 // FINDXT- FIND EXIT FROM ROOM
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -8,18 +8,15 @@
 #include "funcs.h"
 #include "vars.h"
 
-logical findxt_(dir, rm)
-integer dir;
-integer rm;
-{
+Bool findxt_(int dir, int rm) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer i, xi;
-   integer xxxflg;
+   int i, xi;
+   int xxxflg;
 
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!ASSUME WINS.
    xi = rooms_1.rexit[rm - 1];
 // 						!FIND FIRST ENTRY.
@@ -64,7 +61,7 @@ L110:
       goto L100;
    }
 L1000:
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!YES, LOSE.
    return ret_val;
 }
@@ -73,19 +70,12 @@ L1000:
 
 // DECLARATIONS
 
-integer fwim_(f1, f2, rm, con, adv, nocare)
-integer f1;
-integer f2;
-integer rm;
-integer con;
-integer adv;
-logical nocare;
-{
+int fwim_(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 // System generated locals
-   integer ret_val, i__1, i__2;
+   int ret_val, i__1, i__2;
 
 // Local variables
-   integer i, j;
+   int i, j;
 
 // OBJECTS
 
@@ -153,13 +143,9 @@ logical nocare;
 
 // 	YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING)
 
-logical yesno_(q, y, n)
-integer q;
-integer y;
-integer n;
-{
+Bool yesno_(int q, int y, int n) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
    char ans[100];
@@ -182,14 +168,14 @@ L100:
    goto L100;
 
 L200:
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!YES,
    rspeak_(y);
 // 						!OUT WITH IT.
    return ret_val;
 
 L300:
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!NO,
    rspeak_(n);
 // 						!LIKEWISE.

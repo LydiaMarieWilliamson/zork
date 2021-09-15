@@ -16,31 +16,22 @@
 
 // Define these here to avoid using <stdlib.h>
 
-extern void exit P((int));
-extern int rand P((void));
+extern void exit(int);
+extern int rand(void);
 
-// We should have a definition for time_t and struct tm by now.  Make
-// sure we have definitions for the functions we want to call.
-// The argument to localtime should be P((const time_t *)), but Ultrix
-// 4.0 leaves out the const in their prototype.  Damn them.
-
-extern time_t time P((time_t *));
-extern struct tm *localtime();
+// C99 is now locked in and assumed.
+#include <time.h> // For time() and localtime();
 
 // Terminate the game
 
-void exit_() {
+void exit_(void) {
    fprintf(stderr, "The game is over.\n");
    exit(0);
 }
 
 // Get time in hours, minutes and seconds
 
-void itime_(hrptr, minptr, secptr)
-integer *hrptr;
-integer *minptr;
-integer *secptr;
-{
+void itime_(int *hrptr, int *minptr, int *secptr) {
    time_t timebuf;
    struct tm *tmptr;
 
@@ -54,9 +45,7 @@ integer *secptr;
 
 // Random number generator
 
-integer rnd_(maxval)
-integer maxval;
-{
+int rnd_(int maxval) {
    return rand() % maxval;
 }
 
@@ -104,14 +93,14 @@ integer maxval;
 #endif
 
 #ifdef MORE_TERMCAP
-extern char *getenv P((const char *));
-extern void tgetent P((char *, const char *));
-extern int tgetnum P((const char *));
+extern char *getenv(const char *);
+extern void tgetent(char *, const char *);
+extern int tgetnum(const char *);
 #else
 #   ifdef MORE_TERMINFO
 #      include <cursesX.h>
 #      include <term.h>
-extern void setupterm P((const char *, int, int));
+extern void setupterm(const char *, int, int);
 #   else
 #      ifdef MORE_AMOS
 #         include <moncal.h>
@@ -122,10 +111,10 @@ extern void setupterm P((const char *, int, int));
 
 // Initialize the more waiting facility (determine how many rows the terminal has).
 
-static integer crows;
-static integer coutput;
+static int crows;
+static int coutput;
 
-void more_init() {
+void more_init(void) {
 #ifdef MORE_NONE
    crows = 0;
 #else
@@ -176,9 +165,7 @@ void more_init() {
 // needs some sort of formatting, and is output after this function
 // returns (if all computers had vprintf I would just it, but they
 // probably don't).
-void more_output(z)
-const char *z;
-{
+void more_output(const char *z) {
 // pager code remarked out to allow streamed input and output
 #if 0
    if (crows > 0 && coutput > crows - 2) {
@@ -196,6 +183,6 @@ const char *z;
 
 // The terminal is waiting for input (clear the number of output lines)
 
-void more_input() {
+void more_input(void) {
    coutput = 0;
 }

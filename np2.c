@@ -1,6 +1,6 @@
 // GETOBJ--	FIND OBJ DESCRIBED BY ADJ, NAME PAIR
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -8,27 +8,23 @@
 #include "vars.h"
 #include "parse.h"
 
-static logical thisit_ P((integer, integer, integer, integer));
+static Bool thisit_(int, int, int, int);
 
 // THIS ROUTINE DETAILS ON BIT 3 OF PRSFLG
 
-integer getobj_(oidx, aidx, spcobj)
-integer oidx;
-integer aidx;
-integer spcobj;
-{
+int getobj_(int oidx, int aidx, int spcobj) {
 // System generated locals
-   integer ret_val, i__1;
+   int ret_val, i__1;
 
 // Local variables
-   integer i, av;
-   integer obj;
-   integer nobj;
-   logical chomp;
+   int i, av;
+   int obj;
+   int nobj;
+   Bool chomp;
 
 // GETOBJ, PAGE 2
 
-   chomp = FALSE_;
+   chomp = false;
    av = advs_1.avehic[play_1.winner - 1];
    obj = 0;
 // 						!ASSUME DARK.
@@ -55,7 +51,7 @@ L100:
       goto L200;
    }
 // 						!TEST IF REACHABLE.
-   chomp = TRUE_;
+   chomp = true;
 // 						!PROBABLY NOT.
 
 L200:
@@ -74,7 +70,7 @@ L200:
    }
 // 						!TEST RESULT.
 L300:
-   chomp = FALSE_;
+   chomp = false;
 // 						!REACHABLE.
    if (obj == nobj) {
       goto L400;
@@ -147,19 +143,12 @@ L1500:
 
 // DECLARATIONS
 
-integer schlst_(oidx, aidx, rm, cn, ad, spcobj)
-integer oidx;
-integer aidx;
-integer rm;
-integer cn;
-integer ad;
-integer spcobj;
-{
+int schlst_(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
 // System generated locals
-   integer ret_val, i__1, i__2;
+   int ret_val, i__1, i__2;
 
 // Local variables
-   integer i, j, x;
+   int i, j, x;
 
    ret_val = 0;
 // 						!NO RESULT.
@@ -245,12 +234,7 @@ L2000:
 
 // DECLARATIONS
 
-static logical thisit_(oidx, aidx, obj, spcobj)
-integer oidx;
-integer aidx;
-integer obj;
-integer spcobj;
-{
+static Bool thisit_(int oidx, int aidx, int obj, int spcobj) {
 // Initialized data
 
 //    THE FOLLOWING DATA STATEMENT USED RADIX-50 NOTATION (R50MIN/1RA/)
@@ -258,15 +242,15 @@ integer spcobj;
 //       IN RADIX-50 NOTATION, AN "A" IN THE FIRST POSITION IS
 //       ENCODED AS 1*40*40 = 1600.
 
-   const integer r50min = 1600;
+   const int r50min = 1600;
 
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer i;
+   int i;
 
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME NO MATCH.
    if (spcobj != 0 && obj == spcobj) {
       goto L500;
@@ -303,6 +287,6 @@ L200:
 // 						!IF FAIL, CONT.
 
 L500:
-   ret_val = TRUE_;
+   ret_val = true;
    return ret_val;
 }

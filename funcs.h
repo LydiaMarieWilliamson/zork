@@ -3,50 +3,100 @@
 #ifndef FUNCS_H
 #define FUNCS_H
 
-// If __STDC__ is not defined, don't use function prototypes, void, or const.
+// Assumes C99, which is now (well into the 21st century) POSIX.
+// That means: boolean types, function prototypes, "rb" and "wb" for fopen, "const", "void", etc.
+#include <stdbool.h>
 
-#ifdef __STDC__
-#   define P(x) x
-#else
-#   define P(x) ()
-#   define void int
-#   define const
-#endif
+#define BINREAD "rb"
+#define BINWRITE "wb"
 
-// Try to guess whether we need "rb" to open files in binary mode.
-// If this is unix, it doesn't matter.  Otherwise, assume that if
-// __STDC__ is defined we can use "rb".  Otherwise, assume that we
-// had better use "r" or fopen will fail.
+typedef int Bool;
 
-#ifdef unix
-#   define BINREAD "r"
-#   define BINWRITE "w"
-#else
-#   ifdef __STDC__
-#      define BINREAD "rb"
-#      define BINWRITE "wb"
-#   else
-#      define BINREAD "r"
-#      define BINWRITE "w"
-#   endif
-#endif
+#define abs(X)		((X) >= 0? (X): -(X))
+#define min(A, B)	((A) <= (B)? (A): (B))
+#define max(A, B)	((A) >= (B)? (A): (B))
 
-typedef int integer;
-typedef int logical;
+extern Bool protected(void);
+extern Bool wizard(void);
 
-#define TRUE_ (1)
-#define FALSE_ (0)
+extern void more_init(void);
+extern void more_output(const char *);
+extern void more_input(void);
 
-#define abs(x) ((x) >= 0 ? (x) : -(x))
-#define min(a,b) ((a) <= (b) ? (a) : (b))
-#define max(a,b) ((a) >= (b) ? (a) : (b))
-
-extern logical protected P((void)), wizard P((void));
-
-extern void more_init P((void)), more_output P((const char *)), more_input P((void));
-
-extern void bug_ P((integer, integer)), cevapp_ P((integer)), cpgoto_ P((integer)), cpinfo_ P((integer, integer)), encryp_ P((const char *, char *)), exit_ P((void)), fightd_ P((void)), game_ P((void)), gdt_ P((void)), gttime_ P((integer *)), invent_ P((integer)), itime_ P((integer *, integer *, integer *)), jigsup_ P((integer)), newsta_ P((integer, integer, integer, integer, integer)), orphan_ P((integer, integer, integer, integer, integer)), princo_ P((integer, integer)), princr_ P((logical, integer)), rdline_ P((char *, integer)), rspeak_ P((integer)), rspsb2_ P((integer, integer, integer)), rspsub_ P((integer, integer)), rstrgm_ P((void)), savegm_ P((void)), score_ P((logical)), scrupd_ P((integer)), swordd_ P((void)), thiefd_ P((void)), valuac_ P((integer));
-extern integer blow_ P((integer, integer, integer, logical, integer)), fights_ P((integer, logical)), fwim_ P((integer, integer, integer, integer, integer, logical)), getobj_ P((integer, integer, integer)), schlst_ P((integer, integer, integer, integer, integer, integer)), mrhere_ P((integer)), oactor_ P((integer)), rnd_ P((integer)), robadv_ P((integer, integer, integer, integer)), robrm_ P((integer, integer, integer, integer, integer)), sparse_ P((const integer *, integer, logical)), vilstr_ P((integer)), weight_ P((integer, integer, integer));
-extern logical aappli_ P((integer)), ballop_ P((integer)), clockd_ P((void)), cyclop_ P((integer)), drop_ P((logical)), findxt_ P((integer, integer)), ghere_ P((integer, integer)), init_ P((void)), lightp_ P((integer)), lit_ P((integer)), moveto_ P((integer, integer)), nobjs_ P((integer, integer)), oappli_ P((integer, integer)), objact_ P((void)), opncls_ P((integer, integer, integer)), parse_ P((char *, logical)), prob_ P((integer, integer)), put_ P((logical)), rappli_ P((integer)), rappl1_ P((integer)), rappl2_ P((integer)), rmdesc_ P((integer)), sobjs_ P((integer, integer)), sverbs_ P((integer)), synmch_ P((void)), take_ P((logical)), thiefp_ P((integer)), trollp_ P((integer)), qempty_ P((integer)), qhere_ P((integer, integer)), vappli_ P((integer)), walk_ P((void)), winnin_ P((integer, integer)), yesno_ P((integer, integer, integer));
+extern void bug_(int, int);
+extern void cevapp_(int);
+extern void cpgoto_(int);
+extern void cpinfo_(int, int);
+extern void encryp_(const char *, char *);
+extern void exit_(void);
+extern void fightd_(void);
+extern void game_(void);
+extern void gdt_(void);
+extern void gttime_(int *);
+extern void invent_(int);
+extern void itime_(int *, int *, int *);
+extern void jigsup_(int);
+extern void newsta_(int, int, int, int, int);
+extern void orphan_(int, int, int, int, int);
+extern void princo_(int, int);
+extern void princr_(Bool, int);
+extern void rdline_(char *, int);
+extern void rspeak_(int);
+extern void rspsb2_(int, int, int);
+extern void rspsub_(int, int);
+extern void rstrgm_(void);
+extern void savegm_(void);
+extern void score_(Bool);
+extern void scrupd_(int);
+extern void swordd_(void);
+extern void thiefd_(void);
+extern void valuac_(int);
+extern int blow_(int, int, int, Bool, int);
+extern int fights_(int, Bool);
+extern int fwim_(int, int, int, int, int, Bool);
+extern int getobj_(int, int, int);
+extern int schlst_(int, int, int, int, int, int);
+extern int mrhere_(int);
+extern int oactor_(int);
+extern int rnd_(int);
+extern int robadv_(int, int, int, int);
+extern int robrm_(int, int, int, int, int);
+extern int sparse_(const int *, int, Bool);
+extern int vilstr_(int);
+extern int weight_(int, int, int);
+extern Bool aappli_(int);
+extern Bool ballop_(int);
+extern Bool clockd_(void);
+extern Bool cyclop_(int);
+extern Bool drop_(Bool);
+extern Bool findxt_(int, int);
+extern Bool ghere_(int, int);
+extern Bool init_(void);
+extern Bool lightp_(int);
+extern Bool lit_(int);
+extern Bool moveto_(int, int);
+extern Bool nobjs_(int, int);
+extern Bool oappli_(int, int);
+extern Bool objact_(void);
+extern Bool opncls_(int, int, int);
+extern Bool parse_(char *, Bool);
+extern Bool prob_(int, int);
+extern Bool put_(Bool);
+extern Bool rappli_(int);
+extern Bool rappl1_(int);
+extern Bool rappl2_(int);
+extern Bool rmdesc_(int);
+extern Bool sobjs_(int, int);
+extern Bool sverbs_(int);
+extern Bool synmch_(void);
+extern Bool take_(Bool);
+extern Bool thiefp_(int);
+extern Bool trollp_(int);
+extern Bool qempty_(int);
+extern Bool qhere_(int, int);
+extern Bool vappli_(int);
+extern Bool walk_(void);
+extern Bool winnin_(int, int);
+extern Bool yesno_(int, int, int);
 
 #endif

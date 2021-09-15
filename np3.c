@@ -1,6 +1,6 @@
 // SYNMCH--	SYNTAX MATCHER
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
@@ -8,32 +8,32 @@
 #include "vars.h"
 #include "parse.h"
 
-static void unpack_ P((integer, integer *));
-static integer gwim_ P((integer, integer, integer));
-static logical syneql_ P((integer, integer, integer, integer, integer));
-static logical takeit_ P((integer, integer));
+static void unpack_(int, int *);
+static int gwim_(int, int, int);
+static Bool syneql_(int, int, int, int, int);
+static Bool takeit_(int, int);
 
 // THIS ROUTINE DETAILS ON BIT 4 OF PRSFLG
 
-logical synmch_() {
+Bool synmch_(void) {
 // Initialized data
 
 //   THE FOLLOWING DATA STATEMENT WAS ORIGINALLY:
 
 // 	DATA R50MIN/1RA/
 
-   const integer r50min = 1600;
+   const int r50min = 1600;
 
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer j;
-   integer newj;
-   integer drive, limit, qprep, sprep, dforce;
+   int j;
+   int newj;
+   int drive, limit, qprep, sprep, dforce;
 
-   ret_val = FALSE_;
+   ret_val = false;
    j = pv_1.act;
 // 						!SET UP PTR TO SYNTAX.
    drive = 0;
@@ -193,7 +193,7 @@ L5000:
       return ret_val;
    }
 // 						!TRY TAKE.
-   ret_val = TRUE_;
+   ret_val = true;
    return ret_val;
 
 }
@@ -202,12 +202,9 @@ L5000:
 
 // DECLARATIONS
 
-static void unpack_(oldj, j)
-integer oldj;
-integer *j;
-{
+static void unpack_(int oldj, int *j) {
 // Local variables
-   integer i;
+   int i;
 
    for (i = 1; i <= 11; ++i) {
 // 						!CLEAR SYNTAX.
@@ -268,15 +265,9 @@ L200:
 
 // DECLARATIONS
 
-static logical syneql_(prep, obj, sprep, sfl1, sfl2)
-integer prep;
-integer obj;
-integer sprep;
-integer sfl1;
-integer sfl2;
-{
+static Bool syneql_(int prep, int obj, int sprep, int sfl1, int sfl2) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
    if (obj == 0) {
       goto L100;
@@ -295,20 +286,17 @@ L100:
 
 // DECLARATIONS
 
-static logical takeit_(obj, sflag)
-integer obj;
-integer sflag;
-{
+static Bool takeit_(int obj, int sflag) {
 // System generated locals
-   logical ret_val;
+   Bool ret_val;
 
 // Local variables
-   integer x;
-   integer odo2;
+   int x;
+   int odo2;
 
 // TAKEIT, PAGE 2
 
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!ASSUME LOSES.
    if (obj == 0 || obj > star_1.strbit) {
       goto L4000;
@@ -402,7 +390,7 @@ L3700:
    objcts_1.ofval[obj - 1] = 0;
 
 L4000:
-   ret_val = TRUE_;
+   ret_val = true;
 // 						!SUCCESS.
    return ret_val;
 
@@ -412,18 +400,14 @@ L4000:
 
 // DECLARATIONS
 
-static integer gwim_(sflag, sfw1, sfw2)
-integer sflag;
-integer sfw1;
-integer sfw2;
-{
+static int gwim_(int sflag, int sfw1, int sfw2) {
 // System generated locals
-   integer ret_val;
+   int ret_val;
 
 // Local variables
-   integer av;
-   integer nobj, robj;
-   logical nocare;
+   int av;
+   int nobj, robj;
+   Bool nocare;
 
 // GWIM, PAGE 2
 

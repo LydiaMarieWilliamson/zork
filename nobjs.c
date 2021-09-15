@@ -2,30 +2,27 @@
 // 	OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP,
 // 	MAJOR VERBS, OR OTHER NON-RESIDENT SUBROUTINES
 
-//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
 
-static logical mirpan_ P((integer, logical));
+static Bool mirpan_(int, Bool);
 
-logical nobjs_(ri, arg)
-integer ri;
-integer arg;
-{
+Bool nobjs_(int ri, int arg) {
 // System generated locals
-   integer i__1, i__2;
-   logical ret_val;
+   int i__1, i__2;
+   Bool ret_val;
 
 // Local variables
-   logical f;
-   integer target;
-   integer i;
-   integer j;
-   integer av, wl;
-   integer nxt, odi2 = 0, odo2 = 0;
+   Bool f;
+   int target;
+   int i;
+   int j;
+   int av, wl;
+   int nxt, odi2 = 0, odo2 = 0;
 
    if (prsvec_1.prso != 0) {
       odo2 = objcts_1.odesc2[prsvec_1.prso - 1];
@@ -34,7 +31,7 @@ integer arg;
       odi2 = objcts_1.odesc2[prsvec_1.prsi - 1];
    }
    av = advs_1.avehic[play_1.winner - 1];
-   ret_val = TRUE_;
+   ret_val = true;
 
    switch (ri - 31) {
       case 1:
@@ -85,7 +82,7 @@ integer arg;
 // RETURN HERE TO DECLARE FALSE RESULT
 
 L10:
-   ret_val = FALSE_;
+   ret_val = false;
    return ret_val;
 
 // O32--	BILLS
@@ -327,7 +324,7 @@ L5100:
    return ret_val;
 
 L5200:
-   findex_1.singsf = TRUE_;
+   findex_1.singsf = true;
 // 						!SANG SONG.
    i = play_1.here;
    if (i == rindex_1.mtree) {
@@ -448,7 +445,7 @@ L9400:
       i = 879;
    }
 // 						!NOT?
-   findex_1.cpushf = TRUE_;
+   findex_1.cpushf = true;
    puzzle_1.cpvec[nxt + j - 1] = wl;
 // 						!MOVE WALL.
    puzzle_1.cpvec[nxt - 1] = 0;
@@ -571,11 +568,11 @@ L11000:
    return ret_val;
 
 L11200:
-   cevent_1.cflag[cindex_1.cevmrs - 1] = TRUE_;
+   cevent_1.cflag[cindex_1.cevmrs - 1] = true;
 // 						!MIRROR OPENS.
    cevent_1.ctick[cindex_1.cevmrs - 1] = 7;
-   findex_1.mrpshf = TRUE_;
-   findex_1.mropnf = TRUE_;
+   findex_1.mrpshf = true;
+   findex_1.mropnf = true;
    return ret_val;
 
 L11300:
@@ -665,9 +662,9 @@ L14100:
       goto L14200;
    }
 // 						!TRIED IT ALREADY?
-   findex_1.inqstf = TRUE_;
+   findex_1.inqstf = true;
 // 						!START INQUISITION.
-   cevent_1.cflag[cindex_1.cevinq - 1] = TRUE_;
+   cevent_1.cflag[cindex_1.cevinq - 1] = true;
    cevent_1.ctick[cindex_1.cevinq - 1] = 2;
    findex_1.quesno = rnd_(8);
 // 						!SELECT QUESTION.
@@ -838,7 +835,7 @@ L21000:
 // 						!PUT CARD IN SLIT?
    newsta_(prsvec_1.prso, 863, 0, 0, 0);
 // 						!KILL CARD.
-   findex_1.cpoutf = TRUE_;
+   findex_1.cpoutf = true;
 // 						!OPEN DOOR.
    objcts_1.oflag1[oindex_1.stldr - 1] &= ~VISIBT;
    return ret_val;
@@ -865,19 +862,16 @@ L21200:
 
 // DECLARATIONS
 
-static logical mirpan_(st, pnf)
-integer st;
-logical pnf;
-{
+static Bool mirpan_(int st, Bool pnf) {
 // System generated locals
-   integer i__1;
-   logical ret_val;
+   int i__1;
+   Bool ret_val;
 
 // Local variables
-   integer num;
-   integer mrbf;
+   int num;
+   int mrbf;
 
-   ret_val = TRUE_;
+   ret_val = true;
    num = mrhere_(play_1.here);
 // 						!GET MIRROR NUM.
    if (num != 0) {
@@ -920,10 +914,10 @@ L300:
    rspeak_(i__1);
 // 						!DO IT.
    if (num == 1 && !(pnf)) {
-      findex_1.mr1f = FALSE_;
+      findex_1.mr1f = false;
    }
    if (num == 2 && !(pnf)) {
-      findex_1.mr2f = FALSE_;
+      findex_1.mr2f = false;
    }
    return ret_val;
 
@@ -945,7 +939,7 @@ L500:
    return ret_val;
 
 L600:
-   ret_val = FALSE_;
+   ret_val = false;
 // 						!CANT HANDLE IT.
    return ret_val;
 
