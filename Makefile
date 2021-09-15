@@ -4,7 +4,7 @@
 BINDIR = /usr/games
 
 # Where to install the data file
-DATADIR = /usr/games/lib
+LIBDIR = /usr/games/lib
 
 # Where to install the man page
 MANDIR = /usr/share/man
@@ -45,7 +45,10 @@ TERMFLAG = -DMORE_NONE
 GDTFLAG = -DALLOW_GDT
 
 # Compilation flags
+# Development
 CFLAGS = -g #-static
+# Production
+# CFLAGS = -O2 #-static
 # On SCO Unix Development System 3.2.2a, the const type qualifier does
 # not work correctly when using cc.  The following line will cause it
 # to not be used and should be uncommented.
@@ -65,8 +68,8 @@ OBJS =	actors.o ballop.o clockr.o demons.o dgame.o dinit.o dmain.o\
 	dverb2.o gdt.o lightp.o local.o nobjs.o np.o np1.o np2.o np3.o\
 	nrooms.o objcts.o rooms.o sobjs.o supp.o sverbs.o verbs.o villns.o
 
-APP = Zork
 # APP = dungeon
+APP = Zork
 
 $(APP): $(OBJS) dtextc.dat
 	$(CC) $(CFLAGS) -o $(APP) $(OBJS) $(LIBS)
@@ -74,7 +77,7 @@ $(APP): $(OBJS) dtextc.dat
 install: $(APP) dtextc.dat
 	mkdir -p $(BINDIR) $(LIBDIR) $(MANDIR)/man6
 	cp $(APP) $(BINDIR)
-	cp dtextc.dat $(DATADIR)
+	cp dtextc.dat $(LIBDIR)
 	cp $(APP).6 $(MANDIR)/man6/
 
 clean:
@@ -86,7 +89,7 @@ dtextc.dat:
 	cat dtextc.uu1 dtextc.uu2 dtextc.uu3 dtextc.uu4 | uudecode
 
 dinit.o: dinit.c
-	$(CC) $(CFLAGS) $(GDTFLAG) -DTEXTFILE=\"$(DATADIR)/dtextc.dat\" -c dinit.c
+	$(CC) $(CFLAGS) $(GDTFLAG) -DTEXTFILE=\"$(LIBDIR)/dtextc.dat\" -c dinit.c
 
 dgame.o: dgame.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c dgame.c

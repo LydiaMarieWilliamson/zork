@@ -27,6 +27,7 @@ logical vbflag;
     const integer r50wal = 36852;
 
     /* System generated locals */
+    /* (@) The ‟volatile” was to prevent reused integers from being optimized out. */
     volatile integer ret_val, i__1, i__2;
 
     /* Local variables */
