@@ -1,8 +1,8 @@
-/* GDT- GAME DEBUGGING TOOL */
+// GDT- GAME DEBUGGING TOOL
 
-/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
-/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
-/* WRITTEN BY R. M. SUPNIK */
+//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
+// WRITTEN BY R. M. SUPNIK
 
 #include <stdio.h>
 #include <ctype.h>
@@ -13,7 +13,7 @@
 #ifdef ALLOW_GDT
 
 void gdt_() {
-/* Initialized data */
+// Initialized data
 
    const integer cmdmax = 38;
    const char *dbgcmd = "DRDODADCDXDHDLDVDFDSAFHENRNTNCNDRRRTRCRDTKEXARAOAAACAXAVD2DNANDMDTAHDPPDDZAZ";
@@ -21,71 +21,71 @@ void gdt_() {
       0, 0, 0, 1, 0, 3, 3, 3, 3, 1, 3, 2, 2, 1, 2, 1, 0, 0, 0, 0, 1
    };
 
-/* System generated locals */
+// System generated locals
    integer i__1, i__2;
 
-/* Local variables */
+// Local variables
    integer i, j, k, l, l1;
    char cmd[3];
    integer fmax, smax;
    char buf[80];
    char *z;
 
-/* FIRST, VALIDATE THAT THE CALLER IS AN IMPLEMENTER. */
+// FIRST, VALIDATE THAT THE CALLER IS AN IMPLEMENTER.
 
    fmax = 46;
-/* 						!SET ARRAY LIMITS. */
+// 						!SET ARRAY LIMITS.
    smax = 22;
 
    if (debug_1.gdtflg != 0) {
       goto L2000;
    }
-/* 						!IF OK, SKIP. */
+// 						!IF OK, SKIP.
    more_output("You are not an authorized user.");
-/* 						!NOT AN IMPLEMENTER. */
+// 						!NOT AN IMPLEMENTER.
    return;
-/* 						!BOOT HIM OFF */
+// 						!BOOT HIM OFF
 
-/* GDT, PAGE 2A */
+// GDT, PAGE 2A
 
-/* HERE TO GET NEXT COMMAND */
+// HERE TO GET NEXT COMMAND
 
 L2000:
    printf("GDT>");
-/* 						!OUTPUT PROMPT. */
+// 						!OUTPUT PROMPT.
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
    more_input();
    cmd[0] = ' ';
    cmd[1] = ' ';
    sscanf(buf, "%2s", cmd);
-/* 						!GET COMMAND. */
+// 						!GET COMMAND.
    if (cmd[0] == '\0')
       goto L2000;
-/* 						!IGNORE BLANKS. */
+// 						!IGNORE BLANKS.
    if (islower(cmd[0]))
       cmd[0] = toupper(cmd[0]);
    if (islower(cmd[1]))
       cmd[1] = toupper(cmd[1]);
    i__1 = cmdmax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!LOOK IT UP. */
+// 						!LOOK IT UP.
       if (cmd[0] == dbgcmd[(i - 1) << 1] && cmd[1] == dbgcmd[((i - 1) << 1) + 1]) {
          goto L2300;
       }
-/* 						!FOUND? */
-/*L2100: */
+// 						!FOUND?
+// L2100:
    }
 L2200:
    more_output("?");
-/* 						!NO, LOSE. */
+// 						!NO, LOSE.
    goto L2000;
 
-/*L230: */
-/*L240: */
-/*L225: */
-/*L235: */
-/*L245: */
+//L230:
+//L240:
+//L225:
+//L235:
+//L245:
 
 L2300:
    switch (argtyp[i - 1] + 1) {
@@ -98,13 +98,13 @@ L2300:
       case 4:
          goto L2700;
    }
-/* 						!BRANCH ON ARG TYPE. */
+// 						!BRANCH ON ARG TYPE.
    goto L2200;
-/* 						!ILLEGAL TYPE. */
+// 						!ILLEGAL TYPE.
 
 L2700:
    printf("Idx,Ary:  ");
-/* 						!TYPE 3, REQUEST ARRAY COORDS. */
+// 						!TYPE 3, REQUEST ARRAY COORDS.
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
    more_input();
@@ -118,7 +118,7 @@ L2700:
 
 L2600:
    printf("Limits:   ");
-/* 						!TYPE 2, READ BOUNDS. */
+// 						!TYPE 2, READ BOUNDS.
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
    more_input();
@@ -135,7 +135,7 @@ L2600:
 
 L2500:
    printf("Entry:    ");
-/* 						!TYPE 1, READ ENTRY NO. */
+// 						!TYPE 1, READ ENTRY NO.
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
    more_input();
@@ -222,18 +222,18 @@ L2400:
          goto L47000;
    }
    goto L2200;
-/* 						!WHAT??? */
-/* GDT, PAGE 3 */
+// 						!WHAT???
+// GDT, PAGE 3
 
-/* DR-- DISPLAY ROOMS */
+// DR-- DISPLAY ROOMS
 
 L10000:
    if (!(j > 0 && j <= rooms_1.rlnt && (k > 0 && k <= rooms_1.rlnt) && j <= k)) {
       goto L2200;
    }
-/* 						!ARGS VALID? */
+// 						!ARGS VALID?
    more_output("RM#  DESC1  DESC2  EXITS ACTION  VALUE  FLAGS");
-/* 						!COL HDRS. */
+// 						!COL HDRS.
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
       more_output(NULL);
@@ -242,35 +242,35 @@ L10000:
          printf(" %6d", eqr[i + l * 200 - 201]);
       printf("\n");
 
-/*L10100: */
+// L10100:
    }
    goto L2000;
 
-/* DO-- DISPLAY OBJECTS */
+// DO-- DISPLAY OBJECTS
 
 L11000:
    if (!(j > 0 && j <= objcts_1.olnt && (k > 0 && k <= objcts_1.olnt) && j <= k)) {
       goto L2200;
    }
-/* 						!ARGS VALID? */
+// 						!ARGS VALID?
    more_output("OB# DESC1 DESC2 DESCO ACT FLAGS1 FLAGS2 FVL TVL	  SIZE CAPAC ROOM ADV CON  READ");
-/* 						!COL HDRS */
+// 						!COL HDRS
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
       more_output(NULL);
       printf("%3d%6d%6d%6d%4d%7d%7d%4d%4d%6d%6d %4d%4d%4d%6d\n", i, eqo[i + 1 * 220 - 221], eqo[i + 2 * 220 - 221], eqo[i + 3 * 220 - 221], eqo[i + 4 * 220 - 221], eqo[i + 5 * 220 - 221], eqo[i + 6 * 220 - 221], eqo[i + 7 * 220 - 221], eqo[i + 8 * 220 - 221], eqo[i + 9 * 220 - 221], eqo[i + 10 * 220 - 221], eqo[i + 11 * 220 - 221], eqo[i + 12 * 220 - 221], eqo[i + 13 * 220 - 221], eqo[i + 14 * 220 - 221]);
 
-/*L11100: */
+// L11100:
    }
    goto L2000;
 
-/* DA-- DISPLAY ADVENTURERS */
+// DA-- DISPLAY ADVENTURERS
 
 L12000:
    if (!(j > 0 && j <= advs_1.alnt && (k > 0 && k <= advs_1.alnt) && j <= k)) {
       goto L2200;
    }
-/* 						!ARGS VALID? */
+// 						!ARGS VALID?
    more_output("AD#   ROOM  SCORE  VEHIC OBJECT ACTION  STREN  FLAGS");
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
@@ -279,52 +279,52 @@ L12000:
       for (l = 1; l <= 7; ++l)
          printf(" %6d", eqa[i + (l << 2) - 5]);
       printf("\n");
-/*L12100: */
+// L12100:
    }
    goto L2000;
 
-/* DC-- DISPLAY CLOCK EVENTS */
+// DC-- DISPLAY CLOCK EVENTS
 
 L13000:
    if (!(j > 0 && j <= cevent_1.clnt && (k > 0 && k <= cevent_1.clnt) && j <= k)) {
       goto L2200;
    }
-/* 						!ARGS VALID? */
+// 						!ARGS VALID?
    more_output("CL#   TICK ACTION  FLAG");
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
       more_output(NULL);
       printf("%3d %6d %6d     %c\n", i, eqc[i + 1 * 25 - 26], eqc[i + 2 * 25 - 26], cevent_1.cflag[i - 1] ? 'T' : 'F');
-/*L13100: */
+// L13100:
    }
    goto L2000;
 
-/* DX-- DISPLAY EXITS */
+// DX-- DISPLAY EXITS
 
 L14000:
    if (!(j > 0 && j <= exits_1.xlnt && (k > 0 && k <= exits_1.xlnt) && j <= k)) {
       goto L2200;
    }
-/* 						!ARGS VALID? */
+// 						!ARGS VALID?
    more_output("  RANGE   CONTENTS");
-/* 						!COL HDRS. */
+// 						!COL HDRS.
    i__1 = k;
    for (i = j; i <= i__1; i += 10) {
-/* 						!TEN PER LINE. */
-/* Computing MIN */
+// 						!TEN PER LINE.
+// Computing MIN
       i__2 = i + 9;
       l = min(i__2, k);
-/* 						!COMPUTE END OF LINE. */
+// 						!COMPUTE END OF LINE.
       more_output(NULL);
       printf("%3d-%3d  ", i, l);
       for (l1 = i; l1 <= l; ++l1)
          printf("%7d", exits_1.travel[l1 - 1]);
       printf("\n");
-/*L14100: */
+// L14100:
    }
    goto L2000;
 
-/* DH-- DISPLAY HACKS */
+// DH-- DISPLAY HACKS
 
 L15000:
    more_output(NULL);
@@ -333,7 +333,7 @@ L15000:
    printf("SWDACT= %c, SWDSTA= %d\n", hack_1.swdact ? 'T' : 'F', hack_1.swdsta);
    goto L2000;
 
-/* DL-- DISPLAY LENGTHS */
+// DL-- DISPLAY LENGTHS
 
 L16000:
    more_output(NULL);
@@ -344,15 +344,15 @@ L16000:
    printf("MBASE=%d, STRBIT=%d\n", star_1.mbase, star_1.strbit);
    goto L2000;
 
-/* DV-- DISPLAY VILLAINS */
+// DV-- DISPLAY VILLAINS
 
 L17000:
    if (!(j > 0 && j <= vill_1.vlnt && (k > 0 && k <= vill_1.vlnt) && j <= k)) {
       goto L2200;
    }
-/* 						!ARGS VALID? */
+// 						!ARGS VALID?
    more_output("VL# OBJECT   PROB   OPPS   BEST  MELEE");
-/* 						!COL HDRS */
+// 						!COL HDRS
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
       more_output(NULL);
@@ -360,26 +360,26 @@ L17000:
       for (l = 1; l <= 5; ++l)
          printf(" %6d", eqv[i + (l << 2) - 5]);
       printf("\n");
-/*L17100: */
+// L17100:
    }
    goto L2000;
 
-/* DF-- DISPLAY FLAGS */
+// DF-- DISPLAY FLAGS
 
 L18000:
    if (!(j > 0 && j <= fmax && (k > 0 && k <= fmax) && j <= k)) {
       goto L2200;
    }
-/* 						!ARGS VALID? */
+// 						!ARGS VALID?
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
       more_output(NULL);
       printf("Flag #%-2d = %c\n", i, flags[i - 1] ? 'T' : 'F');
-/*L18100: */
+// L18100:
    }
    goto L2000;
 
-/* DS-- DISPLAY STATE */
+// DS-- DISPLAY STATE
 
 L19000:
    more_output(NULL);
@@ -394,17 +394,17 @@ L19000:
    printf("Scol vector=  %6d %6d %6d\n", screen_1.fromdr, screen_1.scolrm, screen_1.scolac);
    goto L2000;
 
-/* GDT, PAGE 4 */
+// GDT, PAGE 4
 
-/* AF-- ALTER FLAGS */
+// AF-- ALTER FLAGS
 
 L20000:
    if (!(j > 0 && j <= fmax)) {
       goto L2200;
    }
-/* 						!ENTRY NO VALID? */
+// 						!ENTRY NO VALID?
    printf("Old= %c      New= ", flags[j - 1] ? 'T' : 'F');
-/* 						!TYPE OLD, GET NEW. */
+// 						!TYPE OLD, GET NEW.
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
    more_input();
@@ -419,7 +419,7 @@ L20000:
    }
    goto L2000;
 
-/* 21000-- HELP */
+// 21000-- HELP
 
 L21000:
    more_output("Valid commands are:");
@@ -444,18 +444,18 @@ L21000:
    more_output("DP- Display parser      TK- Take");
    goto L2000;
 
-/* NR-- NO ROBBER */
+// NR-- NO ROBBER
 
 L22000:
    hack_1.thfflg = FALSE_;
-/* 						!DISABLE ROBBER. */
+// 						!DISABLE ROBBER.
    hack_1.thfact = FALSE_;
    newsta_(oindex_1.thief, 0, 0, 0, 0);
-/* 						!VANISH THIEF. */
+// 						!VANISH THIEF.
    more_output("No robber.");
    goto L2000;
 
-/* NT-- NO TROLL */
+// NT-- NO TROLL
 
 L23000:
    findex_1.trollf = TRUE_;
@@ -463,7 +463,7 @@ L23000:
    more_output("No troll.");
    goto L2000;
 
-/* NC-- NO CYCLOPS */
+// NC-- NO CYCLOPS
 
 L24000:
    findex_1.cyclof = TRUE_;
@@ -471,21 +471,21 @@ L24000:
    more_output("No cyclops.");
    goto L2000;
 
-/* ND-- IMMORTALITY MODE */
+// ND-- IMMORTALITY MODE
 
 L25000:
    debug_1.dbgflg = 1;
    more_output("No deaths.");
    goto L2000;
 
-/* RR-- RESTORE ROBBER */
+// RR-- RESTORE ROBBER
 
 L26000:
    hack_1.thfact = TRUE_;
    more_output("Restored robber.");
    goto L2000;
 
-/* RT-- RESTORE TROLL */
+// RT-- RESTORE TROLL
 
 L27000:
    findex_1.trollf = FALSE_;
@@ -493,7 +493,7 @@ L27000:
    more_output("Restored troll.");
    goto L2000;
 
-/* RC-- RESTORE CYCLOPS */
+// RC-- RESTORE CYCLOPS
 
 L28000:
    findex_1.cyclof = FALSE_;
@@ -502,56 +502,56 @@ L28000:
    more_output("Restored cyclops.");
    goto L2000;
 
-/* RD-- MORTAL MODE */
+// RD-- MORTAL MODE
 
 L29000:
    debug_1.dbgflg = 0;
    more_output("Restored deaths.");
    goto L2000;
 
-/* GDT, PAGE 5 */
+// GDT, PAGE 5
 
-/* TK-- TAKE */
+// TK-- TAKE
 
 L30000:
    if (!(j > 0 && j <= objcts_1.olnt)) {
       goto L2200;
    }
-/* 						!VALID OBJECT? */
+// 						!VALID OBJECT?
    newsta_(j, 0, 0, 0, play_1.winner);
-/* 						!YES, TAKE OBJECT. */
+// 						!YES, TAKE OBJECT.
    more_output("Taken.");
-/* 						!TELL. */
+// 						!TELL.
    goto L2000;
 
-/* EX-- GOODBYE */
+// EX-- GOODBYE
 
 L31000:
    prsvec_1.prscon = 1;
    return;
 
-/* AR--	ALTER ROOM ENTRY */
+// AR--	ALTER ROOM ENTRY
 
 L32000:
    if (!(j > 0 && j <= rooms_1.rlnt && (k > 0 && k <= 5))) {
       goto L2200;
    }
-/* 						!INDICES VALID? */
+// 						!INDICES VALID?
    printf("Old = %6d      New = ", eqr[j + k * 200 - 201]);
-/* 						!TYPE OLD, GET NEW. */
+// 						!TYPE OLD, GET NEW.
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
    more_input();
    sscanf(buf, "%d", &eqr[j + k * 200 - 201]);
    goto L2000;
 
-/* AO-- ALTER OBJECT ENTRY */
+// AO-- ALTER OBJECT ENTRY
 
 L33000:
    if (!(j > 0 && j <= objcts_1.olnt && (k > 0 && k <= 14))) {
       goto L2200;
    }
-/* 						!INDICES VALID? */
+// 						!INDICES VALID?
    printf("Old = %6d      New = ", eqo[j + k * 200 - 201]);
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
@@ -559,13 +559,13 @@ L33000:
    sscanf(buf, "%d", &eqo[j + k * 220 - 221]);
    goto L2000;
 
-/* AA-- ALTER ADVS ENTRY */
+// AA-- ALTER ADVS ENTRY
 
 L34000:
    if (!(j > 0 && j <= advs_1.alnt && (k > 0 && k <= 7))) {
       goto L2200;
    }
-/* 						!INDICES VALID? */
+// 						!INDICES VALID?
    printf("Old = %6d      New = ", eqa[j + (k << 2) - 5]);
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
@@ -573,17 +573,17 @@ L34000:
    sscanf(buf, "%d", &eqa[j + (k << 2) - 5]);
    goto L2000;
 
-/* AC-- ALTER CLOCK EVENTS */
+// AC-- ALTER CLOCK EVENTS
 
 L35000:
    if (!(j > 0 && j <= cevent_1.clnt && (k > 0 && k <= 3))) {
       goto L2200;
    }
-/* 						!INDICES VALID? */
+// 						!INDICES VALID?
    if (k == 3) {
       goto L35500;
    }
-/* 						!FLAGS ENTRY? */
+// 						!FLAGS ENTRY?
    printf("Old = %6d      New = ", eqc[j + k * 25 - 26]);
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
@@ -605,15 +605,15 @@ L35500:
       }
    }
    goto L2000;
-/* GDT, PAGE 6 */
+// GDT, PAGE 6
 
-/* AX-- ALTER EXITS */
+// AX-- ALTER EXITS
 
 L36000:
    if (!(j > 0 && j <= exits_1.xlnt)) {
       goto L2200;
    }
-/* 						!ENTRY NO VALID? */
+// 						!ENTRY NO VALID?
    printf("Old= %6d     New= ", exits_1.travel[j - 1]);
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
@@ -621,13 +621,13 @@ L36000:
    sscanf(buf, "%d", &exits_1.travel[j - 1]);
    goto L2000;
 
-/* AV-- ALTER VILLAINS */
+// AV-- ALTER VILLAINS
 
 L37000:
    if (!(j > 0 && j <= vill_1.vlnt && (k > 0 && k <= 5))) {
       goto L2200;
    }
-/* 						!INDICES VALID? */
+// 						!INDICES VALID?
    printf("Old = %6d      New= ", eqv[j + (k << 2) - 5]);
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
@@ -635,7 +635,7 @@ L37000:
    sscanf(buf, "%d", &eqv[j + (k << 2) - 5]);
    goto L2000;
 
-/* D2-- DISPLAY ROOM2 LIST */
+// D2-- DISPLAY ROOM2 LIST
 
 L38000:
    if (!(j > 0 && j <= oroom2_1.r2lnt && (k > 0 && k <= oroom2_1.r2lnt) && j <= k)) {
@@ -645,32 +645,32 @@ L38000:
    for (i = j; i <= i__1; ++i) {
       more_output(NULL);
       printf("#%2d   Room=%6d   Obj=%6d\n", i, oroom2_1.rroom2[i - 1], oroom2_1.oroom2[i - 1]);
-/*L38100: */
+// L38100:
    }
    goto L2000;
 
-/* DN-- DISPLAY SWITCHES */
+// DN-- DISPLAY SWITCHES
 
 L39000:
    if (!(j > 0 && j <= smax && (k > 0 && k <= smax) && j <= k)) {
       goto L2200;
    }
-/* 						!VALID? */
+// 						!VALID?
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
       more_output(NULL);
       printf("Switch #%-2d = %d\n", i, switch_[i - 1]);
-/*L39100: */
+// L39100:
    }
    goto L2000;
 
-/* AN-- ALTER SWITCHES */
+// AN-- ALTER SWITCHES
 
 L40000:
    if (!(j > 0 && j <= smax)) {
       goto L2200;
    }
-/* 						!VALID ENTRY? */
+// 						!VALID ENTRY?
    printf("Old= %6d      New= ", switch_[j - 1]);
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
@@ -678,35 +678,35 @@ L40000:
    sscanf(buf, "%d", &switch_[j - 1]);
    goto L2000;
 
-/* DM-- DISPLAY MESSAGES */
+// DM-- DISPLAY MESSAGES
 
 L41000:
    if (!(j > 0 && j <= rmsg_1.mlnt && (k > 0 && k <= rmsg_1.mlnt) && j <= k)) {
       goto L2200;
    }
-/* 						!VALID LIMITS? */
+// 						!VALID LIMITS?
    more_output("  RANGE   CONTENTS");
    i__1 = k;
    for (i = j; i <= i__1; i += 10) {
       more_output(NULL);
-/* Computing MIN */
+// Computing MIN
       i__2 = i + 9;
       l = min(i__2, k);
       printf("%3d-%3d  ", i, l);
       for (l1 = i; l1 <= l; ++l1)
          printf(" %6d", rmsg_1.rtext[l1 - 1]);
       printf("\n");
-/*L41100: */
+// L41100:
    }
    goto L2000;
 
-/* DT-- DISPLAY TEXT */
+// DT-- DISPLAY TEXT
 
 L42000:
    rspeak_(j);
    goto L2000;
 
-/* AH--	ALTER HERE */
+// AH--	ALTER HERE
 
 L43000:
    printf("Old= %6d      New= ", play_1.here);
@@ -717,7 +717,7 @@ L43000:
    eqa[0] = play_1.here;
    goto L2000;
 
-/* DP--	DISPLAY PARSER STATE */
+// DP--	DISPLAY PARSER STATE
 
 L44000:
    more_output(NULL);
@@ -730,46 +730,46 @@ L44000:
    printf("              %7d%7d%7d%7d%7d\n", syn[6], syn[7], syn[8], syn[9], syn[10]);
    goto L2000;
 
-/* PD--	PROGRAM DETAIL DEBUG */
+// PD--	PROGRAM DETAIL DEBUG
 
 L45000:
    printf("Old= %6d      New= ", debug_1.prsflg);
-/* 						!TYPE OLD, GET NEW. */
+// 						!TYPE OLD, GET NEW.
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
    more_input();
    sscanf(buf, "%d", &debug_1.prsflg);
    goto L2000;
 
-/* DZ--	DISPLAY PUZZLE ROOM */
+// DZ--	DISPLAY PUZZLE ROOM
 
 L46000:
    for (i = 1; i <= 64; i += 8) {
-/* 						!DISPLAY PUZZLE */
+// 						!DISPLAY PUZZLE
       more_output(NULL);
       printf(" ");
       for (j = i; j <= i + 7; ++j)
          printf("%3d", puzzle_1.cpvec[j - 1]);
       printf("\n");
-/*L46100: */
+// L46100:
    }
    goto L2000;
 
-/* AZ--	ALTER PUZZLE ROOM */
+// AZ--	ALTER PUZZLE ROOM
 
 L47000:
    if (!(j > 0 && j <= 64)) {
       goto L2200;
    }
-/* 						!VALID ENTRY? */
+// 						!VALID ENTRY?
    printf("Old= %6d      New= ", puzzle_1.cpvec[j - 1]);
-/* 						!OUTPUT OLD, */
+// 						!OUTPUT OLD,
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
    more_input();
    sscanf(buf, "%d", &puzzle_1.cpvec[j - 1]);
    goto L2000;
 
-} /* gdt_ */
+}
 
-#endif /* ALLOW_GDT */
+#endif // ALLOW_GDT

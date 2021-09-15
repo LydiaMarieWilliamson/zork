@@ -1,8 +1,8 @@
-/* BALLOP-	BALLOON FUNCTION */
+// BALLOP-	BALLOON FUNCTION
 
-/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
-/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
-/* WRITTEN BY R. M. SUPNIK */
+//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
+// WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
@@ -10,67 +10,67 @@
 logical ballop_(arg)
 integer arg;
 {
-/* System generated locals */
+// System generated locals
    logical ret_val;
 
    ret_val = TRUE_;
-/* 						!ASSUME WINS. */
+// 						!ASSUME WINS.
    if (arg != 2) {
       goto L200;
    }
-/* 						!READOUT? */
+// 						!READOUT?
    if (prsvec_1.prsa != vindex_1.lookw) {
       goto L10;
    }
-/* 						!ONLY PROCESS LOOK. */
+// 						!ONLY PROCESS LOOK.
    if (findex_1.binff != 0) {
       goto L50;
    }
-/* 						!INFLATED? */
+// 						!INFLATED?
    rspeak_(543);
-/* 						!NO. */
+// 						!NO.
    goto L100;
 L50:
    rspsub_(544, objcts_1.odesc2[findex_1.binff - 1]);
-/* 						!YES. */
+// 						!YES.
 L100:
    if (findex_1.btief != 0) {
       rspeak_(545);
    }
-/* 						!HOOKED? */
+// 						!HOOKED?
    return ret_val;
 
 L200:
    if (arg != 1) {
       goto L500;
    }
-/* 						!READIN? */
+// 						!READIN?
    if (prsvec_1.prsa != vindex_1.walkw) {
       goto L300;
    }
-/* 						!WALK? */
+// 						!WALK?
    if (findxt_(prsvec_1.prso, play_1.here)) {
       goto L250;
    }
-/* 						!VALID EXIT? */
+// 						!VALID EXIT?
    rspeak_(546);
-/* 						!NO, JOKE. */
+// 						!NO, JOKE.
    return ret_val;
 
 L250:
    if (findex_1.btief == 0) {
       goto L275;
    }
-/* 						!TIED UP? */
+// 						!TIED UP?
    rspeak_(547);
-/* 						!YES, JOKE. */
+// 						!YES, JOKE.
    return ret_val;
 
 L275:
    if (curxt_1.xtype != xpars_1.xnorm) {
       goto L10;
    }
-/* 						!NORMAL EXIT? */
+// 						!NORMAL EXIT?
    if ((rooms_1.rflag[curxt_1.xroom1 - 1] & RMUNG) == 0) {
       state_1.bloc = curxt_1.xroom1;
    }
@@ -83,7 +83,7 @@ L300:
       goto L350;
    }
    rspsub_(548, objcts_1.odesc2[findex_1.binff - 1]);
-/* 						!RECEP CONT TOO HOT. */
+// 						!RECEP CONT TOO HOT.
    return ret_val;
 
 L350:
@@ -100,7 +100,7 @@ L500:
    if (findex_1.binff != 0) {
       cevent_1.ctick[cindex_1.cevbal - 1] = 3;
    }
-/* 						!HE GOT OUT, START BALLOON. */
+// 						!HE GOT OUT, START BALLOON.
    goto L10;
 
 L600:
@@ -108,7 +108,7 @@ L600:
       goto L700;
    }
    rspsub_(550, objcts_1.odesc2[prsvec_1.prso - 1]);
-/* 						!LIGHT FIRE IN RECEP. */
+// 						!LIGHT FIRE IN RECEP.
    cevent_1.ctick[cindex_1.cevbrn - 1] = objcts_1.osize[prsvec_1.prso - 1] * 20;
    objcts_1.oflag1[prsvec_1.prso - 1] |= ONBT + FLAMBT + LITEBT & ~(TAKEBT + READBT);
    if (findex_1.binff != 0) {
@@ -129,4 +129,4 @@ L700:
    }
    goto L10;
 
-} /* ballop_ */
+}

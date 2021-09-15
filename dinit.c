@@ -1,8 +1,8 @@
-/* INIT-- DUNGEON INITIALIZATION SUBROUTINE */
+// INIT-- DUNGEON INITIALIZATION SUBROUTINE
 
-/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
-/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
-/* WRITTEN BY R. M. SUPNIK */
+//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
+// WRITTEN BY R. M. SUPNIK
 
 #include <stdio.h>
 
@@ -13,7 +13,7 @@
 #include "funcs.h"
 #include "vars.h"
 
-/* This is here to avoid depending on the existence of <stdlib.h> */
+// This is here to avoid depending on the existence of <stdlib.h>
 
 extern void srand P((unsigned int));
 
@@ -23,46 +23,44 @@ FILE *dbfile;
 #   ifdef __AMOS__
 #      define TEXTFILE "lib:dtextc.dat"
 #   else
-      /* ! __AMOS__ */
+      // ! __AMOS__
 #      ifdef unix
 #         define TEXTFILE "/usr/games/lib/dunlib/dtextc.dat"
 #      else
-      /* ! unix */
+      // ! unix
 I need a definition for TEXTFILE
 #      endif
-       /* ! unix */
+       // ! unix
 #   endif
-       /* ! __AMOS__ */
-#endif /* ! TEXTFILE */
+       // ! __AMOS__
+#endif // ! TEXTFILE
 #ifndef LOCALTEXTFILE
 #   define LOCALTEXTFILE "dtextc.dat"
 #endif
-/* Read a single two byte integer from the index file */
+// Read a single two byte integer from the index file
 #define rdint(indxfile) \
     (ch = getc(indxfile), \
      ((ch > 127) ? (ch - 256) : (ch)) * 256 + getc(indxfile))
-/* Read a number of two byte integers from the index file */
+// Read a number of two byte integers from the index file
 static void rdints(c, pi, indxfile)
 integer c;
 integer *pi;
 FILE *indxfile;
 {
-   integer ch; /* Local variable for rdint */
+   integer ch; // Local variable for rdint
 
    while (c-- != 0)
       *pi++ = rdint(indxfile);
 }
 
-/* Read a partial array of integers.  These are stored as index,value
- * pairs.
- */
+// Read a partial array of integers.  These are stored as index,value pairs.
 
 static void rdpartialints(c, pi, indxfile)
 integer c;
 integer *pi;
 FILE *indxfile;
 {
-   integer ch; /* Local variable for rdint */
+   integer ch; // Local variable for rdint
 
    while (1) {
       int i;
@@ -81,7 +79,7 @@ FILE *indxfile;
    }
 }
 
-/* Read a number of one byte flags from the index file */
+// Read a number of one byte flags from the index file
 
 static void rdflags(c, pf, indxfile)
 integer c;
@@ -93,11 +91,11 @@ FILE *indxfile;
 }
 
 logical init_() {
-/* System generated locals */
+// System generated locals
    integer i__1;
    logical ret_val;
 
-/* Local variables */
+// Local variables
    integer xmax, r2max, dirmax, recno;
    integer i, j, k;
    register integer ch;
@@ -106,12 +104,12 @@ logical init_() {
 
    more_init();
 
-/* FIRST CHECK FOR PROTECTION VIOLATION */
+// FIRST CHECK FOR PROTECTION VIOLATION
 
    if (protected()) {
       goto L10000;
    }
-/* 						!PROTECTION VIOLATION? */
+// 						!PROTECTION VIOLATION?
    more_output("There appears before you a threatening figure clad all over");
    more_output("in heavy black armor.  His legs seem like the massive trunk");
    more_output("of the oak tree.  His broad shoulders and helmeted head loom");
@@ -126,13 +124,13 @@ logical init_() {
    more_output("As he grabs you by the neck all grows dim about you.");
    exit_();
 
-/* NOW START INITIALIZATION PROPER */
+// NOW START INITIALIZATION PROPER
 
 L10000:
    ret_val = FALSE_;
-/* 						!ASSUME INIT FAILS. */
+// 						!ASSUME INIT FAILS.
    mmax = 1050;
-/* 						!SET UP ARRAY LIMITS. */
+// 						!SET UP ARRAY LIMITS.
    omax = 220;
    rmax = 200;
    vmax = 4;
@@ -145,7 +143,7 @@ L10000:
    dirmax = 15;
 
    rmsg_1.mlnt = 0;
-/* 						!INIT ARRAY COUNTERS. */
+// 						!INIT ARRAY COUNTERS.
    objcts_1.olnt = 0;
    rooms_1.rlnt = 0;
    vill_1.vlnt = 0;
@@ -155,7 +153,7 @@ L10000:
    oroom2_1.r2lnt = 0;
 
    state_1.ltshft = 10;
-/* 						!SET UP STATE VARIABLES. */
+// 						!SET UP STATE VARIABLES.
    state_1.mxscor = state_1.ltshft;
    state_1.egscor = 0;
    state_1.egmxsc = 0;
@@ -167,50 +165,50 @@ L10000:
    state_1.mungrm = 0;
    state_1.hs = 0;
    prsvec_1.prsa = 0;
-/* 						!CLEAR PARSE VECTOR. */
+// 						!CLEAR PARSE VECTOR.
    prsvec_1.prsi = 0;
    prsvec_1.prso = 0;
    prsvec_1.prscon = 1;
    orphs_1.oflag = 0;
-/* 						!CLEAR ORPHANS. */
+// 						!CLEAR ORPHANS.
    orphs_1.oact = 0;
    orphs_1.oslot = 0;
    orphs_1.oprep = 0;
    orphs_1.oname = 0;
    hack_1.thfflg = FALSE_;
-/* 						!THIEF NOT INTRODUCED BUT */
+// 						!THIEF NOT INTRODUCED BUT
    hack_1.thfact = TRUE_;
-/* 						!IS ACTIVE. */
+// 						!IS ACTIVE.
    hack_1.swdact = FALSE_;
-/* 						!SWORD IS INACTIVE. */
+// 						!SWORD IS INACTIVE.
    hack_1.swdsta = 0;
-/* 						!SWORD IS OFF. */
+// 						!SWORD IS OFF.
 
    recno = 1;
-/* 						!INIT DB FILE POINTER. */
+// 						!INIT DB FILE POINTER.
    star_1.mbase = 0;
-/* 						!INIT MELEE BASE. */
-/* INIT, PAGE 3 */
+// 						!INIT MELEE BASE.
+// INIT, PAGE 3
 
-/* INIT ALL ARRAYS. */
+// INIT ALL ARRAYS.
 
    i__1 = cmax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR CLOCK EVENTS */
+// 						!CLEAR CLOCK EVENTS
       cevent_1.cflag[i - 1] = FALSE_;
       cevent_1.ctick[i - 1] = 0;
       cevent_1.cactio[i - 1] = 0;
-/*L5: */
+// L5:
    }
 
    i__1 = fmax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR FLAGS. */
+// 						!CLEAR FLAGS.
       flags[i - 1] = FALSE_;
-/*L10: */
+// L10:
    }
    findex_1.buoyf = TRUE_;
-/* 						!SOME START AS TRUE. */
+// 						!SOME START AS TRUE.
    findex_1.egyptf = TRUE_;
    findex_1.cagetf = TRUE_;
    findex_1.mr1f = TRUE_;
@@ -218,12 +216,12 @@ L10000:
    findex_1.follwf = TRUE_;
    i__1 = smax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR SWITCHES. */
+// 						!CLEAR SWITCHES.
       switch_[i - 1] = 0;
-/*L12: */
+// L12:
    }
    findex_1.ormtch = 4;
-/* 						!NUMBER OF MATCHES. */
+// 						!NUMBER OF MATCHES.
    findex_1.lcell = 1;
    findex_1.pnumb = 1;
    findex_1.mdir = 270;
@@ -232,33 +230,33 @@ L10000:
 
    i__1 = r2max;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR ROOM 2 ARRAY. */
+// 						!CLEAR ROOM 2 ARRAY.
       oroom2_1.rroom2[i - 1] = 0;
       oroom2_1.oroom2[i - 1] = 0;
-/*L15: */
+// L15:
    }
 
    i__1 = xmax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR TRAVEL ARRAY. */
+// 						!CLEAR TRAVEL ARRAY.
       exits_1.travel[i - 1] = 0;
-/*L20: */
+// L20:
    }
 
    i__1 = vmax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR VILLAINS ARRAYS. */
+// 						!CLEAR VILLAINS ARRAYS.
       vill_1.vopps[i - 1] = 0;
       vill_1.vprob[i - 1] = 0;
       vill_1.villns[i - 1] = 0;
       vill_1.vbest[i - 1] = 0;
       vill_1.vmelee[i - 1] = 0;
-/*L30: */
+// L30:
    }
 
    i__1 = omax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR OBJECT ARRAYS. */
+// 						!CLEAR OBJECT ARRAYS.
       objcts_1.odesc1[i - 1] = 0;
       objcts_1.odesc2[i - 1] = 0;
       objcts_1.odesco[i - 1] = 0;
@@ -273,31 +271,31 @@ L10000:
       objcts_1.ocan[i - 1] = 0;
       objcts_1.oadv[i - 1] = 0;
       objcts_1.oroom[i - 1] = 0;
-/*L40: */
+// L40:
    }
 
    i__1 = rmax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR ROOM ARRAYS. */
+// 						!CLEAR ROOM ARRAYS.
       rooms_1.rdesc1[i - 1] = 0;
       rooms_1.rdesc2[i - 1] = 0;
       rooms_1.ractio[i - 1] = 0;
       rooms_1.rflag[i - 1] = 0;
       rooms_1.rval[i - 1] = 0;
       rooms_1.rexit[i - 1] = 0;
-/*L50: */
+// L50:
    }
 
    i__1 = mmax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR MESSAGE DIRECTORY. */
+// 						!CLEAR MESSAGE DIRECTORY.
       rmsg_1.rtext[i - 1] = 0;
-/*L60: */
+// L60:
    }
 
    i__1 = amax;
    for (i = 1; i <= i__1; ++i) {
-/* 						!CLEAR ADVENTURER'S ARRAYS. */
+// 						!CLEAR ADVENTURER'S ARRAYS.
       advs_1.aroom[i - 1] = 0;
       advs_1.ascore[i - 1] = 0;
       advs_1.avehic[i - 1] = 0;
@@ -305,7 +303,7 @@ L10000:
       advs_1.aactio[i - 1] = 0;
       advs_1.astren[i - 1] = 0;
       advs_1.aflag[i - 1] = 0;
-/*L70: */
+// L70:
    }
 
    debug_1.dbgflg = 0;
@@ -314,22 +312,22 @@ L10000:
 
 #ifdef ALLOW_GDT
 
-/* allow setting gdtflg true if user id matches wizard id */
-/* this way, the wizard doesn't have to recompile to use gdt */
+// allow setting gdtflg true if user id matches wizard id
+// this way, the wizard doesn't have to recompile to use gdt
 
    if (wizard()) {
       debug_1.gdtflg = 1;
    }
 
-#endif /* ALLOW_GDT */
+#endif // ALLOW_GDT
 
    screen_1.fromdr = 0;
-/* 						!INIT SCOL GOODIES. */
+// 						!INIT SCOL GOODIES.
    screen_1.scolrm = 0;
    screen_1.scolac = 0;
-/* INIT, PAGE 4 */
+// INIT, PAGE 4
 
-/* NOW RESTORE FROM EXISTING INDEX FILE. */
+// NOW RESTORE FROM EXISTING INDEX FILE.
 
 #ifdef __AMOS__
    if ((dbfile = fdopen(ropen(LOCALTEXTFILE, 0), BINREAD)) == NULL && (dbfile = fdopen(ropen(TEXTFILE, 0), BINREAD)) == NULL)
@@ -344,7 +342,7 @@ L10000:
    j = rdint(indxfile);
    k = rdint(indxfile);
 
-/* 						!GET VERSION. */
+// 						!GET VERSION.
    if (i != vers_1.vmaj || j != vers_1.vmin) {
       goto L1925;
    }
@@ -409,18 +407,18 @@ L10000:
    rmsg_1.mlnt = rdint(indxfile);
    rdints(rmsg_1.mlnt, &rmsg_1.rtext[0], indxfile);
 
-/* Save location of start of message text */
+// Save location of start of message text
    rmsg_1.mrloc = ftell(indxfile);
 
-/* 						!INIT DONE. */
+// 						!INIT DONE.
 
-/* INIT, PAGE 5 */
+// INIT, PAGE 5
 
-/* THE INTERNAL DATA BASE IS NOW ESTABLISHED. */
-/* SET UP TO PLAY THE GAME. */
+// THE INTERNAL DATA BASE IS NOW ESTABLISHED.
+// SET UP TO PLAY THE GAME.
 
    itime_(&time_1.shour, &time_1.smin, &time_1.ssec);
-/*    srand(time_1.shour ^ (time_1.smin ^ time_1.ssec)); */
+//    srand(time_1.shour ^ (time_1.smin ^ time_1.ssec));
 
    play_1.winner = aindex_1.player;
    last_1.lastit = advs_1.aobj[aindex_1.player - 1];
@@ -430,9 +428,9 @@ L10000:
    ret_val = TRUE_;
 
    return ret_val;
-/* INIT, PAGE 6 */
+// INIT, PAGE 6
 
-/* ERRORS-- INIT FAILS. */
+// ERRORS-- INIT FAILS.
 
 L1925:
    more_output(NULL);
@@ -456,4 +454,4 @@ L1975:
    more_output("The darkness becomes all encompassing, and your vision fails.");
    return ret_val;
 
-} /* init_ */
+}

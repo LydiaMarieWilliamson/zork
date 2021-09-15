@@ -1,13 +1,12 @@
-/* vars.h -- variables for dungeon */
+// vars.h -- variables for dungeon
 
-/* These variable definitions are really ugly because they are actually
- * translations of FORTRAN common blocks.  In the original FORTRAN source
- * the common blocks were included many times by each function that
- * needed them; I have changed this to define them all in this one file,
- * and include this in every source file.  It's less modular, and it
- * makes everything slower to compile, but it's easier on me.
- * A few structures used only by the parsing routines are in parse.h.
- */
+// These variable definitions are really ugly because they are actually
+// translations of FORTRAN common blocks.  In the original FORTRAN source
+// the common blocks were included many times by each function that
+// needed them; I have changed this to define them all in this one file,
+// and include this in every source file.  It's less modular, and it
+// makes everything slower to compile, but it's easier on me.
+// A few structures used only by the parsing routines are in parse.h.
 
 #ifndef VARS_H
 #define VARS_H
@@ -52,7 +51,7 @@ EXTERN struct {
 #define eqr ((integer *)&rooms_1 + 1)
 #define rrand ((integer *)&rooms_1 + 601)
 
-/* Room flags */
+// Room flags
 
 #define RSEEN (32768)
 #define RLIGHT (16384)
@@ -112,7 +111,7 @@ EXTERN struct {
 
 #define oroom2_1 oroom2_
 
-/* Object flags (oflags) */
+// Object flags (oflags)
 
 #define VISIBT (32768)
 #define READBT (16384)

@@ -1,8 +1,8 @@
-/* LIGHTP-	LIGHT PROCESSOR */
+// LIGHTP-	LIGHT PROCESSOR
 
-/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
-/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
-/* WRITTEN BY R. M. SUPNIK */
+//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
+// WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
@@ -10,46 +10,46 @@
 logical lightp_(obj)
 integer obj;
 {
-/* System generated locals */
+// System generated locals
    logical ret_val;
 
-/* Local variables */
+// Local variables
    integer flobts;
    integer i;
 
    ret_val = TRUE_;
-/* 						!ASSUME WINS */
+// 						!ASSUME WINS
    flobts = FLAMBT + LITEBT + ONBT;
    if (obj != oindex_1.candl) {
       goto L20000;
    }
-/* 						!CANDLE? */
+// 						!CANDLE?
    if (findex_1.orcand != 0) {
       goto L19100;
    }
-/* 						!FIRST REF? */
+// 						!FIRST REF?
    findex_1.orcand = 1;
-/* 						!YES, CANDLES ARE */
+// 						!YES, CANDLES ARE
    cevent_1.ctick[cindex_1.cevcnd - 1] = 50;
-/* 						!BURNING WHEN SEEN. */
+// 						!BURNING WHEN SEEN.
 
 L19100:
    if (prsvec_1.prsi == oindex_1.candl) {
       goto L10;
    }
-/* 						!IGNORE IND REFS. */
+// 						!IGNORE IND REFS.
    if (prsvec_1.prsa != vindex_1.trnofw) {
       goto L19200;
    }
-/* 						!TURN OFF? */
+// 						!TURN OFF?
    i = 513;
-/* 						!ASSUME OFF. */
+// 						!ASSUME OFF.
    if ((objcts_1.oflag1[oindex_1.candl - 1] & ONBT) != 0) {
       i = 514;
    }
-/* 						!IF ON, DIFFERENT. */
+// 						!IF ON, DIFFERENT.
    cevent_1.cflag[cindex_1.cevcnd - 1] = FALSE_;
-/* 						!DISABLE COUNTDOWN. */
+// 						!DISABLE COUNTDOWN.
    objcts_1.oflag1[oindex_1.candl - 1] &= ~ONBT;
    rspeak_(i);
    return ret_val;
@@ -63,16 +63,16 @@ L19200:
       goto L19300;
    }
    rspeak_(515);
-/* 						!CANDLES TOO SHORT. */
+// 						!CANDLES TOO SHORT.
    return ret_val;
 
 L19300:
    if (prsvec_1.prsi != 0) {
       goto L19400;
    }
-/* 						!ANY FLAME? */
+// 						!ANY FLAME?
    rspeak_(516);
-/* 						!NO, LOSE. */
+// 						!NO, LOSE.
    prsvec_1.prswon = FALSE_;
    return ret_val;
 
@@ -81,14 +81,14 @@ L19400:
       goto L19500;
    }
    i = 517;
-/* 						!ASSUME OFF. */
+// 						!ASSUME OFF.
    if ((objcts_1.oflag1[oindex_1.candl - 1] & ONBT) != 0) {
       i = 518;
    }
-/* 						!IF ON, JOKE. */
+// 						!IF ON, JOKE.
    objcts_1.oflag1[oindex_1.candl - 1] |= ONBT;
    cevent_1.cflag[cindex_1.cevcnd - 1] = TRUE_;
-/* 						!RESUME COUNTDOWN. */
+// 						!RESUME COUNTDOWN.
    rspeak_(i);
    return ret_val;
 
@@ -99,19 +99,19 @@ L19500:
    if ((objcts_1.oflag1[oindex_1.candl - 1] & ONBT) != 0) {
       goto L19700;
    }
-/* 						!ALREADY ON? */
+// 						!ALREADY ON?
    newsta_(oindex_1.candl, 521, 0, 0, 0);
-/* 						!NO, VAPORIZE. */
+// 						!NO, VAPORIZE.
    return ret_val;
 
 L19600:
    rspeak_(519);
-/* 						!CANT LIGHT WITH THAT. */
+// 						!CANT LIGHT WITH THAT.
    return ret_val;
 
 L19700:
    rspeak_(520);
-/* 						!ALREADY ON. */
+// 						!ALREADY ON.
    return ret_val;
 
 L20000:
@@ -125,17 +125,17 @@ L20000:
    if (findex_1.ormtch != 0) {
       goto L20100;
    }
-/* 						!ANY MATCHES LEFT? */
+// 						!ANY MATCHES LEFT?
    rspeak_(183);
-/* 						!NO, LOSE. */
+// 						!NO, LOSE.
    return ret_val;
 
 L20100:
    --findex_1.ormtch;
-/* 						!DECREMENT NO MATCHES. */
+// 						!DECREMENT NO MATCHES.
    objcts_1.oflag1[oindex_1.match - 1] |= flobts;
    cevent_1.ctick[cindex_1.cevmat - 1] = 2;
-/* 						!COUNTDOWN. */
+// 						!COUNTDOWN.
    rspeak_(184);
    return ret_val;
 
@@ -148,9 +148,9 @@ L20500:
    rspeak_(185);
    return ret_val;
 
-/* HERE FOR FALSE RETURN */
+// HERE FOR FALSE RETURN
 
 L10:
    ret_val = FALSE_;
    return ret_val;
-} /* lightp_ */
+}

@@ -1,11 +1,9 @@
-/* funcs.h -- functions for dungeon */
+// funcs.h -- functions for dungeon
 
 #ifndef FUNCS_H
 #define FUNCS_H
 
-/* If __STDC__ is not defined, don't use function prototypes, void, or
- * const.
- */
+// If __STDC__ is not defined, don't use function prototypes, void, or const.
 
 #ifdef __STDC__
 #   define P(x) x
@@ -15,11 +13,10 @@
 #   define const
 #endif
 
-/* Try to guess whether we need "rb" to open files in binary mode.
- * If this is unix, it doesn't matter.  Otherwise, assume that if
- * __STDC__ is defined we can use "rb".  Otherwise, assume that we
- * had better use "r" or fopen will fail.
- */
+// Try to guess whether we need "rb" to open files in binary mode.
+// If this is unix, it doesn't matter.  Otherwise, assume that if
+// __STDC__ is defined we can use "rb".  Otherwise, assume that we
+// had better use "r" or fopen will fail.
 
 #ifdef unix
 #   define BINREAD "r"

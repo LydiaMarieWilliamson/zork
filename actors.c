@@ -1,8 +1,8 @@
-/* AAPPLI- APPLICABLES FOR ADVENTURERS */
+// AAPPLI- APPLICABLES FOR ADVENTURERS
 
-/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
-/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
-/* WRITTEN BY R. M. SUPNIK */
+//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
+// WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
@@ -10,35 +10,35 @@
 logical aappli_(ri)
 integer ri;
 {
-/* System generated locals */
+// System generated locals
    logical ret_val;
 
-/* Local variables */
+// Local variables
    logical f;
    integer i;
 
    if (ri == 0) {
       goto L10;
    }
-/* 						!IF ZERO, NO APP. */
+// 						!IF ZERO, NO APP.
    ret_val = TRUE_;
-/* 						!ASSUME WINS. */
+// 						!ASSUME WINS.
    switch (ri) {
       case 1:
          goto L1000;
       case 2:
          goto L2000;
    }
-/* 						!BRANCH ON ADV. */
+// 						!BRANCH ON ADV.
    bug_(11, ri);
 
-/* COMMON FALSE RETURN. */
+// COMMON FALSE RETURN.
 
 L10:
    ret_val = FALSE_;
    return ret_val;
 
-/* A1--	ROBOT.  PROCESS MOST COMMANDS GIVEN TO ROBOT. */
+// A1--	ROBOT.  PROCESS MOST COMMANDS GIVEN TO ROBOT.
 
 L1000:
    if (prsvec_1.prsa != vindex_1.raisew || prsvec_1.prso != oindex_1.rcage) {
@@ -46,19 +46,19 @@ L1000:
       goto L1200;
    }
    cevent_1.cflag[cindex_1.cevsph - 1] = FALSE_;
-/* 						!ROBOT RAISED CAGE. */
+// 						!ROBOT RAISED CAGE.
    play_1.winner = aindex_1.player;
-/* 						!RESET FOR PLAYER. */
+// 						!RESET FOR PLAYER.
    f = moveto_(rindex_1.cager, play_1.winner);
-/* 						!MOVE TO NEW ROOM. */
+// 						!MOVE TO NEW ROOM.
    newsta_(oindex_1.cage, 567, rindex_1.cager, 0, 0);
-/* 						!INSTALL CAGE IN ROOM. */
+// 						!INSTALL CAGE IN ROOM.
    newsta_(oindex_1.robot, 0, rindex_1.cager, 0, 0);
-/* 						!INSTALL ROBOT IN ROOM. */
+// 						!INSTALL ROBOT IN ROOM.
    advs_1.aroom[aindex_1.arobot - 1] = rindex_1.cager;
-/* 						!ALSO MOVE ROBOT/ADV. */
+// 						!ALSO MOVE ROBOT/ADV.
    findex_1.cagesf = TRUE_;
-/* 						!CAGE SOLVED. */
+// 						!CAGE SOLVED.
    objcts_1.oflag1[oindex_1.robot - 1] &= ~NDSCBT;
    objcts_1.oflag1[oindex_1.spher - 1] |= TAKEBT;
    return ret_val;
@@ -68,16 +68,16 @@ L1200:
       goto L1300;
    }
    rspeak_(568);
-/* 						!EAT OR DRINK, JOKE. */
+// 						!EAT OR DRINK, JOKE.
    return ret_val;
 
 L1300:
    if (prsvec_1.prsa != vindex_1.readw) {
       goto L1400;
    }
-/* 						!READ, */
+// 						!READ,
    rspeak_(569);
-/* 						!JOKE. */
+// 						!JOKE.
    return ret_val;
 
 L1400:
@@ -85,27 +85,27 @@ L1400:
       goto L10;
    }
    rspeak_(570);
-/* 						!JOKE. */
+// 						!JOKE.
    return ret_val;
-/* AAPPLI, PAGE 3 */
+// AAPPLI, PAGE 3
 
-/* A2--	MASTER.  PROCESS MOST COMMANDS GIVEN TO MASTER. */
+// A2--	MASTER.  PROCESS MOST COMMANDS GIVEN TO MASTER.
 
 L2000:
    if ((objcts_1.oflag2[oindex_1.qdoor - 1] & OPENBT) != 0) {
       goto L2100;
    }
    rspeak_(783);
-/* 						!NO MASTER YET. */
+// 						!NO MASTER YET.
    return ret_val;
 
 L2100:
    if (prsvec_1.prsa != vindex_1.walkw) {
       goto L2200;
    }
-/* 						!WALK? */
+// 						!WALK?
    i = 784;
-/* 						!ASSUME WONT. */
+// 						!ASSUME WONT.
    if (play_1.here == rindex_1.scorr && (prsvec_1.prso == xsrch_1.xnorth || prsvec_1.prso == xsrch_1.xenter) || play_1.here == rindex_1.ncorr && (prsvec_1.prso == xsrch_1.xsouth || prsvec_1.prso == xsrch_1.xenter)) {
       i = 785;
    }
@@ -117,30 +117,30 @@ L2200:
       goto L10;
    }
    rspeak_(786);
-/* 						!MASTER CANT DO IT. */
+// 						!MASTER CANT DO IT.
    return ret_val;
 
-} /* aappli_ */
+}
 
-/* THIEFD-	INTERMOVE THIEF DEMON */
+// THIEFD-	INTERMOVE THIEF DEMON
 
-/* DECLARATIONS */
+// DECLARATIONS
 
 void thiefd_() {
-/* System generated locals */
+// System generated locals
    integer i__1, i__2;
 
-/* Local variables */
+// Local variables
    integer i, j, nr;
    logical once;
    integer rhere;
 
-/* 						!SET UP DETAIL FLAG. */
+// 						!SET UP DETAIL FLAG.
    once = FALSE_;
-/* 						!INIT FLAG. */
+// 						!INIT FLAG.
 L1025:
    rhere = objcts_1.oroom[oindex_1.thief - 1];
-/* 						!VISIBLE POS. */
+// 						!VISIBLE POS.
    if (rhere != 0) {
       hack_1.thfpos = rhere;
    }
@@ -148,20 +148,20 @@ L1025:
    if (hack_1.thfpos == play_1.here) {
       goto L1100;
    }
-/* 						!THIEF IN WIN RM? */
+// 						!THIEF IN WIN RM?
    if (hack_1.thfpos != rindex_1.treas) {
       goto L1400;
    }
-/* 						!THIEF NOT IN TREAS? */
+// 						!THIEF NOT IN TREAS?
 
-/* THIEF IS IN TREASURE ROOM, AND WINNER IS NOT. */
+// THIEF IS IN TREASURE ROOM, AND WINNER IS NOT.
 
    if (rhere == 0) {
       goto L1050;
    }
-/* 						!VISIBLE? */
+// 						!VISIBLE?
    newsta_(oindex_1.thief, 0, 0, 0, 0);
-/* 						!YES, VANISH. */
+// 						!YES, VANISH.
    rhere = 0;
    if (qhere_(oindex_1.still, rindex_1.treas) || objcts_1.oadv[oindex_1.still - 1] == -oindex_1.thief) {
       newsta_(oindex_1.still, 0, 0, oindex_1.thief, 0);
@@ -169,38 +169,38 @@ L1025:
 L1050:
    i__1 = -oindex_1.thief;
    i = robadv_(i__1, hack_1.thfpos, 0, 0);
-/* 						!DROP VALUABLES. */
+// 						!DROP VALUABLES.
    if (qhere_(oindex_1.egg, hack_1.thfpos)) {
       objcts_1.oflag2[oindex_1.egg - 1] |= OPENBT;
    }
    goto L1700;
 
-/* THIEF AND WINNER IN SAME ROOM. */
+// THIEF AND WINNER IN SAME ROOM.
 
 L1100:
    if (hack_1.thfpos == rindex_1.treas) {
       goto L1700;
    }
-/* 						!IF TREAS ROOM, NOTHING. */
+// 						!IF TREAS ROOM, NOTHING.
    if ((rooms_1.rflag[hack_1.thfpos - 1] & RLIGHT) != 0) {
       goto L1400;
    }
    if (hack_1.thfflg) {
       goto L1300;
    }
-/* 						!THIEF ANNOUNCED? */
+// 						!THIEF ANNOUNCED?
    if (rhere != 0 || prob_(70, 70)) {
       goto L1150;
    }
-/* 						!IF INVIS AND 30%. */
+// 						!IF INVIS AND 30%.
    if (objcts_1.ocan[oindex_1.still - 1] != oindex_1.thief) {
       goto L1700;
    }
-/* 						!ABORT IF NO STILLETTO. */
+// 						!ABORT IF NO STILLETTO.
    newsta_(oindex_1.thief, 583, hack_1.thfpos, 0, 0);
-/* 						!INSERT THIEF INTO ROOM. */
+// 						!INSERT THIEF INTO ROOM.
    hack_1.thfflg = TRUE_;
-/* 						!THIEF IS ANNOUNCED. */
+// 						!THIEF IS ANNOUNCED.
    return;
 
 L1150:
@@ -210,9 +210,9 @@ L1150:
    if (winnin_(oindex_1.thief, play_1.winner)) {
       goto L1175;
    }
-/* 						!WINNING? */
+// 						!WINNING?
    newsta_(oindex_1.thief, 584, 0, 0, 0);
-/* 						!NO, VANISH THIEF. */
+// 						!NO, VANISH THIEF.
    objcts_1.oflag2[oindex_1.thief - 1] &= ~FITEBT;
    if (qhere_(oindex_1.still, hack_1.thfpos) || objcts_1.oadv[oindex_1.still - 1] == -oindex_1.thief) {
       newsta_(oindex_1.still, 0, 0, oindex_1.thief, 0);
@@ -223,15 +223,15 @@ L1175:
    if (prob_(90, 90)) {
       goto L1700;
    }
-/* 						!90% CHANCE TO STAY. */
+// 						!90% CHANCE TO STAY.
 
 L1200:
    if (rhere == 0 || prob_(70, 70)) {
       goto L1250;
    }
-/* 						!IF VISIBLE AND 30% */
+// 						!IF VISIBLE AND 30%
    newsta_(oindex_1.thief, 585, 0, 0, 0);
-/* 						!VANISH THIEF. */
+// 						!VANISH THIEF.
    if (qhere_(oindex_1.still, hack_1.thfpos) || objcts_1.oadv[oindex_1.still - 1] == -oindex_1.thief) {
       newsta_(oindex_1.still, 0, 0, oindex_1.thief, 0);
    }
@@ -241,28 +241,28 @@ L1300:
    if (rhere == 0) {
       goto L1700;
    }
-/* 						!ANNOUNCED.  VISIBLE? */
+// 						!ANNOUNCED.  VISIBLE?
 L1250:
    if (prob_(70, 70)) {
       return;
    }
-/* 						!70% CHANCE TO DO NOTHING. */
+// 						!70% CHANCE TO DO NOTHING.
    hack_1.thfflg = TRUE_;
    i__1 = -oindex_1.thief;
    i__2 = -oindex_1.thief;
    nr = robrm_(hack_1.thfpos, 100, 0, 0, i__1) + robadv_(play_1.winner, 0, 0, i__2);
    i = 586;
-/* 						!ROBBED EM. */
+// 						!ROBBED EM.
    if (rhere != 0) {
       i = 588;
    }
-/* 						!WAS HE VISIBLE? */
+// 						!WAS HE VISIBLE?
    if (nr != 0) {
       ++i;
    }
-/* 						!DID HE GET ANYTHING? */
+// 						!DID HE GET ANYTHING?
    newsta_(oindex_1.thief, i, 0, 0, 0);
-/* 						!VANISH THIEF. */
+// 						!VANISH THIEF.
    if (qhere_(oindex_1.still, hack_1.thfpos) || objcts_1.oadv[oindex_1.still - 1] == -oindex_1.thief) {
       newsta_(oindex_1.still, 0, 0, oindex_1.thief, 0);
    }
@@ -271,13 +271,13 @@ L1250:
    }
    rhere = 0;
    goto L1700;
-/* 						!ONWARD. */
+// 						!ONWARD.
 
-/* NOT IN ADVENTURERS ROOM. */
+// NOT IN ADVENTURERS ROOM.
 
 L1400:
    newsta_(oindex_1.thief, 0, 0, 0, 0);
-/* 						!VANISH. */
+// 						!VANISH.
    rhere = 0;
    if (qhere_(oindex_1.still, hack_1.thfpos) || objcts_1.oadv[oindex_1.still - 1] == -oindex_1.thief) {
       newsta_(oindex_1.still, 0, 0, oindex_1.thief, 0);
@@ -287,24 +287,24 @@ L1400:
    }
    i__1 = -oindex_1.thief;
    i = robrm_(hack_1.thfpos, 75, 0, 0, i__1);
-/* 						!ROB ROOM 75%. */
+// 						!ROB ROOM 75%.
    if (hack_1.thfpos < rindex_1.maze1 || hack_1.thfpos > rindex_1.maz15 || play_1.here < rindex_1.maze1 || play_1.here > rindex_1.maz15) {
       goto L1500;
    }
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
-/* 						!BOTH IN MAZE. */
+// 						!BOTH IN MAZE.
       if (!qhere_(i, hack_1.thfpos) || prob_(60, 60) || (objcts_1.oflag1[i - 1] & VISIBT + TAKEBT) != VISIBT + TAKEBT) {
          goto L1450;
       }
       rspsub_(590, objcts_1.odesc2[i - 1]);
-/* 						!TAKE OBJECT. */
+// 						!TAKE OBJECT.
       if (prob_(40, 20)) {
          goto L1700;
       }
       i__2 = -oindex_1.thief;
       newsta_(i, 0, 0, 0, i__2);
-/* 						!MOST OF THE TIME. */
+// 						!MOST OF THE TIME.
       objcts_1.oflag2[i - 1] |= TCHBT;
       goto L1700;
    L1450:
@@ -315,7 +315,7 @@ L1400:
 L1500:
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
-/* 						!NOT IN MAZE. */
+// 						!NOT IN MAZE.
       if (!qhere_(i, hack_1.thfpos) || objcts_1.otval[i - 1] != 0 || prob_(80, 60) || (objcts_1.oflag1[i - 1] & VISIBT + TAKEBT) != VISIBT + TAKEBT) {
          goto L1550;
       }
@@ -327,7 +327,7 @@ L1500:
       ;
    }
 
-/* NOW MOVE TO NEW ROOM. */
+// NOW MOVE TO NEW ROOM.
 
 L1700:
    if (objcts_1.oadv[oindex_1.rope - 1] == -oindex_1.thief) {
@@ -339,7 +339,7 @@ L1700:
    once = !once;
 L1750:
    --hack_1.thfpos;
-/* 						!NEXT ROOM. */
+// 						!NEXT ROOM.
    if (hack_1.thfpos <= 0) {
       hack_1.thfpos = rooms_1.rlnt;
    }
@@ -347,19 +347,19 @@ L1750:
       goto L1750;
    }
    hack_1.thfflg = FALSE_;
-/* 						!NOT ANNOUNCED. */
+// 						!NOT ANNOUNCED.
    goto L1025;
-/* 						!ONCE MORE. */
+// 						!ONCE MORE.
 
-/* ALL DONE. */
+// ALL DONE.
 
 L1800:
    if (hack_1.thfpos == rindex_1.treas) {
       return;
    }
-/* 						!IN TREASURE ROOM? */
+// 						!IN TREASURE ROOM?
    j = 591;
-/* 						!NO, DROP STUFF. */
+// 						!NO, DROP STUFF.
    if (hack_1.thfpos != play_1.here) {
       j = 0;
    }
@@ -375,4 +375,4 @@ L1800:
    }
    return;
 
-} /* thiefd_ */
+}

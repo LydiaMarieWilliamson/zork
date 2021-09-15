@@ -1,8 +1,8 @@
-/* VAPPLI- MAIN VERB PROCESSING ROUTINE */
+// VAPPLI- MAIN VERB PROCESSING ROUTINE
 
-/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
-/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
-/* WRITTEN BY R. M. SUPNIK */
+//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
+// WRITTEN BY R. M. SUPNIK
 
 #include "funcs.h"
 #include "vars.h"
@@ -10,16 +10,16 @@
 logical vappli_(ri)
 integer ri;
 {
-/* Initialized data */
+// Initialized data
 
    const integer mxnop = 39;
    const integer mxsmp = 99;
 
-/* System generated locals */
+// System generated locals
    integer i__1;
    logical ret_val;
 
-/* Local variables */
+// Local variables
    integer melee;
    logical f;
    integer i, j, av;
@@ -27,7 +27,7 @@ integer ri;
    integer odi2 = 0, odo2 = 0;
 
    ret_val = TRUE_;
-/* 						!ASSUME WINS. */
+// 						!ASSUME WINS.
 
    if (prsvec_1.prso > 220) {
       goto L5;
@@ -36,27 +36,27 @@ integer ri;
    if (prsvec_1.prso != 0) {
       odo2 = objcts_1.odesc2[prsvec_1.prso - 1];
    }
-/* 						!SET UP DESCRIPTORS. */
+// 						!SET UP DESCRIPTORS.
 L5:
    if (prsvec_1.prsi != 0) {
       odi2 = objcts_1.odesc2[prsvec_1.prsi - 1];
    }
    av = advs_1.avehic[play_1.winner - 1];
    rmk = rnd_(6) + 372;
-/* 						!REMARK FOR HACK-HACKS. */
+// 						!REMARK FOR HACK-HACKS.
 
    if (ri == 0) {
       goto L10;
    }
-/* 						!ZERO IS FALSE. */
+// 						!ZERO IS FALSE.
    if (ri <= mxnop) {
       return ret_val;
    }
-/* 						!NOP? */
+// 						!NOP?
    if (ri <= mxsmp) {
       goto L100;
    }
-/* 						!SIMPLE VERB? */
+// 						!SIMPLE VERB?
    switch (ri - mxsmp) {
       case 1:
          goto L18000;
@@ -181,41 +181,41 @@ L5:
    }
    bug_(7, ri);
 
-/* ALL VERB PROCESSORS RETURN HERE TO DECLARE FAILURE. */
+// ALL VERB PROCESSORS RETURN HERE TO DECLARE FAILURE.
 
 L10:
    ret_val = FALSE_;
-/* 						!LOSE. */
+// 						!LOSE.
    return ret_val;
 
-/* SIMPLE VERBS ARE HANDLED EXTERNALLY. */
+// SIMPLE VERBS ARE HANDLED EXTERNALLY.
 
 L100:
    ret_val = sverbs_(ri);
    return ret_val;
-/* VAPPLI, PAGE 3 */
+// VAPPLI, PAGE 3
 
-/* V100--	READ.  OUR FIRST REAL VERB. */
+// V100--	READ.  OUR FIRST REAL VERB.
 
 L18000:
    if (lit_(play_1.here)) {
       goto L18100;
    }
-/* 						!ROOM LIT? */
+// 						!ROOM LIT?
    rspeak_(356);
-/* 						!NO, CANT READ. */
+// 						!NO, CANT READ.
    return ret_val;
 
 L18100:
    if (prsvec_1.prsi == 0) {
       goto L18200;
    }
-/* 						!READ THROUGH OBJ? */
+// 						!READ THROUGH OBJ?
    if ((objcts_1.oflag1[prsvec_1.prsi - 1] & TRANBT) != 0) {
       goto L18200;
    }
    rspsub_(357, odi2);
-/* 						!NOT TRANSPARENT. */
+// 						!NOT TRANSPARENT.
    return ret_val;
 
 L18200:
@@ -223,7 +223,7 @@ L18200:
       goto L18300;
    }
    rspsub_(358, odo2);
-/* 						!NOT READABLE. */
+// 						!NOT READABLE.
    return ret_val;
 
 L18300:
@@ -232,7 +232,7 @@ L18300:
    }
    return ret_val;
 
-/* V101--	MELT.  UNLESS OBJECT HANDLES, JOKE. */
+// V101--	MELT.  UNLESS OBJECT HANDLES, JOKE.
 
 L20000:
    if (!objact_()) {
@@ -240,48 +240,48 @@ L20000:
    }
    return ret_val;
 
-/* V102--	INFLATE.  WORKS ONLY WITH BOATS. */
+// V102--	INFLATE.  WORKS ONLY WITH BOATS.
 
 L22000:
    if (!objact_()) {
       rspeak_(368);
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    return ret_val;
 
-/* V103--	DEFLATE. */
+// V103--	DEFLATE.
 
 L23000:
    if (!objact_()) {
       rspeak_(369);
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    return ret_val;
-/* VAPPLI, PAGE 4 */
+// VAPPLI, PAGE 4
 
-/* V104--	ALARM.  IF SLEEPING, WAKE HIM UP. */
+// V104--	ALARM.  IF SLEEPING, WAKE HIM UP.
 
 L24000:
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & SLEPBT) == 0) {
       goto L24100;
    }
    ret_val = objact_();
-/* 						!SLEEPING, LET OBJ DO. */
+// 						!SLEEPING, LET OBJ DO.
    return ret_val;
 
 L24100:
    rspsub_(370, odo2);
-/* 						!JOKE. */
+// 						!JOKE.
    return ret_val;
 
-/* V105--	EXORCISE.  OBJECTS HANDLE. */
+// V105--	EXORCISE.  OBJECTS HANDLE.
 
 L25000:
    f = objact_();
-/* 						!OBJECTS HANDLE. */
+// 						!OBJECTS HANDLE.
    return ret_val;
 
-/* V106--	PLUG.  LET OBJECTS HANDLE. */
+// V106--	PLUG.  LET OBJECTS HANDLE.
 
 L26000:
    if (!objact_()) {
@@ -289,7 +289,7 @@ L26000:
    }
    return ret_val;
 
-/* V107--	KICK.  IF OBJECT IGNORES, JOKE. */
+// V107--	KICK.  IF OBJECT IGNORES, JOKE.
 
 L27000:
    if (!objact_()) {
@@ -297,7 +297,7 @@ L27000:
    }
    return ret_val;
 
-/* V108--	WAVE.  SAME. */
+// V108--	WAVE.  SAME.
 
 L28000:
    if (!objact_()) {
@@ -305,7 +305,7 @@ L28000:
    }
    return ret_val;
 
-/* V109,V110--	RAISE, LOWER.  SAME. */
+// V109,V110--	RAISE, LOWER.  SAME.
 
 L29000:
 L30000:
@@ -314,7 +314,7 @@ L30000:
    }
    return ret_val;
 
-/* V111--	RUB.  SAME. */
+// V111--	RUB.  SAME.
 
 L31000:
    if (!objact_()) {
@@ -322,75 +322,75 @@ L31000:
    }
    return ret_val;
 
-/* V112--	PUSH.  SAME. */
+// V112--	PUSH.  SAME.
 
 L32000:
    if (!objact_()) {
       rspsb2_(382, odo2, rmk);
    }
    return ret_val;
-/* VAPPLI, PAGE 5 */
+// VAPPLI, PAGE 5
 
-/* V113--	UNTIE.  IF OBJECT IGNORES, JOKE. */
+// V113--	UNTIE.  IF OBJECT IGNORES, JOKE.
 
 L33000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJECT HANDLE? */
+// 						!OBJECT HANDLE?
    i = 383;
-/* 						!NO, NOT TIED. */
+// 						!NO, NOT TIED.
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & TIEBT) == 0) {
       i = 384;
    }
    rspeak_(i);
    return ret_val;
 
-/* V114--	TIE.  NEVER REALLY WORKS. */
+// V114--	TIE.  NEVER REALLY WORKS.
 
 L34000:
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & TIEBT) != 0) {
       goto L34100;
    }
    rspeak_(385);
-/* 						!NOT TIEABLE. */
+// 						!NOT TIEABLE.
    return ret_val;
 
 L34100:
    if (!objact_()) {
       rspsub_(386, odo2);
    }
-/* 						!JOKE. */
+// 						!JOKE.
    return ret_val;
 
-/* V115--	TIE UP.  NEVER REALLY WORKS. */
+// V115--	TIE UP.  NEVER REALLY WORKS.
 
 L35000:
    if ((objcts_1.oflag2[prsvec_1.prsi - 1] & TIEBT) != 0) {
       goto L35100;
    }
    rspsub_(387, odo2);
-/* 						!NOT TIEABLE. */
+// 						!NOT TIEABLE.
    return ret_val;
 
 L35100:
    i = 388;
-/* 						!ASSUME VILLAIN. */
+// 						!ASSUME VILLAIN.
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) == 0) {
       i = 389;
    }
    rspsub_(i, odo2);
-/* 						!JOKE. */
+// 						!JOKE.
    return ret_val;
 
-/* V116--	TURN.  OBJECT MUST HANDLE. */
+// V116--	TURN.  OBJECT MUST HANDLE.
 
 L36000:
    if ((objcts_1.oflag1[prsvec_1.prso - 1] & TURNBT) != 0) {
       goto L36100;
    }
    rspeak_(390);
-/* 						!NOT TURNABLE. */
+// 						!NOT TURNABLE.
    return ret_val;
 
 L36100:
@@ -398,91 +398,91 @@ L36100:
       goto L36200;
    }
    rspsub_(391, odi2);
-/* 						!NOT A TOOL. */
+// 						!NOT A TOOL.
    return ret_val;
 
 L36200:
    ret_val = objact_();
-/* 						!LET OBJECT HANDLE. */
+// 						!LET OBJECT HANDLE.
    return ret_val;
 
-/* V117--	BREATHE.  BECOMES INFLATE WITH LUNGS. */
+// V117--	BREATHE.  BECOMES INFLATE WITH LUNGS.
 
 L38000:
    prsvec_1.prsa = vindex_1.inflaw;
    prsvec_1.prsi = oindex_1.lungs;
    goto L22000;
-/* 						!HANDLE LIKE INFLATE. */
+// 						!HANDLE LIKE INFLATE.
 
-/* V118--	KNOCK.  MOSTLY JOKE. */
+// V118--	KNOCK.  MOSTLY JOKE.
 
 L39000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    i = 394;
-/* 						!JOKE FOR DOOR. */
+// 						!JOKE FOR DOOR.
    if ((objcts_1.oflag1[prsvec_1.prso - 1] & DOORBT) == 0) {
       i = 395;
    }
    rspsub_(i, odo2);
-/* 						!JOKE FOR NONDOORS TOO. */
+// 						!JOKE FOR NONDOORS TOO.
    return ret_val;
 
-/* V119--	LOOK. */
+// V119--	LOOK.
 
 L40000:
    if (prsvec_1.prso != 0) {
       goto L41500;
    }
-/* 						!SOMETHING TO LOOK AT? */
+// 						!SOMETHING TO LOOK AT?
    ret_val = rmdesc_(3);
-/* 						!HANDLED BY RMDESC. */
+// 						!HANDLED BY RMDESC.
    return ret_val;
 
-/* V120--	EXAMINE. */
+// V120--	EXAMINE.
 
 L41000:
    if (prsvec_1.prso != 0) {
       goto L41500;
    }
-/* 						!SOMETHING TO EXAMINE? */
+// 						!SOMETHING TO EXAMINE?
    ret_val = rmdesc_(0);
-/* 						!HANDLED BY RMDESC. */
+// 						!HANDLED BY RMDESC.
    return ret_val;
 
 L41500:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    i = objcts_1.oread[prsvec_1.prso - 1];
-/* 						!GET READING MATERIAL. */
+// 						!GET READING MATERIAL.
    if (i != 0) {
       rspeak_(i);
    }
-/* 						!OUTPUT IF THERE, */
+// 						!OUTPUT IF THERE,
    if (i == 0) {
       rspsub_(429, odo2);
    }
-/* 						!OTHERWISE DEFAULT. */
+// 						!OTHERWISE DEFAULT.
    prsvec_1.prsa = vindex_1.foow;
-/* 						!DEFUSE ROOM PROCESSORS. */
+// 						!DEFUSE ROOM PROCESSORS.
    return ret_val;
 
-/* V121--	SHAKE.  IF HOLLOW OBJECT, SOME ACTION. */
+// V121--	SHAKE.  IF HOLLOW OBJECT, SOME ACTION.
 
 L42000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJECT HANDLE? */
+// 						!OBJECT HANDLE?
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) == 0) {
       goto L42100;
    }
    rspeak_(371);
-/* 						!JOKE FOR VILLAINS. */
+// 						!JOKE FOR VILLAINS.
    return ret_val;
 
 L42100:
@@ -492,73 +492,73 @@ L42100:
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & OPENBT) != 0) {
       goto L42300;
    }
-/* 						!OPEN?  SPILL. */
+// 						!OPEN?  SPILL.
    rspsub_(396, odo2);
-/* 						!NO, DESCRIBE NOISE. */
+// 						!NO, DESCRIBE NOISE.
    return ret_val;
 
 L42300:
    rspsub_(397, odo2);
-/* 						!SPILL THE WORKS. */
+// 						!SPILL THE WORKS.
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
-/* 						!SPILL CONTENTS. */
+// 						!SPILL CONTENTS.
       if (objcts_1.ocan[i - 1] != prsvec_1.prso) {
          goto L42500;
       }
-/* 						!INSIDE? */
+// 						!INSIDE?
       objcts_1.oflag2[i - 1] |= TCHBT;
       if (av == 0) {
          goto L42400;
       }
-/* 						!IN VEHICLE? */
+// 						!IN VEHICLE?
       newsta_(i, 0, 0, av, 0);
-/* 						!YES, SPILL IN THERE. */
+// 						!YES, SPILL IN THERE.
       goto L42500;
 
    L42400:
       newsta_(i, 0, play_1.here, 0, 0);
-/* 						!NO, SPILL ON FLOOR, */
+// 						!NO, SPILL ON FLOOR,
       if (i == oindex_1.water) {
          newsta_(i, 133, 0, 0, 0);
       }
-/* 						!BUT WATER DISAPPEARS. */
+// 						!BUT WATER DISAPPEARS.
    L42500:
       ;
    }
    return ret_val;
 
-/* V122--	MOVE.  MOSTLY JOKES. */
+// V122--	MOVE.  MOSTLY JOKES.
 
 L43000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    i = 398;
-/* 						!ASSUME NOT HERE. */
+// 						!ASSUME NOT HERE.
    if (qhere_(prsvec_1.prso, play_1.here)) {
       i = 399;
    }
    rspsub_(i, odo2);
-/* 						!JOKE. */
+// 						!JOKE.
    return ret_val;
-/* VAPPLI, PAGE 6 */
+// VAPPLI, PAGE 6
 
-/* V123--	TURN ON. */
+// V123--	TURN ON.
 
 L44000:
    f = lit_(play_1.here);
-/* 						!RECORD IF LIT. */
+// 						!RECORD IF LIT.
    if (objact_()) {
       goto L44300;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if ((objcts_1.oflag1[prsvec_1.prso - 1] & LITEBT) != 0 && objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
       goto L44100;
    }
    rspeak_(400);
-/* 						!CANT DO IT. */
+// 						!CANT DO IT.
    return ret_val;
 
 L44100:
@@ -566,7 +566,7 @@ L44100:
       goto L44200;
    }
    rspeak_(401);
-/* 						!ALREADY ON. */
+// 						!ALREADY ON.
    return ret_val;
 
 L44200:
@@ -576,21 +576,21 @@ L44300:
    if (!f && lit_(play_1.here)) {
       f = rmdesc_(0);
    }
-/* 						!ROOM NEWLY LIT. */
+// 						!ROOM NEWLY LIT.
    return ret_val;
 
-/* V124--	TURN OFF. */
+// V124--	TURN OFF.
 
 L45000:
    if (objact_()) {
       goto L45300;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if ((objcts_1.oflag1[prsvec_1.prso - 1] & LITEBT) != 0 && objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
       goto L45100;
    }
    rspeak_(402);
-/* 						!CANT DO IT. */
+// 						!CANT DO IT.
    return ret_val;
 
 L45100:
@@ -598,7 +598,7 @@ L45100:
       goto L45200;
    }
    rspeak_(403);
-/* 						!ALREADY OFF. */
+// 						!ALREADY OFF.
    return ret_val;
 
 L45200:
@@ -608,22 +608,22 @@ L45300:
    if (!lit_(play_1.here)) {
       rspeak_(406);
    }
-/* 						!MAY BE DARK. */
+// 						!MAY BE DARK.
    return ret_val;
 
-/* V125--	OPEN.  A FINE MESS. */
+// V125--	OPEN.  A FINE MESS.
 
 L46000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if ((objcts_1.oflag1[prsvec_1.prso - 1] & CONTBT) != 0) {
       goto L46100;
    }
 L46050:
    rspsub_(407, odo2);
-/* 						!NOT OPENABLE. */
+// 						!NOT OPENABLE.
    return ret_val;
 
 L46100:
@@ -631,7 +631,7 @@ L46100:
       goto L46200;
    }
    rspsub_(408, odo2);
-/* 						!NOT OPENABLE. */
+// 						!NOT OPENABLE.
    return ret_val;
 
 L46200:
@@ -639,7 +639,7 @@ L46200:
       goto L46225;
    }
    rspeak_(412);
-/* 						!ALREADY OPEN. */
+// 						!ALREADY OPEN.
    return ret_val;
 
 L46225:
@@ -648,21 +648,21 @@ L46225:
       goto L46300;
    }
    princo_(prsvec_1.prso, 410);
-/* 						!PRINT CONTENTS. */
+// 						!PRINT CONTENTS.
    return ret_val;
 
 L46300:
    rspeak_(409);
-/* 						!DONE */
+// 						!DONE
    return ret_val;
 
-/* V126--	CLOSE. */
+// V126--	CLOSE.
 
 L47000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if ((objcts_1.oflag1[prsvec_1.prso - 1] & CONTBT) == 0) {
       goto L46050;
    }
@@ -670,44 +670,44 @@ L47000:
       goto L47100;
    }
    rspsub_(411, odo2);
-/* 						!NOT CLOSABLE. */
+// 						!NOT CLOSABLE.
    return ret_val;
 
 L47100:
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & OPENBT) != 0) {
       goto L47200;
    }
-/* 						!OPEN? */
+// 						!OPEN?
    rspeak_(413);
-/* 						!NO, JOKE. */
+// 						!NO, JOKE.
    return ret_val;
 
 L47200:
    objcts_1.oflag2[prsvec_1.prso - 1] &= ~OPENBT;
    rspeak_(414);
-/* 						!DONE. */
+// 						!DONE.
    return ret_val;
-/* VAPPLI, PAGE 7 */
+// VAPPLI, PAGE 7
 
-/* V127--	FIND.  BIG MEGILLA. */
+// V127--	FIND.  BIG MEGILLA.
 
 L48000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    i = 415;
-/* 						!DEFAULT CASE. */
+// 						!DEFAULT CASE.
    if (qhere_(prsvec_1.prso, play_1.here)) {
       goto L48300;
    }
-/* 						!IN ROOM? */
+// 						!IN ROOM?
    if (objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
       goto L48200;
    }
-/* 						!ON WINNER? */
+// 						!ON WINNER?
    j = objcts_1.ocan[prsvec_1.prso - 1];
-/* 						!DOWN ONE LEVEL. */
+// 						!DOWN ONE LEVEL.
    if (j == 0) {
       goto L10;
    }
@@ -715,113 +715,113 @@ L48000:
       goto L10;
    }
    i = 417;
-/* 						!ASSUME IN ROOM. */
+// 						!ASSUME IN ROOM.
    if (qhere_(j, play_1.here)) {
       goto L48100;
    }
    if (objcts_1.oadv[j - 1] != play_1.winner) {
       goto L10;
    }
-/* 						!NOT HERE OR ON PERSON. */
+// 						!NOT HERE OR ON PERSON.
    i = 418;
 L48100:
    rspsub_(i, objcts_1.odesc2[j - 1]);
-/* 						!DESCRIBE FINDINGS. */
+// 						!DESCRIBE FINDINGS.
    return ret_val;
 
 L48200:
    i = 416;
 L48300:
    rspsub_(i, odo2);
-/* 						!DESCRIBE FINDINGS. */
+// 						!DESCRIBE FINDINGS.
    return ret_val;
 
-/* V128--	WAIT.  RUN CLOCK DEMON. */
+// V128--	WAIT.  RUN CLOCK DEMON.
 
 L49000:
    rspeak_(419);
-/* 						!TIME PASSES. */
+// 						!TIME PASSES.
    for (i = 1; i <= 3; ++i) {
       if (clockd_()) {
          return ret_val;
       }
-/*L49100: */
+// L49100:
    }
    return ret_val;
 
-/* V129--	SPIN. */
-/* V159--	TURN TO. */
+// V129--	SPIN.
+// V159--	TURN TO.
 
 L50000:
 L88000:
    if (!objact_()) {
       rspeak_(663);
    }
-/* 						!IF NOT OBJ, JOKE. */
+// 						!IF NOT OBJ, JOKE.
    return ret_val;
 
-/* V130--	BOARD.  WORKS WITH VEHICLES. */
+// V130--	BOARD.  WORKS WITH VEHICLES.
 
 L51000:
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & VEHBT) != 0) {
       goto L51100;
    }
    rspsub_(421, odo2);
-/* 						!NOT VEHICLE, JOKE. */
+// 						!NOT VEHICLE, JOKE.
    return ret_val;
 
 L51100:
    if (qhere_(prsvec_1.prso, play_1.here)) {
       goto L51200;
    }
-/* 						!HERE? */
+// 						!HERE?
    rspsub_(420, odo2);
-/* 						!NO, JOKE. */
+// 						!NO, JOKE.
    return ret_val;
 
 L51200:
    if (av == 0) {
       goto L51300;
    }
-/* 						!ALREADY GOT ONE? */
+// 						!ALREADY GOT ONE?
    rspsub_(422, odo2);
-/* 						!YES, JOKE. */
+// 						!YES, JOKE.
    return ret_val;
 
 L51300:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    rspsub_(423, odo2);
-/* 						!DESCRIBE. */
+// 						!DESCRIBE.
    advs_1.avehic[play_1.winner - 1] = prsvec_1.prso;
    if (play_1.winner != aindex_1.player) {
       objcts_1.ocan[advs_1.aobj[play_1.winner - 1] - 1] = prsvec_1.prso;
    }
    return ret_val;
 
-/* V131--	DISEMBARK. */
+// V131--	DISEMBARK.
 
 L52000:
    if (av == prsvec_1.prso) {
       goto L52100;
    }
-/* 						!FROM VEHICLE? */
+// 						!FROM VEHICLE?
    rspeak_(424);
-/* 						!NO, JOKE. */
+// 						!NO, JOKE.
    return ret_val;
 
 L52100:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if ((rooms_1.rflag[play_1.here - 1] & RLAND) != 0) {
       goto L52200;
    }
    rspeak_(425);
-/* 						!NOT ON LAND. */
+// 						!NOT ON LAND.
    return ret_val;
 
 L52200:
@@ -832,118 +832,118 @@ L52200:
    }
    return ret_val;
 
-/* V132--	TAKE.  HANDLED EXTERNALLY. */
+// V132--	TAKE.  HANDLED EXTERNALLY.
 
 L53000:
    ret_val = take_(1);
    return ret_val;
 
-/* V133--	INVENTORY.  PROCESSED EXTERNALLY. */
+// V133--	INVENTORY.  PROCESSED EXTERNALLY.
 
 L55000:
    invent_(play_1.winner);
    return ret_val;
-/* VAPPLI, PAGE 8 */
+// VAPPLI, PAGE 8
 
-/* V134--	FILL.  STRANGE DOINGS WITH WATER. */
+// V134--	FILL.  STRANGE DOINGS WITH WATER.
 
 L56000:
    if (prsvec_1.prsi != 0) {
       goto L56050;
    }
-/* 						!ANY OBJ SPECIFIED? */
+// 						!ANY OBJ SPECIFIED?
    if ((rooms_1.rflag[play_1.here - 1] & RWATER + RFILL) != 0) {
       goto L56025;
    }
    rspeak_(516);
-/* 						!NOTHING TO FILL WITH. */
+// 						!NOTHING TO FILL WITH.
    prsvec_1.prswon = FALSE_;
-/* 						!YOU LOSE. */
+// 						!YOU LOSE.
    return ret_val;
 
 L56025:
    prsvec_1.prsi = oindex_1.gwate;
-/* 						!USE GLOBAL WATER. */
+// 						!USE GLOBAL WATER.
 L56050:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if (prsvec_1.prsi != oindex_1.gwate && prsvec_1.prsi != oindex_1.water) {
       rspsb2_(444, odi2, odo2);
    }
    return ret_val;
 
-/* V135,V136--	EAT/DRINK */
+// V135,V136--	EAT/DRINK
 
 L58000:
 L59000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if (prsvec_1.prso == oindex_1.gwate) {
       goto L59500;
    }
-/* 						!DRINK GLOBAL WATER? */
+// 						!DRINK GLOBAL WATER?
    if (!((objcts_1.oflag1[prsvec_1.prso - 1] & FOODBT) != 0)) {
       goto L59400;
    }
-/* 						!EDIBLE? */
+// 						!EDIBLE?
    if (objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
       goto L59200;
    }
-/* 						!YES, ON WINNER? */
+// 						!YES, ON WINNER?
 L59100:
    rspsub_(454, odo2);
-/* 						!NOT ACCESSIBLE. */
+// 						!NOT ACCESSIBLE.
    return ret_val;
 
 L59200:
    if (prsvec_1.prsa == vindex_1.drinkw) {
       goto L59300;
    }
-/* 						!DRINK FOOD? */
+// 						!DRINK FOOD?
    newsta_(prsvec_1.prso, 455, 0, 0, 0);
-/* 						!NO, IT DISAPPEARS. */
+// 						!NO, IT DISAPPEARS.
    return ret_val;
 
 L59300:
    rspeak_(456);
-/* 						!YES, JOKE. */
+// 						!YES, JOKE.
    return ret_val;
 
 L59400:
    if (!((objcts_1.oflag1[prsvec_1.prso - 1] & DRNKBT) != 0)) {
       goto L59600;
    }
-/* 						!DRINKABLE? */
+// 						!DRINKABLE?
    if (objcts_1.ocan[prsvec_1.prso - 1] == 0) {
       goto L59100;
    }
-/* 						!YES, IN SOMETHING? */
+// 						!YES, IN SOMETHING?
    if (objcts_1.oadv[objcts_1.ocan[prsvec_1.prso - 1] - 1] != play_1.winner) {
       goto L59100;
    }
    if ((objcts_1.oflag2[objcts_1.ocan[prsvec_1.prso - 1] - 1] & OPENBT) != 0) {
       goto L59500;
    }
-/* 						!CONT OPEN? */
+// 						!CONT OPEN?
    rspeak_(457);
-/* 						!NO, JOKE. */
+// 						!NO, JOKE.
    return ret_val;
 
 L59500:
    newsta_(prsvec_1.prso, 458, 0, 0, 0);
-/* 						!GONE. */
+// 						!GONE.
    return ret_val;
 
 L59600:
    rspsub_(453, odo2);
-/* 						!NOT FOOD OR DRINK. */
+// 						!NOT FOOD OR DRINK.
    return ret_val;
 
-/* V137--	BURN.  COMPLICATED. */
+// V137--	BURN.  COMPLICATED.
 
 L60000:
    if ((objcts_1.oflag1[prsvec_1.prsi - 1] & FLAMBT + LITEBT + ONBT) != FLAMBT + LITEBT + ONBT) {
@@ -952,15 +952,15 @@ L60000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if (objcts_1.ocan[prsvec_1.prso - 1] != oindex_1.recep) {
       goto L60050;
    }
-/* 						!BALLOON? */
+// 						!BALLOON?
    if (oappli_(objcts_1.oactio[oindex_1.ballo - 1], 0)) {
       return ret_val;
    }
-/* 						!DID IT HANDLE? */
+// 						!DID IT HANDLE?
 L60050:
    if ((objcts_1.oflag1[prsvec_1.prso - 1] & BURNBT) == 0) {
       goto L60300;
@@ -968,55 +968,55 @@ L60050:
    if (objcts_1.oadv[prsvec_1.prso - 1] != play_1.winner) {
       goto L60100;
    }
-/* 						!CARRYING IT? */
+// 						!CARRYING IT?
    rspsub_(459, odo2);
    jigsup_(460);
    return ret_val;
 
 L60100:
    j = objcts_1.ocan[prsvec_1.prso - 1];
-/* 						!GET CONTAINER. */
+// 						!GET CONTAINER.
    if (qhere_(prsvec_1.prso, play_1.here) || av != 0 && j == av) {
       goto L60200;
    }
    if (j == 0) {
       goto L60150;
    }
-/* 						!INSIDE? */
+// 						!INSIDE?
    if (!((objcts_1.oflag2[j - 1] & OPENBT) != 0)) {
       goto L60150;
    }
-/* 						!OPEN? */
+// 						!OPEN?
    if (qhere_(j, play_1.here) || av != 0 && objcts_1.ocan[j - 1] == av) {
       goto L60200;
    }
 L60150:
    rspeak_(461);
-/* 						!CANT REACH IT. */
+// 						!CANT REACH IT.
    return ret_val;
 
 L60200:
    rspsub_(462, odo2);
-/* 						!BURN IT. */
+// 						!BURN IT.
    newsta_(prsvec_1.prso, 0, 0, 0, 0);
    return ret_val;
 
 L60300:
    rspsub_(463, odo2);
-/* 						!CANT BURN IT. */
+// 						!CANT BURN IT.
    return ret_val;
 
 L60400:
    rspsub_(301, odi2);
-/* 						!CANT BURN IT WITH THAT. */
+// 						!CANT BURN IT WITH THAT.
    return ret_val;
-/* VAPPLI, PAGE 9 */
+// VAPPLI, PAGE 9
 
-/* V138--	MUNG.  GO TO COMMON ATTACK CODE. */
+// V138--	MUNG.  GO TO COMMON ATTACK CODE.
 
 L63000:
    i = 466;
-/* 						!CHOOSE PHRASE. */
+// 						!CHOOSE PHRASE.
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) != 0) {
       goto L66100;
    }
@@ -1025,47 +1025,47 @@ L63000:
    }
    return ret_val;
 
-/* V139--	KILL.  GO TO COMMON ATTACK CODE. */
+// V139--	KILL.  GO TO COMMON ATTACK CODE.
 
 L64000:
    i = 467;
-/* 						!CHOOSE PHRASE. */
+// 						!CHOOSE PHRASE.
    goto L66100;
 
-/* V140--	SWING.  INVERT OBJECTS, FALL THRU TO ATTACK. */
+// V140--	SWING.  INVERT OBJECTS, FALL THRU TO ATTACK.
 
 L65000:
    j = prsvec_1.prso;
-/* 						!INVERT. */
+// 						!INVERT.
    prsvec_1.prso = prsvec_1.prsi;
    prsvec_1.prsi = j;
    j = odo2;
    odo2 = odi2;
    odi2 = j;
    prsvec_1.prsa = vindex_1.attacw;
-/* 						!FOR OBJACT. */
+// 						!FOR OBJACT.
 
-/* V141--	ATTACK.  FALL THRU TO ATTACK CODE. */
+// V141--	ATTACK.  FALL THRU TO ATTACK CODE.
 
 L66000:
    i = 468;
 
-/* COMMON MUNG/ATTACK/SWING/KILL CODE. */
+// COMMON MUNG/ATTACK/SWING/KILL CODE.
 
 L66100:
    if (prsvec_1.prso != 0) {
       goto L66200;
    }
-/* 						!ANYTHING? */
+// 						!ANYTHING?
    rspeak_(469);
-/* 						!NO, JOKE. */
+// 						!NO, JOKE.
    return ret_val;
 
 L66200:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) != 0) {
       goto L66300;
    }
@@ -1076,7 +1076,7 @@ L66200:
 
 L66300:
    j = 471;
-/* 						!ASSUME NO WEAPON. */
+// 						!ASSUME NO WEAPON.
    if (prsvec_1.prsi == 0) {
       goto L66500;
    }
@@ -1084,43 +1084,43 @@ L66300:
       goto L66400;
    }
    melee = 1;
-/* 						!ASSUME SWORD. */
+// 						!ASSUME SWORD.
    if (prsvec_1.prsi != oindex_1.sword) {
       melee = 2;
    }
-/* 						!MUST BE KNIFE. */
+// 						!MUST BE KNIFE.
    i = blow_(aindex_1.player, prsvec_1.prso, melee, 1, 0);
-/* 						!STRIKE BLOW. */
+// 						!STRIKE BLOW.
    return ret_val;
 
 L66400:
    j = 472;
-/* 						!NOT A WEAPON. */
+// 						!NOT A WEAPON.
 L66500:
    rspsb2_(i, odo2, j);
-/* 						!JOKE. */
+// 						!JOKE.
    return ret_val;
-/* VAPPLI, PAGE 10 */
+// VAPPLI, PAGE 10
 
-/* V142--	WALK.  PROCESSED EXTERNALLY. */
+// V142--	WALK.  PROCESSED EXTERNALLY.
 
 L68000:
    ret_val = walk_();
    return ret_val;
 
-/* V143--	TELL.  PROCESSED IN GAME. */
+// V143--	TELL.  PROCESSED IN GAME.
 
 L69000:
    rspeak_(603);
    return ret_val;
 
-/* V144--	PUT.  PROCESSED EXTERNALLY. */
+// V144--	PUT.  PROCESSED EXTERNALLY.
 
 L70000:
    ret_val = put_(1);
    return ret_val;
 
-/* V145,V146,V147,V148--	DROP/GIVE/POUR/THROW */
+// V145,V146,V147,V148--	DROP/GIVE/POUR/THROW
 
 L71000:
 L72000:
@@ -1129,112 +1129,112 @@ L74000:
    ret_val = drop_(0);
    return ret_val;
 
-/* V149--	SAVE */
+// V149--	SAVE
 
 L77000:
    if ((rooms_1.rflag[rindex_1.tstrs - 1] & RSEEN) == 0) {
       goto L77100;
    }
    rspeak_(828);
-/* 						!NO SAVES IN ENDGAME. */
+// 						!NO SAVES IN ENDGAME.
    return ret_val;
 
 L77100:
    savegm_();
    return ret_val;
 
-/* V150--	RESTORE */
+// V150--	RESTORE
 
 L78000:
    if ((rooms_1.rflag[rindex_1.tstrs - 1] & RSEEN) == 0) {
       goto L78100;
    }
    rspeak_(829);
-/* 						!NO RESTORES IN ENDGAME. */
+// 						!NO RESTORES IN ENDGAME.
    return ret_val;
 
 L78100:
    rstrgm_();
    return ret_val;
-/* VAPPLI, PAGE 11 */
+// VAPPLI, PAGE 11
 
-/* V151--	HELLO */
+// V151--	HELLO
 
 L80000:
    if (prsvec_1.prso != 0) {
       goto L80100;
    }
-/* 						!ANY OBJ? */
+// 						!ANY OBJ?
    i__1 = rnd_(4) + 346;
    rspeak_(i__1);
-/* 						!NO, VANILLA HELLO. */
+// 						!NO, VANILLA HELLO.
    return ret_val;
 
 L80100:
    if (prsvec_1.prso != oindex_1.aviat) {
       goto L80200;
    }
-/* 						!HELLO AVIATOR? */
+// 						!HELLO AVIATOR?
    rspeak_(350);
-/* 						!NOTHING HAPPENS. */
+// 						!NOTHING HAPPENS.
    return ret_val;
 
 L80200:
    if (prsvec_1.prso != oindex_1.sailo) {
       goto L80300;
    }
-/* 						!HELLO SAILOR? */
+// 						!HELLO SAILOR?
    ++state_1.hs;
-/* 						!COUNT. */
+// 						!COUNT.
    i = 351;
-/* 						!GIVE NORMAL OR */
+// 						!GIVE NORMAL OR
    if (state_1.hs % 10 == 0) {
       i = 352;
    }
-/* 						!RANDOM MESSAGE. */
+// 						!RANDOM MESSAGE.
    if (state_1.hs % 20 == 0) {
       i = 353;
    }
    rspeak_(i);
-/* 						!SPEAK UP. */
+// 						!SPEAK UP.
    return ret_val;
 
 L80300:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    i = 354;
-/* 						!ASSUME VILLAIN. */
+// 						!ASSUME VILLAIN.
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT + ACTRBT) == 0) {
       i = 355;
    }
    rspsub_(i, odo2);
-/* 						!HELLO THERE */
-/* 						! */
+// 						!HELLO THERE
+// 						!
    return ret_val;
 
-/* V152--	LOOK INTO */
+// V152--	LOOK INTO
 
 L81000:
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    if ((objcts_1.oflag1[prsvec_1.prso - 1] & DOORBT) == 0) {
       goto L81300;
    }
    if (!((objcts_1.oflag2[prsvec_1.prso - 1] & OPENBT) != 0)) {
       goto L81200;
    }
-/* 						!OPEN? */
+// 						!OPEN?
    rspsub_(628, odo2);
-/* 						!OPEN DOOR- UNINTERESTING. */
+// 						!OPEN DOOR- UNINTERESTING.
    return ret_val;
 
 L81200:
    rspsub_(525, odo2);
-/* 						!CLOSED DOOR- CANT SEE. */
+// 						!CLOSED DOOR- CANT SEE.
    return ret_val;
 
 L81300:
@@ -1248,118 +1248,118 @@ L81300:
       goto L81200;
    }
    rspsub_(630, odo2);
-/* 						!CANT LOOK INSIDE. */
+// 						!CANT LOOK INSIDE.
    return ret_val;
 
 L81400:
    if (qempty_(prsvec_1.prso)) {
       goto L81500;
    }
-/* 						!VEH OR SEE IN.  EMPTY? */
+// 						!VEH OR SEE IN.  EMPTY?
    princo_(prsvec_1.prso, 573);
-/* 						!NO, LIST CONTENTS. */
+// 						!NO, LIST CONTENTS.
    return ret_val;
 
 L81500:
    rspsub_(629, odo2);
-/* 						!EMPTY. */
+// 						!EMPTY.
    return ret_val;
 
-/* V153--	LOOK UNDER */
+// V153--	LOOK UNDER
 
 L82000:
    if (!objact_()) {
       rspeak_(631);
    }
-/* 						!OBJECT HANDLE? */
+// 						!OBJECT HANDLE?
    return ret_val;
-/* VAPPLI, PAGE 12 */
+// VAPPLI, PAGE 12
 
-/* V154--	PUMP */
+// V154--	PUMP
 
 L83000:
    if (objcts_1.oroom[oindex_1.pump - 1] == play_1.here || objcts_1.oadv[oindex_1.pump - 1] == play_1.winner) {
       goto L83100;
    }
    rspeak_(632);
-/* 						!NO. */
+// 						!NO.
    return ret_val;
 
 L83100:
    prsvec_1.prsi = oindex_1.pump;
-/* 						!BECOMES INFLATE */
+// 						!BECOMES INFLATE
    prsvec_1.prsa = vindex_1.inflaw;
-/* 						!X WITH PUMP. */
+// 						!X WITH PUMP.
    goto L22000;
-/* 						!DONE. */
+// 						!DONE.
 
-/* V155--	WIND */
+// V155--	WIND
 
 L84000:
    if (!objact_()) {
       rspsub_(634, odo2);
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    return ret_val;
 
-/* V156--	CLIMB */
-/* V157--	CLIMB UP */
-/* V158--	CLIMB DOWN */
+// V156--	CLIMB
+// V157--	CLIMB UP
+// V158--	CLIMB DOWN
 
 L85000:
 L86000:
 L87000:
    i = xsrch_1.xup;
-/* 						!ASSUME UP. */
+// 						!ASSUME UP.
    if (prsvec_1.prsa == vindex_1.clmbdw) {
       i = xsrch_1.xdown;
    }
-/* 						!UNLESS CLIMB DN. */
+// 						!UNLESS CLIMB DN.
    f = (objcts_1.oflag2[prsvec_1.prso - 1] & CLMBBT) != 0;
    if (f && findxt_(i, play_1.here)) {
       goto L87500;
    }
-/* 						!ANYTHING TO CLIMB? */
+// 						!ANYTHING TO CLIMB?
    if (objact_()) {
       return ret_val;
    }
-/* 						!OBJ HANDLE? */
+// 						!OBJ HANDLE?
    i = 657;
    if (f) {
       i = 524;
    }
-/* 						!VARIETY OF JOKES. */
+// 						!VARIETY OF JOKES.
    if (!f && (prsvec_1.prso == oindex_1.wall || prsvec_1.prso >= oindex_1.wnort && prsvec_1.prso <= oindex_1.wnort + 3)) {
       i = 656;
    }
    rspeak_(i);
-/* 						!JOKE. */
+// 						!JOKE.
    return ret_val;
 
 L87500:
    prsvec_1.prsa = vindex_1.walkw;
-/* 						!WALK */
+// 						!WALK
    prsvec_1.prso = i;
-/* 						!IN SPECIFIED DIR. */
+// 						!IN SPECIFIED DIR.
    ret_val = walk_();
    return ret_val;
 
-} /* vappli_ */
+}
 
-/* CLOCKD- CLOCK DEMON FOR INTERMOVE CLOCK EVENTS */
+// CLOCKD- CLOCK DEMON FOR INTERMOVE CLOCK EVENTS
 
-/* DECLARATIONS */
+// DECLARATIONS
 
 logical clockd_() {
-/* System generated locals */
+// System generated locals
    integer i__1;
    logical ret_val;
 
-/* Local variables */
+// Local variables
    integer i;
 
    ret_val = FALSE_;
-/* 						!ASSUME NO ACTION. */
+// 						!ASSUME NO ACTION.
    i__1 = cevent_1.clnt;
    for (i = 1; i <= i__1; ++i) {
       if (!cevent_1.cflag[i - 1] || cevent_1.ctick[i - 1] == 0) {
@@ -1368,19 +1368,19 @@ logical clockd_() {
       if (cevent_1.ctick[i - 1] < 0) {
          goto L50;
       }
-/* 						!PERMANENT ENTRY? */
+// 						!PERMANENT ENTRY?
       --cevent_1.ctick[i - 1];
       if (cevent_1.ctick[i - 1] != 0) {
          goto L100;
       }
-/* 						!TIMER EXPIRED? */
+// 						!TIMER EXPIRED?
    L50:
       ret_val = TRUE_;
       cevapp_(cevent_1.cactio[i - 1]);
-/* 						!DO ACTION. */
+// 						!DO ACTION.
    L100:
       ;
    }
    return ret_val;
 
-} /* clockd_ */
+}

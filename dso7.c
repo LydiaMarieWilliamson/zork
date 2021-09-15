@@ -1,8 +1,8 @@
-/* ENCRYP--	ENCRYPT PASSWORD */
+// ENCRYP--	ENCRYPT PASSWORD
 
-/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
-/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
-/* WRITTEN BY R. M. SUPNIK */
+//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
+// WRITTEN BY R. M. SUPNIK
 
 #include <stdio.h>
 #include "funcs.h"
@@ -12,7 +12,7 @@ void encryp_(inw, outw)
 const char *inw;
 char *outw;
 {
-/* Initialized data */
+// Initialized data
 
    const char *keyw = "ECORMS";
 
@@ -20,20 +20,20 @@ char *outw;
    char ukeyw[1 * 6];
    integer uinws, ukeyws;
 
-/* Parameter adjustments */
+// Parameter adjustments
    --outw;
    --inw;
 
-/* Function Body */
+// Function Body
 
    uinws = 0;
-/* 						!UNBIASED INW SUM. */
+// 						!UNBIASED INW SUM.
    ukeyws = 0;
-/* 						!UNBIASED KEYW SUM. */
+// 						!UNBIASED KEYW SUM.
    j = 1;
-/* 						!POINTER IN KEYWORD. */
+// 						!POINTER IN KEYWORD.
    for (i = 1; i <= 6; ++i) {
-/* 						!UNBIAS, COMPUTE SUMS. */
+// 						!UNBIAS, COMPUTE SUMS.
       ukeyw[i - 1] = (keyw[i - 1] - 64);
       if (inw[j] <= '@') {
          j = 1;
@@ -42,11 +42,11 @@ char *outw;
       ukeyws += ukeyw[i - 1];
       uinws += uinw[i - 1];
       ++j;
-/*L100: */
+// L100:
    }
 
    usum = uinws % 8 + (ukeyws % 8 << 3);
-/* 						!COMPUTE MASK. */
+// 						!COMPUTE MASK.
    for (i = 1; i <= 6; ++i) {
       j = (uinw[i - 1] ^ ukeyw[i - 1] ^ usum) & 31;
       usum = (usum + 1) % 32;
@@ -54,27 +54,27 @@ char *outw;
          j %= 26;
       }
       outw[i] = (max(1, j) + 64);
-/*L200: */
+// L200:
    }
-} /* encryp_ */
+}
 
-/* CPGOTO--	MOVE TO NEXT STATE IN PUZZLE ROOM */
+// CPGOTO--	MOVE TO NEXT STATE IN PUZZLE ROOM
 
-/* DECLARATIONS */
+// DECLARATIONS
 
 void cpgoto_(st)
 integer st;
 {
-/* System generated locals */
+// System generated locals
    integer i__1, i__2;
 
-/* Local variables */
+// Local variables
    integer i;
 
    rooms_1.rflag[rindex_1.cpuzz - 1] &= ~RSEEN;
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
-/* 						!RELOCATE OBJECTS. */
+// 						!RELOCATE OBJECTS.
       if (objcts_1.oroom[i - 1] == rindex_1.cpuzz && (objcts_1.oflag2[i - 1] & ACTRBT + VILLBT) == 0) {
          i__2 = findex_1.cphere * hyper_1.hfactr;
          newsta_(i, 0, i__2, 0, 0);
@@ -82,25 +82,25 @@ integer st;
       if (objcts_1.oroom[i - 1] == st * hyper_1.hfactr) {
          newsta_(i, 0, rindex_1.cpuzz, 0, 0);
       }
-/*L100: */
+// L100:
    }
    findex_1.cphere = st;
-} /* cpgoto_ */
+}
 
-/* CPINFO--	DESCRIBE PUZZLE ROOM */
+// CPINFO--	DESCRIBE PUZZLE ROOM
 
-/* DECLARATIONS */
+// DECLARATIONS
 
 void cpinfo_(rmk, st)
 integer rmk;
 integer st;
 {
-/* Initialized data */
+// Initialized data
 
    static const integer dgmoft[8] = { -9, -8, -7, -1, 1, 7, 8, 9 };
    const char *pict = "SSS M";
 
-/* Local variables */
+// Local variables
    integer i, j, k, l;
    char dgm[1 * 8];
 
@@ -108,7 +108,7 @@ integer st;
    for (i = 1; i <= 8; ++i) {
       j = dgmoft[i - 1];
       dgm[i - 1] = pict[puzzle_1.cpvec[st + j - 1] + 3];
-/* 						!GET PICTURE ELEMENT. */
+// 						!GET PICTURE ELEMENT.
       if (abs(j) == 1 || abs(j) == 8) {
          goto L100;
       }
@@ -116,7 +116,7 @@ integer st;
       if (j < 0) {
          k = -8;
       }
-/* 						!GET ORTHO DIR. */
+// 						!GET ORTHO DIR.
       l = j - k;
       if (puzzle_1.cpvec[st + k - 1] != 0 && puzzle_1.cpvec[st + l - 1] != 0) {
          dgm[i - 1] = '?';
@@ -135,26 +135,26 @@ integer st;
    if (st == 10) {
       rspeak_(870);
    }
-/* 						!AT HOLE? */
+// 						!AT HOLE?
    if (st == 37) {
       rspeak_(871);
    }
-/* 						!AT NICHE? */
+// 						!AT NICHE?
    i = 872;
-/* 						!DOOR OPEN? */
+// 						!DOOR OPEN?
    if (findex_1.cpoutf) {
       i = 873;
    }
    if (st == 52) {
       rspeak_(i);
    }
-/* 						!AT DOOR? */
+// 						!AT DOOR?
    if (puzzle_1.cpvec[st] == -2) {
       rspeak_(874);
    }
-/* 						!EAST LADDER? */
+// 						!EAST LADDER?
    if (puzzle_1.cpvec[st - 2] == -3) {
       rspeak_(875);
    }
-/* 						!WEST LADDER? */
-} /* cpinfo_ */
+// 						!WEST LADDER?
+}

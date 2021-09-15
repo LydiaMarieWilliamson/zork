@@ -1,8 +1,8 @@
-/* FINDXT- FIND EXIT FROM ROOM */
+// FINDXT- FIND EXIT FROM ROOM
 
-/*COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142*/
-/* ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED */
-/* WRITTEN BY R. M. SUPNIK */
+//COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
+// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
+// WRITTEN BY R. M. SUPNIK
 
 #include <stdio.h>
 #include "funcs.h"
@@ -12,28 +12,27 @@ logical findxt_(dir, rm)
 integer dir;
 integer rm;
 {
-/* System generated locals */
+// System generated locals
    logical ret_val;
 
-/* Local variables */
+// Local variables
    integer i, xi;
    integer xxxflg;
 
    ret_val = TRUE_;
-/* 						!ASSUME WINS. */
+// 						!ASSUME WINS.
    xi = rooms_1.rexit[rm - 1];
-/* 						!FIND FIRST ENTRY. */
+// 						!FIND FIRST ENTRY.
    if (xi == 0) {
       goto L1000;
    }
-/* 						!NO EXITS? */
+// 						!NO EXITS?
 
 L100:
    i = exits_1.travel[xi - 1];
-/* 						!GET ENTRY. */
+// 						!GET ENTRY.
    curxt_1.xroom1 = i & xpars_1.xrmask;
-/* mask to 16-bits to get rid of sign extension problems with 32-bit ints 
-*/
+// mask to 16-bits to get rid of sign extension problems with 32-bit ints 
    xxxflg = ~xpars_1.xlflag & 65535;
    curxt_1.xtype = ((i & xxxflg) / xpars_1.xfshft & xpars_1.xfmask) + 1;
    switch (curxt_1.xtype) {
@@ -46,7 +45,7 @@ L100:
       case 4:
          goto L130;
    }
-/* 						!BRANCH ON ENTRY. */
+// 						!BRANCH ON ENTRY.
    bug_(10, curxt_1.xtype);
 
 L130:
@@ -54,10 +53,10 @@ L130:
    curxt_1.xactio = exits_1.travel[xi + 1] / xpars_1.xashft;
 L120:
    curxt_1.xstrng = exits_1.travel[xi];
-/* 						!DOOR/CEXIT/NEXIT - STRING. */
+// 						!DOOR/CEXIT/NEXIT - STRING.
 L110:
    xi += xpars_1.xelnt[curxt_1.xtype - 1];
-/* 						!ADVANCE TO NEXT ENTRY. */
+// 						!ADVANCE TO NEXT ENTRY.
    if ((i & xpars_1.xdmask) == dir) {
       return ret_val;
    }
@@ -66,13 +65,13 @@ L110:
    }
 L1000:
    ret_val = FALSE_;
-/* 						!YES, LOSE. */
+// 						!YES, LOSE.
    return ret_val;
-} /* findxt_ */
+}
 
-/* FWIM- FIND WHAT I MEAN */
+// FWIM- FIND WHAT I MEAN
 
-/* DECLARATIONS */
+// DECLARATIONS
 
 integer fwim_(f1, f2, rm, con, adv, nocare)
 integer f1;
@@ -82,24 +81,24 @@ integer con;
 integer adv;
 logical nocare;
 {
-/* System generated locals */
+// System generated locals
    integer ret_val, i__1, i__2;
 
-/* Local variables */
+// Local variables
    integer i, j;
 
-/* OBJECTS */
+// OBJECTS
 
    ret_val = 0;
-/* 						!ASSUME NOTHING. */
+// 						!ASSUME NOTHING.
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
-/* 						!LOOP */
+// 						!LOOP
       if ((rm == 0 || objcts_1.oroom[i - 1] != rm) && (adv == 0 || objcts_1.oadv[i - 1] != adv) && (con == 0 || objcts_1.ocan[i - 1] != con)) {
          goto L1000;
       }
 
-/* OBJECT IS ON LIST... IS IT A MATCH? */
+// OBJECT IS ON LIST... IS IT A MATCH?
 
       if ((objcts_1.oflag1[i - 1] & VISIBT) == 0) {
          goto L1000;
@@ -110,16 +109,16 @@ logical nocare;
       if (ret_val == 0) {
          goto L400;
       }
-/* 						!ALREADY GOT SOMETHING? */
+// 						!ALREADY GOT SOMETHING?
       ret_val = -ret_val;
-/* 						!YES, AMBIGUOUS. */
+// 						!YES, AMBIGUOUS.
       return ret_val;
 
    L400:
       ret_val = i;
-/* 						!NOTE MATCH. */
+// 						!NOTE MATCH.
 
-/* DOES OBJECT CONTAIN A MATCH? */
+// DOES OBJECT CONTAIN A MATCH?
 
    L500:
       if ((objcts_1.oflag2[i - 1] & OPENBT) == 0) {
@@ -127,7 +126,7 @@ logical nocare;
       }
       i__2 = objcts_1.olnt;
       for (j = 1; j <= i__2; ++j) {
-/* 						!NO, SEARCH CONTENTS. */
+// 						!NO, SEARCH CONTENTS.
          if (objcts_1.ocan[j - 1] != i || (objcts_1.oflag1[j - 1] & VISIBT) == 0 || (objcts_1.oflag1[j - 1] & f1) == 0 && (objcts_1.oflag2[j - 1] & f2) == 0) {
             goto L700;
          }
@@ -146,32 +145,32 @@ logical nocare;
       ;
    }
    return ret_val;
-} /* fwim_ */
+}
 
-/* YESNO- OBTAIN YES/NO ANSWER */
+// YESNO- OBTAIN YES/NO ANSWER
 
-/* CALLED BY- */
+// CALLED BY-
 
-/* 	YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING) */
+// 	YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING)
 
 logical yesno_(q, y, n)
 integer q;
 integer y;
 integer n;
 {
-/* System generated locals */
+// System generated locals
    logical ret_val;
 
-/* Local variables */
+// Local variables
    char ans[100];
 
 L100:
    rspeak_(q);
-/* 						!ASK */
+// 						!ASK
    (void)fflush(stdout);
    (void)fgets(ans, sizeof ans, stdin);
    more_input();
-/* 						!GET ANSWER */
+// 						!GET ANSWER
    if (*ans == 'Y' || *ans == 'y') {
       goto L200;
    }
@@ -179,21 +178,21 @@ L100:
       goto L300;
    }
    rspeak_(6);
-/* 						!SCOLD. */
+// 						!SCOLD.
    goto L100;
 
 L200:
    ret_val = TRUE_;
-/* 						!YES, */
+// 						!YES,
    rspeak_(y);
-/* 						!OUT WITH IT. */
+// 						!OUT WITH IT.
    return ret_val;
 
 L300:
    ret_val = FALSE_;
-/* 						!NO, */
+// 						!NO,
    rspeak_(n);
-/* 						!LIKEWISE. */
+// 						!LIKEWISE.
    return ret_val;
 
-} /* yesno_ */
+}
