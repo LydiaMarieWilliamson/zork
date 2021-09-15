@@ -18,8 +18,8 @@ MANDIR = /usr/share/man
 # more option 1: use the termcap routines.  On some systems the LIBS
 # variable may need to be set to -lcurses.  On some it may need to
 # be /usr/lib/termcap.o.  These options are commented out below.
-LIBS = -ltermcap
-TERMFLAG =
+# LIBS = -ltermcap
+# TERMFLAG =
 # LIBS = -lcurses
 # LIBS = /usr/lib/termcap.o
 
@@ -34,8 +34,8 @@ TERMFLAG =
 # TERMFLAG = -DMORE_24
 
 # more option 4: don't use the more facility at all
-# LIBS =
-# TERMFLAG = -DMORE_NONE
+LIBS =
+TERMFLAG = -DMORE_NONE
 
 # End of more options
 
@@ -65,61 +65,39 @@ OBJS =	actors.o ballop.o clockr.o demons.o dgame.o dinit.o dmain.o\
 	dverb2.o gdt.o lightp.o local.o nobjs.o np.o np1.o np2.o np3.o\
 	nrooms.o objcts.o rooms.o sobjs.o supp.o sverbs.o verbs.o villns.o
 
-dungeon: $(OBJS) dtextc.dat
-	$(CC) $(CFLAGS) -o zork $(OBJS) $(LIBS)
+APP = Zork
+# APP = dungeon
 
-install: zork dtextc.dat
+$(APP): $(OBJS) dtextc.dat
+	$(CC) $(CFLAGS) -o $(APP) $(OBJS) $(LIBS)
+
+install: $(APP) dtextc.dat
 	mkdir -p $(BINDIR) $(LIBDIR) $(MANDIR)/man6
-	cp zork $(BINDIR)
+	cp $(APP) $(BINDIR)
 	cp dtextc.dat $(DATADIR)
-	cp dungeon.6 $(MANDIR)/man6/
+	cp $(APP).6 $(MANDIR)/man6/
 
 clean:
-	rm -f $(OBJS) zork core dsave.dat *~
+	rm -f $(OBJS) core dsave.dat *~
+clobber: clean
+	rm -f $(APP)
 
 dtextc.dat:
 	cat dtextc.uu1 dtextc.uu2 dtextc.uu3 dtextc.uu4 | uudecode
 
-dinit.o: dinit.c funcs.h vars.h
+dinit.o: dinit.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -DTEXTFILE=\"$(DATADIR)/dtextc.dat\" -c dinit.c
 
-dgame.o: dgame.c funcs.h vars.h
+dgame.o: dgame.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c dgame.c
 
-gdt.o: gdt.c funcs.h vars.h
+gdt.o: gdt.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c gdt.c
 
-local.o: local.c funcs.h vars.h
+local.o: local.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c local.c
 
-supp.o: supp.c funcs.h vars.h
+supp.o: supp.c
 	$(CC) $(CFLAGS) $(TERMFLAG) -c supp.c	
 
-actors.o: funcs.h vars.h
-ballop.o: funcs.h vars.h
-clockr.o: funcs.h vars.h
-demons.o: funcs.h vars.h
-dmain.o: funcs.h vars.h
-dso1.o: funcs.h vars.h
-dso2.o: funcs.h vars.h
-dso3.o: funcs.h vars.h
-dso4.o: funcs.h vars.h
-dso5.o: funcs.h vars.h
-dso6.o: funcs.h vars.h
-dso7.o: funcs.h vars.h
-dsub.o: funcs.h vars.h
-dverb1.o: funcs.h vars.h
-dverb2.o: funcs.h vars.h
-lightp.o: funcs.h vars.h
-nobjs.o: funcs.h vars.h
-np.o: funcs.h vars.h
-np1.o: funcs.h vars.h parse.h
-np2.o: funcs.h vars.h parse.h
-np3.o: funcs.h vars.h parse.h
-nrooms.o: funcs.h vars.h
-objcts.o: funcs.h vars.h
-rooms.o: funcs.h vars.h
-sobjs.o: funcs.h vars.h
-sverbs.o: funcs.h vars.h
-verbs.o: funcs.h vars.h
-villns.o: funcs.h vars.h
+$(OBJS): funcs.h vars.h
