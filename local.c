@@ -48,30 +48,23 @@ Bool protected(void) {
 }
 
 #ifdef ALLOW_GDT
-
-// This function should return true if the user is allowed to invoke the
-// game debugging tool by typing "gdt".  This isn't very useful without
-// the source code, and it's mainly for people trying to debug the game.
-// You can define WIZARDID to specify a user id on a UNIX system.  On a
-// non AMOS, non unix system this function will have to be changed if
-// you want to use gdt.
-
+// This function should return true if the user is allowed to invoke the game debugging tool by typing "gdt".
+// This isn't very useful without the source code, and it's mainly for people trying to debug the game.
+// You can define WIZARDID to specify a user id on a UNIX system.
+// On a non AMOS, non unix system this function will have to be changed if you want to use gdt.
 #   ifndef WIZARDID
 #      define WIZARDID (0)
 #   endif
 
 Bool wizard(void) {
-#   ifdef __AMOS__
-   if (jobidx()->jobusr == 0x102)
-      return true;
-#   else
-#      ifdef unix
-   if (getuid() == 0 || getuid() == WIZARDID)
-      return true;
-#      endif
-#   endif
-
+#   if 1
    return true;
+#   elif defined __AMOS__
+   return jobidx()->jobusr == 0x102;
+#   elif defined unix
+   return getuid() == 0 || getuid() == WIZARDID;
+#   else
+   return true;
+#   endif
 }
-
 #endif
