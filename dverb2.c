@@ -24,7 +24,7 @@ void savegm_(void) {
    if ((e = fopen("dsave.dat", BINWRITE)) == NULL)
       goto L100;
 
-   gttime_(&i);
+   i = gttime_();
 // 						!GET TIME.
 
 #define do_uio(i, zbuf, cbytes) \
@@ -196,7 +196,7 @@ L200:
 
 // DECLARATIONS
 
-Bool walk_(void) {
+Bool walk_(/*int x*/) {
 // System generated locals
    Bool ret_val;
 

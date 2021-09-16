@@ -225,7 +225,7 @@ L18200:
    return ret_val;
 
 L18300:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspeak_(objcts_1.oread[prsvec_1.prso - 1]);
    }
    return ret_val;
@@ -233,7 +233,7 @@ L18300:
 // V101--	MELT.  UNLESS OBJECT HANDLES, JOKE.
 
 L20000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspsub_(361, odo2);
    }
    return ret_val;
@@ -241,7 +241,7 @@ L20000:
 // V102--	INFLATE.  WORKS ONLY WITH BOATS.
 
 L22000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspeak_(368);
    }
 // 						!OBJ HANDLE?
@@ -250,7 +250,7 @@ L22000:
 // V103--	DEFLATE.
 
 L23000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspeak_(369);
    }
 // 						!OBJ HANDLE?
@@ -263,7 +263,7 @@ L24000:
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & SLEPBT) == 0) {
       goto L24100;
    }
-   ret_val = objact_();
+   ret_val = objact_(/*x*/);
 // 						!SLEEPING, LET OBJ DO.
    return ret_val;
 
@@ -275,14 +275,14 @@ L24100:
 // V105--	EXORCISE.  OBJECTS HANDLE.
 
 L25000:
-   f = objact_();
+   f = objact_(/*x*/);
 // 						!OBJECTS HANDLE.
    return ret_val;
 
 // V106--	PLUG.  LET OBJECTS HANDLE.
 
 L26000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspeak_(371);
    }
    return ret_val;
@@ -290,7 +290,7 @@ L26000:
 // V107--	KICK.  IF OBJECT IGNORES, JOKE.
 
 L27000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspsb2_(378, odo2, rmk);
    }
    return ret_val;
@@ -298,7 +298,7 @@ L27000:
 // V108--	WAVE.  SAME.
 
 L28000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspsb2_(379, odo2, rmk);
    }
    return ret_val;
@@ -307,7 +307,7 @@ L28000:
 
 L29000:
 L30000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspsb2_(380, odo2, rmk);
    }
    return ret_val;
@@ -315,7 +315,7 @@ L30000:
 // V111--	RUB.  SAME.
 
 L31000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspsb2_(381, odo2, rmk);
    }
    return ret_val;
@@ -323,7 +323,7 @@ L31000:
 // V112--	PUSH.  SAME.
 
 L32000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspsb2_(382, odo2, rmk);
    }
    return ret_val;
@@ -332,7 +332,7 @@ L32000:
 // V113--	UNTIE.  IF OBJECT IGNORES, JOKE.
 
 L33000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJECT HANDLE?
@@ -355,7 +355,7 @@ L34000:
    return ret_val;
 
 L34100:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspsub_(386, odo2);
    }
 // 						!JOKE.
@@ -400,7 +400,7 @@ L36100:
    return ret_val;
 
 L36200:
-   ret_val = objact_();
+   ret_val = objact_(/*x*/);
 // 						!LET OBJECT HANDLE.
    return ret_val;
 
@@ -415,7 +415,7 @@ L38000:
 // V118--	KNOCK.  MOSTLY JOKE.
 
 L39000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -451,7 +451,7 @@ L41000:
    return ret_val;
 
 L41500:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -472,7 +472,7 @@ L41500:
 // V121--	SHAKE.  IF HOLLOW OBJECT, SOME ACTION.
 
 L42000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJECT HANDLE?
@@ -529,7 +529,7 @@ L42300:
 // V122--	MOVE.  MOSTLY JOKES.
 
 L43000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -548,7 +548,7 @@ L43000:
 L44000:
    f = lit_(play_1.here);
 // 						!RECORD IF LIT.
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       goto L44300;
    }
 // 						!OBJ HANDLE?
@@ -580,7 +580,7 @@ L44300:
 // V124--	TURN OFF.
 
 L45000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       goto L45300;
    }
 // 						!OBJ HANDLE?
@@ -612,7 +612,7 @@ L45300:
 // V125--	OPEN.  A FINE MESS.
 
 L46000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -657,7 +657,7 @@ L46300:
 // V126--	CLOSE.
 
 L47000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -690,7 +690,7 @@ L47200:
 // V127--	FIND.  BIG MEGILLA.
 
 L48000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -740,7 +740,7 @@ L49000:
    rspeak_(419);
 // 						!TIME PASSES.
    for (i = 1; i <= 3; ++i) {
-      if (clockd_()) {
+      if (clockd_(/*x*/)) {
          return ret_val;
       }
 // L49100:
@@ -752,7 +752,7 @@ L49000:
 
 L50000:
 L88000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspeak_(663);
    }
 // 						!IF NOT OBJ, JOKE.
@@ -787,7 +787,7 @@ L51200:
    return ret_val;
 
 L51300:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -811,7 +811,7 @@ L52000:
    return ret_val;
 
 L52100:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -863,7 +863,7 @@ L56025:
    prsvec_1.prsi = oindex_1.gwate;
 // 						!USE GLOBAL WATER.
 L56050:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -876,7 +876,7 @@ L56050:
 
 L58000:
 L59000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -947,7 +947,7 @@ L60000:
    if ((objcts_1.oflag1[prsvec_1.prsi - 1] & FLAMBT + LITEBT + ONBT) != FLAMBT + LITEBT + ONBT) {
       goto L60400;
    }
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -1018,7 +1018,7 @@ L63000:
    if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) != 0) {
       goto L66100;
    }
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspsb2_(466, odo2, rmk);
    }
    return ret_val;
@@ -1060,7 +1060,7 @@ L66100:
    return ret_val;
 
 L66200:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -1103,7 +1103,7 @@ L66500:
 // V142--	WALK.  PROCESSED EXTERNALLY.
 
 L68000:
-   ret_val = walk_();
+   ret_val = walk_(/*x*/);
    return ret_val;
 
 // V143--	TELL.  PROCESSED IN GAME.
@@ -1115,7 +1115,7 @@ L69000:
 // V144--	PUT.  PROCESSED EXTERNALLY.
 
 L70000:
-   ret_val = put_(1);
+   ret_val = put_(/*true*/);
    return ret_val;
 
 // V145,V146,V147,V148--	DROP/GIVE/POUR/THROW
@@ -1124,7 +1124,7 @@ L71000:
 L72000:
 L73000:
 L74000:
-   ret_val = drop_(0);
+   ret_val = drop_(/*false*/);
    return ret_val;
 
 // V149--	SAVE
@@ -1198,7 +1198,7 @@ L80200:
    return ret_val;
 
 L80300:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -1215,7 +1215,7 @@ L80300:
 // V152--	LOOK INTO
 
 L81000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -1266,7 +1266,7 @@ L81500:
 // V153--	LOOK UNDER
 
 L82000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspeak_(631);
    }
 // 						!OBJECT HANDLE?
@@ -1294,7 +1294,7 @@ L83100:
 // V155--	WIND
 
 L84000:
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspsub_(634, odo2);
    }
 // 						!OBJ HANDLE?
@@ -1318,7 +1318,7 @@ L87000:
       goto L87500;
    }
 // 						!ANYTHING TO CLIMB?
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
@@ -1339,7 +1339,7 @@ L87500:
 // 						!WALK
    prsvec_1.prso = i;
 // 						!IN SPECIFIED DIR.
-   ret_val = walk_();
+   ret_val = walk_(/*x*/);
    return ret_val;
 
 }
@@ -1348,7 +1348,7 @@ L87500:
 
 // DECLARATIONS
 
-Bool clockd_(void) {
+Bool clockd_(/*int x*/) {
 // System generated locals
    int i__1;
    Bool ret_val;

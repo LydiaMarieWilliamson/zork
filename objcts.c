@@ -19,7 +19,7 @@ Bool oappli_(int ri, int arg) {
 // Local variables
    Bool f;
    int flobts, i;
-   int j, av, io, ir, iz;
+   int j,/* x,*/ av, io, ir, iz;
    int odi2 = 0, odo2 = 0;
    int nloc;
 
@@ -125,7 +125,7 @@ L100:
    if (ri < 32) {
       ret_val = sobjs_(ri, arg);
    } else {
-      ret_val = nobjs_(ri, arg);
+      ret_val = nobjs_(ri/*, arg*/);
    }
    return ret_val;
 // OAPPLI, PAGE 3
@@ -305,7 +305,7 @@ L10600:
 // O103--	TROLL, DONE EXTERNALLY.
 
 L11000:
-   ret_val = trollp_(arg);
+   ret_val = trollp_(/*arg*/);
 // 						!TROLL PROCESSOR.
    return ret_val;
 
@@ -437,14 +437,14 @@ L20000:
 // O109--	CYCLOPS, PROCESSED EXTERNALLY.
 
 L22000:
-   ret_val = cyclop_(arg);
+   ret_val = cyclop_(/*arg*/);
 // 						!CYCLOPS
    return ret_val;
 
 // O110--	THIEF, PROCESSED EXTERNALLY
 
 L25000:
-   ret_val = thiefp_(arg);
+   ret_val = thiefp_(/*arg*/);
    return ret_val;
 
 // O111--	WINDOW
@@ -1072,7 +1072,7 @@ L60000:
 // 						!TIME PASSES.
    for (i = 1; i <= 3; ++i) {
 // 						!WAIT A WHILE.
-      if (clockd_()) {
+      if (clockd_(/*x*/)) {
          return ret_val;
       }
 // L60100:

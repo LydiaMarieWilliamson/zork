@@ -10,7 +10,7 @@
 #include "funcs.h"
 #include "vars.h"
 
-void main(int argc, char **argv) {
+int main(void) {
 // 1) INITIALIZE DATA STRUCTURES
 // 2) PLAY GAME
 
@@ -20,4 +20,5 @@ void main(int argc, char **argv) {
 // 						!IF INIT, PLAY GAME.
    exit_();
 // 						!DONE
+   return 0;
 }

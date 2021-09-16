@@ -11,7 +11,7 @@
 
 static Bool mirpan_(int, Bool);
 
-Bool nobjs_(int ri, int arg) {
+Bool nobjs_(int ri/*, int arg*/) {
 // System generated locals
    int i__1, i__2;
    Bool ret_val;

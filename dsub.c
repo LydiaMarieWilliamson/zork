@@ -113,7 +113,7 @@ static void rspsb2nl_(int n, int y, int z, Bool nl) {
 
 // DECLARATIONS
 
-Bool objact_(void) {
+Bool objact_(/*int x*/) {
 // System generated locals
    Bool ret_val;
 
@@ -278,9 +278,11 @@ L100:
 
 // always exit for plopbot's purposes
    goto L1000;
-//    if (state_1.deaths >= 2) {
-//      goto L1000;
-//    }
+#if 0
+   if (state_1.deaths >= 2) {
+      goto L1000;
+   }
+#endif
 
 // 						!DEAD TWICE? KICK HIM OFF.
    if (!yesno_(10, 9, 8)) {

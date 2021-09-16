@@ -8,14 +8,14 @@
 #include "vars.h"
 #include "parse.h"
 
-static void unpack_(int, int *);
+static int unpacks_(int);
 static int gwim_(int, int, int);
 static Bool syneql_(int, int, int, int, int);
 static Bool takeit_(int, int);
 
 // THIS ROUTINE DETAILS ON BIT 4 OF PRSFLG
 
-Bool synmch_(void) {
+Bool synmch_(/*int x*/) {
 // Initialized data
 
 //   THE FOLLOWING DATA STATEMENT WAS ORIGINALLY:
@@ -53,7 +53,7 @@ L100:
 // 						!ADVANCE TO NEXT.
 
 L200:
-   unpack_(j, &newj);
+   newj = unpacks_(j);
 // 						!UNPACK SYNTAX.
    sprep = syntax_1.dobj & VPMASK;
    if (!syneql_(pv_1.p1, pv_1.o1, syntax_1.dobj, syntax_1.dfl1, syntax_1.dfl2)) {
@@ -106,7 +106,7 @@ L3000:
       goto L10000;
    }
 // 						!ANY DRIVER?
-   unpack_(drive, &dforce);
+   dforce = unpacks_(drive);
 // 						!UNPACK DFLT SYNTAX.
 
 // TRY TO FILL DIRECT OBJECT SLOT IF THAT WAS THE PROBLEM.
@@ -202,7 +202,7 @@ L5000:
 
 // DECLARATIONS
 
-static void unpack_(int oldj, int *j) {
+static int unpacks_(int oldj) {
 // Local variables
    int i;
 
@@ -213,9 +213,9 @@ static void unpack_(int oldj, int *j) {
    }
 
    syntax_1.vflag = vvoc[oldj - 1];
-   *j = oldj + 1;
+   int j = oldj + 1;
    if ((syntax_1.vflag & SDIR) == 0) {
-      return;
+      return j;
    }
    syntax_1.dfl1 = -1;
 // 						!ASSUME STD.
@@ -230,11 +230,11 @@ static void unpack_(int oldj, int *j) {
    goto L200;
 
 L100:
-   syntax_1.dobj = vvoc[*j - 1];
+   syntax_1.dobj = vvoc[j - 1];
 // 						!NOT STD.
-   syntax_1.dfw1 = vvoc[*j];
-   syntax_1.dfw2 = vvoc[*j + 1];
-   *j += 3;
+   syntax_1.dfw1 = vvoc[j];
+   syntax_1.dfw2 = vvoc[j + 1];
+   j += 3;
    if ((syntax_1.dobj & VEBIT) == 0) {
       goto L200;
    }
@@ -244,21 +244,22 @@ L100:
 
 L200:
    if ((syntax_1.vflag & SIND) == 0) {
-      return;
+      return j;
    }
    syntax_1.ifl1 = -1;
 // 						!ASSUME STD.
    syntax_1.ifl2 = -1;
-   syntax_1.iobj = vvoc[*j - 1];
-   syntax_1.ifw1 = vvoc[*j];
-   syntax_1.ifw2 = vvoc[*j + 1];
-   *j += 3;
+   syntax_1.iobj = vvoc[j - 1];
+   syntax_1.ifw1 = vvoc[j];
+   syntax_1.ifw2 = vvoc[j + 1];
+   j += 3;
    if ((syntax_1.iobj & VEBIT) == 0) {
-      return;
+      return j;
    }
    syntax_1.ifl1 = syntax_1.ifw1;
 // 						!YES.
    syntax_1.ifl2 = syntax_1.ifw2;
+   return j;
 }
 
 // SYNEQL-	TEST FOR SYNTAX EQUALITY

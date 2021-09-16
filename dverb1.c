@@ -26,7 +26,7 @@ Bool take_(Bool flg) {
       goto L100;
    }
 // 						!STAR?
-   ret_val = objact_();
+   ret_val = objact_(/*x*/);
 // 						!YES, LET IT HANDLE.
    return ret_val;
 
@@ -97,7 +97,7 @@ L700:
 
 // DECLARATIONS
 
-Bool drop_(Bool z) {
+Bool drop_(/*Bool z*/) {
 // System generated locals
    Bool ret_val;
 
@@ -136,7 +136,7 @@ L300:
 // 						!IS HE IN VEHICLE?
    prsvec_1.prsi = advs_1.avehic[play_1.winner - 1];
 // 						!YES,
-   f = put_(1);
+   f = put_(/*true*/);
 // 						!DROP INTO VEHICLE.
    prsvec_1.prsi = 0;
 // 						!DISARM PARSER.
@@ -155,7 +155,7 @@ L400:
 // 						!CANT BE SCORED AGAIN.
    objcts_1.oflag2[prsvec_1.prso - 1] |= TCHBT;
 
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!DID IT HANDLE?
@@ -184,7 +184,7 @@ L1000:
 
 // DECLARATIONS
 
-Bool put_(Bool flg) {
+Bool put_(/*Bool flg*/) {
 // System generated locals
    Bool ret_val;
 
@@ -196,7 +196,7 @@ Bool put_(Bool flg) {
    if (prsvec_1.prso <= star_1.strbit && prsvec_1.prsi <= star_1.strbit) {
       goto L200;
    }
-   if (!objact_()) {
+   if (!objact_(/*x*/)) {
       rspeak_(560);
    }
 // 						!STAR
@@ -303,7 +303,7 @@ L900:
 // 						!TEMPORARILY ON WINNER.
 
 L1000:
-   if (objact_()) {
+   if (objact_(/*x*/)) {
       return ret_val;
    }
 // 						!NO, GIVE OBJECT A SHOT.
@@ -378,7 +378,7 @@ L1000:
       }
       f = false;
       rspsub_(580, objcts_1.odesc2[prsvec_1.prso - 1]);
-      f1 = drop_(1);
+      f1 = drop_(/*true*/);
       if (saveh != play_1.here) {
          return;
       }
@@ -400,7 +400,7 @@ L2000:
       }
       f = false;
       rspsub_(580, objcts_1.odesc2[prsvec_1.prso - 1]);
-      f1 = put_(1);
+      f1 = put_(/*true*/);
       if (saveh != play_1.here) {
          return;
       }

@@ -205,7 +205,9 @@ L2900:
 static void xendmv_(Bool flag) {
 // Local variables
    Bool f;
-
+#if 0
+   static int x;
+#endif
    if (!(flag)) {
       rspeak_(341);
    }
@@ -223,7 +225,7 @@ static void xendmv_(Bool flag) {
    }
 // 						!SWORD DEMON.
    if (prsvec_1.prswon) {
-      f = clockd_();
+      f = clockd_(/*x*/);
    }
 // 						!CLOCK DEMON.
    if (prsvec_1.prswon) {

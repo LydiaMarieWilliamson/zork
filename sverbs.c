@@ -551,7 +551,7 @@ L20000:
 // V90--	TIME.  PRINT OUT DURATION OF GAME.
 
 L21000:
-   gttime_(&k);
+   k = gttime_();
 // 						!GET PLAY TIME.
    i = k / 60;
    j = k % 60;

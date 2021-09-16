@@ -7,16 +7,15 @@
 
 // GTTIME-- GET TOTAL TIME PLAYED
 
-void gttime_(int *t) {
+int gttime_(void) {
    int h, m, s;
 
    itime_(&h, &m, &s);
-   *t = h * 60 + m - (time_1.shour * 60 + time_1.smin);
-   if (*t < 0) {
-      *t += 1440;
+   int t = h * 60 + m - (time_1.shour * 60 + time_1.smin);
+   if (t < 0) {
+      t += 1440;
    }
-   *t += time_1.pltime;
-   return;
+   return t += time_1.pltime;
 }
 
 // OPNCLS-- PROCESS OPEN/CLOSE FOR DOORS
