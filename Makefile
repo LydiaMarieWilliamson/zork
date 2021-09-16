@@ -80,6 +80,9 @@ install: $(APP) dtextc.dat
 	cp dtextc.dat $(LIBDIR)
 	cp $(APP).6 $(MANDIR)/man6/
 
+test: $(APP)
+	./$(APP) <Test.in >Ex && diff -d Test.ex Ex && rm Ex
+
 clean:
 	rm -f $(OBJS) core dsave.dat *~
 clobber: clean
