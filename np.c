@@ -13,7 +13,7 @@
 
 extern int system(const char *);
 
-static Bool lex_(char *, int *, int, Bool);
+static Bool lex_(char *, int *, int *, Bool);
 
 void rdline_(char *buffer, int who) {
 // Local variables
@@ -81,7 +81,7 @@ Bool parse_(char *inbuf, Bool vbflag) {
    prsvec_1.prsi = 0;
    prsvec_1.prso = 0;
 
-   if (!lex_(inbuf + 1, outbuf, outlnt, vbflag)) {
+   if (!lex_(inbuf + 1, outbuf, &outlnt, vbflag)) {
       goto L100;
    }
    if ((i__1 = sparse_(outbuf, outlnt, vbflag)) < 0) {
@@ -142,7 +142,7 @@ void orphan_(int o1, int o2, int o3, int o4, int o5) {
 
 // THIS ROUTINE DETAILS ON BIT 1 OF PRSFLAG
 
-static Bool lex_(char *inbuf, int *outbuf, int op, Bool vbflag) {
+static Bool lex_(char *inbuf, int *outbuf, int *op, Bool vbflag) {
 // Initialized data
 
    static const char dlimit[9] = { 'A', 'Z', 'A' - 1,
@@ -172,10 +172,10 @@ static Bool lex_(char *inbuf, int *outbuf, int op, Bool vbflag) {
 
    ret_val = false;
 // 						!ASSUME LEX FAILS.
-   op = -1;
+   *op = -1;
 // 						!OUTPUT PTR.
 L50:
-   op += 2;
+   *op += 2;
 // 						!ADV OUTPUT PTR.
    cp = 0;
 // 						!CHAR PTR=0.
@@ -224,11 +224,11 @@ L1000:
       prsvec_1.prscon = 1;
    }
 // 						!FORCE PARSE RESTART.
-   if (cp == 0 & op == 1) {
+   if (cp == 0 & *op == 1) {
       return ret_val;
    }
    if (cp == 0) {
-      op += -2;
+      *op += -2;
    }
 // 						!ANY LAST WORD?
    ret_val = true;
@@ -242,7 +242,7 @@ L4000:
       goto L200;
    }
 // 						!IGNORE IF TOO MANY CHAR.
-   k = op + cp / 3;
+   k = *op + cp / 3;
 // 						!COMPUTE WORD INDEX.
    switch (cp % 3 + 1) {
       case 1:
