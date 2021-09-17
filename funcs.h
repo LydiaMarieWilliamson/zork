@@ -1,8 +1,7 @@
+#ifndef OnceOnlyFuncs_h
+#define OnceOnlyFuncs_h
+
 // funcs.h -- functions for dungeon
-
-#ifndef FUNCS_H
-#define FUNCS_H
-
 // Assumes C99, which is now (well into the 21st century) POSIX.
 // That means: boolean types, function prototypes, "rb" and "wb" for fopen, "const", "void", etc.
 #include <stdbool.h>
@@ -99,4 +98,4 @@ extern Bool walk_(void/*int*/);
 extern Bool winnin_(int, int);
 extern Bool yesno_(int, int, int);
 
-#endif
+#endif // OnceOnly

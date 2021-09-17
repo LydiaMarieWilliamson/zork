@@ -107,3 +107,4 @@ supp.o: supp.c
 	$(CC) $(CFLAGS) $(TERMFLAG) -c supp.c	
 
 $(OBJS): funcs.h vars.h
+gdt.o np1.o np2.o np3.o: parse.h

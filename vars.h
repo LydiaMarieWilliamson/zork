@@ -1,3 +1,6 @@
+#ifndef OnceOnlyVars_h
+#define OnceOnlyVars_h
+
 // vars.h -- variables for dungeon
 
 // These variable definitions are really ugly because they are actually
@@ -7,9 +10,6 @@
 // and include this in every source file.  It's less modular, and it
 // makes everything slower to compile, but it's easier on me.
 // A few structures used only by the parsing routines are in parse.h.
-
-#ifndef VARS_H
-#define VARS_H
 
 #ifndef EXTERN
 #   define EXTERN extern
@@ -384,4 +384,4 @@ EXTERN const struct {
 
 #define bats_1 bats_
 
-#endif
+#endif // OnceOnly

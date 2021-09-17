@@ -1,34 +1,46 @@
+#ifndef OnceOnlyParse_h
+#define OnceOnlyParse_h
+
 // parse.h -- header file for parsing structures used by dungeon
 
 // These structures are only used by the parsing routines.  They are in
 // their own file since they are so large.
 
-#ifndef PARSE_H
-#define PARSE_H
-
 #ifndef EXTERN
 #   define EXTERN extern
 #endif
 
+// common /pv/
 EXTERN struct {
    int act, o1, o2, p1, p2;
 } pv_;
-
 #define pv_1 pv_
+// int pvec[5]; // equivalence(pvec, pv_1.act);
 #define pvec ((int *)&pv_1)
+// int objvec[2]; // equivalence(objvec[1], pv_1.o1);
 #define objvec ((int *)&pv_1 + 1)
+// int prpvec[2]; // equivalence(prpvec[1], pv_1.p1);
 #define prpvec ((int *)&pv_1 + 3)
 
+// common /syntax/
 EXTERN struct {
    int vflag, dobj, dfl1, dfl2, dfw1, dfw2, iobj, ifl1, ifl2, ifw1, ifw2;
-
 } syntax_;
-
 #define syntax_1 syntax_
+// int syn[11]; // equivalence(syntax_1.vflag, syn);
 #define syn ((int *)&syntax_1)
 
-// Object flags (objflg)
+// common /synflg/
+// Syntax flags (synflg)
+#define SDIR (16384)
+#define SIND (8192)
+#define SSTD (4096)
+#define SFLIP (2048)
+#define SDRIV (1024)
+#define SVMASK (511)
 
+// common /objflg/
+// Object flags (objflg)
 #define VABIT (16384)
 #define VRBIT (8192)
 #define VTBIT (4096)
@@ -36,15 +48,6 @@ EXTERN struct {
 #define VEBIT (1024)
 #define VFBIT (512)
 #define VPMASK (511)
-
-// Syntax flags (synflg)
-
-#define SDIR (16384)
-#define SIND (8192)
-#define SSTD (4096)
-#define SFLIP (2048)
-#define SDRIV (1024)
-#define SVMASK (511)
 
 // BUZZ WORDS--	IGNORED IN SYNTACTIC PROCESSING
 
@@ -696,4 +699,4 @@ EXTERN const int ovoc[]
 #endif
 ;
 
-#endif
+#endif // OnceOnly
