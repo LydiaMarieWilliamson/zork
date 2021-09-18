@@ -9,7 +9,7 @@
 // &		2RAN,0,3RTHE,0,3RRUN,0,2RGO,0,3RPRO,3RCEE,0,0/
 
 // common /buzvoc/
-const struct buzvoc_1_ buzvoc_ = {
+const struct buzvocCB buzvoc_ = {
    2164, 0, 4200, 0, 15160, 0, 1600, 0, 2160, 0, 32325, 0,
    29654, 0, 11800, 0, 26335, 5005, 0, 0
 };
@@ -25,7 +25,7 @@ const struct buzvoc_1_ buzvoc_ = {
 // &		3ROFF,0,11/
 
 // common /prpvoc/
-const struct prpvoc_1_ prpvoc_ = {
+const struct prpvocCB prpvoc_ = {
    24885, 28800, 1, 37180, 12800, 2, 34369, 22680, 2, 32338,
    24847, 2, 2400, 0, 3, 32600, 0, 4, 14960, 0, 5, 14979, 14565, 5,
    14980, 0, 5, 7023, 22400, 6, 34240, 0, 7, 34164, 8720, 8, 24240,
@@ -49,7 +49,7 @@ const struct prpvoc_1_ prpvoc_ = {
 // &	 3RCRO,2RSS,"36000/
 
 // common /dirvoc/
-const struct dirvoc_1_ dirvoc_ = {
+const struct dirvocCB dirvoc_ = {
    22400, 0, 1024, 23018, 32320, 1024, 30400, 0, 5120, 8000, 0,
    3072, 8059, 32000, 3072, 36800, 0, 7168, 37019, 32000, 7168,
    30600, 0, 4096, 31320, 0, 6144, 22600, 0, 2048, 23320, 0, 8192,

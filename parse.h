@@ -55,19 +55,19 @@ EXTERN struct {
 // VOCABULARIES
 
 // common /buzvoc/
-extern const struct buzvoc_1_ {
+extern const struct buzvocCB {
    int bvoc[20];
 } buzvoc_;
 #define buzvoc_1 buzvoc_
 
 // common /prpvoc/
-extern const struct prpvoc_1_ {
+extern const struct prpvocCB {
    int pvoc[45];
 } prpvoc_;
 #define prpvoc_1 prpvoc_
 
 // common /dirvoc/
-extern const struct dirvoc_1_ {
+extern const struct dirvocCB {
    int dvoc[75];
 } dirvoc_;
 #define dirvoc_1 dirvoc_
