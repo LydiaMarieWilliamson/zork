@@ -5,13 +5,13 @@
 // Assumes C99, which is now (well into the 21st century) POSIX.
 // That means: boolean types, function prototypes, "rb" and "wb" for fopen, "const", "void", etc.
 #include <stdbool.h>
+#include <stdlib.h> // For abs().
 
 #define BINREAD "rb"
 #define BINWRITE "wb"
 
 typedef int Bool;
 
-#define abs(X)		((X) >= 0? (X): -(X))
 #define min(A, B)	((A) <= (B)? (A): (B))
 #define max(A, B)	((A) >= (B)? (A): (B))
 

@@ -206,7 +206,7 @@ static void xendmv_(Bool flag) {
 // Local variables
    Bool f;
 #if 0
-   static int x;
+   int x;
 #endif
    if (!(flag)) {
       rspeak_(341);
