@@ -10,8 +10,8 @@
 #   include <amos.h>
 #endif
 
-#include "funcs.h"
-#include "vars.h"
+#include "extern.h"
+#include "common.h"
 
 // This is here to avoid depending on the existence of <stdlib.h>
 

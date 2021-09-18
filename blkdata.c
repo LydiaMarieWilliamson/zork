@@ -1,4 +1,9 @@
-#include "parse.h"
+#include "extern.h"
+#include "common.h"
+
+// The parsing structures used by dungeon.
+// These structures are only used by the parsing routines.
+// They are in their own file since they are so large.
 
 // vocab.h:
 // BUZZ WORDS--	IGNORED IN SYNTACTIC PROCESSING

@@ -4,8 +4,8 @@
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
-#include "funcs.h"
-#include "vars.h"
+#include "extern.h"
+#include "common.h"
 
 Bool ballop_(int arg) {
 // System generated locals

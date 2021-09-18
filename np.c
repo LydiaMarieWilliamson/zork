@@ -6,8 +6,8 @@
 
 #include <stdio.h>
 #include <ctype.h>
-#include "funcs.h"
-#include "vars.h"
+#include "extern.h"
+#include "common.h"
 
 // This declaration is here since many systems don't have <stdlib.h>
 

@@ -1,6 +1,6 @@
 // local.c -- dungeon functions which need local definition
 
-#include "funcs.h"
+#include "extern.h"
 
 #ifdef __AMOS__
 #   include <moncal.h>

@@ -5,8 +5,8 @@
 // WRITTEN BY R. M. SUPNIK
 
 #include <stdio.h>
-#include "funcs.h"
-#include "vars.h"
+#include "extern.h"
+#include "common.h"
 
 Bool moveto_(int nr, int who) {
 // System generated locals

@@ -12,7 +12,7 @@
 #   include <time.h>
 #endif
 
-#include "funcs.h"
+#include "extern.h"
 
 // Define these here to avoid using <stdlib.h>
 

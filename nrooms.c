@@ -4,8 +4,8 @@
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
-#include "funcs.h"
-#include "vars.h"
+#include "extern.h"
+#include "common.h"
 
 static void ewtell_(int, int);
 static void lookto_(int, int, int, int, int);

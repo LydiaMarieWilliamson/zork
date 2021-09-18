@@ -4,14 +4,8 @@
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
-#include "funcs.h"
-#include "vars.h"
-
-#undef EXTERN
-#define EXTERN
-#define INIT
-
-#include "parse.h"
+#include "extern.h"
+#include "common.h"
 
 // THIS ROUTINE DETAILS ON BIT 2 OF PRSFLG
 

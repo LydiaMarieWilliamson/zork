@@ -4,9 +4,8 @@
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
-#include "funcs.h"
-#include "vars.h"
-#include "parse.h"
+#include "extern.h"
+#include "common.h"
 
 static int unpacks_(int);
 static int gwim_(int, int, int);

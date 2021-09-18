@@ -6,9 +6,8 @@
 
 #include <stdio.h>
 #include <ctype.h>
-#include "funcs.h"
-#include "vars.h"
-#include "parse.h"
+#include "extern.h"
+#include "common.h"
 
 #ifdef ALLOW_GDT
 

@@ -2,8 +2,8 @@
 // ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
 // WRITTEN BY R. M. SUPNIK
 
-#include "funcs.h"
-#include "vars.h"
+#include "extern.h"
+#include "common.h"
 
 // GTTIME-- GET TOTAL TIME PLAYED
 
