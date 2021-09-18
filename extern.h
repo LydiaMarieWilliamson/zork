@@ -1,7 +1,7 @@
-#ifndef OnceOnlyFuncs_h
-#define OnceOnlyFuncs_h
+#ifndef OnceOnlyExtern_h
+#define OnceOnlyExtern_h
 
-// funcs.h -- functions for dungeon
+// The functions for dungeon.
 // Assumes C99, which is now (well into the 21st century) POSIX.
 // That means: boolean types, function prototypes, "rb" and "wb" for fopen, "const", "void", etc.
 #include <stdbool.h>
@@ -15,87 +15,150 @@ typedef int Bool;
 #define min(A, B)	((A) <= (B)? (A): (B))
 #define max(A, B)	((A) >= (B)? (A): (B))
 
-extern Bool protected(void);
-extern Bool wizard(void);
+// local.c:
+Bool protected(void);
+Bool wizard(void);
 
-extern void more_init(void);
-extern void more_output(const char *);
-extern void more_input(void);
+// supp.c:
+void more_init(void);
+void more_output(const char *);
+void more_input(void);
 
-extern void bug_(int, int);
-extern void cevapp_(int);
-extern void cpgoto_(int);
-extern void cpinfo_(int, int);
-extern void encryp_(const char *, char *);
-extern void exit_(void);
-extern void fightd_(void);
-extern void game_(void);
-extern void gdt_(void);
-extern int gttime_(void);
-extern void invent_(int);
-extern void itime_(int *, int *, int *);
-extern void jigsup_(int);
-extern void newsta_(int, int, int, int, int);
-extern void orphan_(int, int, int, int, int);
-extern void princo_(int, int);
-extern void princr_(Bool, int);
-extern void rdline_(char *, int);
-extern void rspeak_(int);
-extern void rspsb2_(int, int, int);
-extern void rspsub_(int, int);
-extern void rstrgm_(void);
-extern void savegm_(void);
-extern void score_(Bool);
-extern void scrupd_(int);
-extern void swordd_(void);
-extern void thiefd_(void);
-extern void valuac_(int);
-extern int blow_(int, int, int, Bool, int);
-extern int fights_(int, Bool);
-extern int fwim_(int, int, int, int, int, Bool);
-extern int getobj_(int, int, int);
-extern int schlst_(int, int, int, int, int, int);
-extern int mrhere_(int);
-extern int oactor_(int);
-extern int rnd_(int);
-extern int robadv_(int, int, int, int);
-extern int robrm_(int, int, int, int, int);
-extern int sparse_(const int *, int, Bool);
-extern int vilstr_(int);
-extern int weight_(int, int, int);
-extern Bool aappli_(int);
-extern Bool ballop_(int);
-extern Bool clockd_(void/*int*/);
-extern Bool cyclop_(void/*int*/);
-extern Bool drop_(void/*Bool*/);
-extern Bool findxt_(int, int);
-extern Bool ghere_(int, int);
-extern Bool init_(void);
-extern Bool lightp_(int);
-extern Bool lit_(int);
-extern Bool moveto_(int, int);
-extern Bool nobjs_(int/*, int*/);
-extern Bool oappli_(int, int);
-extern Bool objact_(void/*int*/);
-extern Bool opncls_(int, int, int);
-extern Bool parse_(char *, Bool);
-extern Bool prob_(int, int);
-extern Bool put_(void/*Bool*/);
-extern Bool rappli_(int);
-extern Bool rappl1_(int);
-extern Bool rappl2_(int);
-extern Bool rmdesc_(int);
-extern Bool sobjs_(int, int);
-extern Bool sverbs_(int);
-extern Bool synmch_(void/*int*/);
-extern Bool take_(Bool);
-extern Bool thiefp_(void/*int*/);
-extern Bool trollp_(void/*int*/);
-extern Bool qempty_(int);
-extern Bool qhere_(int, int);
-extern Bool vappli_(int);
-extern Bool walk_(void/*int*/);
-extern Bool winnin_(int, int);
-extern Bool yesno_(int, int, int);
+// actors.c:
+Bool aappli_(int);
+void thiefd_(void);
+
+// ballop.c:
+Bool ballop_(int);
+
+// clockr.c:
+void cevapp_(int);
+
+// demons.c:
+void fightd_(void);
+int blow_(int, int, int, Bool, int);
+void swordd_(void);
+
+// dgame.c:
+void game_(void);
+
+// dinit.c:
+Bool init_(void);
+
+// dso1.c:
+void princr_(Bool, int);
+void invent_(int);
+void princo_(int, int);
+
+// dso2.c:
+Bool moveto_(int, int);
+void score_(Bool);
+void scrupd_(int);
+
+// dso3.c:
+Bool findxt_(int, int);
+int fwim_(int, int, int, int, int, Bool);
+Bool yesno_(int, int, int);
+
+// dso4.c:
+int robadv_(int, int, int, int);
+int robrm_(int, int, int, int, int);
+Bool winnin_(int, int);
+int fights_(int, Bool);
+int vilstr_(int);
+
+// dso5.c:
+int gttime_(void);
+Bool opncls_(int, int, int);
+Bool lit_(int);
+int weight_(int, int, int);
+
+// dso6.c:
+Bool ghere_(int, int);
+int mrhere_(int);
+
+// dso7.c:
+void encryp_(const char *, char *);
+void cpgoto_(int);
+void cpinfo_(int, int);
+
+// dsub.c
+void rspeak_(int);
+void rspsub_(int, int);
+void rspsb2_(int, int, int);
+Bool objact_(void/*int*/);
+void bug_(int, int);
+void newsta_(int, int, int, int, int);
+Bool qhere_(int, int);
+Bool qempty_(int);
+void jigsup_(int);
+int oactor_(int);
+Bool prob_(int, int);
+Bool rmdesc_(int);
+Bool rappli_(int);
+
+// dverb1.c:
+Bool take_(Bool);
+Bool drop_(void/*Bool*/);
+Bool put_(void/*Bool*/);
+void valuac_(int);
+
+// dverb2.c:
+void savegm_(void);
+void rstrgm_(void);
+Bool walk_(void/*int*/);
+
+// gdt.c:
+void gdt_(void);
+
+// lightp.c:
+Bool lightp_(int);
+
+// nobjs.c:
+Bool nobjs_(int/*, int*/);
+
+// np1.c:
+int sparse_(const int *, int, Bool);
+
+// np2.c:
+int getobj_(int, int, int);
+int schlst_(int, int, int, int, int, int);
+
+// np3.c:
+Bool synmch_(void/*int*/);
+
+// np.c:
+void rdline_(char *, int);
+Bool parse_(char *, Bool);
+void orphan_(int, int, int, int, int);
+
+// nrooms.c:
+Bool rappl2_(int);
+
+// objcts.c:
+Bool oappli_(int, int);
+
+// rooms.c:
+Bool rappl1_(int);
+
+// rtim.c:
+void itime_(int *, int *, int *);
+int rnd_(int);
+void exit_(void);
+
+// sobjs.c:
+Bool sobjs_(int, int);
+
+// sverbs.c:
+Bool sverbs_(int);
+
+// verbs.c:
+Bool vappli_(int);
+Bool clockd_(void/*int*/);
+
+// villns.c:
+Bool trollp_(void/*int*/);
+Bool cyclop_(void/*int*/);
+Bool thiefp_(void/*int*/);
 
 #endif // OnceOnly
