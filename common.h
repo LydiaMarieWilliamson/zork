@@ -83,28 +83,15 @@ extern struct syntaxCB {
 
 // Syntax flags
 // common /synflg/
-// enum synflgCB {
-//    SDIR = 16384, SIND = 8192, SSTD = 4096, SFLIP = 2048, SDRIV = 1024, SVMASK = 511
-// };
-#define SDIR (16384)
-#define SIND (8192)
-#define SSTD (4096)
-#define SFLIP (2048)
-#define SDRIV (1024)
-#define SVMASK (511)
+enum synflgCB {
+   SDIR = 0x4000, SIND = 0x2000, SSTD = 0x1000, SFLIP = 0x800, SDRIV = 0x400, SVMASK = 0x1ff
+};
 
 // Object flags
 // common /objflg/
-// enum objflgCB {
-//    VABIT = 16384, VRBIT = 8192, VTBIT = 4096, VCBIT = 2048, VEBIT = 1024, VFBIT = 512, VPMASK = 511
-// };
-#define VABIT (16384)
-#define VRBIT (8192)
-#define VTBIT (4096)
-#define VCBIT (2048)
-#define VEBIT (1024)
-#define VFBIT (512)
-#define VPMASK (511)
+enum objflgCB {
+   VABIT = 0x4000, VRBIT = 0x2000, VTBIT = 0x1000, VCBIT = 0x800, VEBIT = 0x400, VFBIT = 0x200, VPMASK = 0x1ff
+};
 
 // vocab.h:
 
@@ -160,22 +147,11 @@ extern struct roomsCB {
 // rflag.h:
 // Room flags.
 // common /rflag/
-// enum rflagCB {
-//    RSEEN = 32768, RLIGHT = 16384, RLAND = 8192, RWATER = 4096, RAIR = 2048, RSACRD = 1024,
-//    RFILL = 512, RMUNG = 256, RBUCK = 128, RHOUSE = 64, RNWALL = 32, REND = 16
-// };
-#define RSEEN (32768)
-#define RLIGHT (16384)
-#define RLAND (8192)
-#define RWATER (4096)
-#define RAIR (2048)
-#define RSACRD (1024)
-#define RFILL (512)
-#define RMUNG (256)
-#define RBUCK (128)
-#define RHOUSE (64)
-#define RNWALL (32)
-#define REND (16)
+enum rflagCB {
+   RSEEN = 0x8000, RLIGHT = 0x4000, RLAND = 0x2000, RWATER = 0x1000,
+   RAIR = 0x800, RSACRD = 0x400, RFILL = 0x200, RMUNG = 0x100,
+   RBUCK = 0x80, RHOUSE = 0x40, RNWALL = 0x20, REND = 0x10
+};
 
 // rindex.h:
 // common /rindex/
@@ -210,44 +186,16 @@ extern struct oroom2CB {
 // oflags.h:
 // Object flags.
 // common /oflags/
-// enum oflagsCB {
-//    VISIBT = 32768, READBT = 16384, TAKEBT = 8192, DOORBT = 4096, TRANBT = 2048, FOODBT = 1024, NDSCBT = 512, DRNKBT = 256,
-//    CONTBT = 128, LITEBT = 64, VICTBT = 32, BURNBT = 16, FLAMBT = 8, TOOLBT = 4, TURNBT = 2, ONBT = 1,
-//    FINDBT = 32768, SLEPBT = 16384, SCRDBT = 8192, TIEBT = 4096, CLMBBT = 2048, ACTRBT = 1024, WEAPBT = 512, FITEBT = 256,
-//    VILLBT = 128, STAGBT = 64, TRYBT = 32, NOCHBT = 16, OPENBT = 8, TCHBT = 4, VEHBT = 2, SCHBT = 1
-// };
-#define VISIBT (32768)
-#define READBT (16384)
-#define TAKEBT (8192)
-#define DOORBT (4096)
-#define TRANBT (2048)
-#define FOODBT (1024)
-#define NDSCBT (512)
-#define DRNKBT (256)
-#define CONTBT (128)
-#define LITEBT (64)
-#define VICTBT (32)
-#define BURNBT (16)
-#define FLAMBT (8)
-#define TOOLBT (4)
-#define TURNBT (2)
-#define ONBT (1)
-#define FINDBT (32768)
-#define SLEPBT (16384)
-#define SCRDBT (8192)
-#define TIEBT (4096)
-#define CLMBBT (2048)
-#define ACTRBT (1024)
-#define WEAPBT (512)
-#define FITEBT (256)
-#define VILLBT (128)
-#define STAGBT (64)
-#define TRYBT (32)
-#define NOCHBT (16)
-#define OPENBT (8)
-#define TCHBT (4)
-#define VEHBT (2)
-#define SCHBT (1)
+enum oflagsCB {
+   VISIBT = 0x8000, READBT = 0x4000, TAKEBT = 0x2000, DOORBT = 0x1000,
+   TRANBT = 0x800, FOODBT = 0x400, NDSCBT = 0x200, DRNKBT = 0x100,
+   CONTBT = 0x80, LITEBT = 0x40, VICTBT = 0x20, BURNBT = 0x10,
+   FLAMBT = 8, TOOLBT = 4, TURNBT = 2, ONBT = 1,
+   FINDBT = 0x8000, SLEPBT = 0x4000, SCRDBT = 0x2000, TIEBT = 0x1000,
+   CLMBBT = 0x800, ACTRBT = 0x400, WEAPBT = 0x200, FITEBT = 0x100,
+   VILLBT = 0x80, STAGBT = 0x40, TRYBT = 0x20, NOCHBT = 0x10,
+   OPENBT = 8, TCHBT = 4, VEHBT = 2, SCHBT = 1
+};
 
 // oindex.h:
 // common /oindex/

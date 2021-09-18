@@ -56,6 +56,14 @@ struct pvCB pv_;
 // int vflag, dobj, dfl1, dfl2, dfw1, dfw2, iobj, ifl1, ifl2, ifw1, ifw2;
 struct syntaxCB syntax_;
 
+// Syntax flags
+// common /synflg/
+// enum synflgCB;
+
+// Object flags
+// common /objflg/
+// enum objflgCB;
+
 // gamestat.h:
 // common /play/
 // int winner, here;
@@ -70,10 +78,7 @@ struct roomsCB rooms_;
 // rflag.h:
 // Room flags.
 // common /rflag/
-// enum rflagCB {
-//    RSEEN = 32768, RLIGHT = 16384, RLAND = 8192, RWATER = 4096, RAIR = 2048, RSACRD = 1024,
-//    RFILL = 512, RMUNG = 256, RBUCK = 128, RHOUSE = 64, RNWALL = 32, REND = 16
-// };
+// enum rflagCB;
 
 // rindex.h:
 // common /rindex/
@@ -110,12 +115,7 @@ struct oroom2CB oroom2_;
 // oflags.h:
 // Object flags.
 // common /oflags/
-// enum oflagsCB {
-//    VISIBT = 32768, READBT = 16384, TAKEBT = 8192, DOORBT = 4096, TRANBT = 2048, FOODBT = 1024, NDSCBT = 512, DRNKBT = 256,
-//    CONTBT = 128, LITEBT = 64, VICTBT = 32, BURNBT = 16, FLAMBT = 8, TOOLBT = 4, TURNBT = 2, ONBT = 1,
-//    FINDBT = 32768, SLEPBT = 16384, SCRDBT = 8192, TIEBT = 4096, CLMBBT = 2048, ACTRBT = 1024, WEAPBT = 512, FITEBT = 256,
-//    VILLBT = 128, STAGBT = 64, TRYBT = 32, NOCHBT = 16, OPENBT = 8, TCHBT = 4, VEHBT = 2, SCHBT = 1
-// };
+// enum oflagsCB;
 
 // oindex.h:
 // common /oindex/
