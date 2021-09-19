@@ -1,6 +1,3 @@
-#ifndef OnceOnlyExtern_h
-#define OnceOnlyExtern_h
-
 // The functions for dungeon.
 // Assumes C99, which is now (well into the 21st century) POSIX.
 // That means: boolean types, function prototypes, "rb" and "wb" for fopen, "const", "void", etc.
@@ -82,7 +79,7 @@ void encryp(const char *, char *);
 void cpgoto(int);
 void cpinfo(int, int);
 
-// dsub.c
+// dsub.c:
 void rspeak(int);
 void rspsub(int, int);
 void rspsb2(int, int, int);
@@ -160,5 +157,3 @@ Bool clockd(void/*int*/);
 Bool trollp(void/*int*/);
 Bool cyclop(void/*int*/);
 Bool thiefp(void/*int*/);
-
-#endif // OnceOnly

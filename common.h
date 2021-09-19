@@ -1,6 +1,3 @@
-#ifndef OnceOnlyCommon_h
-#define OnceOnlyCommon_h
-
 // The common block structures and variable declarations used in dungeon.
 
 // These are the structures which encapsulate the variables contained in common blocks, in the original Fortran source,
@@ -344,5 +341,3 @@ extern struct puzzleCB {
    int cpvec[64];
 } puzzle;
 #define puzzle_1 puzzle
-
-#endif // OnceOnly
