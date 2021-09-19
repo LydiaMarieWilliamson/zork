@@ -1,6 +1,5 @@
-
 int vmaj = 2, vmin = 7, vedit = 65
-Version: 2.7.65 (versus 2.7.65)
+Version: 2.7.65
 int mxscor = 585, strbit = 191, egmxsc = 100
 
 1660 clips

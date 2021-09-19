@@ -5,15 +5,12 @@
 // WRITTEN BY R. M. SUPNIK
 
 #include <stdio.h>
+#include <string.h> // For strcmp().
 #include "extern.h"
 #include "common.h"
 
-// Do all systems have <string.h>?  Don't use it, just in case
-
-extern int strcmp(const char *, const char *);
-
-static Bool xvehic_(int);
 static void xendmv_(Bool);
+static Bool xvehic_(int);
 
 void game_(void) {
 // Local variables
