@@ -199,8 +199,6 @@ L5000:
 
 // UNPACK-	UNPACK SYNTAX SPECIFICATION, ADV POINTER
 
-// DECLARATIONS
-
 static int unpacks_(int oldj) {
 // Local variables
    int i;
@@ -263,8 +261,6 @@ L200:
 
 // SYNEQL-	TEST FOR SYNTAX EQUALITY
 
-// DECLARATIONS
-
 static Bool syneql_(int prep, int obj, int sprep, int sfl1, int sfl2) {
 // System generated locals
    Bool ret_val;
@@ -283,8 +279,6 @@ L100:
 }
 
 // TAKEIT-	PARSER BASED TAKE OF OBJECT
-
-// DECLARATIONS
 
 static Bool takeit_(int obj, int sflag) {
 // System generated locals
@@ -397,8 +391,6 @@ L4000:
 }
 
 // GWIM- GET WHAT I MEAN IN AMBIGOUS SITUATIONS
-
-// DECLARATIONS
 
 static int gwim_(int sflag, int sfw1, int sfw2) {
 // System generated locals

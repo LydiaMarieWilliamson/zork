@@ -68,8 +68,6 @@ L1000:
 
 // FWIM- FIND WHAT I MEAN
 
-// DECLARATIONS
-
 int fwim_(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 // System generated locals
    int ret_val, i__1, i__2;

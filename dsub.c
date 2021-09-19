@@ -111,8 +111,6 @@ static void rspsb2nl_(int n, int y, int z, Bool nl) {
 
 // OBJACT-- APPLY OBJECTS FROM PARSE VECTOR
 
-// DECLARATIONS
-
 Bool objact_(/*int x*/) {
 // System generated locals
    Bool ret_val;
@@ -178,8 +176,6 @@ void newsta_(int o, int r, int rm, int cn, int ad) {
 
 // QHERE-- TEST FOR OBJECT IN ROOM
 
-// DECLARATIONS
-
 Bool qhere_(int obj, int rm) {
 // System generated locals
    int i__1;
@@ -209,8 +205,6 @@ Bool qhere_(int obj, int rm) {
 
 // QEMPTY-- TEST FOR OBJECT EMPTY
 
-// DECLARATIONS
-
 Bool qempty_(int obj) {
 // System generated locals
    int i__1;
@@ -234,8 +228,6 @@ Bool qempty_(int obj) {
 }
 
 // JIGSUP- YOU ARE DEAD
-
-// DECLARATIONS
 
 void jigsup_(int desc) {
 // Initialized data
@@ -399,8 +391,6 @@ L1100:
 
 // OACTOR-	GET ACTOR ASSOCIATED WITH OBJECT
 
-// DECLARATIONS
-
 int oactor_(int obj) {
 // System generated locals
    int ret_val = 1, i__1;
@@ -425,8 +415,6 @@ int oactor_(int obj) {
 }
 
 // PROB-		COMPUTE PROBABILITY
-
-// DECLARATIONS
 
 Bool prob_(int g, int b) {
 // System generated locals
@@ -556,8 +544,6 @@ L600:
 }
 
 // RAPPLI-	ROUTING ROUTINE FOR ROOM APPLICABLES
-
-// DECLARATIONS
 
 Bool rappli_(int ri) {
 // Initialized data

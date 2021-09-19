@@ -860,8 +860,6 @@ L21200:
 
 // MIRPAN--	PROCESSOR FOR GLOBAL MIRROR/PANEL
 
-// DECLARATIONS
-
 static Bool mirpan_(int st, Bool pnf) {
 // System generated locals
    int i__1;

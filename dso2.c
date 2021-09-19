@@ -89,8 +89,6 @@ L800:
 
 // SCORE-- PRINT OUT CURRENT SCORE
 
-// DECLARATIONS
-
 void score_(Bool flg) {
 // Initialized data
 
@@ -152,8 +150,6 @@ L80:
 }
 
 // SCRUPD- UPDATE WINNER'S SCORE
-
-// DECLARATIONS
 
 void scrupd_(int n) {
    if (findex_1.endgmf) {

@@ -8,8 +8,6 @@
 #include "extern.h"
 #include "common.h"
 
-// DECLARATIONS
-
 static int cxappl_(int);
 
 void savegm_(void) {
@@ -99,8 +97,6 @@ L100:
 }
 
 // RESTORE- RESTORE GAME STATE
-
-// DECLARATIONS
 
 void rstrgm_(void) {
 // Local variables
@@ -193,8 +189,6 @@ L200:
 }
 
 // WALK- MOVE IN SPECIFIED DIRECTION
-
-// DECLARATIONS
 
 Bool walk_(/*int x*/) {
 // System generated locals
@@ -352,8 +346,6 @@ L900:
 }
 
 // CXAPPL- CONDITIONAL EXIT PROCESSORS
-
-// DECLARATIONS
 
 static int cxappl_(int ri) {
 // System generated locals

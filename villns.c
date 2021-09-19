@@ -160,8 +160,6 @@ L10:
 
 // CYCLOP-	CYCLOPS FUNCTION
 
-// DECLARATIONS
-
 Bool cyclop_(/*int arg*/) {
 // System generated locals
    int i__1, i__2;
@@ -290,8 +288,6 @@ L500:
 }
 
 // THIEFP-	THIEF FUNCTION
-
-// DECLARATIONS
 
 Bool thiefp_(/*int arg*/) {
 // System generated locals

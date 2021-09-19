@@ -95,8 +95,6 @@ L700:
 
 // DROP- DROP VERB PROCESSOR
 
-// DECLARATIONS
-
 Bool drop_(/*Bool z*/) {
 // System generated locals
    Bool ret_val;
@@ -181,8 +179,6 @@ L1000:
 }
 
 // PUT- PUT VERB PROCESSOR
-
-// DECLARATIONS
 
 Bool put_(/*Bool flg*/) {
 // System generated locals

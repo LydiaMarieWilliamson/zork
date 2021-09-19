@@ -1346,8 +1346,6 @@ L87500:
 
 // CLOCKD- CLOCK DEMON FOR INTERMOVE CLOCK EVENTS
 
-// DECLARATIONS
-
 Bool clockd_(/*int x*/) {
 // System generated locals
    int i__1;

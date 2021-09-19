@@ -764,8 +764,6 @@ L24100:
 
 // LITINT-	LIGHT INTERRUPT PROCESSOR
 
-// DECLARATIONS
-
 static void litint_(int obj, int *ctr, int cev, const int *ticks, int tickln) {
 // Parameter adjustments
    --ticks;

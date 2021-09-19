@@ -124,8 +124,6 @@ L100:
 
 // ORPHAN- SET UP NEW ORPHANS
 
-// DECLARATIONS
-
 void orphan_(int o1, int o2, int o3, int o4, int o5) {
    orphs_1.oflag = o1;
 // 						!SET UP NEW ORPHANS.

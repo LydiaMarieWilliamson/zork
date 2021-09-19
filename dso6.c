@@ -142,8 +142,6 @@ L11000:
 
 // MRHERE--	IS MIRROR HERE?
 
-// DECLARATIONS
-
 int mrhere_(int rm) {
 // System generated locals
    int ret_val, i__1;

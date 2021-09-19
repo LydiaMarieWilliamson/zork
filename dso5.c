@@ -20,8 +20,6 @@ int gttime_(void) {
 
 // OPNCLS-- PROCESS OPEN/CLOSE FOR DOORS
 
-// DECLARATIONS
-
 Bool opncls_(int obj, int so, int sc) {
 // System generated locals
    int i__1;
@@ -67,8 +65,6 @@ L200:
 }
 
 // LIT-- IS ROOM LIT?
-
-// DECLARATIONS
 
 Bool lit_(int rm) {
 // System generated locals
@@ -129,8 +125,6 @@ Bool lit_(int rm) {
 }
 
 // WEIGHT- RETURNS SUM OF WEIGHT OF QUALIFYING OBJECTS
-
-// DECLARATIONS
 
 int weight_(int rm, int cn, int ad) {
 // System generated locals

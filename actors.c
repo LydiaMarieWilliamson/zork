@@ -122,8 +122,6 @@ L2200:
 
 // THIEFD-	INTERMOVE THIEF DEMON
 
-// DECLARATIONS
-
 void thiefd_(void) {
 // System generated locals
    int i__1, i__2;

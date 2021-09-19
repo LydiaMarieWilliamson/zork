@@ -57,8 +57,6 @@ void encryp_(const char *inw, char *outw) {
 
 // CPGOTO--	MOVE TO NEXT STATE IN PUZZLE ROOM
 
-// DECLARATIONS
-
 void cpgoto_(int st) {
 // System generated locals
    int i__1, i__2;
@@ -83,8 +81,6 @@ void cpgoto_(int st) {
 }
 
 // CPINFO--	DESCRIBE PUZZLE ROOM
-
-// DECLARATIONS
 
 void cpinfo_(int rmk, int st) {
 // Initialized data

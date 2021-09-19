@@ -197,8 +197,6 @@ L2900:
 
 // XENDMV-	EXECUTE END OF MOVE FUNCTIONS.
 
-// DECLARATIONS
-
 static void xendmv_(Bool flag) {
 // Local variables
    Bool f;
@@ -232,8 +230,6 @@ static void xendmv_(Bool flag) {
 }
 
 // XVEHIC- EXECUTE VEHICLE FUNCTION
-
-// DECLARATIONS
 
 static Bool xvehic_(int n) {
 // System generated locals

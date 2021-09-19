@@ -85,8 +85,6 @@ void princr_(Bool full, int rm) {
 
 // INVENT- PRINT CONTENTS OF ADVENTURER
 
-// DECLARATIONS
-
 void invent_(int adv) {
 // System generated locals
    int i__1;
@@ -140,8 +138,6 @@ L25:
 }
 
 // PRINCO-	PRINT CONTENTS OF OBJECT
-
-// DECLARATIONS
 
 void princo_(int obj, int desc) {
 // System generated locals
