@@ -9,7 +9,6 @@
 
 Bool vappli_(int ri) {
 // Initialized data
-
    const int mxnop = 39;
    const int mxsmp = 99;
 

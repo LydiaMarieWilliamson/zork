@@ -16,11 +16,8 @@ static Bool takeit_(int, int);
 
 Bool synmch_(/*int x*/) {
 // Initialized data
-
 //   THE FOLLOWING DATA STATEMENT WAS ORIGINALLY:
-
 // 	DATA R50MIN/1RA/
-
    const int r50min = 1600;
 
 // System generated locals

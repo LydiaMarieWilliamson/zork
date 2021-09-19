@@ -230,12 +230,9 @@ L2000:
 
 static Bool thisit_(int oidx, int aidx, int obj, int spcobj) {
 // Initialized data
-
 //    THE FOLLOWING DATA STATEMENT USED RADIX-50 NOTATION (R50MIN/1RA/)
-
 //       IN RADIX-50 NOTATION, AN "A" IN THE FIRST POSITION IS
 //       ENCODED AS 1*40*40 = 1600.
-
    const int r50min = 1600;
 
 // System generated locals

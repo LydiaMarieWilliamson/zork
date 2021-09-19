@@ -9,7 +9,6 @@
 
 Bool oappli_(int ri, int arg) {
 // Initialized data
-
    const int mxsmp = 99;
 
 // System generated locals

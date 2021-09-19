@@ -10,7 +10,6 @@
 
 void encryp_(const char *inw, char *outw) {
 // Initialized data
-
    const char *keyw = "ECORMS";
 
    int i, j, uinw[6], usum;
@@ -84,7 +83,6 @@ void cpgoto_(int st) {
 
 void cpinfo_(int rmk, int st) {
 // Initialized data
-
    static const int dgmoft[8] = { -9, -8, -7, -1, 1, 7, 8, 9 };
    const char *pict = "SSS M";
 

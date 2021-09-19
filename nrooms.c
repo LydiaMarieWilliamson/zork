@@ -12,7 +12,6 @@ static void ewtell_(int, int);
 
 Bool rappl2_(int ri) {
 // Initialized data
-
    const int newrms = 38;
 
 // System generated locals

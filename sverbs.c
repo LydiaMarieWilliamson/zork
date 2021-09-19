@@ -12,7 +12,6 @@
 
 Bool sverbs_(int ri) {
 // Initialized data
-
    const int mxnop = 39;
    const int mxjoke = 64;
    static const int jokes[25] = { 4, 5, 3, 304, 305, 306, 307, 308, 309, 310, 311,

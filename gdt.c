@@ -13,7 +13,6 @@
 
 void gdt_(void) {
 // Initialized data
-
    const int cmdmax = 38;
    const char *dbgcmd = "DRDODADCDXDHDLDVDFDSAFHENRNTNCNDRRRTRCRDTKEXARAOAAACAXAVD2DNANDMDTAHDPPDDZAZ";
    static const int argtyp[38] = { 2, 2, 2, 2, 2, 0, 0, 2, 2, 0, 1, 0, 0, 0, 0, 0, 0,

@@ -11,7 +11,6 @@
 
 int sparse_(const int *lbuf, int llnt, Bool vbflag) {
 // Initialized data
-
 // 	DATA R50MIN/1RA/,R50WAL/3RWAL/
    const int r50min = 1600;
    const int r50wal = 36852;

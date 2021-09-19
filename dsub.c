@@ -231,7 +231,6 @@ Bool qempty_(int obj) {
 
 void jigsup_(int desc) {
 // Initialized data
-
    static const int rlist[9] = { 8, 6, 36, 35, 34, 4, 34, 6, 5 };
 
 // System generated locals
@@ -547,7 +546,6 @@ L600:
 
 Bool rappli_(int ri) {
 // Initialized data
-
    const int newrms = 38;
 
 // System generated locals

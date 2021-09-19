@@ -110,7 +110,6 @@ Bool winnin_(int vl, int hr) {
 
 int fights_(int h, Bool flg) {
 // Initialized data
-
    const int smin = 2;
    const int smax = 7;
 

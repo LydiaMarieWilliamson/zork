@@ -11,7 +11,6 @@ static Bool infest_(int);
 
 void fightd_(void) {
 // Initialized data
-
    const int rout = 1;
 
 // System generated locals
@@ -171,7 +170,6 @@ L2600:
 
 int blow_(int h, int v, int rmk, Bool hflg, int out) {
 // Initialized data
-
    const int rmiss = 0;
    const int rout = 1;
    const int rkill = 2;
