@@ -14,7 +14,7 @@
 
 extern FILE *dbfile;
 
-static void rspsb2nl_(int, int, int, Bool);
+static void rspsb2nl(int, int, int, Bool);
 
 // RSPEAK-- OUTPUT RANDOM MESSAGE ROUTINE
 
@@ -22,8 +22,8 @@ static void rspsb2nl_(int, int, int, Bool);
 
 // 	CALL RSPEAK(MSGNUM)
 
-void rspeak_(int n) {
-   rspsb2nl_(n, 0, 0, 1);
+void rspeak(int n) {
+   rspsb2nl(n, 0, 0, 1);
 }
 
 // RSPSUB-- OUTPUT RANDOM MESSAGE WITH SUBSTITUTABLE ARGUMENT
@@ -32,8 +32,8 @@ void rspeak_(int n) {
 
 // 	CALL RSPSUB(MSGNUM,SUBNUM)
 
-void rspsub_(int n, int s1) {
-   rspsb2nl_(n, s1, 0, 1);
+void rspsub(int n, int s1) {
+   rspsb2nl(n, s1, 0, 1);
 }
 
 // RSPSB2-- OUTPUT RANDOM MESSAGE WITH UP TO TWO SUBSTITUTABLE ARGUMENTS
@@ -42,13 +42,13 @@ void rspsub_(int n, int s1) {
 
 // 	CALL RSPSB2(MSGNUM,SUBNUM1,SUBNUM2)
 
-void rspsb2_(int n, int s1, int s2) {
-   rspsb2nl_(n, s1, s2, 1);
+void rspsb2(int n, int s1, int s2) {
+   rspsb2nl(n, s1, s2, 1);
 }
 
-// rspsb2nl_ Display a substitutable message with an optional newline
+// rspsb2nl Display a substitutable message with an optional newline
 
-static void rspsb2nl_(int n, int y, int z, Bool nl) {
+static void rspsb2nl(int n, int y, int z, Bool nl) {
    const char *zkey = "IanLanceTaylorJr";
    long x;
 
@@ -94,7 +94,7 @@ static void rspsb2nl_(int n, int y, int z, Bool nl) {
          long iloc;
 
          iloc = ftell(dbfile);
-         rspsb2nl_(y, 0, 0, 0);
+         rspsb2nl(y, 0, 0, 0);
          if (fseek(dbfile, iloc, SEEK_SET) == EOF) {
             fprintf(stderr, "Error seeking database loc %d\n", iloc);
             exit_();
@@ -111,7 +111,7 @@ static void rspsb2nl_(int n, int y, int z, Bool nl) {
 
 // OBJACT-- APPLY OBJECTS FROM PARSE VECTOR
 
-Bool objact_(/*int x*/) {
+Bool objact(/*int x*/) {
 // System generated locals
    Bool ret_val;
 
@@ -121,7 +121,7 @@ Bool objact_(/*int x*/) {
       goto L100;
    }
 // 						!IND OBJECT?
-   if (oappli_(objcts_1.oactio[prsvec_1.prsi - 1], 0)) {
+   if (oappli(objcts_1.oactio[prsvec_1.prsi - 1], 0)) {
       return ret_val;
    }
 // 						!YES, LET IT HANDLE.
@@ -131,7 +131,7 @@ L100:
       goto L200;
    }
 // 						!DIR OBJECT?
-   if (oappli_(objcts_1.oactio[prsvec_1.prso - 1], 0)) {
+   if (oappli(objcts_1.oactio[prsvec_1.prso - 1], 0)) {
       return ret_val;
    }
 // 						!YES, LET IT HANDLE.
@@ -148,7 +148,7 @@ L200:
 
 // 	CALL BUG(NO,PAR)
 
-void bug_(int a, int b) {
+void bug(int a, int b) {
 // Local variables
 
    more_output(NULL);
@@ -167,8 +167,8 @@ void bug_(int a, int b) {
 
 // 	CALL NEWSTA(OBJECT,STRING,NEWROOM,NEWCON,NEWADV)
 
-void newsta_(int o, int r, int rm, int cn, int ad) {
-   rspeak_(r);
+void newsta(int o, int r, int rm, int cn, int ad) {
+   rspeak(r);
    objcts_1.oroom[o - 1] = rm;
    objcts_1.ocan[o - 1] = cn;
    objcts_1.oadv[o - 1] = ad;
@@ -176,7 +176,7 @@ void newsta_(int o, int r, int rm, int cn, int ad) {
 
 // QHERE-- TEST FOR OBJECT IN ROOM
 
-Bool qhere_(int obj, int rm) {
+Bool qhere(int obj, int rm) {
 // System generated locals
    int i__1;
    Bool ret_val;
@@ -205,7 +205,7 @@ Bool qhere_(int obj, int rm) {
 
 // QEMPTY-- TEST FOR OBJECT EMPTY
 
-Bool qempty_(int obj) {
+Bool qempty(int obj) {
 // System generated locals
    int i__1;
    Bool ret_val;
@@ -229,7 +229,7 @@ Bool qempty_(int obj) {
 
 // JIGSUP- YOU ARE DEAD
 
-void jigsup_(int desc) {
+void jigsup(int desc) {
 // Initialized data
    static const int rlist[9] = { 8, 6, 36, 35, 34, 4, 34, 6, 5 };
 
@@ -241,7 +241,7 @@ void jigsup_(int desc) {
    Bool f;
    int i, j;
 
-   rspeak_(desc);
+   rspeak(desc);
 // 						!DESCRIBE SAD STATE.
    prsvec_1.prscon = 1;
 // 						!STOP PARSER.
@@ -255,9 +255,9 @@ void jigsup_(int desc) {
       goto L100;
    }
 // 						!HIMSELF?
-   rspsub_(432, objcts_1.odesc2[advs_1.aobj[play_1.winner - 1] - 1]);
+   rspsub(432, objcts_1.odesc2[advs_1.aobj[play_1.winner - 1] - 1]);
 // 						!NO, SAY WHO DIED.
-   newsta_(advs_1.aobj[play_1.winner - 1], 0, 0, 0, 0);
+   newsta(advs_1.aobj[play_1.winner - 1], 0, 0, 0, 0);
 // 						!SEND TO HYPER SPACE.
    return;
 
@@ -276,7 +276,7 @@ L100:
 #endif
 
 // 						!DEAD TWICE? KICK HIM OFF.
-   if (!yesno_(10, 9, 8)) {
+   if (!yesno(10, 9, 8)) {
       goto L1100;
    }
 // 						!CONTINUE?
@@ -284,26 +284,26 @@ L100:
    i__1 = objcts_1.olnt;
    for (j = 1; j <= i__1; ++j) {
 // 						!TURN OFF FIGHTING.
-      if (qhere_(j, play_1.here)) {
+      if (qhere(j, play_1.here)) {
          objcts_1.oflag2[j - 1] &= ~FiteO;
       }
 // L50:
    }
 
    ++state_1.deaths;
-   scrupd_(-10);
+   scrupd(-10);
 // 						!CHARGE TEN POINTS.
-   f = moveto_(rindex_1.fore1, play_1.winner);
+   f = moveto(rindex_1.fore1, play_1.winner);
 // 						!REPOSITION HIM.
    findex_1.egyptf = true;
 // 						!RESTORE COFFIN.
    if (objcts_1.oadv[oindex_1.coffi - 1] == play_1.winner) {
-      newsta_(oindex_1.coffi, 0, rindex_1.egypt, 0, 0);
+      newsta(oindex_1.coffi, 0, rindex_1.egypt, 0, 0);
    }
    objcts_1.oflag2[oindex_1.door - 1] &= ~TChO;
    objcts_1.oflag1[oindex_1.robot - 1] = (objcts_1.oflag1[oindex_1.robot - 1] | VisiO) & ~NDscO;
    if (objcts_1.oroom[oindex_1.lamp - 1] != 0 || objcts_1.oadv[oindex_1.lamp - 1] == play_1.winner) {
-      newsta_(oindex_1.lamp, 0, rindex_1.lroom, 0, 0);
+      newsta(oindex_1.lamp, 0, rindex_1.lroom, 0, 0);
    }
 
 // NOW REDISTRIBUTE HIS VALUABLES AND OTHER BELONGINGS.
@@ -325,7 +325,7 @@ L100:
          goto L400;
       }
 // 						!MOVE TO RANDOM LOCATIONS.
-      newsta_(j, 0, rlist[i - 1], 0, 0);
+      newsta(j, 0, rlist[i - 1], 0, 0);
    L200:
       ;
    }
@@ -346,7 +346,7 @@ L400:
       if ((rooms_1.rflag[i - 1] & nonofl) != 0) {
          goto L250;
       }
-      newsta_(j, 0, i, 0, 0);
+      newsta(j, 0, i, 0, 0);
 // 						!YES, MOVE.
    L300:
       ;
@@ -364,7 +364,7 @@ L400:
       if ((rooms_1.rflag[i - 1] & nonofl) != 0) {
          goto L450;
       }
-      newsta_(j, 0, i, 0, 0);
+      newsta(j, 0, i, 0, 0);
    L500:
       ;
    }
@@ -373,15 +373,15 @@ L400:
 // CAN'T OR WON'T CONTINUE, CLEAN UP AND EXIT.
 
 L900:
-   rspeak_(625);
+   rspeak(625);
 // 						!IN ENDGAME, LOSE.
    goto L1100;
 
 L1000:
-   rspeak_(7);
+   rspeak(7);
 // 						!INVOLUNTARY EXIT.
 L1100:
-   score_(false);
+   score(false);
 // 						!TELL SCORE.
    (void)fclose(dbfile);
    exit_();
@@ -390,7 +390,7 @@ L1100:
 
 // OACTOR-	GET ACTOR ASSOCIATED WITH OBJECT
 
-int oactor_(int obj) {
+int oactor(int obj) {
 // System generated locals
    int ret_val = 1, i__1;
 
@@ -408,14 +408,14 @@ int oactor_(int obj) {
 // 						!FOUND IT?
 // L100:
    }
-   bug_(40, obj);
+   bug(40, obj);
 // 						!NO, DIE.
    return ret_val;
 }
 
 // PROB-		COMPUTE PROBABILITY
 
-Bool prob_(int g, int b) {
+Bool prob(int g, int b) {
 // System generated locals
    Bool ret_val;
 
@@ -428,7 +428,7 @@ Bool prob_(int g, int b) {
       i = b;
    }
 // 						!IF BAD, TOO BAD.
-   ret_val = rnd_(100) < i;
+   ret_val = rnd(100) < i;
 // 						!COMPUTE.
    return ret_val;
 }
@@ -438,7 +438,7 @@ Bool prob_(int g, int b) {
 // RMDESC PRINTS A DESCRIPTION OF THE CURRENT ROOM.
 // IT IS ALSO THE PROCESSOR FOR VERBS 'LOOK' AND 'EXAMINE'.
 
-Bool rmdesc_(int full) {
+Bool rmdesc(int full) {
 // System generated locals
    Bool ret_val, L__1;
 
@@ -462,18 +462,18 @@ L50:
       goto L100;
    }
 // 						!PLAYER JUST MOVE?
-   rspeak_(2);
+   rspeak(2);
 // 						!NO, JUST SAY DONE.
    prsvec_1.prsa = vindex_1.walkiw;
 // 						!SET UP WALK IN ACTION.
    return ret_val;
 
 L100:
-   if (lit_(play_1.here)) {
+   if (lit(play_1.here)) {
       goto L300;
    }
 // 						!LIT?
-   rspeak_(430);
+   rspeak(430);
 // 						!WARN OF GRUE.
    ret_val = false;
    return ret_val;
@@ -505,7 +505,7 @@ L300:
 // 						!IF GOT DESC, SKIP.
    prsvec_1.prsa = vindex_1.lookw;
 // 						!PRETEND LOOK AROUND.
-   if (!rappli_(ra)) {
+   if (!rappli(ra)) {
       goto L100;
    }
 // 						!ROOM HANDLES, NEW DESC?
@@ -514,17 +514,17 @@ L300:
    goto L500;
 
 L400:
-   rspeak_(i);
+   rspeak(i);
 // 						!OUTPUT DESCRIPTION.
 L500:
    if (advs_1.avehic[play_1.winner - 1] != 0) {
-      rspsub_(431, objcts_1.odesc2[advs_1.avehic[play_1.winner - 1] - 1]);
+      rspsub(431, objcts_1.odesc2[advs_1.avehic[play_1.winner - 1] - 1]);
    }
 
 L600:
    if (full != 2) {
       L__1 = full != 0;
-      princr_(L__1, play_1.here);
+      princr(L__1, play_1.here);
    }
    rooms_1.rflag[play_1.here - 1] |= SeenR;
    if (full != 0 || ra == 0) {
@@ -533,7 +533,7 @@ L600:
 // 						!ANYTHING MORE?
    prsvec_1.prsa = vindex_1.walkiw;
 // 						!GIVE HIM A SURPISE.
-   if (!rappli_(ra)) {
+   if (!rappli(ra)) {
       goto L100;
    }
 // 						!ROOM HANDLES, NEW DESC?
@@ -544,7 +544,7 @@ L600:
 
 // RAPPLI-	ROUTING ROUTINE FOR ROOM APPLICABLES
 
-Bool rappli_(int ri) {
+Bool rappli(int ri) {
 // Initialized data
    const int newrms = 38;
 
@@ -558,11 +558,11 @@ Bool rappli_(int ri) {
    }
 // 						!IF ZERO, WIN.
    if (ri < newrms) {
-      ret_val = rappl1_(ri);
+      ret_val = rappl1(ri);
    }
 // 						!IF OLD, PROCESSOR 1.
    if (ri >= newrms) {
-      ret_val = rappl2_(ri);
+      ret_val = rappl2(ri);
    }
 // 						!IF NEW, PROCESSOR 2.
    return ret_val;

@@ -11,7 +11,7 @@ int main(void) {
 // 1) INITIALIZE DATA STRUCTURES
 // 2) PLAY GAME
 
-   if (init_()) {
+   if (init()) {
       game_();
    }
 // 						!IF INIT, PLAY GAME.

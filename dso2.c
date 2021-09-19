@@ -8,7 +8,7 @@
 #include "extern.h"
 #include "common.h"
 
-Bool moveto_(int nr, int who) {
+Bool moveto(int nr, int who) {
 // System generated locals
    Bool ret_val;
 
@@ -33,7 +33,7 @@ Bool moveto_(int nr, int who) {
       goto L500;
    }
 // 						!NO, GOING TO LAND?
-   rspeak_(427);
+   rspeak(427);
 // 						!CAN'T GO WITHOUT VEHICLE.
    return ret_val;
 
@@ -63,33 +63,33 @@ L500:
    if ((rooms_1.rflag[nr - 1] & MungR) == 0) {
       goto L600;
    }
-   rspeak_(rrand[nr - 1]);
+   rspeak(rrand[nr - 1]);
 // 						!YES, TELL HOW.
    return ret_val;
 
 L600:
    if (who != aindex_1.player) {
-      newsta_(advs_1.aobj[who - 1], 0, nr, 0, 0);
+      newsta(advs_1.aobj[who - 1], 0, nr, 0, 0);
    }
    if (j != 0) {
-      newsta_(j, 0, nr, 0, 0);
+      newsta(j, 0, nr, 0, 0);
    }
    play_1.here = nr;
    advs_1.aroom[who - 1] = play_1.here;
-   scrupd_(rooms_1.rval[nr - 1]);
+   scrupd(rooms_1.rval[nr - 1]);
 // 						!SCORE ROOM
    rooms_1.rval[nr - 1] = 0;
    return ret_val;
 
 L800:
-   rspsub_(428, objcts_1.odesc2[j - 1]);
+   rspsub(428, objcts_1.odesc2[j - 1]);
 // 						!WRONG VEHICLE.
    return ret_val;
 }
 
 // SCORE-- PRINT OUT CURRENT SCORE
 
-void score_(Bool flg) {
+void score(Bool flg) {
 // Initialized data
    static const int rank[10] = { 20, 19, 18, 16, 12, 8, 4, 2, 1, 0 };
    static const int erank[5] = { 20, 15, 10, 5, 0 };
@@ -125,7 +125,7 @@ void score_(Bool flg) {
    }
 L50:
    i__1 = i + 484;
-   rspeak_(i__1);
+   rspeak(i__1);
    return;
 
 L60:
@@ -145,12 +145,12 @@ L60:
    }
 L80:
    i__1 = i + 786;
-   rspeak_(i__1);
+   rspeak(i__1);
 }
 
 // SCRUPD- UPDATE WINNER'S SCORE
 
-void scrupd_(int n) {
+void scrupd(int n) {
    if (findex_1.endgmf) {
       goto L100;
    }

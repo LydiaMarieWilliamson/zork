@@ -7,7 +7,7 @@
 #include "extern.h"
 #include "common.h"
 
-Bool oappli_(int ri, int arg) {
+Bool oappli(int ri, int arg) {
 // Initialized data
    const int mxsmp = 99;
 
@@ -110,7 +110,7 @@ L5:
       case 32:
          goto L62000;
    }
-   bug_(6, ri);
+   bug(6, ri);
 
 // RETURN HERE TO DECLARE FALSE RESULT
 
@@ -122,9 +122,9 @@ L10:
 
 L100:
    if (ri < 32) {
-      ret_val = sobjs_(ri, arg);
+      ret_val = sobjs(ri, arg);
    } else {
-      ret_val = nobjs_(ri/*, arg*/);
+      ret_val = nobjs(ri/*, arg*/);
    }
    return ret_val;
 // OAPPLI, PAGE 3
@@ -136,7 +136,7 @@ L2000:
       goto L10;
    }
 // 						!NOT HERE? F
-   ret_val = opncls_(oindex_1.machi, 123, 124);
+   ret_val = opncls(oindex_1.machi, 123, 124);
 // 						!HANDLE OPN/CLS.
    return ret_val;
 
@@ -160,7 +160,7 @@ L5050:
    if (prsvec_1.prso == oindex_1.water || prsvec_1.prso == oindex_1.gwate) {
       goto L5100;
    }
-   rspeak_(561);
+   rspeak(561);
 // 						!WATER IS IND OBJ,
    return ret_val;
 // 						!PUNT.
@@ -181,12 +181,12 @@ L5100:
       goto L5200;
    }
 // 						!YES, OPEN?
-   rspsub_(525, objcts_1.odesc2[objcts_1.ocan[prsvec_1.prso - 1] - 1]);
+   rspsub(525, objcts_1.odesc2[objcts_1.ocan[prsvec_1.prso - 1] - 1]);
 // 						!INSIDE, CLOSED, PUNT.
    return ret_val;
 
 L5200:
-   rspeak_(615);
+   rspeak(615);
 // 						!NOT INSIDE OR OPEN,
    return ret_val;
 // 						!SLIPS THRU FINGERS.
@@ -204,9 +204,9 @@ L5400:
       goto L5500;
    }
 // 						!IN BOTTLE?
-   rspsub_(297, odi2);
+   rspsub(297, odi2);
 // 						!WONT GO ELSEWHERE.
-   newsta_(prsvec_1.prso, 0, 0, 0, 0);
+   newsta(prsvec_1.prso, 0, 0, 0, 0);
 // 						!VANISH WATER.
    return ret_val;
 
@@ -215,21 +215,21 @@ L5500:
       goto L5550;
    }
 // 						!BOTTLE OPEN?
-   rspeak_(612);
+   rspeak(612);
 // 						!NO, LOSE.
    return ret_val;
 
 L5550:
-   if (qempty_(oindex_1.bottl)) {
+   if (qempty(oindex_1.bottl)) {
       goto L5600;
    }
 // 						!OPEN, EMPTY?
-   rspeak_(613);
+   rspeak(613);
 // 						!NO, ALREADY FULL.
    return ret_val;
 
 L5600:
-   newsta_(oindex_1.water, 614, 0, oindex_1.bottl, 0);
+   newsta(oindex_1.water, 614, 0, oindex_1.bottl, 0);
 // 						!TAKE WATER TO BOTTLE.
    return ret_val;
 
@@ -241,14 +241,14 @@ L5700:
       goto L5800;
    }
 // 						!INTO VEHICLE?
-   newsta_(prsvec_1.prso, 133, 0, 0, 0);
+   newsta(prsvec_1.prso, 133, 0, 0, 0);
 // 						!NO, VANISHES.
    return ret_val;
 
 L5800:
-   newsta_(oindex_1.water, 0, 0, av, 0);
+   newsta(oindex_1.water, 0, 0, av, 0);
 // 						!WATER INTO VEHICLE.
-   rspsub_(296, objcts_1.odesc2[av - 1]);
+   rspsub(296, objcts_1.odesc2[av - 1]);
 // 						!DESCRIBE.
    return ret_val;
 
@@ -257,7 +257,7 @@ L5900:
       goto L10;
    }
 // 						!LAST CHANCE, THROW?
-   newsta_(prsvec_1.prso, 132, 0, 0, 0);
+   newsta(prsvec_1.prso, 132, 0, 0, 0);
 // 						!VANISHES.
    return ret_val;
 // OAPPLI, PAGE 4
@@ -273,14 +273,14 @@ L10000:
       goto L10100;
    }
 // 						!WAS HE CARRYING?
-   newsta_(prsvec_1.prso, 158, 0, 0, 0);
+   newsta(prsvec_1.prso, 158, 0, 0, 0);
 // 						!NO, BURN IT.
    return ret_val;
 
 L10100:
-   newsta_(prsvec_1.prso, 0, play_1.here, 0, 0);
+   newsta(prsvec_1.prso, 0, play_1.here, 0, 0);
 // 						!DROP LEAVES.
-   jigsup_(159);
+   jigsup(159);
 // 						!BURN HIM.
    return ret_val;
 
@@ -289,7 +289,7 @@ L10500:
       goto L10600;
    }
 // 						!MOVE?
-   rspeak_(2);
+   rspeak(2);
 // 						!DONE.
    return ret_val;
 
@@ -297,14 +297,14 @@ L10600:
    if (prsvec_1.prsa != vindex_1.lookuw || findex_1.rvclr != 0) {
       goto L10;
    }
-   rspeak_(344);
+   rspeak(344);
 // 						!LOOK UNDER?
    return ret_val;
 
 // O103--	TROLL, DONE EXTERNALLY.
 
 L11000:
-   ret_val = trollp_(/*arg*/);
+   ret_val = trollp(/*arg*/);
 // 						!TROLL PROCESSOR.
    return ret_val;
 
@@ -316,7 +316,7 @@ L12000:
    }
 // 						!TAKE?
    if (objcts_1.oadv[oindex_1.sword - 1] == play_1.winner) {
-      rspeak_(160);
+      rspeak(160);
    }
 // 						!PULSE SWORD.
    goto L10;
@@ -325,9 +325,9 @@ L12100:
    if ((prsvec_1.prsa != vindex_1.attacw && prsvec_1.prsa != vindex_1.killw || prsvec_1.prsi != oindex_1.rknif) && (prsvec_1.prsa != vindex_1.swingw && prsvec_1.prsa != vindex_1.throww || prsvec_1.prso != oindex_1.rknif)) {
       goto L10;
    }
-   newsta_(oindex_1.rknif, 0, 0, 0, 0);
+   newsta(oindex_1.rknif, 0, 0, 0, 0);
 // 						!KILL KNIFE.
-   jigsup_(161);
+   jigsup(161);
 // 						!KILL HIM.
    return ret_val;
 // OAPPLI, PAGE 5
@@ -343,24 +343,24 @@ L15000:
       goto L15400;
    }
 // 						!TORCH?
-   newsta_(oindex_1.ice, 169, 0, 0, 0);
+   newsta(oindex_1.ice, 169, 0, 0, 0);
 // 						!MELT ICE.
    objcts_1.odesc1[oindex_1.torch - 1] = 174;
 // 						!MUNG TORCH.
    objcts_1.odesc2[oindex_1.torch - 1] = 173;
    objcts_1.oflag1[oindex_1.torch - 1] &= ~flobts;
-   newsta_(oindex_1.torch, 0, rindex_1.strea, 0, 0);
+   newsta(oindex_1.torch, 0, rindex_1.strea, 0, 0);
 // 						!MOVE TORCH.
    findex_1.glacrf = true;
 // 						!GLACIER GONE.
-   if (!lit_(play_1.here)) {
-      rspeak_(170);
+   if (!lit(play_1.here)) {
+      rspeak(170);
    }
 // 						!IN DARK?
    return ret_val;
 
 L15400:
-   rspeak_(171);
+   rspeak(171);
 // 						!JOKE IF NOT TORCH.
    return ret_val;
 
@@ -371,7 +371,7 @@ L15500:
    if ((objcts_1.oflag1[prsvec_1.prsi - 1] & flobts) == flobts) {
       goto L15600;
    }
-   rspsub_(298, odi2);
+   rspsub(298, odi2);
 // 						!CANT MELT WITH THAT.
    return ret_val;
 
@@ -387,7 +387,7 @@ L15600:
    objcts_1.odesc2[oindex_1.torch - 1] = 173;
    objcts_1.oflag1[oindex_1.torch - 1] &= ~flobts;
 L15700:
-   jigsup_(172);
+   jigsup(172);
 // 						!DROWN.
    return ret_val;
 
@@ -398,7 +398,7 @@ L18000:
       goto L18100;
    }
 // 						!OPEN?
-   rspeak_(180);
+   rspeak(180);
 // 						!JOKE.
    return ret_val;
 
@@ -407,7 +407,7 @@ L18100:
       goto L18200;
    }
 // 						!CLOSE?
-   rspeak_(181);
+   rspeak(181);
    return ret_val;
 
 L18200:
@@ -415,41 +415,41 @@ L18200:
       goto L10;
    }
 // 						!BURN?
-   newsta_(prsvec_1.prso, 0, 0, 0, 0);
+   newsta(prsvec_1.prso, 0, 0, 0, 0);
 // 						!FATAL JOKE.
-   jigsup_(182);
+   jigsup(182);
    return ret_val;
 // OAPPLI, PAGE 6
 
 // O107--	CANDLES, PROCESSED EXTERNALLY
 
 L19000:
-   ret_val = lightp_(oindex_1.candl);
+   ret_val = lightp(oindex_1.candl);
    return ret_val;
 
 // O108--	MATCHES, PROCESSED EXTERNALLY
 
 L20000:
-   ret_val = lightp_(oindex_1.match);
+   ret_val = lightp(oindex_1.match);
    return ret_val;
 
 // O109--	CYCLOPS, PROCESSED EXTERNALLY.
 
 L22000:
-   ret_val = cyclop_(/*arg*/);
+   ret_val = cyclop(/*arg*/);
 // 						!CYCLOPS
    return ret_val;
 
 // O110--	THIEF, PROCESSED EXTERNALLY
 
 L25000:
-   ret_val = thiefp_(/*arg*/);
+   ret_val = thiefp(/*arg*/);
    return ret_val;
 
 // O111--	WINDOW
 
 L26000:
-   ret_val = opncls_(oindex_1.windo, 208, 209);
+   ret_val = opncls(oindex_1.windo, 208, 209);
 // 						!OPEN/CLS WINDOW.
    return ret_val;
 
@@ -460,7 +460,7 @@ L32000:
       goto L32500;
    }
 // 						!TAKE?
-   rspeak_(228);
+   rspeak(228);
 // 						!CANT.
    return ret_val;
 
@@ -474,19 +474,19 @@ L32500:
 // 						!BURN OR MUNG?
    findex_1.onpolf = true;
 // 						!SET HEAD ON POLE.
-   newsta_(oindex_1.hpole, 0, rindex_1.lld2, 0, 0);
-   jigsup_(229);
+   newsta(oindex_1.hpole, 0, rindex_1.lld2, 0, 0);
+   jigsup(229);
 // 						!BEHEADED.
    return ret_val;
 
 // O113--	VAMPIRE BAT
 
 L35000:
-   rspeak_(50);
+   rspeak(50);
 // 						!TIME TO FLY, JACK.
-   f = moveto_(bats_1.batdrp[rnd_(9)], play_1.winner);
+   f = moveto(bats_1.batdrp[rnd(9)], play_1.winner);
 // 						!SELECT RANDOM DEST.
-   f = rmdesc_(0);
+   f = rmdesc(0);
    return ret_val;
 // OAPPLI, PAGE 7
 
@@ -504,7 +504,7 @@ L39000:
    if (play_1.here == rindex_1.pog || play_1.here == rindex_1.falls) {
       goto L39200;
    }
-   rspeak_(244);
+   rspeak(244);
 // 						!NOTHING HAPPENS.
    return ret_val;
 
@@ -518,21 +518,21 @@ L39200:
       i = 246;
    }
 // 						!IF ON, SOLID.
-   rspeak_(i);
+   rspeak(i);
 // 						!DESCRIBE.
    return ret_val;
 
 L39500:
    findex_1.rainbf = false;
 // 						!ON RAINBOW,
-   jigsup_(247);
+   jigsup(247);
 // 						!TAKE A FALL.
    return ret_val;
 
 // O115--	BALLOON, HANDLED EXTERNALLY
 
 L40000:
-   ret_val = ballop_(arg);
+   ret_val = ballop(arg);
    return ret_val;
 
 // O116--	HEADS
@@ -542,7 +542,7 @@ L45000:
       goto L45100;
    }
 // 						!HELLO HEADS?
-   rspeak_(633);
+   rspeak(633);
 // 						!TRULY BIZARRE.
    return ret_val;
 
@@ -551,10 +551,10 @@ L45100:
       goto L10;
    }
 // 						!READ IS OK.
-   newsta_(oindex_1.lcase, 260, rindex_1.lroom, 0, 0);
+   newsta(oindex_1.lcase, 260, rindex_1.lroom, 0, 0);
 // 						!MAKE LARGE CASE.
-   i = robadv_(play_1.winner, 0, oindex_1.lcase, 0) + robrm_(play_1.here, 100, 0, oindex_1.lcase, 0);
-   jigsup_(261);
+   i = robadv(play_1.winner, 0, oindex_1.lcase, 0) + robrm(play_1.here, 100, 0, oindex_1.lcase, 0);
+   jigsup(261);
 // 						!KILL HIM.
    return ret_val;
 // OAPPLI, PAGE 8
@@ -570,15 +570,15 @@ L47000:
       goto L47500;
    }
 // 						!ROBOT TAKE?
-   rspeak_(263);
+   rspeak(263);
 // 						!NO, DROP CAGE.
    if (objcts_1.oroom[oindex_1.robot - 1] != play_1.here) {
       goto L47200;
    }
 // 						!ROBOT HERE?
-   f = moveto_(rindex_1.caged, play_1.winner);
+   f = moveto(rindex_1.caged, play_1.winner);
 // 						!YES, MOVE INTO CAGE.
-   newsta_(oindex_1.robot, 0, rindex_1.caged, 0, 0);
+   newsta(oindex_1.robot, 0, rindex_1.caged, 0, 0);
 // 						!MOVE ROBOT.
    advs_1.aroom[aindex_1.arobot - 1] = rindex_1.caged;
    objcts_1.oflag1[oindex_1.robot - 1] |= NDscO;
@@ -587,20 +587,20 @@ L47000:
    return ret_val;
 
 L47200:
-   newsta_(oindex_1.spher, 0, 0, 0, 0);
+   newsta(oindex_1.spher, 0, 0, 0, 0);
 // 						!YOURE DEAD.
    rooms_1.rflag[rindex_1.cager - 1] |= MungR;
    rrand[rindex_1.cager - 1] = 147;
-   jigsup_(148);
+   jigsup(148);
 // 						!MUNG PLAYER.
    return ret_val;
 
 L47500:
-   newsta_(oindex_1.spher, 0, 0, 0, 0);
+   newsta(oindex_1.spher, 0, 0, 0, 0);
 // 						!ROBOT TRIED,
-   newsta_(oindex_1.robot, 264, 0, 0, 0);
+   newsta(oindex_1.robot, 264, 0, 0, 0);
 // 						!KILL HIM.
-   newsta_(oindex_1.cage, 0, play_1.here, 0, 0);
+   newsta(oindex_1.cage, 0, play_1.here, 0, 0);
 // 						!INSERT MANGLED CAGE.
    return ret_val;
 
@@ -627,7 +627,7 @@ L48000:
             goto L48300;
       }
    }
-   jigsup_(265);
+   jigsup(265);
 // 						!YOU PUSHED, YOU DIE.
    return ret_val;
 
@@ -638,7 +638,7 @@ L48100:
    }
 // 						!SPEED UP?
    findex_1.carozf = true;
-   rspeak_(i);
+   rspeak(i);
    return ret_val;
 
 L48200:
@@ -648,17 +648,17 @@ L48200:
       i = 268;
    }
    findex_1.carozf = false;
-   rspeak_(i);
+   rspeak(i);
    return ret_val;
 
 L48300:
    findex_1.caroff = !findex_1.caroff;
 // 						!FLIP CAROUSEL.
-   if (!qhere_(oindex_1.irbox, rindex_1.carou)) {
+   if (!qhere(oindex_1.irbox, rindex_1.carou)) {
       return ret_val;
    }
 // 						!IRON BOX IN CAROUSEL?
-   rspeak_(269);
+   rspeak(269);
 // 						!YES, THUMP.
    objcts_1.oflag1[oindex_1.irbox - 1] ^= VisiO;
    if (findex_1.caroff) {
@@ -677,12 +677,12 @@ L49000:
 
       goto L10;
    }
-   newsta_(oindex_1.flask, 270, 0, 0, 0);
+   newsta(oindex_1.flask, 270, 0, 0, 0);
 // 						!KILL FLASK.
 L49100:
    rooms_1.rflag[play_1.here - 1] |= MungR;
    rrand[play_1.here - 1] = 271;
-   jigsup_(272);
+   jigsup(272);
 // 						!POISONED.
    return ret_val;
 
@@ -700,7 +700,7 @@ L50000:
 // 						!BUCKET AT TOP.
    cevent_1.ctick[cindex_1.cevbuc - 1] = 100;
 // 						!START COUNTDOWN.
-   newsta_(oindex_1.bucke, 290, rindex_1.twell, 0, 0);
+   newsta(oindex_1.bucke, 290, rindex_1.twell, 0, 0);
 // 						!REPOSITION BUCKET.
    goto L50900;
 // 						!FINISH UP.
@@ -710,16 +710,16 @@ L50500:
       goto L10;
    }
    findex_1.bucktf = false;
-   newsta_(oindex_1.bucke, 291, rindex_1.bwell, 0, 0);
+   newsta(oindex_1.bucke, 291, rindex_1.bwell, 0, 0);
 // 						!BUCKET AT BOTTOM.
 L50900:
    if (av != oindex_1.bucke) {
       return ret_val;
    }
 // 						!IN BUCKET?
-   f = moveto_(objcts_1.oroom[oindex_1.bucke - 1], play_1.winner);
+   f = moveto(objcts_1.oroom[oindex_1.bucke - 1], play_1.winner);
 // 						!MOVE ADVENTURER.
-   f = rmdesc_(0);
+   f = rmdesc(0);
 // 						!DESCRIBE ROOM.
    return ret_val;
 // OAPPLI, PAGE 9
@@ -730,10 +730,10 @@ L51000:
    if (prsvec_1.prsa != vindex_1.eatw || prsvec_1.prso != oindex_1.ecake || play_1.here != rindex_1.alice) {
       goto L10;
    }
-   newsta_(oindex_1.ecake, 273, 0, 0, 0);
+   newsta(oindex_1.ecake, 273, 0, 0, 0);
 // 						!VANISH CAKE.
    objcts_1.oflag1[oindex_1.robot - 1] &= ~VisiO;
-   ret_val = moveto_(rindex_1.alism, play_1.winner);
+   ret_val = moveto(rindex_1.alism, play_1.winner);
 // 						!MOVE TO ALICE SMALL.
    iz = 64;
    ir = rindex_1.alism;
@@ -761,7 +761,7 @@ L52000:
       i = prsvec_1.prso - oindex_1.orice + 277;
    }
 // 						!THROUGH FLASK?
-   rspeak_(i);
+   rspeak(i);
 // 						!READ FLASK.
    return ret_val;
 
@@ -769,7 +769,7 @@ L52200:
    if (prsvec_1.prsa != vindex_1.throww || prsvec_1.prso != oindex_1.rdice || prsvec_1.prsi != oindex_1.pool) {
       goto L52300;
    }
-   newsta_(oindex_1.pool, 280, 0, 0, 0);
+   newsta(oindex_1.pool, 280, 0, 0, 0);
 // 						!VANISH POOL.
    objcts_1.oflag1[oindex_1.saffr - 1] |= VisiO;
    return ret_val;
@@ -781,11 +781,11 @@ L52300:
    if (prsvec_1.prsa != vindex_1.eatw && prsvec_1.prsa != vindex_1.throww || prsvec_1.prso != oindex_1.orice) {
       goto L52400;
    }
-   newsta_(oindex_1.orice, 0, 0, 0, 0);
+   newsta(oindex_1.orice, 0, 0, 0, 0);
 // 						!VANISH ORANGE ICE.
    rooms_1.rflag[play_1.here - 1] |= MungR;
    rrand[play_1.here - 1] = 281;
-   jigsup_(282);
+   jigsup(282);
 // 						!VANISH ADVENTURER.
    return ret_val;
 
@@ -793,7 +793,7 @@ L52400:
    if (prsvec_1.prsa != vindex_1.eatw || prsvec_1.prso != oindex_1.blice) {
       goto L10;
    }
-   newsta_(oindex_1.blice, 283, 0, 0, 0);
+   newsta(oindex_1.blice, 283, 0, 0, 0);
 // 						!VANISH BLUE ICE.
    if (play_1.here != rindex_1.alism) {
       goto L52500;
@@ -801,7 +801,7 @@ L52400:
 // 						!IN REDUCED ROOM?
    objcts_1.oflag1[oindex_1.robot - 1] |= VisiO;
    io = play_1.here;
-   ret_val = moveto_(rindex_1.alice, play_1.winner);
+   ret_val = moveto(rindex_1.alice, play_1.winner);
    iz = 0;
    ir = rindex_1.alice;
 
@@ -822,7 +822,7 @@ L52405:
    return ret_val;
 
 L52500:
-   jigsup_(284);
+   jigsup(284);
 // 						!ENLARGED IN WRONG ROOM.
    return ret_val;
 
@@ -833,7 +833,7 @@ L54000:
       goto L10;
    }
 // 						!BURN?
-   jigsup_(150);
+   jigsup(150);
 // 						!BOOM
 // 						!
    return ret_val;
@@ -845,7 +845,7 @@ L55000:
       goto L55100;
    }
 // 						!GIVE?
-   newsta_(prsvec_1.prso, 2, 0, 0, aindex_1.player);
+   newsta(prsvec_1.prso, 2, 0, 0, aindex_1.player);
 // 						!DONE.
    return ret_val;
 
@@ -854,7 +854,7 @@ L55100:
       goto L55200;
    }
 // 						!TAKE?
-   rspeak_(286);
+   rspeak(286);
 // 						!JOKE.
    return ret_val;
 
@@ -862,7 +862,7 @@ L55200:
    if (prsvec_1.prsa != vindex_1.killw && prsvec_1.prsa != vindex_1.mungw) {
       goto L10;
    }
-   jigsup_(287);
+   jigsup(287);
 // 						!KILL, NO JOKE.
    return ret_val;
 // OAPPLI, PAGE 10
@@ -884,7 +884,7 @@ L56000:
       i = 732;
    }
 // 						!DIFF MSG IF N-S.
-   rspeak_(i);
+   rspeak(i);
 // 						!TELL WONT MOVE.
    return ret_val;
 
@@ -893,9 +893,9 @@ L56100:
       goto L56200;
    }
 // 						!IN GDN ROOM?
-   rspeak_(733);
+   rspeak(733);
 // 						!YOU LOSE.
-   jigsup_(685);
+   jigsup(685);
    return ret_val;
 
 L56200:
@@ -904,15 +904,15 @@ L56200:
    if (prsvec_1.prso == oindex_1.rdwal || prsvec_1.prso == oindex_1.ylwal) {
       i = 830;
    }
-   rspeak_(i);
+   rspeak(i);
 // 						!TELL DIRECTION.
    findex_1.mdir = (findex_1.mdir + 45 + (i - 830) * 270) % 360;
 // 						!CALCULATE NEW DIR.
    i__1 = findex_1.mdir / 45 + 695;
-   rspsub_(734, i__1);
+   rspsub(734, i__1);
 // 						!TELL NEW DIR.
    if (findex_1.wdopnf) {
-      rspeak_(730);
+      rspeak(730);
    }
 // 						!IF PANEL OPEN, CLOSE.
    findex_1.wdopnf = false;
@@ -930,7 +930,7 @@ L57000:
       goto L57100;
    }
 // 						!MIRROR N-S?
-   rspeak_(735);
+   rspeak(735);
 // 						!NO, WONT BUDGE.
    return ret_val;
 
@@ -942,7 +942,7 @@ L57100:
    if (findex_1.mloc == rindex_1.mrc && findex_1.mdir == 180 || findex_1.mloc == rindex_1.mrd && findex_1.mdir == 0 || findex_1.mloc == rindex_1.mrg) {
       goto L57200;
    }
-   rspeak_(736);
+   rspeak(736);
 // 						!NO, OPENS.
    findex_1.wdopnf = true;
 // 						!INDICATE OPEN.
@@ -952,9 +952,9 @@ L57100:
    return ret_val;
 
 L57200:
-   rspeak_(737);
+   rspeak(737);
 // 						!GDN SEES YOU, DIE.
-   jigsup_(685);
+   jigsup(685);
    return ret_val;
 
 L57300:
@@ -967,7 +967,7 @@ L57300:
    if (nloc >= rindex_1.mra && nloc <= rindex_1.mrd) {
       goto L57400;
    }
-   rspeak_(738);
+   rspeak(738);
 // 						!HAVE REACHED END.
    return ret_val;
 
@@ -984,7 +984,7 @@ L57400:
       j = 740;
    }
 // 						!POLE UP, WOBBLES.
-   rspsub_(j, i);
+   rspsub(j, i);
 // 						!DESCRIBE.
    findex_1.mloc = nloc;
    if (findex_1.mloc != rindex_1.mrg) {
@@ -1004,21 +1004,21 @@ L57400:
       return ret_val;
    }
 // 						!MIRRORS INTACT, OK.
-   rspeak_(742);
+   rspeak(742);
 // 						!MIRRORS BROKEN, DIE.
-   jigsup_(743);
+   jigsup(743);
    return ret_val;
 
 L57500:
-   rspeak_(741);
+   rspeak(741);
 // 						!POLE UP, DIE.
-   jigsup_(743);
+   jigsup(743);
    return ret_val;
 
 L57600:
-   rspeak_(744);
+   rspeak(744);
 // 						!DOOR OPEN, DIE.
-   jigsup_(743);
+   jigsup(743);
    return ret_val;
 // OAPPLI, PAGE 11
 
@@ -1028,7 +1028,7 @@ L58000:
    if (prsvec_1.prsa != vindex_1.attacw && prsvec_1.prsa != vindex_1.killw && prsvec_1.prsa != vindex_1.mungw) {
       goto L58100;
    }
-   jigsup_(745);
+   jigsup(745);
 // 						!LOSE.
    return ret_val;
 
@@ -1037,7 +1037,7 @@ L58100:
       goto L10;
    }
 // 						!HELLO?
-   rspeak_(746);
+   rspeak(746);
 // 						!NO REPLY.
    return ret_val;
 
@@ -1047,7 +1047,7 @@ L59000:
    if (prsvec_1.prsa != vindex_1.attacw && prsvec_1.prsa != vindex_1.killw && prsvec_1.prsa != vindex_1.mungw) {
       goto L59100;
    }
-   jigsup_(747);
+   jigsup(747);
 // 						!BAD IDEA.
    return ret_val;
 
@@ -1056,7 +1056,7 @@ L59100:
       goto L10;
    }
 // 						!TAKE?
-   rspeak_(748);
+   rspeak(748);
 // 						!JOKE.
    return ret_val;
 
@@ -1067,11 +1067,11 @@ L60000:
       goto L10;
    }
 // 						!TAKE FIVE?
-   rspeak_(419);
+   rspeak(419);
 // 						!TIME PASSES.
    for (i = 1; i <= 3; ++i) {
 // 						!WAIT A WHILE.
-      if (clockd_(/*x*/)) {
+      if (clockd(/*x*/)) {
          return ret_val;
       }
 // L60100:
@@ -1093,7 +1093,7 @@ L61000:
    if ((objcts_1.oflag2[oindex_1.tomb - 1] & OpenO) != 0) {
       i = 794;
    }
-   rspeak_(i);
+   rspeak(i);
    objcts_1.oflag2[oindex_1.tomb - 1] |= OpenO;
    return ret_val;
 
@@ -1106,7 +1106,7 @@ L61100:
    if ((objcts_1.oflag2[oindex_1.tomb - 1] & OpenO) != 0) {
       i = 796;
    }
-   rspeak_(i);
+   rspeak(i);
    objcts_1.oflag2[oindex_1.tomb - 1] &= ~OpenO;
    if (play_1.here == rindex_1.crypt) {
       cevent_1.ctick[cindex_1.cevste - 1] = 3;
@@ -1121,7 +1121,7 @@ L62000:
    if (puzzle_1.cpvec[findex_1.cphere] == -2 || puzzle_1.cpvec[findex_1.cphere - 2] == -3) {
       goto L62100;
    }
-   rspeak_(865);
+   rspeak(865);
 // 						!NO, LOSE.
    return ret_val;
 
@@ -1130,7 +1130,7 @@ L62100:
 
       goto L62200;
    }
-   rspeak_(866);
+   rspeak(866);
 // 						!CLIMB IT?
    return ret_val;
 
@@ -1138,14 +1138,14 @@ L62200:
    if (findex_1.cphere == 10 && puzzle_1.cpvec[findex_1.cphere] == -2) {
       goto L62300;
    }
-   rspeak_(867);
+   rspeak(867);
 // 						!NO, HIT YOUR HEAD.
    return ret_val;
 
 L62300:
-   f = moveto_(rindex_1.cpant, play_1.winner);
+   f = moveto(rindex_1.cpant, play_1.winner);
 // 						!TO ANTEROOM.
-   f = rmdesc_(3);
+   f = rmdesc(3);
 // 						!DESCRIBE.
    return ret_val;
 

@@ -8,7 +8,7 @@
 #include "extern.h"
 #include "common.h"
 
-void encryp_(const char *inw, char *outw) {
+void encryp(const char *inw, char *outw) {
 // Initialized data
    const char *keyw = "ECORMS";
 
@@ -56,7 +56,7 @@ void encryp_(const char *inw, char *outw) {
 
 // CPGOTO--	MOVE TO NEXT STATE IN PUZZLE ROOM
 
-void cpgoto_(int st) {
+void cpgoto(int st) {
 // System generated locals
    int i__1, i__2;
 
@@ -69,10 +69,10 @@ void cpgoto_(int st) {
 // 						!RELOCATE OBJECTS.
       if (objcts_1.oroom[i - 1] == rindex_1.cpuzz && (objcts_1.oflag2[i - 1] & ActrO + VillO) == 0) {
          i__2 = findex_1.cphere * hyper_1.hfactr;
-         newsta_(i, 0, i__2, 0, 0);
+         newsta(i, 0, i__2, 0, 0);
       }
       if (objcts_1.oroom[i - 1] == st * hyper_1.hfactr) {
-         newsta_(i, 0, rindex_1.cpuzz, 0, 0);
+         newsta(i, 0, rindex_1.cpuzz, 0, 0);
       }
 // L100:
    }
@@ -81,7 +81,7 @@ void cpgoto_(int st) {
 
 // CPINFO--	DESCRIBE PUZZLE ROOM
 
-void cpinfo_(int rmk, int st) {
+void cpinfo(int rmk, int st) {
 // Initialized data
    static const int dgmoft[8] = { -9, -8, -7, -1, 1, 7, 8, 9 };
    const char *pict = "SSS M";
@@ -90,7 +90,7 @@ void cpinfo_(int rmk, int st) {
    int i, j, k, l;
    char dgm[1 * 8];
 
-   rspeak_(rmk);
+   rspeak(rmk);
    for (i = 1; i <= 8; ++i) {
       j = dgmoft[i - 1];
       dgm[i - 1] = pict[puzzle_1.cpvec[st + j - 1] + 3];
@@ -119,11 +119,11 @@ void cpinfo_(int rmk, int st) {
    printf("       |%c%c %c%c %c%c|\n", dgm[5], dgm[5], dgm[6], dgm[6], dgm[7], dgm[7]);
 
    if (st == 10) {
-      rspeak_(870);
+      rspeak(870);
    }
 // 						!AT HOLE?
    if (st == 37) {
-      rspeak_(871);
+      rspeak(871);
    }
 // 						!AT NICHE?
    i = 872;
@@ -132,15 +132,15 @@ void cpinfo_(int rmk, int st) {
       i = 873;
    }
    if (st == 52) {
-      rspeak_(i);
+      rspeak(i);
    }
 // 						!AT DOOR?
    if (puzzle_1.cpvec[st] == -2) {
-      rspeak_(874);
+      rspeak(874);
    }
 // 						!EAST LADDER?
    if (puzzle_1.cpvec[st - 2] == -3) {
-      rspeak_(875);
+      rspeak(875);
    }
 // 						!WEST LADDER?
 }

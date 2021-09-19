@@ -8,7 +8,7 @@
 #include "extern.h"
 #include "common.h"
 
-Bool findxt_(int dir, int rm) {
+Bool findxt(int dir, int rm) {
 // System generated locals
    Bool ret_val;
 
@@ -43,7 +43,7 @@ L100:
          goto L130;
    }
 // 						!BRANCH ON ENTRY.
-   bug_(10, curxt_1.xtype);
+   bug(10, curxt_1.xtype);
 
 L130:
    curxt_1.xobj = exits_1.travel[xi + 1] & xpars_1.xrmask;
@@ -68,7 +68,7 @@ L1000:
 
 // FWIM- FIND WHAT I MEAN
 
-int fwim_(int f1, int f2, int rm, int con, int adv, Bool nocare) {
+int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 // System generated locals
    int ret_val, i__1, i__2;
 
@@ -141,7 +141,7 @@ int fwim_(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 
 // 	YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING)
 
-Bool yesno_(int q, int y, int n) {
+Bool yesno(int q, int y, int n) {
 // System generated locals
    Bool ret_val;
 
@@ -149,7 +149,7 @@ Bool yesno_(int q, int y, int n) {
    char ans[100];
 
 L100:
-   rspeak_(q);
+   rspeak(q);
 // 						!ASK
    (void)fflush(stdout);
    (void)fgets(ans, sizeof ans, stdin);
@@ -161,21 +161,21 @@ L100:
    if (*ans == 'N' || *ans == 'n') {
       goto L300;
    }
-   rspeak_(6);
+   rspeak(6);
 // 						!SCOLD.
    goto L100;
 
 L200:
    ret_val = true;
 // 						!YES,
-   rspeak_(y);
+   rspeak(y);
 // 						!OUT WITH IT.
    return ret_val;
 
 L300:
    ret_val = false;
 // 						!NO,
-   rspeak_(n);
+   rspeak(n);
 // 						!LIKEWISE.
    return ret_val;
 

@@ -20,20 +20,14 @@ extern void srand(unsigned int);
 FILE *dbfile;
 
 #ifndef TEXTFILE
-#   ifdef __AMOS__
+#   if defined __AMOS__
 #      define TEXTFILE "lib:dtextc.dat"
+#   elif defined unix
+#      define TEXTFILE "/usr/games/lib/dunlib/dtextc.dat"
 #   else
-      // ! __AMOS__
-#      ifdef unix
-#         define TEXTFILE "/usr/games/lib/dunlib/dtextc.dat"
-#      else
-      // ! unix
-I need a definition for TEXTFILE
-#      endif
-       // ! unix
+#      error I need a definition for TEXTFILE
 #   endif
-       // ! __AMOS__
-#endif // ! TEXTFILE
+#endif
 #ifndef LOCALTEXTFILE
 #   define LOCALTEXTFILE "dtextc.dat"
 #endif
@@ -78,7 +72,7 @@ static void rdflags(int c, Bool *pf, FILE *indxfile) {
       *pf++ = getc(indxfile);
 }
 
-Bool init_(void) {
+Bool init(void) {
 // System generated locals
    int i__1;
    Bool ret_val;
@@ -94,7 +88,7 @@ Bool init_(void) {
 
 // FIRST CHECK FOR PROTECTION VIOLATION
 
-   if (protected()) {
+   if (protected_()) {
       goto L10000;
    }
 // 						!PROTECTION VIOLATION?
@@ -405,7 +399,7 @@ L10000:
 // THE INTERNAL DATA BASE IS NOW ESTABLISHED.
 // SET UP TO PLAY THE GAME.
 
-   itime_(&time_1.shour, &time_1.smin, &time_1.ssec);
+   itime(&time_1.shour, &time_1.smin, &time_1.ssec);
 //    srand(time_1.shour ^ (time_1.smin ^ time_1.ssec));
 
    play_1.winner = aindex_1.player;

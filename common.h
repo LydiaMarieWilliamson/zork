@@ -12,8 +12,8 @@
 // common /star/
 extern struct starCB {
    int mbase, strbit;
-} star_;
-#define star_1 star_
+} star;
+#define star_1 star
 
 // common /time/
 extern struct timeCB {
@@ -24,20 +24,20 @@ extern struct timeCB {
 // common /vers/
 extern const struct versCB {
    int vmaj, vmin, vedit;
-} vers_;
-#define vers_1 vers_
+} vers;
+#define vers_1 vers
 
 // common /hyper/
 extern const struct hyperCB {
    int hfactr;
-} hyper_;
-#define hyper_1 hyper_
+} hyper;
+#define hyper_1 hyper
 
 // common /bats/
 extern const struct batsCB {
    const int batdrp[9];
-} bats_;
-#define bats_1 bats_
+} bats;
+#define bats_1 bats
 
 // parser.h:
 // common /prsvec/
@@ -45,27 +45,27 @@ extern struct prsvecCB {
    int prsa, prsi, prso;
    Bool prswon;
    int prscon;
-} prsvec_;
-#define prsvec_1 prsvec_
+} prsvec;
+#define prsvec_1 prsvec
 
 // common /orphs/
 extern struct orphsCB {
    int oflag, oact, oslot, oprep, oname;
-} orphs_;
-#define orphs_1 orphs_
+} orphs;
+#define orphs_1 orphs
 #define orp ((int *)&orphs_1)
 
 // common /last/
 extern struct lastCB {
    int lastit;
-} last_;
-#define last_1 last_
+} last;
+#define last_1 last
 
 // common /pv/
 extern struct pvCB {
    int act, o1, o2, p1, p2;
-} pv_;
-#define pv_1 pv_
+} pv;
+#define pv_1 pv
 // int objvec[2]; // equivalence (objvec[1], pv_1.o1);
 #define objvec ((int *)&pv_1 + 1)
 // int prpvec[2]; // equivalence (prpvec[1], pv_1.p1);
@@ -76,8 +76,8 @@ extern struct pvCB {
 // common /syntax/
 extern struct syntaxCB {
    int vflag, dobj, dfl1, dfl2, dfw1, dfw2, iobj, ifl1, ifl2, ifw1, ifw2;
-} syntax_;
-#define syntax_1 syntax_
+} syntax;
+#define syntax_1 syntax
 // int syn[11]; // equivalence (syntax_1.vflag, syn);
 #define syn ((int *)&syntax_1)
 
@@ -100,20 +100,20 @@ enum objflgCB {
 // common /buzvoc/
 extern const struct buzvocCB {
    int bvoc[20];
-} buzvoc_;
-#define buzvoc_1 buzvoc_
+} buzvoc;
+#define buzvoc_1 buzvoc
 
 // common /prpvoc/
 extern const struct prpvocCB {
    int pvoc[45];
-} prpvoc_;
-#define prpvoc_1 prpvoc_
+} prpvoc;
+#define prpvoc_1 prpvoc
 
 // common /dirvoc/
 extern const struct dirvocCB {
    int dvoc[75];
-} dirvoc_;
-#define dirvoc_1 dirvoc_
+} dirvoc;
+#define dirvoc_1 dirvoc
 
 // common /adjvoc/ int avoc1[184], avoc2[114], avoc3[106], avocnd;
 // int avoc[450]; // equivalence (avoc[1], adjvoc_1.avoc1[1]);
@@ -132,15 +132,15 @@ extern const int ovoc[];
 extern struct playCB {
    int winner, here;
    Bool telflg;
-} play_;
-#define play_1 play_
+} play;
+#define play_1 play
 
 // rooms.h:
 // common /rooms/
 extern struct roomsCB {
    int rlnt, rdesc1[200], rdesc2[200], rexit[200], ractio[200], rval[200], rflag[200];
-} rooms_;
-#define rooms_1 rooms_
+} rooms;
+#define rooms_1 rooms
 #define eqr ((int *)&rooms_1 + 1)
 #define rrand ((int *)&rooms_1 + 601)
 
@@ -166,15 +166,15 @@ extern const struct rindexCB {
 // common /xsrch/
 extern const struct xsrchCB {
    int xmin, xmax, xdown, xup, xnorth, xsouth, xenter, xexit, xeast, xwest;
-} xsrch_;
-#define xsrch_1 xsrch_
+} xsrch;
+#define xsrch_1 xsrch
 
 // objects.h:
 // common /objcts/
 extern struct objctsCB {
    int olnt, odesc1[220], odesc2[220], odesco[220], oactio[220], oflag1[220], oflag2[220], ofval[220], otval[220], osize[220], ocapac[220], oroom[220], oadv[220], ocan[220], oread[220];
-} objcts_;
-#define objcts_1 objcts_
+} objcts;
+#define objcts_1 objcts
 #define eqo ((int *)&objcts_1 + 1)
 
 // common /oroom2/
@@ -204,43 +204,43 @@ extern const struct oindexCB {
       cyclo, chali, thief, still, windo, grate, door, hpole, leak, rbutt, raili, pot, statu, iboat, dboat, pump, rboat, stick, buoy, shove, ballo, recep, guano, brope, hook1, hook2, safe, sslot, brick, fuse, gnome, blabe, dball, tomb, lcase, cage, rcage,
       spher, sqbut, flask, pool, saffr, bucke, ecake, orice, rdice, blice, robot, ftree, bills, portr, scol, zgnom, egg, begg, baubl, canar, bcana, ylwal, rdwal, pindr, rbeam, odoor, qdoor, cdoor, num1, num8, warni, cslit, gcard, stldr, hands, wall, lungs,
       sailo, aviat, teeth, itobj, every, valua, oplay, wnort, gwate, master;
-} oindex_;
-#define oindex_1 oindex_
+} oindex;
+#define oindex_1 oindex
 
 // clock.h:
 // common /cevent/
 extern struct ceventCB {
    int clnt, ctick[25], cactio[25];
    Bool cflag[25];
-} cevent_;
-#define cevent_1 cevent_
+} cevent;
+#define cevent_1 cevent
 #define eqc ((int *)&cevent_1 + 1)
 
 // common /cindex/
 extern const struct cindexCB {
    int cevcur, cevmnt, cevlnt, cevmat, cevcnd, cevbal, cevbrn, cevfus, cevled, cevsaf, cevvlg, cevgno, cevbuc, cevsph, cevegh, cevfor, cevscl, cevzgi, cevzgo, cevste, cevmrs, cevpin, cevinq, cevfol;
-} cindex_;
-#define cindex_1 cindex_
+} cindex;
+#define cindex_1 cindex
 
 // advers.h:
 // common /advs/
 extern struct advsCB {
    int alnt, aroom[4], ascore[4], avehic[4], aobj[4], aactio[4], astren[4], aflag[4];
-} advs_;
-#define advs_1 advs_
+} advs;
+#define advs_1 advs
 #define eqa ((int *)&advs_1 + 1)
 
 // common /aflags/
 extern const struct aflagsCB {
    int astag;
-} aflags_;
-#define aflags_1 aflags_
+} aflags;
+#define aflags_1 aflags
 
 // common /aindex/
 extern const struct aindexCB {
    int player, arobot, amastr;
-} aindex_;
-#define aindex_1 aindex_
+} aindex;
+#define aindex_1 aindex
 
 // verbs.h:
 // common /vindex/
@@ -248,8 +248,8 @@ extern const struct vindexCB {
    int cintw, deadxw, frstqw, inxw, outxw, walkiw, fightw, foow, meltw, readw, inflaw, deflaw, alarmw, exorcw, plugw, kickw, wavew, raisew, lowerw, rubw, pushw, untiew, tiew, tieupw, turnw, breatw, knockw, lookw, examiw, shakew, movew, trnonw, trnofw,
       openw, closew, findw, waitw, spinw, boardw, unboaw, takew, invenw, fillw, eatw, drinkw, burnw, mungw, killw, attacw, swingw, walkw, tellw, putw, dropw, givew, pourw, throww, digw, leapw, stayw, follow, hellow, lookiw, lookuw, pumpw, windw, clmbw,
       clmbuw, clmbdw, trntow;
-} vindex_;
-#define vindex_1 vindex_
+} vindex;
+#define vindex_1 vindex
 
 // flags.h:
 // common /findex/
@@ -257,8 +257,8 @@ extern struct findexCB {
    Bool trollf, cagesf, bucktf, caroff, carozf, lwtidf, domef, glacrf, echof, riddlf, lldf, cyclof, magicf, litldf, safef, gnomef, gnodrf, mirrmf, egyptf, onpolf, blabf, brieff, superf, buoyf, grunlf, gatef, rainbf, cagetf, empthf, deflaf, glacmf,
       frobzf, endgmf, badlkf, thfenf, singsf, mrpshf, mropnf, wdopnf, mr1f, mr2f, inqstf, follwf, spellf, cpoutf, cpushf;
    int btief, binff, rvmnt, rvclr, rvcyc, rvsnd, rvgua, orrug, orcand, ormtch, orlamp, mdir, mloc, poleuf, quesno, nqatt, corrct, lcell, pnumb, acell, dcell, cphere;
-} findex_;
-#define findex_1 findex_
+} findex;
+#define findex_1 findex
 #define flags ((Bool *)&findex_1)
 #define switch_ ((int *)&findex_1 + 46)
 
@@ -266,8 +266,8 @@ extern struct findexCB {
 // common /debug/
 extern struct debugCB {
    int dbgflg, prsflg, gdtflg;
-} debug_;
-#define debug_1 debug_
+} debug;
+#define debug_1 debug
 
 // villians.h:
 // common /hack/
@@ -275,74 +275,74 @@ extern struct hackCB {
    int thfpos;
    Bool thfflg, thfact, swdact;
    int swdsta;
-} hack_;
-#define hack_1 hack_
+} hack;
+#define hack_1 hack
 
 // common /vill/
 extern struct villCB {
    int vlnt, villns[4], vprob[4], vopps[4], vbest[4], vmelee[4];
-} vill_;
-#define vill_1 vill_
+} vill;
+#define vill_1 vill
 #define eqv ((int *)&vill_1 + 1)
 
 // state.h:
 // common /state/
 extern struct stateCB {
    int moves, deaths, rwscor, mxscor, mxload, ltshft, bloc, mungrm, hs, egscor, egmxsc;
-} state_;
-#define state_1 state_
+} state;
+#define state_1 state
 
 // curxt.h:
 // common /curxt/
 extern struct curxtCB {
    int xtype, xroom1, xstrng, xactio, xobj;
-} curxt_;
-#define curxt_1 curxt_
+} curxt;
+#define curxt_1 curxt
 #define xflag ((int *)&curxt_1 + 4)
 
 // xpars.h:
 // common /xpars/
 extern const struct xparsCB {
    int xrmask, xdmask, xfmask, xfshft, xashft, xelnt[4], xnorm, xno, xcond, xdoor, xlflag;
-} xpars_;
-#define xpars_1 xpars_
+} xpars;
+#define xpars_1 xpars
 
 // io.h:
 // common /input/
 extern struct inputCB {
    int inlnt;
    char inbuf[78];
-} input_;
-#define input_1 input_
+} input;
+#define input_1 input
 
 // screen.h:
 // common /screen/
 extern struct screenCB {
    int fromdr, scolrm, scolac;
    const int scoldr[8], scolwl[12];
-} screen_;
-#define screen_1 screen_
+} screen;
+#define screen_1 screen
 
 // mindex.h:
 // common /rmsg/
 extern struct rmsgCB {
    int mlnt, mrloc, rtext[1050];
-} rmsg_;
-#define rmsg_1 rmsg_
+} rmsg;
+#define rmsg_1 rmsg
 
 // exits.h:
 // common /exits/
 extern struct exitsCB {
    int xlnt, travel[900];
-} exits_;
-#define exits_1 exits_
+} exits;
+#define exits_1 exits
 
 // puzzle.h:
 // common /puzzle/
 extern struct puzzleCB {
    const int cpdr[16], cpwl[8];
    int cpvec[64];
-} puzzle_;
-#define puzzle_1 puzzle_
+} puzzle;
+#define puzzle_1 puzzle
 
 #endif // OnceOnly

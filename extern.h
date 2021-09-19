@@ -16,7 +16,7 @@ typedef int Bool;
 #define max(A, B)	((A) >= (B)? (A): (B))
 
 // local.c:
-Bool protected(void);
+Bool protected_(void);
 Bool wizard(void);
 
 // supp.c:
@@ -25,140 +25,140 @@ void more_output(const char *);
 void more_input(void);
 
 // actors.c:
-Bool aappli_(int);
-void thiefd_(void);
+Bool aappli(int);
+void thiefd(void);
 
 // ballop.c:
-Bool ballop_(int);
+Bool ballop(int);
 
 // clockr.c:
-void cevapp_(int);
+void cevapp(int);
 
 // demons.c:
-void fightd_(void);
-int blow_(int, int, int, Bool, int);
-void swordd_(void);
+void fightd(void);
+int blow(int, int, int, Bool, int);
+void swordd(void);
 
 // dgame.c:
 void game_(void);
 
 // dinit.c:
-Bool init_(void);
+Bool init(void);
 
 // dso1.c:
-void princr_(Bool, int);
-void invent_(int);
-void princo_(int, int);
+void princr(Bool, int);
+void invent(int);
+void princo(int, int);
 
 // dso2.c:
-Bool moveto_(int, int);
-void score_(Bool);
-void scrupd_(int);
+Bool moveto(int, int);
+void score(Bool);
+void scrupd(int);
 
 // dso3.c:
-Bool findxt_(int, int);
-int fwim_(int, int, int, int, int, Bool);
-Bool yesno_(int, int, int);
+Bool findxt(int, int);
+int fwim(int, int, int, int, int, Bool);
+Bool yesno(int, int, int);
 
 // dso4.c:
-int robadv_(int, int, int, int);
-int robrm_(int, int, int, int, int);
-Bool winnin_(int, int);
-int fights_(int, Bool);
-int vilstr_(int);
+int robadv(int, int, int, int);
+int robrm(int, int, int, int, int);
+Bool winnin(int, int);
+int fights(int, Bool);
+int vilstr(int);
 
 // dso5.c:
-int gttime_(void);
-Bool opncls_(int, int, int);
-Bool lit_(int);
-int weight_(int, int, int);
+int gttime(void);
+Bool opncls(int, int, int);
+Bool lit(int);
+int weight(int, int, int);
 
 // dso6.c:
-Bool ghere_(int, int);
-int mrhere_(int);
+Bool ghere(int, int);
+int mrhere(int);
 
 // dso7.c:
-void encryp_(const char *, char *);
-void cpgoto_(int);
-void cpinfo_(int, int);
+void encryp(const char *, char *);
+void cpgoto(int);
+void cpinfo(int, int);
 
 // dsub.c
-void rspeak_(int);
-void rspsub_(int, int);
-void rspsb2_(int, int, int);
-Bool objact_(void/*int*/);
-void bug_(int, int);
-void newsta_(int, int, int, int, int);
-Bool qhere_(int, int);
-Bool qempty_(int);
-void jigsup_(int);
-int oactor_(int);
-Bool prob_(int, int);
-Bool rmdesc_(int);
-Bool rappli_(int);
+void rspeak(int);
+void rspsub(int, int);
+void rspsb2(int, int, int);
+Bool objact(void/*int*/);
+void bug(int, int);
+void newsta(int, int, int, int, int);
+Bool qhere(int, int);
+Bool qempty(int);
+void jigsup(int);
+int oactor(int);
+Bool prob(int, int);
+Bool rmdesc(int);
+Bool rappli(int);
 
 // dverb1.c:
-Bool take_(Bool);
-Bool drop_(void/*Bool*/);
-Bool put_(void/*Bool*/);
-void valuac_(int);
+Bool take(Bool);
+Bool drop(void/*Bool*/);
+Bool put(void/*Bool*/);
+void valuac(int);
 
 // dverb2.c:
-void savegm_(void);
-void rstrgm_(void);
-Bool walk_(void/*int*/);
+void savegm(void);
+void rstrgm(void);
+Bool walk(void/*int*/);
 
 // gdt.c:
-void gdt_(void);
+void gdt(void);
 
 // lightp.c:
-Bool lightp_(int);
+Bool lightp(int);
 
 // nobjs.c:
-Bool nobjs_(int/*, int*/);
+Bool nobjs(int/*, int*/);
 
 // np1.c:
-int sparse_(const int *, int, Bool);
+int sparse(const int *, int, Bool);
 
 // np2.c:
-int getobj_(int, int, int);
-int schlst_(int, int, int, int, int, int);
+int getobj(int, int, int);
+int schlst(int, int, int, int, int, int);
 
 // np3.c:
-Bool synmch_(void/*int*/);
+Bool synmch(void/*int*/);
 
 // np.c:
-void rdline_(char *, int);
-Bool parse_(char *, Bool);
-void orphan_(int, int, int, int, int);
+void rdline(char *, int);
+Bool parse(char *, Bool);
+void orphan(int, int, int, int, int);
 
 // nrooms.c:
-Bool rappl2_(int);
+Bool rappl2(int);
 
 // objcts.c:
-Bool oappli_(int, int);
+Bool oappli(int, int);
 
 // rooms.c:
-Bool rappl1_(int);
+Bool rappl1(int);
 
 // rtim.c:
-void itime_(int *, int *, int *);
-int rnd_(int);
+void itime(int *, int *, int *);
+int rnd(int);
 void exit_(void);
 
 // sobjs.c:
-Bool sobjs_(int, int);
+Bool sobjs(int, int);
 
 // sverbs.c:
-Bool sverbs_(int);
+Bool sverbs(int);
 
 // verbs.c:
-Bool vappli_(int);
-Bool clockd_(void/*int*/);
+Bool vappli(int);
+Bool clockd(void/*int*/);
 
 // villns.c:
-Bool trollp_(void/*int*/);
-Bool cyclop_(void/*int*/);
-Bool thiefp_(void/*int*/);
+Bool trollp(void/*int*/);
+Bool cyclop(void/*int*/);
+Bool thiefp(void/*int*/);
 
 #endif // OnceOnly

@@ -7,7 +7,7 @@
 #include "extern.h"
 #include "common.h"
 
-Bool ballop_(int arg) {
+Bool ballop(int arg) {
 // System generated locals
    Bool ret_val;
 
@@ -25,15 +25,15 @@ Bool ballop_(int arg) {
       goto L50;
    }
 // 						!INFLATED?
-   rspeak_(543);
+   rspeak(543);
 // 						!NO.
    goto L100;
 L50:
-   rspsub_(544, objcts_1.odesc2[findex_1.binff - 1]);
+   rspsub(544, objcts_1.odesc2[findex_1.binff - 1]);
 // 						!YES.
 L100:
    if (findex_1.btief != 0) {
-      rspeak_(545);
+      rspeak(545);
    }
 // 						!HOOKED?
    return ret_val;
@@ -47,11 +47,11 @@ L200:
       goto L300;
    }
 // 						!WALK?
-   if (findxt_(prsvec_1.prso, play_1.here)) {
+   if (findxt(prsvec_1.prso, play_1.here)) {
       goto L250;
    }
 // 						!VALID EXIT?
-   rspeak_(546);
+   rspeak(546);
 // 						!NO, JOKE.
    return ret_val;
 
@@ -60,7 +60,7 @@ L250:
       goto L275;
    }
 // 						!TIED UP?
-   rspeak_(547);
+   rspeak(547);
 // 						!YES, JOKE.
    return ret_val;
 
@@ -80,15 +80,15 @@ L300:
    if (prsvec_1.prsa != vindex_1.takew || prsvec_1.prso != findex_1.binff) {
       goto L350;
    }
-   rspsub_(548, objcts_1.odesc2[findex_1.binff - 1]);
+   rspsub(548, objcts_1.odesc2[findex_1.binff - 1]);
 // 						!RECEP CONT TOO HOT.
    return ret_val;
 
 L350:
-   if (prsvec_1.prsa != vindex_1.putw || prsvec_1.prsi != oindex_1.recep || qempty_(oindex_1.recep)) {
+   if (prsvec_1.prsa != vindex_1.putw || prsvec_1.prsi != oindex_1.recep || qempty(oindex_1.recep)) {
       goto L10;
    }
-   rspeak_(549);
+   rspeak(549);
    return ret_val;
 
 L500:
@@ -105,7 +105,7 @@ L600:
    if (prsvec_1.prsa != vindex_1.burnw || objcts_1.ocan[prsvec_1.prso - 1] != oindex_1.recep) {
       goto L700;
    }
-   rspsub_(550, objcts_1.odesc2[prsvec_1.prso - 1]);
+   rspsub(550, objcts_1.odesc2[prsvec_1.prso - 1]);
 // 						!LIGHT FIRE IN RECEP.
    cevent_1.ctick[cindex_1.cevbrn - 1] = objcts_1.osize[prsvec_1.prso - 1] * 20;
    objcts_1.oflag1[prsvec_1.prso - 1] |= OnO + FlamO + LiteO & ~(TakeO + ReadO);
@@ -113,12 +113,12 @@ L600:
       return ret_val;
    }
    if (!findex_1.blabf) {
-      newsta_(oindex_1.blabe, 0, 0, oindex_1.ballo, 0);
+      newsta(oindex_1.blabe, 0, 0, oindex_1.ballo, 0);
    }
    findex_1.blabf = true;
    findex_1.binff = prsvec_1.prso;
    cevent_1.ctick[cindex_1.cevbal - 1] = 3;
-   rspeak_(551);
+   rspeak(551);
    return ret_val;
 
 L700:

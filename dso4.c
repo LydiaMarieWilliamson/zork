@@ -7,7 +7,7 @@
 #include "extern.h"
 #include "common.h"
 
-int robadv_(int adv, int nr, int nc, int na) {
+int robadv(int adv, int nr, int nc, int na) {
 // System generated locals
    int ret_val, i__1;
 
@@ -21,7 +21,7 @@ int robadv_(int adv, int nr, int nc, int na) {
       if (objcts_1.oadv[i - 1] != adv || objcts_1.otval[i - 1] <= 0 || (objcts_1.oflag2[i - 1] & ScrDO) != 0) {
          goto L100;
       }
-      newsta_(i, 0, nr, nc, na);
+      newsta(i, 0, nr, nc, na);
 // 						!STEAL OBJECT
       ++ret_val;
    L100:
@@ -32,7 +32,7 @@ int robadv_(int adv, int nr, int nc, int na) {
 
 // ROBRM-- STEAL ROOM VALUABLES
 
-int robrm_(int rm, int pr, int nr, int nc, int na) {
+int robrm(int rm, int pr, int nr, int nc, int na) {
 // System generated locals
    int ret_val, i__1, i__2;
 
@@ -46,20 +46,20 @@ int robrm_(int rm, int pr, int nr, int nc, int na) {
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!LOOP ON OBJECTS.
-      if (!qhere_(i, rm)) {
+      if (!qhere(i, rm)) {
          goto L100;
       }
-      if (objcts_1.otval[i - 1] <= 0 || (objcts_1.oflag2[i - 1] & ScrDO) != 0 || (objcts_1.oflag1[i - 1] & VisiO) == 0 || !prob_(pr, pr)) {
+      if (objcts_1.otval[i - 1] <= 0 || (objcts_1.oflag2[i - 1] & ScrDO) != 0 || (objcts_1.oflag1[i - 1] & VisiO) == 0 || !prob(pr, pr)) {
          goto L50;
       }
-      newsta_(i, 0, nr, nc, na);
+      newsta(i, 0, nr, nc, na);
       ++ret_val;
       objcts_1.oflag2[i - 1] |= TChO;
       goto L100;
    L50:
       if ((objcts_1.oflag2[i - 1] & ActrO) != 0) {
-         i__2 = oactor_(i);
-         ret_val += robadv_(i__2, nr, nc, na);
+         i__2 = oactor(i);
+         ret_val += robadv(i__2, nr, nc, na);
       }
    L100:
       ;
@@ -69,7 +69,7 @@ int robrm_(int rm, int pr, int nr, int nc, int na) {
 
 // WINNIN-- SEE IF VILLAIN IS WINNING
 
-Bool winnin_(int vl, int hr) {
+Bool winnin(int vl, int hr) {
 // System generated locals
    Bool ret_val;
 
@@ -80,35 +80,35 @@ Bool winnin_(int vl, int hr) {
 
    vs = objcts_1.ocapac[vl - 1];
 // 						!VILLAIN STRENGTH
-   ps = vs - fights_(hr, true);
+   ps = vs - fights(hr, true);
 // 						!HIS MARGIN OVER HERO
-   ret_val = prob_(90, 100);
+   ret_val = prob(90, 100);
    if (ps > 3) {
       return ret_val;
    }
 // 						!+3... 90% WINNING
-   ret_val = prob_(75, 85);
+   ret_val = prob(75, 85);
    if (ps > 0) {
       return ret_val;
    }
 // 						!>0... 75% WINNING
-   ret_val = prob_(50, 30);
+   ret_val = prob(50, 30);
    if (ps == 0) {
       return ret_val;
    }
 // 						!=0... 50% WINNING
-   ret_val = prob_(25, 25);
+   ret_val = prob(25, 25);
    if (vs > 1) {
       return ret_val;
    }
 // 						!ANY VILLAIN STRENGTH.
-   ret_val = prob_(10, 0);
+   ret_val = prob(10, 0);
    return ret_val;
 }
 
 // FIGHTS-- COMPUTE FIGHT STRENGTH
 
-int fights_(int h, Bool flg) {
+int fights(int h, Bool flg) {
 // Initialized data
    const int smin = 2;
    const int smax = 7;
@@ -125,7 +125,7 @@ int fights_(int h, Bool flg) {
 
 // VILSTR-	COMPUTE VILLAIN STRENGTH
 
-int vilstr_(int v) {
+int vilstr(int v) {
 // System generated locals
    int ret_val, i__1, i__2, i__3;
 

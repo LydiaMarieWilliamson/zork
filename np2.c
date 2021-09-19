@@ -7,11 +7,11 @@
 #include "extern.h"
 #include "common.h"
 
-static Bool thisit_(int, int, int, int);
+static Bool thisit(int, int, int, int);
 
 // THIS ROUTINE DETAILS ON BIT 3 OF PRSFLG
 
-int getobj_(int oidx, int aidx, int spcobj) {
+int getobj(int oidx, int aidx, int spcobj) {
 // System generated locals
    int ret_val, i__1;
 
@@ -27,12 +27,12 @@ int getobj_(int oidx, int aidx, int spcobj) {
    av = advs_1.avehic[play_1.winner - 1];
    obj = 0;
 // 						!ASSUME DARK.
-   if (!lit_(play_1.here)) {
+   if (!lit(play_1.here)) {
       goto L200;
    }
 // 						!LIT?
 
-   obj = schlst_(oidx, aidx, play_1.here, 0, 0, spcobj);
+   obj = schlst(oidx, aidx, play_1.here, 0, 0, spcobj);
 // 						!SEARCH ROOM.
    if (obj < 0) {
       goto L1000;
@@ -58,7 +58,7 @@ L200:
       goto L400;
    }
 // 						!IN VEHICLE?
-   nobj = schlst_(oidx, aidx, 0, av, 0, spcobj);
+   nobj = schlst(oidx, aidx, 0, av, 0, spcobj);
 // 						!SEARCH VEHICLE.
    if (nobj < 0) {
       goto L1100;
@@ -82,7 +82,7 @@ L300:
    obj = nobj;
 
 L400:
-   nobj = schlst_(oidx, aidx, 0, 0, play_1.winner, spcobj);
+   nobj = schlst(oidx, aidx, 0, 0, play_1.winner, spcobj);
 // 						!SEARCH ADVENTURER.
    if (nobj < 0) {
       goto L1100;
@@ -115,10 +115,10 @@ L1000:
    i__1 = objcts_1.olnt;
    for (i = star_1.strbit + 1; i <= i__1; ++i) {
 // 						!NO, SEARCH GLOBALS.
-      if (!thisit_(oidx, aidx, i, spcobj)) {
+      if (!thisit(oidx, aidx, i, spcobj)) {
          goto L1200;
       }
-      if (!ghere_(i, play_1.here)) {
+      if (!ghere(i, play_1.here)) {
          goto L1200;
       }
 // 						!CAN IT BE HERE?
@@ -140,7 +140,7 @@ L1500:
 
 // SCHLST--	SEARCH FOR OBJECT
 
-int schlst_(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
+int schlst(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
 // System generated locals
    int ret_val, i__1, i__2;
 
@@ -152,10 +152,10 @@ int schlst_(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!SEARCH OBJECTS.
-      if ((objcts_1.oflag1[i - 1] & VisiO) == 0 || (rm == 0 || !qhere_(i, rm)) && (cn == 0 || objcts_1.ocan[i - 1] != cn) && (ad == 0 || objcts_1.oadv[i - 1] != ad)) {
+      if ((objcts_1.oflag1[i - 1] & VisiO) == 0 || (rm == 0 || !qhere(i, rm)) && (cn == 0 || objcts_1.ocan[i - 1] != cn) && (ad == 0 || objcts_1.oadv[i - 1] != ad)) {
          goto L1000;
       }
-      if (!thisit_(oidx, aidx, i, spcobj)) {
+      if (!thisit(oidx, aidx, i, spcobj)) {
          goto L200;
       }
       if (ret_val != 0) {
@@ -182,7 +182,7 @@ int schlst_(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
       i__2 = objcts_1.olnt;
       for (j = 1; j <= i__2; ++j) {
 // 						!SEARCH OBJECTS.
-         if ((objcts_1.oflag1[j - 1] & VisiO) == 0 || !thisit_(oidx, aidx, j, spcobj)) {
+         if ((objcts_1.oflag1[j - 1] & VisiO) == 0 || !thisit(oidx, aidx, j, spcobj)) {
             goto L500;
          }
          x = objcts_1.ocan[j - 1];
@@ -228,7 +228,7 @@ L2000:
 
 // THISIT--	VALIDATE OBJECT VS DESCRIPTION
 
-static Bool thisit_(int oidx, int aidx, int obj, int spcobj) {
+static Bool thisit(int oidx, int aidx, int obj, int spcobj) {
 // Initialized data
 //    THE FOLLOWING DATA STATEMENT USED RADIX-50 NOTATION (R50MIN/1RA/)
 //       IN RADIX-50 NOTATION, AN "A" IN THE FIRST POSITION IS

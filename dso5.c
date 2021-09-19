@@ -7,10 +7,10 @@
 
 // GTTIME-- GET TOTAL TIME PLAYED
 
-int gttime_(void) {
+int gttime(void) {
    int h, m, s;
 
-   itime_(&h, &m, &s);
+   itime(&h, &m, &s);
    int t = h * 60 + m - (time_1.shour * 60 + time_1.smin);
    if (t < 0) {
       t += 1440;
@@ -20,7 +20,7 @@ int gttime_(void) {
 
 // OPNCLS-- PROCESS OPEN/CLOSE FOR DOORS
 
-Bool opncls_(int obj, int so, int sc) {
+Bool opncls(int obj, int so, int sc) {
 // System generated locals
    int i__1;
    Bool ret_val;
@@ -44,7 +44,7 @@ L50:
       goto L200;
    }
 // 						!OPEN... IS IT?
-   rspeak_(so);
+   rspeak(so);
    objcts_1.oflag2[obj - 1] |= OpenO;
    return ret_val;
 
@@ -53,20 +53,20 @@ L100:
       goto L200;
    }
 // 						!CLOSE... IS IT?
-   rspeak_(sc);
+   rspeak(sc);
    objcts_1.oflag2[obj - 1] &= ~OpenO;
    return ret_val;
 
 L200:
-   i__1 = rnd_(3) + 125;
-   rspeak_(i__1);
+   i__1 = rnd(3) + 125;
+   rspeak(i__1);
 // 						!DUMMY.
    return ret_val;
 }
 
 // LIT-- IS ROOM LIT?
 
-Bool lit_(int rm) {
+Bool lit(int rm) {
 // System generated locals
    int i__1, i__2;
    Bool ret_val;
@@ -83,7 +83,7 @@ Bool lit_(int rm) {
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!LOOK FOR LIT OBJ
-      if (qhere_(i, rm)) {
+      if (qhere(i, rm)) {
          goto L100;
       }
 // 						!IN ROOM?
@@ -126,7 +126,7 @@ Bool lit_(int rm) {
 
 // WEIGHT- RETURNS SUM OF WEIGHT OF QUALIFYING OBJECTS
 
-int weight_(int rm, int cn, int ad) {
+int weight(int rm, int cn, int ad) {
 // System generated locals
    int ret_val, i__1;
 
@@ -141,7 +141,7 @@ int weight_(int rm, int cn, int ad) {
          goto L100;
       }
 // 						!IF FIXED, FORGET IT.
-      if (qhere_(i, rm) && rm != 0 || objcts_1.oadv[i - 1] == ad && ad != 0) {
+      if (qhere(i, rm) && rm != 0 || objcts_1.oadv[i - 1] == ad && ad != 0) {
          goto L50;
       }
       j = i;

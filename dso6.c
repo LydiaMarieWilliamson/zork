@@ -7,7 +7,7 @@
 #include "extern.h"
 #include "common.h"
 
-Bool ghere_(int obj, int rm) {
+Bool ghere(int obj, int rm) {
 // System generated locals
    Bool ret_val;
 
@@ -65,7 +65,7 @@ Bool ghere_(int obj, int rm) {
       case 25:
          goto L11000;
    }
-   bug_(60, obj);
+   bug(60, obj);
 
 // 1000--	STARS ARE ALWAYS HERE
 
@@ -142,7 +142,7 @@ L11000:
 
 // MRHERE--	IS MIRROR HERE?
 
-int mrhere_(int rm) {
+int mrhere(int rm) {
 // System generated locals
    int ret_val, i__1;
 

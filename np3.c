@@ -7,14 +7,14 @@
 #include "extern.h"
 #include "common.h"
 
-static int unpacks_(int);
-static int gwim_(int, int, int);
-static Bool syneql_(int, int, int, int, int);
-static Bool takeit_(int, int);
+static int unpacks(int);
+static int gwim(int, int, int);
+static Bool syneql(int, int, int, int, int);
+static Bool takeit(int, int);
 
 // THIS ROUTINE DETAILS ON BIT 4 OF PRSFLG
 
-Bool synmch_(/*int x*/) {
+Bool synmch(/*int x*/) {
 // Initialized data
 //   THE FOLLOWING DATA STATEMENT WAS ORIGINALLY:
 // 	DATA R50MIN/1RA/
@@ -49,14 +49,14 @@ L100:
 // 						!ADVANCE TO NEXT.
 
 L200:
-   newj = unpacks_(j);
+   newj = unpacks(j);
 // 						!UNPACK SYNTAX.
    sprep = syntax_1.dobj & PMaskV;
-   if (!syneql_(pv_1.p1, pv_1.o1, syntax_1.dobj, syntax_1.dfl1, syntax_1.dfl2)) {
+   if (!syneql(pv_1.p1, pv_1.o1, syntax_1.dobj, syntax_1.dfl1, syntax_1.dfl2)) {
       goto L1000;
    }
    sprep = syntax_1.iobj & PMaskV;
-   if (syneql_(pv_1.p2, pv_1.o2, syntax_1.iobj, syntax_1.ifl1, syntax_1.ifl2)) {
+   if (syneql(pv_1.p2, pv_1.o2, syntax_1.iobj, syntax_1.ifl1, syntax_1.ifl2)) {
       goto L6000;
    }
 
@@ -102,7 +102,7 @@ L3000:
       goto L10000;
    }
 // 						!ANY DRIVER?
-   dforce = unpacks_(drive);
+   dforce = unpacks(drive);
 // 						!UNPACK DFLT SYNTAX.
 
 // TRY TO FILL DIRECT OBJECT SLOT IF THAT WAS THE PROBLEM.
@@ -118,22 +118,22 @@ L3000:
       goto L3500;
    }
 // 						!ANY ORPHAN?
-   if (syneql_(pv_1.p1, pv_1.o1, syntax_1.dobj, syntax_1.dfl1, syntax_1.dfl2)) {
+   if (syneql(pv_1.p1, pv_1.o1, syntax_1.dobj, syntax_1.dfl1, syntax_1.dfl2)) {
       goto L4000;
    }
 
 // ORPHAN FAILS, TRY GWIM.
 
 L3500:
-   pv_1.o1 = gwim_(syntax_1.dobj, syntax_1.dfw1, syntax_1.dfw2);
+   pv_1.o1 = gwim(syntax_1.dobj, syntax_1.dfw1, syntax_1.dfw2);
 // 						!GET GWIM.
    if (pv_1.o1 > 0) {
       goto L4000;
    }
 // 						!TEST RESULT.
    i__1 = syntax_1.dobj & PMaskV;
-   orphan_(-1, pv_1.act, 0, i__1, 0);
-   rspeak_(623);
+   orphan(-1, pv_1.act, 0, i__1, 0);
+   rspeak(623);
    return ret_val;
 
 // TRY TO FILL INDIRECT OBJECT SLOT IF THAT WAS THE PROBLEM.
@@ -142,7 +142,7 @@ L4000:
    if ((syntax_1.vflag & IndS) == 0 || pv_1.o2 != 0) {
       goto L6000;
    }
-   pv_1.o2 = gwim_(syntax_1.iobj, syntax_1.ifw1, syntax_1.ifw2);
+   pv_1.o2 = gwim(syntax_1.iobj, syntax_1.ifw1, syntax_1.ifw2);
 // 						!GWIM.
    if (pv_1.o2 > 0) {
       goto L6000;
@@ -151,14 +151,14 @@ L4000:
       pv_1.o1 = orphs_1.oflag & orphs_1.oslot;
    }
    i__1 = syntax_1.dobj & PMaskV;
-   orphan_(-1, pv_1.act, pv_1.o1, i__1, 0);
-   rspeak_(624);
+   orphan(-1, pv_1.act, pv_1.o1, i__1, 0);
+   rspeak(624);
    return ret_val;
 
 // TOTAL CHOMP
 
 L10000:
-   rspeak_(601);
+   rspeak(601);
 // 						!CANT DO ANYTHING.
    return ret_val;
 // SYNMCH, PAGE 3
@@ -181,11 +181,11 @@ L5000:
 // 						!GET DIR OBJ.
    prsvec_1.prsi = pv_1.o2;
 // 						!GET IND OBJ.
-   if (!takeit_(prsvec_1.prso, syntax_1.dobj)) {
+   if (!takeit(prsvec_1.prso, syntax_1.dobj)) {
       return ret_val;
    }
 // 						!TRY TAKE.
-   if (!takeit_(prsvec_1.prsi, syntax_1.iobj)) {
+   if (!takeit(prsvec_1.prsi, syntax_1.iobj)) {
       return ret_val;
    }
 // 						!TRY TAKE.
@@ -196,7 +196,7 @@ L5000:
 
 // UNPACK-	UNPACK SYNTAX SPECIFICATION, ADV POINTER
 
-static int unpacks_(int oldj) {
+static int unpacks(int oldj) {
 // Local variables
    int i;
 
@@ -258,7 +258,7 @@ L200:
 
 // SYNEQL-	TEST FOR SYNTAX EQUALITY
 
-static Bool syneql_(int prep, int obj, int sprep, int sfl1, int sfl2) {
+static Bool syneql(int prep, int obj, int sprep, int sfl1, int sfl2) {
 // System generated locals
    Bool ret_val;
 
@@ -277,7 +277,7 @@ L100:
 
 // TAKEIT-	PARSER BASED TAKE OF OBJECT
 
-static Bool takeit_(int obj, int sflag) {
+static Bool takeit(int obj, int sflag) {
 // System generated locals
    Bool ret_val;
 
@@ -303,7 +303,7 @@ static Bool takeit_(int obj, int sflag) {
    if ((objcts_1.oflag2[x - 1] & OpenO) != 0) {
       goto L500;
    }
-   rspsub_(566, odo2);
+   rspsub(566, odo2);
 // 						!CANT REACH.
    return ret_val;
 
@@ -317,7 +317,7 @@ L500:
 
 // SHOULD BE IN ROOM (RbitV NE 0) AND CAN BE TAKEN (TbitV NE 0)
 
-   if (schlst_(0, 0, play_1.here, 0, 0, obj) <= 0) {
+   if (schlst(0, 0, play_1.here, 0, 0, obj) <= 0) {
       goto L4000;
    }
 // 						!IF NOT, OK.
@@ -333,7 +333,7 @@ L500:
    if ((sflag & CbitV) == 0) {
       goto L4000;
    }
-   rspsub_(445, odo2);
+   rspsub(445, odo2);
    return ret_val;
 
 // 1000--	IT SHOULD NOT BE IN THE ROOM.
@@ -344,10 +344,10 @@ L2000:
       goto L4000;
    }
 L1000:
-   if (schlst_(0, 0, play_1.here, 0, 0, obj) <= 0) {
+   if (schlst(0, 0, play_1.here, 0, 0, obj) <= 0) {
       goto L4000;
    }
-   rspsub_(665, odo2);
+   rspsub(665, odo2);
    return ret_val;
 // TAKEIT, PAGE 3
 
@@ -362,22 +362,22 @@ L3000:
       goto L3500;
    }
 // 						!TAKE VEHICLE?
-   rspeak_(672);
+   rspeak(672);
    return ret_val;
 
 L3500:
-   if (x != 0 && objcts_1.oadv[x - 1] == play_1.winner || weight_(0, obj, play_1.winner) + objcts_1.osize[obj - 1] <= state_1.mxload) {
+   if (x != 0 && objcts_1.oadv[x - 1] == play_1.winner || weight(0, obj, play_1.winner) + objcts_1.osize[obj - 1] <= state_1.mxload) {
       goto L3700;
    }
-   rspeak_(558);
+   rspeak(558);
 // 						!TOO BIG.
    return ret_val;
 
 L3700:
-   newsta_(obj, 559, 0, 0, play_1.winner);
+   newsta(obj, 559, 0, 0, play_1.winner);
 // 						!DO TAKE.
    objcts_1.oflag2[obj - 1] |= TChO;
-   scrupd_(objcts_1.ofval[obj - 1]);
+   scrupd(objcts_1.ofval[obj - 1]);
    objcts_1.ofval[obj - 1] = 0;
 
 L4000:
@@ -389,7 +389,7 @@ L4000:
 
 // GWIM- GET WHAT I MEAN IN AMBIGOUS SITUATIONS
 
-static int gwim_(int sflag, int sfw1, int sfw2) {
+static int gwim(int sflag, int sfw1, int sfw2) {
 // System generated locals
    int ret_val;
 
@@ -409,7 +409,7 @@ static int gwim_(int sflag, int sfw1, int sfw2) {
 // FIRST SEARCH ADVENTURER
 
    if ((sflag & AbitV) != 0) {
-      nobj = fwim_(sfw1, sfw2, 0, 0, play_1.winner, nocare);
+      nobj = fwim(sfw1, sfw2, 0, 0, play_1.winner, nocare);
    }
    if ((sflag & RbitV) != 0) {
       goto L100;
@@ -421,7 +421,7 @@ L50:
 // ALSO SEARCH ROOM
 
 L100:
-   robj = fwim_(sfw1, sfw2, play_1.here, 0, 0, nocare);
+   robj = fwim(sfw1, sfw2, play_1.here, 0, 0, nocare);
    if (robj < 0) {
       goto L500;
    } else if (robj == 0) {
@@ -446,7 +446,7 @@ L300:
       return ret_val;
    }
 // 						!IF AMBIGUOUS, RETURN.
-   if (!takeit_(robj, sflag)) {
+   if (!takeit(robj, sflag)) {
       return ret_val;
    }
 // 						!IF UNTAKEABLE, RETURN

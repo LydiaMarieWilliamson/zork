@@ -7,7 +7,7 @@
 #include "extern.h"
 #include "common.h"
 
-Bool trollp_(/*int arg*/) {
+Bool trollp(/*int arg*/) {
 // System generated locals
    Bool ret_val;
 
@@ -26,16 +26,16 @@ Bool trollp_(/*int arg*/) {
 // 						!GOT AXE?  NOTHING.
    i = 433;
 // 						!ASSUME CANT GET.
-   if (!qhere_(oindex_1.axe, play_1.here)) {
+   if (!qhere(oindex_1.axe, play_1.here)) {
       goto L1050;
    }
 // 						!HERE?
    i = 434;
 // 						!YES, RECOVER.
-   newsta_(oindex_1.axe, 0, 0, oindex_1.troll, 0);
+   newsta(oindex_1.axe, 0, 0, oindex_1.troll, 0);
 L1050:
-   if (qhere_(oindex_1.troll, play_1.here)) {
-      rspeak_(i);
+   if (qhere(oindex_1.troll, play_1.here)) {
+      rspeak(i);
    }
 // 						!IF PLAYER HERE.
    return ret_val;
@@ -71,8 +71,8 @@ L1300:
    objcts_1.oflag1[oindex_1.axe - 1] |= VisiO;
    objcts_1.odesc1[oindex_1.troll - 1] = 436;
 // 						!TROLL IN.
-   if (qhere_(oindex_1.troll, play_1.here)) {
-      rspeak_(437);
+   if (qhere(oindex_1.troll, play_1.here)) {
+      rspeak(437);
    }
    return ret_val;
 
@@ -81,7 +81,7 @@ L1400:
       goto L1500;
    }
 // 						!FIRST ENCOUNTER?
-   ret_val = prob_(33, 66);
+   ret_val = prob(33, 66);
 // 						!33% TRUE UNLESS BADLK.
    return ret_val;
 
@@ -98,13 +98,13 @@ L1500:
    objcts_1.oflag1[oindex_1.axe - 1] |= VisiO;
    findex_1.trollf = false;
    objcts_1.odesc1[oindex_1.troll - 1] = 436;
-   rspeak_(437);
+   rspeak(437);
 
 L1550:
    if (prsvec_1.prsa != vindex_1.takew && prsvec_1.prsa != vindex_1.movew) {
       goto L1600;
    }
-   rspeak_(438);
+   rspeak(438);
 // 						!JOKE.
    return ret_val;
 
@@ -113,7 +113,7 @@ L1600:
       goto L1700;
    }
 // 						!MUNG?
-   rspeak_(439);
+   rspeak(439);
 // 						!JOKE.
    return ret_val;
 
@@ -128,18 +128,18 @@ L1700:
       i = 441;
    }
 // 						!GIVE?
-   rspsub_(i, objcts_1.odesc2[prsvec_1.prso - 1]);
+   rspsub(i, objcts_1.odesc2[prsvec_1.prso - 1]);
 // 						!TROLL TAKES.
    if (prsvec_1.prso == oindex_1.knife) {
       goto L1900;
    }
 // 						!OBJ KNIFE?
-   newsta_(prsvec_1.prso, 442, 0, 0, 0);
+   newsta(prsvec_1.prso, 442, 0, 0, 0);
 // 						!NO, EATS IT.
    return ret_val;
 
 L1900:
-   rspeak_(443);
+   rspeak(443);
 // 						!KNIFE, THROWS IT BACK
    objcts_1.oflag2[oindex_1.troll - 1] |= FiteO;
    return ret_val;
@@ -148,7 +148,7 @@ L2000:
    if (!findex_1.trollf || prsvec_1.prsa != vindex_1.hellow) {
       goto L10;
    }
-   rspeak_(366);
+   rspeak(366);
 // 						!TROLL OUT.
    return ret_val;
 
@@ -160,7 +160,7 @@ L10:
 
 // CYCLOP-	CYCLOPS FUNCTION
 
-Bool cyclop_(/*int arg*/) {
+Bool cyclop(/*int arg*/) {
 // System generated locals
    int i__1, i__2;
    Bool ret_val;
@@ -179,7 +179,7 @@ Bool cyclop_(/*int arg*/) {
    }
    findex_1.cyclof = false;
 // 						!WAKE CYCLOPS.
-   rspeak_(187);
+   rspeak(187);
 // 						!DESCRIBE.
    findex_1.rvcyc = abs(findex_1.rvcyc);
    objcts_1.oflag2[oindex_1.cyclo - 1] = (objcts_1.oflag2[oindex_1.cyclo - 1] | FiteO) & ~SlepO;
@@ -195,7 +195,7 @@ L100:
 // 						!ANNOYED TOO MUCH?
    findex_1.rvcyc = 0;
 // 						!RESTART COUNT.
-   jigsup_(188);
+   jigsup(188);
 // 						!YES, EATS PLAYER.
    return ret_val;
 
@@ -208,7 +208,7 @@ L200:
       goto L300;
    }
 // 						!FOOD WHEN HUNGRY?
-   newsta_(oindex_1.food, 189, 0, 0, 0);
+   newsta(oindex_1.food, 189, 0, 0, 0);
 // 						!EATS PEPPERS.
 // Computing MIN
    i__1 = -1, i__2 = -findex_1.rvcyc;
@@ -224,7 +224,7 @@ L300:
    if (findex_1.rvcyc >= 0) {
       goto L350;
    }
-   newsta_(prsvec_1.prso, 190, 0, 0, 0);
+   newsta(prsvec_1.prso, 190, 0, 0, 0);
 // 						!DRINKS AND
    findex_1.cyclof = true;
 // 						!FALLS ASLEEP.
@@ -232,7 +232,7 @@ L300:
    return ret_val;
 
 L350:
-   rspeak_(191);
+   rspeak(191);
 // 						!NOT THIRSTY.
 L10:
    ret_val = false;
@@ -247,7 +247,7 @@ L400:
    }
 // 						!GARLIC IS JOKE.
 L450:
-   rspeak_(i);
+   rspeak(i);
 // 						!DISDAIN IT.
    if (findex_1.rvcyc < 0) {
       --findex_1.rvcyc;
@@ -257,7 +257,7 @@ L450:
    }
    if (!findex_1.cyclof) {
       i__1 = abs(findex_1.rvcyc) + 193;
-      rspeak_(i__1);
+      rspeak(i__1);
    }
    return ret_val;
 
@@ -270,7 +270,7 @@ L500:
 // 						!HELLO IS NO GO.
    if (prsvec_1.prsa == vindex_1.throww || prsvec_1.prsa == vindex_1.mungw) {
 
-      i = rnd_(2) + 200;
+      i = rnd(2) + 200;
    }
    if (prsvec_1.prsa == vindex_1.takew) {
       i = 202;
@@ -289,7 +289,7 @@ L500:
 
 // THIEFP-	THIEF FUNCTION
 
-Bool thiefp_(/*int arg*/) {
+Bool thiefp(/*int arg*/) {
 // System generated locals
    int i__1;
    Bool ret_val;
@@ -307,23 +307,23 @@ Bool thiefp_(/*int arg*/) {
       goto L10;
    }
 // 						!GOT STILLETTO?  F.
-   if (qhere_(oindex_1.still, hack_1.thfpos)) {
+   if (qhere(oindex_1.still, hack_1.thfpos)) {
       goto L50;
    }
 // 						!CAN HE RECOVER IT?
-   newsta_(oindex_1.thief, 0, 0, 0, 0);
+   newsta(oindex_1.thief, 0, 0, 0, 0);
 // 						!NO, VANISH.
-   if (qhere_(oindex_1.thief, play_1.here)) {
-      rspeak_(498);
+   if (qhere(oindex_1.thief, play_1.here)) {
+      rspeak(498);
    }
 // 						!IF HERO, TELL.
    return ret_val;
 
 L50:
-   newsta_(oindex_1.still, 0, 0, oindex_1.thief, 0);
+   newsta(oindex_1.still, 0, 0, oindex_1.thief, 0);
 // 						!YES, RECOVER.
-   if (qhere_(oindex_1.thief, play_1.here)) {
-      rspeak_(499);
+   if (qhere(oindex_1.thief, play_1.here)) {
+      rspeak(499);
    }
 // 						!IF HERO, TELL.
    return ret_val;
@@ -345,25 +345,25 @@ L100:
          j = 500;
       }
    }
-   rspeak_(j);
+   rspeak(j);
 // 						!TELL IF BOOTY REAPPEARS.
 
    j = 501;
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!LOOP.
-      if (i == oindex_1.chali || i == oindex_1.thief || play_1.here != rindex_1.treas || !qhere_(i, play_1.here)) {
+      if (i == oindex_1.chali || i == oindex_1.thief || play_1.here != rindex_1.treas || !qhere(i, play_1.here)) {
          goto L135;
       }
       objcts_1.oflag1[i - 1] |= VisiO;
-      rspsub_(j, objcts_1.odesc2[i - 1]);
+      rspsub(j, objcts_1.odesc2[i - 1]);
 // 						!DESCRIBE.
       j = 502;
       goto L150;
 
    L135:
       if (objcts_1.oadv[i - 1] == -oindex_1.thief) {
-         newsta_(i, 0, play_1.here, 0, 0);
+         newsta(i, 0, play_1.here, 0, 0);
       }
    L150:
       ;
@@ -375,14 +375,14 @@ L200:
       goto L250;
    }
 // 						!FIRST ENCOUNTER?
-   ret_val = prob_(20, 75);
+   ret_val = prob(20, 75);
    return ret_val;
 
 L250:
    if (prsvec_1.prsa != vindex_1.hellow || objcts_1.odesc1[oindex_1.thief - 1] != 504) {
       goto L300;
    }
-   rspeak_(626);
+   rspeak(626);
    return ret_val;
 
 L300:
@@ -403,8 +403,8 @@ L400:
       goto L500;
    }
 // 						!IN?
-   if (qhere_(oindex_1.thief, play_1.here)) {
-      rspeak_(505);
+   if (qhere(oindex_1.thief, play_1.here)) {
+      rspeak(505);
    }
 // 						!CAN HERO SEE?
    hack_1.thfact = true;
@@ -412,7 +412,7 @@ L400:
    objcts_1.odesc1[oindex_1.thief - 1] = 503;
 // 						!CHANGE DESCRIPTION.
    objcts_1.oflag1[oindex_1.still - 1] |= VisiO;
-   if (play_1.here == rindex_1.treas && qhere_(oindex_1.chali, play_1.here)) {
+   if (play_1.here == rindex_1.treas && qhere(oindex_1.chali, play_1.here)) {
       objcts_1.oflag1[oindex_1.chali - 1] &= ~TakeO;
    }
    return ret_val;
@@ -422,7 +422,7 @@ L500:
       goto L600;
    }
 // 						!TAKE?
-   rspeak_(506);
+   rspeak(506);
 // 						!JOKE.
    return ret_val;
 
@@ -430,11 +430,11 @@ L600:
    if (prsvec_1.prsa != vindex_1.throww || prsvec_1.prso != oindex_1.knife || (objcts_1.oflag2[oindex_1.thief - 1] & FiteO) != 0) {
       goto L700;
    }
-   if (prob_(10, 10)) {
+   if (prob(10, 10)) {
       goto L650;
    }
 // 						!THREW KNIFE, 10%?
-   rspeak_(507);
+   rspeak(507);
 // 						!NO, JUST MAKES
    objcts_1.oflag2[oindex_1.thief - 1] |= FiteO;
    return ret_val;
@@ -449,11 +449,11 @@ L650:
       }
 // 						!THIEF CARRYING?
       j = 509;
-      newsta_(i, 0, play_1.here, 0, 0);
+      newsta(i, 0, play_1.here, 0, 0);
    L675:
       ;
    }
-   newsta_(oindex_1.thief, j, 0, 0, 0);
+   newsta(oindex_1.thief, j, 0, 0, 0);
 // 						!THIEF VANISHES.
    return ret_val;
 
@@ -469,29 +469,29 @@ L700:
    hack_1.thfact = true;
    objcts_1.oflag1[oindex_1.still - 1] |= VisiO;
    objcts_1.odesc1[oindex_1.thief - 1] = 503;
-   rspeak_(510);
+   rspeak(510);
 
 L750:
    if (prsvec_1.prso != oindex_1.brick || objcts_1.ocan[oindex_1.fuse - 1] != oindex_1.brick || cevent_1.ctick[cindex_1.cevfus - 1] == 0) {
       goto L800;
    }
-   rspeak_(511);
+   rspeak(511);
 // 						!THIEF REFUSES BOMB.
    return ret_val;
 
 L800:
    i__1 = -oindex_1.thief;
-   newsta_(prsvec_1.prso, 0, 0, 0, i__1);
+   newsta(prsvec_1.prso, 0, 0, 0, i__1);
 // 						!THIEF TAKES GIFT.
    if (objcts_1.otval[prsvec_1.prso - 1] > 0) {
       goto L900;
    }
 // 						!A TREASURE?
-   rspsub_(512, objcts_1.odesc2[prsvec_1.prso - 1]);
+   rspsub(512, objcts_1.odesc2[prsvec_1.prso - 1]);
    return ret_val;
 
 L900:
-   rspsub_(627, objcts_1.odesc2[prsvec_1.prso - 1]);
+   rspsub(627, objcts_1.odesc2[prsvec_1.prso - 1]);
 // 						!THIEF ENGROSSED.
    findex_1.thfenf = true;
    return ret_val;

@@ -7,7 +7,7 @@
 #include "extern.h"
 #include "common.h"
 
-Bool lightp_(int obj) {
+Bool lightp(int obj) {
 // System generated locals
    Bool ret_val;
 
@@ -49,7 +49,7 @@ L19100:
    cevent_1.cflag[cindex_1.cevcnd - 1] = false;
 // 						!DISABLE COUNTDOWN.
    objcts_1.oflag1[oindex_1.candl - 1] &= ~OnO;
-   rspeak_(i);
+   rspeak(i);
    return ret_val;
 
 L19200:
@@ -60,7 +60,7 @@ L19200:
    if ((objcts_1.oflag1[oindex_1.candl - 1] & LiteO) != 0) {
       goto L19300;
    }
-   rspeak_(515);
+   rspeak(515);
 // 						!CANDLES TOO SHORT.
    return ret_val;
 
@@ -69,7 +69,7 @@ L19300:
       goto L19400;
    }
 // 						!ANY FLAME?
-   rspeak_(516);
+   rspeak(516);
 // 						!NO, LOSE.
    prsvec_1.prswon = false;
    return ret_val;
@@ -87,7 +87,7 @@ L19400:
    objcts_1.oflag1[oindex_1.candl - 1] |= OnO;
    cevent_1.cflag[cindex_1.cevcnd - 1] = true;
 // 						!RESUME COUNTDOWN.
-   rspeak_(i);
+   rspeak(i);
    return ret_val;
 
 L19500:
@@ -98,23 +98,23 @@ L19500:
       goto L19700;
    }
 // 						!ALREADY ON?
-   newsta_(oindex_1.candl, 521, 0, 0, 0);
+   newsta(oindex_1.candl, 521, 0, 0, 0);
 // 						!NO, VAPORIZE.
    return ret_val;
 
 L19600:
-   rspeak_(519);
+   rspeak(519);
 // 						!CANT LIGHT WITH THAT.
    return ret_val;
 
 L19700:
-   rspeak_(520);
+   rspeak(520);
 // 						!ALREADY ON.
    return ret_val;
 
 L20000:
    if (obj != oindex_1.match) {
-      bug_(6, obj);
+      bug(6, obj);
    }
    if (prsvec_1.prsa != vindex_1.trnonw || prsvec_1.prso != oindex_1.match) {
 
@@ -124,7 +124,7 @@ L20000:
       goto L20100;
    }
 // 						!ANY MATCHES LEFT?
-   rspeak_(183);
+   rspeak(183);
 // 						!NO, LOSE.
    return ret_val;
 
@@ -134,7 +134,7 @@ L20100:
    objcts_1.oflag1[oindex_1.match - 1] |= flobts;
    cevent_1.ctick[cindex_1.cevmat - 1] = 2;
 // 						!COUNTDOWN.
-   rspeak_(184);
+   rspeak(184);
    return ret_val;
 
 L20500:
@@ -143,7 +143,7 @@ L20500:
    }
    objcts_1.oflag1[oindex_1.match - 1] &= ~flobts;
    cevent_1.ctick[cindex_1.cevmat - 1] = 0;
-   rspeak_(185);
+   rspeak(185);
    return ret_val;
 
 // HERE FOR FALSE RETURN

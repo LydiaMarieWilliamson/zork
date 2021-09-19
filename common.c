@@ -12,24 +12,24 @@
 // Unlisted:
 // common /star/
 // int mbase, strbit;
-struct starCB star_;
+struct starCB star;
 
 // common /time/
 // int pltime, shour, smin, ssec;
 struct timeCB time_;
 
 // common /vers/
-const struct versCB vers_ = (struct versCB){
+const struct versCB vers = (struct versCB){
    vmaj: 2, vmin: 7, vedit: 'A'
 };
 
 // common /hyper/
-const struct hyperCB hyper_ = (struct hyperCB){
+const struct hyperCB hyper = (struct hyperCB){
    hfactr: 500
 };
 
 // common /bats/
-const struct batsCB bats_ = (struct batsCB){
+const struct batsCB bats = (struct batsCB){
    batdrp: { 66, 67, 68, 69, 70, 71, 72, 65, 73 }
 };
 
@@ -38,23 +38,23 @@ const struct batsCB bats_ = (struct batsCB){
 // int prsa, prsi, prso;
 // Bool prswon;
 // int prscon;
-struct prsvecCB prsvec_;
+struct prsvecCB prsvec;
 
 // common /orphs/
 // int oflag, oact, oslot, oprep, oname;
-struct orphsCB orphs_;
+struct orphsCB orphs;
 
 // common /last/
 // int lastit;
-struct lastCB last_;
+struct lastCB last;
 
 // common /pv/
 // int act, o1, o2, p1, p2;
-struct pvCB pv_;
+struct pvCB pv;
 
 // common /syntax/
 // int vflag, dobj, dfl1, dfl2, dfw1, dfw2, iobj, ifl1, ifl2, ifw1, ifw2;
-struct syntaxCB syntax_;
+struct syntaxCB syntax;
 
 // Syntax flags
 // common /synflg/
@@ -68,12 +68,12 @@ struct syntaxCB syntax_;
 // common /play/
 // int winner, here;
 // Bool telflg;
-struct playCB play_;
+struct playCB play;
 
 // rooms.h:
 // common /rooms/
 // int rlnt, rdesc1[200], rdesc2[200], rexit[200], ractio[200], rval[200], rflag[200];
-struct roomsCB rooms_;
+struct roomsCB rooms;
 
 // rflag.h:
 // Room flags.
@@ -98,7 +98,7 @@ const struct rindexCB rindex_ = (struct rindexCB){
 
 // xsrch.h:
 // common /xsrch/
-const struct xsrchCB xsrch_ = (struct xsrchCB){
+const struct xsrchCB xsrch = (struct xsrchCB){
    xmin: 1024, xmax: 16384, xdown: 10240, xup: 9216, xnorth: 1024,
    xsouth: 5120, xenter: 13312, xexit: 14336, xeast: 3072, xwest: 7168
 };
@@ -106,7 +106,7 @@ const struct xsrchCB xsrch_ = (struct xsrchCB){
 // objects.h:
 // common /objcts/
 // int olnt, odesc1[220], odesc2[220], odesco[220], oactio[220], oflag1[220], oflag2[220], ofval[220], otval[220], osize[220], ocapac[220], oroom[220], oadv[220], ocan[220], oread[220];
-struct objctsCB objcts_;
+struct objctsCB objcts;
 
 // common /oroom2/
 // int r2lnt, oroom2[20], rroom2[20];
@@ -119,7 +119,7 @@ struct oroom2CB oroom2_;
 
 // oindex.h:
 // common /oindex/
-const struct oindexCB oindex_ = (struct oindexCB){
+const struct oindexCB oindex = (struct oindexCB){
    garli: 2, food: 3, gunk: 4, coal: 5, machi: 7, diamo: 8, tcase: 9, bottl: 10,
    water: 11, rope: 12, knife: 13, sword: 14, lamp: 15, blamp: 16, rug: 17, leave: 18,
    troll: 19, axe: 20, rknif: 21, keys: 23, ice: 30, bar: 26, coffi: 33, torch: 34,
@@ -141,10 +141,10 @@ const struct oindexCB oindex_ = (struct oindexCB){
 // common /cevent/
 // int clnt, ctick[25], cactio[25];
 // Bool cflag[25];
-struct ceventCB cevent_;
+struct ceventCB cevent;
 
 // common /cindex/
-const struct cindexCB cindex_ = (struct cindexCB){
+const struct cindexCB cindex = (struct cindexCB){
    cevcur: 1, cevmnt: 2, cevlnt: 3, cevmat: 4, cevcnd: 5, cevbal: 6, cevbrn: 7, cevfus: 8,
    cevled: 9, cevsaf: 10, cevvlg: 11, cevgno: 12, cevbuc: 13, cevsph: 14, cevegh: 15, cevfor: 16,
    cevscl: 17, cevzgi: 18, cevzgo: 19, cevste: 20, cevmrs: 21, cevpin: 22, cevinq: 23, cevfol: 24
@@ -153,21 +153,21 @@ const struct cindexCB cindex_ = (struct cindexCB){
 // advers.h:
 // common /advs/
 // int alnt, aroom[4], ascore[4], avehic[4], aobj[4], aactio[4], astren[4], aflag[4];
-struct advsCB advs_;
+struct advsCB advs;
 
 // common /aflags/
-const struct aflagsCB aflags_ = (struct aflagsCB){
+const struct aflagsCB aflags = (struct aflagsCB){
    astag: 32768
 };
 
 // common /aindex/
-const struct aindexCB aindex_ = (struct aindexCB){
+const struct aindexCB aindex = (struct aindexCB){
    player: 1, arobot: 2, amastr: 3
 };
 
 // verbs.h:
 // common /vindex/
-const struct vindexCB vindex_ = (struct vindexCB){
+const struct vindexCB vindex = (struct vindexCB){
    cintw: 1, deadxw: 2, frstqw: 3, inxw: 4, outxw: 5, walkiw: 6, fightw: 7, foow: 8,
    meltw: 101, readw: 100, inflaw: 102, deflaw: 103, alarmw: 104, exorcw: 105, plugw: 106, kickw: 107,
    wavew: 108, raisew: 109, lowerw: 110, rubw: 111, pushw: 112, untiew: 113, tiew: 114, tieupw: 115,
@@ -183,37 +183,37 @@ const struct vindexCB vindex_ = (struct vindexCB){
 // common /findex/
 // Bool trollf, cagesf, bucktf, caroff, carozf, lwtidf, domef, glacrf, echof, riddlf, lldf, cyclof, magicf, litldf, safef, gnomef, gnodrf, mirrmf, egyptf, onpolf, blabf, brieff, superf, buoyf, grunlf, gatef, rainbf, cagetf, empthf, deflaf, glacmf, frobzf, endgmf, badlkf, thfenf, singsf, mrpshf, mropnf, wdopnf, mr1f, mr2f, inqstf, follwf, spellf, cpoutf, cpushf;
 // int btief, binff, rvmnt, rvclr, rvcyc, rvsnd, rvgua, orrug, orcand, ormtch, orlamp, mdir, mloc, poleuf, quesno, nqatt, corrct, lcell, pnumb, acell, dcell, cphere;
-struct findexCB findex_;
+struct findexCB findex;
 
 // debug.h:
 // common /debug/
 // int dbgflg, prsflg, gdtflg;
-struct debugCB debug_;
+struct debugCB debug;
 
 // villians.h:
 // common /hack/
 // int thfpos;
 // Bool thfflg, thfact, swdact;
 // int swdsta;
-struct hackCB hack_;
+struct hackCB hack;
 
 // common /vill/
 // int vlnt, villns[4], vprob[4], vopps[4], vbest[4], vmelee[4];
-struct villCB vill_;
+struct villCB vill;
 
 // state.h:
 // common /state/
 // int moves, deaths, rwscor, mxscor, mxload, ltshft, bloc, mungrm, hs, egscor, egmxsc;
-struct stateCB state_;
+struct stateCB state;
 
 // curxt.h:
 // common /curxt/
 // int xtype, xroom1, xstrng, xactio, xobj;
-struct curxtCB curxt_;
+struct curxtCB curxt;
 
 // xpars.h:
 // common /xpars/
-const struct xparsCB xpars_ = (struct xparsCB){
+const struct xparsCB xpars = (struct xparsCB){
    xrmask: 255, xdmask: 31744, xfmask: 3, xfshft: 256, xashft: 256,
    xelnt: { 1, 2, 3, 3 },
    xnorm: 1, xno: 2, xcond: 3, xdoor: 4, xlflag: 32768
@@ -223,11 +223,11 @@ const struct xparsCB xpars_ = (struct xparsCB){
 // common /input/
 // int inlnt;
 // char inbuf[78];
-struct inputCB input_;
+struct inputCB input;
 
 // screen.h:
 // common /screen/
-struct screenCB screen_ = (struct screenCB){
+struct screenCB screen = (struct screenCB){
    fromdr: 0, scolrm: 0, scolac: 0,
    scoldr: { 1024, 153, 5120, 154, 3072, 152, 7168, 151 },
    scolwl: { 151, 207, 3072, 152, 208, 7168, 153, 206, 5120, 154, 205, 1024 }
@@ -236,16 +236,16 @@ struct screenCB screen_ = (struct screenCB){
 // mindex.h:
 // common /rmsg/
 // int mlnt, mrloc, rtext[1050];
-struct rmsgCB rmsg_;
+struct rmsgCB rmsg;
 
 // exits.h:
 // common /exits/
 // int xlnt, travel[900];
-struct exitsCB exits_;
+struct exitsCB exits;
 
 // puzzle.h:
 // common /puzzle/
-struct puzzleCB puzzle_ = (struct puzzleCB){
+struct puzzleCB puzzle = (struct puzzleCB){
    cpdr: { 1024, -8, 2048, -7, 3072, 1, 4096, 9, 5120, 8, 6144, 7, 7168, -1, 8192, -9 },
    cpwl: { 205, -8, 206, 8, 207, 1, 208, -1 },
    cpvec: {

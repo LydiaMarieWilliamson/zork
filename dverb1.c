@@ -9,7 +9,7 @@
 
 // TAKE AN OBJECT (FOR VERBS TAKE, PUT, DROP, READ, ETC.)
 
-Bool take_(Bool flg) {
+Bool take(Bool flg) {
 // System generated locals
    int i__1;
    Bool ret_val;
@@ -26,7 +26,7 @@ Bool take_(Bool flg) {
       goto L100;
    }
 // 						!STAR?
-   ret_val = objact_(/*x*/);
+   ret_val = objact(/*x*/);
 // 						!YES, LET IT HANDLE.
    return ret_val;
 
@@ -37,7 +37,7 @@ L100:
       goto L400;
    }
 // 						!HIS VEHICLE?
-   rspeak_(672);
+   rspeak(672);
 // 						!DUMMY.
    return ret_val;
 
@@ -45,48 +45,48 @@ L400:
    if ((objcts_1.oflag1[prsvec_1.prso - 1] & TakeO) != 0) {
       goto L500;
    }
-   if (!oappli_(oa, 0)) {
-      i__1 = rnd_(5) + 552;
-      rspeak_(i__1);
+   if (!oappli(oa, 0)) {
+      i__1 = rnd(5) + 552;
+      rspeak(i__1);
    }
    return ret_val;
 
 // OBJECT IS TAKEABLE AND IN POSITION TO BE TAKEN.
 
 L500:
-   if (x != 0 || qhere_(prsvec_1.prso, play_1.here)) {
+   if (x != 0 || qhere(prsvec_1.prso, play_1.here)) {
       goto L600;
    }
    if (objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
-      rspeak_(557);
+      rspeak(557);
    }
 // 						!ALREADY GOT IT?
    return ret_val;
 
 L600:
-   if (x != 0 && objcts_1.oadv[x - 1] == play_1.winner || weight_(0, prsvec_1.prso, play_1.winner) + objcts_1.osize[prsvec_1.prso - 1] <= state_1.mxload) {
+   if (x != 0 && objcts_1.oadv[x - 1] == play_1.winner || weight(0, prsvec_1.prso, play_1.winner) + objcts_1.osize[prsvec_1.prso - 1] <= state_1.mxload) {
       goto L700;
    }
-   rspeak_(558);
+   rspeak(558);
 // 						!TOO MUCH WEIGHT.
    return ret_val;
 
 L700:
    ret_val = true;
 // 						!AT LAST.
-   if (oappli_(oa, 0)) {
+   if (oappli(oa, 0)) {
       return ret_val;
    }
 // 						!DID IT HANDLE?
-   newsta_(prsvec_1.prso, 0, 0, 0, play_1.winner);
+   newsta(prsvec_1.prso, 0, 0, 0, play_1.winner);
 // 						!TAKE OBJECT FOR WINNER.
    objcts_1.oflag2[prsvec_1.prso - 1] |= TChO;
-   scrupd_(objcts_1.ofval[prsvec_1.prso - 1]);
+   scrupd(objcts_1.ofval[prsvec_1.prso - 1]);
 // 						!UPDATE SCORE.
    objcts_1.ofval[prsvec_1.prso - 1] = 0;
 // 						!CANT BE SCORED AGAIN.
    if (flg) {
-      rspeak_(559);
+      rspeak(559);
    }
 // 						!TELL TAKEN.
    return ret_val;
@@ -95,7 +95,7 @@ L700:
 
 // DROP- DROP VERB PROCESSOR
 
-Bool drop_(/*Bool z*/) {
+Bool drop(/*Bool z*/) {
 // System generated locals
    Bool ret_val;
 
@@ -118,7 +118,7 @@ Bool drop_(/*Bool z*/) {
    if ((objcts_1.oflag2[x - 1] & OpenO) != 0) {
       goto L300;
    }
-   rspsub_(525, objcts_1.odesc2[x - 1]);
+   rspsub(525, objcts_1.odesc2[x - 1]);
 // 						!CANT REACH.
    return ret_val;
 
@@ -134,7 +134,7 @@ L300:
 // 						!IS HE IN VEHICLE?
    prsvec_1.prsi = advs_1.avehic[play_1.winner - 1];
 // 						!YES,
-   f = put_(/*true*/);
+   f = put(/*true*/);
 // 						!DROP INTO VEHICLE.
    prsvec_1.prsi = 0;
 // 						!DISARM PARSER.
@@ -142,18 +142,18 @@ L300:
 // 						!DONE.
 
 L400:
-   newsta_(prsvec_1.prso, 0, play_1.here, 0, 0);
+   newsta(prsvec_1.prso, 0, play_1.here, 0, 0);
 // 						!DROP INTO ROOM.
    if (play_1.here == rindex_1.mtree) {
-      newsta_(prsvec_1.prso, 0, rindex_1.fore3, 0, 0);
+      newsta(prsvec_1.prso, 0, rindex_1.fore3, 0, 0);
    }
-   scrupd_(objcts_1.ofval[prsvec_1.prso - 1]);
+   scrupd(objcts_1.ofval[prsvec_1.prso - 1]);
 // 						!SCORE OBJECT.
    objcts_1.ofval[prsvec_1.prso - 1] = 0;
 // 						!CANT BE SCORED AGAIN.
    objcts_1.oflag2[prsvec_1.prso - 1] |= TChO;
 
-   if (objact_(/*x*/)) {
+   if (objact(/*x*/)) {
       return ret_val;
    }
 // 						!DID IT HANDLE?
@@ -168,11 +168,11 @@ L400:
    if (i != 0 && play_1.here == rindex_1.mtree) {
       i = 659;
    }
-   rspsub_(i, objcts_1.odesc2[prsvec_1.prso - 1]);
+   rspsub(i, objcts_1.odesc2[prsvec_1.prso - 1]);
    return ret_val;
 
 L1000:
-   rspeak_(527);
+   rspeak(527);
 // 						!DONT HAVE IT.
    return ret_val;
 
@@ -180,7 +180,7 @@ L1000:
 
 // PUT- PUT VERB PROCESSOR
 
-Bool put_(/*Bool flg*/) {
+Bool put(/*Bool flg*/) {
 // System generated locals
    Bool ret_val;
 
@@ -192,8 +192,8 @@ Bool put_(/*Bool flg*/) {
    if (prsvec_1.prso <= star_1.strbit && prsvec_1.prsi <= star_1.strbit) {
       goto L200;
    }
-   if (!objact_(/*x*/)) {
-      rspeak_(560);
+   if (!objact(/*x*/)) {
+      rspeak(560);
    }
 // 						!STAR
    ret_val = true;
@@ -203,7 +203,7 @@ L200:
    if ((objcts_1.oflag2[prsvec_1.prsi - 1] & OpenO) != 0 || (objcts_1.oflag1[prsvec_1.prsi - 1] & DoorO + ContO) != 0 || (objcts_1.oflag2[prsvec_1.prsi - 1] & VehO) != 0) {
       goto L300;
    }
-   rspeak_(561);
+   rspeak(561);
 // 						!CANT PUT IN THAT.
    return ret_val;
 
@@ -212,7 +212,7 @@ L300:
       goto L400;
    }
 // 						!IS IT OPEN?
-   rspeak_(562);
+   rspeak(562);
 // 						!NO, JOKE
    return ret_val;
 
@@ -221,7 +221,7 @@ L400:
       goto L500;
    }
 // 						!INTO ITSELF?
-   rspeak_(563);
+   rspeak(563);
 // 						!YES, JOKE.
    return ret_val;
 
@@ -230,15 +230,15 @@ L500:
       goto L600;
    }
 // 						!ALREADY INSIDE.
-   rspsb2_(564, objcts_1.odesc2[prsvec_1.prso - 1], objcts_1.odesc2[prsvec_1.prsi - 1]);
+   rspsb2(564, objcts_1.odesc2[prsvec_1.prso - 1], objcts_1.odesc2[prsvec_1.prsi - 1]);
    ret_val = true;
    return ret_val;
 
 L600:
-   if (weight_(0, prsvec_1.prso, 0) + weight_(0, prsvec_1.prsi, 0) + objcts_1.osize[prsvec_1.prso - 1] <= objcts_1.ocapac[prsvec_1.prsi - 1]) {
+   if (weight(0, prsvec_1.prso, 0) + weight(0, prsvec_1.prsi, 0) + objcts_1.osize[prsvec_1.prso - 1] <= objcts_1.ocapac[prsvec_1.prsi - 1]) {
       goto L700;
    }
-   rspeak_(565);
+   rspeak(565);
 // 						!THEN CANT DO IT.
    return ret_val;
 
@@ -248,7 +248,7 @@ L700:
    j = prsvec_1.prso;
 // 						!START SEARCH.
 L725:
-   if (qhere_(j, play_1.here)) {
+   if (qhere(j, play_1.here)) {
       goto L750;
    }
 // 						!IS IT HERE?
@@ -266,7 +266,7 @@ L750:
    svi = prsvec_1.prsi;
    prsvec_1.prsa = vindex_1.takew;
    prsvec_1.prsi = 0;
-   if (!take_(false)) {
+   if (!take(false)) {
       return ret_val;
    }
 // 						!TAKE OBJECT.
@@ -286,24 +286,24 @@ L800:
       goto L900;
    }
 // 						!OPEN?
-   rspsub_(566, objcts_1.odesc2[prsvec_1.prso - 1]);
+   rspsub(566, objcts_1.odesc2[prsvec_1.prso - 1]);
 // 						!LOSE.
    return ret_val;
 
 L900:
-   scrupd_(objcts_1.ofval[prsvec_1.prso - 1]);
+   scrupd(objcts_1.ofval[prsvec_1.prso - 1]);
 // 						!SCORE OBJECT.
    objcts_1.ofval[prsvec_1.prso - 1] = 0;
    objcts_1.oflag2[prsvec_1.prso - 1] |= TChO;
-   newsta_(prsvec_1.prso, 0, 0, 0, play_1.winner);
+   newsta(prsvec_1.prso, 0, 0, 0, play_1.winner);
 // 						!TEMPORARILY ON WINNER.
 
 L1000:
-   if (objact_(/*x*/)) {
+   if (objact(/*x*/)) {
       return ret_val;
    }
 // 						!NO, GIVE OBJECT A SHOT.
-   newsta_(prsvec_1.prso, 2, 0, prsvec_1.prsi, 0);
+   newsta(prsvec_1.prso, 2, 0, prsvec_1.prsi, 0);
 // 						!CONTAINED INSIDE.
    ret_val = true;
    return ret_val;
@@ -312,7 +312,7 @@ L1000:
 
 // VALUAC- HANDLES VALUABLES/EVERYTHING
 
-void valuac_(int v) {
+void valuac(int v) {
 // System generated locals
    int i__1;
 
@@ -326,7 +326,7 @@ void valuac_(int v) {
 // 						!ASSUME NO ACTIONS.
    i = 579;
 // 						!ASSUME NOT LIT.
-   if (!lit_(play_1.here)) {
+   if (!lit(play_1.here)) {
       goto L4000;
    }
 // 						!IF NOT LIT, PUNT.
@@ -345,15 +345,15 @@ void valuac_(int v) {
    i__1 = objcts_1.olnt;
    for (prsvec_1.prso = 1; prsvec_1.prso <= i__1; ++prsvec_1.prso) {
 // 						!LOOP THRU OBJECTS.
-      if (!qhere_(prsvec_1.prso, play_1.here) || (objcts_1.oflag1[prsvec_1.prso - 1] & VisiO) == 0 || (objcts_1.oflag2[prsvec_1.prso - 1] & ActrO) != 0 || savep == v && objcts_1.otval[prsvec_1.prso - 1] <= 0) {
+      if (!qhere(prsvec_1.prso, play_1.here) || (objcts_1.oflag1[prsvec_1.prso - 1] & VisiO) == 0 || (objcts_1.oflag2[prsvec_1.prso - 1] & ActrO) != 0 || savep == v && objcts_1.otval[prsvec_1.prso - 1] <= 0) {
          goto L500;
       }
       if ((objcts_1.oflag1[prsvec_1.prso - 1] & TakeO) == 0 && (objcts_1.oflag2[prsvec_1.prso - 1] & TryO) == 0) {
          goto L500;
       }
       f = false;
-      rspsub_(580, objcts_1.odesc2[prsvec_1.prso - 1]);
-      f1 = take_(true);
+      rspsub(580, objcts_1.odesc2[prsvec_1.prso - 1]);
+      f1 = take(true);
       if (saveh != play_1.here) {
          return;
       }
@@ -373,8 +373,8 @@ L1000:
          goto L1500;
       }
       f = false;
-      rspsub_(580, objcts_1.odesc2[prsvec_1.prso - 1]);
-      f1 = drop_(/*true*/);
+      rspsub(580, objcts_1.odesc2[prsvec_1.prso - 1]);
+      f1 = drop(/*true*/);
       if (saveh != play_1.here) {
          return;
       }
@@ -395,8 +395,8 @@ L2000:
          goto L2500;
       }
       f = false;
-      rspsub_(580, objcts_1.odesc2[prsvec_1.prso - 1]);
-      f1 = put_(/*true*/);
+      rspsub(580, objcts_1.odesc2[prsvec_1.prso - 1]);
+      f1 = put(/*true*/);
       if (saveh != play_1.here) {
          return;
       }
@@ -412,7 +412,7 @@ L3000:
 // 						!CHOOSE MESSAGE.
 L4000:
    if (f) {
-      rspeak_(i);
+      rspeak(i);
    }
 // 						!IF NOTHING, REPORT.
 }

@@ -21,14 +21,14 @@ void exit_(void) {
 }
 
 // Get time in hours, minutes and seconds.
-void itime_(int *hrptr, int *minptr, int *secptr) {
+void itime(int *hrptr, int *minptr, int *secptr) {
    time_t timebuf; time(&timebuf);
    struct tm *tmptr = localtime(&timebuf);
    *hrptr = tmptr->tm_hour, *minptr = tmptr->tm_min, *secptr = tmptr->tm_sec;
 }
 
 // Random number generator.
-int rnd_(int maxval) {
+int rnd(int maxval) {
    return rand() % maxval;
 }
 

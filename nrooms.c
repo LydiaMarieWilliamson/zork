@@ -7,10 +7,10 @@
 #include "extern.h"
 #include "common.h"
 
-static void lookto_(int, int, int, int, int);
-static void ewtell_(int, int);
+static void lookto(int, int, int, int, int);
+static void ewtell(int, int);
 
-Bool rappl2_(int ri) {
+Bool rappl2(int ri) {
 // Initialized data
    const int newrms = 38;
 
@@ -71,14 +71,14 @@ Bool rappl2_(int ri) {
       case 23:
          goto L60000;
    }
-   bug_(70, ri);
+   bug(70, ri);
    return ret_val;
 
 // R38--	MIRROR D ROOM
 
 L38000:
    if (prsvec_1.prsa == vindex_1.lookw) {
-      lookto_(rindex_1.fdoor, rindex_1.mrg, 0, 682, 681);
+      lookto(rindex_1.fdoor, rindex_1.mrg, 0, 682, 681);
    }
    return ret_val;
 
@@ -86,7 +86,7 @@ L38000:
 
 L39000:
    if (prsvec_1.prsa == vindex_1.walkiw) {
-      jigsup_(685);
+      jigsup(685);
    }
    return ret_val;
 
@@ -94,7 +94,7 @@ L39000:
 
 L40000:
    if (prsvec_1.prsa == vindex_1.lookw) {
-      lookto_(rindex_1.mrg, rindex_1.mrb, 683, 0, 681);
+      lookto(rindex_1.mrg, rindex_1.mrb, 683, 0, 681);
    }
    return ret_val;
 
@@ -102,7 +102,7 @@ L40000:
 
 L41000:
    if (prsvec_1.prsa == vindex_1.lookw) {
-      lookto_(rindex_1.mrc, rindex_1.mra, 0, 0, 681);
+      lookto(rindex_1.mrc, rindex_1.mra, 0, 0, 681);
    }
    return ret_val;
 
@@ -110,7 +110,7 @@ L41000:
 
 L42000:
    if (prsvec_1.prsa == vindex_1.lookw) {
-      lookto_(rindex_1.mrb, 0, 0, 684, 681);
+      lookto(rindex_1.mrb, 0, 0, 684, 681);
    }
    return ret_val;
 // RAPPL2, PAGE 3
@@ -119,7 +119,7 @@ L42000:
 
 L43000:
    if (prsvec_1.prsa == vindex_1.lookw) {
-      ewtell_(play_1.here, 683);
+      ewtell(play_1.here, 683);
    }
    return ret_val;
 
@@ -127,7 +127,7 @@ L43000:
 
 L44000:
    if (prsvec_1.prsa == vindex_1.lookw) {
-      ewtell_(play_1.here, 686);
+      ewtell(play_1.here, 686);
    }
    return ret_val;
 
@@ -135,7 +135,7 @@ L44000:
 
 L45000:
    if (prsvec_1.prsa == vindex_1.lookw) {
-      ewtell_(play_1.here, 687);
+      ewtell(play_1.here, 687);
    }
    return ret_val;
 
@@ -146,7 +146,7 @@ L46000:
       return ret_val;
    }
 // 						!LOOK?
-   rspeak_(688);
+   rspeak(688);
 // 						!DESCRIBE
 
 // NOW DESCRIBE POLE STATE.
@@ -163,10 +163,10 @@ L46000:
    if (findex_1.mdir % 180 == 0) {
       i = min(findex_1.poleuf, 1) + 692;
    }
-   rspeak_(i);
+   rspeak(i);
 // 						!DESCRIBE POLE.
    i__1 = findex_1.mdir / 45 + 695;
-   rspsub_(694, i__1);
+   rspsub(694, i__1);
 // 						!DESCRIBE ARROW.
    return ret_val;
 // RAPPL2, PAGE 4
@@ -182,16 +182,16 @@ L47000:
 // 						!ASSUME BEAM STOP.
    i__1 = objcts_1.olnt;
    for (j = 1; j <= i__1; ++j) {
-      if (qhere_(j, play_1.here) && j != oindex_1.rbeam) {
+      if (qhere(j, play_1.here) && j != oindex_1.rbeam) {
          goto L47200;
       }
 // L47100:
    }
    i = 703;
 L47200:
-   rspsub_(i, objcts_1.odesc2[j - 1]);
+   rspsub(i, objcts_1.odesc2[j - 1]);
 // 						!DESCRIBE BEAM.
-   lookto_(rindex_1.mra, 0, 0, 0, 0);
+   lookto(rindex_1.mra, 0, 0, 0, 0);
 // 						!LOOK NORTH.
    return ret_val;
 
@@ -207,7 +207,7 @@ L48000:
    if ((objcts_1.oflag2[oindex_1.tomb - 1] & OpenO) != 0) {
       i = 12;
    }
-   rspsub_(705, i);
+   rspsub(705, i);
    return ret_val;
 
 // R49--	SOUTH CORRIDOR
@@ -217,7 +217,7 @@ L49000:
       return ret_val;
    }
 // 						!LOOK?
-   rspeak_(706);
+   rspeak(706);
 // 						!DESCRIBE.
    i = 46;
 // 						!ODOOR IS OPEN/CLOSED.
@@ -225,7 +225,7 @@ L49000:
       i = 12;
    }
    if (findex_1.lcell == 4) {
-      rspsub_(707, i);
+      rspsub(707, i);
    }
 // 						!DESCRIBE ODOOR IF THERE.
    return ret_val;
@@ -252,7 +252,7 @@ L50100:
    if ((objcts_1.oflag2[oindex_1.qdoor - 1] & OpenO) != 0) {
       i = 12;
    }
-   rspsub_(708, i);
+   rspsub(708, i);
    return ret_val;
 // RAPPL2, PAGE 5
 
@@ -267,7 +267,7 @@ L51000:
       return ret_val;
    }
 // 						!LOOK?
-   lookto_(0, rindex_1.mrd, 709, 0, 0);
+   lookto(0, rindex_1.mrd, 709, 0, 0);
 // 						!DESCRIBE SOUTH.
    i = 46;
 // 						!PANEL IS OPEN/CLOSED.
@@ -280,7 +280,7 @@ L51000:
    if ((objcts_1.oflag2[oindex_1.qdoor - 1] & OpenO) != 0) {
       j = 12;
    }
-   rspsb2_(710, i, j);
+   rspsb2(710, i, j);
    return ret_val;
 
 // R52--	NORTH CORRIDOR
@@ -295,7 +295,7 @@ L52000:
       i = 12;
    }
 // 						!CDOOR IS OPEN/CLOSED.
-   rspsub_(711, i);
+   rspsub(711, i);
    return ret_val;
 
 // R53--	PARAPET
@@ -303,7 +303,7 @@ L52000:
 L53000:
    if (prsvec_1.prsa == vindex_1.lookw) {
       i__1 = findex_1.pnumb + 712;
-      rspsub_(712, i__1);
+      rspsub(712, i__1);
    }
    return ret_val;
 
@@ -319,14 +319,14 @@ L54000:
    if ((objcts_1.oflag2[oindex_1.cdoor - 1] & OpenO) != 0) {
       i = 722;
    }
-   rspeak_(i);
+   rspeak(i);
    i = 46;
 // 						!ODOOR IS OPEN/CLOSED.
    if ((objcts_1.oflag2[oindex_1.odoor - 1] & OpenO) != 0) {
       i = 12;
    }
    if (findex_1.lcell == 4) {
-      rspsub_(723, i);
+      rspsub(723, i);
    }
 //						!DESCRIBE.
    return ret_val;
@@ -335,7 +335,7 @@ L54000:
 
 L55000:
    if (prsvec_1.prsa == vindex_1.lookw) {
-      rspeak_(724);
+      rspeak(724);
    }
 // 						!LOOK?
    return ret_val;
@@ -352,7 +352,7 @@ L56000:
    if ((objcts_1.oflag2[oindex_1.odoor - 1] & OpenO) != 0) {
       i = 12;
    }
-   rspsub_(725, i);
+   rspsub(725, i);
    return ret_val;
 // RAPPL2, PAGE 6
 
@@ -363,8 +363,8 @@ L57000:
       return ret_val;
    }
 // 						!WALKIN?
-   rspeak_(726);
-   score_(false);
+   rspeak(726);
+   score(false);
 // moved to exit routine	CLOSE(DBCH)
    exit_();
 
@@ -380,7 +380,7 @@ L58000:
    if ((objcts_1.oflag2[oindex_1.tomb - 1] & OpenO) != 0) {
       i = 12;
    }
-   rspsub_(792, i);
+   rspsub(792, i);
    return ret_val;
 
 // R59--	PUZZLE SIDE ROOM
@@ -396,7 +396,7 @@ L59000:
       i = 862;
    }
 // 						!OPEN?
-   rspeak_(i);
+   rspeak(i);
 // 						!DESCRIBE.
    return ret_val;
 
@@ -411,15 +411,15 @@ L60000:
       goto L60100;
    }
 // 						!STARTED PUZZLE?
-   rspeak_(868);
+   rspeak(868);
 // 						!NO, DESCRIBE.
    if ((objcts_1.oflag2[oindex_1.warni - 1] & TChO) != 0) {
-      rspeak_(869);
+      rspeak(869);
    }
    return ret_val;
 
 L60100:
-   cpinfo_(880, findex_1.cphere);
+   cpinfo(880, findex_1.cphere);
 // 						!DESCRIBE ROOM.
    return ret_val;
 
@@ -427,18 +427,18 @@ L60100:
 
 // LOOKTO--	DESCRIBE VIEW IN MIRROR HALLWAY
 
-static void lookto_(int nrm, int srm, int nt, int st, int ht) {
+static void lookto(int nrm, int srm, int nt, int st, int ht) {
 // System generated locals
    int i__1;
 
 // Local variables
    int i, m1, dir, mrbf;
 
-   rspeak_(ht);
+   rspeak(ht);
 // 						!DESCRIBE HALL.
-   rspeak_(nt);
+   rspeak(nt);
 // 						!DESCRIBE NORTH VIEW.
-   rspeak_(st);
+   rspeak(st);
 // 						!DESCRIBE SOUTH VIEW.
    dir = 0;
 // 						!ASSUME NO DIRECTION.
@@ -457,14 +457,14 @@ static void lookto_(int nrm, int srm, int nt, int st, int ht) {
       goto L100;
    }
 // 						!MIRROR N-S?
-   rspsub_(847, dir);
+   rspsub(847, dir);
 // 						!YES, HE SEES PANEL
-   rspsb2_(848, dir, dir);
+   rspsb2(848, dir, dir);
 // 						!AND NARROW ROOMS.
    goto L200;
 
 L100:
-   m1 = mrhere_(play_1.here);
+   m1 = mrhere(play_1.here);
 // 						!WHICH MIRROR?
    mrbf = 0;
 // 						!ASSUME INTACT.
@@ -472,14 +472,14 @@ L100:
       mrbf = 1;
    }
    i__1 = mrbf + 849;
-   rspsub_(i__1, dir);
+   rspsub(i__1, dir);
 // 						!DESCRIBE.
    if (m1 == 1 && findex_1.mropnf) {
       i__1 = mrbf + 823;
-      rspeak_(i__1);
+      rspeak(i__1);
    }
    if (mrbf != 0) {
-      rspeak_(851);
+      rspeak(851);
    }
 
 L200:
@@ -495,14 +495,14 @@ L200:
       i = 854;
    }
    if (ht != 0) {
-      rspeak_(i);
+      rspeak(i);
    }
 // 						!DESCRIBE HALLS.
 }
 
 // EWTELL--	DESCRIBE E/W NARROW ROOMS
 
-static void ewtell_(int rm, int st) {
+static void ewtell(int rm, int st) {
 // System generated locals
    int i__1;
 
@@ -519,11 +519,11 @@ static void ewtell_(int rm, int st) {
    if (m1 && !findex_1.mr1f || !m1 && !findex_1.mr2f) {
       i += 2;
    }
-   rspeak_(i);
+   rspeak(i);
    if (m1 && findex_1.mropnf) {
       i__1 = (i - 819) / 2 + 823;
-      rspeak_(i__1);
+      rspeak(i__1);
    }
-   rspeak_(825);
-   rspeak_(st);
+   rspeak(825);
+   rspeak(st);
 }

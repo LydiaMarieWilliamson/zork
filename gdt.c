@@ -11,7 +11,7 @@
 
 #ifdef ALLOW_GDT
 
-void gdt_(void) {
+void gdt(void) {
 // Initialized data
    const int cmdmax = 38;
    const char *dbgcmd = "DRDODADCDXDHDLDVDFDSAFHENRNTNCNDRRRTRCRDTKEXARAOAAACAXAVD2DNANDMDTAHDPPDDZAZ";
@@ -448,7 +448,7 @@ L22000:
    hack_1.thfflg = false;
 // 						!DISABLE ROBBER.
    hack_1.thfact = false;
-   newsta_(oindex_1.thief, 0, 0, 0, 0);
+   newsta(oindex_1.thief, 0, 0, 0, 0);
 // 						!VANISH THIEF.
    more_output("No robber.");
    goto L2000;
@@ -457,7 +457,7 @@ L22000:
 
 L23000:
    findex_1.trollf = true;
-   newsta_(oindex_1.troll, 0, 0, 0, 0);
+   newsta(oindex_1.troll, 0, 0, 0, 0);
    more_output("No troll.");
    goto L2000;
 
@@ -465,7 +465,7 @@ L23000:
 
 L24000:
    findex_1.cyclof = true;
-   newsta_(oindex_1.cyclo, 0, 0, 0, 0);
+   newsta(oindex_1.cyclo, 0, 0, 0, 0);
    more_output("No cyclops.");
    goto L2000;
 
@@ -487,7 +487,7 @@ L26000:
 
 L27000:
    findex_1.trollf = false;
-   newsta_(oindex_1.troll, 0, rindex_1.mtrol, 0, 0);
+   newsta(oindex_1.troll, 0, rindex_1.mtrol, 0, 0);
    more_output("Restored troll.");
    goto L2000;
 
@@ -496,7 +496,7 @@ L27000:
 L28000:
    findex_1.cyclof = false;
    findex_1.magicf = false;
-   newsta_(oindex_1.cyclo, 0, rindex_1.mcycl, 0, 0);
+   newsta(oindex_1.cyclo, 0, rindex_1.mcycl, 0, 0);
    more_output("Restored cyclops.");
    goto L2000;
 
@@ -516,7 +516,7 @@ L30000:
       goto L2200;
    }
 // 						!VALID OBJECT?
-   newsta_(j, 0, 0, 0, play_1.winner);
+   newsta(j, 0, 0, 0, play_1.winner);
 // 						!YES, TAKE OBJECT.
    more_output("Taken.");
 // 						!TELL.
@@ -701,7 +701,7 @@ L41000:
 // DT-- DISPLAY TEXT
 
 L42000:
-   rspeak_(j);
+   rspeak(j);
    goto L2000;
 
 // AH--	ALTER HERE

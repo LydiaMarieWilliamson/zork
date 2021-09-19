@@ -21,7 +21,7 @@
 #   endif
 #endif
 
-Bool protected(void) {
+Bool protected_(void) {
 #ifndef NONBUSINESS
 
    return true;
