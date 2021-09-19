@@ -833,7 +833,7 @@ L52200:
 // V132--	TAKE.  HANDLED EXTERNALLY.
 
 L53000:
-   ret_val = take_(1);
+   ret_val = take_(true);
    return ret_val;
 
 // V133--	INVENTORY.  PROCESSED EXTERNALLY.
@@ -1087,7 +1087,7 @@ L66300:
       melee = 2;
    }
 // 						!MUST BE KNIFE.
-   i = blow_(aindex_1.player, prsvec_1.prso, melee, 1, 0);
+   i = blow_(aindex_1.player, prsvec_1.prso, melee, true, 0);
 // 						!STRIKE BLOW.
    return ret_val;
 

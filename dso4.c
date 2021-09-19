@@ -84,7 +84,7 @@ Bool winnin_(int vl, int hr) {
 
    vs = objcts_1.ocapac[vl - 1];
 // 						!VILLAIN STRENGTH
-   ps = vs - fights_(hr, 1);
+   ps = vs - fights_(hr, true);
 // 						!HIS MARGIN OVER HERO
    ret_val = prob_(90, 100);
    if (ps > 3) {

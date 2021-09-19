@@ -390,7 +390,7 @@ L1000:
    rspeak_(7);
 // 						!INVOLUNTARY EXIT.
 L1100:
-   score_(0);
+   score_(false);
 // 						!TELL SCORE.
    (void)fclose(dbfile);
    exit_();

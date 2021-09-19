@@ -143,7 +143,7 @@ L2600:
       }
 // 						!SPECIAL ACTION.
    L2650:
-      res = blow_(aindex_1.player, j, vill_1.vmelee[i - 1], 0, out);
+      res = blow_(aindex_1.player, j, vill_1.vmelee[i - 1], false, out);
 
 // 						!STRIKE BLOW.
       if (res < 0) {
@@ -230,7 +230,7 @@ int blow_(int h, int v, int rmk, Bool hflg, int out) {
    return ret_val;
 
 L100:
-   att = fights_(h, 1);
+   att = fights_(h, true);
 // 						!GET HIS STRENGTH.
    oa = att;
    def = vilstr_(v);
@@ -281,13 +281,13 @@ L1200:
    att = vilstr_(v);
 // 						!SET UP ATT, DEF.
    oa = att;
-   def = fights_(h, 1);
+   def = fights_(h, true);
    if (def <= 0) {
       return ret_val;
    }
 // 						!DONT ALLOW DEAD DEF.
-   od = fights_(h, 0);
-   dweap = (i__1 = fwim_(0, WeapO, 0, 0, h, 1), abs(i__1));
+   od = fights_(h, false);
+   dweap = (i__1 = fwim_(0, WeapO, 0, 0, h, true), abs(i__1));
 // 						!FIND A WEAPON.
 // BLOW, PAGE 4
 
@@ -443,7 +443,7 @@ L3600:
       goto L4000;
    }
 // 						!IF HERO, DONE.
-   dweap = (i__1 = fwim_(0, WeapO, 0, 0, h, 1), abs(i__1));
+   dweap = (i__1 = fwim_(0, WeapO, 0, 0, h, true), abs(i__1));
 // 						!GET NEW.
    if (dweap != 0) {
       rspsub_(605, objcts_1.odesc2[dweap - 1]);
@@ -498,10 +498,10 @@ L4500:
    cevent_1.ctick[cindex_1.cevcur - 1] = 30;
    cevent_1.cflag[cindex_1.cevcur - 1] = true;
 L4600:
-   if (fights_(h, 1) > 0) {
+   if (fights_(h, true) > 0) {
       return ret_val;
    }
-   advs_1.astren[h - 1] = 1 - fights_(h, 0);
+   advs_1.astren[h - 1] = 1 - fights_(h, false);
 // 						!HE'S DEAD.
    jigsup_(596);
    ret_val = -1;

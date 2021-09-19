@@ -377,13 +377,13 @@ L13000:
 // V83--	SCORE.  PRINT SCORE.
 
 L14000:
-   score_(0);
+   score_(false);
    return ret_val;
 
 // V84--	QUIT.  FINISH OUT THE GAME.
 
 L15000:
-   score_(1);
+   score_(true);
 // 						!TELLL SCORE.
    if (!yesno_(343, 0, 0)) {
       return ret_val;
@@ -660,7 +660,7 @@ L24200:
 // V94--	DIAGNOSE.
 
 L25000:
-   i = fights_(play_1.winner, 0);
+   i = fights_(play_1.winner, false);
 // 						!GET FIGHTS STRENGTH.
    j = advs_1.astren[play_1.winner - 1];
 // 						!GET HEALTH.

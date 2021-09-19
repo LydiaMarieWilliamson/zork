@@ -49,7 +49,7 @@ L100:
 #endif // ALLOW_GDT
 
    ++state_1.moves;
-   prsvec_1.prswon = parse_(input_1.inbuf, 1);
+   prsvec_1.prswon = parse_(input_1.inbuf, true);
    if (!prsvec_1.prswon) {
       goto L400;
    }
@@ -111,7 +111,7 @@ L1000:
    goto L400;
 
 L1300:
-   prsvec_1.prswon = parse_(input_1.inbuf, 0);
+   prsvec_1.prswon = parse_(input_1.inbuf, false);
    if (!prsvec_1.prswon || prsvec_1.prsa != vindex_1.walkw) {
       goto L1400;
    }
@@ -149,7 +149,7 @@ L2100:
       goto L2700;
    }
 // 						!ANY INPUT?
-   if (parse_(input_1.inbuf, 1)) {
+   if (parse_(input_1.inbuf, true)) {
       goto L2150;
    }
 L2700:

@@ -454,7 +454,7 @@ L9400:
 // 						!ONWARD.
    cpinfo_(i, nxt);
 // 						!DESCRIBE.
-   princr_(1, play_1.here);
+   princr_(true, play_1.here);
 // 						!PRINT ROOMS CONTENTS.
    rooms_1.rflag[play_1.here - 1] |= SeenR;
    return ret_val;
@@ -801,7 +801,7 @@ L18300:
 // O50--	GLOBAL MIRROR
 
 L19000:
-   ret_val = mirpan_(832, 0);
+   ret_val = mirpan_(832, false);
    return ret_val;
 
 // O51--	GLOBAL PANEL
@@ -820,7 +820,7 @@ L20000:
    return ret_val;
 
 L20100:
-   ret_val = mirpan_(838, 1);
+   ret_val = mirpan_(838, true);
    return ret_val;
 
 // O52--	PUZZLE ROOM SLIT

@@ -270,7 +270,7 @@ L750:
    svi = prsvec_1.prsi;
    prsvec_1.prsa = vindex_1.takew;
    prsvec_1.prsi = 0;
-   if (!take_(0)) {
+   if (!take_(false)) {
       return ret_val;
    }
 // 						!TAKE OBJECT.
@@ -357,7 +357,7 @@ void valuac_(int v) {
       }
       f = false;
       rspsub_(580, objcts_1.odesc2[prsvec_1.prso - 1]);
-      f1 = take_(1);
+      f1 = take_(true);
       if (saveh != play_1.here) {
          return;
       }

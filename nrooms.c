@@ -7,8 +7,8 @@
 #include "extern.h"
 #include "common.h"
 
-static void ewtell_(int, int);
 static void lookto_(int, int, int, int, int);
+static void ewtell_(int, int);
 
 Bool rappl2_(int ri) {
 // Initialized data
@@ -365,7 +365,7 @@ L57000:
    }
 // 						!WALKIN?
    rspeak_(726);
-   score_(0);
+   score_(false);
 // moved to exit routine	CLOSE(DBCH)
    exit_();
 
