@@ -99,7 +99,7 @@ L5000:
 // 6000--	GLOBAL WATER
 
 L6000:
-   ret_val = (rooms_1.rflag[rm - 1] & RWATER + RFILL) != 0;
+   ret_val = (rooms_1.rflag[rm - 1] & WaterR + FillR) != 0;
    return ret_val;
 
 // 7000--	GLOBAL GUARDIANS

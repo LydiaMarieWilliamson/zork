@@ -84,13 +84,13 @@ extern struct syntaxCB {
 // Syntax flags
 // common /synflg/
 enum synflgCB {
-   SDIR = 0x4000, SIND = 0x2000, SSTD = 0x1000, SFLIP = 0x800, SDRIV = 0x400, SVMASK = 0x1ff
+   DirS = 0x4000, IndS = 0x2000, StdS = 0x1000, FlipS = 0x800, DrivS = 0x400, VMaskS = 0x1ff
 };
 
 // Object flags
 // common /objflg/
 enum objflgCB {
-   VABIT = 0x4000, VRBIT = 0x2000, VTBIT = 0x1000, VCBIT = 0x800, VEBIT = 0x400, VFBIT = 0x200, VPMASK = 0x1ff
+   AbitV = 0x4000, RbitV = 0x2000, TbitV = 0x1000, CbitV = 0x800, EbitV = 0x400, FbitV = 0x200, PMaskV = 0x1ff
 };
 
 // vocab.h:
@@ -148,9 +148,9 @@ extern struct roomsCB {
 // Room flags.
 // common /rflag/
 enum rflagCB {
-   RSEEN = 0x8000, RLIGHT = 0x4000, RLAND = 0x2000, RWATER = 0x1000,
-   RAIR = 0x800, RSACRD = 0x400, RFILL = 0x200, RMUNG = 0x100,
-   RBUCK = 0x80, RHOUSE = 0x40, RNWALL = 0x20, REND = 0x10
+   SeenR = 0x8000, LightR = 0x4000, LandR = 0x2000, WaterR = 0x1000,
+   AirR = 0x800, SacrdR = 0x400, FillR = 0x200, MungR = 0x100,
+   BuckR = 0x80, HouseR = 0x40, NWallR = 0x20, EndR = 0x10
 };
 
 // rindex.h:
@@ -187,14 +187,14 @@ extern struct oroom2CB {
 // Object flags.
 // common /oflags/
 enum oflagsCB {
-   VISIBT = 0x8000, READBT = 0x4000, TAKEBT = 0x2000, DOORBT = 0x1000,
-   TRANBT = 0x800, FOODBT = 0x400, NDSCBT = 0x200, DRNKBT = 0x100,
-   CONTBT = 0x80, LITEBT = 0x40, VICTBT = 0x20, BURNBT = 0x10,
-   FLAMBT = 8, TOOLBT = 4, TURNBT = 2, ONBT = 1,
-   FINDBT = 0x8000, SLEPBT = 0x4000, SCRDBT = 0x2000, TIEBT = 0x1000,
-   CLMBBT = 0x800, ACTRBT = 0x400, WEAPBT = 0x200, FITEBT = 0x100,
-   VILLBT = 0x80, STAGBT = 0x40, TRYBT = 0x20, NOCHBT = 0x10,
-   OPENBT = 8, TCHBT = 4, VEHBT = 2, SCHBT = 1
+   VisiO = 0x8000, ReadO = 0x4000, TakeO = 0x2000, DoorO = 0x1000,
+   TranO = 0x800, FoodO = 0x400, NDscO = 0x200, DrnkO = 0x100,
+   ContO = 0x80, LiteO = 0x40, VictO = 0x20, BurnO = 0x10,
+   FlamO = 8, ToolO = 4, TurnO = 2, OnO = 1,
+   FindO = 0x8000, SlepO = 0x4000, ScrDO = 0x2000, TieO = 0x1000,
+   ClmbO = 0x800, ActrO = 0x400, WeapO = 0x200, FiteO = 0x100,
+   VillO = 0x80, StagO = 0x40, TryO = 0x20, NoChO = 0x10,
+   OpenO = 8, TChO = 4, VehO = 2, SchO = 1
 };
 
 // oindex.h:

@@ -43,7 +43,7 @@ int getobj_(int oidx, int aidx, int spcobj) {
    }
 // 						!TEST RESULT.
 L100:
-   if (av == 0 || av == obj || (objcts_1.oflag2[obj - 1] & FINDBT) != 0) {
+   if (av == 0 || av == obj || (objcts_1.oflag2[obj - 1] & FindO) != 0) {
       goto L200;
    }
    if (objcts_1.ocan[obj - 1] == av) {
@@ -154,8 +154,7 @@ int schlst_(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!SEARCH OBJECTS.
-      if ((objcts_1.oflag1[i - 1] & VISIBT) == 0 || (rm == 0 || !qhere_(i, rm)) && (cn == 0 || objcts_1.ocan[i - 1] != cn)
-         && (ad == 0 || objcts_1.oadv[i - 1] != ad)) {
+      if ((objcts_1.oflag1[i - 1] & VisiO) == 0 || (rm == 0 || !qhere_(i, rm)) && (cn == 0 || objcts_1.ocan[i - 1] != cn) && (ad == 0 || objcts_1.oadv[i - 1] != ad)) {
          goto L1000;
       }
       if (!thisit_(oidx, aidx, i, spcobj)) {
@@ -171,7 +170,7 @@ int schlst_(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
 // IF OPEN OR TRANSPARENT, SEARCH THE OBJECT ITSELF.
 
    L200:
-      if ((objcts_1.oflag1[i - 1] & TRANBT) == 0 && (objcts_1.oflag2[i - 1] & OPENBT) == 0) {
+      if ((objcts_1.oflag1[i - 1] & TranO) == 0 && (objcts_1.oflag2[i - 1] & OpenO) == 0) {
          goto L1000;
       }
 
@@ -185,7 +184,7 @@ int schlst_(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
       i__2 = objcts_1.olnt;
       for (j = 1; j <= i__2; ++j) {
 // 						!SEARCH OBJECTS.
-         if ((objcts_1.oflag1[j - 1] & VISIBT) == 0 || !thisit_(oidx, aidx, j, spcobj)) {
+         if ((objcts_1.oflag1[j - 1] & VisiO) == 0 || !thisit_(oidx, aidx, j, spcobj)) {
             goto L500;
          }
          x = objcts_1.ocan[j - 1];
@@ -199,7 +198,7 @@ int schlst_(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
             goto L500;
          }
 // 						!INSIDE ANYTHING?
-         if ((objcts_1.oflag1[x - 1] & VISIBT) == 0 || (objcts_1.oflag1[x - 1] & TRANBT) == 0 && (objcts_1.oflag2[x - 1] & OPENBT) == 0 || (objcts_1.oflag2[x - 1] & SCHBT) == 0) {
+         if ((objcts_1.oflag1[x - 1] & VisiO) == 0 || (objcts_1.oflag1[x - 1] & TranO) == 0 && (objcts_1.oflag2[x - 1] & OpenO) == 0 || (objcts_1.oflag2[x - 1] & SchO) == 0) {
             goto L500;
          }
          x = objcts_1.ocan[x - 1];

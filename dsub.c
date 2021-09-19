@@ -294,7 +294,7 @@ L100:
    for (j = 1; j <= i__1; ++j) {
 // 						!TURN OFF FIGHTING.
       if (qhere_(j, play_1.here)) {
-         objcts_1.oflag2[j - 1] &= ~FITEBT;
+         objcts_1.oflag2[j - 1] &= ~FiteO;
       }
 // L50:
    }
@@ -309,8 +309,8 @@ L100:
    if (objcts_1.oadv[oindex_1.coffi - 1] == play_1.winner) {
       newsta_(oindex_1.coffi, 0, rindex_1.egypt, 0, 0);
    }
-   objcts_1.oflag2[oindex_1.door - 1] &= ~TCHBT;
-   objcts_1.oflag1[oindex_1.robot - 1] = (objcts_1.oflag1[oindex_1.robot - 1] | VISIBT) & ~NDSCBT;
+   objcts_1.oflag2[oindex_1.door - 1] &= ~TChO;
+   objcts_1.oflag1[oindex_1.robot - 1] = (objcts_1.oflag1[oindex_1.robot - 1] | VisiO) & ~NDscO;
    if (objcts_1.oroom[oindex_1.lamp - 1] != 0 || objcts_1.oadv[oindex_1.lamp - 1] == play_1.winner) {
       newsta_(oindex_1.lamp, 0, rindex_1.lroom, 0, 0);
    }
@@ -342,7 +342,7 @@ L100:
 L400:
    i = rooms_1.rlnt + 1;
 // 						!NOW MOVE VALUABLES.
-   nonofl = RAIR + RWATER + RSACRD + REND;
+   nonofl = AirR + WaterR + SacrdR + EndR;
 // 						!DONT MOVE HERE.
    i__1 = objcts_1.olnt;
    for (j = 1; j <= i__1; ++j) {
@@ -500,7 +500,7 @@ L300:
 // 						!OBJ ONLY?
    i = rooms_1.rdesc2[play_1.here - 1];
 // 						!ASSUME SHORT DESC.
-   if (full == 0 && (findex_1.superf || (rooms_1.rflag[play_1.here - 1] & RSEEN) != 0 && findex_1.brieff)) {
+   if (full == 0 && (findex_1.superf || (rooms_1.rflag[play_1.here - 1] & SeenR) != 0 && findex_1.brieff)) {
       goto L400;
    }
 
@@ -539,7 +539,7 @@ L600:
       L__1 = full != 0;
       princr_(L__1, play_1.here);
    }
-   rooms_1.rflag[play_1.here - 1] |= RSEEN;
+   rooms_1.rflag[play_1.here - 1] |= SeenR;
    if (full != 0 || ra == 0) {
       return ret_val;
    }

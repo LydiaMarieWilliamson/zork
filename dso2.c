@@ -20,8 +20,8 @@ Bool moveto_(int nr, int who) {
 
    ret_val = false;
 // 						!ASSUME FAILS.
-   lhr = (rooms_1.rflag[play_1.here - 1] & RLAND) != 0;
-   lnr = (rooms_1.rflag[nr - 1] & RLAND) != 0;
+   lhr = (rooms_1.rflag[play_1.here - 1] & LandR) != 0;
+   lnr = (rooms_1.rflag[nr - 1] & LandR) != 0;
    j = advs_1.avehic[who - 1];
 // 						!HIS VEHICLE
 
@@ -41,26 +41,26 @@ L100:
    bits = 0;
 // 						!ASSUME NOWHERE.
    if (j == oindex_1.rboat) {
-      bits = RWATER;
+      bits = WaterR;
    }
 // 						!IN BOAT?
    if (j == oindex_1.ballo) {
-      bits = RAIR;
+      bits = AirR;
    }
 // 						!IN BALLOON?
    if (j == oindex_1.bucke) {
-      bits = RBUCK;
+      bits = BuckR;
    }
 // 						!IN BUCKET?
    nlv = (rooms_1.rflag[nr - 1] & bits) == 0;
-   if (!lnr && nlv || lnr && lhr && nlv && bits != RLAND) {
+   if (!lnr && nlv || lnr && lhr && nlv && bits != LandR) {
       goto L800;
    }
 
 L500:
    ret_val = true;
 // 						!MOVE SHOULD SUCCEED.
-   if ((rooms_1.rflag[nr - 1] & RMUNG) == 0) {
+   if ((rooms_1.rflag[nr - 1] & MungR) == 0) {
       goto L600;
    }
    rspeak_(rrand[nr - 1]);

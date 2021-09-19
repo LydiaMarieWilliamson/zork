@@ -103,7 +103,7 @@ L1000:
    rspeak_(571);
 // 						!KILL THE ECHO.
    findex_1.echof = true;
-   objcts_1.oflag2[oindex_1.bar - 1] &= ~SCRDBT;
+   objcts_1.oflag2[oindex_1.bar - 1] &= ~ScrDO;
    prsvec_1.prswon = true;
 // 						!FAKE OUT PARSER.
    prsvec_1.prscon = 1;
@@ -132,7 +132,7 @@ L1400:
 // NOTE THAT WE CANNOT BE IN THE ECHO ROOM.
 
 L2000:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & ACTRBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & ActrO) != 0) {
       goto L2100;
    }
    rspeak_(602);

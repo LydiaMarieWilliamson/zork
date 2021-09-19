@@ -90,10 +90,10 @@ int fwim_(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 
 // OBJECT IS ON LIST... IS IT A MATCH?
 
-      if ((objcts_1.oflag1[i - 1] & VISIBT) == 0) {
+      if ((objcts_1.oflag1[i - 1] & VisiO) == 0) {
          goto L1000;
       }
-      if (~(nocare) & (objcts_1.oflag1[i - 1] & TAKEBT) == 0 || (objcts_1.oflag1[i - 1] & f1) == 0 && (objcts_1.oflag2[i - 1] & f2) == 0) {
+      if (~(nocare) & (objcts_1.oflag1[i - 1] & TakeO) == 0 || (objcts_1.oflag1[i - 1] & f1) == 0 && (objcts_1.oflag2[i - 1] & f2) == 0) {
          goto L500;
       }
       if (ret_val == 0) {
@@ -111,13 +111,13 @@ int fwim_(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 // DOES OBJECT CONTAIN A MATCH?
 
    L500:
-      if ((objcts_1.oflag2[i - 1] & OPENBT) == 0) {
+      if ((objcts_1.oflag2[i - 1] & OpenO) == 0) {
          goto L1000;
       }
       i__2 = objcts_1.olnt;
       for (j = 1; j <= i__2; ++j) {
 // 						!NO, SEARCH CONTENTS.
-         if (objcts_1.ocan[j - 1] != i || (objcts_1.oflag1[j - 1] & VISIBT) == 0 || (objcts_1.oflag1[j - 1] & f1) == 0 && (objcts_1.oflag2[j - 1] & f2) == 0) {
+         if (objcts_1.ocan[j - 1] != i || (objcts_1.oflag1[j - 1] & VisiO) == 0 || (objcts_1.oflag1[j - 1] & f1) == 0 && (objcts_1.oflag2[j - 1] & f2) == 0) {
             goto L700;
          }
          if (ret_val == 0) {

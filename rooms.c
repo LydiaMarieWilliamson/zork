@@ -114,7 +114,7 @@ L1000:
 // 						!LOOK?
    i = 13;
 // 						!ASSUME CLOSED.
-   if ((objcts_1.oflag2[oindex_1.windo - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[oindex_1.windo - 1] & OpenO) != 0) {
       i = 12;
    }
 // 						!IF OPEN, AJAR.
@@ -131,7 +131,7 @@ L2000:
 // 						!LOOK?
    i = 13;
 // 						!ASSUME CLOSED.
-   if ((objcts_1.oflag2[oindex_1.windo - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[oindex_1.windo - 1] & OpenO) != 0) {
       i = 12;
    }
 // 						!IF OPEN, AJAR.
@@ -157,7 +157,7 @@ L3000:
 // 						!DESCRIBE.
    i = findex_1.orrug + 17;
 // 						!ASSUME INITIAL STATE.
-   if ((objcts_1.oflag2[oindex_1.door - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[oindex_1.door - 1] & OpenO) != 0) {
       i += 2;
    }
 // 						!DOOR OPEN?
@@ -213,10 +213,10 @@ L4500:
       return ret_val;
    }
 // 						!WALKIN?
-   if ((objcts_1.oflag2[oindex_1.door - 1] & OPENBT + TCHBT) != OPENBT) {
+   if ((objcts_1.oflag2[oindex_1.door - 1] & OpenO + TChO) != OpenO) {
       return ret_val;
    }
-   objcts_1.oflag2[oindex_1.door - 1] = (objcts_1.oflag2[oindex_1.door - 1] | TCHBT) & ~OPENBT;
+   objcts_1.oflag2[oindex_1.door - 1] = (objcts_1.oflag2[oindex_1.door - 1] | TChO) & ~OpenO;
    rspeak_(22);
 // 						!SLAM AND BOLT DOOR.
    return ret_val;
@@ -236,7 +236,7 @@ L5000:
       i = 26;
    }
 // 						!UNLOCKED?
-   if ((objcts_1.oflag2[oindex_1.grate - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[oindex_1.grate - 1] & OpenO) != 0) {
       i = 25;
    }
 // 						!OPEN?
@@ -259,7 +259,7 @@ L6000:
 // 						!LEAVES MOVED?
    i = 28;
 // 						!YES, ASSUME GRATE CLOSED.
-   if ((objcts_1.oflag2[oindex_1.grate - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[oindex_1.grate - 1] & OpenO) != 0) {
       i = 29;
    }
 // 						!OPEN?
@@ -385,10 +385,10 @@ L13000:
       return ret_val;
    }
 // 						!WALKIN?
-   if (prob_(50, 50) || objcts_1.oadv[oindex_1.candl - 1] != play_1.winner || !((objcts_1.oflag1[oindex_1.candl - 1] & ONBT) != 0)) {
+   if (prob_(50, 50) || objcts_1.oadv[oindex_1.candl - 1] != play_1.winner || !((objcts_1.oflag1[oindex_1.candl - 1] & OnO) != 0)) {
       return ret_val;
    }
-   objcts_1.oflag1[oindex_1.candl - 1] &= ~ONBT;
+   objcts_1.oflag1[oindex_1.candl - 1] &= ~OnO;
    rspeak_(47);
 // 						!TELL OF WINDS.
    cevent_1.cflag[cindex_1.cevcnd - 1] = false;
@@ -400,16 +400,16 @@ L13000:
 L14000:
    j = objcts_1.odesc2[oindex_1.candl - 1];
 // 						!ASSUME CANDLE.
-   if (objcts_1.oadv[oindex_1.candl - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.candl - 1] & ONBT) != 0) {
+   if (objcts_1.oadv[oindex_1.candl - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.candl - 1] & OnO) != 0) {
       goto L14100;
    }
    j = objcts_1.odesc2[oindex_1.torch - 1];
 // 						!ASSUME TORCH.
-   if (objcts_1.oadv[oindex_1.torch - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.torch - 1] & ONBT) != 0) {
+   if (objcts_1.oadv[oindex_1.torch - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.torch - 1] & OnO) != 0) {
       goto L14100;
    }
    j = objcts_1.odesc2[oindex_1.match - 1];
-   if (objcts_1.oadv[oindex_1.match - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.match - 1] & ONBT) != 0) {
+   if (objcts_1.oadv[oindex_1.match - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.match - 1] & OnO) != 0) {
       goto L14100;
    }
    return ret_val;
@@ -470,7 +470,7 @@ L16000:
 // 						!LOOK?
    i = 46;
 // 						!ASSUME LID CLOSED.
-   if ((objcts_1.oflag2[oindex_1.machi - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[oindex_1.machi - 1] & OpenO) != 0) {
       i = 12;
    }
 // 						!IF OPEN, OPEN.
@@ -585,7 +585,7 @@ L21500:
       return ret_val;
    }
 // 						!EXORCISE?
-   if (objcts_1.oadv[oindex_1.bell - 1] == play_1.winner && objcts_1.oadv[oindex_1.book - 1] == play_1.winner && objcts_1.oadv[oindex_1.candl - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.candl - 1] & ONBT) != 0) {
+   if (objcts_1.oadv[oindex_1.bell - 1] == play_1.winner && objcts_1.oadv[oindex_1.book - 1] == play_1.winner && objcts_1.oadv[oindex_1.candl - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.candl - 1] & OnO) != 0) {
       goto L21600;
    }
    rspeak_(62);
@@ -737,9 +737,9 @@ L27000:
    }
    hack_1.thfpos = play_1.here;
 // 						!RESET SEARCH PATTERN.
-   objcts_1.oflag2[oindex_1.thief - 1] |= FITEBT;
+   objcts_1.oflag2[oindex_1.thief - 1] |= FiteO;
    if (objcts_1.oroom[oindex_1.chali - 1] == play_1.here) {
-      objcts_1.oflag1[oindex_1.chali - 1] &= ~TAKEBT;
+      objcts_1.oflag1[oindex_1.chali - 1] &= ~TakeO;
    }
 
 // 	VANISH EVERYTHING IN ROOM
@@ -753,7 +753,7 @@ L27000:
       }
       j = 83;
 // 						!FLAG BYEBYE.
-      objcts_1.oflag1[i - 1] &= ~VISIBT;
+      objcts_1.oflag1[i - 1] &= ~VisiO;
    L27200:
       ;
    }
@@ -822,11 +822,11 @@ L31100:
 L31400:
    i = 89;
 // 						!ASSUME DISCOVERY.
-   if ((objcts_1.oflag1[oindex_1.statu - 1] & VISIBT) != 0) {
+   if ((objcts_1.oflag1[oindex_1.statu - 1] & VisiO) != 0) {
       i = 88;
    }
    rspeak_(i);
-   objcts_1.oflag1[oindex_1.statu - 1] |= VISIBT;
+   objcts_1.oflag1[oindex_1.statu - 1] |= VisiO;
    return ret_val;
 
 L31500:
@@ -890,7 +890,7 @@ L34000:
 // 						!DESCRIBE.
    i = 102;
 // 						!ASSUME SAFE ROOM OK.
-   if ((rooms_1.rflag[rindex_1.msafe - 1] & RMUNG) != 0) {
+   if ((rooms_1.rflag[rindex_1.msafe - 1] & MungR) != 0) {
       i = 101;
    }
    rspeak_(i);

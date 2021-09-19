@@ -66,11 +66,11 @@ void cpgoto_(int st) {
 // Local variables
    int i;
 
-   rooms_1.rflag[rindex_1.cpuzz - 1] &= ~RSEEN;
+   rooms_1.rflag[rindex_1.cpuzz - 1] &= ~SeenR;
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!RELOCATE OBJECTS.
-      if (objcts_1.oroom[i - 1] == rindex_1.cpuzz && (objcts_1.oflag2[i - 1] & ACTRBT + VILLBT) == 0) {
+      if (objcts_1.oroom[i - 1] == rindex_1.cpuzz && (objcts_1.oflag2[i - 1] & ActrO + VillO) == 0) {
          i__2 = findex_1.cphere * hyper_1.hfactr;
          newsta_(i, 0, i__2, 0, 0);
       }

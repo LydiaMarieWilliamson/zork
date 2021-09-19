@@ -248,7 +248,7 @@ L5000:
 L6000:
    i = 330;
 // 						!ASSUME WATER.
-   if ((rooms_1.rflag[play_1.here - 1] & RWATER + RFILL) == 0) {
+   if ((rooms_1.rflag[play_1.here - 1] & WaterR + FillR) == 0) {
       i = rnd_(3) + 331;
    }
    rspeak_(i);
@@ -286,7 +286,7 @@ L8100:
    findex_1.cyclof = true;
 // 						!SET ALL FLAGS.
    findex_1.magicf = true;
-   objcts_1.oflag2[oindex_1.cyclo - 1] &= ~FITEBT;
+   objcts_1.oflag2[oindex_1.cyclo - 1] &= ~FiteO;
    return ret_val;
 
 // V78--	WELL.  OPEN DOOR, ELSE JOKE.
@@ -439,7 +439,7 @@ L17100:
    }
 
 L17300:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TAKEBT) != 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TakeO) != 0) {
       goto L17400;
    }
    i = 669;
@@ -542,7 +542,7 @@ L20000:
 // 						!SHOVEL?
    i = 392;
 // 						!ASSUME TOOL.
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TOOLBT) == 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ToolO) == 0) {
       i = 393;
    }
    rspsub_(i, odo2);
@@ -587,7 +587,7 @@ L22000:
    return ret_val;
 
 L22100:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) == 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO) == 0) {
       goto L22300;
    }
    rspsub_(448, odo2);
@@ -765,7 +765,7 @@ L26400:
       goto L26550;
    }
 // 						!HE'S TRYING TO LEARN.
-   if ((rooms_1.rflag[rindex_1.tstrs - 1] & RSEEN) == 0) {
+   if ((rooms_1.rflag[rindex_1.tstrs - 1] & SeenR) == 0) {
       goto L26575;
    }
    findex_1.spellf = true;
@@ -787,7 +787,7 @@ L26575:
    return ret_val;
 
 L26600:
-   if ((rooms_1.rflag[rindex_1.tstrs - 1] & RSEEN) != 0) {
+   if ((rooms_1.rflag[rindex_1.tstrs - 1] & SeenR) != 0) {
       goto L26800;
    }
    for (i = 1; i <= 6; ++i) {
@@ -887,7 +887,7 @@ L27600:
    rspeak_(827);
 // 						!QUIZ OVER,
    cevent_1.cflag[cindex_1.cevinq - 1] = false;
-   objcts_1.oflag2[oindex_1.qdoor - 1] |= OPENBT;
+   objcts_1.oflag2[oindex_1.qdoor - 1] |= OpenO;
    return ret_val;
 
 }

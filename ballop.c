@@ -69,7 +69,7 @@ L275:
       goto L10;
    }
 // 						!NORMAL EXIT?
-   if ((rooms_1.rflag[curxt_1.xroom1 - 1] & RMUNG) == 0) {
+   if ((rooms_1.rflag[curxt_1.xroom1 - 1] & MungR) == 0) {
       state_1.bloc = curxt_1.xroom1;
    }
 L10:
@@ -92,7 +92,7 @@ L350:
    return ret_val;
 
 L500:
-   if (prsvec_1.prsa != vindex_1.unboaw || (rooms_1.rflag[play_1.here - 1] & RLAND) == 0) {
+   if (prsvec_1.prsa != vindex_1.unboaw || (rooms_1.rflag[play_1.here - 1] & LandR) == 0) {
       goto L600;
    }
    if (findex_1.binff != 0) {
@@ -108,7 +108,7 @@ L600:
    rspsub_(550, objcts_1.odesc2[prsvec_1.prso - 1]);
 // 						!LIGHT FIRE IN RECEP.
    cevent_1.ctick[cindex_1.cevbrn - 1] = objcts_1.osize[prsvec_1.prso - 1] * 20;
-   objcts_1.oflag1[prsvec_1.prso - 1] |= ONBT + FLAMBT + LITEBT & ~(TAKEBT + READBT);
+   objcts_1.oflag1[prsvec_1.prso - 1] |= OnO + FlamO + LiteO & ~(TakeO + ReadO);
    if (findex_1.binff != 0) {
       return ret_val;
    }
@@ -122,7 +122,7 @@ L600:
    return ret_val;
 
 L700:
-   if (prsvec_1.prsa == vindex_1.unboaw && findex_1.binff != 0 && (rooms_1.rflag[play_1.here - 1] & RLAND) != 0) {
+   if (prsvec_1.prsa == vindex_1.unboaw && findex_1.binff != 0 && (rooms_1.rflag[play_1.here - 1] & LandR) != 0) {
       cevent_1.ctick[cindex_1.cevbal - 1] = 3;
    }
    goto L10;

@@ -17,7 +17,7 @@ Bool lightp_(int obj) {
 
    ret_val = true;
 // 						!ASSUME WINS
-   flobts = FLAMBT + LITEBT + ONBT;
+   flobts = FlamO + LiteO + OnO;
    if (obj != oindex_1.candl) {
       goto L20000;
    }
@@ -42,13 +42,13 @@ L19100:
 // 						!TURN OFF?
    i = 513;
 // 						!ASSUME OFF.
-   if ((objcts_1.oflag1[oindex_1.candl - 1] & ONBT) != 0) {
+   if ((objcts_1.oflag1[oindex_1.candl - 1] & OnO) != 0) {
       i = 514;
    }
 // 						!IF ON, DIFFERENT.
    cevent_1.cflag[cindex_1.cevcnd - 1] = false;
 // 						!DISABLE COUNTDOWN.
-   objcts_1.oflag1[oindex_1.candl - 1] &= ~ONBT;
+   objcts_1.oflag1[oindex_1.candl - 1] &= ~OnO;
    rspeak_(i);
    return ret_val;
 
@@ -57,7 +57,7 @@ L19200:
 
       goto L10;
    }
-   if ((objcts_1.oflag1[oindex_1.candl - 1] & LITEBT) != 0) {
+   if ((objcts_1.oflag1[oindex_1.candl - 1] & LiteO) != 0) {
       goto L19300;
    }
    rspeak_(515);
@@ -75,26 +75,26 @@ L19300:
    return ret_val;
 
 L19400:
-   if (prsvec_1.prsi != oindex_1.match || !((objcts_1.oflag1[oindex_1.match - 1] & ONBT) != 0)) {
+   if (prsvec_1.prsi != oindex_1.match || !((objcts_1.oflag1[oindex_1.match - 1] & OnO) != 0)) {
       goto L19500;
    }
    i = 517;
 // 						!ASSUME OFF.
-   if ((objcts_1.oflag1[oindex_1.candl - 1] & ONBT) != 0) {
+   if ((objcts_1.oflag1[oindex_1.candl - 1] & OnO) != 0) {
       i = 518;
    }
 // 						!IF ON, JOKE.
-   objcts_1.oflag1[oindex_1.candl - 1] |= ONBT;
+   objcts_1.oflag1[oindex_1.candl - 1] |= OnO;
    cevent_1.cflag[cindex_1.cevcnd - 1] = true;
 // 						!RESUME COUNTDOWN.
    rspeak_(i);
    return ret_val;
 
 L19500:
-   if (prsvec_1.prsi != oindex_1.torch || !((objcts_1.oflag1[oindex_1.torch - 1] & ONBT) != 0)) {
+   if (prsvec_1.prsi != oindex_1.torch || !((objcts_1.oflag1[oindex_1.torch - 1] & OnO) != 0)) {
       goto L19600;
    }
-   if ((objcts_1.oflag1[oindex_1.candl - 1] & ONBT) != 0) {
+   if ((objcts_1.oflag1[oindex_1.candl - 1] & OnO) != 0) {
       goto L19700;
    }
 // 						!ALREADY ON?
@@ -138,7 +138,7 @@ L20100:
    return ret_val;
 
 L20500:
-   if (prsvec_1.prsa != vindex_1.trnofw || (objcts_1.oflag1[oindex_1.match - 1] & ONBT) == 0) {
+   if (prsvec_1.prsa != vindex_1.trnofw || (objcts_1.oflag1[oindex_1.match - 1] & OnO) == 0) {
       goto L10;
    }
    objcts_1.oflag1[oindex_1.match - 1] &= ~flobts;

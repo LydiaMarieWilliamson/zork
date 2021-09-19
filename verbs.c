@@ -209,7 +209,7 @@ L18100:
       goto L18200;
    }
 // 						!READ THROUGH OBJ?
-   if ((objcts_1.oflag1[prsvec_1.prsi - 1] & TRANBT) != 0) {
+   if ((objcts_1.oflag1[prsvec_1.prsi - 1] & TranO) != 0) {
       goto L18200;
    }
    rspsub_(357, odi2);
@@ -217,7 +217,7 @@ L18100:
    return ret_val;
 
 L18200:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & READBT) != 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ReadO) != 0) {
       goto L18300;
    }
    rspsub_(358, odo2);
@@ -260,7 +260,7 @@ L23000:
 // V104--	ALARM.  IF SLEEPING, WAKE HIM UP.
 
 L24000:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & SLEPBT) == 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & SlepO) == 0) {
       goto L24100;
    }
    ret_val = objact_(/*x*/);
@@ -338,7 +338,7 @@ L33000:
 // 						!OBJECT HANDLE?
    i = 383;
 // 						!NO, NOT TIED.
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & TIEBT) == 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & TieO) == 0) {
       i = 384;
    }
    rspeak_(i);
@@ -347,7 +347,7 @@ L33000:
 // V114--	TIE.  NEVER REALLY WORKS.
 
 L34000:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & TIEBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & TieO) != 0) {
       goto L34100;
    }
    rspeak_(385);
@@ -364,7 +364,7 @@ L34100:
 // V115--	TIE UP.  NEVER REALLY WORKS.
 
 L35000:
-   if ((objcts_1.oflag2[prsvec_1.prsi - 1] & TIEBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prsi - 1] & TieO) != 0) {
       goto L35100;
    }
    rspsub_(387, odo2);
@@ -374,7 +374,7 @@ L35000:
 L35100:
    i = 388;
 // 						!ASSUME VILLAIN.
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) == 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO) == 0) {
       i = 389;
    }
    rspsub_(i, odo2);
@@ -384,7 +384,7 @@ L35100:
 // V116--	TURN.  OBJECT MUST HANDLE.
 
 L36000:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TURNBT) != 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TurnO) != 0) {
       goto L36100;
    }
    rspeak_(390);
@@ -392,7 +392,7 @@ L36000:
    return ret_val;
 
 L36100:
-   if ((objcts_1.oflag1[prsvec_1.prsi - 1] & TOOLBT) != 0) {
+   if ((objcts_1.oflag1[prsvec_1.prsi - 1] & ToolO) != 0) {
       goto L36200;
    }
    rspsub_(391, odi2);
@@ -421,7 +421,7 @@ L39000:
 // 						!OBJ HANDLE?
    i = 394;
 // 						!JOKE FOR DOOR.
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & DOORBT) == 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & DoorO) == 0) {
       i = 395;
    }
    rspsub_(i, odo2);
@@ -476,7 +476,7 @@ L42000:
       return ret_val;
    }
 // 						!OBJECT HANDLE?
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) == 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO) == 0) {
       goto L42100;
    }
    rspeak_(371);
@@ -484,10 +484,10 @@ L42000:
    return ret_val;
 
 L42100:
-   if (qempty_(prsvec_1.prso) || (objcts_1.oflag1[prsvec_1.prso - 1] & TAKEBT) == 0) {
+   if (qempty_(prsvec_1.prso) || (objcts_1.oflag1[prsvec_1.prso - 1] & TakeO) == 0) {
       goto L10;
    }
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0) {
       goto L42300;
    }
 // 						!OPEN?  SPILL.
@@ -505,7 +505,7 @@ L42300:
          goto L42500;
       }
 // 						!INSIDE?
-      objcts_1.oflag2[i - 1] |= TCHBT;
+      objcts_1.oflag2[i - 1] |= TChO;
       if (av == 0) {
          goto L42400;
       }
@@ -552,7 +552,7 @@ L44000:
       goto L44300;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & LITEBT) != 0 && objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & LiteO) != 0 && objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
       goto L44100;
    }
    rspeak_(400);
@@ -560,7 +560,7 @@ L44000:
    return ret_val;
 
 L44100:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ONBT) == 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & OnO) == 0) {
       goto L44200;
    }
    rspeak_(401);
@@ -568,7 +568,7 @@ L44100:
    return ret_val;
 
 L44200:
-   objcts_1.oflag1[prsvec_1.prso - 1] |= ONBT;
+   objcts_1.oflag1[prsvec_1.prso - 1] |= OnO;
    rspsub_(404, odo2);
 L44300:
    if (!f && lit_(play_1.here)) {
@@ -584,7 +584,7 @@ L45000:
       goto L45300;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & LITEBT) != 0 && objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & LiteO) != 0 && objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
       goto L45100;
    }
    rspeak_(402);
@@ -592,7 +592,7 @@ L45000:
    return ret_val;
 
 L45100:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ONBT) != 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & OnO) != 0) {
       goto L45200;
    }
    rspeak_(403);
@@ -600,7 +600,7 @@ L45100:
    return ret_val;
 
 L45200:
-   objcts_1.oflag1[prsvec_1.prso - 1] &= ~ONBT;
+   objcts_1.oflag1[prsvec_1.prso - 1] &= ~OnO;
    rspsub_(405, odo2);
 L45300:
    if (!lit_(play_1.here)) {
@@ -616,7 +616,7 @@ L46000:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & CONTBT) != 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ContO) != 0) {
       goto L46100;
    }
 L46050:
@@ -633,7 +633,7 @@ L46100:
    return ret_val;
 
 L46200:
-   if (!((objcts_1.oflag2[prsvec_1.prso - 1] & OPENBT) != 0)) {
+   if (!((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0)) {
       goto L46225;
    }
    rspeak_(412);
@@ -641,8 +641,8 @@ L46200:
    return ret_val;
 
 L46225:
-   objcts_1.oflag2[prsvec_1.prso - 1] |= OPENBT;
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TRANBT) != 0 || qempty_(prsvec_1.prso)) {
+   objcts_1.oflag2[prsvec_1.prso - 1] |= OpenO;
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TranO) != 0 || qempty_(prsvec_1.prso)) {
       goto L46300;
    }
    princo_(prsvec_1.prso, 410);
@@ -661,7 +661,7 @@ L47000:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & CONTBT) == 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ContO) == 0) {
       goto L46050;
    }
    if (objcts_1.ocapac[prsvec_1.prso - 1] != 0) {
@@ -672,7 +672,7 @@ L47000:
    return ret_val;
 
 L47100:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0) {
       goto L47200;
    }
 // 						!OPEN?
@@ -681,7 +681,7 @@ L47100:
    return ret_val;
 
 L47200:
-   objcts_1.oflag2[prsvec_1.prso - 1] &= ~OPENBT;
+   objcts_1.oflag2[prsvec_1.prso - 1] &= ~OpenO;
    rspeak_(414);
 // 						!DONE.
    return ret_val;
@@ -709,7 +709,7 @@ L48000:
    if (j == 0) {
       goto L10;
    }
-   if ((objcts_1.oflag1[j - 1] & TRANBT) == 0 && (!((objcts_1.oflag2[j - 1] & OPENBT) != 0) || (objcts_1.oflag1[j - 1] & DOORBT + CONTBT) == 0)) {
+   if ((objcts_1.oflag1[j - 1] & TranO) == 0 && (!((objcts_1.oflag2[j - 1] & OpenO) != 0) || (objcts_1.oflag1[j - 1] & DoorO + ContO) == 0)) {
       goto L10;
    }
    i = 417;
@@ -761,7 +761,7 @@ L88000:
 // V130--	BOARD.  WORKS WITH VEHICLES.
 
 L51000:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VEHBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VehO) != 0) {
       goto L51100;
    }
    rspsub_(421, odo2);
@@ -815,7 +815,7 @@ L52100:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((rooms_1.rflag[play_1.here - 1] & RLAND) != 0) {
+   if ((rooms_1.rflag[play_1.here - 1] & LandR) != 0) {
       goto L52200;
    }
    rspeak_(425);
@@ -850,7 +850,7 @@ L56000:
       goto L56050;
    }
 // 						!ANY OBJ SPECIFIED?
-   if ((rooms_1.rflag[play_1.here - 1] & RWATER + RFILL) != 0) {
+   if ((rooms_1.rflag[play_1.here - 1] & WaterR + FillR) != 0) {
       goto L56025;
    }
    rspeak_(516);
@@ -884,7 +884,7 @@ L59000:
       goto L59500;
    }
 // 						!DRINK GLOBAL WATER?
-   if (!((objcts_1.oflag1[prsvec_1.prso - 1] & FOODBT) != 0)) {
+   if (!((objcts_1.oflag1[prsvec_1.prso - 1] & FoodO) != 0)) {
       goto L59400;
    }
 // 						!EDIBLE?
@@ -912,7 +912,7 @@ L59300:
    return ret_val;
 
 L59400:
-   if (!((objcts_1.oflag1[prsvec_1.prso - 1] & DRNKBT) != 0)) {
+   if (!((objcts_1.oflag1[prsvec_1.prso - 1] & DrnkO) != 0)) {
       goto L59600;
    }
 // 						!DRINKABLE?
@@ -923,7 +923,7 @@ L59400:
    if (objcts_1.oadv[objcts_1.ocan[prsvec_1.prso - 1] - 1] != play_1.winner) {
       goto L59100;
    }
-   if ((objcts_1.oflag2[objcts_1.ocan[prsvec_1.prso - 1] - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[objcts_1.ocan[prsvec_1.prso - 1] - 1] & OpenO) != 0) {
       goto L59500;
    }
 // 						!CONT OPEN?
@@ -944,7 +944,7 @@ L59600:
 // V137--	BURN.  COMPLICATED.
 
 L60000:
-   if ((objcts_1.oflag1[prsvec_1.prsi - 1] & FLAMBT + LITEBT + ONBT) != FLAMBT + LITEBT + ONBT) {
+   if ((objcts_1.oflag1[prsvec_1.prsi - 1] & FlamO + LiteO + OnO) != FlamO + LiteO + OnO) {
       goto L60400;
    }
    if (objact_(/*x*/)) {
@@ -960,7 +960,7 @@ L60000:
    }
 // 						!DID IT HANDLE?
 L60050:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & BURNBT) == 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & BurnO) == 0) {
       goto L60300;
    }
    if (objcts_1.oadv[prsvec_1.prso - 1] != play_1.winner) {
@@ -981,7 +981,7 @@ L60100:
       goto L60150;
    }
 // 						!INSIDE?
-   if (!((objcts_1.oflag2[j - 1] & OPENBT) != 0)) {
+   if (!((objcts_1.oflag2[j - 1] & OpenO) != 0)) {
       goto L60150;
    }
 // 						!OPEN?
@@ -1015,7 +1015,7 @@ L60400:
 L63000:
    i = 466;
 // 						!CHOOSE PHRASE.
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO) != 0) {
       goto L66100;
    }
    if (!objact_(/*x*/)) {
@@ -1064,10 +1064,10 @@ L66200:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO) != 0) {
       goto L66300;
    }
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & VICTBT) == 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & VictO) == 0) {
       rspsub_(470, odo2);
    }
    return ret_val;
@@ -1078,7 +1078,7 @@ L66300:
    if (prsvec_1.prsi == 0) {
       goto L66500;
    }
-   if ((objcts_1.oflag2[prsvec_1.prsi - 1] & WEAPBT) == 0) {
+   if ((objcts_1.oflag2[prsvec_1.prsi - 1] & WeapO) == 0) {
       goto L66400;
    }
    melee = 1;
@@ -1130,7 +1130,7 @@ L74000:
 // V149--	SAVE
 
 L77000:
-   if ((rooms_1.rflag[rindex_1.tstrs - 1] & RSEEN) == 0) {
+   if ((rooms_1.rflag[rindex_1.tstrs - 1] & SeenR) == 0) {
       goto L77100;
    }
    rspeak_(828);
@@ -1144,7 +1144,7 @@ L77100:
 // V150--	RESTORE
 
 L78000:
-   if ((rooms_1.rflag[rindex_1.tstrs - 1] & RSEEN) == 0) {
+   if ((rooms_1.rflag[rindex_1.tstrs - 1] & SeenR) == 0) {
       goto L78100;
    }
    rspeak_(829);
@@ -1204,7 +1204,7 @@ L80300:
 // 						!OBJ HANDLE?
    i = 354;
 // 						!ASSUME VILLAIN.
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VILLBT + ACTRBT) == 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO + ActrO) == 0) {
       i = 355;
    }
    rspsub_(i, odo2);
@@ -1219,10 +1219,10 @@ L81000:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & DOORBT) == 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & DoorO) == 0) {
       goto L81300;
    }
-   if (!((objcts_1.oflag2[prsvec_1.prso - 1] & OPENBT) != 0)) {
+   if (!((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0)) {
       goto L81200;
    }
 // 						!OPEN?
@@ -1236,13 +1236,13 @@ L81200:
    return ret_val;
 
 L81300:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VEHBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VehO) != 0) {
       goto L81400;
    }
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & OPENBT) != 0 || (objcts_1.oflag1[prsvec_1.prso - 1] & TRANBT) != 0) {
+   if ((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0 || (objcts_1.oflag1[prsvec_1.prso - 1] & TranO) != 0) {
       goto L81400;
    }
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & CONTBT) != 0) {
+   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ContO) != 0) {
       goto L81200;
    }
    rspsub_(630, odo2);
@@ -1313,7 +1313,7 @@ L87000:
       i = xsrch_1.xdown;
    }
 // 						!UNLESS CLIMB DN.
-   f = (objcts_1.oflag2[prsvec_1.prso - 1] & CLMBBT) != 0;
+   f = (objcts_1.oflag2[prsvec_1.prso - 1] & ClmbO) != 0;
    if (f && findxt_(i, play_1.here)) {
       goto L87500;
    }

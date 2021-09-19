@@ -42,21 +42,21 @@ Bool opncls_(int obj, int so, int sc) {
    return ret_val;
 
 L50:
-   if ((objcts_1.oflag2[obj - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[obj - 1] & OpenO) != 0) {
       goto L200;
    }
 // 						!OPEN... IS IT?
    rspeak_(so);
-   objcts_1.oflag2[obj - 1] |= OPENBT;
+   objcts_1.oflag2[obj - 1] |= OpenO;
    return ret_val;
 
 L100:
-   if (!((objcts_1.oflag2[obj - 1] & OPENBT) != 0)) {
+   if (!((objcts_1.oflag2[obj - 1] & OpenO) != 0)) {
       goto L200;
    }
 // 						!CLOSE... IS IT?
    rspeak_(sc);
-   objcts_1.oflag2[obj - 1] &= ~OPENBT;
+   objcts_1.oflag2[obj - 1] &= ~OpenO;
    return ret_val;
 
 L200:
@@ -80,7 +80,7 @@ Bool lit_(int rm) {
 
    ret_val = true;
 // 						!ASSUME WINS
-   if ((rooms_1.rflag[rm - 1] & RLIGHT) != 0) {
+   if ((rooms_1.rflag[rm - 1] & LightR) != 0) {
       return ret_val;
    }
 
@@ -105,10 +105,10 @@ Bool lit_(int rm) {
 // OBJ IN ROOM OR ON ADV IN ROOM
 
    L100:
-      if ((objcts_1.oflag1[i - 1] & ONBT) != 0) {
+      if ((objcts_1.oflag1[i - 1] & OnO) != 0) {
          return ret_val;
       }
-      if ((objcts_1.oflag1[i - 1] & VISIBT) == 0 || (objcts_1.oflag1[i - 1] & TRANBT) == 0 && (objcts_1.oflag2[i - 1] & OPENBT) == 0) {
+      if ((objcts_1.oflag1[i - 1] & VisiO) == 0 || (objcts_1.oflag1[i - 1] & TranO) == 0 && (objcts_1.oflag2[i - 1] & OpenO) == 0) {
          goto L1000;
       }
 
@@ -116,7 +116,7 @@ Bool lit_(int rm) {
 
       i__2 = objcts_1.olnt;
       for (j = 1; j <= i__2; ++j) {
-         if (objcts_1.ocan[j - 1] == i && (objcts_1.oflag1[j - 1] & ONBT) != 0) {
+         if (objcts_1.ocan[j - 1] == i && (objcts_1.oflag1[j - 1] & OnO) != 0) {
             return ret_val;
          }
    // L500:

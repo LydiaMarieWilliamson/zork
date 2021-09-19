@@ -243,7 +243,7 @@ L300:
       goto L400;
    }
 // 						!DOOR... RETURNED ROOM?
-   if ((objcts_1.oflag2[curxt_1.xobj - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[curxt_1.xobj - 1] & OpenO) != 0) {
       goto L400;
    }
 // 						!NO, DOOR OPEN?
@@ -281,7 +281,7 @@ L525:
       curxt_1.xstrng = 680;
    }
 // 						!IF DOWN, CANT.
-   if ((rooms_1.rflag[play_1.here - 1] & RNWALL) != 0) {
+   if ((rooms_1.rflag[play_1.here - 1] & NWallR) != 0) {
       curxt_1.xstrng = 524;
    }
    rspeak_(curxt_1.xstrng);
@@ -328,7 +328,7 @@ L800:
       goto L900;
    }
 // 						!DOOR... RETURNED ROOM?
-   if ((objcts_1.oflag2[curxt_1.xobj - 1] & OPENBT) != 0) {
+   if ((objcts_1.oflag2[curxt_1.xobj - 1] & OpenO) != 0) {
       goto L900;
    }
 // 						!NO, DOOR OPEN?
@@ -455,8 +455,8 @@ L3000:
 // 						!NO LAMP?
    findex_1.litldf = true;
 // 						!HE CAN DO IT.
-   if ((objcts_1.oflag2[oindex_1.door - 1] & OPENBT) == 0) {
-      objcts_1.oflag2[oindex_1.door - 1] &= ~TCHBT;
+   if ((objcts_1.oflag2[oindex_1.door - 1] & OpenO) == 0) {
+      objcts_1.oflag2[oindex_1.door - 1] &= ~TChO;
    }
    return ret_val;
 
