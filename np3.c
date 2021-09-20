@@ -1,9 +1,7 @@
-// SYNMCH--	SYNTAX MATCHER
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
@@ -12,8 +10,8 @@ static int gwim(int, int, int);
 static Bool syneql(int, int, int, int, int);
 static Bool takeit(int, int);
 
+// SYNMCH--	SYNTAX MATCHER
 // THIS ROUTINE DETAILS ON BIT 4 OF PRSFLG
-
 Bool synmch(/*int x*/) {
 // Initialized data
 //   THE FOLLOWING DATA STATEMENT WAS ORIGINALLY:
@@ -191,11 +189,9 @@ L5000:
 // 						!TRY TAKE.
    ret_val = true;
    return ret_val;
-
 }
 
 // UNPACK-	UNPACK SYNTAX SPECIFICATION, ADV POINTER
-
 static int unpacks(int oldj) {
 // Local variables
    int i;
@@ -257,7 +253,6 @@ L200:
 }
 
 // SYNEQL-	TEST FOR SYNTAX EQUALITY
-
 static Bool syneql(int prep, int obj, int sprep, int sfl1, int sfl2) {
 // System generated locals
    Bool ret_val;
@@ -272,11 +267,9 @@ static Bool syneql(int prep, int obj, int sprep, int sfl1, int sfl2) {
 L100:
    ret_val = prep == 0 && sfl1 == 0 && sfl2 == 0;
    return ret_val;
-
 }
 
 // TAKEIT-	PARSER BASED TAKE OF OBJECT
-
 static Bool takeit(int obj, int sflag) {
 // System generated locals
    Bool ret_val;
@@ -384,11 +377,9 @@ L4000:
    ret_val = true;
 // 						!SUCCESS.
    return ret_val;
-
 }
 
 // GWIM- GET WHAT I MEAN IN AMBIGOUS SITUATIONS
-
 static int gwim(int sflag, int sfw1, int sfw2) {
 // System generated locals
    int ret_val;
@@ -453,5 +444,4 @@ L300:
    ret_val = robj;
 L500:
    return ret_val;
-
 }

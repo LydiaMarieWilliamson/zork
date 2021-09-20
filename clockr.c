@@ -1,14 +1,13 @@
-// CEVAPP- CLOCK EVENT APPLICABLES
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
 static void litint(int, int *, int, const int *, int);
 
+// CEVAPP- CLOCK EVENT APPLICABLES
 void cevapp(int ri) {
 // Initialized data
    static const int cndtck[10] = { 50, 20, 10, 5, 0, 156, 156, 156, 157, 0 };
@@ -757,12 +756,9 @@ L24100:
 // 						!MOVE MASTER OBJECT.
    advs_1.aroom[aindex_1.amastr - 1] = play_1.here;
 // 						!MOVE MASTER PLAYER.
-   return;
-
 }
 
 // LITINT-	LIGHT INTERRUPT PROCESSOR
-
 static void litint(int obj, int *ctr, int cev, const int *ticks, int tickln) {
 // Parameter adjustments
    --ticks;
@@ -786,6 +782,4 @@ L100:
    if (objcts_1.oroom[obj - 1] == play_1.here || objcts_1.oadv[obj - 1] == play_1.winner) {
       rspeak(ticks[*ctr + tickln / 2]);
    }
-   return;
-
 }

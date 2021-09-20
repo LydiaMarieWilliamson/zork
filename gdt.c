@@ -1,16 +1,14 @@
-// GDT- GAME DEBUGGING TOOL
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
 #include <ctype.h>
 #include "extern.h"
 #include "common.h"
 
 #ifdef ALLOW_GDT
-
+// GDT- GAME DEBUGGING TOOL
 void gdt(void) {
 // Initialized data
    const int cmdmax = 38;
@@ -767,7 +765,6 @@ L47000:
    more_input();
    sscanf(buf, "%d", &puzzle_1.cpvec[j - 1]);
    goto L2000;
-
 }
 
 #endif // ALLOW_GDT

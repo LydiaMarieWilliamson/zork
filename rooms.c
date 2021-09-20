@@ -1,12 +1,11 @@
-// RAPPL1- SPECIAL PURPOSE ROOM ROUTINES, PART 1
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
+// RAPPL1- SPECIAL PURPOSE ROOM ROUTINES, PART 1
 Bool rappl1(int ri) {
 // System generated locals
    int i__1, i__2;
@@ -959,5 +958,4 @@ L37000:
    }
 // 						!IF SOLVED, MOVE.
    return ret_val;
-
 }

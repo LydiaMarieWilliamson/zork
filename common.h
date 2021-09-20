@@ -1,3 +1,8 @@
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
+
 // The common block structures and variable declarations used in dungeon.
 
 // These are the structures which encapsulate the variables contained in common blocks, in the original Fortran source,

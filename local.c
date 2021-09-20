@@ -1,18 +1,18 @@
-// local.c -- dungeon functions which need local definition
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 
+// Dungeon functions which need local definition.
 #ifdef __AMOS__
 #   include <moncal.h>
 #endif
 
-// This function should return true if it's OK for people to play the
-// game, false otherwise.  If you have a working <time.h> library,
-// you can define NONBUSINESS to disallow play Monday to Friday, 9-5
-// (this is only checked at the start of the game, though).  For more
-// complex control you will have to write your own version of this
-// function.
-
+// This function should return true if it's OK for people to play the game, false otherwise.
+// If you have a working <time.h> library, you can define NONBUSINESS to disallow play Monday to Friday, 9-5
+// (this is only checked at the start of the game, though).
+// For more complex control you will have to write your own version of this function.
 #ifdef NONBUSINESS
 #   ifdef BSD4_2
 #      include <sys/timeb.h>
@@ -20,31 +20,15 @@
 #      include <time.h>
 #   endif
 #endif
-
 Bool protected_(void) {
 #ifndef NONBUSINESS
-
    return true;
-
 #else
-
-   time_t t;
-   struct tm *q;
-
-   (void)time(&t);
-   q = localtime(&t);
-
-// Return true if it's Sunday or Saturday or before 9 or after 5
-
-   if (q->tm_wday == 0 || q->tm_wday == 6)
-      return true;
-   else if (q->tm_hour < 9 || q->tm_hour >= 17)
-      return true;
-   else
-      return false;
-
+// True if it's Sunday or Saturday or before 09:00 or after 17:00.
+   time_t t; (void)time(&t);
+   struct tm *q = localtime(&t);
+   return q->tm_wday == 0 || q->tm_wday == 6 || q->tm_hour < 9 || q->tm_hour >= 17;
 #endif
-
 }
 
 #ifdef ALLOW_GDT
@@ -55,7 +39,6 @@ Bool protected_(void) {
 #   ifndef WIZARDID
 #      define WIZARDID (0)
 #   endif
-
 Bool wizard(void) {
 #   if 1
    return true;

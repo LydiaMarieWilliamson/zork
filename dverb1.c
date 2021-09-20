@@ -1,14 +1,12 @@
-// TAKE-- BASIC TAKE SEQUENCE
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
+// TAKE-- BASIC TAKE SEQUENCE
 // TAKE AN OBJECT (FOR VERBS TAKE, PUT, DROP, READ, ETC.)
-
 Bool take(Bool flg) {
 // System generated locals
    int i__1;
@@ -90,11 +88,9 @@ L700:
    }
 // 						!TELL TAKEN.
    return ret_val;
-
 }
 
 // DROP- DROP VERB PROCESSOR
-
 Bool drop(/*Bool z*/) {
 // System generated locals
    Bool ret_val;
@@ -175,11 +171,9 @@ L1000:
    rspeak(527);
 // 						!DONT HAVE IT.
    return ret_val;
-
 }
 
 // PUT- PUT VERB PROCESSOR
-
 Bool put(/*Bool flg*/) {
 // System generated locals
    Bool ret_val;
@@ -307,11 +301,9 @@ L1000:
 // 						!CONTAINED INSIDE.
    ret_val = true;
    return ret_val;
-
 }
 
 // VALUAC- HANDLES VALUABLES/EVERYTHING
-
 void valuac(int v) {
 // System generated locals
    int i__1;

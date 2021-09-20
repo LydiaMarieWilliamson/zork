@@ -1,12 +1,11 @@
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
 // GTTIME-- GET TOTAL TIME PLAYED
-
 int gttime(void) {
    int h, m, s;
 
@@ -19,7 +18,6 @@ int gttime(void) {
 }
 
 // OPNCLS-- PROCESS OPEN/CLOSE FOR DOORS
-
 Bool opncls(int obj, int so, int sc) {
 // System generated locals
    int i__1;
@@ -65,7 +63,6 @@ L200:
 }
 
 // LIT-- IS ROOM LIT?
-
 Bool lit(int rm) {
 // System generated locals
    int i__1, i__2;
@@ -125,7 +122,6 @@ Bool lit(int rm) {
 }
 
 // WEIGHT- RETURNS SUM OF WEIGHT OF QUALIFYING OBJECTS
-
 int weight(int rm, int cn, int ad) {
 // System generated locals
    int ret_val, i__1;

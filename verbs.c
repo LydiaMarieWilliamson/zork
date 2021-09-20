@@ -1,12 +1,11 @@
-// VAPPLI- MAIN VERB PROCESSING ROUTINE
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
+// VAPPLI- MAIN VERB PROCESSING ROUTINE
 Bool vappli(int ri) {
 // Initialized data
    const int mxnop = 39;
@@ -1340,11 +1339,9 @@ L87500:
 // 						!IN SPECIFIED DIR.
    ret_val = walk(/*x*/);
    return ret_val;
-
 }
 
 // CLOCKD- CLOCK DEMON FOR INTERMOVE CLOCK EVENTS
-
 Bool clockd(/*int x*/) {
 // System generated locals
    int i__1;
@@ -1377,5 +1374,4 @@ Bool clockd(/*int x*/) {
       ;
    }
    return ret_val;
-
 }

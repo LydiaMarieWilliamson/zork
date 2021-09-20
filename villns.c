@@ -1,12 +1,11 @@
-// TROLLP-	TROLL FUNCTION
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
+// TROLLP-	TROLL FUNCTION
 Bool trollp(/*int arg*/) {
 // System generated locals
    Bool ret_val;
@@ -159,7 +158,6 @@ L10:
 }
 
 // CYCLOP-	CYCLOPS FUNCTION
-
 Bool cyclop(/*int arg*/) {
 // System generated locals
    int i__1, i__2;
@@ -284,11 +282,9 @@ L500:
       goto L450;
    }
 // 						!SEE IF HANDLED.
-
 }
 
 // THIEFP-	THIEF FUNCTION
-
 Bool thiefp(/*int arg*/) {
 // System generated locals
    int i__1;

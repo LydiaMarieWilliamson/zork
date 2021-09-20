@@ -1,15 +1,11 @@
-// INIT-- DUNGEON INITIALIZATION SUBROUTINE
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
-
 #ifdef __AMOS__
 #   include <amos.h>
 #endif
-
 #include "extern.h"
 #include "common.h"
 
@@ -43,8 +39,8 @@ static void rdints(int c, int *pi, FILE *indxfile) {
       *pi++ = rdint(indxfile);
 }
 
-// Read a partial array of integers.  These are stored as index,value pairs.
-
+// Read a partial array of integers.
+// These are stored as index,value pairs.
 static void rdpartialints(int c, int *pi, FILE *indxfile) {
    int ch; // Local variable for rdint
 
@@ -66,12 +62,12 @@ static void rdpartialints(int c, int *pi, FILE *indxfile) {
 }
 
 // Read a number of one byte flags from the index file
-
 static void rdflags(int c, Bool *pf, FILE *indxfile) {
    while (c-- != 0)
       *pf++ = getc(indxfile);
 }
 
+// INIT-- DUNGEON INITIALIZATION SUBROUTINE
 Bool init(void) {
 // System generated locals
    int i__1;
@@ -435,5 +431,4 @@ L1975:
    more_output("");
    more_output("The darkness becomes all encompassing, and your vision fails.");
    return ret_val;
-
 }

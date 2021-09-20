@@ -1,14 +1,13 @@
-// SOBJS-	SIMPLE OBJECTS PROCESSOR
-// 	OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP,
-// 	MAJOR VERBS, OR OTHER NON-RESIDENT SUBROUTINES
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
+// SOBJS-	SIMPLE OBJECTS PROCESSOR
+// 	OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP,
+// 	MAJOR VERBS, OR OTHER NON-RESIDENT SUBROUTINES
 Bool sobjs(int ri, int arg) {
 // System generated locals
    int i__1;
@@ -1034,5 +1033,4 @@ L56100:
 // 						!FIND?
    rspeak(289);
    return ret_val;
-
 }

@@ -1,3 +1,8 @@
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
+
 // Support routines for dungeon: in place of the f2c library functions.
 #include <stdio.h>
 #ifdef unix
@@ -70,9 +75,9 @@ extern void setupterm(const char *, int, int);
 #   include <unistd.h>
 #endif
 
-// Initialize the more waiting facility (determine how many rows the terminal has).
 static int crows, coutput;
 
+// Initialize the more waiting facility (determine how many rows the terminal has).
 void more_init(void) {
 #if defined MORE_NONE
    crows = 0;

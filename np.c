@@ -1,9 +1,7 @@
-// RDLINE-	READ INPUT LINE
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
 #include <ctype.h>
 #include "extern.h"
@@ -12,6 +10,7 @@
 
 static Bool lex(char *, int *, int *, Bool);
 
+// RDLINE-	READ INPUT LINE
 void rdline(char *buffer, int who) {
 // Local variables
    char *z, *zlast;
@@ -56,9 +55,7 @@ L90:
 }
 
 // PARSE-	TOP LEVEL PARSE ROUTINE
-
 // THIS ROUTINE DETAILS ON BIT 0 OF PRSFLG
-
 Bool parse(char *inbuf, Bool vbflag) {
 // System generated locals
    int i__1;
@@ -119,11 +116,9 @@ L350:
 L100:
    prsvec_1.prscon = 1;
    return ret_val;
-
 }
 
 // ORPHAN- SET UP NEW ORPHANS
-
 void orphan(int o1, int o2, int o3, int o4, int o5) {
    orphs_1.oflag = o1;
 // 						!SET UP NEW ORPHANS.
@@ -134,9 +129,7 @@ void orphan(int o1, int o2, int o3, int o4, int o5) {
 }
 
 // LEX-	LEXICAL ANALYZER
-
 // THIS ROUTINE DETAILS ON BIT 1 OF PRSFLAG
-
 static Bool lex(char *inbuf, int *outbuf, int *op, Bool vbflag) {
 // Initialized data
    static const char dlimit[9] = { 'A', 'Z', 'A' - 1,
@@ -271,5 +264,4 @@ L6000:
 // 						!ANY WORD YET?
    goto L50;
 // 						!YES, ADV OP.
-
 }

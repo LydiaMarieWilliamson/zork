@@ -1,12 +1,11 @@
-// BALLOP-	BALLOON FUNCTION
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
+// BALLOP-	BALLOON FUNCTION
 Bool ballop(int arg) {
 // System generated locals
    Bool ret_val;
@@ -126,5 +125,4 @@ L700:
       cevent_1.ctick[cindex_1.cevbal - 1] = 3;
    }
    goto L10;
-
 }

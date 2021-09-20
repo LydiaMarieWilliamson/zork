@@ -1,12 +1,11 @@
-// AAPPLI- APPLICABLES FOR ADVENTURERS
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
+// AAPPLI- APPLICABLES FOR ADVENTURERS
 Bool aappli(int ri) {
 // System generated locals
    Bool ret_val;
@@ -117,11 +116,9 @@ L2200:
    rspeak(786);
 // 						!MASTER CANT DO IT.
    return ret_val;
-
 }
 
 // THIEFD-	INTERMOVE THIEF DEMON
-
 void thiefd(void) {
 // System generated locals
    int i__1, i__2;
@@ -369,6 +366,4 @@ L1800:
    L1850:
       ;
    }
-   return;
-
 }

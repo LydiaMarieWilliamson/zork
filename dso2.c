@@ -1,13 +1,12 @@
-// MOVETO- MOVE PLAYER TO NEW ROOM
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
 #include "extern.h"
 #include "common.h"
 
+// MOVETO- MOVE PLAYER TO NEW ROOM
 Bool moveto(int nr, int who) {
 // System generated locals
    Bool ret_val;
@@ -88,7 +87,6 @@ L800:
 }
 
 // SCORE-- PRINT OUT CURRENT SCORE
-
 void score(Bool flg) {
 // Initialized data
    static const int rank[10] = { 20, 19, 18, 16, 12, 8, 4, 2, 1, 0 };
@@ -149,7 +147,6 @@ L80:
 }
 
 // SCRUPD- UPDATE WINNER'S SCORE
-
 void scrupd(int n) {
    if (findex_1.endgmf) {
       goto L100;

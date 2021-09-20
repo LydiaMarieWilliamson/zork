@@ -1,15 +1,14 @@
-// RAPPL2- SPECIAL PURPOSE ROOM ROUTINES, PART 2
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
 static void lookto(int, int, int, int, int);
 static void ewtell(int, int);
 
+// RAPPL2- SPECIAL PURPOSE ROOM ROUTINES, PART 2
 Bool rappl2(int ri) {
 // Initialized data
    const int newrms = 38;
@@ -422,11 +421,9 @@ L60100:
    cpinfo(880, findex_1.cphere);
 // 						!DESCRIBE ROOM.
    return ret_val;
-
 }
 
 // LOOKTO--	DESCRIBE VIEW IN MIRROR HALLWAY
-
 static void lookto(int nrm, int srm, int nt, int st, int ht) {
 // System generated locals
    int i__1;
@@ -501,7 +498,6 @@ L200:
 }
 
 // EWTELL--	DESCRIBE E/W NARROW ROOMS
-
 static void ewtell(int rm, int st) {
 // System generated locals
    int i__1;

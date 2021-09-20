@@ -1,13 +1,12 @@
-// ENCRYP--	ENCRYPT PASSWORD
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
 #include "extern.h"
 #include "common.h"
 
+// ENCRYP--	ENCRYPT PASSWORD
 void encryp(const char *inw, char *outw) {
 // Initialized data
    const char *keyw = "ECORMS";
@@ -55,7 +54,6 @@ void encryp(const char *inw, char *outw) {
 }
 
 // CPGOTO--	MOVE TO NEXT STATE IN PUZZLE ROOM
-
 void cpgoto(int st) {
 // System generated locals
    int i__1, i__2;
@@ -80,7 +78,6 @@ void cpgoto(int st) {
 }
 
 // CPINFO--	DESCRIBE PUZZLE ROOM
-
 void cpinfo(int rmk, int st) {
 // Initialized data
    static const int dgmoft[8] = { -9, -8, -7, -1, 1, 7, 8, 9 };

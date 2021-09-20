@@ -1,13 +1,12 @@
-// RESIDENT SUBROUTINES FOR DUNGEON
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
 #include "extern.h"
 #include "common.h"
 
+// RESIDENT SUBROUTINES FOR DUNGEON
 #ifndef SEEK_SET
 #   define SEEK_SET (0)
 #endif
@@ -17,37 +16,27 @@ extern FILE *dbfile;
 static void rspsb2nl(int, int, int, Bool);
 
 // RSPEAK-- OUTPUT RANDOM MESSAGE ROUTINE
-
 // CALLED BY--
-
 // 	CALL RSPEAK(MSGNUM)
-
 void rspeak(int n) {
    rspsb2nl(n, 0, 0, 1);
 }
 
 // RSPSUB-- OUTPUT RANDOM MESSAGE WITH SUBSTITUTABLE ARGUMENT
-
 // CALLED BY--
-
 // 	CALL RSPSUB(MSGNUM,SUBNUM)
-
 void rspsub(int n, int s1) {
    rspsb2nl(n, s1, 0, 1);
 }
 
 // RSPSB2-- OUTPUT RANDOM MESSAGE WITH UP TO TWO SUBSTITUTABLE ARGUMENTS
-
 // CALLED BY--
-
 // 	CALL RSPSB2(MSGNUM,SUBNUM1,SUBNUM2)
-
 void rspsb2(int n, int s1, int s2) {
    rspsb2nl(n, s1, s2, 1);
 }
 
 // rspsb2nl Display a substitutable message with an optional newline
-
 static void rspsb2nl(int n, int y, int z, Bool nl) {
    const char *zkey = "IanLanceTaylorJr";
    long x;
@@ -110,7 +99,6 @@ static void rspsb2nl(int n, int y, int z, Bool nl) {
 }
 
 // OBJACT-- APPLY OBJECTS FROM PARSE VECTOR
-
 Bool objact(/*int x*/) {
 // System generated locals
    Bool ret_val;
@@ -143,11 +131,8 @@ L200:
 }
 
 // BUG-- REPORT FATAL SYSTEM ERROR
-
 // CALLED BY--
-
 // 	CALL BUG(NO,PAR)
-
 void bug(int a, int b) {
 // Local variables
 
@@ -158,15 +143,11 @@ void bug(int a, int b) {
       return;
    }
    exit_();
-
 }
 
 // NEWSTA-- SET NEW STATUS FOR OBJECT
-
 // CALLED BY--
-
 // 	CALL NEWSTA(OBJECT,STRING,NEWROOM,NEWCON,NEWADV)
-
 void newsta(int o, int r, int rm, int cn, int ad) {
    rspeak(r);
    objcts_1.oroom[o - 1] = rm;
@@ -175,7 +156,6 @@ void newsta(int o, int r, int rm, int cn, int ad) {
 }
 
 // QHERE-- TEST FOR OBJECT IN ROOM
-
 Bool qhere(int obj, int rm) {
 // System generated locals
    int i__1;
@@ -204,7 +184,6 @@ Bool qhere(int obj, int rm) {
 }
 
 // QEMPTY-- TEST FOR OBJECT EMPTY
-
 Bool qempty(int obj) {
 // System generated locals
    int i__1;
@@ -228,7 +207,6 @@ Bool qempty(int obj) {
 }
 
 // JIGSUP- YOU ARE DEAD
-
 void jigsup(int desc) {
 // Initialized data
    static const int rlist[9] = { 8, 6, 36, 35, 34, 4, 34, 6, 5 };
@@ -385,11 +363,9 @@ L1100:
 // 						!TELL SCORE.
    (void)fclose(dbfile);
    exit_();
-
 }
 
 // OACTOR-	GET ACTOR ASSOCIATED WITH OBJECT
-
 int oactor(int obj) {
 // System generated locals
    int ret_val = 1, i__1;
@@ -414,7 +390,6 @@ int oactor(int obj) {
 }
 
 // PROB-		COMPUTE PROBABILITY
-
 Bool prob(int g, int b) {
 // System generated locals
    Bool ret_val;
@@ -434,10 +409,8 @@ Bool prob(int g, int b) {
 }
 
 // RMDESC-- PRINT ROOM DESCRIPTION
-
 // RMDESC PRINTS A DESCRIPTION OF THE CURRENT ROOM.
 // IT IS ALSO THE PROCESSOR FOR VERBS 'LOOK' AND 'EXAMINE'.
-
 Bool rmdesc(int full) {
 // System generated locals
    Bool ret_val, L__1;
@@ -539,11 +512,9 @@ L600:
 // 						!ROOM HANDLES, NEW DESC?
    prsvec_1.prsa = vindex_1.foow;
    return ret_val;
-
 }
 
 // RAPPLI-	ROUTING ROUTINE FOR ROOM APPLICABLES
-
 Bool rappli(int ri) {
 // Initialized data
    const int newrms = 38;

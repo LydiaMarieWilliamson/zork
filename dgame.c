@@ -1,9 +1,7 @@
-// GAME- MAIN COMMAND LOOP FOR DUNGEON
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
 #include <string.h> // For strcmp().
 #include "extern.h"
@@ -12,6 +10,7 @@
 static void xendmv(Bool);
 static Bool xvehic(int);
 
+// GAME- MAIN COMMAND LOOP FOR DUNGEON
 void game_(void) {
 // Local variables
    Bool f;
@@ -192,11 +191,9 @@ L2900:
    valuac(oindex_1.valua);
 // 						!ALL OR VALUABLES.
    goto L350;
-
 }
 
 // XENDMV-	EXECUTE END OF MOVE FUNCTIONS.
-
 static void xendmv(Bool flag) {
 // Local variables
    Bool f;
@@ -230,7 +227,6 @@ static void xendmv(Bool flag) {
 }
 
 // XVEHIC- EXECUTE VEHICLE FUNCTION
-
 static Bool xvehic(int n) {
 // System generated locals
    Bool ret_val;

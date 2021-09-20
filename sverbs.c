@@ -1,15 +1,14 @@
-// SVERBS-	SIMPLE VERBS PROCESSOR
-// 	ALL VERBS IN THIS ROUTINE MUST BE INDEPENDANT
-// 	OF OBJECT ACTIONS
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
 #include "extern.h"
 #include "common.h"
 
+// SVERBS-	SIMPLE VERBS PROCESSOR
+// 	ALL VERBS IN THIS ROUTINE MUST BE INDEPENDANT
+// 	OF OBJECT ACTIONS
 Bool sverbs(int ri) {
 // Initialized data
    const int mxnop = 39;
@@ -888,5 +887,4 @@ L27600:
    cevent_1.cflag[cindex_1.cevinq - 1] = false;
    objcts_1.oflag2[oindex_1.qdoor - 1] |= OpenO;
    return ret_val;
-
 }

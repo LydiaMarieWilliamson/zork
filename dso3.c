@@ -1,13 +1,12 @@
-// FINDXT- FIND EXIT FROM ROOM
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
 #include "extern.h"
 #include "common.h"
 
+// FINDXT- FIND EXIT FROM ROOM
 Bool findxt(int dir, int rm) {
 // System generated locals
    Bool ret_val;
@@ -67,7 +66,6 @@ L1000:
 }
 
 // FWIM- FIND WHAT I MEAN
-
 int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 // System generated locals
    int ret_val, i__1, i__2;
@@ -136,11 +134,8 @@ int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 }
 
 // YESNO- OBTAIN YES/NO ANSWER
-
 // CALLED BY-
-
 // 	YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING)
-
 Bool yesno(int q, int y, int n) {
 // System generated locals
    Bool ret_val;
@@ -178,5 +173,4 @@ L300:
    rspeak(n);
 // 						!LIKEWISE.
    return ret_val;
-
 }

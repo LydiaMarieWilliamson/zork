@@ -1,16 +1,14 @@
-// GETOBJ--	FIND OBJ DESCRIBED BY ADJ, NAME PAIR
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
 static Bool thisit(int, int, int, int);
 
+// GETOBJ--	FIND OBJ DESCRIBED BY ADJ, NAME PAIR
 // THIS ROUTINE DETAILS ON BIT 3 OF PRSFLG
-
 int getobj(int oidx, int aidx, int spcobj) {
 // System generated locals
    int ret_val, i__1;
@@ -139,7 +137,6 @@ L1500:
 }
 
 // SCHLST--	SEARCH FOR OBJECT
-
 int schlst(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
 // System generated locals
    int ret_val, i__1, i__2;
@@ -223,11 +220,9 @@ L2000:
    ret_val = -ret_val;
 // 						!AMB RETURN.
    return ret_val;
-
 }
 
 // THISIT--	VALIDATE OBJECT VS DESCRIPTION
-
 static Bool thisit(int oidx, int aidx, int obj, int spcobj) {
 // Initialized data
 //    THE FOLLOWING DATA STATEMENT USED RADIX-50 NOTATION (R50MIN/1RA/)

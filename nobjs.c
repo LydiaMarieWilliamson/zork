@@ -1,16 +1,15 @@
-// NOBJS-	NEW OBJECTS PROCESSOR
-// 	OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP,
-// 	MAJOR VERBS, OR OTHER NON-RESIDENT SUBROUTINES
-
-// COPYRIGHT 1980, INFOCOM COMPUTERS AND COMMUNICATIONS, CAMBRIDGE MA. 02142
-// ALL RIGHTS RESERVED, COMMERCIAL USAGE STRICTLY PROHIBITED
-// WRITTEN BY R. M. SUPNIK
-
+// Copyright (c) 1980, InfoCom Computers and Communications, Cambridge MA 02142
+// All rights reserved, commercial usage strictly prohibited.
+// Written by R. M. Supnik.
+// Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include "extern.h"
 #include "common.h"
 
 static Bool mirpan(int, Bool);
 
+// NOBJS-	NEW OBJECTS PROCESSOR
+// 	OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP,
+// 	MAJOR VERBS, OR OTHER NON-RESIDENT SUBROUTINES
 Bool nobjs(int ri/*, int arg*/) {
 // System generated locals
    int i__1, i__2;
@@ -855,7 +854,6 @@ L21200:
    rspsub(864, odo2);
 // 						!DESCRIBE.
    return ret_val;
-
 }
 
 // MIRPAN--	PROCESSOR FOR GLOBAL MIRROR/PANEL
@@ -940,5 +938,4 @@ L600:
    ret_val = false;
 // 						!CANT HANDLE IT.
    return ret_val;
-
 }
