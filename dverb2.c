@@ -16,7 +16,7 @@ void savegm(void) {
 
    prsvec_1.prswon = false;
 // 						!DISABLE GAME.
-// Note: save file format is different for PDP vs. non-PDP versions
+// Note: save file format is different for PDP versus non-PDP versions
 
    if ((e = fopen("dsave.dat", BINWRITE)) == NULL)
       goto L100;
@@ -102,7 +102,7 @@ void rstrgm(void) {
 
    prsvec_1.prswon = false;
 // 						!DISABLE GAME.
-// Note: save file format is different for PDP vs. non-PDP versions
+// Note: save file format is different for PDP versus non-PDP versions
 
    if ((e = fopen("dsave.dat", BINREAD)) == NULL)
       goto L100;

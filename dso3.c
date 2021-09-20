@@ -134,7 +134,7 @@ int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 }
 
 // Obtain yes/no answer
-// Called by:
+// Called as:
 // 	YesIsTrue = yesno(Question, YesString, NoString);
 Bool yesno(int q, int y, int n) {
 // System generated locals

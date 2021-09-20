@@ -16,21 +16,21 @@ extern FILE *dbfile;
 static void rspsb2nl(int, int, int, Bool);
 
 // Output random message routine
-// Called by:
+// Called as:
 // 	rspeak(MsgNum);
 void rspeak(int n) {
    rspsb2nl(n, 0, 0, 1);
 }
 
 // Output random message with substitutable argument
-// Called by:
+// Called as:
 // 	rspsub(MsgNum, SubNum);
 void rspsub(int n, int s1) {
    rspsb2nl(n, s1, 0, 1);
 }
 
 // Output random message with up to two substitutable arguments
-// Called by:
+// Called as:
 // 	rspsb2(MsgNum, SubNum1, SubNum2);
 void rspsb2(int n, int s1, int s2) {
    rspsb2nl(n, s1, s2, 1);
@@ -131,8 +131,8 @@ L200:
 }
 
 // Report fatal system error
-// Called by:
-// 	bug(No, Par)
+// Called as:
+// 	bug(No, Par);
 void bug(int a, int b) {
 // Local variables
 
@@ -146,8 +146,8 @@ void bug(int a, int b) {
 }
 
 // Set new status for object
-// Called by:
-// 	newsta(Object, String, NewRoom, NewCon, NewAdv)
+// Called as:
+// 	newsta(Object, String, NewRoom, NewCon, NewAdv);
 void newsta(int o, int r, int rm, int cn, int ad) {
    rspeak(r);
    objcts_1.oroom[o - 1] = rm;
