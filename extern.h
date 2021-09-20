@@ -45,7 +45,7 @@ void swordd(void);
 void game_(void);
 
 // dinit.c:
-Bool init(void);
+Bool init(void/*int x*/);
 
 // dso1.c:
 void princr(Bool, int);

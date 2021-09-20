@@ -9,7 +9,7 @@
 // ENCRYP--	ENCRYPT PASSWORD
 void encryp(const char *inw, char *outw) {
 // Initialized data
-   const char *keyw = "ECORMS";
+   const char *keyw = "E" "C" "O" "R" "M" "S";
 
    int i, j, uinw[6], usum;
    char ukeyw[1 * 6];
@@ -81,7 +81,7 @@ void cpgoto(int st) {
 void cpinfo(int rmk, int st) {
 // Initialized data
    static const int dgmoft[8] = { -9, -8, -7, -1, 1, 7, 8, 9 };
-   const char *pict = "SSS M";
+   const char *pict = "S" "S" "S" " " "M";
 
 // Local variables
    int i, j, k, l;

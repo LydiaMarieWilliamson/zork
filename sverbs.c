@@ -13,13 +13,17 @@ Bool sverbs(int ri) {
 // Initialized data
    const int mxnop = 39;
    const int mxjoke = 64;
-   static const int jokes[25] = { 4, 5, 3, 304, 305, 306, 307, 308, 309, 310, 311,
-      312, 313, 5314, 5319, 324, 325, 883, 884, 120, 120, 0, 0, 0, 0
+   static const int jokes[25] = {
+      4, 5, 3, 304, 305, 306, 307, 308, 309, 310, 311, 312,
+      313, 5314, 5319, 324, 325, 883, 884, 120, 120, 0, 0, 0, 0
    };
-   static const int answer[14] = { 0, 1, 2, 3, 4, 4, 4, 4, 5, 5, 5, 6, 7, 7 };
-   static const char *const ansstr[14] = { "TEMPLE", "FOREST", "30003", "FLASK", "RUB", "FONDLE",
-      "CARRES", "TOUCH", "BONES", "BODY", "SKELE", "RUSTYKNIFE",
-      "NONE", "NOWHER"
+   static const int answer[14] = {
+      0, 1, 2, 3, 4, 4, 4,
+      4, 5, 5, 5, 6, 7, 7
+   };
+   static const char *const ansstr[14] = {
+      "TEMPLE", "FOREST", "30003", "FLASK", "RUB", "FONDLE", "CARRES",
+      "TOUCH", "BONES", "BODY", "SKELE", "RUSTYKNIFE", "NONE", "NOWHER"
    };
 
 // System generated locals

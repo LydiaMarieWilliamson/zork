@@ -198,7 +198,7 @@ static void xendmv(Bool flag) {
 // Local variables
    Bool f;
 #if 0
-   int x;
+   int x; //(@) Not actually used.
 #endif
    if (!(flag)) {
       rspeak(341);

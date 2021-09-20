@@ -36,7 +36,7 @@ void rspsb2(int n, int s1, int s2) {
    rspsb2nl(n, s1, s2, 1);
 }
 
-// rspsb2nl Display a substitutable message with an optional newline
+// RSPSB2NL-- Display a substitutable message with an optional newline
 static void rspsb2nl(int n, int y, int z, Bool nl) {
    const char *zkey = "IanLanceTaylorJr";
    long x;

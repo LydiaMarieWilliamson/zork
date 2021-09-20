@@ -24,8 +24,7 @@ void savegm(void) {
    i = gttime();
 // 						!GET TIME.
 
-#define do_uio(i, zbuf, cbytes) \
-	(void) fwrite((const char *)(zbuf), (cbytes), (i), e)
+#define do_uio(i, zbuf, cbytes) (void)fwrite((const char *)(zbuf), (cbytes), (i), e)
 
    do_uio(1, &vers_1.vmaj, sizeof(int));
    do_uio(1, &vers_1.vmin, sizeof(int));
@@ -108,8 +107,7 @@ void rstrgm(void) {
    if ((e = fopen("dsave.dat", BINREAD)) == NULL)
       goto L100;
 
-#define do_uio(i, zbuf, cbytes) \
-	(void)fread((char *)(zbuf), (cbytes), (i), e)
+#define do_uio(i, zbuf, cbytes) (void)fread((char *)(zbuf), (cbytes), (i), e)
 
    do_uio(1, &i, sizeof(int));
    do_uio(1, &j, sizeof(int));
@@ -472,7 +470,7 @@ L6000:
 // C7-	FROBOZZ FLAG (BANK ALARM)
 
 L7000:
-   findex_1.frobzf = objcts_1.oroom[oindex_1.bills - 1] != 0 & objcts_1.oroom[oindex_1.portr - 1] != 0;
+   findex_1.frobzf = objcts_1.oroom[oindex_1.bills - 1] != 0 && objcts_1.oroom[oindex_1.portr - 1] != 0;
    return ret_val;
 // CXAPPL, PAGE 3
 

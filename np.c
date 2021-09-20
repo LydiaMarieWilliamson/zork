@@ -132,10 +132,7 @@ void orphan(int o1, int o2, int o3, int o4, int o5) {
 // THIS ROUTINE DETAILS ON BIT 1 OF PRSFLAG
 static Bool lex(char *inbuf, int *outbuf, int *op, Bool vbflag) {
 // Initialized data
-   static const char dlimit[9] = { 'A', 'Z', 'A' - 1,
-      '1', '9', '1' - 31,
-      '-', '-', '-' - 27
-   };
+   static const char dlimit[9] = { 'A', 'Z', 'A' - 1, '1', '9', '1' - 31, '-', '-', '-' - 27 };
 
 // System generated locals
    Bool ret_val;

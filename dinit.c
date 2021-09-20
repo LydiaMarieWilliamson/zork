@@ -8,10 +8,7 @@
 #endif
 #include "extern.h"
 #include "common.h"
-
-// This is here to avoid depending on the existence of <stdlib.h>
-
-extern void srand(unsigned int);
+#include <stdlib.h> // For srand().
 
 FILE *dbfile;
 
@@ -28,9 +25,8 @@ FILE *dbfile;
 #   define LOCALTEXTFILE "dtextc.dat"
 #endif
 // Read a single two byte int from the index file
-#define rdint(indxfile) \
-    (ch = getc(indxfile), \
-     ((ch > 127) ? (ch - 256) : (ch)) * 256 + getc(indxfile))
+#define rdint(indxfile) (ch = getc(indxfile), 256*(ch > 127? ch - 256: (ch)) + getc(indxfile))
+
 // Read a number of two byte integers from the index file
 static void rdints(int c, int *pi, FILE *indxfile) {
    int ch; // Local variable for rdint
@@ -68,7 +64,7 @@ static void rdflags(int c, Bool *pf, FILE *indxfile) {
 }
 
 // INIT-- DUNGEON INITIALIZATION SUBROUTINE
-Bool init(void) {
+Bool init(void/*int x*/) {
 // System generated locals
    int i__1;
    Bool ret_val;

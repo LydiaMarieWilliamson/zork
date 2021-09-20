@@ -7,10 +7,13 @@
 
 // DUNGEON-- MAIN PROGRAM
 int main(void) {
+#if 0
+   int x;
+#endif
 // 1) INITIALIZE DATA STRUCTURES
 // 2) PLAY GAME
 
-   if (init()) {
+   if (init(/*x*/)) {
       game_();
    }
 // 						!IF INIT, PLAY GAME.
