@@ -7,9 +7,8 @@
 
 static Bool mirpan(int, Bool);
 
-// NOBJS-	NEW OBJECTS PROCESSOR
-// 	OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP,
-// 	MAJOR VERBS, OR OTHER NON-RESIDENT SUBROUTINES
+// New objects processor
+// Objects in this module cannot call rminfo(), jigsup(), major verbs, or other non-resident subroutines
 Bool nobjs(int ri/*, int arg*/) {
 // System generated locals
    int i__1, i__2;
@@ -856,7 +855,7 @@ L21200:
    return ret_val;
 }
 
-// MIRPAN--	PROCESSOR FOR GLOBAL MIRROR/PANEL
+// Processor for global mirror/panel
 static Bool mirpan(int st, Bool pnf) {
 // System generated locals
    int i__1;

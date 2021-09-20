@@ -7,8 +7,8 @@
 
 static Bool thisit(int, int, int, int);
 
-// GETOBJ--	FIND OBJ DESCRIBED BY ADJ, NAME PAIR
-// THIS ROUTINE DETAILS ON BIT 3 OF PRSFLG
+// Find obj described by adj, name pair
+// This routine details on bit 3 of prsflg
 int getobj(int oidx, int aidx, int spcobj) {
 // System generated locals
    int ret_val, i__1;
@@ -136,7 +136,7 @@ L1500:
    return ret_val;
 }
 
-// SCHLST--	SEARCH FOR OBJECT
+// Search for object
 int schlst(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
 // System generated locals
    int ret_val, i__1, i__2;
@@ -222,12 +222,11 @@ L2000:
    return ret_val;
 }
 
-// THISIT--	VALIDATE OBJECT VS DESCRIPTION
+// Validate object vs description
 static Bool thisit(int oidx, int aidx, int obj, int spcobj) {
 // Initialized data
-//    THE FOLLOWING DATA STATEMENT USED RADIX-50 NOTATION (R50MIN/1RA/)
-//       IN RADIX-50 NOTATION, AN "A" IN THE FIRST POSITION IS
-//       ENCODED AS 1*40*40 = 1600.
+//    The following data statement used radix-50 notation (r50min/1ra/)
+//       In radix-50 notation, an ‟A” in the first position is encoded as 1×40×40 = 1600.
    const int r50min = 1600;
 
 // System generated locals

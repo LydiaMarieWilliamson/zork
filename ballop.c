@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// BALLOP-	BALLOON FUNCTION
+// Balloon function
 Bool ballop(int arg) {
 // System generated locals
    Bool ret_val;

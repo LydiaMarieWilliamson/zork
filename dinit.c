@@ -63,7 +63,7 @@ static void rdflags(int c, Bool *pf, FILE *indxfile) {
       *pf++ = getc(indxfile);
 }
 
-// INIT-- DUNGEON INITIALIZATION SUBROUTINE
+// Dungeon initialization subroutine
 Bool init(void/*int x*/) {
 // System generated locals
    int i__1;

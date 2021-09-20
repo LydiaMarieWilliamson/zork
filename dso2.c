@@ -6,7 +6,7 @@
 #include "extern.h"
 #include "common.h"
 
-// MOVETO- MOVE PLAYER TO NEW ROOM
+// Move player to new room
 Bool moveto(int nr, int who) {
 // System generated locals
    Bool ret_val;
@@ -86,7 +86,7 @@ L800:
    return ret_val;
 }
 
-// SCORE-- PRINT OUT CURRENT SCORE
+// Print out current score
 void score(Bool flg) {
 // Initialized data
    static const int rank[10] = { 20, 19, 18, 16, 12, 8, 4, 2, 1, 0 };
@@ -146,7 +146,7 @@ L80:
    rspeak(i__1);
 }
 
-// SCRUPD- UPDATE WINNER'S SCORE
+// Update winner's score
 void scrupd(int n) {
    if (findex_1.endgmf) {
       goto L100;

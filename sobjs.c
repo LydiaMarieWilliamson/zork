@@ -5,9 +5,8 @@
 #include "extern.h"
 #include "common.h"
 
-// SOBJS-	SIMPLE OBJECTS PROCESSOR
-// 	OBJECTS IN THIS MODULE CANNOT CALL RMINFO, JIGSUP,
-// 	MAJOR VERBS, OR OTHER NON-RESIDENT SUBROUTINES
+// Simple objects processor
+// Objects in this module cannot call rminfo(), jigsup(), major verbs, or other non-resident subroutines
 Bool sobjs(int ri, int arg) {
 // System generated locals
    int i__1;

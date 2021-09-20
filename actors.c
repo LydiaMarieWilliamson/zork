@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// AAPPLI- APPLICABLES FOR ADVENTURERS
+// Applicables for adventurers
 Bool aappli(int ri) {
 // System generated locals
    Bool ret_val;
@@ -118,7 +118,7 @@ L2200:
    return ret_val;
 }
 
-// THIEFD-	INTERMOVE THIEF DEMON
+// Intermove thief demon
 void thiefd(void) {
 // System generated locals
    int i__1, i__2;

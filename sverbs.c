@@ -6,9 +6,8 @@
 #include "extern.h"
 #include "common.h"
 
-// SVERBS-	SIMPLE VERBS PROCESSOR
-// 	ALL VERBS IN THIS ROUTINE MUST BE INDEPENDANT
-// 	OF OBJECT ACTIONS
+// Simple verbs processor
+// All verbs in this routine must be independent of object actions
 Bool sverbs(int ri) {
 // Initialized data
    const int mxnop = 39;

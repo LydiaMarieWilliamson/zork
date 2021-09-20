@@ -6,7 +6,7 @@
 #include "extern.h"
 #include "common.h"
 
-// FINDXT- FIND EXIT FROM ROOM
+// Find exit from room
 Bool findxt(int dir, int rm) {
 // System generated locals
    Bool ret_val;
@@ -65,7 +65,7 @@ L1000:
    return ret_val;
 }
 
-// FWIM- FIND WHAT I MEAN
+// Find what I mean
 int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 // System generated locals
    int ret_val, i__1, i__2;
@@ -133,9 +133,9 @@ int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
    return ret_val;
 }
 
-// YESNO- OBTAIN YES/NO ANSWER
-// CALLED BY-
-// 	YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING)
+// Obtain yes/no answer
+// Called by:
+// 	YesIsTrue = yesno(Question, YesString, NoString);
 Bool yesno(int q, int y, int n) {
 // System generated locals
    Bool ret_val;

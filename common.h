@@ -96,7 +96,7 @@ enum objflgCB {
 };
 
 // vocab.h:
-// VOCABULARIES
+// Vocabularies
 // common /buzvoc/
 extern const struct buzvocCB {
    int bvoc[20];

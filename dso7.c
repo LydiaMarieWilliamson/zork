@@ -6,7 +6,7 @@
 #include "extern.h"
 #include "common.h"
 
-// ENCRYP--	ENCRYPT PASSWORD
+// Encrypt password
 void encryp(const char *inw, char *outw) {
 // Initialized data
    const char *keyw = "E" "C" "O" "R" "M" "S";
@@ -53,7 +53,7 @@ void encryp(const char *inw, char *outw) {
    }
 }
 
-// CPGOTO--	MOVE TO NEXT STATE IN PUZZLE ROOM
+// Move to next state in puzzle room
 void cpgoto(int st) {
 // System generated locals
    int i__1, i__2;
@@ -77,7 +77,7 @@ void cpgoto(int st) {
    findex_1.cphere = st;
 }
 
-// CPINFO--	DESCRIBE PUZZLE ROOM
+// Describe puzzle room
 void cpinfo(int rmk, int st) {
 // Initialized data
    static const int dgmoft[8] = { -9, -8, -7, -1, 1, 7, 8, 9 };

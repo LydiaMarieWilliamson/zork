@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// TROLLP-	TROLL FUNCTION
+// Troll function
 Bool trollp(/*int arg*/) {
 // System generated locals
    Bool ret_val;
@@ -157,7 +157,7 @@ L10:
    return ret_val;
 }
 
-// CYCLOP-	CYCLOPS FUNCTION
+// Cyclops function
 Bool cyclop(/*int arg*/) {
 // System generated locals
    int i__1, i__2;
@@ -284,7 +284,7 @@ L500:
 // 						!SEE IF HANDLED.
 }
 
-// THIEFP-	THIEF FUNCTION
+// Thief function
 Bool thiefp(/*int arg*/) {
 // System generated locals
    int i__1;

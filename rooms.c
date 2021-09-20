@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// RAPPL1- SPECIAL PURPOSE ROOM ROUTINES, PART 1
+// Special purpose room routines, part 1
 Bool rappl1(int ri) {
 // System generated locals
    int i__1, i__2;

@@ -8,7 +8,7 @@
 static void lookto(int, int, int, int, int);
 static void ewtell(int, int);
 
-// RAPPL2- SPECIAL PURPOSE ROOM ROUTINES, PART 2
+// Special purpose room routines, part 2
 Bool rappl2(int ri) {
 // Initialized data
    const int newrms = 38;
@@ -423,7 +423,7 @@ L60100:
    return ret_val;
 }
 
-// LOOKTO--	DESCRIBE VIEW IN MIRROR HALLWAY
+// Describe view in mirror hallway
 static void lookto(int nrm, int srm, int nt, int st, int ht) {
 // System generated locals
    int i__1;
@@ -497,7 +497,7 @@ L200:
 // 						!DESCRIBE HALLS.
 }
 
-// EWTELL--	DESCRIBE E/W NARROW ROOMS
+// Describe e/w narrow rooms
 static void ewtell(int rm, int st) {
 // System generated locals
    int i__1;

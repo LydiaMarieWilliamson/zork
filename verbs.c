@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// VAPPLI- MAIN VERB PROCESSING ROUTINE
+// Main verb processing routine
 Bool vappli(int ri) {
 // Initialized data
    const int mxnop = 39;
@@ -1341,7 +1341,7 @@ L87500:
    return ret_val;
 }
 
-// CLOCKD- CLOCK DEMON FOR INTERMOVE CLOCK EVENTS
+// Clock demon for intermove clock events
 Bool clockd(/*int x*/) {
 // System generated locals
    int i__1;

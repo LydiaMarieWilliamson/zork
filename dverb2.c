@@ -8,7 +8,7 @@
 
 static int cxappl(int);
 
-// SAVE- SAVE GAME STATE
+// Save game state
 void savegm(void) {
 // Local variables
    int i;
@@ -94,7 +94,7 @@ L100:
 // 						!CANT DO IT.
 }
 
-// RESTORE- RESTORE GAME STATE
+// Restore game state
 void rstrgm(void) {
 // Local variables
    int i, j, k;
@@ -184,7 +184,7 @@ L200:
    (void)fclose(e);
 }
 
-// WALK- MOVE IN SPECIFIED DIRECTION
+// Move in specified direction
 Bool walk(/*int x*/) {
 // System generated locals
    Bool ret_val;
@@ -340,7 +340,7 @@ L900:
    return ret_val;
 }
 
-// CXAPPL- CONDITIONAL EXIT PROCESSORS
+// Conditional exit processors
 static int cxappl(int ri) {
 // System generated locals
    int ret_val, i__1;

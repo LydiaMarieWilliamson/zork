@@ -10,7 +10,7 @@
 static void xendmv(Bool);
 static Bool xvehic(int);
 
-// GAME- MAIN COMMAND LOOP FOR DUNGEON
+// Main command loop for dungeon
 void game_(void) {
 // Local variables
    Bool f;
@@ -193,7 +193,7 @@ L2900:
    goto L350;
 }
 
-// XENDMV-	EXECUTE END OF MOVE FUNCTIONS.
+// Execute end of move functions.
 static void xendmv(Bool flag) {
 // Local variables
    Bool f;
@@ -226,7 +226,7 @@ static void xendmv(Bool flag) {
 // 						!VEHICLE READOUT.
 }
 
-// XVEHIC- EXECUTE VEHICLE FUNCTION
+// Execute vehicle function
 static Bool xvehic(int n) {
 // System generated locals
    Bool ret_val;

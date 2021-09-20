@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// OAPPLI- OBJECT SPECIAL ACTION ROUTINES
+// Object special action routines
 Bool oappli(int ri, int arg) {
 // Initialized data
    const int mxsmp = 99;

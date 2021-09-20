@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// DUNGEON-- MAIN PROGRAM
+// Main program
 int main(void) {
 #if 0
    int x;

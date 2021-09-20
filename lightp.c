@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// LIGHTP-	LIGHT PROCESSOR
+// Light processor
 Bool lightp(int obj) {
 // System generated locals
    Bool ret_val;

@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// ROBADV-- STEAL WINNER'S VALUABLES
+// Steal winner's valuables
 int robadv(int adv, int nr, int nc, int na) {
 // System generated locals
    int ret_val, i__1;
@@ -29,7 +29,7 @@ int robadv(int adv, int nr, int nc, int na) {
    return ret_val;
 }
 
-// ROBRM-- STEAL ROOM VALUABLES
+// Steal room valuables
 int robrm(int rm, int pr, int nr, int nc, int na) {
 // System generated locals
    int ret_val, i__1, i__2;
@@ -65,7 +65,7 @@ int robrm(int rm, int pr, int nr, int nc, int na) {
    return ret_val;
 }
 
-// WINNIN-- SEE IF VILLAIN IS WINNING
+// See if villain is winning
 Bool winnin(int vl, int hr) {
 // System generated locals
    Bool ret_val;
@@ -103,7 +103,7 @@ Bool winnin(int vl, int hr) {
    return ret_val;
 }
 
-// FIGHTS-- COMPUTE FIGHT STRENGTH
+// Compute fight strength
 int fights(int h, Bool flg) {
 // Initialized data
    const int smin = 2;
@@ -119,7 +119,7 @@ int fights(int h, Bool flg) {
    return ret_val;
 }
 
-// VILSTR-	COMPUTE VILLAIN STRENGTH
+// Compute villain strength
 int vilstr(int v) {
 // System generated locals
    int ret_val, i__1, i__2, i__3;

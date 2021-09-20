@@ -5,8 +5,8 @@
 #include "extern.h"
 #include "common.h"
 
-// SPARSE-	START OF PARSE
-// THIS ROUTINE DETAILS ON BIT 2 OF PRSFLG
+// Start of parse
+// This routine details on bit 2 of prsflg
 int sparse(const int *lbuf, int llnt, Bool vbflag) {
 // Initialized data
 // 	DATA R50MIN/1RA/,R50WAL/3RWAL/

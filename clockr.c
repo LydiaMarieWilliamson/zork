@@ -7,7 +7,7 @@
 
 static void litint(int, int *, int, const int *, int);
 
-// CEVAPP- CLOCK EVENT APPLICABLES
+// Clock event applicables
 void cevapp(int ri) {
 // Initialized data
    static const int cndtck[10] = { 50, 20, 10, 5, 0, 156, 156, 156, 157, 0 };
@@ -758,7 +758,7 @@ L24100:
 // 						!MOVE MASTER PLAYER.
 }
 
-// LITINT-	LIGHT INTERRUPT PROCESSOR
+// Light interrupt processor
 static void litint(int obj, int *ctr, int cev, const int *ticks, int tickln) {
 // Parameter adjustments
    --ticks;

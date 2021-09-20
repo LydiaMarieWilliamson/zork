@@ -5,8 +5,8 @@
 #include "extern.h"
 #include "common.h"
 
-// TAKE-- BASIC TAKE SEQUENCE
-// TAKE AN OBJECT (FOR VERBS TAKE, PUT, DROP, READ, ETC.)
+// Basic take sequence
+// Take an object (for verbs take, put, drop, read, etc.)
 Bool take(Bool flg) {
 // System generated locals
    int i__1;
@@ -90,7 +90,7 @@ L700:
    return ret_val;
 }
 
-// DROP- DROP VERB PROCESSOR
+// Drop verb processor
 Bool drop(/*Bool z*/) {
 // System generated locals
    Bool ret_val;
@@ -173,7 +173,7 @@ L1000:
    return ret_val;
 }
 
-// PUT- PUT VERB PROCESSOR
+// Put verb processor
 Bool put(/*Bool flg*/) {
 // System generated locals
    Bool ret_val;
@@ -303,7 +303,7 @@ L1000:
    return ret_val;
 }
 
-// VALUAC- HANDLES VALUABLES/EVERYTHING
+// Handles valuables/everything
 void valuac(int v) {
 // System generated locals
    int i__1;

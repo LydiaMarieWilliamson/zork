@@ -10,10 +10,10 @@
 // They are in their own file since they are so large.
 
 // vocab.h:
-// BUZZ WORDS--	IGNORED IN SYNTACTIC PROCESSING
+// Buzz words: ignored in syntactic processing
 // common /buzvoc/
 const struct buzvocCB buzvoc = (struct buzvocCB){
-//   THE FOLLOWING DATA STATEMENT WAS CONVERTED FROM:
+//   The following data statement was converted from:
 //	DATA BVOC/3RAND,0,2RBY,0,2RIS,0,1RA,0,
 //     & 2RAN,0,3RTHE,0,3RRUN,0,2RGO,0,3RPRO,3RCEE,0,0/
    bvoc: {
@@ -23,10 +23,10 @@ const struct buzvocCB buzvoc = (struct buzvocCB){
 };
 #define buzvoc_1 buzvoc
 
-// PREPOSITIONS--	MAPS PREPOSITIONS TO INDICES
+// Prepositions: maps prepositions to indices
 // common /prpvoc/
 const struct prpvocCB prpvoc = (struct prpvocCB){
-//   THE FOLLOWING DATA STATEMENT WAS CONVERTED FROM:
+//   The following data statement was converted from:
 //	DATA PVOC/3ROVE,1RR,1,3RWIT,1RH,2,3RUSI,2RNG,2,3RTHR,3ROUG,2,
 //     & 2RAT,0,3,2RTO,0,4,2RIN,0,5,3RINS,3RIDE,5,3RINT,1RO,5,
 //     & 3RDOW,1RN,6,2RUP,0,7,3RUND,2RER,8,2ROF,0,9,2RON,0,10,
@@ -40,10 +40,10 @@ const struct prpvocCB prpvoc = (struct prpvocCB){
 };
 #define prpvoc_1 prpvoc
 
-// DIRECTIONS--	MAPS DIRECTIONS TO INDICES
+// Directions: maps directions to indices
 // common /dirvoc/
 const struct dirvocCB dirvoc = (struct dirvocCB){
-//   THE FOLLOWING DATA STATEMENT WAS CONVERTED FROM:
+//   The following data statement was converted from:
 //	DATA DVOC/1RN,0,"2000,3RNOR,2RTH,"2000,1RS,0,"12000,
 //     & 1RE,0,"6000,3REAS,1RT,"6000,1RW,0,"16000,3RWES,1RT,"16000,
 //     & 2RSE,0,"10000,2RSW,0,"14000,
@@ -69,17 +69,15 @@ const struct dirvocCB dirvoc = (struct dirvocCB){
 };
 #define dirvoc_1 dirvoc
 
-// ADJECTIVES--	MAPS ADJECTIVES TO OBJECT NUMBERS
-// EACH ENTRY IS VARIABLE LENGTH AND CONSISTS OF A TWO WORD
-// ADJECTIVE IN RADIX-50 FOLLOWED BY ONE OR MORE OBJECT NUMBERS.
-// NOTE THAT ADJECTIVES CAN BE DISTINGUISHED FROM OBJECTS AS
-// FOLLOWS-- ALL ADJECTIVES ARE .GE. 1RA (1600), WHILE ALL OBJECTS
-// ARE .LE. OLNT (255 MAX).
+// Adjectives: maps adjectives to object numbers
+// Each entry is variable length and consists of a two word adjective in radix-50 followed by one or more object numbers.
+// Note that adjectives can be distinguished from objects as follows:
+// all adjectives are ≥ 1ra (1600), while all objects are ≤ olnt (255 max).
 
 // common /adjvoc/ int avoc1[184], avoc2[114], avoc3[106], avocnd;
 // int avoc[450]; // equivalence (avoc[1], adjvoc_1.avoc1[1]);
 const int avoc[] = {
-//   THE DATA STATEMENT BELOW WAS CONVERTED FROM:
+//   The data statement below was converted from:
 //	DATA AVOC1/3RBRO,2RWN,1,81,3RELO,3RNGA,1,3RHOT,0,3,3RPEP,3RPER,3,
 //     & 3RVIT,3RREO,4,3RJAD,1RE,6,3RHUG,1RE,8,3RENO,3RRMO,8,122,
 //     & 3RTRO,3RPHY,9,3RCLE,2RAR,10,3RLAR,2RGE,12,26,47,95,96,123,
@@ -179,51 +177,45 @@ const int avoc[] = {
    -1
 };
 
-// VERBS--	MAPS VERBS TO SYNTAX SLOTS
-// EACH ENTRY IS VARIABLE LENGTH AND CONSISTS OF ONE OR MORE
-// TWO WORD VERBS IN RADIX-50 FOLLOWED BY A SYNTAX WORD COUNT
-// FOLLOWED BY ONE OR MORE SYNTAXES.  NOTE THAT VERBS CAN BE
-// DISTINGUISHED FROM WORD COUNTS AS FOLLOWS--
-// ALL VERBS ARE .GE. 1RA (1600), WHILE ALL SYNTAX WORD COUNTS
-// ARE .LE. 255.
+// Verbs: maps verbs to syntax slots
+// Each entry is variable length and consists of one or more two word verbs in radix-50
+// followed by a syntax word count followed by one or more syntaxes.
+// Note that verbs can be distinguished from word counts as follows:
+// all verbs are ≥ 1ra (1600), while all syntax word counts are ≤ 255.
 
-// SYNTAX ENTRIES CONSIST OF A FLAG WORD FOLLOWED BY 0, 1, OR 2
-// OBJECT DESCRIPTIONS.  THE FLAG WORD HAS THE FOLLOWING FORMAT--
+// Syntax entries consist of a flag word followed by 0, 1, or 2 object descriptions.
+// The flag word has the following format:
+//	Bit <14>	If 1, syntax includes direct object
+//	Bit <13>	If 1, syntax includes indirect object
+//	Bit <12>	If 1, direct object is implicit (standard form)
+//	Bit <11>	If 1, direct and indirect object must be swapped after syntax processing
+//	Bit <10>	If 1, this is default syntax for orphanery
+//	Bits <8:0>	Verb number for vappli
 
-// BIT <14>	IF 1, SYNTAX INCLUDES DIRECT OBJECT
-// BIT <13>	IF 1, SYNTAX INCLUDES INDIRECT OBJECT
-// BIT <12>	IF 1, DIRECT OBJECT IS IMPLICIT (STANDARD FORM)
-// BIT <11>	IF 1, DIRECT AND INDIRECT OBJECT MUST BE SWAPPED AFTER SYNTAX PROCESSING
-// BIT <10>	IF 1, THIS IS DEFAULT SYNTAX FOR ORPHANERY
-// BITS <8:0>	VERB NUMBER FOR VAPPLI
+// Object descriptions consist of a flag word and two fwim words.
+// The flag word has the following format:
+//	Bit <14>	If 1, search adventurer for object
+//	Bit <13>	If 1, search room for object
+//	Bit <12>	If 1, parser will try to take object
+//	Bit <11>	If 1, adventurer must have object
+//	Bit <10>	If 1, qualifying bits (normally -1,-1) are same as fwim bits
+//	Bit <9>		If 1, object must be reachable
+//	Bits <8:0>	Preposition number for synmch
 
-// OBJECT DESCRIPTIONS CONSIST OF A FLAG WORD AND TWO FWIM WORDS.
-// THE FLAG WORD HAS THE FOLLOWING FORMAT--
+// The fwim words have the same format as the two object flag words.
 
-// BIT <14>	IF 1, SEARCH ADVENTURER FOR OBJECT
-// BIT <13>	IF 1, SEARCH ROOM FOR OBJECT
-// BIT <12>	IF 1, PARSER WILL TRY TO TAKE OBJECT
-// BIT <11>	IF 1, ADVENTURER MUST HAVE OBJECT
-// BIT <10>	IF 1, QUALIFYING BITS (NORMALLY -1,-1) ARE SAME AS FWIM BITS
-// BIT <9>	IF 1, OBJECT MUST BE REACHABLE
-// BITS <8:0>	PREPOSITION NUMBER FOR SYNMCH
-
-// THE FWIM WORDS HAVE THE SAME FORMAT AS THE TWO OBJECT FLAG WORDS.
-
-// NOTE THAT BITS 12 AND 11 OF OBJECT DESCRIPTIONS ACTUALLY HAVE
-// FOUR DISTINCT STATES--
-
-//	BIT 12	BIT 11	MDLDESC		INTERPRETATION
-//	------	------	-------		---------------
-//	  0	  0	 --		NO PARSER ACTION
-//	  0	  1	 HAVE		ADVENTURER MUST HAVE OBJECT
-//	  1	  0	 TRY		TRY TO TAKE, DONT CARE IF FAIL
-//	  1	  1	 TAKE		TRY TO TAKE, CARE IF FAIL
+// Note that bits 12 and 11 of object descriptions actually have four distinct states:
+//	Bit 12	Bit 11	mdldesc		Interpretation
+//	──────	──────	───────		───────────────
+//	0	0	−		No parser action
+//	0	1	Have		Adventurer must have object
+//	1	0	Try		Try to take, don't care if fail
+//	1	1	Take		Try to take, care if fail
 
 // common /vrbvoc/ int vvoc1[92], vvoc1a[108], vvoc1b[38], vvoc2[104], vvoc3[136], vvoc4[116], vvoc5[134], vvoc6[117], vvoc7[89], vvocnd;
 // int vvoc[950]; // equivalence (vvoc[1], vrbvoc_1.vvoc1[1]);
 const int vvoc[] = {
-//   THE FOLLOWING DATA STATEMENT WAS ORIGINALLY:
+//   The following data statement was originally:
 //	DATA VVOC1/3RBRI,2REF,1,70,3RVER,3RBOS,1,71,
 //     & 3RSUP,3RERB,1,72,3RSTA,1RY,1,73,3RVER,3RSIO,1,74,
 //     & 3RSWI,1RM,3RBAT,2RHE,3RWAD,1RE,1,75,3RGER,3RONI,1,76,
@@ -463,12 +455,12 @@ const int vvoc[] = {
    -1
 };
 
-// OBJECTS--	MAPS OBJECTS TO OBJECT INDICES
-// SAME FORMAT AS AVOC.
+// Objects: maps objects to object indices
+// Same format as avoc.
 // common /objvoc/ ovoc1[159], ovoc2[144], ovoc3[150], ovoc4[128], ovoc5[111], ovoc6[104], ovoc6a[97], ovoc7[127], ovocnd;
 // int ovoc[1050]; // equivalence (ovoc[1], objvoc_1.ovoc1[1]);
 const int ovoc[] = {
-//   THE FOLLOWING DATA STATEMENT WAS ORIGINALLY:
+//   The following data statement was originally:
 //	DATA OVOC1/3RBAG,0,1,25,100,3RSAC,1RK,1,3RGAR,3RLIC,2,
 //     & 3RCLO,2RVE,2,3RFOO,1RD,3,3RSAN,3RDWI,3,3RLUN,2RCH,3,
 //     & 3RDIN,3RNER,3,

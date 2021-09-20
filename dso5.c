@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// GTTIME-- GET TOTAL TIME PLAYED
+// Get total time played
 int gttime(void) {
    int h, m, s;
 
@@ -17,7 +17,7 @@ int gttime(void) {
    return t += time_1.pltime;
 }
 
-// OPNCLS-- PROCESS OPEN/CLOSE FOR DOORS
+// Process open/close for doors
 Bool opncls(int obj, int so, int sc) {
 // System generated locals
    int i__1;
@@ -62,7 +62,7 @@ L200:
    return ret_val;
 }
 
-// LIT-- IS ROOM LIT?
+// Is room lit?
 Bool lit(int rm) {
 // System generated locals
    int i__1, i__2;
@@ -121,7 +121,7 @@ Bool lit(int rm) {
    return ret_val;
 }
 
-// WEIGHT- RETURNS SUM OF WEIGHT OF QUALIFYING OBJECTS
+// Returns sum of weight of qualifying objects
 int weight(int rm, int cn, int ad) {
 // System generated locals
    int ret_val, i__1;

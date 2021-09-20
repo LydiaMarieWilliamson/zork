@@ -10,11 +10,11 @@ static int gwim(int, int, int);
 static Bool syneql(int, int, int, int, int);
 static Bool takeit(int, int);
 
-// SYNMCH--	SYNTAX MATCHER
-// THIS ROUTINE DETAILS ON BIT 4 OF PRSFLG
+// Syntax matcher
+// This routine details on bit 4 of prsflg
 Bool synmch(/*int x*/) {
 // Initialized data
-//   THE FOLLOWING DATA STATEMENT WAS ORIGINALLY:
+//   The following data statement was originally:
 // 	DATA R50MIN/1RA/
    const int r50min = 1600;
 
@@ -191,7 +191,7 @@ L5000:
    return ret_val;
 }
 
-// UNPACK-	UNPACK SYNTAX SPECIFICATION, ADV POINTER
+// Unpack syntax specification, adv pointer
 static int unpacks(int oldj) {
 // Local variables
    int i;
@@ -252,7 +252,7 @@ L200:
    return j;
 }
 
-// SYNEQL-	TEST FOR SYNTAX EQUALITY
+// Test for syntax equality
 static Bool syneql(int prep, int obj, int sprep, int sfl1, int sfl2) {
 // System generated locals
    Bool ret_val;
@@ -269,7 +269,7 @@ L100:
    return ret_val;
 }
 
-// TAKEIT-	PARSER BASED TAKE OF OBJECT
+// Parser based take of object
 static Bool takeit(int obj, int sflag) {
 // System generated locals
    Bool ret_val;
@@ -379,7 +379,7 @@ L4000:
    return ret_val;
 }
 
-// GWIM- GET WHAT I MEAN IN AMBIGOUS SITUATIONS
+// Get what I mean in ambigous situations
 static int gwim(int sflag, int sfw1, int sfw2) {
 // System generated locals
    int ret_val;

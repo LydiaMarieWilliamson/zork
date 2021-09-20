@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-// PRINCR- PRINT CONTENTS OF ROOM
+// Print contents of room
 void princr(Bool full, int rm) {
 // System generated locals
    int i__1, i__2;
@@ -82,7 +82,7 @@ void princr(Bool full, int rm) {
    }
 }
 
-// INVENT- PRINT CONTENTS OF ADVENTURER
+// Print contents of adventurer
 void invent(int adv) {
 // System generated locals
    int i__1;
@@ -135,7 +135,7 @@ L25:
    }
 }
 
-// PRINCO-	PRINT CONTENTS OF OBJECT
+// Print contents of object
 void princo(int obj, int desc) {
 // System generated locals
    int i__1;
