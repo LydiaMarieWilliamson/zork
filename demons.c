@@ -209,6 +209,9 @@ int blow(int h, int v, int rmk, Bool hflg, int out) {
 // 						!DESCRIPTION.
    ret_val = rmiss;
 // 						!ASSUME NO RESULT.
+#if 0
+// print(" BLOW 10-- %3I7%L7%I7", h, v, rmk, hflg, out); //F
+#endif
    if (!(hflg)) {
       goto L1000;
    }
@@ -293,6 +296,9 @@ L1200:
 // ATT MUST BE > 0.
 
 L2000:
+#if 0
+// print(" BLOW 2050-- %5I7", att, oa, def, od, dweap); //F
+#endif
    if (def > 0) {
       goto L2100;
    }
@@ -367,6 +373,9 @@ L2600:
    if (!(hflg) && dweap != 0) {
       j = objcts_1.odesc2[dweap - 1];
    }
+#if 0
+// print(" BLOW 2650-- %5I7", res, mi, i, j, star_i.mbase); //F
+#endif
    rspsub(i, j);
 // 						!PRESENT RESULT.
 // BLOW, PAGE 5

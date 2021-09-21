@@ -25,6 +25,7 @@ L5:
    }
 // 						!SEE WHO TO PROMPT FOR.
 L10:
+// write(chan_1.outch, " >%$"); //F
    printf(">");
 // 						!PROMPT FOR GAME.
 L90:

@@ -108,12 +108,15 @@ void cpinfo(int rmk, int st) {
       ;
    }
 
-   more_output(NULL);
-   printf("       |%c%c %c%c %c%c|\n", dgm[0], dgm[0], dgm[1], dgm[1], dgm[2], dgm[2]);
-   more_output(NULL);
-   printf(" West  |%c%c .. %c%c| East\n", dgm[3], dgm[3], dgm[4], dgm[4]);
-   more_output(NULL);
-   printf("       |%c%c %c%c %c%c|\n", dgm[5], dgm[5], dgm[6], dgm[6], dgm[7], dgm[7]);
+// write(chan_1.outch, //F
+//    "       |%A2%1X%A2%1X%A2|%/" //F
+//    " West  |%A2 .. %A2|  East%/" //F
+//    "       |%A2%1X%A2%1X%A2|", //F
+//    dgm //F
+// ); //F
+   more_output(NULL), printf("       |%c%c %c%c %c%c|\n", dgm[0], dgm[0], dgm[1], dgm[1], dgm[2], dgm[2]);
+   more_output(NULL), printf(" West  |%c%c .. %c%c| East\n", dgm[3], dgm[3], dgm[4], dgm[4]);
+   more_output(NULL), printf("       |%c%c %c%c %c%c|\n", dgm[5], dgm[5], dgm[6], dgm[6], dgm[7], dgm[7]);
 
    if (st == 10) {
       rspeak(870);

@@ -84,6 +84,18 @@ Bool init(void/*int x*/) {
       goto L10000;
    }
 // 						!PROTECTION VIOLATION?
+// print( //F
+//    " There appears before you a threatening figure clad ", //F
+//    "all over%/ in heavy black armor.  His legs seem like the ", //F
+//    "massive trunk%/ of the oak tree.  His broad shoulders and ", //F
+//    "helmeted head loom%/ high over your own puny frame, and ", //F
+//    "you realize that his powerful%/ arms could easily crush the ", //F
+//    "very life from your body.  There%/ hangs from his belt a ", //F
+//    "veritable arsenal of deadly weapons:%/ sword, mace, ball ", //F
+//    "and chain, dagger, lance, and trident.%/ He speaks with a ", //F
+//    "commanding voice:%/%/%20X\"You shall not pass.\"%/%/ As ", //F
+//    "he grabs you by the neck all grows dim about you." //F
+// ); //F
    more_output("There appears before you a threatening figure clad all over");
    more_output("in heavy black armor.  His legs seem like the massive trunk");
    more_output("of the oak tree.  His broad shoulders and helmeted head loom");
@@ -421,15 +433,24 @@ L10000:
 // ERRORS-- INIT FAILS.
 
 L1925:
-   more_output(NULL);
-   printf("%s is version %1d.%1d%c.\n", TEXTFILE, i, j, k);
-   more_output(NULL);
-   printf("I require version %1d.%1d%c.\n", vers_1.vmaj, vers_1.vmin, vers_1.vedit);
+// print(" \"dindx.dat\" is version %I1.%I1%A1.%/  I require version %I1.%I1%A1.", i, j, k, vers_1.vmaj, vers_1.vmin, vers_1.vedit); //F
+   more_output(NULL), printf("%s is version %1d.%1d%c.\n", TEXTFILE, i, j, k);
+   more_output(NULL), printf("I require version %1d.%1d%c.\n", vers_1.vmaj, vers_1.vmin, vers_1.vedit);
    goto L1975;
 L1950:
-   more_output(NULL);
-   printf("I can't open %s.\n", TEXTFILE);
+// print(" I can't open " "dindx.dat" "."); //F
+   more_output(NULL), printf("I can't open %s.\n", TEXTFILE);
 L1975:
+// print( //F
+//    " Suddenly a sinister, wraithlike figure appears before " //F
+//    "you,%/ seeming to float in the air.  In a low, sorrowful voice" //F
+//    " he says,%/ \"Alas, the very nature of the world has changed, " //F
+//    "and the dungeon%/ cannot be found.  All must now pass away.\"" //F
+//    "  Raising his oaken staff%/ in farewell, he fades into the " //F
+//    "spreading darkness.  In his place%/ appears a tastefully " //F
+//    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/" //F
+//    " The darkness becomes all encompassing, and your vision fails." //F
+// ); //F
    more_output("Suddenly a sinister, wraithlike figure appears before you,");
    more_output("seeming to float in the air.  In a low, sorrowful voice he says,");
    more_output("\"Alas, the very nature of the world has changed, and the dungeon");

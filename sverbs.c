@@ -239,8 +239,8 @@ L4100:
 // V74--	VERSION.  PRINT INFO.
 
 L5000:
-   more_output(NULL);
-   printf("V%1d.%1d%c\n", vers_1.vmaj, vers_1.vmin, vers_1.vedit);
+// write(chan_1.outch, " V%I1.%I2%A1", vers_2.vmaj, vers_2.vmin, vers_2.vedit); //F
+   more_output(NULL), printf("V%1d.%1d%c\n", vers_1.vmaj, vers_1.vmin, vers_1.vedit);
    play_1.telflg = true;
    return ret_val;
 
@@ -561,17 +561,20 @@ L21000:
    i = k / 60;
    j = k % 60;
 
-   more_output(NULL);
-   printf("You have been playing Dungeon for ");
+// write(chan_1.outch, " You have been playing Dungeon for %$"); //F
+   more_output(NULL), printf("You have been playing Dungeon for ");
+// if (i != 0) write(chan_1.outch, "+%I3 hour%$", i); //F
+// if (i >= 2) write(chan_1.outch, "+s and %$"); //F
+// if (i == 1) write(chan_1.outch, "+ and %$"); //F
    if (i >= 1) {
-      printf("%d hour", i);
-      if (i >= 2)
-         printf("s");
+      printf("%d ", i);
+      if (i != 1) printf("hours"); else printf("hour");
       printf(" and ");
    }
-   printf("%d minute", j);
-   if (j != 1)
-      printf("s");
+// if (j == 1) write(chan_1.outch, "+%I2 minute.", j); //F
+// if (j != 1) write(chan_1.outch, "+%I2 minutes.", j); //F
+   printf("%d ", j);
+   if (j != 1) printf("minutes"); else printf("minute");
    printf(".\n");
    play_1.telflg = true;
    return ret_val;
@@ -688,8 +691,8 @@ L25000:
 // 						!COMPUTE WAIT.
 
    if (j != 0) {
-      more_output(NULL);
-      printf("You will be cured after %d moves.\n", i);
+//    write(chan_1.outch, " You will be cured after %I3 moves.", I); //F
+      more_output(NULL), printf("You will be cured after %d moves.\n", i);
    }
 
    i__1 = k + 478;
@@ -776,8 +779,8 @@ L26400:
    findex_1.spellf = true;
 // 						!TELL HIM.
    play_1.telflg = true;
-   more_output(NULL);
-   printf("A hollow voice replies:  \"%.6s %.6s\".\n", pp1, ch);
+// write(chan_1.outch," A hollow voice replies:  \"%6A1%1X%6A1\".", pv_2.p1, ch); //F
+   more_output(NULL), printf("A hollow voice replies:  \"%.6s %.6s\".\n", pp1, ch);
 
    return ret_val;
 

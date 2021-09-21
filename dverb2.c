@@ -23,25 +23,42 @@ void savegm(void) {
 #define PutVar(Var) (fwrite((const void *)&(Var), sizeof (Var), (1), (ExF)))
 #define PutArr(N, Buf) (fwrite((const void *)(Buf), sizeof (Buf)[0], (N), (ExF)))
 
+// write(1, vers_1.vmaj, vers_1.vmin, vers_1.vedit); //F
    PutVar(vers_1.vmaj), PutVar(vers_1.vmin), PutVar(vers_1.vedit);
 
-   PutVar(play_1.winner), PutVar(play_1.here), PutVar(hack_1.thfpos), PutVar(play_1.telflg), PutVar(hack_1.thfflg);
-   PutVar(hack_1.thfact), PutVar(hack_1.swdact), PutVar(hack_1.swdsta), PutArr(64, puzzle_1.cpvec);
+// write(1, //F
+//    play_1.winner, play_1.here, hack_1.thfpos, play_1.telflg, hack_1.thfflg, hack_1.thfact, //F
+//    hack_1.swdact, hack_1.swdsta, puzzle_1.cpvec //F
+// ); //F
+   PutVar(play_1.winner), PutVar(play_1.here), PutVar(hack_1.thfpos);
+   PutVar(play_1.telflg), PutVar(hack_1.thfflg), PutVar(hack_1.thfact);
+   PutVar(hack_1.swdact), PutVar(hack_1.swdsta), PutArr(64, puzzle_1.cpvec);
 
+// write(1, //F
+//    PlTime, state_1.moves, state_1.deaths, state_1.rwscor, state_1.egscor, state_1.mxload, //F
+//    state_1.ltshft, state_1.bloc, state_1.mungrm, state_1.hs, screen_1.fromdr, screen_1.scolrm, screen_1.scolac //F
+// ); //F
    PutVar(PlTime), PutVar(state_1.moves), PutVar(state_1.deaths), PutVar(state_1.rwscor);
    PutVar(state_1.egscor), PutVar(state_1.mxload);
    PutVar(state_1.ltshft), PutVar(state_1.bloc), PutVar(state_1.mungrm), PutVar(state_1.hs), PutVar(screen_1.fromdr);
    PutVar(screen_1.scolrm), PutVar(screen_1.scolac);
 
+// write(1, //F
+//   objcts_1.odesc1, objcts_1.odesc2, objcts_1.oflag1, objcts_1.oflag2, objcts_1.ofval, objcts_1.otval, //F
+//   objcts_1.osize, objcts_1.ocapac, objcts_1.oroom, objcts_1.oadv, objcts_1.ocan //F
+// ); //F
    PutArr(220, objcts_1.odesc1), PutArr(220, objcts_1.odesc2), PutArr(220, objcts_1.oflag1), PutArr(220, objcts_1.oflag2);
    PutArr(220, objcts_1.ofval), PutArr(220, objcts_1.otval);
    PutArr(220, objcts_1.osize), PutArr(220, objcts_1.ocapac);
    PutArr(220, objcts_1.oroom), PutArr(220, objcts_1.oadv), PutArr(220, objcts_1.ocan);
 
+// write(1, rooms_1.rval, rooms_1.rflag); //F
    PutArr(200, rooms_1.rval), PutArr(200, rooms_1.rflag);
 
+// write(1, advs_1.aroom, advs_1.ascore, advs_1.avehic, advs_1.astren, advs_1.aflag); //F
    PutArr(4, advs_1.aroom), PutArr(4, advs_1.ascore), PutArr(4, advs_1.avehic), PutArr(4, advs_1.astren), PutArr(4, advs_1.aflag);
 
+// write(1, flags, switch_, vill_1.vprob, cevent_1.cflag, cevent_1.ctick); //F
    PutArr(46, flags), PutArr(22, switch_), PutArr(4, vill_1.vprob), PutArr(25, cevent_1.cflag), PutArr(25, cevent_1.ctick);
 
 // close(unit:1); //F
@@ -75,8 +92,9 @@ void rstrgm(void) {
 //    &play_1.winner, &play_1.here, &hack_1.thfpos, &play_1.telflg, &play_1.thfflg, &hack_1.thfflg, //F
 //    &hack_1.swdact, &hack_1.swdsta, &puzzle_1.cpvec //F
 // ); //F
-   GetVar(play_1.winner), GetVar(play_1.here), GetVar(hack_1.thfpos), GetVar(play_1.telflg), GetVar(hack_1.thfflg);
-   GetVar(hack_1.thfact), GetVar(hack_1.swdact), GetVar(hack_1.swdsta), GetArr(64, puzzle_1.cpvec);
+   GetVar(play_1.winner), GetVar(play_1.here), GetVar(hack_1.thfpos);
+   GetVar(play_1.telflg), GetVar(hack_1.thfflg), GetVar(hack_1.thfact);
+   GetVar(hack_1.swdact), GetVar(hack_1.swdsta), GetArr(64, puzzle_1.cpvec);
 
 // read(1, //F
 //    &time_1.pltime, &state_1.moves, &state_1.deaths, &state_1.rwscor, &state_1.egscor, &state_1.mxload, //F
