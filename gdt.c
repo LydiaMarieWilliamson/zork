@@ -20,6 +20,10 @@ void gdt(void) {
       0, 1, 0, 3, 3, 3, 3, 1, 3, 2, 2, 1, 2, 1, 0, 0, 0, 0, 1
    };
 
+const char Format0[] = "  RANGE   CONTENTS";
+const char Format1[] = "Old= %c      New= ";
+const char Format2[] = "Old= %6d      New= ";
+
 // System generated locals
    int i__1, i__2;
 
@@ -307,7 +311,7 @@ L14000:
       goto L2200;
    }
 // 						!ARGS VALID?
-   more_output("  RANGE   CONTENTS");
+   more_output(Format0);
 // 						!COL HDRS.
    i__1 = k;
    for (i = j; i <= i__1; i += 10) {
@@ -404,7 +408,7 @@ L20000:
       goto L2200;
    }
 // 						!ENTRY NO VALID?
-   printf("Old= %c      New= ", flags[j - 1] ? 'T' : 'F'), fflush(stdout);
+   printf(Format1, flags[j - 1] ? 'T' : 'F'), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
 // read(chan_1.inpch, "%L1", &flags[j - 1]); //F
    fgets(buf, sizeof buf, stdin), more_input();
@@ -537,7 +541,7 @@ L32000:
       goto L2200;
    }
 // 						!INDICES VALID?
-   printf("Old = %6d      New = ", eqr[j - 1 + 200 * (k - 1)]), fflush(stdout);
+   printf(Format2, eqr[j - 1 + 200 * (k - 1)]), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
 // read(chan_1.inpch, "%I6", &eqr[j - 1 + 200 * (k - 1)]); //F
    fgets(buf, sizeof buf, stdin), more_input();
@@ -551,7 +555,7 @@ L33000:
       goto L2200;
    }
 // 						!INDICES VALID?
-   printf("Old = %6d      New = ", eqo[j - 1 + 220 * (k - 1)]), fflush(stdout);
+   printf(Format2, eqo[j - 1 + 220 * (k - 1)]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &eqo[j - 1 + 220 * (k - 1)]); //F
    fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &eqo[j - 1 + 220 * (k - 1)]);
@@ -564,7 +568,7 @@ L34000:
       goto L2200;
    }
 // 						!INDICES VALID?
-   printf("Old = %6d      New = ", eqa[j - 1 + ((k - 1) << 2)]), fflush(stdout);
+   printf(Format2, eqa[j - 1 + ((k - 1) << 2)]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &eqa[j - 1 + ((k - 1) << 2)]); //F
    fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &eqa[j - 1 + ((k - 1) << 2)]);
@@ -581,14 +585,18 @@ L35000:
       goto L35500;
    }
 // 						!FLAGS ENTRY?
-   printf("Old = %6d      New = ", eqc[j - 1 + 25 * (k - 1)]), fflush(stdout);
+   printf(Format2, eqc[j - 1 + 25 * (k - 1)]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &eqc[j - 1 + 25 * (k - 1)]); //F
    fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &eqc[j - 1 + 25 * (k - 1)]);
    goto L2000;
 
 L35500:
+#if 0
+   printf(Format1, cevent_1.cflag[j - 1] ? 'T' : 'F'), fflush(stdout);
+#else
    fflush(stdout);
+#endif
 // read(chan_1.inpch, "%L1", &cevent_1.cflag); //F
    fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++) {
@@ -610,7 +618,7 @@ L36000:
       goto L2200;
    }
 // 						!ENTRY NO VALID?
-   printf("Old= %6d     New= ", exits_1.travel[j - 1]), fflush(stdout);
+   printf(Format2, exits_1.travel[j - 1]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &exits_1.travel[j - 1]); //F
    fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &exits_1.travel[j - 1]);
@@ -623,7 +631,7 @@ L37000:
       goto L2200;
    }
 // 						!INDICES VALID?
-   printf("Old = %6d      New= ", eqv[j - 1 + ((k - 1) << 2)]), fflush(stdout);
+   printf(Format2, eqv[j - 1 + ((k - 1) << 2)]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &eqv[j - 1 + ((k - 1) << 2)]); //F
    fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &eqv[j - 1 + ((k - 1) << 2)]);
@@ -665,7 +673,7 @@ L40000:
       goto L2200;
    }
 // 						!VALID ENTRY?
-   printf("Old= %6d      New= ", switch_[j - 1]), fflush(stdout);
+   printf(Format2, switch_[j - 1]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &switch_[j - 1]); //F
    fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &switch_[j - 1]);
@@ -678,7 +686,7 @@ L41000:
       goto L2200;
    }
 // 						!VALID LIMITS?
-   more_output("  RANGE   CONTENTS");
+   more_output(Format0);
    i__1 = k;
    for (i = j; i <= i__1; i += 10) {
       more_output(NULL);
@@ -702,7 +710,7 @@ L42000:
 // AH--	ALTER HERE
 
 L43000:
-   printf("Old= %6d      New= ", play_1.here), fflush(stdout);
+   printf(Format2, play_1.here), fflush(stdout);
 // read(chan_1.inpch, "%I6", &play_1.here); //F
    fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &play_1.here);
@@ -725,7 +733,7 @@ L44000:
 // PD--	PROGRAM DETAIL DEBUG
 
 L45000:
-   printf("Old= %6d      New= ", debug_1.prsflg), fflush(stdout);
+   printf(Format2, debug_1.prsflg), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
 // read(chan_1.inpch, "%I6", &debug_1.prsflg); //F
    fgets(buf, sizeof buf, stdin), more_input();
@@ -753,7 +761,7 @@ L47000:
       goto L2200;
    }
 // 						!VALID ENTRY?
-   printf("Old= %6d      New= ", puzzle_1.cpvec[j - 1]), fflush(stdout);
+   printf(Format2, puzzle_1.cpvec[j - 1]), fflush(stdout);
 // 						!OUTPUT OLD,
 // read(chan_1.inpch, "%I6", &puzzle_1.cpvec[j - 1]); //F
    fgets(buf, sizeof buf, stdin), more_input();
