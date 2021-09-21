@@ -146,6 +146,7 @@ Bool yesno(int q, int y, int n) {
 L100:
    rspeak(q);
 // 						!ASK
+// read(chan_1.inpch, "%A1", &ans); //F
    (void)fflush(stdout);
    (void)fgets(ans, sizeof ans, stdin);
    more_input();

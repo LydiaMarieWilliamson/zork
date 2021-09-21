@@ -54,11 +54,9 @@ static void rspsb2nl(int n, int y, int z, Bool nl) {
    play_1.telflg = true;
 // 						!SAID SOMETHING.
 
+// read(unit:chan_1.dbch, rec:x, &oldrec, b1); //F
    x = ((-x) - 1) * 8;
-   if (fseek(dbfile, x + (long)rmsg_1.mrloc, SEEK_SET) == EOF) {
-      fprintf(stderr, "Error seeking database loc %d\n", x);
-      exit_();
-   }
+   if (fseek(dbfile, x + (long)rmsg_1.mrloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
 
    if (nl)
       more_output(NULL);
@@ -84,10 +82,7 @@ static void rspsb2nl(int n, int y, int z, Bool nl) {
 
          iloc = ftell(dbfile);
          rspsb2nl(y, 0, 0, 0);
-         if (fseek(dbfile, iloc, SEEK_SET) == EOF) {
-            fprintf(stderr, "Error seeking database loc %d\n", iloc);
-            exit_();
-         }
+         if (fseek(dbfile, iloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", iloc), exit_();
          y = z;
          z = 0;
       } else
@@ -361,6 +356,7 @@ L1000:
 L1100:
    score(false);
 // 						!TELL SCORE.
+// close(chan_1.dbch); //F
    (void)fclose(dbfile);
    exit_();
 }

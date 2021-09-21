@@ -303,85 +303,99 @@ L10000:
 
 // NOW RESTORE FROM EXISTING INDEX FILE.
 
+#if 0
+// open(unit:1,file:"/usr/share/games/dungeon/dindx.dat", //F
+//    status:"OLD", form:"FORMATTED", access:"SEQUENTIAL", err:L1900 //F
+// ); //F
+#else
+// open(unit:1,file:"dindx.dat", //F
+//    status:"OLD", form:"FORMATTED", access:"SEQUENTIAL", err:L1900 //F
+// ); //F
+#endif
 #ifdef __AMOS__
    if ((dbfile = fdopen(ropen(LOCALTEXTFILE, 0), BINREAD)) == NULL && (dbfile = fdopen(ropen(TEXTFILE, 0), BINREAD)) == NULL)
+      goto L1950;
 #else
    if ((dbfile = fopen(LOCALTEXTFILE, BINREAD)) == NULL && (dbfile = fopen(TEXTFILE, BINREAD)) == NULL)
-#endif
       goto L1950;
+#endif
 
    indxfile = dbfile;
 
-   i = rdint(indxfile);
-   j = rdint(indxfile);
-   k = rdint(indxfile);
+// read(1, "%I6", &i, &j, &k); //F
+   i = rdint(indxfile), j = rdint(indxfile), k = rdint(indxfile);
 
 // 						!GET VERSION.
    if (i != vers_1.vmaj || j != vers_1.vmin) {
       goto L1925;
    }
 
-   state_1.mxscor = rdint(indxfile);
-   star_1.strbit = rdint(indxfile);
-   state_1.egmxsc = rdint(indxfile);
+#if 0
+// open(unit:chan_1.dbch, file:"/usr/share/games/dungeon/dtext.dat", //F
+//    status:"old", form:"unformatted", access:"direct", //F
+//    recl:76, err:L1950 //F
+// ); //F
+#else
+// open(unit:chan_1.dbch, file:"dtext.dat", //F
+//    status:"old", form:"unformatted", access:"direct", //F
+//    recl:76, err:L1950 //F
+// ); //F
+#endif
+// // const char *Fmt = "%I8"; //F
+// const char *Fmt = "%I6"; //F
+// read(1, Fmt, &state_1.mxscor, &star_1.strbit, &state_1.egmxsc); //F
+   state_1.mxscor = rdint(indxfile), star_1.strbit = rdint(indxfile), state_1.egmxsc = rdint(indxfile);
 
+// read(1, Fmt, &rooms_1.rlnt, &rooms_1.rdesc2, rooms_1.rdesc1, rooms_1.rexit, rooms_1.ractio, rooms_1.rval, rooms_1.rflag); //F
    rooms_1.rlnt = rdint(indxfile);
-   rdints(rooms_1.rlnt, &rooms_1.rdesc1[0], indxfile);
-   rdints(rooms_1.rlnt, &rooms_1.rdesc2[0], indxfile);
-   rdints(rooms_1.rlnt, &rooms_1.rexit[0], indxfile);
-   rdpartialints(rooms_1.rlnt, &rooms_1.ractio[0], indxfile);
-   rdpartialints(rooms_1.rlnt, &rooms_1.rval[0], indxfile);
-   rdints(rooms_1.rlnt, &rooms_1.rflag[0], indxfile);
+   rdints(rooms_1.rlnt, rooms_1.rdesc1, indxfile), rdints(rooms_1.rlnt, rooms_1.rdesc2, indxfile);
+   rdints(rooms_1.rlnt, rooms_1.rexit, indxfile), rdpartialints(rooms_1.rlnt, rooms_1.ractio, indxfile);
+   rdpartialints(rooms_1.rlnt, rooms_1.rval, indxfile), rdints(rooms_1.rlnt, rooms_1.rflag, indxfile);
 
-   exits_1.xlnt = rdint(indxfile);
-   rdints(exits_1.xlnt, &exits_1.travel[0], indxfile);
+// read(1, Fmt, &exits_1.xlnt, exits_1.travel); //F
+   exits_1.xlnt = rdint(indxfile), rdints(exits_1.xlnt, exits_1.travel, indxfile);
 
+// read(1, Fmt, //F
+//    objcts_1.olnt, objcts_1.odesc1, objcts_1.odesc2, objcts_1.odesco, objcts_1.oactio, objcts_1.oflag1, objcts_1.oflag2, //F
+//    objcts_1.ofval, objcts_1.otval, objcts_1.osize, objcts_1.ocapac, objcts_1.oroom, objcts_1.oadv, objcts_1.ocan, objcts_1.oread //F
+// ); //F
    objcts_1.olnt = rdint(indxfile);
-   rdints(objcts_1.olnt, &objcts_1.odesc1[0], indxfile);
-   rdints(objcts_1.olnt, &objcts_1.odesc2[0], indxfile);
-   rdpartialints(objcts_1.olnt, &objcts_1.odesco[0], indxfile);
-   rdpartialints(objcts_1.olnt, &objcts_1.oactio[0], indxfile);
-   rdints(objcts_1.olnt, &objcts_1.oflag1[0], indxfile);
-   rdpartialints(objcts_1.olnt, &objcts_1.oflag2[0], indxfile);
-   rdpartialints(objcts_1.olnt, &objcts_1.ofval[0], indxfile);
-   rdpartialints(objcts_1.olnt, &objcts_1.otval[0], indxfile);
-   rdints(objcts_1.olnt, &objcts_1.osize[0], indxfile);
-   rdpartialints(objcts_1.olnt, &objcts_1.ocapac[0], indxfile);
-   rdints(objcts_1.olnt, &objcts_1.oroom[0], indxfile);
-   rdpartialints(objcts_1.olnt, &objcts_1.oadv[0], indxfile);
-   rdpartialints(objcts_1.olnt, &objcts_1.ocan[0], indxfile);
-   rdpartialints(objcts_1.olnt, &objcts_1.oread[0], indxfile);
+   rdints(objcts_1.olnt, objcts_1.odesc1, indxfile), rdints(objcts_1.olnt, objcts_1.odesc2, indxfile);
+   rdpartialints(objcts_1.olnt, objcts_1.odesco, indxfile), rdpartialints(objcts_1.olnt, objcts_1.oactio, indxfile);
+   rdints(objcts_1.olnt, objcts_1.oflag1, indxfile), rdpartialints(objcts_1.olnt, objcts_1.oflag2, indxfile);
+   rdpartialints(objcts_1.olnt, objcts_1.ofval, indxfile), rdpartialints(objcts_1.olnt, objcts_1.otval, indxfile);
+   rdints(objcts_1.olnt, objcts_1.osize, indxfile), rdpartialints(objcts_1.olnt, objcts_1.ocapac, indxfile);
+   rdints(objcts_1.olnt, objcts_1.oroom, indxfile), rdpartialints(objcts_1.olnt, objcts_1.oadv, indxfile);
+   rdpartialints(objcts_1.olnt, objcts_1.ocan, indxfile), rdpartialints(objcts_1.olnt, objcts_1.oread, indxfile);
 
+// read(1, Fmt, &oroom2_1.r2lnt, oroom2_1.oroom2, oroom2_1.rroom2); //F
    oroom2_1.r2lnt = rdint(indxfile);
-   rdints(oroom2_1.r2lnt, &oroom2_1.oroom2[0], indxfile);
-   rdints(oroom2_1.r2lnt, &oroom2_1.rroom2[0], indxfile);
+   rdints(oroom2_1.r2lnt, oroom2_1.oroom2, indxfile), rdints(oroom2_1.r2lnt, oroom2_1.rroom2, indxfile);
 
+// read(1, Fmt, &cevent_1.clnt, cevent_1.ctick, cevent_1.cactio); //F
    cevent_1.clnt = rdint(indxfile);
-   rdints(cevent_1.clnt, &cevent_1.ctick[0], indxfile);
-   rdints(cevent_1.clnt, &cevent_1.cactio[0], indxfile);
-   rdflags(cevent_1.clnt, &cevent_1.cflag[0], indxfile);
+   rdints(cevent_1.clnt, cevent_1.ctick, indxfile), rdints(cevent_1.clnt, cevent_1.cactio, indxfile);
 
-   vill_1.vlnt = rdint(indxfile);
-   rdints(vill_1.vlnt, &vill_1.villns[0], indxfile);
-   rdpartialints(vill_1.vlnt, &vill_1.vprob[0], indxfile);
-   rdpartialints(vill_1.vlnt, &vill_1.vopps[0], indxfile);
-   rdints(vill_1.vlnt, &vill_1.vbest[0], indxfile);
-   rdints(vill_1.vlnt, &vill_1.vmelee[0], indxfile);
+// read(1, "%L4", cevent_1.cflag); //F
+   rdflags(cevent_1.clnt, cevent_1.cflag, indxfile);
 
-   advs_1.alnt = rdint(indxfile);
-   rdints(advs_1.alnt, &advs_1.aroom[0], indxfile);
-   rdpartialints(advs_1.alnt, &advs_1.ascore[0], indxfile);
-   rdpartialints(advs_1.alnt, &advs_1.avehic[0], indxfile);
-   rdints(advs_1.alnt, &advs_1.aobj[0], indxfile);
-   rdints(advs_1.alnt, &advs_1.aactio[0], indxfile);
-   rdints(advs_1.alnt, &advs_1.astren[0], indxfile);
-   rdpartialints(advs_1.alnt, &advs_1.aflag[0], indxfile);
+// read(1, Fmt, &vill_1.vlnt, vill_1.villns, vill_1.vprob, vill_1.vopps, vill_1.vbest, vill_1.vmelee); //F
+   vill_1.vlnt = rdint(indxfile), rdints(vill_1.vlnt, vill_1.villns, indxfile);
+   rdpartialints(vill_1.vlnt, vill_1.vprob, indxfile), rdpartialints(vill_1.vlnt, vill_1.vopps, indxfile);
+   rdints(vill_1.vlnt, vill_1.vbest, indxfile), rdints(vill_1.vlnt, vill_1.vmelee, indxfile);
 
+// read(1, Fmt, &advs_1.alnt, advs_1.aroom, advs_1.ascore, advs_1.avehic, advs_1.aobj, advs_1.aactio, advs_1.astren, advs_1.aflag); //F
+   advs_1.alnt = rdint(indxfile), rdints(advs_1.alnt, advs_1.aroom, indxfile);
+   rdpartialints(advs_1.alnt, advs_1.ascore, indxfile), rdpartialints(advs_1.alnt, advs_1.avehic, indxfile);
+   rdints(advs_1.alnt, advs_1.aobj, indxfile), rdints(advs_1.alnt, advs_1.aactio, indxfile);
+   rdints(advs_1.alnt, advs_1.astren, indxfile), rdpartialints(advs_1.alnt, advs_1.aflag, indxfile);
+
+// read(1, Fmt, &star_1.mbase, &rmsg_1.mlnt, rmsg_1.rtext); //F
    star_1.mbase = rdint(indxfile);
-   rmsg_1.mlnt = rdint(indxfile);
-   rdints(rmsg_1.mlnt, &rmsg_1.rtext[0], indxfile);
+   rmsg_1.mlnt = rdint(indxfile), rdints(rmsg_1.mlnt, rmsg_1.rtext, indxfile);
 
 // Save location of start of message text
+// close(1); //F
    rmsg_1.mrloc = ftell(indxfile);
 
 // 						!INIT DONE.

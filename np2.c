@@ -225,7 +225,7 @@ L2000:
 // Validate object versus description
 static Bool thisit(int oidx, int aidx, int obj, int spcobj) {
 // Initialized data
-//    The following data statement used radix-50 notation (r50min/1ra/)
+//    The following data statement used radix-50 notation (r50min/1RA/)
 //       In radix-50 notation, an ‟A” in the first position is encoded as 1×40×40 = 1600.
    const int r50min = 1600;
 

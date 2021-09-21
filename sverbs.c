@@ -390,6 +390,10 @@ L15000:
       return ret_val;
    }
 // 						!ASK FOR Y/N DECISION.
+#if 0
+// close(chan_1.dbch); //F
+   fclose(dbfile);
+#endif
    exit_();
 // 						!BYE.
 // SVERBS, PAGE 4

@@ -7,9 +7,9 @@
 #include "extern.h"
 #include "common.h"
 
-#ifdef ALLOW_GDT
 // Game debugging tool
 void gdt(void) {
+#ifdef ALLOW_GDT
 // Initialized data
    const int cmdmax = 38;
    const char *dbgcmd =
@@ -50,11 +50,10 @@ void gdt(void) {
 // HERE TO GET NEXT COMMAND
 
 L2000:
-   printf("GDT>");
+   printf("GDT>"), fflush(stdout);
 // 						!OUTPUT PROMPT.
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+// read(chan_1.inpch, "%A2", cmd); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    cmd[0] = ' ';
    cmd[1] = ' ';
    sscanf(buf, "%2s", cmd);
@@ -102,11 +101,10 @@ L2300:
 // 						!ILLEGAL TYPE.
 
 L2700:
-   printf("Idx,Ary:  ");
+   printf("Idx,Ary:  "), fflush(stdout);
 // 						!TYPE 3, REQUEST ARRAY COORDS.
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+// read(chan_1.inpch, "%2I6", &j, &k); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++)
       if (*z == ',')
          *z = ' ';
@@ -116,11 +114,10 @@ L2700:
    goto L2400;
 
 L2600:
-   printf("Limits:   ");
+   printf("Limits:   "), fflush(stdout);
 // 						!TYPE 2, READ BOUNDS.
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+// read(chan_1.inpch, "%2I6", &j, &k); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++)
       if (*z == ',')
          *z = ' ';
@@ -133,11 +130,10 @@ L2600:
    goto L2400;
 
 L2500:
-   printf("Entry:    ");
+   printf("Entry:    "), fflush(stdout);
 // 						!TYPE 1, READ ENTRY NO.
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+// read(chan_1.inpch, "%I6", &j); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    j = 0;
    sscanf(buf, "%d", &j);
 
@@ -238,7 +234,7 @@ L10000:
       more_output(NULL);
       printf("%3d", i);
       for (l = 1; l <= 6; ++l)
-         printf(" %6d", eqr[i + l * 200 - 201]);
+         printf(" %6d", eqr[i - 1 + 200 * (l - 1)]);
       printf("\n");
 
 // L10100:
@@ -257,7 +253,13 @@ L11000:
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
       more_output(NULL);
-      printf("%3d%6d%6d%6d%4d%7d%7d%4d%4d%6d%6d %4d%4d%4d%6d\n", i, eqo[i + 1 * 220 - 221], eqo[i + 2 * 220 - 221], eqo[i + 3 * 220 - 221], eqo[i + 4 * 220 - 221], eqo[i + 5 * 220 - 221], eqo[i + 6 * 220 - 221], eqo[i + 7 * 220 - 221], eqo[i + 8 * 220 - 221], eqo[i + 9 * 220 - 221], eqo[i + 10 * 220 - 221], eqo[i + 11 * 220 - 221], eqo[i + 12 * 220 - 221], eqo[i + 13 * 220 - 221], eqo[i + 14 * 220 - 221]);
+      printf("%3d%6d%6d%6d%4d%7d%7d%4d%4d%6d%6d %4d%4d%4d%6d\n", i,
+         eqo[i - 1 + 220 * (1 - 1)], eqo[i - 1 + 220 * (2 - 1)], eqo[i - 1 + 220 * (3 - 1)],
+         eqo[i - 1 + 220 * (4 - 1)], eqo[i - 1 + 220 * (5 - 1)], eqo[i - 1 + 220 * (6 - 1)],
+         eqo[i - 1 + 220 * (7 - 1)], eqo[i - 1 + 220 * (8 - 1)], eqo[i - 1 + 220 * (9 - 1)],
+         eqo[i - 1 + 220 * (10 - 1)], eqo[i - 1 + 220 * (11 - 1)], eqo[i - 1 + 220 * (12 - 1)],
+         eqo[i - 1 + 220 * (13 - 1)], eqo[i - 1 + 220 * (14 - 1)]
+      );
 
 // L11100:
    }
@@ -276,7 +278,7 @@ L12000:
       more_output(NULL);
       printf("%3d", i);
       for (l = 1; l <= 7; ++l)
-         printf(" %6d", eqa[i + (l << 2) - 5]);
+         printf(" %6d", eqa[i - 1 + ((l - 1) << 2)]);
       printf("\n");
 // L12100:
    }
@@ -293,7 +295,7 @@ L13000:
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
       more_output(NULL);
-      printf("%3d %6d %6d     %c\n", i, eqc[i + 1 * 25 - 26], eqc[i + 2 * 25 - 26], cevent_1.cflag[i - 1] ? 'T' : 'F');
+      printf("%3d %6d %6d     %c\n", i, eqc[i - 1 + 25 * (1 - 1)], eqc[i - 1 + 25 * (2 - 1)], cevent_1.cflag[i - 1] ? 'T' : 'F');
 // L13100:
    }
    goto L2000;
@@ -357,7 +359,7 @@ L17000:
       more_output(NULL);
       printf("%3d", i);
       for (l = 1; l <= 5; ++l)
-         printf(" %6d", eqv[i + (l << 2) - 5]);
+         printf(" %6d", eqv[i - 1 + ((l - 1) << 2)]);
       printf("\n");
 // L17100:
    }
@@ -402,11 +404,10 @@ L20000:
       goto L2200;
    }
 // 						!ENTRY NO VALID?
-   printf("Old= %c      New= ", flags[j - 1] ? 'T' : 'F');
+   printf("Old= %c      New= ", flags[j - 1] ? 'T' : 'F'), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+// read(chan_1.inpch, "%L1", &flags[j - 1]); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++) {
       if (!isspace(*z)) {
          if (*z == 't' || *z == 'T')
@@ -536,12 +537,11 @@ L32000:
       goto L2200;
    }
 // 						!INDICES VALID?
-   printf("Old = %6d      New = ", eqr[j + k * 200 - 201]);
+   printf("Old = %6d      New = ", eqr[j - 1 + 200 * (k - 1)]), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
-   sscanf(buf, "%d", &eqr[j + k * 200 - 201]);
+// read(chan_1.inpch, "%I6", &eqr[j - 1 + 200 * (k - 1)]); //F
+   fgets(buf, sizeof buf, stdin), more_input();
+   sscanf(buf, "%d", &eqr[j - 1 + 200 * (k - 1)]);
    goto L2000;
 
 // AO-- ALTER OBJECT ENTRY
@@ -551,11 +551,10 @@ L33000:
       goto L2200;
    }
 // 						!INDICES VALID?
-   printf("Old = %6d      New = ", eqo[j + k * 220 - 221]);
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
-   sscanf(buf, "%d", &eqo[j + k * 220 - 221]);
+   printf("Old = %6d      New = ", eqo[j - 1 + 220 * (k - 1)]), fflush(stdout);
+// read(chan_1.inpch, "%I6", &eqo[j - 1 + 220 * (k - 1)]); //F
+   fgets(buf, sizeof buf, stdin), more_input();
+   sscanf(buf, "%d", &eqo[j - 1 + 220 * (k - 1)]);
    goto L2000;
 
 // AA-- ALTER ADVS ENTRY
@@ -565,11 +564,10 @@ L34000:
       goto L2200;
    }
 // 						!INDICES VALID?
-   printf("Old = %6d      New = ", eqa[j + (k << 2) - 5]);
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
-   sscanf(buf, "%d", &eqa[j + (k << 2) - 5]);
+   printf("Old = %6d      New = ", eqa[j - 1 + ((k - 1) << 2)]), fflush(stdout);
+// read(chan_1.inpch, "%I6", &eqa[j - 1 + ((k - 1) << 2)]); //F
+   fgets(buf, sizeof buf, stdin), more_input();
+   sscanf(buf, "%d", &eqa[j - 1 + ((k - 1) << 2)]);
    goto L2000;
 
 // AC-- ALTER CLOCK EVENTS
@@ -583,17 +581,16 @@ L35000:
       goto L35500;
    }
 // 						!FLAGS ENTRY?
-   printf("Old = %6d      New = ", eqc[j + k * 25 - 26]);
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
-   sscanf(buf, "%d", &eqc[j + k * 25 - 26]);
+   printf("Old = %6d      New = ", eqc[j - 1 + 25 * (k - 1)]), fflush(stdout);
+// read(chan_1.inpch, "%I6", &eqc[j - 1 + 25 * (k - 1)]); //F
+   fgets(buf, sizeof buf, stdin), more_input();
+   sscanf(buf, "%d", &eqc[j - 1 + 25 * (k - 1)]);
    goto L2000;
 
 L35500:
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+   fflush(stdout);
+// read(chan_1.inpch, "%L1", &cevent_1.cflag); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++) {
       if (!isspace(*z)) {
          if (*z == 't' || *z == 'T')
@@ -613,10 +610,9 @@ L36000:
       goto L2200;
    }
 // 						!ENTRY NO VALID?
-   printf("Old= %6d     New= ", exits_1.travel[j - 1]);
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+   printf("Old= %6d     New= ", exits_1.travel[j - 1]), fflush(stdout);
+// read(chan_1.inpch, "%I6", &exits_1.travel[j - 1]); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &exits_1.travel[j - 1]);
    goto L2000;
 
@@ -627,11 +623,10 @@ L37000:
       goto L2200;
    }
 // 						!INDICES VALID?
-   printf("Old = %6d      New= ", eqv[j + (k << 2) - 5]);
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
-   sscanf(buf, "%d", &eqv[j + (k << 2) - 5]);
+   printf("Old = %6d      New= ", eqv[j - 1 + ((k - 1) << 2)]), fflush(stdout);
+// read(chan_1.inpch, "%I6", &eqv[j - 1 + ((k - 1) << 2)]); //F
+   fgets(buf, sizeof buf, stdin), more_input();
+   sscanf(buf, "%d", &eqv[j - 1 + ((k - 1) << 2)]);
    goto L2000;
 
 // D2-- DISPLAY ROOM2 LIST
@@ -670,10 +665,9 @@ L40000:
       goto L2200;
    }
 // 						!VALID ENTRY?
-   printf("Old= %6d      New= ", switch_[j - 1]);
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+   printf("Old= %6d      New= ", switch_[j - 1]), fflush(stdout);
+// read(chan_1.inpch, "%I6", &switch_[j - 1]); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &switch_[j - 1]);
    goto L2000;
 
@@ -708,10 +702,9 @@ L42000:
 // AH--	ALTER HERE
 
 L43000:
-   printf("Old= %6d      New= ", play_1.here);
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+   printf("Old= %6d      New= ", play_1.here), fflush(stdout);
+// read(chan_1.inpch, "%I6", &play_1.here); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &play_1.here);
    eqa[0] = play_1.here;
    goto L2000;
@@ -732,11 +725,10 @@ L44000:
 // PD--	PROGRAM DETAIL DEBUG
 
 L45000:
-   printf("Old= %6d      New= ", debug_1.prsflg);
+   printf("Old= %6d      New= ", debug_1.prsflg), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+// read(chan_1.inpch, "%I6", &debug_1.prsflg); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &debug_1.prsflg);
    goto L2000;
 
@@ -761,13 +753,11 @@ L47000:
       goto L2200;
    }
 // 						!VALID ENTRY?
-   printf("Old= %6d      New= ", puzzle_1.cpvec[j - 1]);
+   printf("Old= %6d      New= ", puzzle_1.cpvec[j - 1]), fflush(stdout);
 // 						!OUTPUT OLD,
-   (void)fflush(stdout);
-   (void)fgets(buf, sizeof buf, stdin);
-   more_input();
+// read(chan_1.inpch, "%I6", &puzzle_1.cpvec[j - 1]); //F
+   fgets(buf, sizeof buf, stdin), more_input();
    sscanf(buf, "%d", &puzzle_1.cpvec[j - 1]);
    goto L2000;
-}
-
 #endif // ALLOW_GDT
+}
