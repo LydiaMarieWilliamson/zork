@@ -109,7 +109,7 @@ void rstrgm(void) {
 
 #define do_uio(i, zbuf, cbytes) (void)fread((char *)(zbuf), (cbytes), (i), e)
 
-// read(1, &i, &j, &j); //F
+// read(1, &i, &j, &k); //F
    do_uio(1, &i, sizeof(int)), do_uio(1, &j, sizeof(int)), do_uio(1, &k, sizeof(int));
 
    if (i != vers_1.vmaj | j != vers_1.vmin) {
