@@ -551,7 +551,7 @@ L33000:
       goto L2200;
    }
 // 						!INDICES VALID?
-   printf("Old = %6d      New = ", eqo[j + k * 200 - 201]);
+   printf("Old = %6d      New = ", eqo[j + k * 220 - 221]);
    (void)fflush(stdout);
    (void)fgets(buf, sizeof buf, stdin);
    more_input();
