@@ -11,7 +11,7 @@ static int cxappl(int);
 // Save game state
 void savegm(void) {
 // Local variables
-   int i;
+   int PlTime;
    FILE *e;
 
    prsvec_1.prswon = false;
@@ -21,67 +21,44 @@ void savegm(void) {
 // open(unit:1, file:"dsave.dat", access:"SEQUENTIAL", status:"UNKNOWN", form:"UNFORMATTED", err:L100); //F
    if ((e = fopen("dsave.dat", BINWRITE)) == NULL) goto L100;
 
-   i = gttime();
+   PlTime = gttime();
 // 						!GET TIME.
 
-#define do_uio(i, zbuf, cbytes) (void)fwrite((const char *)(zbuf), (cbytes), (i), e)
+#define DoUio(i, zbuf, cbytes) (void)fwrite((const char *)(zbuf), (cbytes), (i), e)
 
-   do_uio(1, &vers_1.vmaj, sizeof(int));
-   do_uio(1, &vers_1.vmin, sizeof(int));
-   do_uio(1, &vers_1.vedit, sizeof(int));
+   DoUio(1, &vers_1.vmaj, sizeof vers_1.vmaj), DoUio(1, &vers_1.vmin, sizeof vers_1.vmin), DoUio(1, &vers_1.vedit, sizeof vers_1.vedit);
 
-   do_uio(1, &play_1.winner, sizeof(int));
-   do_uio(1, &play_1.here, sizeof(int));
-   do_uio(1, &hack_1.thfpos, sizeof(int));
-   do_uio(1, &play_1.telflg, sizeof(Bool));
-   do_uio(1, &hack_1.thfflg, sizeof(Bool));
-   do_uio(1, &hack_1.thfact, sizeof(Bool));
-   do_uio(1, &hack_1.swdact, sizeof(Bool));
-   do_uio(1, &hack_1.swdsta, sizeof(int));
-   do_uio(64, puzzle_1.cpvec, sizeof(int));
+   DoUio(1, &play_1.winner, sizeof play_1.winner), DoUio(1, &play_1.here, sizeof play_1.here);
+   DoUio(1, &hack_1.thfpos, sizeof hack_1.thfpos), DoUio(1, &play_1.telflg, sizeof play_1.telflg);
+   DoUio(1, &hack_1.thfflg, sizeof hack_1.thfflg), DoUio(1, &hack_1.thfact, sizeof hack_1.thfact);
+   DoUio(1, &hack_1.swdact, sizeof hack_1.swdact), DoUio(1, &hack_1.swdsta, sizeof hack_1.swdsta);
+   DoUio(64, puzzle_1.cpvec, sizeof puzzle_1.cpvec[0]);
 
-   do_uio(1, &i, sizeof(int));
-   do_uio(1, &state_1.moves, sizeof(int));
-   do_uio(1, &state_1.deaths, sizeof(int));
-   do_uio(1, &state_1.rwscor, sizeof(int));
-   do_uio(1, &state_1.egscor, sizeof(int));
-   do_uio(1, &state_1.mxload, sizeof(int));
-   do_uio(1, &state_1.ltshft, sizeof(int));
-   do_uio(1, &state_1.bloc, sizeof(int));
-   do_uio(1, &state_1.mungrm, sizeof(int));
-   do_uio(1, &state_1.hs, sizeof(int));
-   do_uio(1, &screen_1.fromdr, sizeof(int));
-   do_uio(1, &screen_1.scolrm, sizeof(int));
-   do_uio(1, &screen_1.scolac, sizeof(int));
+   DoUio(1, &PlTime, sizeof PlTime), DoUio(1, &state_1.moves, sizeof state_1.moves);
+   DoUio(1, &state_1.deaths, sizeof state_1.deaths), DoUio(1, &state_1.rwscor, sizeof state_1.rwscor);
+   DoUio(1, &state_1.egscor, sizeof state_1.egscor), DoUio(1, &state_1.mxload, sizeof state_1.mxload);
+   DoUio(1, &state_1.ltshft, sizeof state_1.ltshft), DoUio(1, &state_1.bloc, sizeof state_1.bloc);
+   DoUio(1, &state_1.mungrm, sizeof state_1.mungrm), DoUio(1, &state_1.hs, sizeof state_1.hs);
+   DoUio(1, &screen_1.fromdr, sizeof screen_1.fromdr);
+   DoUio(1, &screen_1.scolrm, sizeof screen_1.scolrm), DoUio(1, &screen_1.scolac, sizeof screen_1.scolac);
 
-   do_uio(220, objcts_1.odesc1, sizeof(int));
-   do_uio(220, objcts_1.odesc2, sizeof(int));
-   do_uio(220, objcts_1.oflag1, sizeof(int));
-   do_uio(220, objcts_1.oflag2, sizeof(int));
-   do_uio(220, objcts_1.ofval, sizeof(int));
-   do_uio(220, objcts_1.otval, sizeof(int));
-   do_uio(220, objcts_1.osize, sizeof(int));
-   do_uio(220, objcts_1.ocapac, sizeof(int));
-   do_uio(220, objcts_1.oroom, sizeof(int));
-   do_uio(220, objcts_1.oadv, sizeof(int));
-   do_uio(220, objcts_1.ocan, sizeof(int));
+   DoUio(220, objcts_1.odesc1, sizeof objcts_1.odesc1[0]), DoUio(220, objcts_1.odesc2, sizeof objcts_1.odesc2[0]);
+   DoUio(220, objcts_1.oflag1, sizeof objcts_1.oflag1[0]), DoUio(220, objcts_1.oflag2, sizeof objcts_1.oflag2[0]);
+   DoUio(220, objcts_1.ofval, sizeof objcts_1.ofval[0]), DoUio(220, objcts_1.otval, sizeof objcts_1.otval[0]);
+   DoUio(220, objcts_1.osize, sizeof objcts_1.osize[0]), DoUio(220, objcts_1.ocapac, sizeof objcts_1.ocapac[0]);
+   DoUio(220, objcts_1.oroom, sizeof objcts_1.oroom[0]), DoUio(220, objcts_1.oadv, sizeof objcts_1.oadv[0]);
+   DoUio(220, objcts_1.ocan, sizeof objcts_1.ocan[0]);
 
-   do_uio(200, rooms_1.rval, sizeof(int));
-   do_uio(200, rooms_1.rflag, sizeof(int));
+   DoUio(200, rooms_1.rval, sizeof rooms_1.rval[0]), DoUio(200, rooms_1.rflag, sizeof rooms_1.rflag[0]);
 
-   do_uio(4, advs_1.aroom, sizeof(int));
-   do_uio(4, advs_1.ascore, sizeof(int));
-   do_uio(4, advs_1.avehic, sizeof(int));
-   do_uio(4, advs_1.astren, sizeof(int));
-   do_uio(4, advs_1.aflag, sizeof(int));
+   DoUio(4, advs_1.aroom, sizeof advs_1.aroom[0]), DoUio(4, advs_1.ascore, sizeof advs_1.ascore[0]);
+   DoUio(4, advs_1.avehic, sizeof advs_1.avehic[0]), DoUio(4, advs_1.astren, sizeof advs_1.astren[0]);
+   DoUio(4, advs_1.aflag, sizeof advs_1.aflag[0]);
 
-   do_uio(46, flags, sizeof(Bool));
-   do_uio(22, switch_, sizeof(int));
-   do_uio(4, vill_1.vprob, sizeof(int));
-   do_uio(25, cevent_1.cflag, sizeof(Bool));
-   do_uio(25, cevent_1.ctick, sizeof(int));
+   DoUio(46, flags, sizeof flags[0]), DoUio(22, switch_, sizeof switch_[0]), DoUio(4, vill_1.vprob, sizeof vill_1.vprob[0]);
+   DoUio(25, cevent_1.cflag, sizeof cevent_1.cflag[0]), DoUio(25, cevent_1.ctick, sizeof cevent_1.ctick[0]);
 
-#undef do_uio
+#undef DoUio
 
 // close(unit:1); //F
    if (fclose(e) == EOF) goto L100;
@@ -97,7 +74,7 @@ L100:
 // Restore game state
 void rstrgm(void) {
 // Local variables
-   int i, j, k;
+   int Maj, Min, Edit;
    FILE *e;
 
    prsvec_1.prswon = false;
@@ -107,12 +84,12 @@ void rstrgm(void) {
 // open(unit:1, file:"dsave.dat", access:"SEQUENTIAL", status:"OLD", form:"UNFORMATTED", err:L100); //F
    if ((e = fopen("dsave.dat", BINREAD)) == NULL) goto L100;
 
-#define do_uio(i, zbuf, cbytes) (void)fread((char *)(zbuf), (cbytes), (i), e)
+#define DoUio(i, zbuf, cbytes) (void)fread((char *)(zbuf), (cbytes), (i), e)
 
-// read(1, &i, &j, &k); //F
-   do_uio(1, &i, sizeof(int)), do_uio(1, &j, sizeof(int)), do_uio(1, &k, sizeof(int));
+// read(1, &Maj, &Min, &Edit); //F
+   DoUio(1, &Maj, sizeof Maj), DoUio(1, &Min, sizeof Min), DoUio(1, &Edit, sizeof Edit);
 
-   if (i != vers_1.vmaj | j != vers_1.vmin) {
+   if (Maj != vers_1.vmaj || Min != vers_1.vmin) {
       goto L200;
    }
 
@@ -120,46 +97,46 @@ void rstrgm(void) {
 //    &play_1.winner, &play_1.here, &hack_1.thfpos, &play_1.telflg, &play_1.thfflg, &hack_1.thfflg, //F
 //    &hack_1.swdact, &hack_1.swdsta, &puzzle_1.cpvec //F
 // ); //F
-   do_uio(1, &play_1.winner, sizeof(int)), do_uio(1, &play_1.here, sizeof(int));
-   do_uio(1, &hack_1.thfpos, sizeof(int)), do_uio(1, &play_1.telflg, sizeof(Bool));
-   do_uio(1, &hack_1.thfflg, sizeof(Bool)), do_uio(1, &hack_1.thfact, sizeof(Bool));
-   do_uio(1, &hack_1.swdact, sizeof(Bool)), do_uio(1, &hack_1.swdsta, sizeof(int));
-   do_uio(64, puzzle_1.cpvec, sizeof(int));
+   DoUio(1, &play_1.winner, sizeof play_1.winner), DoUio(1, &play_1.here, sizeof play_1.here);
+   DoUio(1, &hack_1.thfpos, sizeof hack_1.thfpos), DoUio(1, &play_1.telflg, sizeof play_1.telflg);
+   DoUio(1, &hack_1.thfflg, sizeof hack_1.thfflg), DoUio(1, &hack_1.thfact, sizeof hack_1.thfact);
+   DoUio(1, &hack_1.swdact, sizeof hack_1.swdact), DoUio(1, &hack_1.swdsta, sizeof hack_1.swdsta);
+   DoUio(64, puzzle_1.cpvec, sizeof puzzle_1.cpvec[0]);
 
 // read(1, //F
 //    &time_1.pltime, &state_1.moves, &state_1.deaths, &state_1.rwscor, &state_1.egscor, &state_1.mxload, //F
 //    &state_1.ltshft, &state_1.bloc, &state_1.mungrm, &state_1.hs, &state_1.fromdr, &state_1.scolrm, &state_1.scolac //F
 // ); //F
-   do_uio(1, &time_1.pltime, sizeof(int)), do_uio(1, &state_1.moves, sizeof(int));
-   do_uio(1, &state_1.deaths, sizeof(int)), do_uio(1, &state_1.rwscor, sizeof(int));
-   do_uio(1, &state_1.egscor, sizeof(int)), do_uio(1, &state_1.mxload, sizeof(int));
-   do_uio(1, &state_1.ltshft, sizeof(int)), do_uio(1, &state_1.bloc, sizeof(int));
-   do_uio(1, &state_1.mungrm, sizeof(int)), do_uio(1, &state_1.hs, sizeof(int));
-   do_uio(1, &screen_1.fromdr, sizeof(int));
-   do_uio(1, &screen_1.scolrm, sizeof(int)), do_uio(1, &screen_1.scolac, sizeof(int));
+   DoUio(1, &time_1.pltime, sizeof time_1.pltime), DoUio(1, &state_1.moves, sizeof state_1.moves);
+   DoUio(1, &state_1.deaths, sizeof state_1.deaths), DoUio(1, &state_1.rwscor, sizeof state_1.rwscor);
+   DoUio(1, &state_1.egscor, sizeof state_1.egscor), DoUio(1, &state_1.mxload, sizeof state_1.mxload);
+   DoUio(1, &state_1.ltshft, sizeof state_1.ltshft), DoUio(1, &state_1.bloc, sizeof state_1.bloc);
+   DoUio(1, &state_1.mungrm, sizeof state_1.mungrm), DoUio(1, &state_1.hs, sizeof state_1.hs);
+   DoUio(1, &screen_1.fromdr, sizeof screen_1.fromdr);
+   DoUio(1, &screen_1.scolrm, sizeof screen_1.scolrm), DoUio(1, &screen_1.scolac, sizeof screen_1.scolac);
 
 // read(1, //F
 //    &objcts_1.odesc1, &objcts_1.odesc2, &objcts_1.oflag1, &objcts_1.oflag2, &objcts_1.ofval, &objcts_1.otval, //F
 //    &objcts_1.osize, &objcts_1.ocapac, &objcts_1.oroom, &objcts_1.oadv, &objcts_1.ocan //F
 // ); //F
-   do_uio(220, objcts_1.odesc1, sizeof(int)), do_uio(220, objcts_1.odesc2, sizeof(int));
-   do_uio(220, objcts_1.oflag1, sizeof(int)), do_uio(220, objcts_1.oflag2, sizeof(int));
-   do_uio(220, objcts_1.ofval, sizeof(int)), do_uio(220, objcts_1.otval, sizeof(int));
-   do_uio(220, objcts_1.osize, sizeof(int)), do_uio(220, objcts_1.ocapac, sizeof(int));
-   do_uio(220, objcts_1.oroom, sizeof(int)), do_uio(220, objcts_1.oadv, sizeof(int));
-   do_uio(220, objcts_1.ocan, sizeof(int));
+   DoUio(220, objcts_1.odesc1, sizeof objcts_1.odesc1[0]), DoUio(220, objcts_1.odesc2, sizeof objcts_1.odesc2[0]);
+   DoUio(220, objcts_1.oflag1, sizeof objcts_1.oflag1[0]), DoUio(220, objcts_1.oflag2, sizeof objcts_1.oflag2[0]);
+   DoUio(220, objcts_1.ofval, sizeof objcts_1.ofval[0]), DoUio(220, objcts_1.otval, sizeof objcts_1.otval[0]);
+   DoUio(220, objcts_1.osize, sizeof objcts_1.osize[0]), DoUio(220, objcts_1.ocapac, sizeof objcts_1.ocapac[0]);
+   DoUio(220, objcts_1.oroom, sizeof objcts_1.oroom[0]), DoUio(220, objcts_1.oadv, sizeof objcts_1.oadv[0]);
+   DoUio(220, objcts_1.ocan, sizeof objcts_1.ocan[0]);
 
 // read(1, rooms_1.rval, rooms_1.rflag); //F
-   do_uio(200, rooms_1.rval, sizeof(int)), do_uio(200, rooms_1.rflag, sizeof(int));
+   DoUio(200, rooms_1.rval, sizeof rooms_1.rval[0]), DoUio(200, rooms_1.rflag, sizeof rooms_1.rflag[0]);
 
 // read(1, &advs_1.aroom, &advs_1.ascore, &advs_1.avehic, &advs_1.astren, &advs_1.aflag); //F
-   do_uio(4, advs_1.aroom, sizeof(int)), do_uio(4, advs_1.ascore, sizeof(int));
-   do_uio(4, advs_1.avehic, sizeof(int)), do_uio(4, advs_1.astren, sizeof(int));
-   do_uio(4, advs_1.aflag, sizeof(int));
+   DoUio(4, advs_1.aroom, sizeof advs_1.aroom[0]), DoUio(4, advs_1.ascore, sizeof advs_1.ascore[0]);
+   DoUio(4, advs_1.avehic, sizeof advs_1.avehic[0]), DoUio(4, advs_1.astren, sizeof advs_1.astren[0]);
+   DoUio(4, advs_1.aflag, sizeof advs_1.aflag[0]);
 
 // read(1, flags, switch_, &vill_1.vprob, cevent_1.cflag, cevent_1.ctick); //F
-   do_uio(46, flags, sizeof(Bool)), do_uio(22, switch_, sizeof(int)), do_uio(4, vill_1.vprob, sizeof(int));
-   do_uio(25, cevent_1.cflag, sizeof(Bool)), do_uio(25, cevent_1.ctick, sizeof(int));
+   DoUio(46, flags, sizeof flags[0]), DoUio(22, switch_, sizeof switch_[0]), DoUio(4, vill_1.vprob, sizeof vill_1.vprob[0]);
+   DoUio(25, cevent_1.cflag, sizeof cevent_1.cflag[0]), DoUio(25, cevent_1.ctick, sizeof cevent_1.ctick[0]);
 
 // close(unit:1); //F
    (void)fclose(e);
