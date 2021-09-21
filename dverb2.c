@@ -10,58 +10,42 @@ static int cxappl(int);
 
 // Save game state
 void savegm(void) {
-// Local variables
-   int PlTime;
-   FILE *e;
-
    prsvec_1.prswon = false;
 // 						!DISABLE GAME.
 // Note: save file format is different for PDP versus non-PDP versions
 
 // open(unit:1, file:"dsave.dat", access:"SEQUENTIAL", status:"UNKNOWN", form:"UNFORMATTED", err:L100); //F
-   if ((e = fopen("dsave.dat", BINWRITE)) == NULL) goto L100;
+   FILE *ExF = fopen("dsave.dat", BINWRITE); if (ExF == NULL) goto L100;
 
-   PlTime = gttime();
+   int PlTime = gttime();
 // 						!GET TIME.
 
-#define DoUio(i, zbuf, cbytes) (void)fwrite((const char *)(zbuf), (cbytes), (i), e)
+#define PutVar(Var) (fwrite((const void *)&(Var), sizeof (Var), (1), (ExF)))
+#define PutArr(N, Buf) (fwrite((const void *)(Buf), sizeof (Buf)[0], (N), (ExF)))
 
-   DoUio(1, &vers_1.vmaj, sizeof vers_1.vmaj), DoUio(1, &vers_1.vmin, sizeof vers_1.vmin), DoUio(1, &vers_1.vedit, sizeof vers_1.vedit);
+   PutVar(vers_1.vmaj), PutVar(vers_1.vmin), PutVar(vers_1.vedit);
 
-   DoUio(1, &play_1.winner, sizeof play_1.winner), DoUio(1, &play_1.here, sizeof play_1.here);
-   DoUio(1, &hack_1.thfpos, sizeof hack_1.thfpos), DoUio(1, &play_1.telflg, sizeof play_1.telflg);
-   DoUio(1, &hack_1.thfflg, sizeof hack_1.thfflg), DoUio(1, &hack_1.thfact, sizeof hack_1.thfact);
-   DoUio(1, &hack_1.swdact, sizeof hack_1.swdact), DoUio(1, &hack_1.swdsta, sizeof hack_1.swdsta);
-   DoUio(64, puzzle_1.cpvec, sizeof puzzle_1.cpvec[0]);
+   PutVar(play_1.winner), PutVar(play_1.here), PutVar(hack_1.thfpos), PutVar(play_1.telflg), PutVar(hack_1.thfflg);
+   PutVar(hack_1.thfact), PutVar(hack_1.swdact), PutVar(hack_1.swdsta), PutArr(64, puzzle_1.cpvec);
 
-   DoUio(1, &PlTime, sizeof PlTime), DoUio(1, &state_1.moves, sizeof state_1.moves);
-   DoUio(1, &state_1.deaths, sizeof state_1.deaths), DoUio(1, &state_1.rwscor, sizeof state_1.rwscor);
-   DoUio(1, &state_1.egscor, sizeof state_1.egscor), DoUio(1, &state_1.mxload, sizeof state_1.mxload);
-   DoUio(1, &state_1.ltshft, sizeof state_1.ltshft), DoUio(1, &state_1.bloc, sizeof state_1.bloc);
-   DoUio(1, &state_1.mungrm, sizeof state_1.mungrm), DoUio(1, &state_1.hs, sizeof state_1.hs);
-   DoUio(1, &screen_1.fromdr, sizeof screen_1.fromdr);
-   DoUio(1, &screen_1.scolrm, sizeof screen_1.scolrm), DoUio(1, &screen_1.scolac, sizeof screen_1.scolac);
+   PutVar(PlTime), PutVar(state_1.moves), PutVar(state_1.deaths), PutVar(state_1.rwscor);
+   PutVar(state_1.egscor), PutVar(state_1.mxload);
+   PutVar(state_1.ltshft), PutVar(state_1.bloc), PutVar(state_1.mungrm), PutVar(state_1.hs), PutVar(screen_1.fromdr);
+   PutVar(screen_1.scolrm), PutVar(screen_1.scolac);
 
-   DoUio(220, objcts_1.odesc1, sizeof objcts_1.odesc1[0]), DoUio(220, objcts_1.odesc2, sizeof objcts_1.odesc2[0]);
-   DoUio(220, objcts_1.oflag1, sizeof objcts_1.oflag1[0]), DoUio(220, objcts_1.oflag2, sizeof objcts_1.oflag2[0]);
-   DoUio(220, objcts_1.ofval, sizeof objcts_1.ofval[0]), DoUio(220, objcts_1.otval, sizeof objcts_1.otval[0]);
-   DoUio(220, objcts_1.osize, sizeof objcts_1.osize[0]), DoUio(220, objcts_1.ocapac, sizeof objcts_1.ocapac[0]);
-   DoUio(220, objcts_1.oroom, sizeof objcts_1.oroom[0]), DoUio(220, objcts_1.oadv, sizeof objcts_1.oadv[0]);
-   DoUio(220, objcts_1.ocan, sizeof objcts_1.ocan[0]);
+   PutArr(220, objcts_1.odesc1), PutArr(220, objcts_1.odesc2), PutArr(220, objcts_1.oflag1), PutArr(220, objcts_1.oflag2);
+   PutArr(220, objcts_1.ofval), PutArr(220, objcts_1.otval);
+   PutArr(220, objcts_1.osize), PutArr(220, objcts_1.ocapac);
+   PutArr(220, objcts_1.oroom), PutArr(220, objcts_1.oadv), PutArr(220, objcts_1.ocan);
 
-   DoUio(200, rooms_1.rval, sizeof rooms_1.rval[0]), DoUio(200, rooms_1.rflag, sizeof rooms_1.rflag[0]);
+   PutArr(200, rooms_1.rval), PutArr(200, rooms_1.rflag);
 
-   DoUio(4, advs_1.aroom, sizeof advs_1.aroom[0]), DoUio(4, advs_1.ascore, sizeof advs_1.ascore[0]);
-   DoUio(4, advs_1.avehic, sizeof advs_1.avehic[0]), DoUio(4, advs_1.astren, sizeof advs_1.astren[0]);
-   DoUio(4, advs_1.aflag, sizeof advs_1.aflag[0]);
+   PutArr(4, advs_1.aroom), PutArr(4, advs_1.ascore), PutArr(4, advs_1.avehic), PutArr(4, advs_1.astren), PutArr(4, advs_1.aflag);
 
-   DoUio(46, flags, sizeof flags[0]), DoUio(22, switch_, sizeof switch_[0]), DoUio(4, vill_1.vprob, sizeof vill_1.vprob[0]);
-   DoUio(25, cevent_1.cflag, sizeof cevent_1.cflag[0]), DoUio(25, cevent_1.ctick, sizeof cevent_1.ctick[0]);
-
-#undef DoUio
+   PutArr(46, flags), PutArr(22, switch_), PutArr(4, vill_1.vprob), PutArr(25, cevent_1.cflag), PutArr(25, cevent_1.ctick);
 
 // close(unit:1); //F
-   if (fclose(e) == EOF) goto L100;
+   if (fclose(ExF) == EOF) goto L100;
 
    rspeak(597);
    return;
@@ -73,73 +57,56 @@ L100:
 
 // Restore game state
 void rstrgm(void) {
-// Local variables
-   int Maj, Min, Edit;
-   FILE *e;
-
    prsvec_1.prswon = false;
 // 						!DISABLE GAME.
 // Note: save file format is different for PDP versus non-PDP versions
 
 // open(unit:1, file:"dsave.dat", access:"SEQUENTIAL", status:"OLD", form:"UNFORMATTED", err:L100); //F
-   if ((e = fopen("dsave.dat", BINREAD)) == NULL) goto L100;
+   FILE *InF = fopen("dsave.dat", BINREAD); if (InF == NULL) goto L100;
 
-#define DoUio(i, zbuf, cbytes) (void)fread((char *)(zbuf), (cbytes), (i), e)
+#define GetVar(Var) (fread((void *)&(Var), sizeof (Var), (1), (InF)))
+#define GetArr(N, Buf) (fread((void *)(Buf), sizeof (Buf)[0], (N), (InF)))
 
 // read(1, &Maj, &Min, &Edit); //F
-   DoUio(1, &Maj, sizeof Maj), DoUio(1, &Min, sizeof Min), DoUio(1, &Edit, sizeof Edit);
-
-   if (Maj != vers_1.vmaj || Min != vers_1.vmin) {
-      goto L200;
-   }
+   int Maj, Min, Edit; GetVar(Maj), GetVar(Min), GetVar(Edit);
+   if (Maj != vers_1.vmaj || Min != vers_1.vmin) goto L200;
 
 // read(1, //F
 //    &play_1.winner, &play_1.here, &hack_1.thfpos, &play_1.telflg, &play_1.thfflg, &hack_1.thfflg, //F
 //    &hack_1.swdact, &hack_1.swdsta, &puzzle_1.cpvec //F
 // ); //F
-   DoUio(1, &play_1.winner, sizeof play_1.winner), DoUio(1, &play_1.here, sizeof play_1.here);
-   DoUio(1, &hack_1.thfpos, sizeof hack_1.thfpos), DoUio(1, &play_1.telflg, sizeof play_1.telflg);
-   DoUio(1, &hack_1.thfflg, sizeof hack_1.thfflg), DoUio(1, &hack_1.thfact, sizeof hack_1.thfact);
-   DoUio(1, &hack_1.swdact, sizeof hack_1.swdact), DoUio(1, &hack_1.swdsta, sizeof hack_1.swdsta);
-   DoUio(64, puzzle_1.cpvec, sizeof puzzle_1.cpvec[0]);
+   GetVar(play_1.winner), GetVar(play_1.here), GetVar(hack_1.thfpos), GetVar(play_1.telflg), GetVar(hack_1.thfflg);
+   GetVar(hack_1.thfact), GetVar(hack_1.swdact), GetVar(hack_1.swdsta), GetArr(64, puzzle_1.cpvec);
 
 // read(1, //F
 //    &time_1.pltime, &state_1.moves, &state_1.deaths, &state_1.rwscor, &state_1.egscor, &state_1.mxload, //F
 //    &state_1.ltshft, &state_1.bloc, &state_1.mungrm, &state_1.hs, &state_1.fromdr, &state_1.scolrm, &state_1.scolac //F
 // ); //F
-   DoUio(1, &time_1.pltime, sizeof time_1.pltime), DoUio(1, &state_1.moves, sizeof state_1.moves);
-   DoUio(1, &state_1.deaths, sizeof state_1.deaths), DoUio(1, &state_1.rwscor, sizeof state_1.rwscor);
-   DoUio(1, &state_1.egscor, sizeof state_1.egscor), DoUio(1, &state_1.mxload, sizeof state_1.mxload);
-   DoUio(1, &state_1.ltshft, sizeof state_1.ltshft), DoUio(1, &state_1.bloc, sizeof state_1.bloc);
-   DoUio(1, &state_1.mungrm, sizeof state_1.mungrm), DoUio(1, &state_1.hs, sizeof state_1.hs);
-   DoUio(1, &screen_1.fromdr, sizeof screen_1.fromdr);
-   DoUio(1, &screen_1.scolrm, sizeof screen_1.scolrm), DoUio(1, &screen_1.scolac, sizeof screen_1.scolac);
+   GetVar(time_1.pltime), GetVar(state_1.moves), GetVar(state_1.deaths), GetVar(state_1.rwscor);
+   GetVar(state_1.egscor), GetVar(state_1.mxload);
+   GetVar(state_1.ltshft), GetVar(state_1.bloc), GetVar(state_1.mungrm), GetVar(state_1.hs), GetVar(screen_1.fromdr);
+   GetVar(screen_1.scolrm), GetVar(screen_1.scolac);
 
 // read(1, //F
 //    &objcts_1.odesc1, &objcts_1.odesc2, &objcts_1.oflag1, &objcts_1.oflag2, &objcts_1.ofval, &objcts_1.otval, //F
 //    &objcts_1.osize, &objcts_1.ocapac, &objcts_1.oroom, &objcts_1.oadv, &objcts_1.ocan //F
 // ); //F
-   DoUio(220, objcts_1.odesc1, sizeof objcts_1.odesc1[0]), DoUio(220, objcts_1.odesc2, sizeof objcts_1.odesc2[0]);
-   DoUio(220, objcts_1.oflag1, sizeof objcts_1.oflag1[0]), DoUio(220, objcts_1.oflag2, sizeof objcts_1.oflag2[0]);
-   DoUio(220, objcts_1.ofval, sizeof objcts_1.ofval[0]), DoUio(220, objcts_1.otval, sizeof objcts_1.otval[0]);
-   DoUio(220, objcts_1.osize, sizeof objcts_1.osize[0]), DoUio(220, objcts_1.ocapac, sizeof objcts_1.ocapac[0]);
-   DoUio(220, objcts_1.oroom, sizeof objcts_1.oroom[0]), DoUio(220, objcts_1.oadv, sizeof objcts_1.oadv[0]);
-   DoUio(220, objcts_1.ocan, sizeof objcts_1.ocan[0]);
+   GetArr(220, objcts_1.odesc1), GetArr(220, objcts_1.odesc2), GetArr(220, objcts_1.oflag1), GetArr(220, objcts_1.oflag2);
+   GetArr(220, objcts_1.ofval), GetArr(220, objcts_1.otval);
+   GetArr(220, objcts_1.osize), GetArr(220, objcts_1.ocapac);
+   GetArr(220, objcts_1.oroom), GetArr(220, objcts_1.oadv), GetArr(220, objcts_1.ocan);
 
 // read(1, rooms_1.rval, rooms_1.rflag); //F
-   DoUio(200, rooms_1.rval, sizeof rooms_1.rval[0]), DoUio(200, rooms_1.rflag, sizeof rooms_1.rflag[0]);
+   GetArr(200, rooms_1.rval), GetArr(200, rooms_1.rflag);
 
 // read(1, &advs_1.aroom, &advs_1.ascore, &advs_1.avehic, &advs_1.astren, &advs_1.aflag); //F
-   DoUio(4, advs_1.aroom, sizeof advs_1.aroom[0]), DoUio(4, advs_1.ascore, sizeof advs_1.ascore[0]);
-   DoUio(4, advs_1.avehic, sizeof advs_1.avehic[0]), DoUio(4, advs_1.astren, sizeof advs_1.astren[0]);
-   DoUio(4, advs_1.aflag, sizeof advs_1.aflag[0]);
+   GetArr(4, advs_1.aroom), GetArr(4, advs_1.ascore), GetArr(4, advs_1.avehic), GetArr(4, advs_1.astren), GetArr(4, advs_1.aflag);
 
 // read(1, flags, switch_, &vill_1.vprob, cevent_1.cflag, cevent_1.ctick); //F
-   DoUio(46, flags, sizeof flags[0]), DoUio(22, switch_, sizeof switch_[0]), DoUio(4, vill_1.vprob, sizeof vill_1.vprob[0]);
-   DoUio(25, cevent_1.cflag, sizeof cevent_1.cflag[0]), DoUio(25, cevent_1.ctick, sizeof cevent_1.ctick[0]);
+   GetArr(46, flags), GetArr(22, switch_), GetArr(4, vill_1.vprob), GetArr(25, cevent_1.cflag), GetArr(25, cevent_1.ctick);
 
 // close(unit:1); //F
-   (void)fclose(e);
+   (void)fclose(InF);
 
    rspeak(599);
    return;
@@ -153,7 +120,7 @@ L200:
    rspeak(600);
 // 						!OBSOLETE VERSION
 // close(unit:1); //F
-   (void)fclose(e);
+   (void)fclose(InF);
 }
 
 // Move in specified direction

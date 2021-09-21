@@ -54,7 +54,6 @@ static void rspsb2nl(int n, int y, int z, Bool nl) {
    play_1.telflg = true;
 // 						!SAID SOMETHING.
 
-// read(unit:chan_1.dbch, rec:x, &oldrec, b1); //F
    x = ((-x) - 1) * 8;
    if (fseek(dbfile, x + (long)rmsg_1.mrloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
 
