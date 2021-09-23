@@ -28,7 +28,7 @@ void game_(void) {
 // NOW LOOP, READING AND EXECUTING COMMANDS.
 
 L100:
-   play.winner = aindex.player;
+   play.winner = PlayerAX;
 // 						!PLAYER MOVING.
    play.telflg = false;
 // 						!ASSUME NOTHING TOLD.
@@ -57,12 +57,12 @@ L100:
    }
 // 						!VEHICLE HANDLE?
 
-   if (prsvec.prsa == vindex.tellw) {
+   if (prsvec.prsa == TellW) {
       goto L2000;
    }
 // 						!TELL?
 L300:
-   if (prsvec.prso == oindex.valua || prsvec.prso == oindex.every) {
+   if (prsvec.prso == ValuaOX || prsvec.prso == EveryOX) {
       goto L900;
    }
    if (!vappli(prsvec.prsa)) {
@@ -70,7 +70,7 @@ L300:
    }
 // 						!VERB OK?
 L350:
-   if (!findex.echof && play.here == rindex_.echor) {
+   if (!findex.echof && play.here == EchoRRX) {
       goto L1000;
    }
    f = rappli(rooms.ractio[play.here - 1]);
@@ -84,7 +84,7 @@ L400:
    goto L100;
 
 L900:
-   valuac(oindex.valua);
+   valuac(ValuaOX);
    goto L350;
 // GAME, PAGE 3
 
@@ -101,7 +101,7 @@ L1000:
    rspeak(571);
 // 						!KILL THE ECHO.
    findex.echof = true;
-   objcts.oflag2[oindex.bar - 1] &= ~ScrDO;
+   objcts.oflag2[BarOX - 1] &= ~ScrDO;
    prsvec.prswon = true;
 // 						!FAKE OUT PARSER.
    prsvec.prscon = 1;
@@ -110,7 +110,7 @@ L1000:
 
 L1300:
    prsvec.prswon = parse(input.inbuf, false);
-   if (!prsvec.prswon || prsvec.prsa != vindex.walkw) {
+   if (!prsvec.prswon || prsvec.prsa != WalkW) {
       goto L1400;
    }
    if (findxt(prsvec.prso, play.here)) {
@@ -160,7 +160,7 @@ L2700:
 // 						!GIVE RESPONSE.
    rspeak(i);
 L2600:
-   play.winner = aindex.player;
+   play.winner = PlayerAX;
 // 						!RESTORE STATE.
    play.here = advs.aroom[play.winner - 1];
    goto L350;
@@ -174,7 +174,7 @@ L2150:
       goto L2400;
    }
 // 						!VEHICLE HANDLE?
-   if (prsvec.prso == oindex.valua || prsvec.prso == oindex.every) {
+   if (prsvec.prso == ValuaOX || prsvec.prso == EveryOX) {
       goto L2900;
    }
    if (!vappli(prsvec.prsa)) {
@@ -191,7 +191,7 @@ L2400:
 // 						!DONE.
 
 L2900:
-   valuac(oindex.valua);
+   valuac(ValuaOX);
 // 						!ALL OR VALUABLES.
    goto L350;
 }

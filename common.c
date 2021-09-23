@@ -13,10 +13,9 @@
 // Already defined in blkdata.c:
 //	buzvoc, prpvoc, dirvoc, adjvoc, vrbvoc, objvoc
 // Already defined in dmain.c:
-//	screen, puzzle, star, vers, bats, hyper, rindex,
-//	xpars, xsrch, oindex, cindex, aflags, aindex, vindex
+//	screen, puzzle, star, vers, bats, hyper, xpars, aflags
 // Already redefined and declared as enum types in common.h:
-//	rflag, oflags, synflg, objflg
+//	rflag, oflags, synflg, objflg, oindex, rindex, xsrch, aindex, cindex, vindex
 
 // Unlisted:
 // common /time/

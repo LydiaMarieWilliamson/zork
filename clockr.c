@@ -82,21 +82,21 @@ void cevapp(int ri) {
 
 L1000:
 // Computing MIN
-   i__1 = 0, i__2 = advs.astren[aindex.player - 1] + 1;
-   advs.astren[aindex.player - 1] = min(i__1, i__2);
+   i__1 = 0, i__2 = advs.astren[PlayerAX - 1] + 1;
+   advs.astren[PlayerAX - 1] = min(i__1, i__2);
 // 						!RECOVER.
-   if (advs.astren[aindex.player - 1] >= 0) {
+   if (advs.astren[PlayerAX - 1] >= 0) {
       return;
    }
 // 						!FULLY RECOVERED?
-   cevent.ctick[cindex.cevcur - 1] = 30;
+   cevent.ctick[CurCX - 1] = 30;
 // 						!NO, WAIT SOME MORE.
    return;
 
 // CEV2--	MAINT-ROOM WITH LEAK.  RAISE THE WATER LEVEL.
 
 L2000:
-   if (play.here == rindex_.maint) {
+   if (play.here == MaintRX) {
       i__1 = findex.rvmnt / 2 + 71;
       rspeak(i__1);
    }
@@ -107,12 +107,12 @@ L2000:
       return;
    }
 // 						!IF NOT FULL, EXIT.
-   cevent.ctick[cindex.cevmnt - 1] = 0;
+   cevent.ctick[MntCX - 1] = 0;
 // 						!FULL, DISABLE CLOCK.
-   rooms.rflag[rindex_.maint - 1] |= MungR;
-   rrand[rindex_.maint - 1] = 80;
+   rooms.rflag[MaintRX - 1] |= MungR;
+   rrand[MaintRX - 1] = 80;
 // 						!SAY IT IS FULL OF WATER.
-   if (play.here == rindex_.maint) {
+   if (play.here == MaintRX) {
       jigsup(81);
    }
 // 						!DROWN HIM IF PRESENT.
@@ -121,7 +121,7 @@ L2000:
 // CEV3--	LANTERN.  DESCRIBE GROWING DIMNESS.
 
 L3000:
-   litint(oindex.lamp, &findex.orlamp, cindex.cevlnt, lmptck, 12);
+   litint(LampOX, &findex.orlamp, LntCX, lmptck, 12);
 // 						!DO LIGHT INTERRUPT.
    return;
 
@@ -130,13 +130,13 @@ L3000:
 L4000:
    rspeak(153);
 // 						!MATCH IS OUT.
-   objcts.oflag1[oindex.match - 1] &= ~OnO;
+   objcts.oflag1[MatchOX - 1] &= ~OnO;
    return;
 
 // CEV5--	CANDLE.  DESCRIBE GROWING DIMNESS.
 
 L5000:
-   litint(oindex.candl, &findex.orcand, cindex.cevcnd, cndtck, 10);
+   litint(CandlOX, &findex.orcand, CndCX, cndtck, 10);
 // 						!DO CANDLE INTERRUPT.
    return;
 // CEVAPP, PAGE 3
@@ -144,37 +144,37 @@ L5000:
 // CEV6--	BALLOON
 
 L6000:
-   cevent.ctick[cindex.cevbal - 1] = 3;
+   cevent.ctick[BalCX - 1] = 3;
 // 						!RESCHEDULE INTERRUPT.
-   f = advs.avehic[play.winner - 1] == oindex.ballo;
+   f = advs.avehic[play.winner - 1] == BalloOX;
 // 						!SEE IF IN BALLOON.
-   if (state.bloc == rindex_.vlbot) {
+   if (state.bloc == VlBotRX) {
       goto L6800;
    }
 // 						!AT BOTTOM?
-   if (state.bloc == rindex_.ledg2 || state.bloc == rindex_.ledg3 || state.bloc == rindex_.ledg4 || state.bloc == rindex_.vlbot) {
+   if (state.bloc == Ledg2RX || state.bloc == Ledg3RX || state.bloc == Ledg4RX || state.bloc == VlBotRX) {
       goto L6700;
    }
 // 						!ON LEDGE?
-   if ((objcts.oflag2[oindex.recep - 1] & OpenO) != 0 && findex.binff != 0) {
+   if ((objcts.oflag2[RecepOX - 1] & OpenO) != 0 && findex.binff != 0) {
       goto L6500;
    }
 
 // BALLOON IS IN MIDAIR AND IS DEFLATED (OR HAS RECEPTACLE CLOSED).
 // FALL TO NEXT ROOM.
 
-   if (state.bloc != rindex_.vair1) {
+   if (state.bloc != Vair1RX) {
       goto L6300;
    }
 // 						!IN VAIR1?
-   state.bloc = rindex_.vlbot;
+   state.bloc = VlBotRX;
 // 						!YES, NOW AT VLBOT.
-   newsta(oindex.ballo, 0, state.bloc, 0, 0);
+   newsta(BalloOX, 0, state.bloc, 0, 0);
    if (f) {
       goto L6200;
    }
 // 						!IN BALLOON?
-   if (play.here == rindex_.ledg2 || play.here == rindex_.ledg3 || play.here == rindex_.ledg4 || play.here == rindex_.vlbot) {
+   if (play.here == Ledg2RX || play.here == Ledg3RX || play.here == Ledg4RX || play.here == VlBotRX) {
       rspeak(530);
    }
 // 						!ON LEDGE, DESCRIBE.
@@ -194,15 +194,15 @@ L6200:
    return;
 
 L6250:
-   newsta(oindex.ballo, 532, 0, 0, 0);
+   newsta(BalloOX, 532, 0, 0, 0);
 // 						!NO, BALLOON & CONTENTS DIE.
-   newsta(oindex.dball, 0, state.bloc, 0, 0);
+   newsta(DBallOX, 0, state.bloc, 0, 0);
 // 						!INSERT DEAD BALLOON.
    advs.avehic[play.winner - 1] = 0;
 // 						!NOT IN VEHICLE.
-   cevent.cflag[cindex.cevbal - 1] = false;
+   cevent.cflag[BalCX - 1] = false;
 // 						!DISABLE INTERRUPTS.
-   cevent.cflag[cindex.cevbrn - 1] = false;
+   cevent.cflag[BrnCX - 1] = false;
    findex.binff = 0;
    findex.btief = 0;
    return;
@@ -210,12 +210,12 @@ L6250:
 L6300:
    --state.bloc;
 // 						!NOT IN VAIR1, DESCEND.
-   newsta(oindex.ballo, 0, state.bloc, 0, 0);
+   newsta(BalloOX, 0, state.bloc, 0, 0);
    if (f) {
       goto L6400;
    }
 // 						!IS HE IN BALLOON?
-   if (play.here == rindex_.ledg2 || play.here == rindex_.ledg3 || play.here == rindex_.ledg4 || play.here == rindex_.vlbot) {
+   if (play.here == Ledg2RX || play.here == Ledg3RX || play.here == Ledg4RX || play.here == VlBotRX) {
       rspeak(533);
    }
 // 						!IF ON LEDGE, DESCRIBE.
@@ -233,25 +233,25 @@ L6400:
 // 						!
 
 L6500:
-   if (state.bloc != rindex_.vair4) {
+   if (state.bloc != Vair4RX) {
       goto L6600;
    }
 // 						!AT VAIR4?
-   cevent.ctick[cindex.cevbrn - 1] = 0;
-   cevent.ctick[cindex.cevbal - 1] = 0;
+   cevent.ctick[BrnCX - 1] = 0;
+   cevent.ctick[BalCX - 1] = 0;
    findex.binff = 0;
    findex.btief = 0;
-   state.bloc = rindex_.vlbot;
+   state.bloc = VlBotRX;
 // 						!FALL TO BOTTOM.
-   newsta(oindex.ballo, 0, 0, 0, 0);
+   newsta(BalloOX, 0, 0, 0, 0);
 // 						!BALLOON & CONTENTS DIE.
-   newsta(oindex.dball, 0, state.bloc, 0, 0);
+   newsta(DBallOX, 0, state.bloc, 0, 0);
 // 						!SUBSTITUTE DEAD BALLOON.
    if (f) {
       goto L6550;
    }
 // 						!WAS HE IN IT?
-   if (play.here == rindex_.ledg2 || play.here == rindex_.ledg3 || play.here == rindex_.ledg4 || play.here == rindex_.vlbot) {
+   if (play.here == Ledg2RX || play.here == Ledg3RX || play.here == Ledg4RX || play.here == VlBotRX) {
       rspeak(535);
    }
 // 						!IF HE CAN SEE, DESCRIBE.
@@ -265,12 +265,12 @@ L6550:
 L6600:
    ++state.bloc;
 // 						!NOT AT VAIR4, GO UP.
-   newsta(oindex.ballo, 0, state.bloc, 0, 0);
+   newsta(BalloOX, 0, state.bloc, 0, 0);
    if (f) {
       goto L6650;
    }
 // 						!IN BALLOON?
-   if (play.here == rindex_.ledg2 || play.here == rindex_.ledg3 || play.here == rindex_.ledg4 || play.here == rindex_.vlbot) {
+   if (play.here == Ledg2RX || play.here == Ledg3RX || play.here == Ledg4RX || play.here == VlBotRX) {
       rspeak(537);
    }
 // 						!CAN HE SEE IT?
@@ -287,18 +287,18 @@ L6650:
 // ON LEDGE, GOES TO MIDAIR ROOM WHETHER INFLATED OR NOT.
 
 L6700:
-   state.bloc += rindex_.vair2 - rindex_.ledg2;
+   state.bloc += Vair2RX - Ledg2RX;
 // 						!MOVE TO MIDAIR.
-   newsta(oindex.ballo, 0, state.bloc, 0, 0);
+   newsta(BalloOX, 0, state.bloc, 0, 0);
    if (f) {
       goto L6750;
    }
 // 						!IN BALLOON?
-   if (play.here == rindex_.ledg2 || play.here == rindex_.ledg3 || play.here == rindex_.ledg4 || play.here == rindex_.vlbot) {
+   if (play.here == Ledg2RX || play.here == Ledg3RX || play.here == Ledg4RX || play.here == VlBotRX) {
       rspeak(539);
    }
 // 						!NO, STRANDED.
-   cevent.ctick[cindex.cevvlg - 1] = 10;
+   cevent.ctick[VlgCX - 1] = 10;
 // 						!MATERIALIZE GNOME.
    return;
 
@@ -313,18 +313,18 @@ L6750:
 // AT BOTTOM, GO UP IF INFLATED, DO NOTHING IF DEFLATED.
 
 L6800:
-   if (findex.binff == 0 || !((objcts.oflag2[oindex.recep - 1] & OpenO) != 0)) {
+   if (findex.binff == 0 || !((objcts.oflag2[RecepOX - 1] & OpenO) != 0)) {
       return;
    }
-   state.bloc = rindex_.vair1;
+   state.bloc = Vair1RX;
 // 						!INFLATED AND OPEN,
-   newsta(oindex.ballo, 0, state.bloc, 0, 0);
+   newsta(BalloOX, 0, state.bloc, 0, 0);
 // 						!GO UP TO VAIR1.
    if (f) {
       goto L6850;
    }
 // 						!IN BALLOON?
-   if (play.here == rindex_.ledg2 || play.here == rindex_.ledg3 || play.here == rindex_.ledg4 || play.here == rindex_.vlbot) {
+   if (play.here == Ledg2RX || play.here == Ledg3RX || play.here == Ledg4RX || play.here == VlBotRX) {
       rspeak(541);
    }
 // 						!IF CAN SEE, DESCRIBE.
@@ -344,7 +344,7 @@ L7000:
    i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!FIND BURNING OBJECT
-      if (oindex.recep == objcts.ocan[i - 1] && (objcts.oflag1[i - 1] & FlamO) != 0) {
+      if (RecepOX == objcts.ocan[i - 1] && (objcts.oflag1[i - 1] & FlamO) != 0) {
          goto L7200;
       }
 // L7100:
@@ -365,20 +365,20 @@ L7200:
 // CEV8--	FUSE FUNCTION
 
 L8000:
-   if (objcts.ocan[oindex.fuse - 1] != oindex.brick) {
+   if (objcts.ocan[FuseOX - 1] != BrickOX) {
       goto L8500;
    }
 // 						!IGNITED BRICK?
-   br = objcts.oroom[oindex.brick - 1];
+   br = objcts.oroom[BrickOX - 1];
 // 						!GET BRICK ROOM.
-   bc = objcts.ocan[oindex.brick - 1];
+   bc = objcts.ocan[BrickOX - 1];
 // 						!GET CONTAINER.
    if (br == 0 && bc != 0) {
       br = objcts.oroom[bc - 1];
    }
-   newsta(oindex.fuse, 0, 0, 0, 0);
+   newsta(FuseOX, 0, 0, 0, 0);
 // 						!KILL FUSE.
-   newsta(oindex.brick, 0, 0, 0, 0);
+   newsta(BrickOX, 0, 0, 0, 0);
 // 						!KILL BRICK.
    if (br != 0 && br != play.here) {
       goto L8100;
@@ -397,19 +397,19 @@ L8100:
 // 						!BOOM.
    state.mungrm = br;
 // 						!SAVE ROOM THAT BLEW.
-   cevent.ctick[cindex.cevsaf - 1] = 5;
+   cevent.ctick[SafCX - 1] = 5;
 // 						!SET SAFE INTERRUPT.
-   if (br != rindex_.msafe) {
+   if (br != MSafeRX) {
       goto L8200;
    }
 // 						!BLEW SAFE ROOM?
-   if (bc != oindex.sslot) {
+   if (bc != SSlotOX) {
       return;
    }
 // 						!WAS BRICK IN SAFE?
-   newsta(oindex.sslot, 0, 0, 0, 0);
+   newsta(SSlotOX, 0, 0, 0, 0);
 // 						!KILL SLOT.
-   objcts.oflag2[oindex.safe - 1] |= OpenO;
+   objcts.oflag2[SafeOX - 1] |= OpenO;
    findex.safef = true;
 // 						!INDICATE SAFE BLOWN.
    return;
@@ -423,13 +423,13 @@ L8200:
       }
 // L8250:
    }
-   if (br != rindex_.lroom) {
+   if (br != LRoomRX) {
       return;
    }
 // 						!BLEW LIVING ROOM?
    i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
-      if (objcts.ocan[i - 1] == oindex.tcase) {
+      if (objcts.ocan[i - 1] == TCaseOX) {
          newsta(i, 0, 0, 0, 0);
       }
 // 						!KILL TROPHY CASE.
@@ -438,10 +438,10 @@ L8200:
    return;
 
 L8500:
-   if (qhere(oindex.fuse, play.here) || objcts.oadv[oindex.fuse - 1] == play.winner) {
+   if (qhere(FuseOX, play.here) || objcts.oadv[FuseOX - 1] == play.winner) {
       rspeak(152);
    }
-   newsta(oindex.fuse, 0, 0, 0, 0);
+   newsta(FuseOX, 0, 0, 0, 0);
 // 						!KILL FUSE.
    return;
 // CEVAPP, PAGE 5
@@ -449,9 +449,9 @@ L8500:
 // CEV9--	LEDGE MUNGE.
 
 L9000:
-   rooms.rflag[rindex_.ledg4 - 1] |= MungR;
-   rrand[rindex_.ledg4 - 1] = 109;
-   if (play.here == rindex_.ledg4) {
+   rooms.rflag[Ledg4RX - 1] |= MungR;
+   rrand[Ledg4RX - 1] = 109;
+   if (play.here == Ledg4RX) {
       goto L9100;
    }
 // 						!WAS HE THERE?
@@ -478,16 +478,16 @@ L9200:
    return;
 
 L9300:
-   state.bloc = rindex_.vlbot;
+   state.bloc = VlBotRX;
 // 						!YES, CRASH BALLOON.
-   newsta(oindex.ballo, 0, 0, 0, 0);
+   newsta(BalloOX, 0, 0, 0, 0);
 // 						!BALLOON & CONTENTS DIE.
-   newsta(oindex.dball, 0, state.bloc, 0, 0);
+   newsta(DBallOX, 0, state.bloc, 0, 0);
 // 						!INSERT DEAD BALLOON.
    findex.btief = 0;
    findex.binff = 0;
-   cevent.cflag[cindex.cevbal - 1] = false;
-   cevent.cflag[cindex.cevbrn - 1] = false;
+   cevent.cflag[BalCX - 1] = false;
+   cevent.cflag[BrnCX - 1] = false;
    jigsup(113);
 // 						!DEAD
    return;
@@ -503,8 +503,8 @@ L10000:
 // 						!IS HE PRESENT?
    rspeak(115);
 // 						!LET HIM KNOW.
-   if (state.mungrm == rindex_.msafe) {
-      cevent.ctick[cindex.cevled - 1] = 8;
+   if (state.mungrm == MSafeRX) {
+      cevent.ctick[LedCX - 1] = 8;
    }
 // 						!START LEDGE CLOCK.
    return;
@@ -523,39 +523,39 @@ L10100:
 // CEV11--	VOLCANO GNOME
 
 L11000:
-   if (play.here == rindex_.ledg2 || play.here == rindex_.ledg3 || play.here == rindex_.ledg4 || play.here == rindex_.vlbot) {
+   if (play.here == Ledg2RX || play.here == Ledg3RX || play.here == Ledg4RX || play.here == VlBotRX) {
       goto L11100;
    }
 // 						!IS HE ON LEDGE?
-   cevent.ctick[cindex.cevvlg - 1] = 1;
+   cevent.ctick[VlgCX - 1] = 1;
 // 						!NO, WAIT A WHILE.
    return;
 
 L11100:
-   newsta(oindex.gnome, 118, play.here, 0, 0);
+   newsta(GnomeOX, 118, play.here, 0, 0);
 // 						!YES, MATERIALIZE GNOME.
    return;
 
 // CEV12--	VOLCANO GNOME DISAPPEARS
 
 L12000:
-   newsta(oindex.gnome, 149, 0, 0, 0);
+   newsta(GnomeOX, 149, 0, 0, 0);
 // 						!DISAPPEAR THE GNOME.
    return;
 
 // CEV13--	BUCKET.
 
 L13000:
-   if (objcts.ocan[oindex.water - 1] == oindex.bucke) {
-      newsta(oindex.water, 0, 0, 0, 0);
+   if (objcts.ocan[WaterOX - 1] == BuckeOX) {
+      newsta(WaterOX, 0, 0, 0, 0);
    }
    return;
 
 // CEV14--	SPHERE.  IF EXPIRES, HE'S TRAPPED.
 
 L14000:
-   rooms.rflag[rindex_.cager - 1] |= MungR;
-   rrand[rindex_.cager - 1] = 147;
+   rooms.rflag[CageRRX - 1] |= MungR;
+   rrand[CageRRX - 1] = 147;
    jigsup(148);
 // 						!MUNG PLAYER.
    return;
@@ -573,8 +573,8 @@ L15000:
 // CEV16--	FOREST MURMURS
 
 L16000:
-   cevent.cflag[cindex.cevfor - 1] = play.here == rindex_.mtree || play.here >= rindex_.fore1 && play.here < rindex_.clear;
-   if (cevent.cflag[cindex.cevfor - 1] && prob(10, 10)) {
+   cevent.cflag[ForCX - 1] = play.here == MTreeRX || play.here >= Fore1RX && play.here < ClearRX;
+   if (cevent.cflag[ForCX - 1] && prob(10, 10)) {
       rspeak(635);
    }
    return;
@@ -582,11 +582,11 @@ L16000:
 // CEV17--	SCOL ALARM
 
 L17000:
-   if (play.here == rindex_.bktwi) {
-      cevent.cflag[cindex.cevzgi - 1] = true;
+   if (play.here == BkTwiRX) {
+      cevent.cflag[ZgICX - 1] = true;
    }
 // 						!IF IN TWI, GNOME.
-   if (play.here == rindex_.bkvau) {
+   if (play.here == BkVauRX) {
       jigsup(636);
    }
 // 						!IF IN VAU, DEAD.
@@ -595,11 +595,11 @@ L17000:
 // CEV18--	ENTER GNOME OF ZURICH
 
 L18000:
-   cevent.cflag[cindex.cevzgo - 1] = true;
+   cevent.cflag[ZgOCX - 1] = true;
 // 						!EXITS, TOO.
-   newsta(oindex.zgnom, 0, rindex_.bktwi, 0, 0);
+   newsta(ZGnomOX, 0, BkTwiRX, 0, 0);
 // 						!PLACE IN TWI.
-   if (play.here == rindex_.bktwi) {
+   if (play.here == BkTwiRX) {
       rspeak(637);
    }
 // 						!ANNOUNCE.
@@ -608,9 +608,9 @@ L18000:
 // CEV19--	EXIT GNOME
 
 L19000:
-   newsta(oindex.zgnom, 0, 0, 0, 0);
+   newsta(ZGnomOX, 0, 0, 0, 0);
 // 						!VANISH.
-   if (play.here == rindex_.bktwi) {
+   if (play.here == BkTwiRX) {
       rspeak(638);
    }
 // 						!ANNOUNCE.
@@ -624,7 +624,7 @@ L20000:
       goto L20200;
    }
 // 						!SPELL HIS WAY IN?
-   if (play.here != rindex_.crypt) {
+   if (play.here != CryptRX) {
       return;
    }
 // 						!NO, STILL IN TOMB?
@@ -632,7 +632,7 @@ L20000:
       goto L20100;
    }
 // 						!LIGHTS OFF?
-   cevent.ctick[cindex.cevste - 1] = 3;
+   cevent.ctick[SteCX - 1] = 3;
 // 						!RESCHEDULE.
    return;
 
@@ -646,18 +646,18 @@ L20200:
       newsta(i, 0, objcts.oroom[i - 1], objcts.ocan[i - 1], 0);
 // L20300:
    }
-   newsta(oindex.lamp, 0, 0, 0, aindex.player);
+   newsta(LampOX, 0, 0, 0, PlayerAX);
 // 						!GIVE HIM LAMP.
-   newsta(oindex.sword, 0, 0, 0, aindex.player);
+   newsta(SwordOX, 0, 0, 0, PlayerAX);
 // 						!GIVE HIM SWORD.
 
-   objcts.oflag1[oindex.lamp - 1] = (objcts.oflag1[oindex.lamp - 1] | LiteO) & ~OnO;
-   objcts.oflag2[oindex.lamp - 1] |= TChO;
-   cevent.cflag[cindex.cevlnt - 1] = false;
+   objcts.oflag1[LampOX - 1] = (objcts.oflag1[LampOX - 1] | LiteO) & ~OnO;
+   objcts.oflag2[LampOX - 1] |= TChO;
+   cevent.cflag[LntCX - 1] = false;
 // 						!LAMP IS GOOD AS NEW.
-   cevent.ctick[cindex.cevlnt - 1] = 350;
+   cevent.ctick[LntCX - 1] = 350;
    findex.orlamp = 0;
-   objcts.oflag2[oindex.sword - 1] |= TChO;
+   objcts.oflag2[SwordOX - 1] |= TChO;
    hack.swdact = true;
    hack.swdsta = 0;
 
@@ -665,16 +665,16 @@ L20200:
 // 						!THIEF GONE.
    findex.endgmf = true;
 // 						!ENDGAME RUNNING.
-   cevent.cflag[cindex.cevmat - 1] = false;
+   cevent.cflag[MatCX - 1] = false;
 // 						!MATCHES GONE,
-   cevent.cflag[cindex.cevcnd - 1] = false;
+   cevent.cflag[CndCX - 1] = false;
 // 						!CANDLES GONE.
 
-   scrupd(rooms.rval[rindex_.crypt - 1]);
+   scrupd(rooms.rval[CryptRX - 1]);
 // 						!SCORE CRYPT,
-   rooms.rval[rindex_.crypt - 1] = 0;
+   rooms.rval[CryptRX - 1] = 0;
 // 						!BUT ONLY ONCE.
-   f = moveto(rindex_.tstrs, play.winner);
+   f = moveto(TStrsRX, play.winner);
 // 						!TO TOP OF STAIRS,
    f = rmdesc(3);
 // 						!AND DESCRIBE.
@@ -689,11 +689,11 @@ L21000:
 // 						!BUTTON IS OUT.
    findex.mropnf = false;
 // 						!MIRROR IS CLOSED.
-   if (play.here == rindex_.mrant) {
+   if (play.here == MrAntRX) {
       rspeak(728);
    }
 // 						!DESCRIBE BUTTON.
-   if (play.here == rindex_.inmir || mrhere(play.here) == 1) {
+   if (play.here == InMirRX || mrhere(play.here) == 1) {
       rspeak(729);
    }
    return;
@@ -713,24 +713,24 @@ L22000:
 // CEV23--	INQUISITOR'S QUESTION
 
 L23000:
-   if (advs.aroom[aindex.player - 1] != rindex_.fdoor) {
+   if (advs.aroom[PlayerAX - 1] != FDoorRX) {
       return;
    }
 // 						!IF PLAYER LEFT, DIE.
    rspeak(769);
    i__1 = findex.quesno + 770;
    rspeak(i__1);
-   cevent.ctick[cindex.cevinq - 1] = 2;
+   cevent.ctick[InqCX - 1] = 2;
    return;
 
 // CEV24--	MASTER FOLLOWS
 
 L24000:
-   if (advs.aroom[aindex.amastr - 1] == play.here) {
+   if (advs.aroom[MastrAX - 1] == play.here) {
       return;
    }
 // 						!NO MOVEMENT, DONE.
-   if (play.here != rindex_.cell && play.here != rindex_.pcell) {
+   if (play.here != CellRX && play.here != PCellRX) {
       goto L24100;
    }
    if (findex.follwf) {
@@ -745,18 +745,18 @@ L24100:
 // 						!FOLLOWING.
    i = 812;
 // 						!ASSUME CATCHES UP.
-   i__1 = xsrch.xmax;
-   i__2 = xsrch.xmin;
-   for (j = xsrch.xmin; i__2 < 0 ? j >= i__1 : j <= i__1; j += i__2) {
-      if (findxt(j, advs.aroom[aindex.amastr - 1]) && curxt.xroom1 == play.here) {
+   i__1 = MaxDX;
+   i__2 = MinDX;
+   for (j = MinDX; i__2 < 0 ? j >= i__1 : j <= i__1; j += i__2) {
+      if (findxt(j, advs.aroom[MastrAX - 1]) && curxt.xroom1 == play.here) {
          i = 813;
       }
 // L24200:
    }
    rspeak(i);
-   newsta(oindex.master, 0, play.here, 0, 0);
+   newsta(MasterOX, 0, play.here, 0, 0);
 // 						!MOVE MASTER OBJECT.
-   advs.aroom[aindex.amastr - 1] = play.here;
+   advs.aroom[MastrAX - 1] = play.here;
 // 						!MOVE MASTER PLAYER.
 }
 

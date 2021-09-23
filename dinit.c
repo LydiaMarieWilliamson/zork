@@ -213,7 +213,7 @@ L10000:
    findex.lcell = 1;
    findex.pnumb = 1;
    findex.mdir = 270;
-   findex.mloc = rindex_.mrb;
+   findex.mloc = MrBrX;
    findex.cphere = 10;
 
    i__1 = r2max;
@@ -337,7 +337,7 @@ L10000:
 // read(1, "%I6", &i, &j, &k); //F
    i = rdint(indxfile), j = rdint(indxfile), k = rdint(indxfile);
 // 						!GET VERSION.
-   if (i != vers.vmaj || j != vers.vmin) {
+   if (i != vmaj || j != vmin) {
       goto L1925;
    }
 #if 0
@@ -411,11 +411,11 @@ L10000:
    itime(&time_.shour, &time_.smin, &time_.ssec);
 //    srand(time_.shour ^ (time_.smin ^ time_.ssec));
 
-   play.winner = aindex.player;
-   last.lastit = advs.aobj[aindex.player - 1];
+   play.winner = PlayerAX;
+   last.lastit = advs.aobj[PlayerAX - 1];
    play.here = advs.aroom[play.winner - 1];
-   hack.thfpos = objcts.oroom[oindex.thief - 1];
-   state.bloc = objcts.oroom[oindex.ballo - 1];
+   hack.thfpos = objcts.oroom[ThiefOX - 1];
+   state.bloc = objcts.oroom[BalloOX - 1];
    ret_val = true;
 
    return ret_val;
@@ -427,10 +427,10 @@ L1925:
 // print(
 //    " \"dindx.dat\" is version %I1.%I1%A1.%/" //F
 //    "  I require version %I1.%I1%A1.", //F
-//    i, j, k, vers.vmaj, vers.vmin, vers.vedit //F
+//    i, j, k, vmaj, vmin, vedit //F
 // ); //F
    more_output(NULL), printf("%s is version %1d.%1d%c.\n", TEXTFILE, i, j, k);
-   more_output(NULL), printf("I require version %1d.%1d%c.\n", vers.vmaj, vers.vmin, (int)vers.vedit);
+   more_output(NULL), printf("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
    goto L1975;
 L1950:
 // print(" I can't open ","dindx.dat","."); //F

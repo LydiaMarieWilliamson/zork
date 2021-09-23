@@ -76,25 +76,25 @@ L1000:
 // 2000--	BIRD
 
 L2000:
-   ret_val = rm >= rindex_.fore1 && rm < rindex_.clear || rm == rindex_.mtree;
+   ret_val = rm >= Fore1RX && rm < ClearRX || rm == MTreeRX;
    return ret_val;
 
 // 3000--	TREE
 
 L3000:
-   ret_val = rm >= rindex_.fore1 && rm < rindex_.clear && rm != rindex_.fore3;
+   ret_val = rm >= Fore1RX && rm < ClearRX && rm != Fore3RX;
    return ret_val;
 
 // 4000--	NORTH WALL
 
 L4000:
-   ret_val = rm >= rindex_.bkvw && rm <= rindex_.bkbox || rm == rindex_.cpuzz;
+   ret_val = rm >= BkVwRX && rm <= BkBoxRX || rm == CPuzzRX;
    return ret_val;
 
 // 5000--	EAST, SOUTH, WEST WALLS
 
 L5000:
-   ret_val = rm >= rindex_.bkvw && rm < rindex_.bkbox || rm == rindex_.cpuzz;
+   ret_val = rm >= BkVwRX && rm < BkBoxRX || rm == CPuzzRX;
    return ret_val;
 
 // 6000--	GLOBAL WATER
@@ -106,37 +106,37 @@ L6000:
 // 7000--	GLOBAL GUARDIANS
 
 L7000:
-   ret_val = rm >= rindex_.mrc && rm <= rindex_.mrd || rm >= rindex_.mrce && rm <= rindex_.mrdw || rm == rindex_.inmir;
+   ret_val = rm >= MrCrX && rm <= MrDrX || rm >= MrCerX && rm <= MrDwrX || rm == InMirRX;
    return ret_val;
 
 // 8000--	ROSE/CHANNEL
 
 L8000:
-   ret_val = rm >= rindex_.mra && rm <= rindex_.mrd || rm == rindex_.inmir;
+   ret_val = rm >= MrArX && rm <= MrDrX || rm == InMirRX;
    return ret_val;
 
 // 9000--	MIRROR
 // 9100		PANEL
 
 L9100:
-   if (rm == rindex_.fdoor) {
+   if (rm == FDoorRX) {
       return ret_val;
    }
 // 						!PANEL AT FDOOR.
 L9000:
-   ret_val = rm >= rindex_.mra && rm <= rindex_.mrc || rm >= rindex_.mrae && rm <= rindex_.mrcw;
+   ret_val = rm >= MrArX && rm <= MrCrX || rm >= MrAerX && rm <= MrCwrX;
    return ret_val;
 
 // 10000--	MASTER
 
 L10000:
-   ret_val = rm == rindex_.fdoor || rm == rindex_.ncorr || rm == rindex_.parap || rm == rindex_.cell;
+   ret_val = rm == FDoorRX || rm == NCorrRX || rm == ParapRX || rm == CellRX;
    return ret_val;
 
 // 11000--	LADDER
 
 L11000:
-   ret_val = rm == rindex_.cpuzz;
+   ret_val = rm == CPuzzRX;
    return ret_val;
 }
 
@@ -147,7 +147,7 @@ int mrhere(int rm) {
 
 // MRHERE, PAGE 2
 
-   if (rm < rindex_.mrae || rm > rindex_.mrdw) {
+   if (rm < MrAerX || rm > MrDwrX) {
       goto L100;
    }
 
@@ -155,7 +155,7 @@ int mrhere(int rm) {
 
    ret_val = 1;
 // 						!ASSUME MIRROR 1 HERE.
-   if ((rm - rindex_.mrae) % 2 == findex.mdir / 180) {
+   if ((rm - MrAerX) % 2 == findex.mdir / 180) {
       ret_val = 2;
    }
    return ret_val;

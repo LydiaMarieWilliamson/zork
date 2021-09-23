@@ -18,7 +18,7 @@ Bool ballop(int arg) {
       goto L200;
    }
 // 						!READOUT?
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       goto L10;
    }
 // 						!ONLY PROCESS LOOK.
@@ -44,7 +44,7 @@ L200:
       goto L500;
    }
 // 						!READIN?
-   if (prsvec.prsa != vindex.walkw) {
+   if (prsvec.prsa != WalkW) {
       goto L300;
    }
 // 						!WALK?
@@ -78,7 +78,7 @@ L10:
    return ret_val;
 
 L300:
-   if (prsvec.prsa != vindex.takew || prsvec.prso != findex.binff) {
+   if (prsvec.prsa != TakeW || prsvec.prso != findex.binff) {
       goto L350;
    }
    rspsub(548, objcts.odesc2[findex.binff - 1]);
@@ -86,45 +86,45 @@ L300:
    return ret_val;
 
 L350:
-   if (prsvec.prsa != vindex.putw || prsvec.prsi != oindex.recep || qempty(oindex.recep)) {
+   if (prsvec.prsa != PutW || prsvec.prsi != RecepOX || qempty(RecepOX)) {
       goto L10;
    }
    rspeak(549);
    return ret_val;
 
 L500:
-   if (prsvec.prsa != vindex.unboaw || (rooms.rflag[play.here - 1] & LandR) == 0) {
+   if (prsvec.prsa != UnboaW || (rooms.rflag[play.here - 1] & LandR) == 0) {
       goto L600;
    }
    if (findex.binff != 0) {
-      cevent.ctick[cindex.cevbal - 1] = 3;
+      cevent.ctick[BalCX - 1] = 3;
    }
 // 						!HE GOT OUT, START BALLOON.
    goto L10;
 
 L600:
-   if (prsvec.prsa != vindex.burnw || objcts.ocan[prsvec.prso - 1] != oindex.recep) {
+   if (prsvec.prsa != BurnW || objcts.ocan[prsvec.prso - 1] != RecepOX) {
       goto L700;
    }
    rspsub(550, objcts.odesc2[prsvec.prso - 1]);
 // 						!LIGHT FIRE IN RECEP.
-   cevent.ctick[cindex.cevbrn - 1] = objcts.osize[prsvec.prso - 1] * 20;
+   cevent.ctick[BrnCX - 1] = objcts.osize[prsvec.prso - 1] * 20;
    objcts.oflag1[prsvec.prso - 1] |= OnO + FlamO + LiteO & ~(TakeO + ReadO);
    if (findex.binff != 0) {
       return ret_val;
    }
    if (!findex.blabf) {
-      newsta(oindex.blabe, 0, 0, oindex.ballo, 0);
+      newsta(BlaBeOX, 0, 0, BalloOX, 0);
    }
    findex.blabf = true;
    findex.binff = prsvec.prso;
-   cevent.ctick[cindex.cevbal - 1] = 3;
+   cevent.ctick[BalCX - 1] = 3;
    rspeak(551);
    return ret_val;
 
 L700:
-   if (prsvec.prsa == vindex.unboaw && findex.binff != 0 && (rooms.rflag[play.here - 1] & LandR) != 0) {
-      cevent.ctick[cindex.cevbal - 1] = 3;
+   if (prsvec.prsa == UnboaW && findex.binff != 0 && (rooms.rflag[play.here - 1] & LandR) != 0) {
+      cevent.ctick[BalCX - 1] = 3;
    }
    goto L10;
 }

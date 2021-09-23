@@ -23,8 +23,8 @@ void savegm(void) {
 #define PutVar(Var) (fwrite((const void *)&(Var), sizeof (Var), (1), (ExF)))
 #define PutArr(N, Buf) (fwrite((const void *)(Buf), sizeof (Buf)[0], (N), (ExF)))
 
-// write(1, vers.vmaj, vers.vmin, vers.vedit); //F
-{  int Edit = vers.vedit; PutVar(vers.vmaj), PutVar(vers.vmin), PutVar(Edit); }
+// write(1, vmaj, vmin, vedit); //F
+{  int Edit = vedit; PutVar(vmaj), PutVar(vmin), PutVar(Edit); }
 // write(1, //F
 //    play.winner, play.here, hack.thfpos, play.telflg, hack.thfflg, hack.thfact, //F
 //    hack.swdact, hack.swdsta, puzzle.cpvec //F
@@ -79,7 +79,7 @@ void rstrgm(void) {
 
 // read(1, &Maj, &Min, &Edit); //F
    int Maj, Min, Edit; GetVar(Maj), GetVar(Min), GetVar(Edit);
-   if (Maj != vers.vmaj || Min != vers.vmin) goto L200;
+   if (Maj != vmaj || Min != vmin) goto L200;
 
 // read(1, //F
 //    &play.winner, &play.here, &hack.thfpos, &play.telflg, &play.thfflg, &hack.thfflg, //F
@@ -137,7 +137,7 @@ Bool walk(/*int x*/) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   if (play.winner != aindex.player || lit(play.here) || prob(25, 25)) {
+   if (play.winner != PlayerAX || lit(play.here) || prob(25, 25)) {
       goto L500;
    }
    if (!findxt(prsvec.prso, play.here)) {
@@ -208,11 +208,11 @@ L500:
 L525:
    curxt.xstrng = 678;
 // 						!ASSUME WALL.
-   if (prsvec.prso == xsrch.xup) {
+   if (prsvec.prso == UpDX) {
       curxt.xstrng = 679;
    }
 // 						!IF UP, CANT.
-   if (prsvec.prso == xsrch.xdown) {
+   if (prsvec.prso == DownDX) {
       curxt.xstrng = 680;
    }
 // 						!IF DOWN, CANT.
@@ -339,7 +339,7 @@ static int cxappl(int ri) {
 // C1- COFFIN-CURE
 
 L1000:
-   findex.egyptf = objcts.oadv[oindex.coffi - 1] != play.winner;
+   findex.egyptf = objcts.oadv[CoffiOX - 1] != play.winner;
 // 						!T IF NO COFFIN.
    return ret_val;
 
@@ -383,14 +383,14 @@ L3000:
 // 						!CARRYING TOO MUCH?
    curxt.xstrng = 446;
 // 						!ASSUME NO LAMP.
-   if (objcts.oadv[oindex.lamp - 1] != play.winner) {
+   if (objcts.oadv[LampOX - 1] != play.winner) {
       return ret_val;
    }
 // 						!NO LAMP?
    findex.litldf = true;
 // 						!HE CAN DO IT.
-   if ((objcts.oflag2[oindex.door - 1] & OpenO) == 0) {
-      objcts.oflag2[oindex.door - 1] &= ~TChO;
+   if ((objcts.oflag2[DoorOX - 1] & OpenO) == 0) {
+      objcts.oflag2[DoorOX - 1] &= ~TChO;
    }
    return ret_val;
 
@@ -418,7 +418,7 @@ L6000:
 // C7-	FROBOZZ FLAG (BANK ALARM)
 
 L7000:
-   findex.frobzf = objcts.oroom[oindex.bills - 1] != 0 && objcts.oroom[oindex.portr - 1] != 0;
+   findex.frobzf = objcts.oroom[BillsOX - 1] != 0 && objcts.oroom[PortrOX - 1] != 0;
    return ret_val;
 // CXAPPL, PAGE 3
 
@@ -431,16 +431,16 @@ L8000:
       goto L8100;
    }
 // 						!MIRROR IN WAY?
-   if (prsvec.prso == xsrch.xnorth || prsvec.prso == xsrch.xsouth) {
+   if (prsvec.prso == NorthDX || prsvec.prso == SouthDX) {
       goto L8200;
    }
    if (findex.mdir % 180 != 0) {
       goto L8300;
    }
 // 						!MIRROR MUST BE N-S.
-   curxt.xroom1 = (curxt.xroom1 - rindex_.mra << 1) + rindex_.mrae;
+   curxt.xroom1 = (curxt.xroom1 - MrArX << 1) + MrAerX;
 // 						!CALC EAST ROOM.
-   if (prsvec.prso > xsrch.xsouth) {
+   if (prsvec.prso > SouthDX) {
       ++curxt.xroom1;
    }
 // 						!IF SW/NW, CALC WEST.
@@ -458,7 +458,7 @@ L8200:
 L8300:
    ldir = findex.mdir;
 // 						!SEE WHICH MIRROR.
-   if (prsvec.prso == xsrch.xsouth) {
+   if (prsvec.prso == SouthDX) {
       ldir = 180;
    }
    curxt.xstrng = 815;
@@ -496,12 +496,12 @@ L9100:
 L10000:
    findex.frobzf = false;
 // 						!ASSUME CANT.
-   ldir = (prsvec.prso - xsrch.xnorth) / xsrch.xnorth * 45;
+   ldir = (prsvec.prso - NorthDX) / NorthDX * 45;
 // 						!XLATE DIR TO DEGREES.
-   if (!findex.mropnf || (findex.mdir + 270) % 360 != ldir && prsvec.prso != xsrch.xexit) {
+   if (!findex.mropnf || (findex.mdir + 270) % 360 != ldir && prsvec.prso != ExitDX) {
       goto L10200;
    }
-   curxt.xroom1 = (findex.mloc - rindex_.mra << 1) + rindex_.mrae + 1 - findex.mdir / 180;
+   curxt.xroom1 = (findex.mloc - MrArX << 1) + MrAerX + 1 - findex.mdir / 180;
 // 						!ASSUME E-W EXIT.
    if (findex.mdir % 180 == 0) {
       goto L10100;
@@ -518,7 +518,7 @@ L10100:
    return ret_val;
 
 L10200:
-   if (!findex.wdopnf || (findex.mdir + 180) % 360 != ldir && prsvec.prso != xsrch.xexit) {
+   if (!findex.wdopnf || (findex.mdir + 180) % 360 != ldir && prsvec.prso != ExitDX) {
       return ret_val;
    }
    curxt.xroom1 = findex.mloc + 1;
@@ -565,7 +565,7 @@ L13000:
 L14000:
    findex.frobzf = false;
 // 						!ASSSUME LOSE.
-   if (prsvec.prso != xsrch.xup) {
+   if (prsvec.prso != UpDX) {
       goto L14100;
    }
 // 						!UP?
@@ -586,7 +586,7 @@ L14000:
    return ret_val;
 
 L14100:
-   if (findex.cphere != 52 || prsvec.prso != xsrch.xwest || !findex.cpoutf) {
+   if (findex.cphere != 52 || prsvec.prso != WestDX || !findex.cpoutf) {
       goto L14200;
    }
    findex.frobzf = true;
@@ -622,7 +622,7 @@ L14400:
 L14500:
    cpgoto(nxt);
 // 						!MOVE TO STATE.
-   curxt.xroom1 = rindex_.cpuzz;
+   curxt.xroom1 = CPuzzRX;
 // 						!STAY IN ROOM.
    ret_val = curxt.xroom1;
    return ret_val;

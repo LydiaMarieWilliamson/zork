@@ -67,7 +67,7 @@ void princr(Bool full, int rm) {
 // OBJECT IS NOT EMPTY AND IS OPEN OR TRANSPARENT.
 
       j = 573;
-      if (i != oindex.tcase) {
+      if (i != TCaseOX) {
          goto L600;
       }
 // 						!TROPHY CASE?
@@ -96,7 +96,7 @@ void invent(int adv) {
 
    i = 575;
 // 						!FIRST LINE.
-   if (adv != aindex.player) {
+   if (adv != PlayerAX) {
       i = 576;
    }
 // 						!IF NOT ME.
@@ -117,7 +117,7 @@ void invent(int adv) {
       goto L25;
    }
 // 						!ANY OBJECTS?
-   if (adv == aindex.player) {
+   if (adv == PlayerAX) {
       rspeak(578);
    }
 // 						!NO, TELL HIM.

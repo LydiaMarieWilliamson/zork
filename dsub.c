@@ -223,7 +223,7 @@ void jigsup(int desc) {
 // 						!IF DBG, EXIT.
    advs.avehic[play.winner - 1] = 0;
 // 						!GET RID OF VEHICLE.
-   if (play.winner == aindex.player) {
+   if (play.winner == PlayerAX) {
       goto L100;
    }
 // 						!HIMSELF?
@@ -264,17 +264,17 @@ L100:
    ++state.deaths;
    scrupd(-10);
 // 						!CHARGE TEN POINTS.
-   f = moveto(rindex_.fore1, play.winner);
+   f = moveto(Fore1RX, play.winner);
 // 						!REPOSITION HIM.
    findex.egyptf = true;
 // 						!RESTORE COFFIN.
-   if (objcts.oadv[oindex.coffi - 1] == play.winner) {
-      newsta(oindex.coffi, 0, rindex_.egypt, 0, 0);
+   if (objcts.oadv[CoffiOX - 1] == play.winner) {
+      newsta(CoffiOX, 0, EgyptRX, 0, 0);
    }
-   objcts.oflag2[oindex.door - 1] &= ~TChO;
-   objcts.oflag1[oindex.robot - 1] = (objcts.oflag1[oindex.robot - 1] | VisiO) & ~NDscO;
-   if (objcts.oroom[oindex.lamp - 1] != 0 || objcts.oadv[oindex.lamp - 1] == play.winner) {
-      newsta(oindex.lamp, 0, rindex_.lroom, 0, 0);
+   objcts.oflag2[DoorOX - 1] &= ~TChO;
+   objcts.oflag1[RobotOX - 1] = (objcts.oflag1[RobotOX - 1] | VisiO) & ~NDscO;
+   if (objcts.oroom[LampOX - 1] != 0 || objcts.oadv[LampOX - 1] == play.winner) {
+      newsta(LampOX, 0, LRoomRX, 0, 0);
    }
 
 // NOW REDISTRIBUTE HIS VALUABLES AND OTHER BELONGINGS.
@@ -418,7 +418,7 @@ Bool rmdesc(int full) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   if (prsvec.prso < xsrch.xmin) {
+   if (prsvec.prso < MinDX) {
       goto L50;
    }
 // 						!IF DIRECTION,
@@ -427,13 +427,13 @@ Bool rmdesc(int full) {
    prsvec.prso = 0;
 // 						!CLEAR.
 L50:
-   if (play.here == advs.aroom[aindex.player - 1]) {
+   if (play.here == advs.aroom[PlayerAX - 1]) {
       goto L100;
    }
 // 						!PLAYER JUST MOVE?
    rspeak(2);
 // 						!NO, JUST SAY DONE.
-   prsvec.prsa = vindex.walkiw;
+   prsvec.prsa = WalkIW;
 // 						!SET UP WALK IN ACTION.
    return ret_val;
 
@@ -476,13 +476,13 @@ L300:
       goto L400;
    }
 // 						!IF GOT DESC, SKIP.
-   prsvec.prsa = vindex.lookw;
+   prsvec.prsa = LookW;
 // 						!PRETEND LOOK AROUND.
    if (!rappli(ra)) {
       goto L100;
    }
 // 						!ROOM HANDLES, NEW DESC?
-   prsvec.prsa = vindex.foow;
+   prsvec.prsa = FooW;
 // 						!NOP PARSER.
    goto L500;
 
@@ -504,13 +504,13 @@ L600:
       return ret_val;
    }
 // 						!ANYTHING MORE?
-   prsvec.prsa = vindex.walkiw;
+   prsvec.prsa = WalkIW;
 // 						!GIVE HIM A SURPISE.
    if (!rappli(ra)) {
       goto L100;
    }
 // 						!ROOM HANDLES, NEW DESC?
-   prsvec.prsa = vindex.foow;
+   prsvec.prsa = FooW;
    return ret_val;
 }
 

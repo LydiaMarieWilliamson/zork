@@ -129,7 +129,7 @@ int vilstr(int v) {
    if (ret_val <= 0) {
       return ret_val;
    }
-   if (v != oindex.thief || !findex.thfenf) {
+   if (v != ThiefOX || !findex.thfenf) {
       goto L100;
    }
    findex.thfenf = false;

@@ -63,16 +63,16 @@ void cpgoto(int st) {
 
 // CPGOTO, PAGE 2
 
-   rooms.rflag[rindex_.cpuzz - 1] &= ~SeenR;
+   rooms.rflag[CPuzzRX - 1] &= ~SeenR;
    i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!RELOCATE OBJECTS.
-      if (objcts.oroom[i - 1] == rindex_.cpuzz && (objcts.oflag2[i - 1] & ActrO + VillO) == 0) {
-         i__2 = findex.cphere * hyper.hfactr;
+      if (objcts.oroom[i - 1] == CPuzzRX && (objcts.oflag2[i - 1] & ActrO + VillO) == 0) {
+         i__2 = findex.cphere * hfactr;
          newsta(i, 0, i__2, 0, 0);
       }
-      if (objcts.oroom[i - 1] == st * hyper.hfactr) {
-         newsta(i, 0, rindex_.cpuzz, 0, 0);
+      if (objcts.oroom[i - 1] == st * hfactr) {
+         newsta(i, 0, CPuzzRX, 0, 0);
       }
 // L100:
    }

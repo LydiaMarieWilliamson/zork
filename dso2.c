@@ -41,15 +41,15 @@ Bool moveto(int nr, int who) {
 L100:
    bits = 0;
 // 						!ASSUME NOWHERE.
-   if (j == oindex.rboat) {
+   if (j == RBoatOX) {
       bits = WaterR;
    }
 // 						!IN BOAT?
-   if (j == oindex.ballo) {
+   if (j == BalloOX) {
       bits = AirR;
    }
 // 						!IN BALLOON?
-   if (j == oindex.bucke) {
+   if (j == BuckeOX) {
       bits = BuckR;
    }
 // 						!IN BUCKET?
@@ -69,7 +69,7 @@ L500:
    return ret_val;
 
 L600:
-   if (who != aindex.player) {
+   if (who != PlayerAX) {
       newsta(advs.aobj[who - 1], 0, nr, 0, 0);
    }
    if (j != 0) {
@@ -164,9 +164,9 @@ void scrupd(int n) {
    if (advs.ascore[play.winner - 1] < state.mxscor - state.deaths * 10) {
       return;
    }
-   cevent.cflag[cindex.cevegh - 1] = true;
+   cevent.cflag[EghCX - 1] = true;
 // 						!TURN ON END GAME
-   cevent.ctick[cindex.cevegh - 1] = 15;
+   cevent.ctick[EghCX - 1] = 15;
    return;
 
 L100:

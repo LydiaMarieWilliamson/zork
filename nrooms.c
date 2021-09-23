@@ -78,15 +78,15 @@ Bool rappl2(int ri) {
 // R38--	MIRROR D ROOM
 
 L38000:
-   if (prsvec.prsa == vindex.lookw) {
-      lookto(rindex_.fdoor, rindex_.mrg, 0, 682, 681);
+   if (prsvec.prsa == LookW) {
+      lookto(FDoorRX, MrGrX, 0, 682, 681);
    }
    return ret_val;
 
 // R39--	MIRROR G ROOM
 
 L39000:
-   if (prsvec.prsa == vindex.walkiw) {
+   if (prsvec.prsa == WalkIW) {
       jigsup(685);
    }
    return ret_val;
@@ -94,24 +94,24 @@ L39000:
 // R40--	MIRROR C ROOM
 
 L40000:
-   if (prsvec.prsa == vindex.lookw) {
-      lookto(rindex_.mrg, rindex_.mrb, 683, 0, 681);
+   if (prsvec.prsa == LookW) {
+      lookto(MrGrX, MrBrX, 683, 0, 681);
    }
    return ret_val;
 
 // R41--	MIRROR B ROOM
 
 L41000:
-   if (prsvec.prsa == vindex.lookw) {
-      lookto(rindex_.mrc, rindex_.mra, 0, 0, 681);
+   if (prsvec.prsa == LookW) {
+      lookto(MrCrX, MrArX, 0, 0, 681);
    }
    return ret_val;
 
 // R42--	MIRROR A ROOM
 
 L42000:
-   if (prsvec.prsa == vindex.lookw) {
-      lookto(rindex_.mrb, 0, 0, 684, 681);
+   if (prsvec.prsa == LookW) {
+      lookto(MrBrX, 0, 0, 684, 681);
    }
    return ret_val;
 // RAPPL2, PAGE 3
@@ -119,7 +119,7 @@ L42000:
 // R43--	MIRROR C EAST/WEST
 
 L43000:
-   if (prsvec.prsa == vindex.lookw) {
+   if (prsvec.prsa == LookW) {
       ewtell(play.here, 683);
    }
    return ret_val;
@@ -127,7 +127,7 @@ L43000:
 // R44--	MIRROR B EAST/WEST
 
 L44000:
-   if (prsvec.prsa == vindex.lookw) {
+   if (prsvec.prsa == LookW) {
       ewtell(play.here, 686);
    }
    return ret_val;
@@ -135,7 +135,7 @@ L44000:
 // R45--	MIRROR A EAST/WEST
 
 L45000:
-   if (prsvec.prsa == vindex.lookw) {
+   if (prsvec.prsa == LookW) {
       ewtell(play.here, 687);
    }
    return ret_val;
@@ -143,7 +143,7 @@ L45000:
 // R46--	INSIDE MIRROR
 
 L46000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
@@ -158,7 +158,7 @@ L46000:
 
    i = 689;
 // 						!ASSUME CASE 5.
-   if (findex.mdir == 270 && findex.mloc == rindex_.mrb) {
+   if (findex.mdir == 270 && findex.mloc == MrBrX) {
       i = min(findex.poleuf, 1) + 690;
    }
    if (findex.mdir % 180 == 0) {
@@ -175,7 +175,7 @@ L46000:
 // R47--	MIRROR EYE ROOM
 
 L47000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
@@ -183,7 +183,7 @@ L47000:
 // 						!ASSUME BEAM STOP.
    i__1 = objcts.olnt;
    for (j = 1; j <= i__1; ++j) {
-      if (qhere(j, play.here) && j != oindex.rbeam) {
+      if (qhere(j, play.here) && j != RBeamOX) {
          goto L47200;
       }
 // L47100:
@@ -192,20 +192,20 @@ L47000:
 L47200:
    rspsub(i, objcts.odesc2[j - 1]);
 // 						!DESCRIBE BEAM.
-   lookto(rindex_.mra, 0, 0, 0, 0);
+   lookto(MrArX, 0, 0, 0, 0);
 // 						!LOOK NORTH.
    return ret_val;
 
 // R48--	INSIDE CRYPT
 
 L48000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
    i = 46;
 // 						!CRYPT IS OPEN/CLOSED.
-   if ((objcts.oflag2[oindex.tomb - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[TombOX - 1] & OpenO) != 0) {
       i = 12;
    }
    rspsub(705, i);
@@ -214,7 +214,7 @@ L48000:
 // R49--	SOUTH CORRIDOR
 
 L49000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
@@ -222,7 +222,7 @@ L49000:
 // 						!DESCRIBE.
    i = 46;
 // 						!ODOOR IS OPEN/CLOSED.
-   if ((objcts.oflag2[oindex.odoor - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[ODoorOX - 1] & OpenO) != 0) {
       i = 12;
    }
    if (findex.lcell == 4) {
@@ -234,23 +234,23 @@ L49000:
 // R50--	BEHIND DOOR
 
 L50000:
-   if (prsvec.prsa != vindex.walkiw) {
+   if (prsvec.prsa != WalkIW) {
       goto L50100;
    }
 // 						!WALK IN?
-   cevent.cflag[cindex.cevfol - 1] = true;
+   cevent.cflag[FolCX - 1] = true;
 // 						!MASTER FOLLOWS.
-   cevent.ctick[cindex.cevfol - 1] = -1;
+   cevent.ctick[FolCX - 1] = -1;
    return ret_val;
 
 L50100:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
    i = 46;
 // 						!QDOOR IS OPEN/CLOSED.
-   if ((objcts.oflag2[oindex.qdoor - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[QDoorOX - 1] & OpenO) != 0) {
       i = 12;
    }
    rspsub(708, i);
@@ -260,15 +260,15 @@ L50100:
 // R51--	FRONT DOOR
 
 L51000:
-   if (prsvec.prsa == vindex.walkiw) {
-      cevent.ctick[cindex.cevfol - 1] = 0;
+   if (prsvec.prsa == WalkIW) {
+      cevent.ctick[FolCX - 1] = 0;
    }
 // 						!IF EXITS, KILL FOLLOW.
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
-   lookto(0, rindex_.mrd, 709, 0, 0);
+   lookto(0, MrDrX, 709, 0, 0);
 // 						!DESCRIBE SOUTH.
    i = 46;
 // 						!PANEL IS OPEN/CLOSED.
@@ -278,7 +278,7 @@ L51000:
 // 						!OPEN IF INQ STARTED.
    j = 46;
 // 						!QDOOR IS OPEN/CLOSED.
-   if ((objcts.oflag2[oindex.qdoor - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[QDoorOX - 1] & OpenO) != 0) {
       j = 12;
    }
    rspsb2(710, i, j);
@@ -287,12 +287,12 @@ L51000:
 // R52--	NORTH CORRIDOR
 
 L52000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
    i = 46;
-   if ((objcts.oflag2[oindex.cdoor - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[CDoorOX - 1] & OpenO) != 0) {
       i = 12;
    }
 // 						!CDOOR IS OPEN/CLOSED.
@@ -302,7 +302,7 @@ L52000:
 // R53--	PARAPET
 
 L53000:
-   if (prsvec.prsa == vindex.lookw) {
+   if (prsvec.prsa == LookW) {
       i__1 = findex.pnumb + 712;
       rspsub(712, i__1);
    }
@@ -311,19 +311,19 @@ L53000:
 // R54--	CELL
 
 L54000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
    i = 721;
 // 						!CDOOR IS OPEN/CLOSED.
-   if ((objcts.oflag2[oindex.cdoor - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[CDoorOX - 1] & OpenO) != 0) {
       i = 722;
    }
    rspeak(i);
    i = 46;
 // 						!ODOOR IS OPEN/CLOSED.
-   if ((objcts.oflag2[oindex.odoor - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[ODoorOX - 1] & OpenO) != 0) {
       i = 12;
    }
    if (findex.lcell == 4) {
@@ -335,7 +335,7 @@ L54000:
 // R55--	PRISON CELL
 
 L55000:
-   if (prsvec.prsa == vindex.lookw) {
+   if (prsvec.prsa == LookW) {
       rspeak(724);
    }
 // 						!LOOK?
@@ -344,13 +344,13 @@ L55000:
 // R56--	NIRVANA CELL
 
 L56000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
    i = 46;
 // 						!ODOOR IS OPEN/CLOSED.
-   if ((objcts.oflag2[oindex.odoor - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[ODoorOX - 1] & OpenO) != 0) {
       i = 12;
    }
    rspsub(725, i);
@@ -360,7 +360,7 @@ L56000:
 // R57--	NIRVANA AND END OF GAME
 
 L57000:
-   if (prsvec.prsa != vindex.walkiw) {
+   if (prsvec.prsa != WalkIW) {
       return ret_val;
    }
 // 						!WALKIN?
@@ -372,13 +372,13 @@ L57000:
 // R58--	TOMB ROOM
 
 L58000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
    i = 46;
 // 						!TOMB IS OPEN/CLOSED.
-   if ((objcts.oflag2[oindex.tomb - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[TombOX - 1] & OpenO) != 0) {
       i = 12;
    }
    rspsub(792, i);
@@ -387,7 +387,7 @@ L58000:
 // R59--	PUZZLE SIDE ROOM
 
 L59000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
@@ -404,7 +404,7 @@ L59000:
 // R60--	PUZZLE ROOM
 
 L60000:
-   if (prsvec.prsa != vindex.lookw) {
+   if (prsvec.prsa != LookW) {
       return ret_val;
    }
 // 						!LOOK?
@@ -414,7 +414,7 @@ L60000:
 // 						!STARTED PUZZLE?
    rspeak(868);
 // 						!NO, DESCRIBE.
-   if ((objcts.oflag2[oindex.warni - 1] & TChO) != 0) {
+   if ((objcts.oflag2[WarniOX - 1] & TChO) != 0) {
       rspeak(869);
    }
    return ret_val;
@@ -515,8 +515,8 @@ static void ewtell(int rm, int st) {
 // NOTE THAT WE ARE EAST OR WEST OF MIRROR, AND
 // MIRROR MUST BE N-S.
 
-   m1 = findex.mdir + (rm - rindex_.mrae) % 2 * 180 == 180;
-   i = (rm - rindex_.mrae) % 2 + 819;
+   m1 = findex.mdir + (rm - MrAerX) % 2 * 180 == 180;
+   i = (rm - MrAerX) % 2 + 819;
 // 						!GET BASIC E/W STRING.
    if (m1 && !findex.mr1f || !m1 && !findex.mr2f) {
       i += 2;

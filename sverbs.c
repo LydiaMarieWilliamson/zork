@@ -221,18 +221,18 @@ L3000:
 // V73-- STAY (USED IN ENDGAME).
 
 L4000:
-   if (play.winner != aindex.amastr) {
+   if (play.winner != MastrAX) {
       goto L4100;
    }
 // 						!TELL MASTER, STAY.
    rspeak(781);
 // 						!HE DOES.
-   cevent.ctick[cindex.cevfol - 1] = 0;
+   cevent.ctick[FolCX - 1] = 0;
 // 						!NOT FOLLOWING.
    return ret_val;
 
 L4100:
-   if (play.winner == aindex.player) {
+   if (play.winner == PlayerAX) {
       rspeak(664);
    }
 // 						!JOKE.
@@ -242,7 +242,7 @@ L4100:
 
 L5000:
 // write(chan.outch, " V%I1.%I2%A1", vers_2.vmaj, vers_2.vmin, vers_2.vedit); //F
-   more_output(NULL), printf("V%1d.%1d%c\n", vers.vmaj, vers.vmin, (int)vers.vedit);
+   more_output(NULL), printf("V%1d.%1d%c\n", vmaj, vmin, (int)vedit);
    play.telflg = true;
    return ret_val;
 
@@ -260,7 +260,7 @@ L6000:
 // V76--	GERONIMO.  IF IN BARREL, FATAL, ELSE JOKE.
 
 L7000:
-   if (play.here == rindex_.mbarr) {
+   if (play.here == MBarrRX) {
       goto L7100;
    }
 // 						!IN BARREL?
@@ -276,7 +276,7 @@ L7100:
 // V77--	SINBAD ET AL.  CHASE CYCLOPS, ELSE JOKE.
 
 L8000:
-   if (play.here == rindex_.mcycl && qhere(oindex.cyclo, play.here)) {
+   if (play.here == MCyclRX && qhere(CycloOX, play.here)) {
       goto L8100;
    }
    rspeak(336);
@@ -284,18 +284,18 @@ L8000:
    return ret_val;
 
 L8100:
-   newsta(oindex.cyclo, 337, 0, 0, 0);
+   newsta(CycloOX, 337, 0, 0, 0);
 // 						!CYCLOPS FLEES.
    findex.cyclof = true;
 // 						!SET ALL FLAGS.
    findex.magicf = true;
-   objcts.oflag2[oindex.cyclo - 1] &= ~FiteO;
+   objcts.oflag2[CycloOX - 1] &= ~FiteO;
    return ret_val;
 
 // V78--	WELL.  OPEN DOOR, ELSE JOKE.
 
 L9000:
-   if (findex.riddlf || play.here != rindex_.riddl) {
+   if (findex.riddlf || play.here != RiddlRX) {
       goto L9100;
    }
 // 						!IN RIDDLE ROOM?
@@ -313,11 +313,11 @@ L9100:
 // 						!
 
 L10000:
-   if (play.here != rindex_.temp2) {
+   if (play.here != Temp2RX) {
       goto L10050;
    }
 // 						!IN TEMPLE?
-   if (moveto(rindex_.fore1, play.winner)) {
+   if (moveto(Fore1RX, play.winner)) {
       goto L10100;
    }
 // 						!FORE1 STILL THERE?
@@ -335,11 +335,11 @@ L10100:
 // 						!
 
 L11000:
-   if (play.here != rindex_.temp1) {
+   if (play.here != Temp1RX) {
       goto L11050;
    }
 // 						!IN TEMPLE?
-   if (moveto(rindex_.treas, play.winner)) {
+   if (moveto(TreasRX, play.winner)) {
       goto L10100;
    }
 // 						!TREASURE ROOM THERE?
@@ -352,11 +352,11 @@ L11050:
 // 						!
 
 L12000:
-   if (play.here != rindex_.treas) {
+   if (play.here != TreasRX) {
       goto L12050;
    }
 // 						!IN TREASURE?
-   if (moveto(rindex_.temp1, play.winner)) {
+   if (moveto(Temp1RX, play.winner)) {
       goto L10100;
    }
 // 						!TEMP1 STILL THERE?
@@ -370,7 +370,7 @@ L12050:
 L13000:
    i = 342;
 // 						!DONT UNDERSTAND.
-   if (prsvec.prso == oindex.safe) {
+   if (prsvec.prso == SafeOX) {
       i = 252;
    }
 // 						!JOKE FOR SAFE.
@@ -403,26 +403,26 @@ L15000:
 // V85--	FOLLOW (USED IN ENDGAME)
 
 L16000:
-   if (play.winner != aindex.amastr) {
+   if (play.winner != MastrAX) {
       return ret_val;
    }
 // 						!TELL MASTER, FOLLOW.
    rspeak(782);
-   cevent.ctick[cindex.cevfol - 1] = -1;
+   cevent.ctick[FolCX - 1] = -1;
 // 						!STARTS FOLLOWING.
    return ret_val;
 
 // V86--	WALK THROUGH
 
 L17000:
-   if (screen.scolrm == 0 || prsvec.prso != oindex.scol && (prsvec.prso != oindex.wnort || play.here != rindex_.bkbox)) {
+   if (screen.scolrm == 0 || prsvec.prso != ScolOX && (prsvec.prso != WNortOX || play.here != BkBoxRX)) {
       goto L17100;
    }
    screen.scolac = screen.scolrm;
 // 						!WALKED THRU SCOL.
    prsvec.prso = 0;
 // 						!FAKE OUT FROMDR.
-   cevent.ctick[cindex.cevscl - 1] = 6;
+   cevent.ctick[SclCX - 1] = 6;
 // 						!START ALARM.
    rspeak(668);
 // 						!DISORIENT HIM.
@@ -451,7 +451,7 @@ L17300:
    }
    i = 669;
 // 						!NO, JOKE.
-   if (prsvec.prso == oindex.scol) {
+   if (prsvec.prso == ScolOX) {
       i = 670;
    }
 // 						!SPECIAL JOKE FOR SCOL.
@@ -479,11 +479,11 @@ L17500:
 // L17600:
    }
 // 						!DECLARE NEW SCOLRM.
-   cevent.ctick[cindex.cevscl - 1] = 0;
+   cevent.ctick[SclCX - 1] = 0;
 // 						!CANCEL ALARM.
    rspeak(668);
 // 						!DISORIENT HIM.
-   f = moveto(rindex_.bkbox, play.winner);
+   f = moveto(BkBoxRX, play.winner);
 // 						!BACK IN BOX ROOM.
    f = rmdesc(3);
    return ret_val;
@@ -493,7 +493,7 @@ L17500:
 L18000:
    i = 359;
 // 						!CANT RING.
-   if (prsvec.prso == oindex.bell) {
+   if (prsvec.prso == BellOX) {
       i = 360;
    }
 // 						!DING, DONG.
@@ -504,7 +504,7 @@ L18000:
 // V88--	BRUSH.  JOKE WITH OBSCURE TRAP.
 
 L19000:
-   if (prsvec.prso == oindex.teeth) {
+   if (prsvec.prso == TeethOX) {
       goto L19100;
    }
 // 						!BRUSH TEETH?
@@ -522,7 +522,7 @@ L19100:
    return ret_val;
 
 L19200:
-   if (prsvec.prsi == oindex.putty && objcts.oadv[oindex.putty - 1] == play.winner) {
+   if (prsvec.prsi == PuttyOX && objcts.oadv[PuttyOX - 1] == play.winner) {
       goto L19300;
    }
    rspsub(364, odi2);
@@ -543,7 +543,7 @@ L19300:
 // V89--	DIG.  UNLESS SHOVEL, A JOKE.
 
 L20000:
-   if (prsvec.prso == oindex.shove) {
+   if (prsvec.prso == ShoveOX) {
       return ret_val;
    }
 // 						!SHOVEL?
@@ -605,7 +605,7 @@ L22100:
    return ret_val;
 
 L22200:
-   if (!findxt(xsrch.xdown, play.here)) {
+   if (!findxt(DownDX, play.here)) {
       goto L22300;
    }
 // 						!DOWN EXIT?
@@ -629,7 +629,7 @@ L22400:
 // V92--	LOCK.
 
 L23000:
-   if (prsvec.prso == oindex.grate && play.here == rindex_.mgrat) {
+   if (prsvec.prso == GrateOX && play.here == MGratRX) {
       goto L23200;
    }
 L23100:
@@ -648,10 +648,10 @@ L23200:
 // V93--	UNLOCK
 
 L24000:
-   if (prsvec.prso != oindex.grate || play.here != rindex_.mgrat) {
+   if (prsvec.prso != GrateOX || play.here != MGratRX) {
       goto L23100;
    }
-   if (prsvec.prsi == oindex.keys) {
+   if (prsvec.prsi == KeysOX) {
       goto L24200;
    }
 // 						!GOT KEYS?
@@ -678,7 +678,7 @@ L25000:
    i__1 = i + j;
    k = min(i__1, 4);
 // 						!GET STATE.
-   if (!cevent.cflag[cindex.cevcur - 1]) {
+   if (!cevent.cflag[CurCX - 1]) {
       j = 0;
    }
 // 						!IF NO WOUNDS.
@@ -689,7 +689,7 @@ L25000:
    i__1 = l + 473;
    rspeak(i__1);
 // 						!DESCRIBE HEALTH.
-   i = (-j - 1) * 30 + cevent.ctick[cindex.cevcur - 1];
+   i = (-j - 1) * 30 + cevent.ctick[CurCX - 1];
 // 						!COMPUTE WAIT.
 
    if (j != 0) {
@@ -777,7 +777,7 @@ L26400:
       goto L26550;
    }
 // 						!HE'S TRYING TO LEARN.
-   if ((rooms.rflag[rindex_.tstrs - 1] & SeenR) == 0) {
+   if ((rooms.rflag[TStrsRX - 1] & SeenR) == 0) {
       goto L26575;
    }
    findex.spellf = true;
@@ -799,7 +799,7 @@ L26575:
    return ret_val;
 
 L26600:
-   if ((rooms.rflag[rindex_.tstrs - 1] & SeenR) != 0) {
+   if ((rooms.rflag[TStrsRX - 1] & SeenR) != 0) {
       goto L26800;
    }
    for (i = 1; i <= 6; ++i) {
@@ -812,7 +812,7 @@ L26600:
    findex.spellf = true;
 // 						!IT WORKS.
    rspeak(859);
-   cevent.ctick[cindex.cevste - 1] = 1;
+   cevent.ctick[SteCX - 1] = 1;
 // 						!FORCE START.
    return ret_val;
 
@@ -825,7 +825,7 @@ L26800:
 // V96--	ANSWER
 
 L27000:
-   if (prsvec.prscon > 1 && play.here == rindex_.fdoor && findex.inqstf) {
+   if (prsvec.prscon > 1 && play.here == FDoorRX && findex.inqstf) {
       goto L27100;
    }
    rspeak(799);
@@ -871,7 +871,7 @@ L27100:
 L27400:
    rspeak(826);
 // 						!ALL OVER.
-   cevent.cflag[cindex.cevinq - 1] = false;
+   cevent.cflag[InqCX - 1] = false;
 // 						!LOSE.
    return ret_val;
 
@@ -886,7 +886,7 @@ L27500:
       goto L27600;
    }
 // 						!WON TOTALLY?
-   cevent.ctick[cindex.cevinq - 1] = 2;
+   cevent.ctick[InqCX - 1] = 2;
 // 						!NO, START AGAIN.
    findex.quesno = (findex.quesno + 3) % 8;
    findex.nqatt = 0;
@@ -899,7 +899,7 @@ L27500:
 L27600:
    rspeak(827);
 // 						!QUIZ OVER,
-   cevent.cflag[cindex.cevinq - 1] = false;
-   objcts.oflag2[oindex.qdoor - 1] |= OpenO;
+   cevent.cflag[InqCX - 1] = false;
+   objcts.oflag2[QDoorOX - 1] |= OpenO;
    return ret_val;
 }

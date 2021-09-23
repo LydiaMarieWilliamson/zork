@@ -22,20 +22,15 @@ extern struct timeCB {
 } time_;
 
 // common /vers/
-extern const struct versCB {
-   int vmaj, vmin;
-   char vedit;
-} vers;
+extern const int vmaj, vmin;
+extern const char vedit;
 
 // common /hyper/
-extern const struct hyperCB {
-   int hfactr;
-} hyper;
+extern const int hfactr;
 
 // common /bats/
-extern const struct batsCB {
-   const int batdrp[9];
-} bats;
+extern const int batdrp[];
+extern const size_t batdrpN;
 
 // parser.h:
 // Parser Output
@@ -133,15 +128,27 @@ enum rflagCB {
 
 // rindex.h:
 // common /rindex/
-extern const struct rindexCB {
-   int whous, lroom, cella, mtrol, maze1, mgrat, maz15, fore1, fore3, clear, reser, strea, egypt, echor, tshaf, bshaf, mmach, dome, mtorc, carou, riddl, lld2, temp1, temp2, maint, blroo, treas, rivr1, rivr2, rivr3, mcycl, rivr4, rivr5, fchmp, falls, mbarr, mrain, pog, vlbot, vair1, vair2, vair3, vair4, ledg2, ledg3, ledg4, msafe, cager, caged, twell, bwell, alice, alism, alitr, mtree, bkent, bkvw, bktwi, bkvau, bkbox, crypt, tstrs, mrant, mreye, mra, mrb, mrc, mrg, mrd, fdoor, mrae, mrce, mrcw, mrge, mrgw, mrdw, inmir, scorr, ncorr, parap, cell, pcell, ncell, cpant, cpout, cpuzz;
-} rindex_;
+enum rindexCB {
+   WHousRX = 2, LRoomRX = 8, CellaRX = 9, MTrolRX = 10, Maze1RX = 11, MGratRX = 25, Maz15RX = 30, Fore1RX = 31,
+   Fore3RX = 33, ClearRX = 36, ReserRX = 40, StreaRX = 42, EgyptRX = 44, EchoRRX = 49, TShafRX = 61, BShafRX = 76,
+   MMachRX = 77, DomeRX = 79, MTorcRX = 80, CarouRX = 83, RiddlRX = 91, Lld2RX = 94, Temp1RX = 96, Temp2RX = 97,
+   MaintRX = 100, BlRooRX = 102, TreasRX = 103, Rivr1RX = 107, Rivr2RX = 108, Rivr3RX = 109, MCyclRX = 101, Rivr4RX = 112,
+   Rivr5RX = 113, FChmpRX = 114, FallsRX = 120, MBarrRX = 119, MRainRX = 121, PogRX = 122, VlBotRX = 126, Vair1RX = 127,
+   Vair2RX = 128, Vair3RX = 129, Vair4RX = 130, Ledg2RX = 131, Ledg3RX = 132, Ledg4RX = 133, MSafeRX = 135, CageRRX = 140,
+   CageDRX = 141, TWellRX = 142, BWellRX = 143, AliCeRX = 144, AliSmRX = 145, AliTrRX = 146, MTreeRX = 147, BkEntRX = 148,
+   BkVwRX = 151, BkTwiRX = 153, BkVauRX = 154, BkBoxRX = 155, CryptRX = 157, TStrsRX = 158, MrAntRX = 159, MrEyeRX = 160,
+   MrArX = 161, MrBrX = 162, MrCrX = 163, MrGrX = 164, MrDrX = 165, FDoorRX = 166, MrAerX = 167, MrCerX = 171,
+   MrCwrX = 172, MrGerX = 173, MrGwrX = 174, MrDwrX = 176, InMirRX = 177, SCorrRX = 179, NCorrRX = 182, ParapRX = 183,
+   CellRX = 184, PCellRX = 185, NCellRX = 186, CpAntRX = 188, CpOutRX = 189, CPuzzRX = 190
+};
 
 // xsrch.h:
 // common /xsrch/
-extern const struct xsrchCB {
-   int xmin, xmax, xdown, xup, xnorth, xsouth, xenter, xexit, xeast, xwest;
-} xsrch;
+enum xsrchCB {
+   MinDX = 02000, MaxDX = 040000, UpDX = 022000, DownDX = 024000,
+   NorthDX = 02000, SouthDX = 012000, EnterDX = 032000, ExitDX = 034000,
+   EastDX = 06000, WestDX = 016000
+};
 
 // objects.h:
 // Objects
@@ -166,15 +173,30 @@ enum oflagsCB {
    FlamO = 8, ToolO = 4, TurnO = 2, OnO = 1,
    FindO = 0x8000, SlepO = 0x4000, ScrDO = 0x2000, TieO = 0x1000,
    ClmbO = 0x800, ActrO = 0x400, WeapO = 0x200, FiteO = 0x100,
-   VillO = 0x80, StagO = 0x40, TryO = 0x20, NoChO = 0x10,
+   VillO = 0x80, STagO = 0x40, TryO = 0x20, NoChO = 0x10,
    OpenO = 8, TChO = 4, VehO = 2, SchO = 1
 };
 
 // oindex.h:
 // common /oindex/
-extern const struct oindexCB {
-   int garli, food, gunk, coal, machi, diamo, tcase, bottl, water, rope, knife, sword, lamp, blamp, rug, leave, troll, axe, rknif, keys, ice, bar, coffi, torch, tbask, fbask, irbox, ghost, trunk, bell, book, candl, match, tube, putty, wrenc, screw, cyclo, chali, thief, still, windo, grate, door, hpole, leak, rbutt, raili, pot, statu, iboat, dboat, pump, rboat, stick, buoy, shove, ballo, recep, guano, brope, hook1, hook2, safe, sslot, brick, fuse, gnome, blabe, dball, tomb, lcase, cage, rcage, spher, sqbut, flask, pool, saffr, bucke, ecake, orice, rdice, blice, robot, ftree, bills, portr, scol, zgnom, egg, begg, baubl, canar, bcana, ylwal, rdwal, pindr, rbeam, odoor, qdoor, cdoor, num1, num8, warni, cslit, gcard, stldr, hands, wall, lungs, sailo, aviat, teeth, itobj, every, valua, oplay, wnort, gwate, master;
-} oindex;
+enum oindexCB {
+   GarliOX = 2, FoodOX = 3, GunkOX = 4, CoalOX = 5, MachiOX = 7, DiamoOX = 8, TCaseOX = 9, BottlOX = 10,
+   WaterOX = 11, RopeOX = 12, KnifeOX = 13, SwordOX = 14, LampOX = 15, BLampOX = 16, RugOX = 17, LeaveOX = 18,
+   TrollOX = 19, AxeOX = 20, RKnifOX = 21, KeysOX = 23, IceOX = 30, BarOX = 26, CoffiOX = 33, TorchOX = 34,
+   TBaskOX = 35, FBaskOX = 36, IrBoxOX = 39, GhostOX = 42, TrunkOX = 45, BellOX = 46, BookOX = 47, CandlOX = 48,
+   MatchOX = 51, TubeOX = 54, PuttyOX = 55, WrencOX = 56, ScrewOX = 57, CycloOX = 58, ChaliOX = 59, ThiefOX = 61,
+   StillOX = 62, WindoOX = 63, GrateOX = 65, DoorOX = 66, HPoleOX = 71, LeakOX = 78, RButtOX = 79, RailiOX = 75,
+   PotOX = 85, StatuOX = 86, IBoatOX = 87, DBoatOX = 88, PumpOX = 89, RBoatOX = 90, StickOX = 92, BuoyOX = 94,
+   ShoveOX = 96, BalloOX = 98, RecepOX = 99, GuanoOX = 97, BRopeOX = 101, Hook1OX = 102, Hook2OX = 103, SafeOX = 105,
+   SSlotOX = 107, BrickOX = 109, FuseOX = 110, GnomeOX = 111, BlaBeOX = 112, DBallOX = 113, TombOX = 119, LCaseOX = 123,
+   CageOX = 124, RCageOX = 125, SpherOX = 126, SqButOX = 127, FlaskOX = 132, PoolOX = 133, SaffrOX = 134, BuckeOX = 137,
+   ECakeOX = 138, OrIceOX = 139, RdIceOX = 140, BlIceOX = 141, RobotOX = 142, FTreeOX = 145, BillsOX = 148, PortrOX = 149,
+   ScolOX = 151, ZGnomOX = 152, EggOX = 154, BEggOX = 155, BaublOX = 156, CanarOX = 157, BCanaOX = 158, YlWalOX = 159,
+   RdWalOX = 161, PinDrOX = 164, RBeamOX = 171, ODoorOX = 172, QDoorOX = 173, CDoorOX = 175, Num1OX = 178, Num8OX = 185,
+   WarniOX = 186, CSlitOX = 187, GCardOX = 188, StlDrOX = 189, HandsOX = 200, WallOX = 198, LungsOX = 201, SailoOX = 196,
+   AviatOX = 202, TeethOX = 197, ItObjOX = 192, EveryOX = 194, ValuaOX = 195, OPlayOX = 193, WNortOX = 205, GWateOX = 209,
+   MasterOX = 215
+};
 
 // clock.h:
 // Clock Interrupts
@@ -186,9 +208,11 @@ extern struct ceventCB {
 #define eqc ((int *)&cevent + 1) // int eqc[2][25]; equivalence(ctick, eqc);
 
 // common /cindex/
-extern const struct cindexCB {
-   int cevcur, cevmnt, cevlnt, cevmat, cevcnd, cevbal, cevbrn, cevfus, cevled, cevsaf, cevvlg, cevgno, cevbuc, cevsph, cevegh, cevfor, cevscl, cevzgi, cevzgo, cevste, cevmrs, cevpin, cevinq, cevfol;
-} cindex;
+enum cindexCB {
+   CurCX = 1, MntCX = 2, LntCX = 3, MatCX = 4, CndCX = 5, BalCX = 6, BrnCX = 7, FusCX = 8,
+   LedCX = 9, SafCX = 10, VlgCX = 11, GnoCX = 12, BucCX = 13, SphCX = 14, EghCX = 15, ForCX = 16,
+   SclCX = 17, ZgICX = 18, ZgOCX = 19, SteCX = 20, MrsCX = 21, PinCX = 22, InqCX = 23, FolCX = 24
+};
 
 // advers.h:
 // Adventurers
@@ -199,21 +223,27 @@ extern struct advsCB {
 #define eqa ((int *)&advs + 1) // int eqa[7][4]; equivalence(aroom, eqa);
 
 // common /aflags/
-extern const struct aflagsCB {
-   int astag;
-} aflags;
+extern const int STagA;
 
 // common /aindex/
-extern const struct aindexCB {
-   int player, arobot, amastr;
-} aindex;
+enum aindexCB {
+   PlayerAX = 1, RobotAX = 2, MastrAX = 3
+};
 
 // verbs.h:
 // Verbs
 // common /vindex/
-extern const struct vindexCB {
-   int cintw, deadxw, frstqw, inxw, outxw, walkiw, fightw, foow, readw, meltw, inflaw, deflaw, alarmw, exorcw, plugw, kickw, wavew, raisew, lowerw, rubw, pushw, untiew, tiew, tieupw, turnw, breatw, knockw, lookw, examiw, shakew, movew, trnonw, trnofw, openw, closew, findw, waitw, spinw, boardw, unboaw, takew, invenw, fillw, eatw, drinkw, burnw, mungw, killw, attacw, swingw, walkw, tellw, putw, dropw, givew, pourw, throww, digw, leapw, stayw, follow, hellow, lookiw, lookuw, pumpw, windw, clmbw, clmbuw, clmbdw, trntow;
-} vindex;
+enum vindexCB {
+   CIntW = 1, DeadXW = 2, FrstQW = 3, InXW = 4, OutXW = 5, WalkIW = 6, FightW = 7, FooW = 8,
+   MeltW = 100, ReadW = 101, InflaW = 102, DeflaW = 103, AlarmW = 104, ExorcW = 105, PlugW = 106, KickW = 107,
+   WaveW = 108, RaiseW = 109, LowerW = 110, RubW = 111, PushW = 112, UnTieW = 113, TieW = 114, TieUpW = 115,
+   TurnW = 116, BreatW = 117, KnockW = 118, LookW = 119, ExamiW = 120, ShakeW = 121, MoveW = 122, TrnOnW = 123,
+   TrnOfW = 124, OpenW = 125, CloseW = 126, FindW = 127, WaitW = 128, SpinW = 129, BoardW = 130, UnboaW = 131,
+   TakeW = 132, InvenW = 133, FillW = 134, EatW = 135, DrinkW = 136, BurnW = 137, MungW = 138, KillW = 139,
+   AttacW = 141, SwingW = 140, WalkW = 142, TellW = 143, PutW = 144, DropW = 145, GiveW = 146, PourW = 147,
+   ThrowW = 148, DigW = 89, LeapW = 91, StayW = 73, FolloW = 85, HelloW = 151, LookIW = 152, LookUW = 153,
+   PumpW = 154, WindW = 155, ClmbW = 156, ClmbUW = 157, ClmbDW = 158, TrnToW = 159
+};
 
 // flags.h:
 // Flags

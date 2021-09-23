@@ -467,7 +467,7 @@ L22000:
    hack.thfflg = false;
 // 						!DISABLE ROBBER.
    hack.thfact = false;
-   newsta(oindex.thief, 0, 0, 0, 0);
+   newsta(ThiefOX, 0, 0, 0, 0);
 // 						!VANISH THIEF.
 // write(chan.outch, " No robber."); //F
    more_output("No robber.");
@@ -477,7 +477,7 @@ L22000:
 
 L23000:
    findex.trollf = true;
-   newsta(oindex.troll, 0, 0, 0, 0);
+   newsta(TrollOX, 0, 0, 0, 0);
 // write(chan.outch, " No troll."); //F
    more_output("No troll.");
    goto L2000;
@@ -486,7 +486,7 @@ L23000:
 
 L24000:
    findex.cyclof = true;
-   newsta(oindex.cyclo, 0, 0, 0, 0);
+   newsta(CycloOX, 0, 0, 0, 0);
 // write(chan.outch, " No cyclops."); //F
    more_output("No cyclops.");
    goto L2000;
@@ -511,7 +511,7 @@ L26000:
 
 L27000:
    findex.trollf = false;
-   newsta(oindex.troll, 0, rindex_.mtrol, 0, 0);
+   newsta(TrollOX, 0, MTrolRX, 0, 0);
 // write(chan.outch, " Restored troll."); //F
    more_output("Restored troll.");
    goto L2000;
@@ -521,7 +521,7 @@ L27000:
 L28000:
    findex.cyclof = false;
    findex.magicf = false;
-   newsta(oindex.cyclo, 0, rindex_.mcycl, 0, 0);
+   newsta(CycloOX, 0, MCyclRX, 0, 0);
 // write(chan.outch, " Restored cyclops."); //F
    more_output("Restored cyclops.");
    goto L2000;

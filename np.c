@@ -106,7 +106,7 @@ L200:
       goto L100;
    }
 // 						!DO SYN MATCH.
-   if (prsvec.prso > 0 && prsvec.prso < xsrch.xmin) {
+   if (prsvec.prso > 0 && prsvec.prso < MinDX) {
       last.lastit = prsvec.prso;
    }
 

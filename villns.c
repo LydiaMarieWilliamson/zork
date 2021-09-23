@@ -17,32 +17,32 @@ Bool trollp(/*int arg*/) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   if (prsvec.prsa != vindex.fightw) {
+   if (prsvec.prsa != FightW) {
       goto L1100;
    }
 // 						!FIGHT?
-   if (objcts.ocan[oindex.axe - 1] == oindex.troll) {
+   if (objcts.ocan[AxeOX - 1] == TrollOX) {
       goto L10;
    }
 // 						!GOT AXE?  NOTHING.
    i = 433;
 // 						!ASSUME CANT GET.
-   if (!qhere(oindex.axe, play.here)) {
+   if (!qhere(AxeOX, play.here)) {
       goto L1050;
    }
 // 						!HERE?
    i = 434;
 // 						!YES, RECOVER.
-   newsta(oindex.axe, 0, 0, oindex.troll, 0);
+   newsta(AxeOX, 0, 0, TrollOX, 0);
 L1050:
-   if (qhere(oindex.troll, play.here)) {
+   if (qhere(TrollOX, play.here)) {
       rspeak(i);
    }
 // 						!IF PLAYER HERE.
    return ret_val;
 
 L1100:
-   if (prsvec.prsa != vindex.deadxw) {
+   if (prsvec.prsa != DeadXW) {
       goto L1200;
    }
 // 						!DEAD?
@@ -51,34 +51,34 @@ L1100:
    return ret_val;
 
 L1200:
-   if (prsvec.prsa != vindex.outxw) {
+   if (prsvec.prsa != OutXW) {
       goto L1300;
    }
 // 						!OUT?
    findex.trollf = true;
 // 						!PERMIT EXITS.
-   objcts.oflag1[oindex.axe - 1] &= ~VisiO;
-   objcts.odesc1[oindex.troll - 1] = 435;
+   objcts.oflag1[AxeOX - 1] &= ~VisiO;
+   objcts.odesc1[TrollOX - 1] = 435;
 // 						!TROLL OUT.
    return ret_val;
 
 L1300:
-   if (prsvec.prsa != vindex.inxw) {
+   if (prsvec.prsa != InXW) {
       goto L1400;
    }
 // 						!WAKE UP?
    findex.trollf = false;
 // 						!FORBID EXITS.
-   objcts.oflag1[oindex.axe - 1] |= VisiO;
-   objcts.odesc1[oindex.troll - 1] = 436;
+   objcts.oflag1[AxeOX - 1] |= VisiO;
+   objcts.odesc1[TrollOX - 1] = 436;
 // 						!TROLL IN.
-   if (qhere(oindex.troll, play.here)) {
+   if (qhere(TrollOX, play.here)) {
       rspeak(437);
    }
    return ret_val;
 
 L1400:
-   if (prsvec.prsa != vindex.frstqw) {
+   if (prsvec.prsa != FrstQW) {
       goto L1500;
    }
 // 						!FIRST ENCOUNTER?
@@ -87,22 +87,22 @@ L1400:
    return ret_val;
 
 L1500:
-   if (prsvec.prsa != vindex.movew && prsvec.prsa != vindex.takew && prsvec.prsa != vindex.mungw && prsvec.prsa != vindex.throww && prsvec.prsa != vindex.givew) {
+   if (prsvec.prsa != MoveW && prsvec.prsa != TakeW && prsvec.prsa != MungW && prsvec.prsa != ThrowW && prsvec.prsa != GiveW) {
       goto L2000;
    }
-   if (objcts.ocapac[oindex.troll - 1] >= 0) {
+   if (objcts.ocapac[TrollOX - 1] >= 0) {
       goto L1550;
    }
 // 						!TROLL OUT?
-   objcts.ocapac[oindex.troll - 1] = -objcts.ocapac[oindex.troll - 1];
+   objcts.ocapac[TrollOX - 1] = -objcts.ocapac[TrollOX - 1];
 // 						!YES, WAKE HIM.
-   objcts.oflag1[oindex.axe - 1] |= VisiO;
+   objcts.oflag1[AxeOX - 1] |= VisiO;
    findex.trollf = false;
-   objcts.odesc1[oindex.troll - 1] = 436;
+   objcts.odesc1[TrollOX - 1] = 436;
    rspeak(437);
 
 L1550:
-   if (prsvec.prsa != vindex.takew && prsvec.prsa != vindex.movew) {
+   if (prsvec.prsa != TakeW && prsvec.prsa != MoveW) {
       goto L1600;
    }
    rspeak(438);
@@ -110,7 +110,7 @@ L1550:
    return ret_val;
 
 L1600:
-   if (prsvec.prsa != vindex.mungw) {
+   if (prsvec.prsa != MungW) {
       goto L1700;
    }
 // 						!MUNG?
@@ -125,13 +125,13 @@ L1700:
 // 						!NO OBJECT?
    i = 440;
 // 						!ASSUME THROW.
-   if (prsvec.prsa == vindex.givew) {
+   if (prsvec.prsa == GiveW) {
       i = 441;
    }
 // 						!GIVE?
    rspsub(i, objcts.odesc2[prsvec.prso - 1]);
 // 						!TROLL TAKES.
-   if (prsvec.prso == oindex.knife) {
+   if (prsvec.prso == KnifeOX) {
       goto L1900;
    }
 // 						!OBJ KNIFE?
@@ -142,11 +142,11 @@ L1700:
 L1900:
    rspeak(443);
 // 						!KNIFE, THROWS IT BACK
-   objcts.oflag2[oindex.troll - 1] |= FiteO;
+   objcts.oflag2[TrollOX - 1] |= FiteO;
    return ret_val;
 
 L2000:
-   if (!findex.trollf || prsvec.prsa != vindex.hellow) {
+   if (!findex.trollf || prsvec.prsa != HelloW) {
       goto L10;
    }
    rspeak(366);
@@ -176,7 +176,7 @@ Bool cyclop(/*int arg*/) {
       goto L100;
    }
 // 						!ASLEEP?
-   if (prsvec.prsa != vindex.alarmw && prsvec.prsa != vindex.mungw && prsvec.prsa != vindex.hellow && prsvec.prsa != vindex.burnw && prsvec.prsa != vindex.killw && prsvec.prsa != vindex.attacw) {
+   if (prsvec.prsa != AlarmW && prsvec.prsa != MungW && prsvec.prsa != HelloW && prsvec.prsa != BurnW && prsvec.prsa != KillW && prsvec.prsa != AttacW) {
       goto L10;
    }
    findex.cyclof = false;
@@ -184,11 +184,11 @@ Bool cyclop(/*int arg*/) {
    rspeak(187);
 // 						!DESCRIBE.
    findex.rvcyc = abs(findex.rvcyc);
-   objcts.oflag2[oindex.cyclo - 1] = (objcts.oflag2[oindex.cyclo - 1] | FiteO) & ~SlepO;
+   objcts.oflag2[CycloOX - 1] = (objcts.oflag2[CycloOX - 1] | FiteO) & ~SlepO;
    return ret_val;
 
 L100:
-   if (prsvec.prsa == vindex.fightw || prsvec.prsa == vindex.frstqw) {
+   if (prsvec.prsa == FightW || prsvec.prsa == FrstQW) {
       goto L10;
    }
    if (abs(findex.rvcyc) <= 5) {
@@ -202,15 +202,15 @@ L100:
    return ret_val;
 
 L200:
-   if (prsvec.prsa != vindex.givew) {
+   if (prsvec.prsa != GiveW) {
       goto L500;
    }
 // 						!GIVE?
-   if (prsvec.prso != oindex.food || findex.rvcyc < 0) {
+   if (prsvec.prso != FoodOX || findex.rvcyc < 0) {
       goto L300;
    }
 // 						!FOOD WHEN HUNGRY?
-   newsta(oindex.food, 189, 0, 0, 0);
+   newsta(FoodOX, 189, 0, 0, 0);
 // 						!EATS PEPPERS.
 // Computing MIN
    i__1 = -1, i__2 = -findex.rvcyc;
@@ -219,7 +219,7 @@ L200:
    return ret_val;
 
 L300:
-   if (prsvec.prso != oindex.water) {
+   if (prsvec.prso != WaterOX) {
       goto L400;
    }
 // 						!DRINK WHEN THIRSTY?
@@ -230,7 +230,7 @@ L300:
 // 						!DRINKS AND
    findex.cyclof = true;
 // 						!FALLS ASLEEP.
-   objcts.oflag2[oindex.cyclo - 1] = (objcts.oflag2[oindex.cyclo - 1] | SlepO) & ~FiteO;
+   objcts.oflag2[CycloOX - 1] = (objcts.oflag2[CycloOX - 1] | SlepO) & ~FiteO;
    return ret_val;
 
 L350:
@@ -244,7 +244,7 @@ L10:
 L400:
    i = 192;
 // 						!ASSUME INEDIBLE.
-   if (prsvec.prso == oindex.garli) {
+   if (prsvec.prso == GarliOX) {
       i = 193;
    }
 // 						!GARLIC IS JOKE.
@@ -266,17 +266,17 @@ L450:
 L500:
    i = 0;
 // 						!ASSUME NOT HANDLED.
-   if (prsvec.prsa == vindex.hellow) {
+   if (prsvec.prsa == HelloW) {
       goto L450;
    }
 // 						!HELLO IS NO GO.
-   if (prsvec.prsa == vindex.throww || prsvec.prsa == vindex.mungw) {
+   if (prsvec.prsa == ThrowW || prsvec.prsa == MungW) {
       i = rnd(2) + 200;
    }
-   if (prsvec.prsa == vindex.takew) {
+   if (prsvec.prsa == TakeW) {
       i = 202;
    }
-   if (prsvec.prsa == vindex.tiew) {
+   if (prsvec.prsa == TieW) {
       i = 203;
    }
    if (i <= 0) {
@@ -300,49 +300,49 @@ Bool thiefp(/*int arg*/) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   if (prsvec.prsa != vindex.fightw) {
+   if (prsvec.prsa != FightW) {
       goto L100;
    }
 // 						!FIGHT?
-   if (objcts.ocan[oindex.still - 1] == oindex.thief) {
+   if (objcts.ocan[StillOX - 1] == ThiefOX) {
       goto L10;
    }
 // 						!GOT STILLETTO?  F.
-   if (qhere(oindex.still, hack.thfpos)) {
+   if (qhere(StillOX, hack.thfpos)) {
       goto L50;
    }
 // 						!CAN HE RECOVER IT?
-   newsta(oindex.thief, 0, 0, 0, 0);
+   newsta(ThiefOX, 0, 0, 0, 0);
 // 						!NO, VANISH.
-   if (qhere(oindex.thief, play.here)) {
+   if (qhere(ThiefOX, play.here)) {
       rspeak(498);
    }
 // 						!IF HERO, TELL.
    return ret_val;
 
 L50:
-   newsta(oindex.still, 0, 0, oindex.thief, 0);
+   newsta(StillOX, 0, 0, ThiefOX, 0);
 // 						!YES, RECOVER.
-   if (qhere(oindex.thief, play.here)) {
+   if (qhere(ThiefOX, play.here)) {
       rspeak(499);
    }
 // 						!IF HERO, TELL.
    return ret_val;
 
 L100:
-   if (prsvec.prsa != vindex.deadxw) {
+   if (prsvec.prsa != DeadXW) {
       goto L200;
    }
 // 						!DEAD?
    hack.thfact = false;
 // 						!DISABLE DEMON.
-   objcts.oflag1[oindex.chali - 1] |= TakeO;
+   objcts.oflag1[ChaliOX - 1] |= TakeO;
    j = 0;
    i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!CARRYING ANYTHING?
 // L125:
-      if (objcts.oadv[i - 1] == -oindex.thief) {
+      if (objcts.oadv[i - 1] == -ThiefOX) {
          j = 500;
       }
    }
@@ -353,7 +353,7 @@ L100:
    i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!LOOP.
-      if (i == oindex.chali || i == oindex.thief || play.here != rindex_.treas || !qhere(i, play.here)) {
+      if (i == ChaliOX || i == ThiefOX || play.here != TreasRX || !qhere(i, play.here)) {
          goto L135;
       }
       objcts.oflag1[i - 1] |= VisiO;
@@ -363,7 +363,7 @@ L100:
       goto L150;
 
    L135:
-      if (objcts.oadv[i - 1] == -oindex.thief) {
+      if (objcts.oadv[i - 1] == -ThiefOX) {
          newsta(i, 0, play.here, 0, 0);
       }
    L150:
@@ -372,7 +372,7 @@ L100:
    return ret_val;
 
 L200:
-   if (prsvec.prsa != vindex.frstqw) {
+   if (prsvec.prsa != FrstQW) {
       goto L250;
    }
 // 						!FIRST ENCOUNTER?
@@ -380,46 +380,46 @@ L200:
    return ret_val;
 
 L250:
-   if (prsvec.prsa != vindex.hellow || objcts.odesc1[oindex.thief - 1] != 504) {
+   if (prsvec.prsa != HelloW || objcts.odesc1[ThiefOX - 1] != 504) {
       goto L300;
    }
    rspeak(626);
    return ret_val;
 
 L300:
-   if (prsvec.prsa != vindex.outxw) {
+   if (prsvec.prsa != OutXW) {
       goto L400;
    }
 // 						!OUT?
    hack.thfact = false;
 // 						!DISABLE DEMON.
-   objcts.odesc1[oindex.thief - 1] = 504;
+   objcts.odesc1[ThiefOX - 1] = 504;
 // 						!CHANGE DESCRIPTION.
-   objcts.oflag1[oindex.still - 1] &= ~VisiO;
-   objcts.oflag1[oindex.chali - 1] |= TakeO;
+   objcts.oflag1[StillOX - 1] &= ~VisiO;
+   objcts.oflag1[ChaliOX - 1] |= TakeO;
    return ret_val;
 
 L400:
-   if (prsvec.prsa != vindex.inxw) {
+   if (prsvec.prsa != InXW) {
       goto L500;
    }
 // 						!IN?
-   if (qhere(oindex.thief, play.here)) {
+   if (qhere(ThiefOX, play.here)) {
       rspeak(505);
    }
 // 						!CAN HERO SEE?
    hack.thfact = true;
 // 						!ENABLE DEMON.
-   objcts.odesc1[oindex.thief - 1] = 503;
+   objcts.odesc1[ThiefOX - 1] = 503;
 // 						!CHANGE DESCRIPTION.
-   objcts.oflag1[oindex.still - 1] |= VisiO;
-   if (play.here == rindex_.treas && qhere(oindex.chali, play.here)) {
-      objcts.oflag1[oindex.chali - 1] &= ~TakeO;
+   objcts.oflag1[StillOX - 1] |= VisiO;
+   if (play.here == TreasRX && qhere(ChaliOX, play.here)) {
+      objcts.oflag1[ChaliOX - 1] &= ~TakeO;
    }
    return ret_val;
 
 L500:
-   if (prsvec.prsa != vindex.takew) {
+   if (prsvec.prsa != TakeW) {
       goto L600;
    }
 // 						!TAKE?
@@ -428,7 +428,7 @@ L500:
    return ret_val;
 
 L600:
-   if (prsvec.prsa != vindex.throww || prsvec.prso != oindex.knife || (objcts.oflag2[oindex.thief - 1] & FiteO) != 0) {
+   if (prsvec.prsa != ThrowW || prsvec.prso != KnifeOX || (objcts.oflag2[ThiefOX - 1] & FiteO) != 0) {
       goto L700;
    }
    if (prob(10, 10)) {
@@ -437,7 +437,7 @@ L600:
 // 						!THREW KNIFE, 10%?
    rspeak(507);
 // 						!NO, JUST MAKES
-   objcts.oflag2[oindex.thief - 1] |= FiteO;
+   objcts.oflag2[ThiefOX - 1] |= FiteO;
    return ret_val;
 
 L650:
@@ -445,7 +445,7 @@ L650:
 // 						!THIEF DROPS STUFF.
    i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
-      if (objcts.oadv[i - 1] != -oindex.thief) {
+      if (objcts.oadv[i - 1] != -ThiefOX) {
          goto L675;
       }
 // 						!THIEF CARRYING?
@@ -454,26 +454,26 @@ L650:
    L675:
       ;
    }
-   newsta(oindex.thief, j, 0, 0, 0);
+   newsta(ThiefOX, j, 0, 0, 0);
 // 						!THIEF VANISHES.
    return ret_val;
 
 L700:
-   if (prsvec.prsa != vindex.throww && prsvec.prsa != vindex.givew || prsvec.prso == 0 || prsvec.prso == oindex.thief) {
+   if (prsvec.prsa != ThrowW && prsvec.prsa != GiveW || prsvec.prso == 0 || prsvec.prso == ThiefOX) {
       goto L10;
    }
-   if (objcts.ocapac[oindex.thief - 1] >= 0) {
+   if (objcts.ocapac[ThiefOX - 1] >= 0) {
       goto L750;
    }
 // 						!WAKE HIM UP.
-   objcts.ocapac[oindex.thief - 1] = -objcts.ocapac[oindex.thief - 1];
+   objcts.ocapac[ThiefOX - 1] = -objcts.ocapac[ThiefOX - 1];
    hack.thfact = true;
-   objcts.oflag1[oindex.still - 1] |= VisiO;
-   objcts.odesc1[oindex.thief - 1] = 503;
+   objcts.oflag1[StillOX - 1] |= VisiO;
+   objcts.odesc1[ThiefOX - 1] = 503;
    rspeak(510);
 
 L750:
-   if (prsvec.prso != oindex.brick || objcts.ocan[oindex.fuse - 1] != oindex.brick || cevent.ctick[cindex.cevfus - 1] == 0) {
+   if (prsvec.prso != BrickOX || objcts.ocan[FuseOX - 1] != BrickOX || cevent.ctick[FusCX - 1] == 0) {
       goto L800;
    }
    rspeak(511);
@@ -481,7 +481,7 @@ L750:
    return ret_val;
 
 L800:
-   i__1 = -oindex.thief;
+   i__1 = -ThiefOX;
    newsta(prsvec.prso, 0, 0, 0, i__1);
 // 						!THIEF TAKES GIFT.
    if (objcts.otval[prsvec.prso - 1] > 0) {

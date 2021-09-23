@@ -25,11 +25,11 @@ Bool opncls(int obj, int so, int sc) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   if (prsvec.prsa == vindex.closew) {
+   if (prsvec.prsa == CloseW) {
       goto L100;
    }
 // 						!CLOSE?
-   if (prsvec.prsa == vindex.openw) {
+   if (prsvec.prsa == OpenW) {
       goto L50;
    }
 // 						!OPEN?

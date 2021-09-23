@@ -143,8 +143,8 @@ L300:
 L400:
    newsta(prsvec.prso, 0, play.here, 0, 0);
 // 						!DROP INTO ROOM.
-   if (play.here == rindex_.mtree) {
-      newsta(prsvec.prso, 0, rindex_.fore3, 0, 0);
+   if (play.here == MTreeRX) {
+      newsta(prsvec.prso, 0, Fore3RX, 0, 0);
    }
    scrupd(objcts.ofval[prsvec.prso - 1]);
 // 						!SCORE OBJECT.
@@ -158,13 +158,13 @@ L400:
 // 						!DID IT HANDLE?
    i = 0;
 // 						!ASSUME NOTHING TO SAY.
-   if (prsvec.prsa == vindex.dropw) {
+   if (prsvec.prsa == DropW) {
       i = 528;
    }
-   if (prsvec.prsa == vindex.throww) {
+   if (prsvec.prsa == ThrowW) {
       i = 529;
    }
-   if (i != 0 && play.here == rindex_.mtree) {
+   if (i != 0 && play.here == MTreeRX) {
       i = 659;
    }
    rspsub(i, objcts.odesc2[prsvec.prso - 1]);
@@ -266,13 +266,13 @@ L750:
    svo = prsvec.prso;
 // 						!SAVE PARSER.
    svi = prsvec.prsi;
-   prsvec.prsa = vindex.takew;
+   prsvec.prsa = TakeW;
    prsvec.prsi = 0;
    if (!take(false)) {
       return ret_val;
    }
 // 						!TAKE OBJECT.
-   prsvec.prsa = vindex.putw;
+   prsvec.prsa = PutW;
    prsvec.prso = svo;
    prsvec.prsi = svi;
    goto L1000;
@@ -340,7 +340,7 @@ void valuac(int v) {
 // 						!SAVE HERE.
 
 //L100:
-   if (prsvec.prsa != vindex.takew) {
+   if (prsvec.prsa != TakeW) {
       goto L1000;
    }
 // 						!TAKE EVERY/VALUA?
@@ -365,7 +365,7 @@ void valuac(int v) {
    goto L3000;
 
 L1000:
-   if (prsvec.prsa != vindex.dropw) {
+   if (prsvec.prsa != DropW) {
       goto L2000;
    }
 // 						!DROP EVERY/VALUA?
@@ -386,7 +386,7 @@ L1000:
    goto L3000;
 
 L2000:
-   if (prsvec.prsa != vindex.putw) {
+   if (prsvec.prsa != PutW) {
       goto L3000;
    }
 // 						!PUT EVERY/VALUA?

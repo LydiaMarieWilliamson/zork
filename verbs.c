@@ -407,8 +407,8 @@ L36200:
 // V117--	BREATHE.  BECOMES INFLATE WITH LUNGS.
 
 L38000:
-   prsvec.prsa = vindex.inflaw;
-   prsvec.prsi = oindex.lungs;
+   prsvec.prsa = InflaW;
+   prsvec.prsi = LungsOX;
    goto L22000;
 // 						!HANDLE LIKE INFLATE.
 
@@ -465,7 +465,7 @@ L41500:
       rspsub(429, odo2);
    }
 // 						!OTHERWISE DEFAULT.
-   prsvec.prsa = vindex.foow;
+   prsvec.prsa = FooW;
 // 						!DEFUSE ROOM PROCESSORS.
    return ret_val;
 
@@ -517,7 +517,7 @@ L42300:
    L42400:
       newsta(i, 0, play.here, 0, 0);
 // 						!NO, SPILL ON FLOOR,
-      if (i == oindex.water) {
+      if (i == WaterOX) {
          newsta(i, 133, 0, 0, 0);
       }
 // 						!BUT WATER DISAPPEARS.
@@ -794,7 +794,7 @@ L51300:
    rspsub(423, odo2);
 // 						!DESCRIBE.
    advs.avehic[play.winner - 1] = prsvec.prso;
-   if (play.winner != aindex.player) {
+   if (play.winner != PlayerAX) {
       objcts.ocan[advs.aobj[play.winner - 1] - 1] = prsvec.prso;
    }
    return ret_val;
@@ -825,7 +825,7 @@ L52100:
 L52200:
    advs.avehic[play.winner - 1] = 0;
    rspeak(426);
-   if (play.winner != aindex.player) {
+   if (play.winner != PlayerAX) {
       newsta(advs.aobj[play.winner - 1], 0, play.here, 0, 0);
    }
    return ret_val;
@@ -860,14 +860,14 @@ L56000:
    return ret_val;
 
 L56025:
-   prsvec.prsi = oindex.gwate;
+   prsvec.prsi = GWateOX;
 // 						!USE GLOBAL WATER.
 L56050:
    if (objact(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if (prsvec.prsi != oindex.gwate && prsvec.prsi != oindex.water) {
+   if (prsvec.prsi != GWateOX && prsvec.prsi != WaterOX) {
       rspsb2(444, odi2, odo2);
    }
    return ret_val;
@@ -880,7 +880,7 @@ L59000:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if (prsvec.prso == oindex.gwate) {
+   if (prsvec.prso == GWateOX) {
       goto L59500;
    }
 // 						!DRINK GLOBAL WATER?
@@ -898,7 +898,7 @@ L59100:
    return ret_val;
 
 L59200:
-   if (prsvec.prsa == vindex.drinkw) {
+   if (prsvec.prsa == DrinkW) {
       goto L59300;
    }
 // 						!DRINK FOOD?
@@ -951,11 +951,11 @@ L60000:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if (objcts.ocan[prsvec.prso - 1] != oindex.recep) {
+   if (objcts.ocan[prsvec.prso - 1] != RecepOX) {
       goto L60050;
    }
 // 						!BALLOON?
-   if (oappli(objcts.oactio[oindex.ballo - 1], 0)) {
+   if (oappli(objcts.oactio[BalloOX - 1], 0)) {
       return ret_val;
    }
 // 						!DID IT HANDLE?
@@ -1040,7 +1040,7 @@ L65000:
    j = odo2;
    odo2 = odi2;
    odi2 = j;
-   prsvec.prsa = vindex.attacw;
+   prsvec.prsa = AttacW;
 // 						!FOR OBJACT.
 
 // V141--	ATTACK.  FALL THRU TO ATTACK CODE.
@@ -1083,11 +1083,11 @@ L66300:
    }
    melee = 1;
 // 						!ASSUME SWORD.
-   if (prsvec.prsi != oindex.sword) {
+   if (prsvec.prsi != SwordOX) {
       melee = 2;
    }
 // 						!MUST BE KNIFE.
-   i = blow(aindex.player, prsvec.prso, melee, true, 0);
+   i = blow(PlayerAX, prsvec.prso, melee, true, 0);
 // 						!STRIKE BLOW.
    return ret_val;
 
@@ -1130,7 +1130,7 @@ L74000:
 // V149--	SAVE
 
 L77000:
-   if ((rooms.rflag[rindex_.tstrs - 1] & SeenR) == 0) {
+   if ((rooms.rflag[TStrsRX - 1] & SeenR) == 0) {
       goto L77100;
    }
    rspeak(828);
@@ -1144,7 +1144,7 @@ L77100:
 // V150--	RESTORE
 
 L78000:
-   if ((rooms.rflag[rindex_.tstrs - 1] & SeenR) == 0) {
+   if ((rooms.rflag[TStrsRX - 1] & SeenR) == 0) {
       goto L78100;
    }
    rspeak(829);
@@ -1169,7 +1169,7 @@ L80000:
    return ret_val;
 
 L80100:
-   if (prsvec.prso != oindex.aviat) {
+   if (prsvec.prso != AviatOX) {
       goto L80200;
    }
 // 						!HELLO AVIATOR?
@@ -1178,7 +1178,7 @@ L80100:
    return ret_val;
 
 L80200:
-   if (prsvec.prso != oindex.sailo) {
+   if (prsvec.prso != SailoOX) {
       goto L80300;
    }
 // 						!HELLO SAILOR?
@@ -1276,7 +1276,7 @@ L82000:
 // V154--	PUMP
 
 L83000:
-   if (objcts.oroom[oindex.pump - 1] == play.here || objcts.oadv[oindex.pump - 1] == play.winner) {
+   if (objcts.oroom[PumpOX - 1] == play.here || objcts.oadv[PumpOX - 1] == play.winner) {
       goto L83100;
    }
    rspeak(632);
@@ -1284,9 +1284,9 @@ L83000:
    return ret_val;
 
 L83100:
-   prsvec.prsi = oindex.pump;
+   prsvec.prsi = PumpOX;
 // 						!BECOMES INFLATE
-   prsvec.prsa = vindex.inflaw;
+   prsvec.prsa = InflaW;
 // 						!X WITH PUMP.
    goto L22000;
 // 						!DONE.
@@ -1307,10 +1307,10 @@ L84000:
 L85000:
 L86000:
 L87000:
-   i = xsrch.xup;
+   i = UpDX;
 // 						!ASSUME UP.
-   if (prsvec.prsa == vindex.clmbdw) {
-      i = xsrch.xdown;
+   if (prsvec.prsa == ClmbDW) {
+      i = DownDX;
    }
 // 						!UNLESS CLIMB DN.
    f = (objcts.oflag2[prsvec.prso - 1] & ClmbO) != 0;
@@ -1327,7 +1327,7 @@ L87000:
       i = 524;
    }
 // 						!VARIETY OF JOKES.
-   if (!f && (prsvec.prso == oindex.wall || prsvec.prso >= oindex.wnort && prsvec.prso <= oindex.wnort + 3)) {
+   if (!f && (prsvec.prso == WallOX || prsvec.prso >= WNortOX && prsvec.prso <= WNortOX + 3)) {
       i = 656;
    }
    rspeak(i);
@@ -1335,7 +1335,7 @@ L87000:
    return ret_val;
 
 L87500:
-   prsvec.prsa = vindex.walkw;
+   prsvec.prsa = WalkW;
 // 						!WALK
    prsvec.prso = i;
 // 						!IN SPECIFIED DIR.

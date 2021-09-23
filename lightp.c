@@ -19,7 +19,7 @@ Bool lightp(int obj) {
    ret_val = true;
 // 						!ASSUME WINS
    flobts = FlamO + LiteO + OnO;
-   if (obj != oindex.candl) {
+   if (obj != CandlOX) {
       goto L20000;
    }
 // 						!CANDLE?
@@ -29,35 +29,35 @@ Bool lightp(int obj) {
 // 						!FIRST REF?
    findex.orcand = 1;
 // 						!YES, CANDLES ARE
-   cevent.ctick[cindex.cevcnd - 1] = 50;
+   cevent.ctick[CndCX - 1] = 50;
 // 						!BURNING WHEN SEEN.
 
 L19100:
-   if (prsvec.prsi == oindex.candl) {
+   if (prsvec.prsi == CandlOX) {
       goto L10;
    }
 // 						!IGNORE IND REFS.
-   if (prsvec.prsa != vindex.trnofw) {
+   if (prsvec.prsa != TrnOfW) {
       goto L19200;
    }
 // 						!TURN OFF?
    i = 513;
 // 						!ASSUME OFF.
-   if ((objcts.oflag1[oindex.candl - 1] & OnO) != 0) {
+   if ((objcts.oflag1[CandlOX - 1] & OnO) != 0) {
       i = 514;
    }
 // 						!IF ON, DIFFERENT.
-   cevent.cflag[cindex.cevcnd - 1] = false;
+   cevent.cflag[CndCX - 1] = false;
 // 						!DISABLE COUNTDOWN.
-   objcts.oflag1[oindex.candl - 1] &= ~OnO;
+   objcts.oflag1[CandlOX - 1] &= ~OnO;
    rspeak(i);
    return ret_val;
 
 L19200:
-   if (prsvec.prsa != vindex.burnw && prsvec.prsa != vindex.trnonw) {
+   if (prsvec.prsa != BurnW && prsvec.prsa != TrnOnW) {
       goto L10;
    }
-   if ((objcts.oflag1[oindex.candl - 1] & LiteO) != 0) {
+   if ((objcts.oflag1[CandlOX - 1] & LiteO) != 0) {
       goto L19300;
    }
    rspeak(515);
@@ -75,30 +75,30 @@ L19300:
    return ret_val;
 
 L19400:
-   if (prsvec.prsi != oindex.match || !((objcts.oflag1[oindex.match - 1] & OnO) != 0)) {
+   if (prsvec.prsi != MatchOX || !((objcts.oflag1[MatchOX - 1] & OnO) != 0)) {
       goto L19500;
    }
    i = 517;
 // 						!ASSUME OFF.
-   if ((objcts.oflag1[oindex.candl - 1] & OnO) != 0) {
+   if ((objcts.oflag1[CandlOX - 1] & OnO) != 0) {
       i = 518;
    }
 // 						!IF ON, JOKE.
-   objcts.oflag1[oindex.candl - 1] |= OnO;
-   cevent.cflag[cindex.cevcnd - 1] = true;
+   objcts.oflag1[CandlOX - 1] |= OnO;
+   cevent.cflag[CndCX - 1] = true;
 // 						!RESUME COUNTDOWN.
    rspeak(i);
    return ret_val;
 
 L19500:
-   if (prsvec.prsi != oindex.torch || !((objcts.oflag1[oindex.torch - 1] & OnO) != 0)) {
+   if (prsvec.prsi != TorchOX || !((objcts.oflag1[TorchOX - 1] & OnO) != 0)) {
       goto L19600;
    }
-   if ((objcts.oflag1[oindex.candl - 1] & OnO) != 0) {
+   if ((objcts.oflag1[CandlOX - 1] & OnO) != 0) {
       goto L19700;
    }
 // 						!ALREADY ON?
-   newsta(oindex.candl, 521, 0, 0, 0);
+   newsta(CandlOX, 521, 0, 0, 0);
 // 						!NO, VAPORIZE.
    return ret_val;
 
@@ -113,10 +113,10 @@ L19700:
    return ret_val;
 
 L20000:
-   if (obj != oindex.match) {
+   if (obj != MatchOX) {
       bug(6, obj);
    }
-   if (prsvec.prsa != vindex.trnonw || prsvec.prso != oindex.match) {
+   if (prsvec.prsa != TrnOnW || prsvec.prso != MatchOX) {
       goto L20500;
    }
    if (findex.ormtch != 0) {
@@ -130,18 +130,18 @@ L20000:
 L20100:
    --findex.ormtch;
 // 						!DECREMENT NO MATCHES.
-   objcts.oflag1[oindex.match - 1] |= flobts;
-   cevent.ctick[cindex.cevmat - 1] = 2;
+   objcts.oflag1[MatchOX - 1] |= flobts;
+   cevent.ctick[MatCX - 1] = 2;
 // 						!COUNTDOWN.
    rspeak(184);
    return ret_val;
 
 L20500:
-   if (prsvec.prsa != vindex.trnofw || (objcts.oflag1[oindex.match - 1] & OnO) == 0) {
+   if (prsvec.prsa != TrnOfW || (objcts.oflag1[MatchOX - 1] & OnO) == 0) {
       goto L10;
    }
-   objcts.oflag1[oindex.match - 1] &= ~flobts;
-   cevent.ctick[cindex.cevmat - 1] = 0;
+   objcts.oflag1[MatchOX - 1] &= ~flobts;
+   cevent.ctick[MatCX - 1] = 0;
    rspeak(185);
    return ret_val;
 
