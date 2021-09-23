@@ -294,18 +294,16 @@ L10000:
 
    debug_1.dbgflg = 0;
    debug_1.prsflg = 0;
-   debug_1.gdtflg = 0;
-
-#ifdef ALLOW_GDT
 
 // allow setting gdtflg true if user id matches wizard id
 // this way, the wizard doesn't have to recompile to use gdt
 
-   if (wizard()) {
-      debug_1.gdtflg = 1;
-   }
-
-#endif // ALLOW_GDT
+#ifdef ALLOW_GDT
+// 	Changed by TAA so that always in wizard ID
+   debug_1.gdtflg = wizard();
+#else
+   debug_1.gdtflg = 0;
+#endif
 
    screen_1.fromdr = 0;
 // 						!INIT SCOL GOODIES.
@@ -336,12 +334,10 @@ L10000:
 
 // read(1, "%I6", &i, &j, &k); //F
    i = rdint(indxfile), j = rdint(indxfile), k = rdint(indxfile);
-
 // 						!GET VERSION.
    if (i != vers_1.vmaj || j != vers_1.vmin) {
       goto L1925;
    }
-
 #if 0
 // open(unit:chan_1.dbch, file:"/usr/share/games/dungeon/dtext.dat", //F
 //    status:"old", form:"unformatted", access:"direct", //F
@@ -353,20 +349,20 @@ L10000:
 //    recl:76, err:L1950 //F
 // ); //F
 #endif
+#ifdef ALLOW_GDT
+// print(" RESTORING FROM \"dindx.dat\""); //F
+#endif
 // // const char *Fmt = "%I8"; //F
 // const char *Fmt = "%I6"; //F
 // read(1, Fmt, &state_1.mxscor, &star_1.strbit, &state_1.egmxsc); //F
    state_1.mxscor = rdint(indxfile), star_1.strbit = rdint(indxfile), state_1.egmxsc = rdint(indxfile);
-
 // read(1, Fmt, &rooms_1.rlnt, &rooms_1.rdesc2, rooms_1.rdesc1, rooms_1.rexit, rooms_1.ractio, rooms_1.rval, rooms_1.rflag); //F
    rooms_1.rlnt = rdint(indxfile);
    rdints(rooms_1.rlnt, rooms_1.rdesc1, indxfile), rdints(rooms_1.rlnt, rooms_1.rdesc2, indxfile);
    rdints(rooms_1.rlnt, rooms_1.rexit, indxfile), rdpartialints(rooms_1.rlnt, rooms_1.ractio, indxfile);
    rdpartialints(rooms_1.rlnt, rooms_1.rval, indxfile), rdints(rooms_1.rlnt, rooms_1.rflag, indxfile);
-
 // read(1, Fmt, &exits_1.xlnt, exits_1.travel); //F
    exits_1.xlnt = rdint(indxfile), rdints(exits_1.xlnt, exits_1.travel, indxfile);
-
 // read(1, Fmt, //F
 //    objcts_1.olnt, objcts_1.odesc1, objcts_1.odesc2, objcts_1.odesco, objcts_1.oactio, objcts_1.oflag1, objcts_1.oflag2, //F
 //    objcts_1.ofval, objcts_1.otval, objcts_1.osize, objcts_1.ocapac, objcts_1.oroom, objcts_1.oadv, objcts_1.ocan, objcts_1.oread //F
@@ -379,29 +375,23 @@ L10000:
    rdints(objcts_1.olnt, objcts_1.osize, indxfile), rdpartialints(objcts_1.olnt, objcts_1.ocapac, indxfile);
    rdints(objcts_1.olnt, objcts_1.oroom, indxfile), rdpartialints(objcts_1.olnt, objcts_1.oadv, indxfile);
    rdpartialints(objcts_1.olnt, objcts_1.ocan, indxfile), rdpartialints(objcts_1.olnt, objcts_1.oread, indxfile);
-
 // read(1, Fmt, &oroom2_1.r2lnt, oroom2_1.oroom2, oroom2_1.rroom2); //F
    oroom2_1.r2lnt = rdint(indxfile);
    rdints(oroom2_1.r2lnt, oroom2_1.oroom2, indxfile), rdints(oroom2_1.r2lnt, oroom2_1.rroom2, indxfile);
-
 // read(1, Fmt, &cevent_1.clnt, cevent_1.ctick, cevent_1.cactio); //F
    cevent_1.clnt = rdint(indxfile);
    rdints(cevent_1.clnt, cevent_1.ctick, indxfile), rdints(cevent_1.clnt, cevent_1.cactio, indxfile);
-
 // read(1, "%L4", cevent_1.cflag); //F
    rdflags(cevent_1.clnt, cevent_1.cflag, indxfile);
-
 // read(1, Fmt, &vill_1.vlnt, vill_1.villns, vill_1.vprob, vill_1.vopps, vill_1.vbest, vill_1.vmelee); //F
    vill_1.vlnt = rdint(indxfile), rdints(vill_1.vlnt, vill_1.villns, indxfile);
    rdpartialints(vill_1.vlnt, vill_1.vprob, indxfile), rdpartialints(vill_1.vlnt, vill_1.vopps, indxfile);
    rdints(vill_1.vlnt, vill_1.vbest, indxfile), rdints(vill_1.vlnt, vill_1.vmelee, indxfile);
-
 // read(1, Fmt, &advs_1.alnt, advs_1.aroom, advs_1.ascore, advs_1.avehic, advs_1.aobj, advs_1.aactio, advs_1.astren, advs_1.aflag); //F
    advs_1.alnt = rdint(indxfile), rdints(advs_1.alnt, advs_1.aroom, indxfile);
    rdpartialints(advs_1.alnt, advs_1.ascore, indxfile), rdpartialints(advs_1.alnt, advs_1.avehic, indxfile);
    rdints(advs_1.alnt, advs_1.aobj, indxfile), rdints(advs_1.alnt, advs_1.aactio, indxfile);
    rdints(advs_1.alnt, advs_1.astren, indxfile), rdpartialints(advs_1.alnt, advs_1.aflag, indxfile);
-
 // read(1, Fmt, &star_1.mbase, &rmsg_1.mlnt, rmsg_1.rtext); //F
    star_1.mbase = rdint(indxfile);
    rmsg_1.mlnt = rdint(indxfile), rdints(rmsg_1.mlnt, rmsg_1.rtext, indxfile);
@@ -409,7 +399,6 @@ L10000:
 // Save location of start of message text
 // close(1); //F
    rmsg_1.mrloc = ftell(indxfile);
-
 // 						!INIT DONE.
 
 // INIT, PAGE 5
@@ -433,22 +422,26 @@ L10000:
 // ERRORS-- INIT FAILS.
 
 L1925:
-// print(" \"dindx.dat\" is version %I1.%I1%A1.%/  I require version %I1.%I1%A1.", i, j, k, vers_1.vmaj, vers_1.vmin, vers_1.vedit); //F
+// print(
+//    " \"dindx.dat\" is version %I1.%I1%A1.%/" //F
+//    "  I require version %I1.%I1%A1.", //F
+//    i, j, k, vers_1.vmaj, vers_1.vmin, vers_1.vedit //F
+// ); //F
    more_output(NULL), printf("%s is version %1d.%1d%c.\n", TEXTFILE, i, j, k);
    more_output(NULL), printf("I require version %1d.%1d%c.\n", vers_1.vmaj, vers_1.vmin, vers_1.vedit);
    goto L1975;
 L1950:
-// print(" I can't open " "dindx.dat" "."); //F
+// print(" I can't open ","dindx.dat","."); //F
    more_output(NULL), printf("I can't open %s.\n", TEXTFILE);
 L1975:
 // print( //F
-//    " Suddenly a sinister, wraithlike figure appears before " //F
-//    "you,%/ seeming to float in the air.  In a low, sorrowful voice" //F
-//    " he says,%/ \"Alas, the very nature of the world has changed, " //F
-//    "and the dungeon%/ cannot be found.  All must now pass away.\"" //F
+//    " Suddenly a sinister, wraithlike figure appears before ", //F
+//    "you,%/ seeming to float in the air.  In a low, sorrowful voice", //F
+//    " he says,%/ \"Alas, the very nature of the world has changed, ", //F
+//    "and the dungeon%/ cannot be found.  All must now pass away.\"", //F
 //    "  Raising his oaken staff%/ in farewell, he fades into the " //F
 //    "spreading darkness.  In his place%/ appears a tastefully " //F
-//    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/" //F
+//    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/", //F
 //    " The darkness becomes all encompassing, and your vision fails." //F
 // ); //F
    more_output("Suddenly a sinister, wraithlike figure appears before you,");

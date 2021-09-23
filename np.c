@@ -63,7 +63,14 @@ Bool parse(char *inbuf, Bool vbflag) {
    Bool ret_val;
 
 // Local variables
+#if 0
+   int x; //(@) Actually unused.
+#endif
    int outbuf[40], outlnt;
+
+#ifdef ALLOW_GDT
+// dflag = (debug_1.prsflg & 1) != 0; //F
+#endif
 
 // Parameter adjustments
    --inbuf;
@@ -110,12 +117,20 @@ L300:
 L350:
    orphan(0, 0, 0, 0, 0);
 // 						!CLEAR ORPHANS.
+#ifdef ALLOW_GDT
+// if (dflag) write(0, *, "parse good"); //F
+// if (dflag) print(" PARSE RESULTS- %L7%3I7", ret_val, prsvec_1.prsa, prsvec_1.prso, prsvec_1.prsi); //F
+#endif
    return ret_val;
 
 // PARSE FAILS, DISALLOW CONTINUATION
 
 L100:
    prsvec_1.prscon = 1;
+#ifdef ALLOW_GDT
+// if (dflag) write(0, *, "parse failed"); //F
+// if (dflag) print(" PARSE RESULTS- %L7%3I7", ret_val, prsvec_1.prsa, prsvec_1.prso, prsvec_1.prsi); //F
+#endif
    return ret_val;
 }
 
@@ -155,6 +170,9 @@ static Bool lex(char *inbuf, int *outbuf, int *op, Bool vbflag) {
 // L100:
    }
 
+#ifdef ALLOW_GDT
+// dflag = (debug_1.prsflg & 2) != 0; //F
+#endif
    ret_val = false;
 // 						!ASSUME LEX FAILS.
    *op = -1;
@@ -217,12 +235,18 @@ L1000:
    }
 // 						!ANY LAST WORD?
    ret_val = true;
+#ifdef ALLOW_GDT
+// if (dflag) print(" LEX RESULTS- %3I7%/%1X%10I7", cp, *op, prsvec_1.prscon, (outbuf[i - 1], i = 1, *op + 1)); //F
+#endif
    return ret_val;
 
 // LEGITIMATE CHARACTERS: LETTER, DIGIT, OR HYPHEN.
 
 L4000:
    j1 = j - dlimit[i + 1];
+#ifdef ALLOW_GDT
+// if (dflag) print(" LEX- CHAR= %A1%2I7", j, j1, cp); //F
+#endif
    if (cp >= 6) {
       goto L200;
    }

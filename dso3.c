@@ -147,9 +147,7 @@ L100:
    rspeak(q);
 // 						!ASK
 // read(chan_1.inpch, "%A1", &ans); //F
-   (void)fflush(stdout);
-   (void)fgets(ans, sizeof ans, stdin);
-   more_input();
+   (void)fflush(stdout), (void)fgets(ans, sizeof ans, stdin), more_input();
 // 						!GET ANSWER
    if (*ans == 'Y' || *ans == 'y') {
       goto L200;

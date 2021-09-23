@@ -41,6 +41,9 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    pv_1.o1 = 0;
    pv_1.o2 = 0;
    pv_1.p1 = 0;
+#ifdef ALLOW_GDT
+// dflag = (debug_1.prsflg & 4) != 0; //F
+#endif
    pv_1.p2 = 0;
 
    buzlnt = 20;
@@ -55,6 +58,9 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 // 						!TWO WORDS/TOKEN.
       lbuf1 = lbuf[i];
 // 						!GET CURRENT TOKEN.
+#ifdef ALLOW_GDT
+//    if (dflag) write(0, *, "lbuf1=", lbuf1, " lbuf2=", lbuf2); //F
+#endif
       lbuf2 = lbuf[i + 1];
       if (lbuf1 == 0) {
          goto L1500;
@@ -169,6 +175,9 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 
    L600:
       obj = getobj(j, adj, 0);
+#ifdef ALLOW_GDT
+//    if (dflag) print(" SPARSE- OBJ AT %I6  OBJ= %I6", 60, j, obj); //F
+#endif
 // 						!IDENTIFY OBJECT.
       if (obj <= 0) {
          goto L6000;
@@ -213,6 +222,9 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    L2000:
       prsvec_1.prsa = vindex_1.walkw;
       prsvec_1.prso = dirvoc_1.dvoc[j + 1];
+#ifdef ALLOW_GDT
+//    if (dflag) print(" SPARSE- DIR AT %I6", j); //F
+#endif
       ret_val = 1;
       return ret_val;
 
@@ -220,6 +232,10 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 
    L3000:
       pv_1.act = j;
+#ifdef ALLOW_GDT
+//    if (dflag) print(" SPARSE- ACT AT %I6", j); //F
+//    if (dflag) write(0, *, "count=", vvoc[j + 1], " vnr=", vvoc[j + 2]); //F
+#endif
       orphs_1.oact = 0;
       goto L1000;
 
@@ -230,6 +246,9 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
          goto L4500;
       }
       prep = prpvoc_1.pvoc[j + 1];
+#ifdef ALLOW_GDT
+//    if (dflag) print(" SPARSE- PREP AT %I6", j); //F
+#endif
       adj = 0;
       goto L1000;
 
@@ -243,6 +262,9 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 
    L5000:
       adj = j;
+#ifdef ALLOW_GDT
+//    if (dflag) print(" SPARSE- ADJ AT %I6 ORPHAN= %I6", adj, j); //F
+#endif
       j = orphs_1.oname & orphs_1.oflag;
       if (j != 0 && i >= llnt) {
          goto L600;
@@ -343,6 +365,10 @@ L1500:
 // 1750--	RETURN A RESULT
 
 L1750:
+#ifdef ALLOW_GDT
+// if (dflag) print(" SPARSE RESULTS- %5I7", pv_1.act, pv_1.o1, pv_1.o2, pv_1.p1, pv_1.p2); //F
+// if (dflag) write(0, *, "sparse=", sparse); //F
+#endif
 // 						!WIN.
    return ret_val;
 // 						!LOSE.

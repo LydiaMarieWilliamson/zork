@@ -779,7 +779,7 @@ L26400:
    findex_1.spellf = true;
 // 						!TELL HIM.
    play_1.telflg = true;
-// write(chan_1.outch," A hollow voice replies:  \"%6A1%1X%6A1\".", pv_2.p1, ch); //F
+// write(chan_1.outch," A hollow voice replies:  \"%6A1%1X%6A1\".", pp1, ch); //F
    more_output(NULL), printf("A hollow voice replies:  \"%.6s %.6s\".\n", pp1, ch);
 
    return ret_val;

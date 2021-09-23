@@ -21,6 +21,10 @@ int getobj(int oidx, int aidx, int spcobj) {
 
 // GETOBJ, PAGE 2
 
+#ifdef ALLOW_GDT
+// dflag = (debug_1.prsflg & 8) != 0; //F
+#endif
+
    chomp = false;
    av = advs_1.avehic[play_1.winner - 1];
    obj = 0;
@@ -32,6 +36,9 @@ int getobj(int oidx, int aidx, int spcobj) {
 
    obj = schlst(oidx, aidx, play_1.here, 0, 0, spcobj);
 // 						!SEARCH ROOM.
+#ifdef ALLOW_GDT
+// if (dflag) print(" SCHLST- ROOM SCH %I6", obj); //F
+#endif
    if (obj < 0) {
       goto L1000;
    } else if (obj == 0) {
@@ -58,6 +65,9 @@ L200:
 // 						!IN VEHICLE?
    nobj = schlst(oidx, aidx, 0, av, 0, spcobj);
 // 						!SEARCH VEHICLE.
+#ifdef ALLOW_GDT
+// if (dflag) print(" SCHLST- VEH SCH  %I6", nobj); //F
+#endif
    if (nobj < 0) {
       goto L1100;
    } else if (nobj == 0) {
@@ -82,6 +92,9 @@ L300:
 L400:
    nobj = schlst(oidx, aidx, 0, 0, play_1.winner, spcobj);
 // 						!SEARCH ADVENTURER.
+#ifdef ALLOW_GDT
+// if (dflag) print(" SCHLST- ADV SCH  %I6", nobj); //F
+#endif
    if (nobj < 0) {
       goto L1100;
    } else if (nobj == 0) {
@@ -133,6 +146,9 @@ L1000:
 
 L1500:
 // 						!END OF SEARCH.
+#ifdef ALLOW_GDT
+// if (dflag) print(" SCHLST- RESULT   %I6", ret_val); //F
+#endif
    return ret_val;
 }
 
@@ -173,7 +189,6 @@ int schlst(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
 // SEE IF THEY ARE AT SOME LEVEL OF CONTAINMENT INSIDE OBJECT 'I'.
 // IF THEY ARE AT LEVEL 1, OR IF ALL LINKS IN THE CONTAINMENT
 // CHAIN ARE OPEN, VISIBLE, AND HAVE SEARCHME SET, THEY CAN QUALIFY
-
 // AS A POTENTIAL MATCH.
 
       i__2 = objcts_1.olnt;
