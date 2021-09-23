@@ -29,7 +29,7 @@ void encryp(const char *inw, char *outw) {
 // 						!POINTER IN KEYWORD.
    for (i = 1; i <= 6; ++i) {
 // 						!UNBIAS, COMPUTE SUMS.
-      ukeyw[i - 1] = (keyw[i - 1] - 64);
+      ukeyw[i - 1] = keyw[i - 1] - 64;
       if (inw[j] <= '@') {
          j = 1;
       }
@@ -48,7 +48,7 @@ void encryp(const char *inw, char *outw) {
       if (j > 26) {
          j %= 26;
       }
-      outw[i] = (max(1, j) + 64);
+      outw[i] = max(1, j) + 64;
 // L200:
    }
 }

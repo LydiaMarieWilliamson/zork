@@ -726,11 +726,13 @@ L26000:
    }
    for (z = input_1.inbuf + prsvec_1.prscon - 1; *z != '\0'; ++z) {
 // 						!PARSE INPUT
-      if (*z == ',')
+      if (*z == ',') {
          goto L26300;
+      }
 // 						!END OF PHRASE?
-      if (*z != ' ')
+      if (*z != ' ') {
          goto L26150;
+      }
 // 						!SPACE?
       if (cp != 1) {
          ++wp;
@@ -834,8 +836,9 @@ L27000:
 L27100:
    for (j = 1; j <= 14; j++) {
 // 						!CHECK ANSWERS.
-      if (findex_1.quesno != answer[j - 1])
+      if (findex_1.quesno != answer[j - 1]) {
          goto L27300;
+      }
 // 						!ONLY CHECK PROPER ANS.
       z = ansstr[j - 1];
       z2 = input_1.inbuf + prsvec_1.prscon - 1;

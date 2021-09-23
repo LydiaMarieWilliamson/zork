@@ -44,10 +44,10 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    pv_1.o1 = 0;
    pv_1.o2 = 0;
    pv_1.p1 = 0;
+   pv_1.p2 = 0;
 #ifdef ALLOW_GDT
 // dflag = (debug_1.prsflg & 4) != 0; //F
 #endif
-   pv_1.p2 = 0;
 
    buzlnt = 20;
    prplnt = 48;
@@ -61,10 +61,10 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 // 						!TWO WORDS/TOKEN.
       lbuf1 = lbuf[i];
 // 						!GET CURRENT TOKEN.
+      lbuf2 = lbuf[i + 1];
 #ifdef ALLOW_GDT
 //    if (dflag) write(0, *, "lbuf1=", lbuf1, " lbuf2=", lbuf2); //F
 #endif
-      lbuf2 = lbuf[i + 1];
       if (lbuf1 == 0) {
          goto L1500;
       }
@@ -225,21 +225,21 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    L2000:
       prsvec_1.prsa = vindex_1.walkw;
       prsvec_1.prso = dirvoc_1.dvoc[j + 1];
+      ret_val = 1;
 #ifdef ALLOW_GDT
 //    if (dflag) print(" SPARSE- DIR AT %I6", j); //F
 #endif
-      ret_val = 1;
       return ret_val;
 
 // 3000--	ACTION
 
    L3000:
       pv_1.act = j;
+      orphs_1.oact = 0;
 #ifdef ALLOW_GDT
 //    if (dflag) print(" SPARSE- ACT AT %I6", j); //F
 //    if (dflag) write(0, *, "count=", vvoc[j + 1], " vnr=", vvoc[j + 2]); //F
 #endif
-      orphs_1.oact = 0;
       goto L1000;
 
 // 4000--	PREPOSITION
@@ -249,10 +249,10 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
          goto L4500;
       }
       prep = prpvoc_1.pvoc[j + 1];
+      adj = 0;
 #ifdef ALLOW_GDT
 //    if (dflag) print(" SPARSE- PREP AT %I6", j); //F
 #endif
-      adj = 0;
       goto L1000;
 
    L4500:
@@ -265,10 +265,10 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 
    L5000:
       adj = j;
+      j = orphs_1.oname & orphs_1.oflag;
 #ifdef ALLOW_GDT
 //    if (dflag) print(" SPARSE- ADJ AT %I6 ORPHAN= %I6", adj, j); //F
 #endif
-      j = orphs_1.oname & orphs_1.oflag;
       if (j != 0 && i >= llnt) {
          goto L600;
       }

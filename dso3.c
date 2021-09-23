@@ -13,7 +13,6 @@ Bool findxt(int dir, int rm) {
 
 // Local variables
    int i, xi;
-   int xxxflg;
 
    ret_val = true;
 // 						!ASSUME WINS.
@@ -29,8 +28,7 @@ L100:
 // 						!GET ENTRY.
    curxt_1.xroom1 = i & xpars_1.xrmask;
 // mask to 16-bits to get rid of sign extension problems with 32-bit ints 
-   xxxflg = ~xpars_1.xlflag & 65535;
-   curxt_1.xtype = ((i & xxxflg) / xpars_1.xfshft & xpars_1.xfmask) + 1;
+   curxt_1.xtype = ((i & ~xpars_1.xlflag & 65535) / xpars_1.xfshft & xpars_1.xfmask) + 1;
    switch (curxt_1.xtype) {
       case 1:
          goto L110;
@@ -87,7 +85,8 @@ int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
       if ((objcts_1.oflag1[i - 1] & VisiO) == 0) {
          goto L1000;
       }
-      if (~(nocare) & (objcts_1.oflag1[i - 1] & TakeO) == 0 || (objcts_1.oflag1[i - 1] & f1) == 0 && (objcts_1.oflag2[i - 1] & f2) == 0) {
+//    if ((~(nocare) & (objcts_1.oflag1[i - 1] & TakeO) == 0) || ⋯) {
+      if (!(nocare) && (objcts_1.oflag1[i - 1] & TakeO) == 0 || (objcts_1.oflag1[i - 1] & f1) == 0 && (objcts_1.oflag2[i - 1] & f2) == 0) {
          goto L500;
       }
       if (ret_val == 0) {
