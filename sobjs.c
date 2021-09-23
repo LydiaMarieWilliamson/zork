@@ -19,6 +19,8 @@ Bool sobjs(int ri, int arg) {
    int av;
    int odi2 = 0, odo2 = 0;
 
+// SOBJS, PAGE 2
+
    if (prsvec_1.prso > 220) {
       goto L5;
    }
@@ -236,7 +238,6 @@ L6400:
 
 L7000:
    if (prsvec_1.prsa == vindex_1.takew && play_1.winner == aindex_1.player) {
-
       hack_1.swdact = true;
    }
    goto L10;
@@ -362,7 +363,6 @@ L14600:
 
 L14700:
    if (prsvec_1.prsa != vindex_1.mungw && prsvec_1.prsa != vindex_1.throww) {
-
       goto L10;
    }
    i = 167;
@@ -538,7 +538,6 @@ L27500:
 
 L28000:
    if (prsvec_1.prsa != vindex_1.openw && prsvec_1.prsa != vindex_1.closew) {
-
       goto L10;
    }
    if (findex_1.grunlf) {
@@ -885,7 +884,6 @@ L41000:
 
 L41500:
    if (prsvec_1.prsa != vindex_1.untiew || prsvec_1.prso != oindex_1.brope) {
-
       goto L10;
    }
    if (findex_1.btief != 0) {
@@ -951,7 +949,6 @@ L43000:
 
 L44000:
    if (prsvec_1.prsa != vindex_1.givew && prsvec_1.prsa != vindex_1.throww) {
-
       goto L44500;
    }
    if (objcts_1.otval[prsvec_1.prso - 1] == 0) {
@@ -986,7 +983,6 @@ L44500:
 
 L46000:
    if (prsvec_1.prsa != vindex_1.throww && prsvec_1.prsa != vindex_1.mungw) {
-
       goto L10;
    }
    newsta(prsvec_1.prso, 262, 0, 0, 0);
@@ -1008,7 +1004,6 @@ L53000:
 
 L53200:
    if (prsvec_1.prsa != vindex_1.mungw && prsvec_1.prsa != vindex_1.throww) {
-
       goto L10;
    }
    newsta(oindex_1.robot, 285, 0, 0, 0);

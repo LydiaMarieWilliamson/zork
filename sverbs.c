@@ -40,6 +40,8 @@ Bool sverbs(int ri) {
    char pp1[1 * 6], pp2[1 * 6];
    int odi2 = 0, odo2 = 0;
 
+// SVERBS, PAGE 2
+
    ret_val = true;
 // 						!ASSUME WINS.
    if (prsvec_1.prso != 0) {

@@ -21,6 +21,8 @@ Bool oappli(int ri, int arg) {
    int odi2 = 0, odo2 = 0;
    int nloc;
 
+// OAPPLI, PAGE 2
+
    if (ri == 0) {
       goto L10;
    }
@@ -673,7 +675,6 @@ L49000:
    }
 // 						!OPEN?
    if (prsvec_1.prsa != vindex_1.mungw && prsvec_1.prsa != vindex_1.throww) {
-
       goto L10;
    }
    newsta(oindex_1.flask, 270, 0, 0, 0);
@@ -1126,7 +1127,6 @@ L62000:
 
 L62100:
    if (prsvec_1.prsa == vindex_1.clmbw || prsvec_1.prsa == vindex_1.clmbuw) {
-
       goto L62200;
    }
    rspeak(866);

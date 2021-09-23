@@ -13,6 +13,8 @@ Bool trollp(/*int arg*/) {
 // Local variables
    int i;
 
+// TROLLP, PAGE 2
+
    ret_val = true;
 // 						!ASSUME WINS.
    if (prsvec_1.prsa != vindex_1.fightw) {
@@ -166,6 +168,8 @@ Bool cyclop(/*int arg*/) {
 // Local variables
    int i;
 
+// CYCLOP, PAGE 2
+
    ret_val = true;
 // 						!ASSUME WINS.
    if (!findex_1.cyclof) {
@@ -267,7 +271,6 @@ L500:
    }
 // 						!HELLO IS NO GO.
    if (prsvec_1.prsa == vindex_1.throww || prsvec_1.prsa == vindex_1.mungw) {
-
       i = rnd(2) + 200;
    }
    if (prsvec_1.prsa == vindex_1.takew) {
@@ -292,6 +295,8 @@ Bool thiefp(/*int arg*/) {
 
 // Local variables
    int i, j;
+
+// THIEFP, PAGE 2
 
    ret_val = true;
 // 						!ASSUME WINS.

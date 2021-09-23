@@ -78,6 +78,8 @@ Bool init(void/*int x*/) {
 
    more_init();
 
+// INIT, PAGE 2
+
 // FIRST CHECK FOR PROTECTION VIOLATION
 
    if (protected_()) {

@@ -16,6 +16,8 @@ Bool rappl1(int ri) {
    int i;
    int j;
 
+// RAPPL1, PAGE 2
+
    ret_val = true;
 // 						!USUALLY IGNORED.
    if (ri == 0) {

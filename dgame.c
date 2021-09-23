@@ -16,6 +16,8 @@ void game_(void) {
    Bool f;
    int i;
 
+// GAME, PAGE 2
+
 // START UP, DESCRIBE CURRENT LOCATION.
 
    rspeak(1);
@@ -33,8 +35,8 @@ L100:
    if (prsvec_1.prscon <= 1) {
       rdline(input_1.inbuf, 1);
    }
-#ifdef ALLOW_GDT
 
+#ifdef ALLOW_GDT
    if (strcmp(input_1.inbuf + prsvec_1.prscon - 1, "GDT") == 0) {
 // 						!CALL ON GDT?
       gdt();
@@ -42,7 +44,7 @@ L100:
       goto L100;
 // 						!ONWARD.
    }
-#endif // ALLOW_GDT
+#endif
 
    ++state_1.moves;
    prsvec_1.prswon = parse(input_1.inbuf, true);
@@ -201,6 +203,7 @@ static void xendmv(Bool flag) {
 #if 0
    int x; //(@) Not actually used.
 #endif
+
    if (!(flag)) {
       rspeak(341);
    }

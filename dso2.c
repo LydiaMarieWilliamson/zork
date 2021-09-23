@@ -17,6 +17,8 @@ Bool moveto(int nr, int who) {
    Bool lnr, nlv;
    int bits;
 
+// MOVETO, PAGE 2
+
    ret_val = false;
 // 						!ASSUME FAILS.
    lhr = (rooms_1.rflag[play_1.here - 1] & LandR) != 0;
@@ -98,6 +100,8 @@ void score(Bool flg) {
 // Local variables
    int i, as;
 
+// SCORE, PAGE 2
+
    as = advs_1.ascore[play_1.winner - 1];
 
    if (findex_1.endgmf) {
@@ -136,7 +140,6 @@ L60:
 //    state_1.egscor, state_1.egmxsc, state_1.moves //F
 // ); //F
    printf(" %d [total of %d points], in %d moves.\n", state_1.egscor, state_1.egmxsc, state_1.moves);
-
    for (i = 1; i <= 5; ++i) {
       if (state_1.egscor * 20 / state_1.egmxsc >= erank[i - 1]) {
          goto L80;

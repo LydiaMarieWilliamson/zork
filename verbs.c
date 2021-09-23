@@ -22,6 +22,8 @@ Bool vappli(int ri) {
    int rmk;
    int odi2 = 0, odo2 = 0;
 
+// VAPPLI, PAGE 2
+
    ret_val = true;
 // 						!ASSUME WINS.
 

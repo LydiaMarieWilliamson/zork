@@ -157,8 +157,11 @@ const struct vindexCB vindex = (struct vindexCB){
 // Main program: dungeo
 int main(void) {
 #if 0
-   int x;
+   int x; //(@) Not actually used.
 #endif
+
+// DUNGEON, PAGE 3
+
 // 1) INITIALIZE DATA STRUCTURES
 // 2) PLAY GAME
 

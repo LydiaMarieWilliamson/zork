@@ -10,6 +10,8 @@ Bool ghere(int obj, int rm) {
 // System generated locals
    Bool ret_val;
 
+// GHERE, PAGE 2
+
    ret_val = true;
 // 						!ASSUME WINS.
    switch (obj - star_1.strbit) {
@@ -142,6 +144,8 @@ L11000:
 int mrhere(int rm) {
 // System generated locals
    int ret_val, i__1;
+
+// MRHERE, PAGE 2
 
    if (rm < rindex_1.mrae || rm > rindex_1.mrdw) {
       goto L100;

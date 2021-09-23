@@ -14,6 +14,8 @@ Bool aappli(int ri) {
    Bool f;
    int i;
 
+// AAPPLI, PAGE 2
+
    if (ri == 0) {
       goto L10;
    }
@@ -39,7 +41,6 @@ L10:
 
 L1000:
    if (prsvec_1.prsa != vindex_1.raisew || prsvec_1.prso != oindex_1.rcage) {
-
       goto L1200;
    }
    cevent_1.cflag[cindex_1.cevsph - 1] = false;
@@ -127,6 +128,8 @@ void thiefd(void) {
    int i, j, nr;
    Bool once;
    int rhere;
+
+// THIEFD, PAGE 2
 
 #ifdef ALLOW_GDT
 // dflag = (debug_1.prsflg & 32768) != 0; //F

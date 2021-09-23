@@ -22,6 +22,8 @@ void fightd(void) {
    int res;
    int out;
 
+// FIGHTD, PAGE 2
+
    i__1 = vill_1.vlnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!LOOP THRU VILLAINS.
@@ -142,7 +144,6 @@ L2600:
 // 						!SPECIAL ACTION.
    L2650:
       res = blow(aindex_1.player, j, vill_1.vmelee[i - 1], false, out);
-
 // 						!STRIKE BLOW.
       if (res < 0) {
          return;
@@ -202,6 +203,8 @@ int blow(int h, int v, int rmk, Bool hflg, int out) {
    int att, res;
    int dweap;
    int pblose;
+
+// BLOW, PAGE 3
 
    ra = objcts_1.oactio[v - 1];
 // 						!GET VILLAIN ACTION,
@@ -522,6 +525,8 @@ void swordd(void) {
 
 // Local variables
    int i, ng;
+
+// SWORDD, PAGE 2
 
    if (objcts_1.oadv[oindex_1.sword - 1] != aindex_1.player) {
       goto L500;

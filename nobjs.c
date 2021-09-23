@@ -22,6 +22,8 @@ Bool nobjs(int ri/*, int arg*/) {
    int av, wl;
    int nxt, odi2 = 0, odo2 = 0;
 
+// NOBJS, PAGE 2
+
    if (prsvec_1.prso != 0) {
       odo2 = objcts_1.odesc2[prsvec_1.prso - 1];
    }
@@ -171,7 +173,6 @@ L2900:
 
 L3000:
    if (prsvec_1.prsa != vindex_1.givew && prsvec_1.prsa != vindex_1.throww) {
-
       goto L3200;
    }
    if (objcts_1.otval[prsvec_1.prso - 1] != 0) {
@@ -501,7 +502,6 @@ L10000:
 
 L10100:
    if (prsvec_1.prsa != vindex_1.lowerw && prsvec_1.prsa != vindex_1.pushw) {
-
       goto L10;
    }
    if (findex_1.poleuf != 0) {
@@ -644,7 +644,6 @@ L13100:
 
 L14000:
    if (prsvec_1.prsa != vindex_1.openw && prsvec_1.prsa != vindex_1.closew) {
-
       goto L14100;
    }
    rspeak(767);
@@ -810,7 +809,6 @@ L20000:
    }
 // 						!AT FRONT DOOR?
    if (prsvec_1.prsa != vindex_1.openw && prsvec_1.prsa != vindex_1.closew) {
-
       goto L10;
    }
    rspeak(843);
@@ -864,6 +862,8 @@ static Bool mirpan(int st, Bool pnf) {
 // Local variables
    int num;
    int mrbf;
+
+// MIRPAN, PAGE 2
 
    ret_val = true;
    num = mrhere(play_1.here);

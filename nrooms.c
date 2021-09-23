@@ -21,6 +21,8 @@ Bool rappl2(int ri) {
    int i;
    int j;
 
+// RAPPL2, PAGE 2
+
    ret_val = true;
    switch (ri - newrms + 1) {
       case 1:
@@ -327,7 +329,7 @@ L54000:
    if (findex_1.lcell == 4) {
       rspsub(723, i);
    }
-//						!DESCRIBE.
+// 						!DESCRIBE.
    return ret_val;
 
 // R55--	PRISON CELL
@@ -431,6 +433,8 @@ static void lookto(int nrm, int srm, int nt, int st, int ht) {
 // Local variables
    int i, m1, dir, mrbf;
 
+// LOOKTO, PAGE 2
+
    rspeak(ht);
 // 						!DESCRIBE HALL.
    rspeak(nt);
@@ -505,6 +509,8 @@ static void ewtell(int rm, int st) {
 // Local variables
    int i;
    Bool m1;
+
+// EWTELL, PAGE 2
 
 // NOTE THAT WE ARE EAST OR WEST OF MIRROR, AND
 // MIRROR MUST BE N-S.

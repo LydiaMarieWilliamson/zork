@@ -10,6 +10,8 @@ Bool ballop(int arg) {
 // System generated locals
    Bool ret_val;
 
+// BALLOP, PAGE 2
+
    ret_val = true;
 // 						!ASSUME WINS.
    if (arg != 2) {

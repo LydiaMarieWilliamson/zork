@@ -132,7 +132,6 @@ void bug(int a, int b) {
 
 // print(" PROGRAM ERROR %I2, PARAMETER=%I6", a, b); //F
    more_output(NULL), printf("PROGRAM ERROR %d, PARAMETER=%d\n", a, b);
-
    if (debug_1.dbgflg != 0) {
       return;
    }
@@ -167,7 +166,6 @@ Bool qhere(int obj, int rm) {
    for (i = 1; i <= i__1; ++i) {
 // 						!NO, SCH ROOM2.
       if (oroom2_1.oroom2[i - 1] == obj && oroom2_1.rroom2[i - 1] == rm) {
-
          return ret_val;
       }
 // L100:
@@ -213,6 +211,8 @@ void jigsup(int desc) {
    Bool f;
    int i, j;
 
+// JIGSUP, PAGE 2
+
    rspeak(desc);
 // 						!DESCRIBE SAD STATE.
    prsvec_1.prscon = 1;
@@ -238,15 +238,14 @@ L100:
       goto L900;
    }
 // 						!NO RECOVERY IN END GAME.
-
+#if 1
 // always exit for plopbot's purposes
    goto L1000;
-#if 0
+#else
    if (state_1.deaths >= 2) {
       goto L1000;
    }
 #endif
-
 // 						!DEAD TWICE? KICK HIM OFF.
    if (!yesno(10, 9, 8)) {
       goto L1100;
@@ -415,6 +414,8 @@ Bool rmdesc(int full) {
 
 // FULL=	0/1/2/3=	SHORT/OBJ/ROOM/FULL
 
+// RMDESC, PAGE 2
+
    ret_val = true;
 // 						!ASSUME WINS.
    if (prsvec_1.prso < xsrch_1.xmin) {
@@ -455,16 +456,20 @@ L300:
 // 						!OBJ ONLY?
    i = rooms_1.rdesc2[play_1.here - 1];
 // 						!ASSUME SHORT DESC.
+// The following comment, in the 1991 C translation, was inherited from a later version of the original Fortran source.
+// 2021/09/22 Darth Spectra
+// The next line means that when you request VERBOSE mode, you only get long room descriptions 20% of the time.
+// I don't either like or understand this, so the mod. ensures VERBOSE works all the time.
+// 1987/10/22 jmh@ukc.ac.uk
+#if 1
    if (full == 0 && (findex_1.superf || (rooms_1.rflag[play_1.here - 1] & SeenR) != 0 && findex_1.brieff)) {
       goto L400;
    }
-
-//  The next line means that when you request VERBOSE mode, you
-//  only get long room descriptions 20% of the time. I don't either
-//  like or understand this, so the mod. ensures VERBOSE works
-//  all the time.			jmh@ukc.ac.uk 22/10/87
-
-// &		        .AND.(BRIEFF.OR.PROB(80,80)))))       GO TO 400
+#else
+   if (full == 0 && (findex_1.superf || (rooms_1.rflag[play_1.here - 1] & SeenR) != 0 && (findex_1.brieff || prob(80, 80)))) {
+      goto L400;
+   }
+#endif
    i = rooms_1.rdesc1[play_1.here - 1];
 // 						!USE LONG.
    if (i != 0 || ra == 0) {

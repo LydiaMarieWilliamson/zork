@@ -37,6 +37,8 @@ void gdt(void) {
    char buf[80];
    char *z;
 
+// GDT, PAGE 2
+
 // FIRST, VALIDATE THAT THE CALLER IS AN IMPLEMENTER.
 
    fmax = 46;

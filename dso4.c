@@ -37,8 +37,6 @@ int robrm(int rm, int pr, int nr, int nc, int na) {
 // Local variables
    int i;
 
-// OBJECTS
-
    ret_val = 0;
 // 						!COUNT OBJECTS
    i__1 = objcts_1.olnt;
@@ -72,8 +70,6 @@ Bool winnin(int vl, int hr) {
 
 // Local variables
    int ps, vs;
-
-// OBJECTS
 
    vs = objcts_1.ocapac[vl - 1];
 // 						!VILLAIN STRENGTH
@@ -126,6 +122,8 @@ int vilstr(int v) {
 
 // Local variables
    int i;
+
+// VILSTR, PAGE 2
 
    ret_val = objcts_1.ocapac[v - 1];
    if (ret_val <= 0) {

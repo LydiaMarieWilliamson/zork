@@ -24,10 +24,13 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    int prep, pptr, lbuf1, lbuf2;
    int buzlnt, prplnt, dirlnt;
 
+// SPARSE, PAGE 2
+
 // Parameter adjustments
    --lbuf;
 
 // Function Body
+// SPARSE, PAGE 7
 
 // SET UP FOR PARSING
 
@@ -175,10 +178,10 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 
    L600:
       obj = getobj(j, adj, 0);
+// 						!IDENTIFY OBJECT.
 #ifdef ALLOW_GDT
 //    if (dflag) print(" SPARSE- OBJ AT %I6  OBJ= %I6", 60, j, obj); //F
 #endif
-// 						!IDENTIFY OBJECT.
       if (obj <= 0) {
          goto L6000;
       }
@@ -365,11 +368,11 @@ L1500:
 // 1750--	RETURN A RESULT
 
 L1750:
+// 						!WIN.
 #ifdef ALLOW_GDT
 // if (dflag) print(" SPARSE RESULTS- %5I7", pv_1.act, pv_1.o1, pv_1.o2, pv_1.p1, pv_1.p2); //F
 // if (dflag) write(0, *, "sparse=", sparse); //F
 #endif
-// 						!WIN.
    return ret_val;
 // 						!LOSE.
 

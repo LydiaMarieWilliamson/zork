@@ -16,6 +16,8 @@ Bool take(Bool flg) {
    int oa;
    int x;
 
+// TAKE, PAGE 2
+
    ret_val = false;
 // 						!ASSUME LOSES.
    oa = objcts_1.oactio[prsvec_1.prso - 1];
@@ -99,6 +101,8 @@ Bool drop(/*Bool z*/) {
    Bool f;
    int i, x;
 
+// DROP, PAGE 2
+
    ret_val = true;
 // 						!ASSUME WINS.
    x = objcts_1.ocan[prsvec_1.prso - 1];
@@ -181,6 +185,8 @@ Bool put(/*Bool flg*/) {
 // Local variables
    int j;
    int svi, svo;
+
+// PUT, PAGE 2
 
    ret_val = false;
    if (prsvec_1.prso <= star_1.strbit && prsvec_1.prsi <= star_1.strbit) {
@@ -313,6 +319,8 @@ void valuac(int v) {
    int i;
    Bool f1;
    int savep, saveh;
+
+// VALUAC, PAGE 2
 
    f = true;
 // 						!ASSUME NO ACTIONS.

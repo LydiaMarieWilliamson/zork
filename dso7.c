@@ -61,6 +61,8 @@ void cpgoto(int st) {
 // Local variables
    int i;
 
+// CPGOTO, PAGE 2
+
    rooms_1.rflag[rindex_1.cpuzz - 1] &= ~SeenR;
    i__1 = objcts_1.olnt;
    for (i = 1; i <= i__1; ++i) {
@@ -87,6 +89,8 @@ void cpinfo(int rmk, int st) {
    int i, j, k, l;
    char dgm[1 * 8];
 
+// CPINFO, PAGE 2
+
    rspeak(rmk);
    for (i = 1; i <= 8; ++i) {
       j = dgmoft[i - 1];
@@ -107,7 +111,6 @@ void cpinfo(int rmk, int st) {
    L100:
       ;
    }
-
 // write(chan_1.outch, //F
 //    "       |%A2%1X%A2%1X%A2|%/" //F
 //    " West  |%A2 .. %A2|  East%/" //F
