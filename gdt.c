@@ -23,9 +23,9 @@ void gdt(void) {
 // const char Format0[] = "   RANGE   CONTENTS"; //F
 // const char Format1[] = " Old=%L2%6XNew= %$"; //F
 // const char Format2[] = " Old= %I6%6XNew= %$"; //F
-const char Format0[] = "  RANGE   CONTENTS";
-const char Format1[] = "Old= %c      New= ";
-const char Format2[] = "Old= %6d      New= ";
+   const char Format0[] = "  RANGE   CONTENTS";
+   const char Format1[] = "Old= %c      New= ";
+   const char Format2[] = "Old= %6d      New= ";
 
 // System generated locals
    int i__1, i__2;
@@ -62,10 +62,7 @@ L2000:
    printf("GDT>"), fflush(stdout);
 // 						!OUTPUT PROMPT.
 // read(chan_1.inpch, "%A2", cmd); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   cmd[0] = ' ';
-   cmd[1] = ' ';
-   sscanf(buf, "%2s", cmd);
+   fgets(buf, sizeof buf, stdin), more_input(), cmd[0] = ' ', cmd[1] = ' ', sscanf(buf, "%2s", cmd);
 // 						!GET COMMAND.
    if (cmd[0] == '\0')
       goto L2000;
@@ -116,12 +113,8 @@ L2700:
 // 						!TYPE 3, REQUEST ARRAY COORDS.
 // read(chan_1.inpch, "%2I6", &j, &k); //F
    fgets(buf, sizeof buf, stdin), more_input();
-   for (z = buf; *z != '\0'; z++)
-      if (*z == ',')
-         *z = ' ';
-   j = 0;
-   k = 0;
-   sscanf(buf, "%d %d", &j, &k);
+   for (z = buf; *z != '\0'; z++) if (*z == ',') *z = ' ';
+   j = 0, k = 0, sscanf(buf, "%d %d", &j, &k);
    goto L2400;
 
 L2600:
@@ -130,12 +123,8 @@ L2600:
 // 						!TYPE 2, READ BOUNDS.
 // read(chan_1.inpch, "%2I6", &j, &k); //F
    fgets(buf, sizeof buf, stdin), more_input();
-   for (z = buf; *z != '\0'; z++)
-      if (*z == ',')
-         *z = ' ';
-   j = 0;
-   k = 0;
-   sscanf(buf, "%d %d", &j, &k);
+   for (z = buf; *z != '\0'; z++) if (*z == ',') *z = ' ';
+   j = 0, k = 0, sscanf(buf, "%d %d", &j, &k);
    if (k == 0) {
       k = j;
    }
@@ -146,9 +135,7 @@ L2500:
    printf("Entry:    "), fflush(stdout);
 // 						!TYPE 1, READ ENTRY NO.
 // read(chan_1.inpch, "%I6", &j); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   j = 0;
-   sscanf(buf, "%d", &j);
+   fgets(buf, sizeof buf, stdin), more_input(), j = 0, sscanf(buf, "%d", &j);
 
 L2400:
    switch (i) {
@@ -436,19 +423,19 @@ L20000:
 L21000:
 // write(chan_1.outch, //F
 //    " Valid commands are:%/" //F
-//    " AA- Alter ADVS%/"               " AC- Alter CEVENT%/"           " AF- Alter FINDEX%/" //F
-//    " AH- Alter HERE%/"               " AN- Alter switches%/"         " AO- Alter OBJCTS%/" //F
-//    " AR- Alter ROOMS%/"              " AV- Alter VILLS%/"            " AX- Alter EXITS%/" //F
-//    " AZ- Alter PUZZLE%/"             " DA- Display ADVS%/"           " DC- Display CEVENT%/" //F
-//    " DF- Display FINDEX%/"           " DH- Display HACKS%/"          " DL- Display lengths%/" //F
-//    " DM- Display RTEXT%/"            " DN- Display switches%/"       " DO- Display OBJCTS%/" //F
-//    " DP- Display parser%/"           " DR- Display ROOMS%/"          " DS- Display state%/" //F
-//    " DT- Display text%/"             " DV- Display VILLS%/"          " DX- Display EXITS%/" //F
-//    " DZ- Display PUZZLE%/"           " D2- Display ROOM2%/"          " EX- Exit%/" //F
-//    " HE- Type this message%/"        " NC- No cyclops%/"             " ND- No deaths%/" //F
-//    " NR- No robber%/"                " NT- No troll%/"               " PD- Program detail%/" //F
-//    " RC- Restore cyclops%/"          " RD- Restore deaths%/"         " RR- Restore robber%/" //F
-//    " RT- Restore troll%/"            " TK- Take." //F
+//    " AA- Alter ADVS%/"		" AC- Alter CEVENT%/"		" AF- Alter FINDEX%/" //F
+//    " AH- Alter HERE%/"		" AN- Alter switches%/"		" AO- Alter OBJCTS%/" //F
+//    " AR- Alter ROOMS%/"		" AV- Alter VILLS%/"		" AX- Alter EXITS%/" //F
+//    " AZ- Alter PUZZLE%/"		" DA- Display ADVS%/"		" DC- Display CEVENT%/" //F
+//    " DF- Display FINDEX%/"		" DH- Display HACKS%/"		" DL- Display lengths%/" //F
+//    " DM- Display RTEXT%/"		" DN- Display switches%/"	" DO- Display OBJCTS%/" //F
+//    " DP- Display parser%/"		" DR- Display ROOMS%/"		" DS- Display state%/" //F
+//    " DT- Display text%/"		" DV- Display VILLS%/"		" DX- Display EXITS%/" //F
+//    " DZ- Display PUZZLE%/"		" D2- Display ROOM2%/"		" EX- Exit%/" //F
+//    " HE- Type this message%/"	" NC- No cyclops%/"		" ND- No deaths%/" //F
+//    " NR- No robber%/"		" NT- No troll%/"		" PD- Program detail%/" //F
+//    " RC- Restore cyclops%/"		" RD- Restore deaths%/"		" RR- Restore robber%/" //F
+//    " RT- Restore troll%/"		" TK- Take." //F
 // ); //F
    more_output("Valid commands are:");
    more_output("AA- Alter ADVS          DR- Display ROOMS");
@@ -578,8 +565,7 @@ L32000:
    printf(Format2, eqr[j - 1 + 200 * (k - 1)]), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
 // read(chan_1.inpch, "%I6", &eqr(j, k)); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &eqr[j - 1 + 200 * (k - 1)]);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqr[j - 1 + 200 * (k - 1)]);
    goto L2000;
 
 // AO-- ALTER OBJECT ENTRY
@@ -592,8 +578,7 @@ L33000:
 // write(chan_1.outch, Format2, eqo(j, k)); //F
    printf(Format2, eqo[j - 1 + 220 * (k - 1)]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &eqo(j, k)); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &eqo[j - 1 + 220 * (k - 1)]);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqo[j - 1 + 220 * (k - 1)]);
    goto L2000;
 
 // AA-- ALTER ADVS ENTRY
@@ -606,8 +591,7 @@ L34000:
 // write(chan_1.outch, Format2, eqa(j, k)); //F
    printf(Format2, eqa[j - 1 + ((k - 1) << 2)]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &eqa(j, k)); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &eqa[j - 1 + ((k - 1) << 2)]);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqa[j - 1 + ((k - 1) << 2)]);
    goto L2000;
 
 // AC-- ALTER CLOCK EVENTS
@@ -624,17 +608,12 @@ L35000:
 // write(chan_1.outch, Format2, eqc(j, k)); //F
    printf(Format2, eqc[j - 1 + 25 * (k - 1)]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &eqc(j, k)); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &eqc[j - 1 + 25 * (k - 1)]);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqc[j - 1 + 25 * (k - 1)]);
    goto L2000;
 
 L35500:
 // write(chan_1.outch, Format1, cflag(j)); //F
-#if 0
    printf(Format1, cevent_1.cflag[j - 1] ? 'T' : 'F'), fflush(stdout);
-#else
-   fflush(stdout);
-#endif
 // read(chan_1.inpch, "%L1", &cevent_1.cflag); //F
    fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++) {
@@ -659,8 +638,7 @@ L36000:
 // write(chan_1.outch, Format2, travel(j)); //F
    printf(Format2, exits_1.travel[j - 1]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &exits_1.travel(j)); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &exits_1.travel[j - 1]);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &exits_1.travel[j - 1]);
    goto L2000;
 
 // AV-- ALTER VILLAINS
@@ -673,8 +651,7 @@ L37000:
 // write(chan_1.outch, Format2, eqv(j, k)); //F
    printf(Format2, eqv[j - 1 + ((k - 1) << 2)]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &eqv(j, k)); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &eqv[j - 1 + ((k - 1) << 2)]);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqv[j - 1 + ((k - 1) << 2)]);
    goto L2000;
 
 // D2-- DISPLAY ROOM2 LIST
@@ -716,8 +693,7 @@ L40000:
 // write(chan_1.outch, Format2, switch_(j)); //F
    printf(Format2, switch_[j - 1]), fflush(stdout);
 // read(chan_1.inpch, "%I6", &switch_(j)); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &switch_[j - 1]);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &switch_[j - 1]);
    goto L2000;
 
 // DM-- DISPLAY MESSAGES
@@ -731,12 +707,11 @@ L41000:
    more_output(Format0);
    i__1 = k;
    for (i = j; i <= i__1; i += 10) {
-//    write(chan_1.outch, "%1X%I3"-%I3%3X%10(1X,I6)", i, l, (rtext(l1), l1 = i, l)); //F
-      more_output(NULL);
 // Computing MIN
       i__2 = i + 9;
       l = min(i__2, k);
-      printf("%3d-%3d  ", i, l);
+//    write(chan_1.outch, "%1X%I3"-%I3%3X%10(1X,I6)", i, l, (rtext(l1), l1 = i, l)); //F
+      more_output(NULL), printf("%3d-%3d  ", i, l);
       for (l1 = i; l1 <= l; ++l1) printf(" %6d", rmsg_1.rtext[l1 - 1]);
       printf("\n");
 // L41100:
@@ -755,8 +730,7 @@ L43000:
 // write(chan_1.outch, Format2, here); //F
    printf(Format2, play_1.here), fflush(stdout);
 // read(chan_1.inpch, "%I6", &play_1.here); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &play_1.here);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &play_1.here);
    eqa[0] = play_1.here;
    goto L2000;
 
@@ -777,8 +751,7 @@ L45000:
    printf(Format2, debug_1.prsflg), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
 // read(chan_1.inpch, "%I6", &debug_1.prsflg); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &debug_1.prsflg);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &debug_1.prsflg);
    goto L2000;
 
 // DZ--	DISPLAY PUZZLE ROOM
@@ -805,8 +778,7 @@ L47000:
    printf(Format2, puzzle_1.cpvec[j - 1]), fflush(stdout);
 // 						!OUTPUT OLD,
 // read(chan_1.inpch, "%I6", &puzzle_1.cpvec(j)); //F
-   fgets(buf, sizeof buf, stdin), more_input();
-   sscanf(buf, "%d", &puzzle_1.cpvec[j - 1]);
+   fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &puzzle_1.cpvec[j - 1]);
    goto L2000;
-#endif // ALLOW_GDT
+#endif
 }
