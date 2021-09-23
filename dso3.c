@@ -73,8 +73,6 @@ int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 // Local variables
    int i, j;
 
-// OBJECTS
-
    ret_val = 0;
 // 						!ASSUME NOTHING.
    i__1 = objcts_1.olnt;
