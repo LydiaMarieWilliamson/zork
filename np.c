@@ -186,8 +186,9 @@ L50:
 L200:
    j = inbuf[prsvec_1.prscon];
 // 						!GET CHARACTER
-   if (j == '\0')
+   if (j == '\0') {
       goto L1000;
+   }
 // 						!END OF INPUT?
    ++prsvec_1.prscon;
 // 						!ADVANCE PTR.

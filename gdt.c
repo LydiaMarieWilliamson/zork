@@ -12,7 +12,7 @@ void gdt(void) {
 #ifdef ALLOW_GDT
 // Initialized data
    const int cmdmax = 38;
-   const char *dbgcmd =
+   const char dbgcmd[2 * 38] =
       "DR" "DO" "DA" "DC" "DX" "DH" "DL" "DV" "DF" "DS" "AF" "HE" "NR" "NT" "NC" "ND" "RR" "RT" "RC"
       "RD" "TK" "EX" "AR" "AO" "AA" "AC" "AX" "AV" "D2" "DN" "AN" "DM" "DT" "AH" "DP" "PD" "DZ" "AZ";
    static const int argtyp[38] = {

@@ -18,7 +18,7 @@ Bool vappli(int ri) {
 // Local variables
    int melee;
    Bool f;
-   int i, j, av;
+   int i, j,/* x,*/ av;
    int rmk;
    int odi2 = 0, odo2 = 0;
 

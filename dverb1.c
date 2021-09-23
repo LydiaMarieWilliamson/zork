@@ -13,8 +13,7 @@ Bool take(Bool flg) {
    Bool ret_val;
 
 // Local variables
-   int oa;
-   int x;
+   int x, oa;
 
 // TAKE, PAGE 2
 
@@ -184,6 +183,9 @@ Bool put(/*Bool flg*/) {
 
 // Local variables
    int j;
+#if 0
+   int x; //(@) No longer used.
+#endif
    int svi, svo;
 
 // PUT, PAGE 2

@@ -166,6 +166,19 @@ L2600:
 
 // Strike blow
 int blow(int h, int v, int rmk, Bool hflg, int out) {
+// System generated locals
+   int ret_val, i__1, i__2;
+
+// Local variables
+   int i, j, oa, ra, od, mi, dv, def;
+   int tbl;
+   int att, res;
+   int dweap;
+   int pblose;
+
+// MISCELLANEOUS VARIABLES
+   Bool f;
+
 // Initialized data
    const int rmiss = 0;
    const int rout = 1;
@@ -192,17 +205,6 @@ int blow(int h, int v, int rmk, Bool hflg, int out) {
       4075, 1079, 4080, 4084, 4088, 4092, 4096, 4100, 1104,
       4105, 2109, 4111, 4115, 4119, 4123, 4127, 3131, 3134
    };
-
-// System generated locals
-   int ret_val, i__1, i__2;
-
-// Local variables
-   Bool f;
-   int i, j, oa, ra, od, mi, dv, def;
-   int tbl;
-   int att, res;
-   int dweap;
-   int pblose;
 
 // BLOW, PAGE 3
 
