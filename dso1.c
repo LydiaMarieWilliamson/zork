@@ -13,6 +13,8 @@ void princr(Bool full, int rm) {
 // Local variables
    int i, j, k;
 
+// PRINCR, PAGE 2
+
    j = 329;
 // 						!ASSUME SUPERBRIEF FORMAT.
    i__1 = objcts_1.olnt;
@@ -89,6 +91,8 @@ void invent(int adv) {
 
 // Local variables
    int i, j;
+
+// INVENT, PAGE 2
 
    i = 575;
 // 						!FIRST LINE.

@@ -4,6 +4,8 @@
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 
 // The functions for dungeon.
+
+// The remnant of f2c.h (begin)
 // Assumes C99, which is now (well into the 21st century) POSIX.
 // That means: boolean types, function prototypes, "rb" and "wb" for fopen, "const", "void", etc.
 #include <stdbool.h>
@@ -25,6 +27,7 @@ Bool wizard(void);
 void more_init(void);
 void more_output(const char *);
 void more_input(void);
+// The remnant of f2c.h (end)
 
 // actors.c:
 Bool aappli(int);
@@ -45,7 +48,7 @@ void swordd(void);
 void game_(void);
 
 // dinit.c:
-Bool init(void/*int x*/);
+Bool init(void/*int*/);
 
 // dso1.c:
 void princr(Bool, int);

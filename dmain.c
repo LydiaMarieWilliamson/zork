@@ -154,7 +154,7 @@ const struct vindexCB vindex = (struct vindexCB){
    pumpw: 154, windw: 155, clmbw: 156, clmbuw: 157, clmbdw: 158, trntow: 159
 };
 
-// Main program
+// Main program: dungeo
 int main(void) {
 #if 0
    int x;

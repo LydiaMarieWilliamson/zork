@@ -14,6 +14,8 @@ Bool lightp(int obj) {
    int flobts;
    int i;
 
+// LIGHTP, PAGE 2
+
    ret_val = true;
 // 						!ASSUME WINS
    flobts = FlamO + LiteO + OnO;
@@ -53,7 +55,6 @@ L19100:
 
 L19200:
    if (prsvec_1.prsa != vindex_1.burnw && prsvec_1.prsa != vindex_1.trnonw) {
-
       goto L10;
    }
    if ((objcts_1.oflag1[oindex_1.candl - 1] & LiteO) != 0) {
@@ -116,7 +117,6 @@ L20000:
       bug(6, obj);
    }
    if (prsvec_1.prsa != vindex_1.trnonw || prsvec_1.prso != oindex_1.match) {
-
       goto L20500;
    }
    if (findex_1.ormtch != 0) {
