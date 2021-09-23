@@ -127,7 +127,7 @@ extern const int avoc[];
 // int vvoc[950]; // equivalence (vvoc[1], vrbvoc_1.vvoc1[1]);
 extern const int vvoc[];
 
-// common /objvoc/ ovoc1[159], ovoc2[144], ovoc3[150], ovoc4[128], ovoc5[111], ovoc6[104], ovoc6a[97], ovoc7[127], ovocnd;
+// common /objvoc/ ovoc1[160], ovoc2[144], ovoc3[150], ovoc4[128], ovoc5[111], ovoc6[104], ovoc6a[97], ovoc7[127], ovocnd;
 // int ovoc[1050]; // equivalence (ovoc[1], objvoc_1.ovoc1[1]);
 extern const int ovoc[];
 
