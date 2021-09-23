@@ -1,69 +1,64 @@
-# Makefile for dungeon
+## Makefile for Dungeon/Zork
 
-# Where to install the program
+## Where to install the program
 BINDIR = /usr/games
 
-# Where to install the data file
+## Where to install the data file
 LIBDIR = /usr/games/lib
 
-# Where to install the man page
+## Where to install the man page
 MANDIR = /usr/share/man
 
-# The dungeon program provides a ``more'' facility which tries to
-# figure out how many rows the terminal has.  Several mechanisms are
-# supported for determining this; the most common one has been left
-# uncommented.  If you have trouble, especially when linking, you may
-# have to select a different option.
+## The Dungeon/Zork program provides a ‟more” facility which tries to figure out how many rows the terminal has.
+## Several mechanisms are supported for determining this; the most common one has been left uncommented.
+## If you have trouble, especially when linking, you may have to select a different option.
 
-# more option 1: use the termcap routines.  On some systems the LIBS
-# variable may need to be set to -lcurses.  On some it may need to
-# be /usr/lib/termcap.o.  These options are commented out below.
-# LIBS = -ltermcap
-# TERMFLAG =
-# LIBS = -lcurses
-# LIBS = /usr/lib/termcap.o
+## more option 1: use the termcap routines.
+## On some systems the LIBS variable may need to be set to -lcurses.
+## On some it may need to be /usr/lib/termcap.o.
+## These options are commented out below.
+#LIBS = -ltermcap
+#TERMFLAG =
+#LIBS = -lcurses
+#LIBS = /usr/lib/termcap.o
 
-# more option 2: use the terminfo routines.  On some systems the LIBS
-# variable needs to be -lcursesX, but probably all such systems support
-# the termcap routines (option 1) anyhow.
-# LIBS = -lcurses
-# TERMFLAG = -DMORE_TERMINFO
+## more option 2: use the terminfo routines.
+## On some systems the LIBS variable needs to be -lcursesX,
+## but probably all such systems support the termcap routines (option 1) anyhow.
+#LIBS = -lcurses
+#TERMFLAG = -DMORE_TERMINFO
 
-# more option 3: assume all terminals have 24 rows
-# LIBS =
-# TERMFLAG = -DMORE_24
+## more option 3: assume all terminals have 24 rows
+#LIBS =
+#TERMFLAG = -DMORE_24
 
-# more option 4: don't use the more facility at all
+## more option 4: don't use the more facility at all
 LIBS =
 TERMFLAG = -DMORE_NONE
 
-# End of more options
+## End of more options
 
-# Uncomment the following line if you want to have access to the game
-# debugging tool.  This is invoked by typing "gdt".  It is not much
-# use except for debugging.
+## Uncomment the following line if you want to have access to the game debugging tool.
+## This is invoked by typing ‟gdt”.
+## It is not much use except for debugging.
 GDTFLAG = -DALLOW_GDT
 
-# Compilation flags
-# Development
+## Compilation flags
+## Development
 CFLAGS = -g #-static
-# Production
-# CFLAGS = -O2 #-static
-# On SCO Unix Development System 3.2.2a, the const type qualifier does
-# not work correctly when using cc.  The following line will cause it
-# to not be used and should be uncommented.
-# CFLAGS= -O -Dconst=
+## Production
+#CFLAGS = -O2 #-static
+## On SCO Unix Development System 3.2.2a, the const type qualifier does not work correctly when using cc.
+## The following line will cause it to not be used and should be uncommented.
+#CFLAGS= -O -Dconst=
 
-##################################################################
+## Object files
+OBJS =	common.o local.o \
+	actors.o ballop.o blkdata.o clockr.o demons.o dgame.o dinit.o dmain.o dso1.o dso2.o dso3.o \
+	dso4.o dso5.o dso6.o dso7.o dsub.o dverb1.o dverb2.o gdt.o lightp.o nobjs.o np1.o \
+	np2.o np3.o np.o nrooms.o objcts.o rooms.o sobjs.o supp.o sverbs.o verbs.o villns.o
 
-# Object files
-OBJS =	common.o \
-	actors.o ballop.o blkdata.o clockr.o demons.o dgame.o dinit.o dmain.o \
-	dso1.o dso2.o dso3.o dso4.o dso5.o dso6.o dso7.o dsub.o dverb1.o \
-	dverb2.o gdt.o lightp.o local.o nobjs.o np.o np1.o np2.o np3.o \
-	nrooms.o objcts.o rooms.o sobjs.o supp.o sverbs.o verbs.o villns.o
-
-# APP = dungeon
+#APP = dungeon
 APP = Zork
 
 $(APP): $(OBJS) dtextc.dat
@@ -99,6 +94,6 @@ local.o: local.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c local.c
 
 supp.o: supp.c
-	$(CC) $(CFLAGS) $(TERMFLAG) -c supp.c	
+	$(CC) $(CFLAGS) $(TERMFLAG) -c supp.c
 
 $(OBJS): extern.h common.h
