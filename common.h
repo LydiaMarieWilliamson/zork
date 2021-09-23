@@ -272,7 +272,7 @@ extern struct debugCB {
 } debug;
 #define debug_1 debug
 #ifdef ALLOW_GDT
-extern bool dflag;
+extern Bool dflag;
 #endif
 
 // villians.h:

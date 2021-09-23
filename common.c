@@ -87,6 +87,9 @@ struct findexCB findex;
 // common /debug/
 // int dbgflg, prsflg, gdtflg;
 struct debugCB debug;
+#ifdef ALLOW_GDT
+Bool dflag;
+#endif
 
 // villians.h:
 // common /hack/
