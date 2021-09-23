@@ -9,6 +9,8 @@
 // These structures are only used by the parsing routines.
 // They are in their own file since they are so large.
 
+// This routine details on bit 2 of prsflg
+
 // vocab.h:
 // Buzz words: ignored in syntactic processing
 // common /buzvoc/
@@ -21,7 +23,6 @@ const struct buzvocCB buzvoc = (struct buzvocCB){
       2160, 0, 32325, 0, 29654, 0, 11800, 0, 26335, 5005, 0, 0
    }
 };
-#define buzvoc_1 buzvoc
 
 // Prepositions: maps prepositions to indices
 // common /prpvoc/
@@ -38,7 +39,6 @@ const struct prpvocCB prpvoc = (struct prpvocCB){
       24246, 0, 11
    }
 };
-#define prpvoc_1 prpvoc
 
 // Directions: maps directions to indices
 // common /dirvoc/
@@ -67,7 +67,8 @@ const struct dirvocCB dirvoc = (struct dirvocCB){
       5535, 31160, 15360
    }
 };
-#define dirvoc_1 dirvoc
+
+// SPARSE, PAGE 3
 
 // Adjectives: maps adjectives to object numbers
 // Each entry is variable length and consists of a two word adjective in radix-50 followed by one or more object numbers.
@@ -117,6 +118,7 @@ const int avoc[] = {
    3681, 5240, 47, 162, 32621, 28800, 49,
    35579, 5421, 55, 35563, 15021, 62,
    11681, 31160, 10, 126, 132, 32721, 25600, 66,
+//   The following data statement was originally:
 //	DATA AVOC2/3RFRO,2RNT,68,3RSTO,2RNE,69,150,214,3RMAN,3RGLE,72,
 //     & 3RRED,0,79,94,140,161,170,171,3RYEL,3RLOW,80,159,
 //     & 3RBLU,1RE,82,112,114,141,
@@ -146,6 +148,7 @@ const int avoc[] = {
    29421, 22560, 128, 32729, 2167, 129,
    28858, 8000, 134, 24092, 24567, 135, 8060, 43725, 138,
    8060, 21000, 138, 24721, 22685, 139, 8123, 12800, 141,
+//   The following data statement was originally:
 //	DATA AVOC3/3RROC,2RKY,147,3RSHE,2RER,147,
 //     & 3R200,0,148,3RNEA,1RT,148,3RSHI,3RMME,151,
 //     & 3RZUR,3RICH,152,3RBIR,2RDS,153,154,155,
@@ -176,6 +179,8 @@ const int avoc[] = {
 // const int avocnd;
    -1
 };
+
+// SPARSE, PAGE 4
 
 // Verbs: maps verbs to syntax slots
 // Each entry is variable length and consists of one or more two word verbs in radix-50
@@ -212,6 +217,8 @@ const int avoc[] = {
 //	1	0	Try		Try to take, don't care if fail
 //	1	1	Take		Try to take, care if fail
 
+// SPARSE, PAGE 5
+
 // common /vrbvoc/ int vvoc1[92], vvoc1a[108], vvoc1b[38], vvoc2[104], vvoc3[136], vvoc4[116], vvoc5[134], vvoc6[117], vvoc7[89], vvocnd;
 // int vvoc[950]; // equivalence (vvoc[1], vrbvoc_1.vvoc1[1]);
 const int vvoc[] = {
@@ -235,6 +242,7 @@ const int vvoc[] = {
    27200, 0, 28049, 32000, 1, 84, 13012, 25600, 1, 40, 14966, 24000, 1, 41,
    13179, 32618, 34244, 2405, 1, 42, 3243, 17600, 1, 43,
    30767, 12800, 21653, 3685, 1, 44,
+//   The following data statement was originally:
 //	DATA VVOC1A/3RCHO,2RMP,3RLOS,1RE,3RBAR,1RF,1,45,
 //     & 3RDUN,3RGEO,1,46,3RFRO,3RBOZ,1,47,3RFOO,0,3RBLE,3RTCH,
 //     & 3RBAR,0,1,48,3RREP,3RENT,1,49,3RHOU,2RRS,3RSCH,3REDU,1,50,
@@ -256,6 +264,7 @@ const int vvoc[] = {
    6761, 11775, 1, 94, 8975, 28929, 1, 105, 14982, 8580,
    14400, 0, 1, 133, 36849, 32000, 1, 128,
    14963, 2180, 1, 95, 2179, 37018, 1, 96,
+//   The following data statement was originally:
 //	DATA VVOC1B/3RAGA,2RIN,1,57,3RNOO,2RBJ,1,58,
 //     & 3RBUG,0,3RGRI,2RPE,3RCOM,3RPLA,1,59,
 //     & 3RFEA,3RTUR,3RCOM,3RMEN,3RSUG,3RGES,3RIDE,1RA,1,60,
@@ -265,6 +274,7 @@ const int vvoc[] = {
    4047, 0, 11929, 25800, 5413, 26081, 1, 59,
    9801, 32858, 5413, 21014, 31247, 11419, 14565, 1600, 1, 60,
    29415, 20800, 1, 65, 24090, 8140, 1, 66, 29361, 21000, 1, 67,
+//   The following data statement was originally:
 //	DATA VVOC2/3RDEF,3RLAT,1,"50147,
 //     & 3RDES,3RCRI,3RWHA,1RT,3REXA,3RMIN,1,"50170,
 //     & 3RFIL,1RL,11,"60206,"61000,"200,0,"61002,"400,0,
@@ -290,6 +300,7 @@ const int vvoc[] = {
    30721, 17800, 1, 20601, 31049, 22400, 1, 20609,
    34180, 14600, 10325, 8000, 1, 20593, 36852, 17600, 9, 20622,
    16470, 25090, -1, -1, 16470, 25093, -1, -1,
+//   The following data statement was originally:
 //	DATA VVOC3/3RATT,3RACK,3RFIG,2RHT,3RINJ,3RURE,3RHIT,0,3RHUR,1RT,
 //     & 7,"60215,"21000,0,"200,"44002,0,"1000,
 //     & 3RBOA,2RRD,4,"40202,"21000,0,"2,
@@ -325,6 +336,7 @@ const int vvoc[] = {
    8060, 0, 5414, 31253, 11802, 3685, 21654, 5120, 32059, 32200,
    4, 16519, 31232, 1024, 0,
    8980, 14967, 7021, 30600, 4, 16508, 31232, 64, 0,
+//   The following data statement was originally:
 //	DATA VVOC4/3RGIV,1RE,3RHAN,1RD,3RDON,3RATE,11,"72222,"21004,
 //     & "40,0,"64222,"21000,"40,0,"61000,-1,-1,
 //     & 3RHEL,2RLO,2RHI,0,2,"2227,"50227,
@@ -356,6 +368,7 @@ const int vvoc[] = {
    19567, 13600, 11, 17531, 31232, 64, 0,
    24713, 25088, 64, 0, 22530, 8, 0,
    19803, 17600, 4, 16476, 8192, -1, -1,
+//   The following data statement was originally:
 //	DATA VVOC5/3RLOO,1RK,1RL,0,3RSTA,2RRE,3RGAZ,1RE,
 //     & 13,"167,"40167,"60003,-1,-1,
 //     & "40231,"61010,-1,-1,"40230,"60005,-1,-1,
@@ -393,6 +406,7 @@ const int vvoc[] = {
    26221, 28800, 31049, 19680, 11, 17555, 17408, 256, 0,
    24723, 17408, 256, 0, 24581, -1, -1,
    26453, 25600, 4, 24730, 24583, -1, -1,
+//   The following data statement was originally:
 //	DATA VVOC6/3RPUT,0,3RINS,3RERT,3RSTU,2RFF,3RPLA,2RCE,
 //     & 8,"72220,"61005,-1,-1,
 //     & "40221,"61006,-1,-1,
@@ -424,6 +438,7 @@ const int vvoc[] = {
    32212, 19200, 5413, 20854, 29017, 33819, 4, 16527, 8192, 0, 1024,
    32338, 24920, 13658, 19200, 5141, 5240, 14, 24724, 18432, -1, -1,
    8707, 32, 0, 24724, 18432, -1, -1, 8706, 32, 0,
+//   The following data statement was originally:
 //	DATA VVOC7/3RTIE,0,3RFAS,3RTEN,11,"70162,"61004,-1,-1,
 //     & "60163,"21000,"40,0,"65002,"4,0,
 //     & 3RTUR,1RN,3RSET,0,22,"62164,"61000,"2,0,
@@ -454,6 +469,8 @@ const int vvoc[] = {
 // int vvocnd;
    -1
 };
+
+// SPARSE, PAGE 6
 
 // Objects: maps objects to object indices
 // Same format as avoc.
@@ -494,6 +511,7 @@ const int ovoc[] = {
    29647, 0, 17, 4858, 25820, 17,
    19401, 35419, 18, 19401, 9600, 18, 32735, 19680, 19,
    2565, 0, 20, 6774, 22618, 3,
+//   The following data statement was originally:
 //	DATA OVOC2/3RKEY,1RS,23,3RKEY,0,23,
 //     & 3RSET,0,23,3RBON,2RES,24,3RSKE,3RLET,24,3RBOD,1RY,24,73,
 //     & 3RCOI,2RNS,25,3RBAR,0,26,165,168,
@@ -521,6 +539,7 @@ const int ovoc[] = {
    31049, 29180, 42, 9965, 22560, 42, 11921, 14880, 43, 26321, 40218, 44, 47,
    32741, 22840, 45, 5125, 31200, 45, 3412, 19200, 46,
    3815, 17600, 47, 49, 114, 115, 116, 117, 3562, 19400, 47,
+//   The following data statement was originally:
 //	DATA OVOC3/3RGOO,3RDBO,47,3RCAN,3RDLE,48,3RPAI,1RR,48,
 //     & 3RGUI,3RDEB,49,
 //     & 3RGUI,2RDE,49,3RPAP,2RER,50,122,143,186,3RNEW,3RSPA,50,
@@ -554,6 +573,7 @@ const int ovoc[] = {
    5529, 21175, 61, 3254, 6780, 61, 5535, 24440, 61, 11414, 32000, 61,
    11414, 32485, 61, 20854, 0, 61, 32341, 11200, 61,
    3247, 20854, 61, 31209, 19685, 62,
+//   The following data statement was originally:
 //	DATA OVOC4/3RWIN,3RDOW,63,3RBOL,1RT,64,3RNUT,0,64,
 //     & 3RGRA,2RTE,65,3RGRA,3RTIN,65,3RDOO,1RR,66,67,68,69,
 //     & 164,172,173,174,175,189,3RTRA,3RPDO,66,
@@ -583,6 +603,7 @@ const int ovoc[] = {
    26220, 0, 85, 31201, 32845, 86, 30541, 19860, 86, 29403, 17600, 86,
    3801, 32000, 87, 88, 90, 26081, 31209, 87, 88,
    26453, 25600, 89,
+//   The following data statement was originally:
 //	DATA OVOC5/3RAIR,3RPUM,89,3RAIR,3R$PU,89,3RLAB,2REL,91,112,
 //     & 3RFIN,3REPR,91,3RSTI,2RCK,92,3RBAR,3RREL,93,3RBUO,1RY,94,
 //     & 3REME,3RRAL,95,3RSHO,3RVEL,96,3RGUA,2RNO,97,3RCRA,1RP,97,
@@ -608,6 +629,7 @@ const int ovoc[] = {
    31201, 21440, 118,
    32613, 3200, 119, 5545, 26400, 119, 11921, 35400, 119, 13001, 7160, 120,
    26212, 8760, 120, 14936, 19413, 120,
+//   The following data statement was originally:
 //	DATA OVOC6/3RLOS,3RERS,120,3RCOK,2RES,121,
 //     & 3RLIS,3RTIN,122,3RSTA,2RCK,122,
 //     & 3RPRI,3RNTO,122,
@@ -635,6 +657,7 @@ const int ovoc[] = {
    4851, 8000, 138, 139, 140, 141, 14529, 22680, 139, 140, 141,
    29402, 24800, 142, 29402, 4200, 142,
    6136, 24000, 142, 30084, 51200, 142,
+//   The following data statement was originally:
 //	DATA OVOC6A/3RPAN,2REL,159,160,161,162,163,164,213,
 //     & 3RPOL,1RE,166,167,3RTBA,1RR,168,3RT$B,2RAR,168,
 //     & 3RARR,2ROW,169,3RPOI,2RNT,169,3RBEA,1RM,171,
@@ -656,6 +679,7 @@ const int ovoc[] = {
    30622, 8560, 184, 60800, 0, 185, 8367, 13600, 185,
    36858, 22774, 186, 30889, 32000, 187,
    15200, 0, 192, 32321, 32000, 192, 32329, 30400, 192,
+//   The following data statement was originally:
 //	DATA OVOC7/2RME,0,193,3RMYS,3RELF,193,3RCRE,3RTIN,193,
 //     & 3RALL,0,194,3REVE,3RRYT,194,
 //     & 3RTRE,3RASU,195,3RVAL,3RUAB,195,3RSAI,3RLOR,196,3RTEE,2RTH,197,
