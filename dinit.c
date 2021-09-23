@@ -430,7 +430,7 @@ L1925:
 //    i, j, k, vers_1.vmaj, vers_1.vmin, vers_1.vedit //F
 // ); //F
    more_output(NULL), printf("%s is version %1d.%1d%c.\n", TEXTFILE, i, j, k);
-   more_output(NULL), printf("I require version %1d.%1d%c.\n", vers_1.vmaj, vers_1.vmin, vers_1.vedit);
+   more_output(NULL), printf("I require version %1d.%1d%c.\n", vers_1.vmaj, vers_1.vmin, (int)vers_1.vedit);
    goto L1975;
 L1950:
 // print(" I can't open ","dindx.dat","."); //F

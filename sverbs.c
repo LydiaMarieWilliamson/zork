@@ -242,7 +242,7 @@ L4100:
 
 L5000:
 // write(chan_1.outch, " V%I1.%I2%A1", vers_2.vmaj, vers_2.vmin, vers_2.vedit); //F
-   more_output(NULL), printf("V%1d.%1d%c\n", vers_1.vmaj, vers_1.vmin, vers_1.vedit);
+   more_output(NULL), printf("V%1d.%1d%c\n", vers_1.vmaj, vers_1.vmin, (int)vers_1.vedit);
    play_1.telflg = true;
    return ret_val;
 

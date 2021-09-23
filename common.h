@@ -25,7 +25,8 @@ extern struct timeCB {
 
 // common /vers/
 extern const struct versCB {
-   int vmaj, vmin, vedit;
+   int vmaj, vmin;
+   char vedit;
 } vers;
 #define vers_1 vers
 

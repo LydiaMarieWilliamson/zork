@@ -24,7 +24,7 @@ void savegm(void) {
 #define PutArr(N, Buf) (fwrite((const void *)(Buf), sizeof (Buf)[0], (N), (ExF)))
 
 // write(1, vers_1.vmaj, vers_1.vmin, vers_1.vedit); //F
-   PutVar(vers_1.vmaj), PutVar(vers_1.vmin), PutVar(vers_1.vedit);
+{  int Edit = vers_1.vedit; PutVar(vers_1.vmaj), PutVar(vers_1.vmin), PutVar(Edit); }
 // write(1, //F
 //    play_1.winner, play_1.here, hack_1.thfpos, play_1.telflg, hack_1.thfflg, hack_1.thfact, //F
 //    hack_1.swdact, hack_1.swdsta, puzzle_1.cpvec //F
