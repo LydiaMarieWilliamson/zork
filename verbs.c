@@ -27,19 +27,19 @@ Bool vappli(int ri) {
    ret_val = true;
 // 						!ASSUME WINS.
 
-   if (prsvec_1.prso > 220) {
+   if (prsvec.prso > 220) {
       goto L5;
    }
 
-   if (prsvec_1.prso != 0) {
-      odo2 = objcts_1.odesc2[prsvec_1.prso - 1];
+   if (prsvec.prso != 0) {
+      odo2 = objcts.odesc2[prsvec.prso - 1];
    }
 // 						!SET UP DESCRIPTORS.
 L5:
-   if (prsvec_1.prsi != 0) {
-      odi2 = objcts_1.odesc2[prsvec_1.prsi - 1];
+   if (prsvec.prsi != 0) {
+      odi2 = objcts.odesc2[prsvec.prsi - 1];
    }
-   av = advs_1.avehic[play_1.winner - 1];
+   av = advs.avehic[play.winner - 1];
    rmk = rnd(6) + 372;
 // 						!REMARK FOR HACK-HACKS.
 
@@ -196,7 +196,7 @@ L100:
 // V100--	READ.  OUR FIRST REAL VERB.
 
 L18000:
-   if (lit(play_1.here)) {
+   if (lit(play.here)) {
       goto L18100;
    }
 // 						!ROOM LIT?
@@ -205,11 +205,11 @@ L18000:
    return ret_val;
 
 L18100:
-   if (prsvec_1.prsi == 0) {
+   if (prsvec.prsi == 0) {
       goto L18200;
    }
 // 						!READ THROUGH OBJ?
-   if ((objcts_1.oflag1[prsvec_1.prsi - 1] & TranO) != 0) {
+   if ((objcts.oflag1[prsvec.prsi - 1] & TranO) != 0) {
       goto L18200;
    }
    rspsub(357, odi2);
@@ -217,7 +217,7 @@ L18100:
    return ret_val;
 
 L18200:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ReadO) != 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & ReadO) != 0) {
       goto L18300;
    }
    rspsub(358, odo2);
@@ -226,7 +226,7 @@ L18200:
 
 L18300:
    if (!objact(/*x*/)) {
-      rspeak(objcts_1.oread[prsvec_1.prso - 1]);
+      rspeak(objcts.oread[prsvec.prso - 1]);
    }
    return ret_val;
 
@@ -260,7 +260,7 @@ L23000:
 // V104--	ALARM.  IF SLEEPING, WAKE HIM UP.
 
 L24000:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & SlepO) == 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & SlepO) == 0) {
       goto L24100;
    }
    ret_val = objact(/*x*/);
@@ -338,7 +338,7 @@ L33000:
 // 						!OBJECT HANDLE?
    i = 383;
 // 						!NO, NOT TIED.
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & TieO) == 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & TieO) == 0) {
       i = 384;
    }
    rspeak(i);
@@ -347,7 +347,7 @@ L33000:
 // V114--	TIE.  NEVER REALLY WORKS.
 
 L34000:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & TieO) != 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & TieO) != 0) {
       goto L34100;
    }
    rspeak(385);
@@ -364,7 +364,7 @@ L34100:
 // V115--	TIE UP.  NEVER REALLY WORKS.
 
 L35000:
-   if ((objcts_1.oflag2[prsvec_1.prsi - 1] & TieO) != 0) {
+   if ((objcts.oflag2[prsvec.prsi - 1] & TieO) != 0) {
       goto L35100;
    }
    rspsub(387, odo2);
@@ -374,7 +374,7 @@ L35000:
 L35100:
    i = 388;
 // 						!ASSUME VILLAIN.
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO) == 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & VillO) == 0) {
       i = 389;
    }
    rspsub(i, odo2);
@@ -384,7 +384,7 @@ L35100:
 // V116--	TURN.  OBJECT MUST HANDLE.
 
 L36000:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TurnO) != 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & TurnO) != 0) {
       goto L36100;
    }
    rspeak(390);
@@ -392,7 +392,7 @@ L36000:
    return ret_val;
 
 L36100:
-   if ((objcts_1.oflag1[prsvec_1.prsi - 1] & ToolO) != 0) {
+   if ((objcts.oflag1[prsvec.prsi - 1] & ToolO) != 0) {
       goto L36200;
    }
    rspsub(391, odi2);
@@ -407,8 +407,8 @@ L36200:
 // V117--	BREATHE.  BECOMES INFLATE WITH LUNGS.
 
 L38000:
-   prsvec_1.prsa = vindex_1.inflaw;
-   prsvec_1.prsi = oindex_1.lungs;
+   prsvec.prsa = vindex.inflaw;
+   prsvec.prsi = oindex.lungs;
    goto L22000;
 // 						!HANDLE LIKE INFLATE.
 
@@ -421,7 +421,7 @@ L39000:
 // 						!OBJ HANDLE?
    i = 394;
 // 						!JOKE FOR DOOR.
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & DoorO) == 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & DoorO) == 0) {
       i = 395;
    }
    rspsub(i, odo2);
@@ -431,7 +431,7 @@ L39000:
 // V119--	LOOK.
 
 L40000:
-   if (prsvec_1.prso != 0) {
+   if (prsvec.prso != 0) {
       goto L41500;
    }
 // 						!SOMETHING TO LOOK AT?
@@ -442,7 +442,7 @@ L40000:
 // V120--	EXAMINE.
 
 L41000:
-   if (prsvec_1.prso != 0) {
+   if (prsvec.prso != 0) {
       goto L41500;
    }
 // 						!SOMETHING TO EXAMINE?
@@ -455,7 +455,7 @@ L41500:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   i = objcts_1.oread[prsvec_1.prso - 1];
+   i = objcts.oread[prsvec.prso - 1];
 // 						!GET READING MATERIAL.
    if (i != 0) {
       rspeak(i);
@@ -465,7 +465,7 @@ L41500:
       rspsub(429, odo2);
    }
 // 						!OTHERWISE DEFAULT.
-   prsvec_1.prsa = vindex_1.foow;
+   prsvec.prsa = vindex.foow;
 // 						!DEFUSE ROOM PROCESSORS.
    return ret_val;
 
@@ -476,7 +476,7 @@ L42000:
       return ret_val;
    }
 // 						!OBJECT HANDLE?
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO) == 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & VillO) == 0) {
       goto L42100;
    }
    rspeak(371);
@@ -484,10 +484,10 @@ L42000:
    return ret_val;
 
 L42100:
-   if (qempty(prsvec_1.prso) || (objcts_1.oflag1[prsvec_1.prso - 1] & TakeO) == 0) {
+   if (qempty(prsvec.prso) || (objcts.oflag1[prsvec.prso - 1] & TakeO) == 0) {
       goto L10;
    }
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & OpenO) != 0) {
       goto L42300;
    }
 // 						!OPEN?  SPILL.
@@ -498,14 +498,14 @@ L42100:
 L42300:
    rspsub(397, odo2);
 // 						!SPILL THE WORKS.
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!SPILL CONTENTS.
-      if (objcts_1.ocan[i - 1] != prsvec_1.prso) {
+      if (objcts.ocan[i - 1] != prsvec.prso) {
          goto L42500;
       }
 // 						!INSIDE?
-      objcts_1.oflag2[i - 1] |= TChO;
+      objcts.oflag2[i - 1] |= TChO;
       if (av == 0) {
          goto L42400;
       }
@@ -515,9 +515,9 @@ L42300:
       goto L42500;
 
    L42400:
-      newsta(i, 0, play_1.here, 0, 0);
+      newsta(i, 0, play.here, 0, 0);
 // 						!NO, SPILL ON FLOOR,
-      if (i == oindex_1.water) {
+      if (i == oindex.water) {
          newsta(i, 133, 0, 0, 0);
       }
 // 						!BUT WATER DISAPPEARS.
@@ -535,7 +535,7 @@ L43000:
 // 						!OBJ HANDLE?
    i = 398;
 // 						!ASSUME NOT HERE.
-   if (qhere(prsvec_1.prso, play_1.here)) {
+   if (qhere(prsvec.prso, play.here)) {
       i = 399;
    }
    rspsub(i, odo2);
@@ -546,13 +546,13 @@ L43000:
 // V123--	TURN ON.
 
 L44000:
-   f = lit(play_1.here);
+   f = lit(play.here);
 // 						!RECORD IF LIT.
    if (objact(/*x*/)) {
       goto L44300;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & LiteO) != 0 && objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
+   if ((objcts.oflag1[prsvec.prso - 1] & LiteO) != 0 && objcts.oadv[prsvec.prso - 1] == play.winner) {
       goto L44100;
    }
    rspeak(400);
@@ -560,7 +560,7 @@ L44000:
    return ret_val;
 
 L44100:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & OnO) == 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & OnO) == 0) {
       goto L44200;
    }
    rspeak(401);
@@ -568,10 +568,10 @@ L44100:
    return ret_val;
 
 L44200:
-   objcts_1.oflag1[prsvec_1.prso - 1] |= OnO;
+   objcts.oflag1[prsvec.prso - 1] |= OnO;
    rspsub(404, odo2);
 L44300:
-   if (!f && lit(play_1.here)) {
+   if (!f && lit(play.here)) {
       f = rmdesc(0);
    }
 // 						!ROOM NEWLY LIT.
@@ -584,7 +584,7 @@ L45000:
       goto L45300;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & LiteO) != 0 && objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
+   if ((objcts.oflag1[prsvec.prso - 1] & LiteO) != 0 && objcts.oadv[prsvec.prso - 1] == play.winner) {
       goto L45100;
    }
    rspeak(402);
@@ -592,7 +592,7 @@ L45000:
    return ret_val;
 
 L45100:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & OnO) != 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & OnO) != 0) {
       goto L45200;
    }
    rspeak(403);
@@ -600,10 +600,10 @@ L45100:
    return ret_val;
 
 L45200:
-   objcts_1.oflag1[prsvec_1.prso - 1] &= ~OnO;
+   objcts.oflag1[prsvec.prso - 1] &= ~OnO;
    rspsub(405, odo2);
 L45300:
-   if (!lit(play_1.here)) {
+   if (!lit(play.here)) {
       rspeak(406);
    }
 // 						!MAY BE DARK.
@@ -616,7 +616,7 @@ L46000:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ContO) != 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & ContO) != 0) {
       goto L46100;
    }
 L46050:
@@ -625,7 +625,7 @@ L46050:
    return ret_val;
 
 L46100:
-   if (objcts_1.ocapac[prsvec_1.prso - 1] != 0) {
+   if (objcts.ocapac[prsvec.prso - 1] != 0) {
       goto L46200;
    }
    rspsub(408, odo2);
@@ -633,7 +633,7 @@ L46100:
    return ret_val;
 
 L46200:
-   if (!((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0)) {
+   if (!((objcts.oflag2[prsvec.prso - 1] & OpenO) != 0)) {
       goto L46225;
    }
    rspeak(412);
@@ -641,11 +641,11 @@ L46200:
    return ret_val;
 
 L46225:
-   objcts_1.oflag2[prsvec_1.prso - 1] |= OpenO;
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TranO) != 0 || qempty(prsvec_1.prso)) {
+   objcts.oflag2[prsvec.prso - 1] |= OpenO;
+   if ((objcts.oflag1[prsvec.prso - 1] & TranO) != 0 || qempty(prsvec.prso)) {
       goto L46300;
    }
-   princo(prsvec_1.prso, 410);
+   princo(prsvec.prso, 410);
 // 						!PRINT CONTENTS.
    return ret_val;
 
@@ -661,10 +661,10 @@ L47000:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ContO) == 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & ContO) == 0) {
       goto L46050;
    }
-   if (objcts_1.ocapac[prsvec_1.prso - 1] != 0) {
+   if (objcts.ocapac[prsvec.prso - 1] != 0) {
       goto L47100;
    }
    rspsub(411, odo2);
@@ -672,7 +672,7 @@ L47000:
    return ret_val;
 
 L47100:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & OpenO) != 0) {
       goto L47200;
    }
 // 						!OPEN?
@@ -681,7 +681,7 @@ L47100:
    return ret_val;
 
 L47200:
-   objcts_1.oflag2[prsvec_1.prso - 1] &= ~OpenO;
+   objcts.oflag2[prsvec.prso - 1] &= ~OpenO;
    rspeak(414);
 // 						!DONE.
    return ret_val;
@@ -696,34 +696,34 @@ L48000:
 // 						!OBJ HANDLE?
    i = 415;
 // 						!DEFAULT CASE.
-   if (qhere(prsvec_1.prso, play_1.here)) {
+   if (qhere(prsvec.prso, play.here)) {
       goto L48300;
    }
 // 						!IN ROOM?
-   if (objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
+   if (objcts.oadv[prsvec.prso - 1] == play.winner) {
       goto L48200;
    }
 // 						!ON WINNER?
-   j = objcts_1.ocan[prsvec_1.prso - 1];
+   j = objcts.ocan[prsvec.prso - 1];
 // 						!DOWN ONE LEVEL.
    if (j == 0) {
       goto L10;
    }
-   if ((objcts_1.oflag1[j - 1] & TranO) == 0 && (!((objcts_1.oflag2[j - 1] & OpenO) != 0) || (objcts_1.oflag1[j - 1] & DoorO + ContO) == 0)) {
+   if ((objcts.oflag1[j - 1] & TranO) == 0 && (!((objcts.oflag2[j - 1] & OpenO) != 0) || (objcts.oflag1[j - 1] & DoorO + ContO) == 0)) {
       goto L10;
    }
    i = 417;
 // 						!ASSUME IN ROOM.
-   if (qhere(j, play_1.here)) {
+   if (qhere(j, play.here)) {
       goto L48100;
    }
-   if (objcts_1.oadv[j - 1] != play_1.winner) {
+   if (objcts.oadv[j - 1] != play.winner) {
       goto L10;
    }
 // 						!NOT HERE OR ON PERSON.
    i = 418;
 L48100:
-   rspsub(i, objcts_1.odesc2[j - 1]);
+   rspsub(i, objcts.odesc2[j - 1]);
 // 						!DESCRIBE FINDINGS.
    return ret_val;
 
@@ -761,7 +761,7 @@ L88000:
 // V130--	BOARD.  WORKS WITH VEHICLES.
 
 L51000:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VehO) != 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & VehO) != 0) {
       goto L51100;
    }
    rspsub(421, odo2);
@@ -769,7 +769,7 @@ L51000:
    return ret_val;
 
 L51100:
-   if (qhere(prsvec_1.prso, play_1.here)) {
+   if (qhere(prsvec.prso, play.here)) {
       goto L51200;
    }
 // 						!HERE?
@@ -793,16 +793,16 @@ L51300:
 // 						!OBJ HANDLE?
    rspsub(423, odo2);
 // 						!DESCRIBE.
-   advs_1.avehic[play_1.winner - 1] = prsvec_1.prso;
-   if (play_1.winner != aindex_1.player) {
-      objcts_1.ocan[advs_1.aobj[play_1.winner - 1] - 1] = prsvec_1.prso;
+   advs.avehic[play.winner - 1] = prsvec.prso;
+   if (play.winner != aindex.player) {
+      objcts.ocan[advs.aobj[play.winner - 1] - 1] = prsvec.prso;
    }
    return ret_val;
 
 // V131--	DISEMBARK.
 
 L52000:
-   if (av == prsvec_1.prso) {
+   if (av == prsvec.prso) {
       goto L52100;
    }
 // 						!FROM VEHICLE?
@@ -815,7 +815,7 @@ L52100:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((rooms_1.rflag[play_1.here - 1] & LandR) != 0) {
+   if ((rooms.rflag[play.here - 1] & LandR) != 0) {
       goto L52200;
    }
    rspeak(425);
@@ -823,10 +823,10 @@ L52100:
    return ret_val;
 
 L52200:
-   advs_1.avehic[play_1.winner - 1] = 0;
+   advs.avehic[play.winner - 1] = 0;
    rspeak(426);
-   if (play_1.winner != aindex_1.player) {
-      newsta(advs_1.aobj[play_1.winner - 1], 0, play_1.here, 0, 0);
+   if (play.winner != aindex.player) {
+      newsta(advs.aobj[play.winner - 1], 0, play.here, 0, 0);
    }
    return ret_val;
 
@@ -839,35 +839,35 @@ L53000:
 // V133--	INVENTORY.  PROCESSED EXTERNALLY.
 
 L55000:
-   invent(play_1.winner);
+   invent(play.winner);
    return ret_val;
 // VAPPLI, PAGE 8
 
 // V134--	FILL.  STRANGE DOINGS WITH WATER.
 
 L56000:
-   if (prsvec_1.prsi != 0) {
+   if (prsvec.prsi != 0) {
       goto L56050;
    }
 // 						!ANY OBJ SPECIFIED?
-   if ((rooms_1.rflag[play_1.here - 1] & WaterR + FillR) != 0) {
+   if ((rooms.rflag[play.here - 1] & WaterR + FillR) != 0) {
       goto L56025;
    }
    rspeak(516);
 // 						!NOTHING TO FILL WITH.
-   prsvec_1.prswon = false;
+   prsvec.prswon = false;
 // 						!YOU LOSE.
    return ret_val;
 
 L56025:
-   prsvec_1.prsi = oindex_1.gwate;
+   prsvec.prsi = oindex.gwate;
 // 						!USE GLOBAL WATER.
 L56050:
    if (objact(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if (prsvec_1.prsi != oindex_1.gwate && prsvec_1.prsi != oindex_1.water) {
+   if (prsvec.prsi != oindex.gwate && prsvec.prsi != oindex.water) {
       rspsb2(444, odi2, odo2);
    }
    return ret_val;
@@ -880,15 +880,15 @@ L59000:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if (prsvec_1.prso == oindex_1.gwate) {
+   if (prsvec.prso == oindex.gwate) {
       goto L59500;
    }
 // 						!DRINK GLOBAL WATER?
-   if (!((objcts_1.oflag1[prsvec_1.prso - 1] & FoodO) != 0)) {
+   if (!((objcts.oflag1[prsvec.prso - 1] & FoodO) != 0)) {
       goto L59400;
    }
 // 						!EDIBLE?
-   if (objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
+   if (objcts.oadv[prsvec.prso - 1] == play.winner) {
       goto L59200;
    }
 // 						!YES, ON WINNER?
@@ -898,11 +898,11 @@ L59100:
    return ret_val;
 
 L59200:
-   if (prsvec_1.prsa == vindex_1.drinkw) {
+   if (prsvec.prsa == vindex.drinkw) {
       goto L59300;
    }
 // 						!DRINK FOOD?
-   newsta(prsvec_1.prso, 455, 0, 0, 0);
+   newsta(prsvec.prso, 455, 0, 0, 0);
 // 						!NO, IT DISAPPEARS.
    return ret_val;
 
@@ -912,18 +912,18 @@ L59300:
    return ret_val;
 
 L59400:
-   if (!((objcts_1.oflag1[prsvec_1.prso - 1] & DrnkO) != 0)) {
+   if (!((objcts.oflag1[prsvec.prso - 1] & DrnkO) != 0)) {
       goto L59600;
    }
 // 						!DRINKABLE?
-   if (objcts_1.ocan[prsvec_1.prso - 1] == 0) {
+   if (objcts.ocan[prsvec.prso - 1] == 0) {
       goto L59100;
    }
 // 						!YES, IN SOMETHING?
-   if (objcts_1.oadv[objcts_1.ocan[prsvec_1.prso - 1] - 1] != play_1.winner) {
+   if (objcts.oadv[objcts.ocan[prsvec.prso - 1] - 1] != play.winner) {
       goto L59100;
    }
-   if ((objcts_1.oflag2[objcts_1.ocan[prsvec_1.prso - 1] - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[objcts.ocan[prsvec.prso - 1] - 1] & OpenO) != 0) {
       goto L59500;
    }
 // 						!CONT OPEN?
@@ -932,7 +932,7 @@ L59400:
    return ret_val;
 
 L59500:
-   newsta(prsvec_1.prso, 458, 0, 0, 0);
+   newsta(prsvec.prso, 458, 0, 0, 0);
 // 						!GONE.
    return ret_val;
 
@@ -944,26 +944,26 @@ L59600:
 // V137--	BURN.  COMPLICATED.
 
 L60000:
-   if ((objcts_1.oflag1[prsvec_1.prsi - 1] & FlamO + LiteO + OnO) != FlamO + LiteO + OnO) {
+   if ((objcts.oflag1[prsvec.prsi - 1] & FlamO + LiteO + OnO) != FlamO + LiteO + OnO) {
       goto L60400;
    }
    if (objact(/*x*/)) {
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if (objcts_1.ocan[prsvec_1.prso - 1] != oindex_1.recep) {
+   if (objcts.ocan[prsvec.prso - 1] != oindex.recep) {
       goto L60050;
    }
 // 						!BALLOON?
-   if (oappli(objcts_1.oactio[oindex_1.ballo - 1], 0)) {
+   if (oappli(objcts.oactio[oindex.ballo - 1], 0)) {
       return ret_val;
    }
 // 						!DID IT HANDLE?
 L60050:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & BurnO) == 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & BurnO) == 0) {
       goto L60300;
    }
-   if (objcts_1.oadv[prsvec_1.prso - 1] != play_1.winner) {
+   if (objcts.oadv[prsvec.prso - 1] != play.winner) {
       goto L60100;
    }
 // 						!CARRYING IT?
@@ -972,20 +972,20 @@ L60050:
    return ret_val;
 
 L60100:
-   j = objcts_1.ocan[prsvec_1.prso - 1];
+   j = objcts.ocan[prsvec.prso - 1];
 // 						!GET CONTAINER.
-   if (qhere(prsvec_1.prso, play_1.here) || av != 0 && j == av) {
+   if (qhere(prsvec.prso, play.here) || av != 0 && j == av) {
       goto L60200;
    }
    if (j == 0) {
       goto L60150;
    }
 // 						!INSIDE?
-   if (!((objcts_1.oflag2[j - 1] & OpenO) != 0)) {
+   if (!((objcts.oflag2[j - 1] & OpenO) != 0)) {
       goto L60150;
    }
 // 						!OPEN?
-   if (qhere(j, play_1.here) || av != 0 && objcts_1.ocan[j - 1] == av) {
+   if (qhere(j, play.here) || av != 0 && objcts.ocan[j - 1] == av) {
       goto L60200;
    }
 L60150:
@@ -996,7 +996,7 @@ L60150:
 L60200:
    rspsub(462, odo2);
 // 						!BURN IT.
-   newsta(prsvec_1.prso, 0, 0, 0, 0);
+   newsta(prsvec.prso, 0, 0, 0, 0);
    return ret_val;
 
 L60300:
@@ -1015,7 +1015,7 @@ L60400:
 L63000:
    i = 466;
 // 						!CHOOSE PHRASE.
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO) != 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & VillO) != 0) {
       goto L66100;
    }
    if (!objact(/*x*/)) {
@@ -1033,14 +1033,14 @@ L64000:
 // V140--	SWING.  INVERT OBJECTS, FALL THRU TO ATTACK.
 
 L65000:
-   j = prsvec_1.prso;
+   j = prsvec.prso;
 // 						!INVERT.
-   prsvec_1.prso = prsvec_1.prsi;
-   prsvec_1.prsi = j;
+   prsvec.prso = prsvec.prsi;
+   prsvec.prsi = j;
    j = odo2;
    odo2 = odi2;
    odi2 = j;
-   prsvec_1.prsa = vindex_1.attacw;
+   prsvec.prsa = vindex.attacw;
 // 						!FOR OBJACT.
 
 // V141--	ATTACK.  FALL THRU TO ATTACK CODE.
@@ -1051,7 +1051,7 @@ L66000:
 // COMMON MUNG/ATTACK/SWING/KILL CODE.
 
 L66100:
-   if (prsvec_1.prso != 0) {
+   if (prsvec.prso != 0) {
       goto L66200;
    }
 // 						!ANYTHING?
@@ -1064,10 +1064,10 @@ L66200:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO) != 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & VillO) != 0) {
       goto L66300;
    }
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & VictO) == 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & VictO) == 0) {
       rspsub(470, odo2);
    }
    return ret_val;
@@ -1075,19 +1075,19 @@ L66200:
 L66300:
    j = 471;
 // 						!ASSUME NO WEAPON.
-   if (prsvec_1.prsi == 0) {
+   if (prsvec.prsi == 0) {
       goto L66500;
    }
-   if ((objcts_1.oflag2[prsvec_1.prsi - 1] & WeapO) == 0) {
+   if ((objcts.oflag2[prsvec.prsi - 1] & WeapO) == 0) {
       goto L66400;
    }
    melee = 1;
 // 						!ASSUME SWORD.
-   if (prsvec_1.prsi != oindex_1.sword) {
+   if (prsvec.prsi != oindex.sword) {
       melee = 2;
    }
 // 						!MUST BE KNIFE.
-   i = blow(aindex_1.player, prsvec_1.prso, melee, true, 0);
+   i = blow(aindex.player, prsvec.prso, melee, true, 0);
 // 						!STRIKE BLOW.
    return ret_val;
 
@@ -1130,7 +1130,7 @@ L74000:
 // V149--	SAVE
 
 L77000:
-   if ((rooms_1.rflag[rindex_1.tstrs - 1] & SeenR) == 0) {
+   if ((rooms.rflag[rindex_.tstrs - 1] & SeenR) == 0) {
       goto L77100;
    }
    rspeak(828);
@@ -1144,7 +1144,7 @@ L77100:
 // V150--	RESTORE
 
 L78000:
-   if ((rooms_1.rflag[rindex_1.tstrs - 1] & SeenR) == 0) {
+   if ((rooms.rflag[rindex_.tstrs - 1] & SeenR) == 0) {
       goto L78100;
    }
    rspeak(829);
@@ -1159,7 +1159,7 @@ L78100:
 // V151--	HELLO
 
 L80000:
-   if (prsvec_1.prso != 0) {
+   if (prsvec.prso != 0) {
       goto L80100;
    }
 // 						!ANY OBJ?
@@ -1169,7 +1169,7 @@ L80000:
    return ret_val;
 
 L80100:
-   if (prsvec_1.prso != oindex_1.aviat) {
+   if (prsvec.prso != oindex.aviat) {
       goto L80200;
    }
 // 						!HELLO AVIATOR?
@@ -1178,19 +1178,19 @@ L80100:
    return ret_val;
 
 L80200:
-   if (prsvec_1.prso != oindex_1.sailo) {
+   if (prsvec.prso != oindex.sailo) {
       goto L80300;
    }
 // 						!HELLO SAILOR?
-   ++state_1.hs;
+   ++state.hs;
 // 						!COUNT.
    i = 351;
 // 						!GIVE NORMAL OR
-   if (state_1.hs % 10 == 0) {
+   if (state.hs % 10 == 0) {
       i = 352;
    }
 // 						!RANDOM MESSAGE.
-   if (state_1.hs % 20 == 0) {
+   if (state.hs % 20 == 0) {
       i = 353;
    }
    rspeak(i);
@@ -1204,7 +1204,7 @@ L80300:
 // 						!OBJ HANDLE?
    i = 354;
 // 						!ASSUME VILLAIN.
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VillO + ActrO) == 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & VillO + ActrO) == 0) {
       i = 355;
    }
    rspsub(i, odo2);
@@ -1219,10 +1219,10 @@ L81000:
       return ret_val;
    }
 // 						!OBJ HANDLE?
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & DoorO) == 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & DoorO) == 0) {
       goto L81300;
    }
-   if (!((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0)) {
+   if (!((objcts.oflag2[prsvec.prso - 1] & OpenO) != 0)) {
       goto L81200;
    }
 // 						!OPEN?
@@ -1236,13 +1236,13 @@ L81200:
    return ret_val;
 
 L81300:
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & VehO) != 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & VehO) != 0) {
       goto L81400;
    }
-   if ((objcts_1.oflag2[prsvec_1.prso - 1] & OpenO) != 0 || (objcts_1.oflag1[prsvec_1.prso - 1] & TranO) != 0) {
+   if ((objcts.oflag2[prsvec.prso - 1] & OpenO) != 0 || (objcts.oflag1[prsvec.prso - 1] & TranO) != 0) {
       goto L81400;
    }
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & ContO) != 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & ContO) != 0) {
       goto L81200;
    }
    rspsub(630, odo2);
@@ -1250,11 +1250,11 @@ L81300:
    return ret_val;
 
 L81400:
-   if (qempty(prsvec_1.prso)) {
+   if (qempty(prsvec.prso)) {
       goto L81500;
    }
 // 						!VEH OR SEE IN.  EMPTY?
-   princo(prsvec_1.prso, 573);
+   princo(prsvec.prso, 573);
 // 						!NO, LIST CONTENTS.
    return ret_val;
 
@@ -1276,7 +1276,7 @@ L82000:
 // V154--	PUMP
 
 L83000:
-   if (objcts_1.oroom[oindex_1.pump - 1] == play_1.here || objcts_1.oadv[oindex_1.pump - 1] == play_1.winner) {
+   if (objcts.oroom[oindex.pump - 1] == play.here || objcts.oadv[oindex.pump - 1] == play.winner) {
       goto L83100;
    }
    rspeak(632);
@@ -1284,9 +1284,9 @@ L83000:
    return ret_val;
 
 L83100:
-   prsvec_1.prsi = oindex_1.pump;
+   prsvec.prsi = oindex.pump;
 // 						!BECOMES INFLATE
-   prsvec_1.prsa = vindex_1.inflaw;
+   prsvec.prsa = vindex.inflaw;
 // 						!X WITH PUMP.
    goto L22000;
 // 						!DONE.
@@ -1307,14 +1307,14 @@ L84000:
 L85000:
 L86000:
 L87000:
-   i = xsrch_1.xup;
+   i = xsrch.xup;
 // 						!ASSUME UP.
-   if (prsvec_1.prsa == vindex_1.clmbdw) {
-      i = xsrch_1.xdown;
+   if (prsvec.prsa == vindex.clmbdw) {
+      i = xsrch.xdown;
    }
 // 						!UNLESS CLIMB DN.
-   f = (objcts_1.oflag2[prsvec_1.prso - 1] & ClmbO) != 0;
-   if (f && findxt(i, play_1.here)) {
+   f = (objcts.oflag2[prsvec.prso - 1] & ClmbO) != 0;
+   if (f && findxt(i, play.here)) {
       goto L87500;
    }
 // 						!ANYTHING TO CLIMB?
@@ -1327,7 +1327,7 @@ L87000:
       i = 524;
    }
 // 						!VARIETY OF JOKES.
-   if (!f && (prsvec_1.prso == oindex_1.wall || prsvec_1.prso >= oindex_1.wnort && prsvec_1.prso <= oindex_1.wnort + 3)) {
+   if (!f && (prsvec.prso == oindex.wall || prsvec.prso >= oindex.wnort && prsvec.prso <= oindex.wnort + 3)) {
       i = 656;
    }
    rspeak(i);
@@ -1335,9 +1335,9 @@ L87000:
    return ret_val;
 
 L87500:
-   prsvec_1.prsa = vindex_1.walkw;
+   prsvec.prsa = vindex.walkw;
 // 						!WALK
-   prsvec_1.prso = i;
+   prsvec.prso = i;
 // 						!IN SPECIFIED DIR.
    ret_val = walk(/*x*/);
    return ret_val;
@@ -1354,23 +1354,23 @@ Bool clockd(/*int x*/) {
 
    ret_val = false;
 // 						!ASSUME NO ACTION.
-   i__1 = cevent_1.clnt;
+   i__1 = cevent.clnt;
    for (i = 1; i <= i__1; ++i) {
-      if (!cevent_1.cflag[i - 1] || cevent_1.ctick[i - 1] == 0) {
+      if (!cevent.cflag[i - 1] || cevent.ctick[i - 1] == 0) {
          goto L100;
       }
-      if (cevent_1.ctick[i - 1] < 0) {
+      if (cevent.ctick[i - 1] < 0) {
          goto L50;
       }
 // 						!PERMANENT ENTRY?
-      --cevent_1.ctick[i - 1];
-      if (cevent_1.ctick[i - 1] != 0) {
+      --cevent.ctick[i - 1];
+      if (cevent.ctick[i - 1] != 0) {
          goto L100;
       }
 // 						!TIMER EXPIRED?
    L50:
       ret_val = true;
-      cevapp(cevent_1.cactio[i - 1]);
+      cevapp(cevent.cactio[i - 1]);
 // 						!DO ACTION.
    L100:
       ;

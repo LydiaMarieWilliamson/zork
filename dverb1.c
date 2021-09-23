@@ -19,9 +19,9 @@ Bool take(Bool flg) {
 
    ret_val = false;
 // 						!ASSUME LOSES.
-   oa = objcts_1.oactio[prsvec_1.prso - 1];
+   oa = objcts.oactio[prsvec.prso - 1];
 // 						!GET OBJECT ACTION.
-   if (prsvec_1.prso <= star_1.strbit) {
+   if (prsvec.prso <= star.strbit) {
       goto L100;
    }
 // 						!STAR?
@@ -30,9 +30,9 @@ Bool take(Bool flg) {
    return ret_val;
 
 L100:
-   x = objcts_1.ocan[prsvec_1.prso - 1];
+   x = objcts.ocan[prsvec.prso - 1];
 // 						!INSIDE?
-   if (prsvec_1.prso != advs_1.avehic[play_1.winner - 1]) {
+   if (prsvec.prso != advs.avehic[play.winner - 1]) {
       goto L400;
    }
 // 						!HIS VEHICLE?
@@ -41,7 +41,7 @@ L100:
    return ret_val;
 
 L400:
-   if ((objcts_1.oflag1[prsvec_1.prso - 1] & TakeO) != 0) {
+   if ((objcts.oflag1[prsvec.prso - 1] & TakeO) != 0) {
       goto L500;
    }
    if (!oappli(oa, 0)) {
@@ -53,17 +53,17 @@ L400:
 // OBJECT IS TAKEABLE AND IN POSITION TO BE TAKEN.
 
 L500:
-   if (x != 0 || qhere(prsvec_1.prso, play_1.here)) {
+   if (x != 0 || qhere(prsvec.prso, play.here)) {
       goto L600;
    }
-   if (objcts_1.oadv[prsvec_1.prso - 1] == play_1.winner) {
+   if (objcts.oadv[prsvec.prso - 1] == play.winner) {
       rspeak(557);
    }
 // 						!ALREADY GOT IT?
    return ret_val;
 
 L600:
-   if (x != 0 && objcts_1.oadv[x - 1] == play_1.winner || weight(0, prsvec_1.prso, play_1.winner) + objcts_1.osize[prsvec_1.prso - 1] <= state_1.mxload) {
+   if (x != 0 && objcts.oadv[x - 1] == play.winner || weight(0, prsvec.prso, play.winner) + objcts.osize[prsvec.prso - 1] <= state.mxload) {
       goto L700;
    }
    rspeak(558);
@@ -77,12 +77,12 @@ L700:
       return ret_val;
    }
 // 						!DID IT HANDLE?
-   newsta(prsvec_1.prso, 0, 0, 0, play_1.winner);
+   newsta(prsvec.prso, 0, 0, 0, play.winner);
 // 						!TAKE OBJECT FOR WINNER.
-   objcts_1.oflag2[prsvec_1.prso - 1] |= TChO;
-   scrupd(objcts_1.ofval[prsvec_1.prso - 1]);
+   objcts.oflag2[prsvec.prso - 1] |= TChO;
+   scrupd(objcts.ofval[prsvec.prso - 1]);
 // 						!UPDATE SCORE.
-   objcts_1.ofval[prsvec_1.prso - 1] = 0;
+   objcts.ofval[prsvec.prso - 1] = 0;
 // 						!CANT BE SCORED AGAIN.
    if (flg) {
       rspeak(559);
@@ -104,53 +104,53 @@ Bool drop(/*Bool z*/) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   x = objcts_1.ocan[prsvec_1.prso - 1];
+   x = objcts.ocan[prsvec.prso - 1];
 // 						!GET CONTAINER.
    if (x == 0) {
       goto L200;
    }
 // 						!IS IT INSIDE?
-   if (objcts_1.oadv[x - 1] != play_1.winner) {
+   if (objcts.oadv[x - 1] != play.winner) {
       goto L1000;
    }
 // 						!IS HE CARRYING CON?
-   if ((objcts_1.oflag2[x - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[x - 1] & OpenO) != 0) {
       goto L300;
    }
-   rspsub(525, objcts_1.odesc2[x - 1]);
+   rspsub(525, objcts.odesc2[x - 1]);
 // 						!CANT REACH.
    return ret_val;
 
 L200:
-   if (objcts_1.oadv[prsvec_1.prso - 1] != play_1.winner) {
+   if (objcts.oadv[prsvec.prso - 1] != play.winner) {
       goto L1000;
    }
 // 						!IS HE CARRYING OBJ?
 L300:
-   if (advs_1.avehic[play_1.winner - 1] == 0) {
+   if (advs.avehic[play.winner - 1] == 0) {
       goto L400;
    }
 // 						!IS HE IN VEHICLE?
-   prsvec_1.prsi = advs_1.avehic[play_1.winner - 1];
+   prsvec.prsi = advs.avehic[play.winner - 1];
 // 						!YES,
    f = put(/*true*/);
 // 						!DROP INTO VEHICLE.
-   prsvec_1.prsi = 0;
+   prsvec.prsi = 0;
 // 						!DISARM PARSER.
    return ret_val;
 // 						!DONE.
 
 L400:
-   newsta(prsvec_1.prso, 0, play_1.here, 0, 0);
+   newsta(prsvec.prso, 0, play.here, 0, 0);
 // 						!DROP INTO ROOM.
-   if (play_1.here == rindex_1.mtree) {
-      newsta(prsvec_1.prso, 0, rindex_1.fore3, 0, 0);
+   if (play.here == rindex_.mtree) {
+      newsta(prsvec.prso, 0, rindex_.fore3, 0, 0);
    }
-   scrupd(objcts_1.ofval[prsvec_1.prso - 1]);
+   scrupd(objcts.ofval[prsvec.prso - 1]);
 // 						!SCORE OBJECT.
-   objcts_1.ofval[prsvec_1.prso - 1] = 0;
+   objcts.ofval[prsvec.prso - 1] = 0;
 // 						!CANT BE SCORED AGAIN.
-   objcts_1.oflag2[prsvec_1.prso - 1] |= TChO;
+   objcts.oflag2[prsvec.prso - 1] |= TChO;
 
    if (objact(/*x*/)) {
       return ret_val;
@@ -158,16 +158,16 @@ L400:
 // 						!DID IT HANDLE?
    i = 0;
 // 						!ASSUME NOTHING TO SAY.
-   if (prsvec_1.prsa == vindex_1.dropw) {
+   if (prsvec.prsa == vindex.dropw) {
       i = 528;
    }
-   if (prsvec_1.prsa == vindex_1.throww) {
+   if (prsvec.prsa == vindex.throww) {
       i = 529;
    }
-   if (i != 0 && play_1.here == rindex_1.mtree) {
+   if (i != 0 && play.here == rindex_.mtree) {
       i = 659;
    }
-   rspsub(i, objcts_1.odesc2[prsvec_1.prso - 1]);
+   rspsub(i, objcts.odesc2[prsvec.prso - 1]);
    return ret_val;
 
 L1000:
@@ -191,7 +191,7 @@ Bool put(/*Bool flg*/) {
 // PUT, PAGE 2
 
    ret_val = false;
-   if (prsvec_1.prso <= star_1.strbit && prsvec_1.prsi <= star_1.strbit) {
+   if (prsvec.prso <= star.strbit && prsvec.prsi <= star.strbit) {
       goto L200;
    }
    if (!objact(/*x*/)) {
@@ -202,7 +202,7 @@ Bool put(/*Bool flg*/) {
    return ret_val;
 
 L200:
-   if ((objcts_1.oflag2[prsvec_1.prsi - 1] & OpenO) != 0 || (objcts_1.oflag1[prsvec_1.prsi - 1] & DoorO + ContO) != 0 || (objcts_1.oflag2[prsvec_1.prsi - 1] & VehO) != 0) {
+   if ((objcts.oflag2[prsvec.prsi - 1] & OpenO) != 0 || (objcts.oflag1[prsvec.prsi - 1] & DoorO + ContO) != 0 || (objcts.oflag2[prsvec.prsi - 1] & VehO) != 0) {
       goto L300;
    }
    rspeak(561);
@@ -210,7 +210,7 @@ L200:
    return ret_val;
 
 L300:
-   if ((objcts_1.oflag2[prsvec_1.prsi - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[prsvec.prsi - 1] & OpenO) != 0) {
       goto L400;
    }
 // 						!IS IT OPEN?
@@ -219,7 +219,7 @@ L300:
    return ret_val;
 
 L400:
-   if (prsvec_1.prso != prsvec_1.prsi) {
+   if (prsvec.prso != prsvec.prsi) {
       goto L500;
    }
 // 						!INTO ITSELF?
@@ -228,16 +228,16 @@ L400:
    return ret_val;
 
 L500:
-   if (objcts_1.ocan[prsvec_1.prso - 1] != prsvec_1.prsi) {
+   if (objcts.ocan[prsvec.prso - 1] != prsvec.prsi) {
       goto L600;
    }
 // 						!ALREADY INSIDE.
-   rspsb2(564, objcts_1.odesc2[prsvec_1.prso - 1], objcts_1.odesc2[prsvec_1.prsi - 1]);
+   rspsb2(564, objcts.odesc2[prsvec.prso - 1], objcts.odesc2[prsvec.prsi - 1]);
    ret_val = true;
    return ret_val;
 
 L600:
-   if (weight(0, prsvec_1.prso, 0) + weight(0, prsvec_1.prsi, 0) + objcts_1.osize[prsvec_1.prso - 1] <= objcts_1.ocapac[prsvec_1.prsi - 1]) {
+   if (weight(0, prsvec.prso, 0) + weight(0, prsvec.prsi, 0) + objcts.osize[prsvec.prso - 1] <= objcts.ocapac[prsvec.prsi - 1]) {
       goto L700;
    }
    rspeak(565);
@@ -247,14 +247,14 @@ L600:
 // NOW SEE IF OBJECT (OR ITS CONTAINER) IS IN ROOM
 
 L700:
-   j = prsvec_1.prso;
+   j = prsvec.prso;
 // 						!START SEARCH.
 L725:
-   if (qhere(j, play_1.here)) {
+   if (qhere(j, play.here)) {
       goto L750;
    }
 // 						!IS IT HERE?
-   j = objcts_1.ocan[j - 1];
+   j = objcts.ocan[j - 1];
    if (j != 0) {
       goto L725;
    }
@@ -263,41 +263,41 @@ L725:
 // 						!NO, SCH FAILS.
 
 L750:
-   svo = prsvec_1.prso;
+   svo = prsvec.prso;
 // 						!SAVE PARSER.
-   svi = prsvec_1.prsi;
-   prsvec_1.prsa = vindex_1.takew;
-   prsvec_1.prsi = 0;
+   svi = prsvec.prsi;
+   prsvec.prsa = vindex.takew;
+   prsvec.prsi = 0;
    if (!take(false)) {
       return ret_val;
    }
 // 						!TAKE OBJECT.
-   prsvec_1.prsa = vindex_1.putw;
-   prsvec_1.prso = svo;
-   prsvec_1.prsi = svi;
+   prsvec.prsa = vindex.putw;
+   prsvec.prso = svo;
+   prsvec.prsi = svi;
    goto L1000;
 
 // NOW SEE IF OBJECT IS ON PERSON.
 
 L800:
-   if (objcts_1.ocan[prsvec_1.prso - 1] == 0) {
+   if (objcts.ocan[prsvec.prso - 1] == 0) {
       goto L1000;
    }
 // 						!INSIDE?
-   if ((objcts_1.oflag2[objcts_1.ocan[prsvec_1.prso - 1] - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[objcts.ocan[prsvec.prso - 1] - 1] & OpenO) != 0) {
       goto L900;
    }
 // 						!OPEN?
-   rspsub(566, objcts_1.odesc2[prsvec_1.prso - 1]);
+   rspsub(566, objcts.odesc2[prsvec.prso - 1]);
 // 						!LOSE.
    return ret_val;
 
 L900:
-   scrupd(objcts_1.ofval[prsvec_1.prso - 1]);
+   scrupd(objcts.ofval[prsvec.prso - 1]);
 // 						!SCORE OBJECT.
-   objcts_1.ofval[prsvec_1.prso - 1] = 0;
-   objcts_1.oflag2[prsvec_1.prso - 1] |= TChO;
-   newsta(prsvec_1.prso, 0, 0, 0, play_1.winner);
+   objcts.ofval[prsvec.prso - 1] = 0;
+   objcts.oflag2[prsvec.prso - 1] |= TChO;
+   newsta(prsvec.prso, 0, 0, 0, play.winner);
 // 						!TEMPORARILY ON WINNER.
 
 L1000:
@@ -305,7 +305,7 @@ L1000:
       return ret_val;
    }
 // 						!NO, GIVE OBJECT A SHOT.
-   newsta(prsvec_1.prso, 2, 0, prsvec_1.prsi, 0);
+   newsta(prsvec.prso, 2, 0, prsvec.prsi, 0);
 // 						!CONTAINED INSIDE.
    ret_val = true;
    return ret_val;
@@ -328,35 +328,35 @@ void valuac(int v) {
 // 						!ASSUME NO ACTIONS.
    i = 579;
 // 						!ASSUME NOT LIT.
-   if (!lit(play_1.here)) {
+   if (!lit(play.here)) {
       goto L4000;
    }
 // 						!IF NOT LIT, PUNT.
    i = 677;
 // 						!ASSUME WRONG VERB.
-   savep = prsvec_1.prso;
+   savep = prsvec.prso;
 // 						!SAVE PRSO.
-   saveh = play_1.here;
+   saveh = play.here;
 // 						!SAVE HERE.
 
 //L100:
-   if (prsvec_1.prsa != vindex_1.takew) {
+   if (prsvec.prsa != vindex.takew) {
       goto L1000;
    }
 // 						!TAKE EVERY/VALUA?
-   i__1 = objcts_1.olnt;
-   for (prsvec_1.prso = 1; prsvec_1.prso <= i__1; ++prsvec_1.prso) {
+   i__1 = objcts.olnt;
+   for (prsvec.prso = 1; prsvec.prso <= i__1; ++prsvec.prso) {
 // 						!LOOP THRU OBJECTS.
-      if (!qhere(prsvec_1.prso, play_1.here) || (objcts_1.oflag1[prsvec_1.prso - 1] & VisiO) == 0 || (objcts_1.oflag2[prsvec_1.prso - 1] & ActrO) != 0 || savep == v && objcts_1.otval[prsvec_1.prso - 1] <= 0) {
+      if (!qhere(prsvec.prso, play.here) || (objcts.oflag1[prsvec.prso - 1] & VisiO) == 0 || (objcts.oflag2[prsvec.prso - 1] & ActrO) != 0 || savep == v && objcts.otval[prsvec.prso - 1] <= 0) {
          goto L500;
       }
-      if ((objcts_1.oflag1[prsvec_1.prso - 1] & TakeO) == 0 && (objcts_1.oflag2[prsvec_1.prso - 1] & TryO) == 0) {
+      if ((objcts.oflag1[prsvec.prso - 1] & TakeO) == 0 && (objcts.oflag2[prsvec.prso - 1] & TryO) == 0) {
          goto L500;
       }
       f = false;
-      rspsub(580, objcts_1.odesc2[prsvec_1.prso - 1]);
+      rspsub(580, objcts.odesc2[prsvec.prso - 1]);
       f1 = take(true);
-      if (saveh != play_1.here) {
+      if (saveh != play.here) {
          return;
       }
    L500:
@@ -365,19 +365,19 @@ void valuac(int v) {
    goto L3000;
 
 L1000:
-   if (prsvec_1.prsa != vindex_1.dropw) {
+   if (prsvec.prsa != vindex.dropw) {
       goto L2000;
    }
 // 						!DROP EVERY/VALUA?
-   i__1 = objcts_1.olnt;
-   for (prsvec_1.prso = 1; prsvec_1.prso <= i__1; ++prsvec_1.prso) {
-      if (objcts_1.oadv[prsvec_1.prso - 1] != play_1.winner || savep == v && objcts_1.otval[prsvec_1.prso - 1] <= 0) {
+   i__1 = objcts.olnt;
+   for (prsvec.prso = 1; prsvec.prso <= i__1; ++prsvec.prso) {
+      if (objcts.oadv[prsvec.prso - 1] != play.winner || savep == v && objcts.otval[prsvec.prso - 1] <= 0) {
          goto L1500;
       }
       f = false;
-      rspsub(580, objcts_1.odesc2[prsvec_1.prso - 1]);
+      rspsub(580, objcts.odesc2[prsvec.prso - 1]);
       f1 = drop(/*true*/);
-      if (saveh != play_1.here) {
+      if (saveh != play.here) {
          return;
       }
    L1500:
@@ -386,20 +386,20 @@ L1000:
    goto L3000;
 
 L2000:
-   if (prsvec_1.prsa != vindex_1.putw) {
+   if (prsvec.prsa != vindex.putw) {
       goto L3000;
    }
 // 						!PUT EVERY/VALUA?
-   i__1 = objcts_1.olnt;
-   for (prsvec_1.prso = 1; prsvec_1.prso <= i__1; ++prsvec_1.prso) {
+   i__1 = objcts.olnt;
+   for (prsvec.prso = 1; prsvec.prso <= i__1; ++prsvec.prso) {
 // 						!LOOP THRU OBJECTS.
-      if (objcts_1.oadv[prsvec_1.prso - 1] != play_1.winner || prsvec_1.prso == prsvec_1.prsi || savep == v && objcts_1.otval[prsvec_1.prso - 1] <= 0 || (objcts_1.oflag1[prsvec_1.prso - 1] & VisiO) == 0) {
+      if (objcts.oadv[prsvec.prso - 1] != play.winner || prsvec.prso == prsvec.prsi || savep == v && objcts.otval[prsvec.prso - 1] <= 0 || (objcts.oflag1[prsvec.prso - 1] & VisiO) == 0) {
          goto L2500;
       }
       f = false;
-      rspsub(580, objcts_1.odesc2[prsvec_1.prso - 1]);
+      rspsub(580, objcts.odesc2[prsvec.prso - 1]);
       f1 = put(/*true*/);
-      if (saveh != play_1.here) {
+      if (saveh != play.here) {
          return;
       }
    L2500:

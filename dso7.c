@@ -63,20 +63,20 @@ void cpgoto(int st) {
 
 // CPGOTO, PAGE 2
 
-   rooms_1.rflag[rindex_1.cpuzz - 1] &= ~SeenR;
-   i__1 = objcts_1.olnt;
+   rooms.rflag[rindex_.cpuzz - 1] &= ~SeenR;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!RELOCATE OBJECTS.
-      if (objcts_1.oroom[i - 1] == rindex_1.cpuzz && (objcts_1.oflag2[i - 1] & ActrO + VillO) == 0) {
-         i__2 = findex_1.cphere * hyper_1.hfactr;
+      if (objcts.oroom[i - 1] == rindex_.cpuzz && (objcts.oflag2[i - 1] & ActrO + VillO) == 0) {
+         i__2 = findex.cphere * hyper.hfactr;
          newsta(i, 0, i__2, 0, 0);
       }
-      if (objcts_1.oroom[i - 1] == st * hyper_1.hfactr) {
-         newsta(i, 0, rindex_1.cpuzz, 0, 0);
+      if (objcts.oroom[i - 1] == st * hyper.hfactr) {
+         newsta(i, 0, rindex_.cpuzz, 0, 0);
       }
 // L100:
    }
-   findex_1.cphere = st;
+   findex.cphere = st;
 }
 
 // Describe puzzle room
@@ -94,7 +94,7 @@ void cpinfo(int rmk, int st) {
    rspeak(rmk);
    for (i = 1; i <= 8; ++i) {
       j = dgmoft[i - 1];
-      dgm[i - 1] = pict[puzzle_1.cpvec[st + j - 1] + 3];
+      dgm[i - 1] = pict[puzzle.cpvec[st + j - 1] + 3];
 // 						!GET PICTURE ELEMENT.
       if (abs(j) == 1 || abs(j) == 8) {
          goto L100;
@@ -105,13 +105,13 @@ void cpinfo(int rmk, int st) {
       }
 // 						!GET ORTHO DIR.
       l = j - k;
-      if (puzzle_1.cpvec[st + k - 1] != 0 && puzzle_1.cpvec[st + l - 1] != 0) {
+      if (puzzle.cpvec[st + k - 1] != 0 && puzzle.cpvec[st + l - 1] != 0) {
          dgm[i - 1] = '?';
       }
    L100:
       ;
    }
-// write(chan_1.outch, //F
+// write(chan.outch, //F
 //    "       |%A2%1X%A2%1X%A2|%/" //F
 //    " West  |%A2 .. %A2|  East%/" //F
 //    "       |%A2%1X%A2%1X%A2|", //F
@@ -131,18 +131,18 @@ void cpinfo(int rmk, int st) {
 // 						!AT NICHE?
    i = 872;
 // 						!DOOR OPEN?
-   if (findex_1.cpoutf) {
+   if (findex.cpoutf) {
       i = 873;
    }
    if (st == 52) {
       rspeak(i);
    }
 // 						!AT DOOR?
-   if (puzzle_1.cpvec[st] == -2) {
+   if (puzzle.cpvec[st] == -2) {
       rspeak(874);
    }
 // 						!EAST LADDER?
-   if (puzzle_1.cpvec[st - 2] == -3) {
+   if (puzzle.cpvec[st - 2] == -3) {
       rspeak(875);
    }
 // 						!WEST LADDER?

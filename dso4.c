@@ -15,9 +15,9 @@ int robadv(int adv, int nr, int nc, int na) {
 
    ret_val = 0;
 // 						!COUNT OBJECTS
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
-      if (objcts_1.oadv[i - 1] != adv || objcts_1.otval[i - 1] <= 0 || (objcts_1.oflag2[i - 1] & ScrDO) != 0) {
+      if (objcts.oadv[i - 1] != adv || objcts.otval[i - 1] <= 0 || (objcts.oflag2[i - 1] & ScrDO) != 0) {
          goto L100;
       }
       newsta(i, 0, nr, nc, na);
@@ -39,21 +39,21 @@ int robrm(int rm, int pr, int nr, int nc, int na) {
 
    ret_val = 0;
 // 						!COUNT OBJECTS
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!LOOP ON OBJECTS.
       if (!qhere(i, rm)) {
          goto L100;
       }
-      if (objcts_1.otval[i - 1] <= 0 || (objcts_1.oflag2[i - 1] & ScrDO) != 0 || (objcts_1.oflag1[i - 1] & VisiO) == 0 || !prob(pr, pr)) {
+      if (objcts.otval[i - 1] <= 0 || (objcts.oflag2[i - 1] & ScrDO) != 0 || (objcts.oflag1[i - 1] & VisiO) == 0 || !prob(pr, pr)) {
          goto L50;
       }
       newsta(i, 0, nr, nc, na);
       ++ret_val;
-      objcts_1.oflag2[i - 1] |= TChO;
+      objcts.oflag2[i - 1] |= TChO;
       goto L100;
    L50:
-      if ((objcts_1.oflag2[i - 1] & ActrO) != 0) {
+      if ((objcts.oflag2[i - 1] & ActrO) != 0) {
          i__2 = oactor(i);
          ret_val += robadv(i__2, nr, nc, na);
       }
@@ -71,7 +71,7 @@ Bool winnin(int vl, int hr) {
 // Local variables
    int ps, vs;
 
-   vs = objcts_1.ocapac[vl - 1];
+   vs = objcts.ocapac[vl - 1];
 // 						!VILLAIN STRENGTH
    ps = vs - fights(hr, true);
 // 						!HIS MARGIN OVER HERO
@@ -108,9 +108,9 @@ int fights(int h, Bool flg) {
 // System generated locals
    int ret_val;
 
-   ret_val = smin + ((smax - smin) * advs_1.ascore[h - 1] + state_1.mxscor / 2) / state_1.mxscor;
+   ret_val = smin + ((smax - smin) * advs.ascore[h - 1] + state.mxscor / 2) / state.mxscor;
    if (flg) {
-      ret_val += advs_1.astren[h - 1];
+      ret_val += advs.astren[h - 1];
    }
    return ret_val;
 }
@@ -125,23 +125,23 @@ int vilstr(int v) {
 
 // VILSTR, PAGE 2
 
-   ret_val = objcts_1.ocapac[v - 1];
+   ret_val = objcts.ocapac[v - 1];
    if (ret_val <= 0) {
       return ret_val;
    }
-   if (v != oindex_1.thief || !findex_1.thfenf) {
+   if (v != oindex.thief || !findex.thfenf) {
       goto L100;
    }
-   findex_1.thfenf = false;
+   findex.thfenf = false;
 // 						!THIEF UNENGROSSED.
    ret_val = min(ret_val, 2);
 // 						!NO BETTER THAN 2.
 
 L100:
-   i__1 = vill_1.vlnt;
+   i__1 = vill.vlnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!SEE IF  BEST WEAPON.
-      if (vill_1.villns[i - 1] == v && prsvec_1.prsi == vill_1.vbest[i - 1]) {
+      if (vill.villns[i - 1] == v && prsvec.prsi == vill.vbest[i - 1]) {
 // Computing MAX
          i__2 = 1, i__3 = ret_val - 1;
          ret_val = max(i__2, i__3);

@@ -22,19 +22,19 @@ int getobj(int oidx, int aidx, int spcobj) {
 // GETOBJ, PAGE 2
 
 #ifdef ALLOW_GDT
-// dflag = (debug_1.prsflg & 8) != 0; //F
+// dflag = (debug.prsflg & 8) != 0; //F
 #endif
 
    chomp = false;
-   av = advs_1.avehic[play_1.winner - 1];
+   av = advs.avehic[play.winner - 1];
    obj = 0;
 // 						!ASSUME DARK.
-   if (!lit(play_1.here)) {
+   if (!lit(play.here)) {
       goto L200;
    }
 // 						!LIT?
 
-   obj = schlst(oidx, aidx, play_1.here, 0, 0, spcobj);
+   obj = schlst(oidx, aidx, play.here, 0, 0, spcobj);
 // 						!SEARCH ROOM.
 #ifdef ALLOW_GDT
 // if (dflag) print(" SCHLST- ROOM SCH %I6", obj); //F
@@ -48,10 +48,10 @@ int getobj(int oidx, int aidx, int spcobj) {
    }
 // 						!TEST RESULT.
 L100:
-   if (av == 0 || av == obj || (objcts_1.oflag2[obj - 1] & FindO) != 0) {
+   if (av == 0 || av == obj || (objcts.oflag2[obj - 1] & FindO) != 0) {
       goto L200;
    }
-   if (objcts_1.ocan[obj - 1] == av) {
+   if (objcts.ocan[obj - 1] == av) {
       goto L200;
    }
 // 						!TEST IF REACHABLE.
@@ -90,7 +90,7 @@ L300:
    obj = nobj;
 
 L400:
-   nobj = schlst(oidx, aidx, 0, 0, play_1.winner, spcobj);
+   nobj = schlst(oidx, aidx, 0, 0, play.winner, spcobj);
 // 						!SEARCH ADVENTURER.
 #ifdef ALLOW_GDT
 // if (dflag) print(" SCHLST- ADV SCH  %I6", nobj); //F
@@ -123,13 +123,13 @@ L1000:
       goto L1500;
    }
 // 						!GOT SOMETHING?
-   i__1 = objcts_1.olnt;
-   for (i = star_1.strbit + 1; i <= i__1; ++i) {
+   i__1 = objcts.olnt;
+   for (i = star.strbit + 1; i <= i__1; ++i) {
 // 						!NO, SEARCH GLOBALS.
       if (!thisit(oidx, aidx, i, spcobj)) {
          goto L1200;
       }
-      if (!ghere(i, play_1.here)) {
+      if (!ghere(i, play.here)) {
          goto L1200;
       }
 // 						!CAN IT BE HERE?
@@ -162,10 +162,10 @@ int schlst(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
 
    ret_val = 0;
 // 						!NO RESULT.
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!SEARCH OBJECTS.
-      if ((objcts_1.oflag1[i - 1] & VisiO) == 0 || (rm == 0 || !qhere(i, rm)) && (cn == 0 || objcts_1.ocan[i - 1] != cn) && (ad == 0 || objcts_1.oadv[i - 1] != ad)) {
+      if ((objcts.oflag1[i - 1] & VisiO) == 0 || (rm == 0 || !qhere(i, rm)) && (cn == 0 || objcts.ocan[i - 1] != cn) && (ad == 0 || objcts.oadv[i - 1] != ad)) {
          goto L1000;
       }
       if (!thisit(oidx, aidx, i, spcobj)) {
@@ -181,7 +181,7 @@ int schlst(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
 // IF OPEN OR TRANSPARENT, SEARCH THE OBJECT ITSELF.
 
    L200:
-      if ((objcts_1.oflag1[i - 1] & TranO) == 0 && (objcts_1.oflag2[i - 1] & OpenO) == 0) {
+      if ((objcts.oflag1[i - 1] & TranO) == 0 && (objcts.oflag2[i - 1] & OpenO) == 0) {
          goto L1000;
       }
 
@@ -191,13 +191,13 @@ int schlst(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
 // CHAIN ARE OPEN, VISIBLE, AND HAVE SEARCHME SET, THEY CAN QUALIFY
 // AS A POTENTIAL MATCH.
 
-      i__2 = objcts_1.olnt;
+      i__2 = objcts.olnt;
       for (j = 1; j <= i__2; ++j) {
 // 						!SEARCH OBJECTS.
-         if ((objcts_1.oflag1[j - 1] & VisiO) == 0 || !thisit(oidx, aidx, j, spcobj)) {
+         if ((objcts.oflag1[j - 1] & VisiO) == 0 || !thisit(oidx, aidx, j, spcobj)) {
             goto L500;
          }
-         x = objcts_1.ocan[j - 1];
+         x = objcts.ocan[j - 1];
 // 						!GET CONTAINER.
       L300:
          if (x == i) {
@@ -208,10 +208,10 @@ int schlst(int oidx, int aidx, int rm, int cn, int ad, int spcobj) {
             goto L500;
          }
 // 						!INSIDE ANYTHING?
-         if ((objcts_1.oflag1[x - 1] & VisiO) == 0 || (objcts_1.oflag1[x - 1] & TranO) == 0 && (objcts_1.oflag2[x - 1] & OpenO) == 0 || (objcts_1.oflag2[x - 1] & SchO) == 0) {
+         if ((objcts.oflag1[x - 1] & VisiO) == 0 || (objcts.oflag1[x - 1] & TranO) == 0 && (objcts.oflag2[x - 1] & OpenO) == 0 || (objcts.oflag2[x - 1] & SchO) == 0) {
             goto L500;
          }
-         x = objcts_1.ocan[x - 1];
+         x = objcts.ocan[x - 1];
 // 						!GO ANOTHER LEVEL.
          goto L300;
 

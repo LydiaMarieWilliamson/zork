@@ -109,13 +109,13 @@ Bool rappl1(int ri) {
 // R1--	EAST OF HOUSE.  DESCRIPTION DEPENDS ON STATE OF WINDOW
 
 L1000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    i = 13;
 // 						!ASSUME CLOSED.
-   if ((objcts_1.oflag2[oindex_1.windo - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[oindex.windo - 1] & OpenO) != 0) {
       i = 12;
    }
 // 						!IF OPEN, AJAR.
@@ -126,13 +126,13 @@ L1000:
 // R2--	KITCHEN.  SAME VIEW FROM INSIDE.
 
 L2000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    i = 13;
 // 						!ASSUME CLOSED.
-   if ((objcts_1.oflag2[oindex_1.windo - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[oindex.windo - 1] & OpenO) != 0) {
       i = 12;
    }
 // 						!IF OPEN, AJAR.
@@ -144,21 +144,21 @@ L2000:
 // 	DOOR TO CYCLOPS ROOM), RUG (MOVED OR NOT), DOOR (OPEN OR CLOSED)
 
 L3000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       goto L3500;
    }
 // 						!LOOK?
    i = 15;
 // 						!ASSUME NO HOLE.
-   if (findex_1.magicf) {
+   if (findex.magicf) {
       i = 16;
    }
 // 						!IF MAGICF, CYCLOPS HOLE.
    rspeak(i);
 // 						!DESCRIBE.
-   i = findex_1.orrug + 17;
+   i = findex.orrug + 17;
 // 						!ASSUME INITIAL STATE.
-   if ((objcts_1.oflag2[oindex_1.door - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[oindex.door - 1] & OpenO) != 0) {
       i += 2;
    }
 // 						!DOOR OPEN?
@@ -169,27 +169,27 @@ L3000:
 // 	NOT A LOOK WORD.  REEVALUATE TROPHY CASE.
 
 L3500:
-   if (prsvec_1.prsa != vindex_1.takew && (prsvec_1.prsa != vindex_1.putw || prsvec_1.prsi != oindex_1.tcase)) {
+   if (prsvec.prsa != vindex.takew && (prsvec.prsa != vindex.putw || prsvec.prsi != oindex.tcase)) {
       return ret_val;
    }
-   advs_1.ascore[play_1.winner - 1] = state_1.rwscor;
+   advs.ascore[play.winner - 1] = state.rwscor;
 // 						!SCORE TROPHY CASE.
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!RETAIN RAW SCORE AS WELL.
       j = i;
 // 						!FIND OUT IF IN CASE.
    L3550:
-      j = objcts_1.ocan[j - 1];
+      j = objcts.ocan[j - 1];
 // 						!TRACE OWNERSHIP.
       if (j == 0) {
          goto L3600;
       }
-      if (j != oindex_1.tcase) {
+      if (j != oindex.tcase) {
          goto L3550;
       }
 // 						!DO ALL LEVELS.
-      advs_1.ascore[play_1.winner - 1] += objcts_1.otval[i - 1];
+      advs.ascore[play.winner - 1] += objcts.otval[i - 1];
    L3600:
       ;
    }
@@ -201,7 +201,7 @@ L3500:
 // R4--	CELLAR.  SHUT DOOR AND BAR IT IF HE JUST WALKED IN.
 
 L4000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       goto L4500;
    }
 // 						!LOOK?
@@ -210,14 +210,14 @@ L4000:
    return ret_val;
 
 L4500:
-   if (prsvec_1.prsa != vindex_1.walkiw) {
+   if (prsvec.prsa != vindex.walkiw) {
       return ret_val;
    }
 // 						!WALKIN?
-   if ((objcts_1.oflag2[oindex_1.door - 1] & OpenO + TChO) != OpenO) {
+   if ((objcts.oflag2[oindex.door - 1] & OpenO + TChO) != OpenO) {
       return ret_val;
    }
-   objcts_1.oflag2[oindex_1.door - 1] = (objcts_1.oflag2[oindex_1.door - 1] | TChO) & ~OpenO;
+   objcts.oflag2[oindex.door - 1] = (objcts.oflag2[oindex.door - 1] | TChO) & ~OpenO;
    rspeak(22);
 // 						!SLAM AND BOLT DOOR.
    return ret_val;
@@ -225,7 +225,7 @@ L4500:
 // R5--	MAZE11.  DESCRIBE STATE OF GRATING.
 
 L5000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
@@ -233,11 +233,11 @@ L5000:
 // 						!DESCRIBE.
    i = 24;
 // 						!ASSUME LOCKED.
-   if (findex_1.grunlf) {
+   if (findex.grunlf) {
       i = 26;
    }
 // 						!UNLOCKED?
-   if ((objcts_1.oflag2[oindex_1.grate - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[oindex.grate - 1] & OpenO) != 0) {
       i = 25;
    }
 // 						!OPEN?
@@ -248,19 +248,19 @@ L5000:
 // R6--	CLEARING.  DESCRIBE CLEARING, MOVE LEAVES.
 
 L6000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       goto L6500;
    }
 // 						!LOOK?
    rspeak(27);
 // 						!DESCRIBE.
-   if (findex_1.rvclr == 0) {
+   if (findex.rvclr == 0) {
       return ret_val;
    }
 // 						!LEAVES MOVED?
    i = 28;
 // 						!YES, ASSUME GRATE CLOSED.
-   if ((objcts_1.oflag2[oindex_1.grate - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[oindex.grate - 1] & OpenO) != 0) {
       i = 29;
    }
 // 						!OPEN?
@@ -269,12 +269,12 @@ L6000:
    return ret_val;
 
 L6500:
-   if (findex_1.rvclr != 0 || qhere(oindex_1.leave, rindex_1.clear) && (prsvec_1.prsa != vindex_1.movew || prsvec_1.prso != oindex_1.leave)) {
+   if (findex.rvclr != 0 || qhere(oindex.leave, rindex_.clear) && (prsvec.prsa != vindex.movew || prsvec.prso != oindex.leave)) {
       return ret_val;
    }
    rspeak(30);
 // 						!MOVE LEAVES, REVEAL GRATE.
-   findex_1.rvclr = 1;
+   findex.rvclr = 1;
 // 						!INDICATE LEAVES MOVED.
    return ret_val;
 // RAPPL1, PAGE 4
@@ -282,13 +282,13 @@ L6500:
 // R7--	RESERVOIR SOUTH.  DESCRIPTION DEPENDS ON LOW TIDE FLAG.
 
 L7000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    i = 31;
 // 						!ASSUME FULL.
-   if (findex_1.lwtidf) {
+   if (findex.lwtidf) {
       i = 32;
    }
 // 						!IF LOW TIDE, EMPTY.
@@ -301,13 +301,13 @@ L7000:
 // R8--	RESERVOIR.  STATE DEPENDS ON LOW TIDE FLAG.
 
 L8000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    i = 34;
 // 						!ASSUME FULL.
-   if (findex_1.lwtidf) {
+   if (findex.lwtidf) {
       i = 35;
    }
 // 						!IF LOW TIDE, EMTPY.
@@ -318,13 +318,13 @@ L8000:
 // R9--	RESERVOIR NORTH.  ALSO DEPENDS ON LOW TIDE FLAG.
 
 L9000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    i = 36;
 // 						!YOU GET THE IDEA.
-   if (findex_1.lwtidf) {
+   if (findex.lwtidf) {
       i = 37;
    }
    rspeak(i);
@@ -334,7 +334,7 @@ L9000:
 // R10--	GLACIER ROOM.  STATE DEPENDS ON MELTED, VANISHED FLAGS.
 
 L10000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
@@ -342,11 +342,11 @@ L10000:
 // 						!BASIC DESCRIPTION.
    i = 0;
 // 						!ASSUME NO CHANGES.
-   if (findex_1.glacmf) {
+   if (findex.glacmf) {
       i = 40;
    }
 // 						!PARTIAL MELT?
-   if (findex_1.glacrf) {
+   if (findex.glacrf) {
       i = 41;
    }
 // 						!COMPLETE MELT?
@@ -357,8 +357,8 @@ L10000:
 // R11--	FOREST ROOM
 
 L11000:
-   if (prsvec_1.prsa == vindex_1.walkiw) {
-      cevent_1.cflag[cindex_1.cevfor - 1] = true;
+   if (prsvec.prsa == vindex.walkiw) {
+      cevent.cflag[cindex.cevfor - 1] = true;
    }
 // 						!IF WALK IN, BIRDIE.
    return ret_val;
@@ -366,13 +366,13 @@ L11000:
 // R12--	MIRROR ROOM.  STATE DEPENDS ON MIRROR INTACT.
 
 L12000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    rspeak(42);
 // 						!DESCRIBE.
-   if (findex_1.mirrmf) {
+   if (findex.mirrmf) {
       rspeak(43);
    }
 // 						!IF BROKEN, NASTY REMARK.
@@ -382,42 +382,42 @@ L12000:
 // R13--	CAVE2 ROOM.  BLOW OUT CANDLES WITH 50% PROBABILITY.
 
 L13000:
-   if (prsvec_1.prsa != vindex_1.walkiw) {
+   if (prsvec.prsa != vindex.walkiw) {
       return ret_val;
    }
 // 						!WALKIN?
-   if (prob(50, 50) || objcts_1.oadv[oindex_1.candl - 1] != play_1.winner || !((objcts_1.oflag1[oindex_1.candl - 1] & OnO) != 0)) {
+   if (prob(50, 50) || objcts.oadv[oindex.candl - 1] != play.winner || !((objcts.oflag1[oindex.candl - 1] & OnO) != 0)) {
       return ret_val;
    }
-   objcts_1.oflag1[oindex_1.candl - 1] &= ~OnO;
+   objcts.oflag1[oindex.candl - 1] &= ~OnO;
    rspeak(47);
 // 						!TELL OF WINDS.
-   cevent_1.cflag[cindex_1.cevcnd - 1] = false;
+   cevent.cflag[cindex.cevcnd - 1] = false;
 // 						!HALT CANDLE COUNTDOWN.
    return ret_val;
 
 // R14--	BOOM ROOM.  BLOW HIM UP IF CARRYING FLAMING OBJECT.
 
 L14000:
-   j = objcts_1.odesc2[oindex_1.candl - 1];
+   j = objcts.odesc2[oindex.candl - 1];
 // 						!ASSUME CANDLE.
-   if (objcts_1.oadv[oindex_1.candl - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.candl - 1] & OnO) != 0) {
+   if (objcts.oadv[oindex.candl - 1] == play.winner && (objcts.oflag1[oindex.candl - 1] & OnO) != 0) {
       goto L14100;
    }
-   j = objcts_1.odesc2[oindex_1.torch - 1];
+   j = objcts.odesc2[oindex.torch - 1];
 // 						!ASSUME TORCH.
-   if (objcts_1.oadv[oindex_1.torch - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.torch - 1] & OnO) != 0) {
+   if (objcts.oadv[oindex.torch - 1] == play.winner && (objcts.oflag1[oindex.torch - 1] & OnO) != 0) {
       goto L14100;
    }
-   j = objcts_1.odesc2[oindex_1.match - 1];
-   if (objcts_1.oadv[oindex_1.match - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.match - 1] & OnO) != 0) {
+   j = objcts.odesc2[oindex.match - 1];
+   if (objcts.oadv[oindex.match - 1] == play.winner && (objcts.oflag1[oindex.match - 1] & OnO) != 0) {
       goto L14100;
    }
    return ret_val;
 // 						!SAFE
 
 L14100:
-   if (prsvec_1.prsa != vindex_1.trnonw) {
+   if (prsvec.prsa != vindex.trnonw) {
       goto L14200;
    }
 // 						!TURN ON?
@@ -428,7 +428,7 @@ L14100:
    return ret_val;
 
 L14200:
-   if (prsvec_1.prsa != vindex_1.walkiw) {
+   if (prsvec.prsa != vindex.walkiw) {
       return ret_val;
    }
 // 						!WALKIN?
@@ -441,23 +441,23 @@ L14200:
 // R15--	NO-OBJS.  SEE IF EMPTY HANDED, SCORE LIGHT SHAFT.
 
 L15000:
-   findex_1.empthf = true;
+   findex.empthf = true;
 // 						!ASSUME TRUE.
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!SEE IF CARRYING.
-      if (objcts_1.oadv[i - 1] == play_1.winner) {
-         findex_1.empthf = false;
+      if (objcts.oadv[i - 1] == play.winner) {
+         findex.empthf = false;
       }
 // L15100:
    }
 
-   if (play_1.here != rindex_1.bshaf || !lit(play_1.here)) {
+   if (play.here != rindex_.bshaf || !lit(play.here)) {
       return ret_val;
    }
-   scrupd(state_1.ltshft);
+   scrupd(state.ltshft);
 // 						!SCORE LIGHT SHAFT.
-   state_1.ltshft = 0;
+   state.ltshft = 0;
 // 						!NEVER AGAIN.
    return ret_val;
 // RAPPL1, PAGE 6
@@ -465,13 +465,13 @@ L15000:
 // R16--	MACHINE ROOM.  DESCRIBE MACHINE.
 
 L16000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    i = 46;
 // 						!ASSUME LID CLOSED.
-   if ((objcts_1.oflag2[oindex_1.machi - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[oindex.machi - 1] & OpenO) != 0) {
       i = 12;
    }
 // 						!IF OPEN, OPEN.
@@ -482,25 +482,25 @@ L16000:
 // R17--	BAT ROOM.  UNLESS CARRYING GARLIC, FLY AWAY WITH ME...
 
 L17000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       goto L17500;
    }
 // 						!LOOK?
    rspeak(48);
 // 						!DESCRIBE ROOM.
-   if (objcts_1.oadv[oindex_1.garli - 1] == play_1.winner) {
+   if (objcts.oadv[oindex.garli - 1] == play.winner) {
       rspeak(49);
    }
 // 						!BAT HOLDS NOSE.
    return ret_val;
 
 L17500:
-   if (prsvec_1.prsa != vindex_1.walkiw || objcts_1.oadv[oindex_1.garli - 1] == play_1.winner) {
+   if (prsvec.prsa != vindex.walkiw || objcts.oadv[oindex.garli - 1] == play.winner) {
       return ret_val;
    }
    rspeak(50);
 // 						!TIME TO FLY, JACK.
-   f = moveto(bats_1.batdrp[rnd(9)], play_1.winner);
+   f = moveto(bats.batdrp[rnd(9)], play.winner);
 // 						!SELECT RANDOM DEST.
    ret_val = false;
 // 						!INDICATE NEW DESC NEEDED.
@@ -509,20 +509,20 @@ L17500:
 // R18--	DOME ROOM.  STATE DEPENDS ON WHETHER ROPE TIED TO RAILING.
 
 L18000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       goto L18500;
    }
 // 						!LOOK?
    rspeak(51);
 // 						!DESCRIBE.
-   if (findex_1.domef) {
+   if (findex.domef) {
       rspeak(52);
    }
 // 						!IF ROPE, DESCRIBE.
    return ret_val;
 
 L18500:
-   if (prsvec_1.prsa == vindex_1.leapw) {
+   if (prsvec.prsa == vindex.leapw) {
       jigsup(53);
    }
 // 						!DID HE JUMP???
@@ -531,13 +531,13 @@ L18500:
 // R19--	TORCH ROOM.  ALSO DEPENDS ON WHETHER ROPE TIED TO RAILING.
 
 L19000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    rspeak(54);
 // 						!DESCRIBE.
-   if (findex_1.domef) {
+   if (findex.domef) {
       rspeak(55);
    }
 // 						!IF ROPE, DESCRIBE.
@@ -546,20 +546,20 @@ L19000:
 // R20--	CAROUSEL ROOM.  SPIN HIM OR KILL HIM.
 
 L20000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       goto L20500;
    }
 // 						!LOOK?
    rspeak(56);
 // 						!DESCRIBE.
-   if (!findex_1.caroff) {
+   if (!findex.caroff) {
       rspeak(57);
    }
 // 						!IF NOT FLIPPED, SPIN.
    return ret_val;
 
 L20500:
-   if (prsvec_1.prsa == vindex_1.walkiw && findex_1.carozf) {
+   if (prsvec.prsa == vindex.walkiw && findex.carozf) {
       jigsup(58);
    }
 // 						!WALKED IN.
@@ -569,24 +569,24 @@ L20500:
 // R21--	LLD ROOM.  HANDLE EXORCISE, DESCRIPTIONS.
 
 L21000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       goto L21500;
    }
 // 						!LOOK?
    rspeak(59);
 // 						!DESCRIBE.
-   if (!findex_1.lldf) {
+   if (!findex.lldf) {
       rspeak(60);
    }
 // 						!IF NOT VANISHED, GHOSTS.
    return ret_val;
 
 L21500:
-   if (prsvec_1.prsa != vindex_1.exorcw) {
+   if (prsvec.prsa != vindex.exorcw) {
       return ret_val;
    }
 // 						!EXORCISE?
-   if (objcts_1.oadv[oindex_1.bell - 1] == play_1.winner && objcts_1.oadv[oindex_1.book - 1] == play_1.winner && objcts_1.oadv[oindex_1.candl - 1] == play_1.winner && (objcts_1.oflag1[oindex_1.candl - 1] & OnO) != 0) {
+   if (objcts.oadv[oindex.bell - 1] == play.winner && objcts.oadv[oindex.book - 1] == play.winner && objcts.oadv[oindex.candl - 1] == play.winner && (objcts.oflag1[oindex.candl - 1] & OnO) != 0) {
       goto L21600;
    }
    rspeak(62);
@@ -594,7 +594,7 @@ L21500:
    return ret_val;
 
 L21600:
-   if (qhere(oindex_1.ghost, play_1.here)) {
+   if (qhere(oindex.ghost, play.here)) {
       goto L21700;
    }
 // 						!GHOST HERE?
@@ -603,22 +603,22 @@ L21600:
    return ret_val;
 
 L21700:
-   newsta(oindex_1.ghost, 63, 0, 0, 0);
+   newsta(oindex.ghost, 63, 0, 0, 0);
 // 						!VANISH GHOST.
-   findex_1.lldf = true;
+   findex.lldf = true;
 // 						!OPEN GATE.
    return ret_val;
 
 // R22--	LLD2-ROOM.  IS HIS HEAD ON A POLE?
 
 L22000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    rspeak(64);
 // 						!DESCRIBE.
-   if (findex_1.onpolf) {
+   if (findex.onpolf) {
       rspeak(65);
    }
 // 						!ON POLE?
@@ -627,21 +627,21 @@ L22000:
 // R23--	DAM ROOM.  DESCRIBE RESERVOIR, PANEL.
 
 L23000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
    rspeak(66);
 // 						!DESCRIBE.
    i = 67;
-   if (findex_1.lwtidf) {
+   if (findex.lwtidf) {
       i = 68;
    }
    rspeak(i);
 // 						!DESCRIBE RESERVOIR.
    rspeak(69);
 // 						!DESCRIBE PANEL.
-   if (findex_1.gatef) {
+   if (findex.gatef) {
       rspeak(70);
    }
 // 						!BUBBLE IS GLOWING.
@@ -650,7 +650,7 @@ L23000:
 // R24--	TREE ROOM
 
 L24000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
@@ -658,16 +658,16 @@ L24000:
 // 						!DESCRIBE.
    i = 661;
 // 						!SET FLAG FOR BELOW.
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (j = 1; j <= i__1; ++j) {
 // 						!DESCRIBE OBJ IN FORE3.
-      if (!qhere(j, rindex_1.fore3) || j == oindex_1.ftree) {
+      if (!qhere(j, rindex_.fore3) || j == oindex.ftree) {
          goto L24200;
       }
       rspeak(i);
 // 						!SET STAGE,
       i = 0;
-      rspsub(502, objcts_1.odesc2[j - 1]);
+      rspsub(502, objcts.odesc2[j - 1]);
 // 						!DESCRIBE.
    L24200:
       ;
@@ -678,7 +678,7 @@ L24000:
 // R25--	CYCLOPS-ROOM.  DEPENDS ON CYCLOPS STATE, ASLEEP FLAG, MAGIC FLAG.
 
 L25000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
@@ -686,26 +686,26 @@ L25000:
 // 						!DESCRIBE.
    i = 607;
 // 						!ASSUME BASIC STATE.
-   if (findex_1.rvcyc > 0) {
+   if (findex.rvcyc > 0) {
       i = 608;
    }
 // 						!>0?  HUNGRY.
-   if (findex_1.rvcyc < 0) {
+   if (findex.rvcyc < 0) {
       i = 609;
    }
 // 						!<0?  THIRSTY.
-   if (findex_1.cyclof) {
+   if (findex.cyclof) {
       i = 610;
    }
 // 						!ASLEEP?
-   if (findex_1.magicf) {
+   if (findex.magicf) {
       i = 611;
    }
 // 						!GONE?
    rspeak(i);
 // 						!DESCRIBE.
-   if (!findex_1.cyclof && findex_1.rvcyc != 0) {
-      i__1 = abs(findex_1.rvcyc) + 193;
+   if (!findex.cyclof && findex.rvcyc != 0) {
+      i__1 = abs(findex.rvcyc) + 193;
       rspeak(i__1);
    }
    return ret_val;
@@ -713,14 +713,14 @@ L25000:
 // R26--	BANK BOX ROOM.
 
 L26000:
-   if (prsvec_1.prsa != vindex_1.walkiw) {
+   if (prsvec.prsa != vindex.walkiw) {
       return ret_val;
    }
 // 						!SURPRISE HIM.
    for (i = 1; i <= 8; i += 2) {
 // 						!SCOLRM DEPENDS ON
-      if (screen_1.fromdr == screen_1.scoldr[i - 1]) {
-         screen_1.scolrm = screen_1.scoldr[i];
+      if (screen.fromdr == screen.scoldr[i - 1]) {
+         screen.scolrm = screen.scoldr[i];
       }
 // L26100:
    }
@@ -730,31 +730,31 @@ L26000:
 // R27--	TREASURE ROOM.
 
 L27000:
-   if (prsvec_1.prsa != vindex_1.walkiw || !hack_1.thfact) {
+   if (prsvec.prsa != vindex.walkiw || !hack.thfact) {
       return ret_val;
    }
-   if (objcts_1.oroom[oindex_1.thief - 1] != play_1.here) {
-      newsta(oindex_1.thief, 82, play_1.here, 0, 0);
+   if (objcts.oroom[oindex.thief - 1] != play.here) {
+      newsta(oindex.thief, 82, play.here, 0, 0);
    }
-   hack_1.thfpos = play_1.here;
+   hack.thfpos = play.here;
 // 						!RESET SEARCH PATTERN.
-   objcts_1.oflag2[oindex_1.thief - 1] |= FiteO;
-   if (objcts_1.oroom[oindex_1.chali - 1] == play_1.here) {
-      objcts_1.oflag1[oindex_1.chali - 1] &= ~TakeO;
+   objcts.oflag2[oindex.thief - 1] |= FiteO;
+   if (objcts.oroom[oindex.chali - 1] == play.here) {
+      objcts.oflag1[oindex.chali - 1] &= ~TakeO;
    }
 
 // 	VANISH EVERYTHING IN ROOM
 
    j = 0;
 // 						!ASSUME NOTHING TO VANISH.
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
-      if (i == oindex_1.chali || i == oindex_1.thief || !qhere(i, play_1.here)) {
+      if (i == oindex.chali || i == oindex.thief || !qhere(i, play.here)) {
          goto L27200;
       }
       j = 83;
 // 						!FLAG BYEBYE.
-      objcts_1.oflag1[i - 1] &= ~VisiO;
+      objcts.oflag1[i - 1] &= ~VisiO;
    L27200:
       ;
    }
@@ -765,7 +765,7 @@ L27000:
 // R28--	CLIFF FUNCTION.  SEE IF CARRYING INFLATED BOAT.
 
 L28000:
-   findex_1.deflaf = objcts_1.oadv[oindex_1.rboat - 1] != play_1.winner;
+   findex.deflaf = objcts.oadv[oindex.rboat - 1] != play.winner;
 // 						!TRUE IF NOT CARRYING.
    return ret_val;
 // RAPPL1, PAGE 9
@@ -773,19 +773,19 @@ L28000:
 // R29--	RIVR4 ROOM.  PLAY WITH BUOY.
 
 L29000:
-   if (!findex_1.buoyf || objcts_1.oadv[oindex_1.buoy - 1] != play_1.winner) {
+   if (!findex.buoyf || objcts.oadv[oindex.buoy - 1] != play.winner) {
       return ret_val;
    }
    rspeak(84);
 // 						!GIVE HINT,
-   findex_1.buoyf = false;
+   findex.buoyf = false;
 // 						!THEN DISABLE.
    return ret_val;
 
 // R30--	OVERFALLS.  DOOM.
 
 L30000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       jigsup(85);
    }
 // 						!OVER YOU GO.
@@ -794,12 +794,12 @@ L30000:
 // R31--	BEACH ROOM.  DIG A HOLE.
 
 L31000:
-   if (prsvec_1.prsa != vindex_1.digw || prsvec_1.prso != oindex_1.shove) {
+   if (prsvec.prsa != vindex.digw || prsvec.prso != oindex.shove) {
       return ret_val;
    }
-   ++findex_1.rvsnd;
+   ++findex.rvsnd;
 // 						!INCREMENT DIG STATE.
-   switch (findex_1.rvsnd) {
+   switch (findex.rvsnd) {
       case 1:
          goto L31100;
       case 2:
@@ -812,10 +812,10 @@ L31000:
          goto L31500;
    }
 // 						!PROCESS STATE.
-   bug(2, findex_1.rvsnd);
+   bug(2, findex.rvsnd);
 
 L31100:
-   i__1 = findex_1.rvsnd + 85;
+   i__1 = findex.rvsnd + 85;
    rspeak(i__1);
 // 						!1-3... DISCOURAGE HIM.
    return ret_val;
@@ -823,15 +823,15 @@ L31100:
 L31400:
    i = 89;
 // 						!ASSUME DISCOVERY.
-   if ((objcts_1.oflag1[oindex_1.statu - 1] & VisiO) != 0) {
+   if ((objcts.oflag1[oindex.statu - 1] & VisiO) != 0) {
       i = 88;
    }
    rspeak(i);
-   objcts_1.oflag1[oindex_1.statu - 1] |= VisiO;
+   objcts.oflag1[oindex.statu - 1] |= VisiO;
    return ret_val;
 
 L31500:
-   findex_1.rvsnd = 0;
+   findex.rvsnd = 0;
 // 						!5... SAND COLLAPSES
    jigsup(90);
 // 						!AND SO DOES HE.
@@ -840,20 +840,20 @@ L31500:
 // R32--	TCAVE ROOM.  DIG A HOLE IN GUANO.
 
 L32000:
-   if (prsvec_1.prsa != vindex_1.digw || prsvec_1.prso != oindex_1.shove) {
+   if (prsvec.prsa != vindex.digw || prsvec.prso != oindex.shove) {
       return ret_val;
    }
    i = 91;
 // 						!ASSUME NO GUANO.
-   if (!qhere(oindex_1.guano, play_1.here)) {
+   if (!qhere(oindex.guano, play.here)) {
       goto L32100;
    }
 // 						!IS IT HERE?
 // Computing MIN
-   i__1 = 4, i__2 = findex_1.rvgua + 1;
-   findex_1.rvgua = min(i__1, i__2);
+   i__1 = 4, i__2 = findex.rvgua + 1;
+   findex.rvgua = min(i__1, i__2);
 // 						!YES, SET NEW STATE.
-   i = findex_1.rvgua + 91;
+   i = findex.rvgua + 91;
 // 						!GET NASTY REMARK.
 L32100:
    rspeak(i);
@@ -863,7 +863,7 @@ L32100:
 // R33--	FALLS ROOM
 
 L33000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
@@ -871,7 +871,7 @@ L33000:
 // 						!DESCRIBE.
    i = 97;
 // 						!ASSUME NO RAINBOW.
-   if (findex_1.rainbf) {
+   if (findex.rainbf) {
       i = 98;
    }
 // 						!GOT ONE?
@@ -883,7 +883,7 @@ L33000:
 // R34--	LEDGE FUNCTION.  LEDGE CAN COLLAPSE.
 
 L34000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
@@ -891,7 +891,7 @@ L34000:
 // 						!DESCRIBE.
    i = 102;
 // 						!ASSUME SAFE ROOM OK.
-   if ((rooms_1.rflag[rindex_1.msafe - 1] & MungR) != 0) {
+   if ((rooms.rflag[rindex_.msafe - 1] & MungR) != 0) {
       i = 101;
    }
    rspeak(i);
@@ -901,7 +901,7 @@ L34000:
 // R35--	SAFE ROOM.  STATE DEPENDS ON WHETHER SAFE BLOWN.
 
 L35000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       return ret_val;
    }
 // 						!LOOK?
@@ -909,7 +909,7 @@ L35000:
 // 						!DESCRIBE.
    i = 105;
 // 						!ASSUME OK.
-   if (findex_1.safef) {
+   if (findex.safef) {
       i = 106;
    }
 // 						!BLOWN?
@@ -920,7 +920,7 @@ L35000:
 // R36--	MAGNET ROOM.  DESCRIBE, CHECK FOR SPINDIZZY DOOM.
 
 L36000:
-   if (prsvec_1.prsa != vindex_1.lookw) {
+   if (prsvec.prsa != vindex.lookw) {
       goto L36500;
    }
 // 						!LOOK?
@@ -929,11 +929,11 @@ L36000:
    return ret_val;
 
 L36500:
-   if (prsvec_1.prsa != vindex_1.walkiw || !findex_1.caroff) {
+   if (prsvec.prsa != vindex.walkiw || !findex.caroff) {
       return ret_val;
    }
 // 						!WALKIN ON FLIPPED?
-   if (findex_1.carozf) {
+   if (findex.carozf) {
       goto L36600;
    }
 // 						!ZOOM?
@@ -944,7 +944,7 @@ L36500:
 L36600:
    i = 58;
 // 						!SPIN HIS INSIDES.
-   if (play_1.winner != aindex_1.player) {
+   if (play.winner != aindex.player) {
       i = 99;
    }
 // 						!SPIN ROBOT.
@@ -955,8 +955,8 @@ L36600:
 // R37--	CAGE ROOM.  IF SOLVED CAGE, MOVE TO OTHER CAGE ROOM.
 
 L37000:
-   if (findex_1.cagesf) {
-      f = moveto(rindex_1.cager, play_1.winner);
+   if (findex.cagesf) {
+      f = moveto(rindex_.cager, play.winner);
    }
 // 						!IF SOLVED, MOVE.
    return ret_val;

@@ -38,15 +38,15 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 // 						!ASSUME PARSE FAILS.
    adj = 0;
 // 						!CLEAR PARTS HOLDERS.
-   pv_1.act = 0;
+   pv.act = 0;
    prep = 0;
    pptr = 0;
-   pv_1.o1 = 0;
-   pv_1.o2 = 0;
-   pv_1.p1 = 0;
-   pv_1.p2 = 0;
+   pv.o1 = 0;
+   pv.o2 = 0;
+   pv.p1 = 0;
+   pv.p2 = 0;
 #ifdef ALLOW_GDT
-// dflag = (debug_1.prsflg & 4) != 0; //F
+// dflag = (debug.prsflg & 4) != 0; //F
 #endif
 
    buzlnt = 20;
@@ -82,7 +82,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 
 // CHECK FOR ACTION OR DIRECTION
 
-      if (pv_1.act != 0) {
+      if (pv.act != 0) {
          goto L75;
       }
 // 						!GOT ACTION ALREADY?
@@ -107,7 +107,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 // 						!TABLE DONE?
 
    L75:
-      if (pv_1.act != 0 && (vvoc[pv_1.act - 1] != r50wal || prep != 0)) {
+      if (pv.act != 0 && (vvoc[pv.act - 1] != r50wal || prep != 0)) {
          goto L200;
       }
       i__2 = dirlnt;
@@ -186,11 +186,11 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
          goto L6000;
       }
 // 						!IF LE, COULDNT.
-      if (obj != oindex_1.itobj) {
+      if (obj != oindex.itobj) {
          goto L650;
       }
 // 						!"IT"?
-      obj = getobj(0, 0, last_1.lastit);
+      obj = getobj(0, 0, last.lastit);
 // 						!FIND LAST.
       if (obj <= 0) {
          goto L6000;
@@ -223,8 +223,8 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 // 2000--	DIRECTION
 
    L2000:
-      prsvec_1.prsa = vindex_1.walkw;
-      prsvec_1.prso = dvoc[j + 1];
+      prsvec.prsa = vindex.walkw;
+      prsvec.prso = dvoc[j + 1];
       ret_val = 1;
 #ifdef ALLOW_GDT
 //    if (dflag) print(" SPARSE- DIR AT %I6", j); //F
@@ -234,8 +234,8 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 // 3000--	ACTION
 
    L3000:
-      pv_1.act = j;
-      orphs_1.oact = 0;
+      pv.act = j;
+      orphs.oact = 0;
 #ifdef ALLOW_GDT
 //    if (dflag) print(" SPARSE- ACT AT %I6", j); //F
 //    if (dflag) write(0, *, "count=", vvoc[j + 1], " vnr=", vvoc[j + 2]); //F
@@ -265,7 +265,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 
    L5000:
       adj = j;
-      j = orphs_1.oname & orphs_1.oflag;
+      j = orphs.oname & orphs.oflag;
 #ifdef ALLOW_GDT
 //    if (dflag) print(" SPARSE- ADJ AT %I6 ORPHAN= %I6", adj, j); //F
 #endif
@@ -281,7 +281,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
          goto L6100;
       }
       j = 579;
-      if (lit(play_1.here)) {
+      if (lit(play.here)) {
          j = 618;
       }
       if (vbflag) {
@@ -294,7 +294,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
          goto L6200;
       }
       if (vbflag) {
-         rspsub(620, objcts_1.odesc2[advs_1.avehic[play_1.winner - 1] - 1]);
+         rspsub(620, objcts.odesc2[advs.avehic[play.winner - 1] - 1]);
       }
       return ret_val;
 
@@ -302,10 +302,10 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
       if (vbflag) {
          rspeak(619);
       }
-      if (pv_1.act == 0) {
-         pv_1.act = orphs_1.oflag & orphs_1.oact;
+      if (pv.act == 0) {
+         pv.act = orphs.oflag & orphs.oact;
       }
-      orphan(-1, pv_1.act, pv_1.o1, prep, j);
+      orphan(-1, pv.act, pv.o1, prep, j);
       return ret_val;
 
 // 7000--	TOO MANY OBJECTS.
@@ -337,10 +337,10 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 // NOW SOME MISC CLEANUP -- We fell out of the do-loop
 
 L1500:
-   if (pv_1.act == 0) {
-      pv_1.act = orphs_1.oflag & orphs_1.oact;
+   if (pv.act == 0) {
+      pv.act = orphs.oflag & orphs.oact;
    }
-   if (pv_1.act == 0) {
+   if (pv.act == 0) {
       goto L9000;
    }
 // 						!IF STILL NONE, PUNT.
@@ -349,7 +349,7 @@ L1500:
    }
 // 						!IF DANGLING ADJ, PUNT.
 
-   if (orphs_1.oflag != 0 && orphs_1.oprep != 0 && prep == 0 && pv_1.o1 != 0 && pv_1.o2 == 0 && pv_1.act == orphs_1.oact) {
+   if (orphs.oflag != 0 && orphs.oprep != 0 && prep == 0 && pv.o1 != 0 && pv.o2 == 0 && pv.act == orphs.oact) {
       goto L11000;
    }
 
@@ -370,7 +370,7 @@ L1500:
 L1750:
 // 						!WIN.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SPARSE RESULTS- %5I7", pv_1.act, pv_1.o1, pv_1.o2, pv_1.p1, pv_1.p2); //F
+// if (dflag) print(" SPARSE RESULTS- %5I7", pv.act, pv.o1, pv.o2, pv.p1, pv.p2); //F
 // if (dflag) write(0, *, "sparse=", sparse); //F
 #endif
    return ret_val;
@@ -379,15 +379,15 @@ L1750:
 // 9000--	NO ACTION, PUNT
 
 L9000:
-   if (pv_1.o1 == 0) {
+   if (pv.o1 == 0) {
       goto L10000;
    }
 // 						!ANY DIRECT OBJECT?
    if (vbflag) {
-      rspsub(621, objcts_1.odesc2[pv_1.o1 - 1]);
+      rspsub(621, objcts.odesc2[pv.o1 - 1]);
    }
 // 						!WHAT TO DO?
-   orphan(-1, 0, pv_1.o1, 0, 0);
+   orphan(-1, 0, pv.o1, 0, 0);
    return ret_val;
 
 // 10000--	TOTAL CHOMP
@@ -403,27 +403,27 @@ L10000:
 // 		O1.NE.0, O2=0, PREP=0, ACT=OACT
 
 L11000:
-   if (orphs_1.oslot != 0) {
+   if (orphs.oslot != 0) {
       goto L11500;
    }
 // 						!ORPHAN OBJECT?
-   pv_1.p1 = orphs_1.oprep;
+   pv.p1 = orphs.oprep;
 // 						!NO, JUST USE PREP.
    goto L1750;
 
 L11500:
-   pv_1.o2 = pv_1.o1;
+   pv.o2 = pv.o1;
 // 						!YES, USE AS DIRECT OBJ.
-   pv_1.p2 = orphs_1.oprep;
-   pv_1.o1 = orphs_1.oslot;
-   pv_1.p1 = 0;
+   pv.p2 = orphs.oprep;
+   pv.o1 = orphs.oslot;
+   pv.p1 = 0;
    goto L1750;
 
 // 12000--	TRUE HANGING PREPOSITION.
 // 		ORPHAN FOR LATER.
 
 L12000:
-   orphan(-1, pv_1.act, 0, prep, 0);
+   orphan(-1, pv.act, 0, prep, 0);
 // 						!ORPHAN PREP.
    goto L1750;
 }

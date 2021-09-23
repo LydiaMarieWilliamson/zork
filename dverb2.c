@@ -10,7 +10,7 @@ static int cxappl(int);
 
 // Save game state
 void savegm(void) {
-   prsvec_1.prswon = false;
+   prsvec.prswon = false;
 // 						!DISABLE GAME.
 // Note: save file format is different for PDP versus non-PDP versions
 
@@ -23,37 +23,37 @@ void savegm(void) {
 #define PutVar(Var) (fwrite((const void *)&(Var), sizeof (Var), (1), (ExF)))
 #define PutArr(N, Buf) (fwrite((const void *)(Buf), sizeof (Buf)[0], (N), (ExF)))
 
-// write(1, vers_1.vmaj, vers_1.vmin, vers_1.vedit); //F
-{  int Edit = vers_1.vedit; PutVar(vers_1.vmaj), PutVar(vers_1.vmin), PutVar(Edit); }
+// write(1, vers.vmaj, vers.vmin, vers.vedit); //F
+{  int Edit = vers.vedit; PutVar(vers.vmaj), PutVar(vers.vmin), PutVar(Edit); }
 // write(1, //F
-//    play_1.winner, play_1.here, hack_1.thfpos, play_1.telflg, hack_1.thfflg, hack_1.thfact, //F
-//    hack_1.swdact, hack_1.swdsta, puzzle_1.cpvec //F
+//    play.winner, play.here, hack.thfpos, play.telflg, hack.thfflg, hack.thfact, //F
+//    hack.swdact, hack.swdsta, puzzle.cpvec //F
 // ); //F
-   PutVar(play_1.winner), PutVar(play_1.here), PutVar(hack_1.thfpos);
-   PutVar(play_1.telflg), PutVar(hack_1.thfflg), PutVar(hack_1.thfact);
-   PutVar(hack_1.swdact), PutVar(hack_1.swdsta), PutArr(64, puzzle_1.cpvec);
+   PutVar(play.winner), PutVar(play.here), PutVar(hack.thfpos);
+   PutVar(play.telflg), PutVar(hack.thfflg), PutVar(hack.thfact);
+   PutVar(hack.swdact), PutVar(hack.swdsta), PutArr(64, puzzle.cpvec);
 // write(1, //F
-//    PlTime, state_1.moves, state_1.deaths, state_1.rwscor, state_1.egscor, state_1.mxload, //F
-//    state_1.ltshft, state_1.bloc, state_1.mungrm, state_1.hs, screen_1.fromdr, screen_1.scolrm, screen_1.scolac //F
+//    PlTime, state.moves, state.deaths, state.rwscor, state.egscor, state.mxload, //F
+//    state.ltshft, state.bloc, state.mungrm, state.hs, screen.fromdr, screen.scolrm, screen.scolac //F
 // ); //F
-   PutVar(PlTime), PutVar(state_1.moves), PutVar(state_1.deaths), PutVar(state_1.rwscor);
-   PutVar(state_1.egscor), PutVar(state_1.mxload);
-   PutVar(state_1.ltshft), PutVar(state_1.bloc), PutVar(state_1.mungrm), PutVar(state_1.hs), PutVar(screen_1.fromdr);
-   PutVar(screen_1.scolrm), PutVar(screen_1.scolac);
+   PutVar(PlTime), PutVar(state.moves), PutVar(state.deaths), PutVar(state.rwscor);
+   PutVar(state.egscor), PutVar(state.mxload);
+   PutVar(state.ltshft), PutVar(state.bloc), PutVar(state.mungrm), PutVar(state.hs), PutVar(screen.fromdr);
+   PutVar(screen.scolrm), PutVar(screen.scolac);
 // write(1, //F
-//   objcts_1.odesc1, objcts_1.odesc2, objcts_1.oflag1, objcts_1.oflag2, objcts_1.ofval, objcts_1.otval, //F
-//   objcts_1.osize, objcts_1.ocapac, objcts_1.oroom, objcts_1.oadv, objcts_1.ocan //F
+//   objcts.odesc1, objcts.odesc2, objcts.oflag1, objcts.oflag2, objcts.ofval, objcts.otval, //F
+//   objcts.osize, objcts.ocapac, objcts.oroom, objcts.oadv, objcts.ocan //F
 // ); //F
-   PutArr(220, objcts_1.odesc1), PutArr(220, objcts_1.odesc2), PutArr(220, objcts_1.oflag1), PutArr(220, objcts_1.oflag2);
-   PutArr(220, objcts_1.ofval), PutArr(220, objcts_1.otval);
-   PutArr(220, objcts_1.osize), PutArr(220, objcts_1.ocapac);
-   PutArr(220, objcts_1.oroom), PutArr(220, objcts_1.oadv), PutArr(220, objcts_1.ocan);
-// write(1, rooms_1.rval, rooms_1.rflag); //F
-   PutArr(200, rooms_1.rval), PutArr(200, rooms_1.rflag);
-// write(1, advs_1.aroom, advs_1.ascore, advs_1.avehic, advs_1.astren, advs_1.aflag); //F
-   PutArr(4, advs_1.aroom), PutArr(4, advs_1.ascore), PutArr(4, advs_1.avehic), PutArr(4, advs_1.astren), PutArr(4, advs_1.aflag);
-// write(1, flags, switch_, vill_1.vprob, cevent_1.cflag, cevent_1.ctick); //F
-   PutArr(46, flags), PutArr(22, switch_), PutArr(4, vill_1.vprob), PutArr(25, cevent_1.cflag), PutArr(25, cevent_1.ctick);
+   PutArr(220, objcts.odesc1), PutArr(220, objcts.odesc2), PutArr(220, objcts.oflag1), PutArr(220, objcts.oflag2);
+   PutArr(220, objcts.ofval), PutArr(220, objcts.otval);
+   PutArr(220, objcts.osize), PutArr(220, objcts.ocapac);
+   PutArr(220, objcts.oroom), PutArr(220, objcts.oadv), PutArr(220, objcts.ocan);
+// write(1, rooms.rval, rooms.rflag); //F
+   PutArr(200, rooms.rval), PutArr(200, rooms.rflag);
+// write(1, advs.aroom, advs.ascore, advs.avehic, advs.astren, advs.aflag); //F
+   PutArr(4, advs.aroom), PutArr(4, advs.ascore), PutArr(4, advs.avehic), PutArr(4, advs.astren), PutArr(4, advs.aflag);
+// write(1, flags, switch_, vill.vprob, cevent.cflag, cevent.ctick); //F
+   PutArr(46, flags), PutArr(22, switch_), PutArr(4, vill.vprob), PutArr(25, cevent.cflag), PutArr(25, cevent.ctick);
 
 // close(unit:1); //F
    if (fclose(ExF) == EOF) goto L100;
@@ -67,7 +67,7 @@ L100:
 
 // Restore game state
 void rstrgm(void) {
-   prsvec_1.prswon = false;
+   prsvec.prswon = false;
 // 						!DISABLE GAME.
 // Note: save file format is different for PDP versus non-PDP versions
 
@@ -79,37 +79,37 @@ void rstrgm(void) {
 
 // read(1, &Maj, &Min, &Edit); //F
    int Maj, Min, Edit; GetVar(Maj), GetVar(Min), GetVar(Edit);
-   if (Maj != vers_1.vmaj || Min != vers_1.vmin) goto L200;
+   if (Maj != vers.vmaj || Min != vers.vmin) goto L200;
 
 // read(1, //F
-//    &play_1.winner, &play_1.here, &hack_1.thfpos, &play_1.telflg, &play_1.thfflg, &hack_1.thfflg, //F
-//    &hack_1.swdact, &hack_1.swdsta, &puzzle_1.cpvec //F
+//    &play.winner, &play.here, &hack.thfpos, &play.telflg, &play.thfflg, &hack.thfflg, //F
+//    &hack.swdact, &hack.swdsta, &puzzle.cpvec //F
 // ); //F
-   GetVar(play_1.winner), GetVar(play_1.here), GetVar(hack_1.thfpos);
-   GetVar(play_1.telflg), GetVar(hack_1.thfflg), GetVar(hack_1.thfact);
-   GetVar(hack_1.swdact), GetVar(hack_1.swdsta), GetArr(64, puzzle_1.cpvec);
+   GetVar(play.winner), GetVar(play.here), GetVar(hack.thfpos);
+   GetVar(play.telflg), GetVar(hack.thfflg), GetVar(hack.thfact);
+   GetVar(hack.swdact), GetVar(hack.swdsta), GetArr(64, puzzle.cpvec);
 // read(1, //F
-//    &time_1.pltime, &state_1.moves, &state_1.deaths, &state_1.rwscor, &state_1.egscor, &state_1.mxload, //F
-//    &state_1.ltshft, &state_1.bloc, &state_1.mungrm, &state_1.hs, &state_1.fromdr, &state_1.scolrm, &state_1.scolac //F
+//    &time_.pltime, &state.moves, &state.deaths, &state.rwscor, &state.egscor, &state.mxload, //F
+//    &state.ltshft, &state.bloc, &state.mungrm, &state.hs, &state.fromdr, &state.scolrm, &state.scolac //F
 // ); //F
-   GetVar(time_1.pltime), GetVar(state_1.moves), GetVar(state_1.deaths), GetVar(state_1.rwscor);
-   GetVar(state_1.egscor), GetVar(state_1.mxload);
-   GetVar(state_1.ltshft), GetVar(state_1.bloc), GetVar(state_1.mungrm), GetVar(state_1.hs), GetVar(screen_1.fromdr);
-   GetVar(screen_1.scolrm), GetVar(screen_1.scolac);
+   GetVar(time_.pltime), GetVar(state.moves), GetVar(state.deaths), GetVar(state.rwscor);
+   GetVar(state.egscor), GetVar(state.mxload);
+   GetVar(state.ltshft), GetVar(state.bloc), GetVar(state.mungrm), GetVar(state.hs), GetVar(screen.fromdr);
+   GetVar(screen.scolrm), GetVar(screen.scolac);
 // read(1, //F
-//    &objcts_1.odesc1, &objcts_1.odesc2, &objcts_1.oflag1, &objcts_1.oflag2, &objcts_1.ofval, &objcts_1.otval, //F
-//    &objcts_1.osize, &objcts_1.ocapac, &objcts_1.oroom, &objcts_1.oadv, &objcts_1.ocan //F
+//    &objcts.odesc1, &objcts.odesc2, &objcts.oflag1, &objcts.oflag2, &objcts.ofval, &objcts.otval, //F
+//    &objcts.osize, &objcts.ocapac, &objcts.oroom, &objcts.oadv, &objcts.ocan //F
 // ); //F
-   GetArr(220, objcts_1.odesc1), GetArr(220, objcts_1.odesc2), GetArr(220, objcts_1.oflag1), GetArr(220, objcts_1.oflag2);
-   GetArr(220, objcts_1.ofval), GetArr(220, objcts_1.otval);
-   GetArr(220, objcts_1.osize), GetArr(220, objcts_1.ocapac);
-   GetArr(220, objcts_1.oroom), GetArr(220, objcts_1.oadv), GetArr(220, objcts_1.ocan);
-// read(1, rooms_1.rval, rooms_1.rflag); //F
-   GetArr(200, rooms_1.rval), GetArr(200, rooms_1.rflag);
-// read(1, &advs_1.aroom, &advs_1.ascore, &advs_1.avehic, &advs_1.astren, &advs_1.aflag); //F
-   GetArr(4, advs_1.aroom), GetArr(4, advs_1.ascore), GetArr(4, advs_1.avehic), GetArr(4, advs_1.astren), GetArr(4, advs_1.aflag);
-// read(1, flags, switch_, &vill_1.vprob, cevent_1.cflag, cevent_1.ctick); //F
-   GetArr(46, flags), GetArr(22, switch_), GetArr(4, vill_1.vprob), GetArr(25, cevent_1.cflag), GetArr(25, cevent_1.ctick);
+   GetArr(220, objcts.odesc1), GetArr(220, objcts.odesc2), GetArr(220, objcts.oflag1), GetArr(220, objcts.oflag2);
+   GetArr(220, objcts.ofval), GetArr(220, objcts.otval);
+   GetArr(220, objcts.osize), GetArr(220, objcts.ocapac);
+   GetArr(220, objcts.oroom), GetArr(220, objcts.oadv), GetArr(220, objcts.ocan);
+// read(1, rooms.rval, rooms.rflag); //F
+   GetArr(200, rooms.rval), GetArr(200, rooms.rflag);
+// read(1, &advs.aroom, &advs.ascore, &advs.avehic, &advs.astren, &advs.aflag); //F
+   GetArr(4, advs.aroom), GetArr(4, advs.ascore), GetArr(4, advs.avehic), GetArr(4, advs.astren), GetArr(4, advs.aflag);
+// read(1, flags, switch_, &vill.vprob, cevent.cflag, cevent.ctick); //F
+   GetArr(46, flags), GetArr(22, switch_), GetArr(4, vill.vprob), GetArr(25, cevent.cflag), GetArr(25, cevent.ctick);
 
 // close(unit:1); //F
    (void)fclose(InF);
@@ -137,15 +137,15 @@ Bool walk(/*int x*/) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   if (play_1.winner != aindex_1.player || lit(play_1.here) || prob(25, 25)) {
+   if (play.winner != aindex.player || lit(play.here) || prob(25, 25)) {
       goto L500;
    }
-   if (!findxt(prsvec_1.prso, play_1.here)) {
+   if (!findxt(prsvec.prso, play.here)) {
       goto L450;
    }
 // 						!INVALID EXIT? GRUE
 // 						!
-   switch (curxt_1.xtype) {
+   switch (curxt.xtype) {
       case 1:
          goto L400;
       case 2:
@@ -156,10 +156,10 @@ Bool walk(/*int x*/) {
          goto L300;
    }
 // 						!DECODE EXIT TYPE.
-   bug(9, curxt_1.xtype);
+   bug(9, curxt.xtype);
 
 L100:
-   if (cxappl(curxt_1.xactio) != 0) {
+   if (cxappl(curxt.xactio) != 0) {
       goto L400;
    }
 // 						!CEXIT... RETURNED ROOM?
@@ -174,11 +174,11 @@ L200:
    return ret_val;
 
 L300:
-   if (cxappl(curxt_1.xactio) != 0) {
+   if (cxappl(curxt.xactio) != 0) {
       goto L400;
    }
 // 						!DOOR... RETURNED ROOM?
-   if ((objcts_1.oflag2[curxt_1.xobj - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[curxt.xobj - 1] & OpenO) != 0) {
       goto L400;
    }
 // 						!NO, DOOR OPEN?
@@ -188,7 +188,7 @@ L300:
    return ret_val;
 
 L400:
-   if (lit(curxt_1.xroom1)) {
+   if (lit(curxt.xroom1)) {
       goto L900;
    }
 // 						!VALID ROOM, IS IT LIT?
@@ -201,31 +201,31 @@ L450:
 // ROOM IS LIT, OR WINNER IS NOT PLAYER (NO GRUE).
 
 L500:
-   if (findxt(prsvec_1.prso, play_1.here)) {
+   if (findxt(prsvec.prso, play.here)) {
       goto L550;
    }
 // 						!EXIT EXIST?
 L525:
-   curxt_1.xstrng = 678;
+   curxt.xstrng = 678;
 // 						!ASSUME WALL.
-   if (prsvec_1.prso == xsrch_1.xup) {
-      curxt_1.xstrng = 679;
+   if (prsvec.prso == xsrch.xup) {
+      curxt.xstrng = 679;
    }
 // 						!IF UP, CANT.
-   if (prsvec_1.prso == xsrch_1.xdown) {
-      curxt_1.xstrng = 680;
+   if (prsvec.prso == xsrch.xdown) {
+      curxt.xstrng = 680;
    }
 // 						!IF DOWN, CANT.
-   if ((rooms_1.rflag[play_1.here - 1] & NWallR) != 0) {
-      curxt_1.xstrng = 524;
+   if ((rooms.rflag[play.here - 1] & NWallR) != 0) {
+      curxt.xstrng = 524;
    }
-   rspeak(curxt_1.xstrng);
-   prsvec_1.prscon = 1;
+   rspeak(curxt.xstrng);
+   prsvec.prscon = 1;
 // 						!STOP CMD STREAM.
    return ret_val;
 
 L550:
-   switch (curxt_1.xtype) {
+   switch (curxt.xtype) {
       case 1:
          goto L900;
       case 2:
@@ -236,10 +236,10 @@ L550:
          goto L800;
    }
 // 						!BRANCH ON EXIT TYPE.
-   bug(9, curxt_1.xtype);
+   bug(9, curxt.xtype);
 
 L700:
-   if (cxappl(curxt_1.xactio) != 0) {
+   if (cxappl(curxt.xactio) != 0) {
       goto L900;
    }
 // 						!CEXIT... RETURNED ROOM?
@@ -248,36 +248,36 @@ L700:
    }
 // 						!NO, FLAG ON?
 L600:
-   if (curxt_1.xstrng == 0) {
+   if (curxt.xstrng == 0) {
       goto L525;
    }
 // 						!IF NO REASON, USE STD.
-   rspeak(curxt_1.xstrng);
+   rspeak(curxt.xstrng);
 // 						!DENY EXIT.
-   prsvec_1.prscon = 1;
+   prsvec.prscon = 1;
 // 						!STOP CMD STREAM.
    return ret_val;
 
 L800:
-   if (cxappl(curxt_1.xactio) != 0) {
+   if (cxappl(curxt.xactio) != 0) {
       goto L900;
    }
 // 						!DOOR... RETURNED ROOM?
-   if ((objcts_1.oflag2[curxt_1.xobj - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[curxt.xobj - 1] & OpenO) != 0) {
       goto L900;
    }
 // 						!NO, DOOR OPEN?
-   if (curxt_1.xstrng == 0) {
-      curxt_1.xstrng = 525;
+   if (curxt.xstrng == 0) {
+      curxt.xstrng = 525;
    }
 // 						!IF NO REASON, USE STD.
-   rspsub(curxt_1.xstrng, objcts_1.odesc2[curxt_1.xobj - 1]);
-   prsvec_1.prscon = 1;
+   rspsub(curxt.xstrng, objcts.odesc2[curxt.xobj - 1]);
+   prsvec.prscon = 1;
 // 						!STOP CMD STREAM.
    return ret_val;
 
 L900:
-   ret_val = moveto(curxt_1.xroom1, play_1.winner);
+   ret_val = moveto(curxt.xroom1, play.winner);
 // 						!MOVE TO ROOM.
    if (ret_val) {
       ret_val = rmdesc(0);
@@ -339,7 +339,7 @@ static int cxappl(int ri) {
 // C1- COFFIN-CURE
 
 L1000:
-   findex_1.egyptf = objcts_1.oadv[oindex_1.coffi - 1] != play_1.winner;
+   findex.egyptf = objcts.oadv[oindex.coffi - 1] != play.winner;
 // 						!T IF NO COFFIN.
    return ret_val;
 
@@ -347,7 +347,7 @@ L1000:
 // C5- CAROUSEL OUT
 
 L2000:
-   if (findex_1.caroff) {
+   if (findex.caroff) {
       return ret_val;
    }
 // 						!IF FLIPPED, NOTHING.
@@ -355,23 +355,23 @@ L2500:
    rspeak(121);
 // 						!SPIN THE COMPASS.
 L5000:
-   i = xpars_1.xelnt[xpars_1.xcond - 1] * rnd(8);
+   i = xpars.xelnt[xpars.xcond - 1] * rnd(8);
 // 						!CHOOSE RANDOM EXIT.
-   curxt_1.xroom1 = exits_1.travel[rooms_1.rexit[play_1.here - 1] + i - 1] & xpars_1.xrmask;
-   ret_val = curxt_1.xroom1;
+   curxt.xroom1 = exits.travel[rooms.rexit[play.here - 1] + i - 1] & xpars.xrmask;
+   ret_val = curxt.xroom1;
 // 						!RETURN EXIT.
    return ret_val;
 
 // C3- CHIMNEY FUNCTION
 
 L3000:
-   findex_1.litldf = false;
+   findex.litldf = false;
 // 						!ASSUME HEAVY LOAD.
    j = 0;
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!COUNT OBJECTS.
-      if (objcts_1.oadv[i - 1] == play_1.winner) {
+      if (objcts.oadv[i - 1] == play.winner) {
          ++j;
       }
 // L3100:
@@ -381,16 +381,16 @@ L3000:
       return ret_val;
    }
 // 						!CARRYING TOO MUCH?
-   curxt_1.xstrng = 446;
+   curxt.xstrng = 446;
 // 						!ASSUME NO LAMP.
-   if (objcts_1.oadv[oindex_1.lamp - 1] != play_1.winner) {
+   if (objcts.oadv[oindex.lamp - 1] != play.winner) {
       return ret_val;
    }
 // 						!NO LAMP?
-   findex_1.litldf = true;
+   findex.litldf = true;
 // 						!HE CAN DO IT.
-   if ((objcts_1.oflag2[oindex_1.door - 1] & OpenO) == 0) {
-      objcts_1.oflag2[oindex_1.door - 1] &= ~TChO;
+   if ((objcts.oflag2[oindex.door - 1] & OpenO) == 0) {
+      objcts.oflag2[oindex.door - 1] &= ~TChO;
    }
    return ret_val;
 
@@ -398,95 +398,95 @@ L3000:
 // C6-	FROBOZZ FLAG (MAGNET ROOM, REAL EXIT)
 
 L4000:
-   if (findex_1.caroff) {
+   if (findex.caroff) {
       goto L2500;
    }
 // 						!IF FLIPPED, GO SPIN.
-   findex_1.frobzf = false;
+   findex.frobzf = false;
 // 						!OTHERWISE, NOT AN EXIT.
    return ret_val;
 
 L6000:
-   if (findex_1.caroff) {
+   if (findex.caroff) {
       goto L2500;
    }
 // 						!IF FLIPPED, GO SPIN.
-   findex_1.frobzf = true;
+   findex.frobzf = true;
 // 						!OTHERWISE, AN EXIT.
    return ret_val;
 
 // C7-	FROBOZZ FLAG (BANK ALARM)
 
 L7000:
-   findex_1.frobzf = objcts_1.oroom[oindex_1.bills - 1] != 0 && objcts_1.oroom[oindex_1.portr - 1] != 0;
+   findex.frobzf = objcts.oroom[oindex.bills - 1] != 0 && objcts.oroom[oindex.portr - 1] != 0;
    return ret_val;
 // CXAPPL, PAGE 3
 
 // C8-	FROBOZZ FLAG (MRGO)
 
 L8000:
-   findex_1.frobzf = false;
+   findex.frobzf = false;
 // 						!ASSUME CANT MOVE.
-   if (findex_1.mloc != curxt_1.xroom1) {
+   if (findex.mloc != curxt.xroom1) {
       goto L8100;
    }
 // 						!MIRROR IN WAY?
-   if (prsvec_1.prso == xsrch_1.xnorth || prsvec_1.prso == xsrch_1.xsouth) {
+   if (prsvec.prso == xsrch.xnorth || prsvec.prso == xsrch.xsouth) {
       goto L8200;
    }
-   if (findex_1.mdir % 180 != 0) {
+   if (findex.mdir % 180 != 0) {
       goto L8300;
    }
 // 						!MIRROR MUST BE N-S.
-   curxt_1.xroom1 = (curxt_1.xroom1 - rindex_1.mra << 1) + rindex_1.mrae;
+   curxt.xroom1 = (curxt.xroom1 - rindex_.mra << 1) + rindex_.mrae;
 // 						!CALC EAST ROOM.
-   if (prsvec_1.prso > xsrch_1.xsouth) {
-      ++curxt_1.xroom1;
+   if (prsvec.prso > xsrch.xsouth) {
+      ++curxt.xroom1;
    }
 // 						!IF SW/NW, CALC WEST.
 L8100:
-   ret_val = curxt_1.xroom1;
+   ret_val = curxt.xroom1;
    return ret_val;
 
 L8200:
-   curxt_1.xstrng = 814;
+   curxt.xstrng = 814;
 // 						!ASSUME STRUC BLOCKS.
-   if (findex_1.mdir % 180 == 0) {
+   if (findex.mdir % 180 == 0) {
       return ret_val;
    }
 // 						!IF MIRROR N-S, DONE.
 L8300:
-   ldir = findex_1.mdir;
+   ldir = findex.mdir;
 // 						!SEE WHICH MIRROR.
-   if (prsvec_1.prso == xsrch_1.xsouth) {
+   if (prsvec.prso == xsrch.xsouth) {
       ldir = 180;
    }
-   curxt_1.xstrng = 815;
+   curxt.xstrng = 815;
 // 						!MIRROR BLOCKS.
-   if (ldir > 180 && !findex_1.mr1f || ldir < 180 && !findex_1.mr2f) {
-      curxt_1.xstrng = 816;
+   if (ldir > 180 && !findex.mr1f || ldir < 180 && !findex.mr2f) {
+      curxt.xstrng = 816;
    }
    return ret_val;
 
 // C9-	FROBOZZ FLAG (MIRIN)
 
 L9000:
-   if (mrhere(play_1.here) != 1) {
+   if (mrhere(play.here) != 1) {
       goto L9100;
    }
 // 						!MIRROR 1 HERE?
-   if (findex_1.mr1f) {
-      curxt_1.xstrng = 805;
+   if (findex.mr1f) {
+      curxt.xstrng = 805;
    }
 // 						!SEE IF BROKEN.
-   findex_1.frobzf = findex_1.mropnf;
+   findex.frobzf = findex.mropnf;
 // 						!ENTER IF OPEN.
    return ret_val;
 
 L9100:
-   findex_1.frobzf = false;
+   findex.frobzf = false;
 // 						!NOT HERE,
-   curxt_1.xstrng = 817;
+   curxt.xstrng = 817;
 // 						!LOSE.
    return ret_val;
 // CXAPPL, PAGE 4
@@ -494,51 +494,51 @@ L9100:
 // C10-	FROBOZZ FLAG (MIRROR EXIT)
 
 L10000:
-   findex_1.frobzf = false;
+   findex.frobzf = false;
 // 						!ASSUME CANT.
-   ldir = (prsvec_1.prso - xsrch_1.xnorth) / xsrch_1.xnorth * 45;
+   ldir = (prsvec.prso - xsrch.xnorth) / xsrch.xnorth * 45;
 // 						!XLATE DIR TO DEGREES.
-   if (!findex_1.mropnf || (findex_1.mdir + 270) % 360 != ldir && prsvec_1.prso != xsrch_1.xexit) {
+   if (!findex.mropnf || (findex.mdir + 270) % 360 != ldir && prsvec.prso != xsrch.xexit) {
       goto L10200;
    }
-   curxt_1.xroom1 = (findex_1.mloc - rindex_1.mra << 1) + rindex_1.mrae + 1 - findex_1.mdir / 180;
+   curxt.xroom1 = (findex.mloc - rindex_.mra << 1) + rindex_.mrae + 1 - findex.mdir / 180;
 // 						!ASSUME E-W EXIT.
-   if (findex_1.mdir % 180 == 0) {
+   if (findex.mdir % 180 == 0) {
       goto L10100;
    }
 // 						!IF N-S, OK.
-   curxt_1.xroom1 = findex_1.mloc + 1;
+   curxt.xroom1 = findex.mloc + 1;
 // 						!ASSUME N EXIT.
-   if (findex_1.mdir > 180) {
-      curxt_1.xroom1 = findex_1.mloc - 1;
+   if (findex.mdir > 180) {
+      curxt.xroom1 = findex.mloc - 1;
    }
 // 						!IF SOUTH.
 L10100:
-   ret_val = curxt_1.xroom1;
+   ret_val = curxt.xroom1;
    return ret_val;
 
 L10200:
-   if (!findex_1.wdopnf || (findex_1.mdir + 180) % 360 != ldir && prsvec_1.prso != xsrch_1.xexit) {
+   if (!findex.wdopnf || (findex.mdir + 180) % 360 != ldir && prsvec.prso != xsrch.xexit) {
       return ret_val;
    }
-   curxt_1.xroom1 = findex_1.mloc + 1;
+   curxt.xroom1 = findex.mloc + 1;
 // 						!ASSUME N.
-   if (findex_1.mdir == 0) {
-      curxt_1.xroom1 = findex_1.mloc - 1;
+   if (findex.mdir == 0) {
+      curxt.xroom1 = findex.mloc - 1;
    }
 // 						!IF S.
    rspeak(818);
 // 						!CLOSE DOOR.
-   findex_1.wdopnf = false;
-   ret_val = curxt_1.xroom1;
+   findex.wdopnf = false;
+   ret_val = curxt.xroom1;
    return ret_val;
 
 // C11-	MAYBE DOOR.  NORMAL MESSAGE IS THAT DOOR IS CLOSED.
 // 	BUT IF LCELL.NE.4, DOOR ISNT THERE.
 
 L11000:
-   if (findex_1.lcell != 4) {
-      curxt_1.xstrng = 678;
+   if (findex.lcell != 4) {
+      curxt.xstrng = 678;
    }
 // 						!SET UP MSG.
    return ret_val;
@@ -546,16 +546,16 @@ L11000:
 // C12-	FROBZF (PUZZLE ROOM MAIN ENTRANCE)
 
 L12000:
-   findex_1.frobzf = true;
+   findex.frobzf = true;
 // 						!ALWAYS ENTER.
-   findex_1.cphere = 10;
+   findex.cphere = 10;
 // 						!SET SUBSTATE.
    return ret_val;
 
 // C13-	CPOUTF (PUZZLE ROOM SIZE ENTRANCE)
 
 L13000:
-   findex_1.cphere = 52;
+   findex.cphere = 52;
 // 						!SET SUBSTATE.
    return ret_val;
 // CXAPPL, PAGE 5
@@ -563,40 +563,40 @@ L13000:
 // C14-	FROBZF (PUZZLE ROOM TRANSITIONS)
 
 L14000:
-   findex_1.frobzf = false;
+   findex.frobzf = false;
 // 						!ASSSUME LOSE.
-   if (prsvec_1.prso != xsrch_1.xup) {
+   if (prsvec.prso != xsrch.xup) {
       goto L14100;
    }
 // 						!UP?
-   if (findex_1.cphere != 10) {
+   if (findex.cphere != 10) {
       return ret_val;
    }
 // 						!AT EXIT?
-   curxt_1.xstrng = 881;
+   curxt.xstrng = 881;
 // 						!ASSUME NO LADDER.
-   if (puzzle_1.cpvec[findex_1.cphere] != -2) {
+   if (puzzle.cpvec[findex.cphere] != -2) {
       return ret_val;
    }
 // 						!LADDER HERE?
    rspeak(882);
 // 						!YOU WIN.
-   findex_1.frobzf = true;
+   findex.frobzf = true;
 // 						!LET HIM OUT.
    return ret_val;
 
 L14100:
-   if (findex_1.cphere != 52 || prsvec_1.prso != xsrch_1.xwest || !findex_1.cpoutf) {
+   if (findex.cphere != 52 || prsvec.prso != xsrch.xwest || !findex.cpoutf) {
       goto L14200;
    }
-   findex_1.frobzf = true;
+   findex.frobzf = true;
 // 						!YES, LET HIM OUT.
    return ret_val;
 
 L14200:
    for (i = 1; i <= 16; i += 2) {
 // 						!LOCATE EXIT.
-      if (prsvec_1.prso == puzzle_1.cpdr[i - 1]) {
+      if (prsvec.prso == puzzle.cpdr[i - 1]) {
          goto L14400;
       }
 // L14300:
@@ -605,16 +605,16 @@ L14200:
 // 						!NO SUCH EXIT.
 
 L14400:
-   j = puzzle_1.cpdr[i];
+   j = puzzle.cpdr[i];
 // 						!GET DIRECTIONAL OFFSET.
-   nxt = findex_1.cphere + j;
+   nxt = findex.cphere + j;
 // 						!GET NEXT STATE.
    k = 8;
 // 						!GET ORTHOGONAL DIR.
    if (j < 0) {
       k = -8;
    }
-   if ((abs(j) == 1 || abs(j) == 8 || (puzzle_1.cpvec[findex_1.cphere + k - 1] == 0 || puzzle_1.cpvec[nxt - k - 1] == 0)) && puzzle_1.cpvec[nxt - 1] == 0) {
+   if ((abs(j) == 1 || abs(j) == 8 || (puzzle.cpvec[findex.cphere + k - 1] == 0 || puzzle.cpvec[nxt - k - 1] == 0)) && puzzle.cpvec[nxt - 1] == 0) {
       goto L14500;
    }
    return ret_val;
@@ -622,8 +622,8 @@ L14400:
 L14500:
    cpgoto(nxt);
 // 						!MOVE TO STATE.
-   curxt_1.xroom1 = rindex_1.cpuzz;
+   curxt.xroom1 = rindex_.cpuzz;
 // 						!STAY IN ROOM.
-   ret_val = curxt_1.xroom1;
+   ret_val = curxt.xroom1;
    return ret_val;
 }

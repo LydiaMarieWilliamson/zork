@@ -16,7 +16,7 @@ Bool findxt(int dir, int rm) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   xi = rooms_1.rexit[rm - 1];
+   xi = rooms.rexit[rm - 1];
 // 						!FIND FIRST ENTRY.
    if (xi == 0) {
       goto L1000;
@@ -24,12 +24,12 @@ Bool findxt(int dir, int rm) {
 // 						!NO EXITS?
 
 L100:
-   i = exits_1.travel[xi - 1];
+   i = exits.travel[xi - 1];
 // 						!GET ENTRY.
-   curxt_1.xroom1 = i & xpars_1.xrmask;
+   curxt.xroom1 = i & xpars.xrmask;
 // mask to 16-bits to get rid of sign extension problems with 32-bit ints 
-   curxt_1.xtype = ((i & ~xpars_1.xlflag & 65535) / xpars_1.xfshft & xpars_1.xfmask) + 1;
-   switch (curxt_1.xtype) {
+   curxt.xtype = ((i & ~xpars.xlflag & 65535) / xpars.xfshft & xpars.xfmask) + 1;
+   switch (curxt.xtype) {
       case 1:
          goto L110;
       case 2:
@@ -40,21 +40,21 @@ L100:
          goto L130;
    }
 // 						!BRANCH ON ENTRY.
-   bug(10, curxt_1.xtype);
+   bug(10, curxt.xtype);
 
 L130:
-   curxt_1.xobj = exits_1.travel[xi + 1] & xpars_1.xrmask;
-   curxt_1.xactio = exits_1.travel[xi + 1] / xpars_1.xashft;
+   curxt.xobj = exits.travel[xi + 1] & xpars.xrmask;
+   curxt.xactio = exits.travel[xi + 1] / xpars.xashft;
 L120:
-   curxt_1.xstrng = exits_1.travel[xi];
+   curxt.xstrng = exits.travel[xi];
 // 						!DOOR/CEXIT/NEXIT - STRING.
 L110:
-   xi += xpars_1.xelnt[curxt_1.xtype - 1];
+   xi += xpars.xelnt[curxt.xtype - 1];
 // 						!ADVANCE TO NEXT ENTRY.
-   if ((i & xpars_1.xdmask) == dir) {
+   if ((i & xpars.xdmask) == dir) {
       return ret_val;
    }
-   if ((i & xpars_1.xlflag) == 0) {
+   if ((i & xpars.xlflag) == 0) {
       goto L100;
    }
 L1000:
@@ -73,20 +73,20 @@ int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 
    ret_val = 0;
 // 						!ASSUME NOTHING.
-   i__1 = objcts_1.olnt;
+   i__1 = objcts.olnt;
    for (i = 1; i <= i__1; ++i) {
 // 						!LOOP
-      if ((rm == 0 || objcts_1.oroom[i - 1] != rm) && (adv == 0 || objcts_1.oadv[i - 1] != adv) && (con == 0 || objcts_1.ocan[i - 1] != con)) {
+      if ((rm == 0 || objcts.oroom[i - 1] != rm) && (adv == 0 || objcts.oadv[i - 1] != adv) && (con == 0 || objcts.ocan[i - 1] != con)) {
          goto L1000;
       }
 
 // OBJECT IS ON LIST... IS IT A MATCH?
 
-      if ((objcts_1.oflag1[i - 1] & VisiO) == 0) {
+      if ((objcts.oflag1[i - 1] & VisiO) == 0) {
          goto L1000;
       }
-//    if ((~(nocare) & (objcts_1.oflag1[i - 1] & TakeO) == 0) || ⋯) {
-      if (!(nocare) && (objcts_1.oflag1[i - 1] & TakeO) == 0 || (objcts_1.oflag1[i - 1] & f1) == 0 && (objcts_1.oflag2[i - 1] & f2) == 0) {
+//    if ((~(nocare) & (objcts.oflag1[i - 1] & TakeO) == 0) || ⋯) {
+      if (!(nocare) && (objcts.oflag1[i - 1] & TakeO) == 0 || (objcts.oflag1[i - 1] & f1) == 0 && (objcts.oflag2[i - 1] & f2) == 0) {
          goto L500;
       }
       if (ret_val == 0) {
@@ -104,13 +104,13 @@ int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 // DOES OBJECT CONTAIN A MATCH?
 
    L500:
-      if ((objcts_1.oflag2[i - 1] & OpenO) == 0) {
+      if ((objcts.oflag2[i - 1] & OpenO) == 0) {
          goto L1000;
       }
-      i__2 = objcts_1.olnt;
+      i__2 = objcts.olnt;
       for (j = 1; j <= i__2; ++j) {
 // 						!NO, SEARCH CONTENTS.
-         if (objcts_1.ocan[j - 1] != i || (objcts_1.oflag1[j - 1] & VisiO) == 0 || (objcts_1.oflag1[j - 1] & f1) == 0 && (objcts_1.oflag2[j - 1] & f2) == 0) {
+         if (objcts.ocan[j - 1] != i || (objcts.oflag1[j - 1] & VisiO) == 0 || (objcts.oflag1[j - 1] & f1) == 0 && (objcts.oflag2[j - 1] & f2) == 0) {
             goto L700;
          }
          if (ret_val == 0) {
@@ -143,7 +143,7 @@ Bool yesno(int q, int y, int n) {
 L100:
    rspeak(q);
 // 						!ASK
-// read(chan_1.inpch, "%A1", &ans); //F
+// read(chan.inpch, "%A1", &ans); //F
    (void)fflush(stdout), (void)fgets(ans, sizeof ans, stdin), more_input();
 // 						!GET ANSWER
    if (*ans == 'Y' || *ans == 'y') {

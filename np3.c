@@ -29,16 +29,16 @@ Bool synmch(/*int x*/) {
 
    ret_val = false;
 #ifdef ALLOW_GDT
-// dflag = (debug_1.prsflg & 16) != 0; //F
+// dflag = (debug.prsflg & 16) != 0; //F
 // if (dflag) write(0, *, "synflags=", DirS, IndS, StdS, FlipS, DrivS, VMaskS); //F
 #endif
-   j = pv_1.act;
+   j = pv.act;
 // 						!SET UP PTR TO SYNTAX.
    drive = 0;
 // 						!NO DEFAULT.
    dforce = 0;
 // 						!NO FORCED DEFAULT.
-   qprep = orphs_1.oflag & orphs_1.oprep;
+   qprep = orphs.oflag & orphs.oprep;
 L100:
    j += 2;
 // 						!FIND START OF SYNTAX.
@@ -54,30 +54,30 @@ L200:
    newj = unpacks(j);
 // 						!UNPACK SYNTAX.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH INPUTS TO SYNEQL- %5I7", pv_1.o1, pv_1.p1, syntax_1.dobj, syntax_1.dfl1, syntax_1.dfl2); //F
+// if (dflag) print(" SYNMCH INPUTS TO SYNEQL- %5I7", pv.o1, pv.p1, syntax.dobj, syntax.dfl1, syntax.dfl2); //F
 #endif
-   sprep = syntax_1.dobj & PMaskV;
-   if (!syneql(pv_1.p1, pv_1.o1, syntax_1.dobj, syntax_1.dfl1, syntax_1.dfl2)) {
+   sprep = syntax.dobj & PMaskV;
+   if (!syneql(pv.p1, pv.o1, syntax.dobj, syntax.dfl1, syntax.dfl2)) {
       goto L1000;
    }
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH INPUTS TO SYNEQL- %5I7", pv_1.o2, pv_1.p2, syntax_1.iobj, syntax_1.ifl1, syntax_1.ifl2); //F
+// if (dflag) print(" SYNMCH INPUTS TO SYNEQL- %5I7", pv.o2, pv.p2, syntax.iobj, syntax.ifl1, syntax.ifl2); //F
 #endif
-   sprep = syntax_1.iobj & PMaskV;
-   if (syneql(pv_1.p2, pv_1.o2, syntax_1.iobj, syntax_1.ifl1, syntax_1.ifl2)) {
+   sprep = syntax.iobj & PMaskV;
+   if (syneql(pv.p2, pv.o2, syntax.iobj, syntax.ifl1, syntax.ifl2)) {
       goto L6000;
    }
 
 // SYNTAX MATCH FAILS, TRY NEXT ONE.
 
-   if (pv_1.o2 != 0) {
+   if (pv.o2 != 0) {
       goto L3000;
    } else {
       goto L500;
    }
 // 						!IF O2=0, SET DFLT.
 L1000:
-   if (pv_1.o1 != 0) {
+   if (pv.o1 != 0) {
       goto L3000;
    } else {
       goto L500;
@@ -88,7 +88,7 @@ L500:
       dforce = j;
    }
 // 						!IF PREP MCH.
-   if ((syntax_1.vflag & DrivS) != 0) {
+   if ((syntax.vflag & DrivS) != 0) {
       drive = j;
    }
 L3000:
@@ -118,57 +118,57 @@ L3000:
 
 // TRY TO FILL DIRECT OBJECT SLOT IF THAT WAS THE PROBLEM.
 
-   if ((syntax_1.vflag & DirS) == 0 || pv_1.o1 != 0) {
+   if ((syntax.vflag & DirS) == 0 || pv.o1 != 0) {
       goto L4000;
    }
 
 // FIRST TRY TO SNARF ORPHAN OBJECT.
 
-   pv_1.o1 = orphs_1.oflag & orphs_1.oslot;
-   if (pv_1.o1 == 0) {
+   pv.o1 = orphs.oflag & orphs.oslot;
+   if (pv.o1 == 0) {
       goto L3500;
    }
 // 						!ANY ORPHAN?
-   if (syneql(pv_1.p1, pv_1.o1, syntax_1.dobj, syntax_1.dfl1, syntax_1.dfl2)) {
+   if (syneql(pv.p1, pv.o1, syntax.dobj, syntax.dfl1, syntax.dfl2)) {
       goto L4000;
    }
 
 // ORPHAN FAILS, TRY GWIM.
 
 L3500:
-   pv_1.o1 = gwim(syntax_1.dobj, syntax_1.dfw1, syntax_1.dfw2);
+   pv.o1 = gwim(syntax.dobj, syntax.dfw1, syntax.dfw2);
 // 						!GET GWIM.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH- DO GWIM= %I6", pv_1.o1); //F
+// if (dflag) print(" SYNMCH- DO GWIM= %I6", pv.o1); //F
 #endif
-   if (pv_1.o1 > 0) {
+   if (pv.o1 > 0) {
       goto L4000;
    }
 // 						!TEST RESULT.
-   i__1 = syntax_1.dobj & PMaskV;
-   orphan(-1, pv_1.act, 0, i__1, 0);
+   i__1 = syntax.dobj & PMaskV;
+   orphan(-1, pv.act, 0, i__1, 0);
    rspeak(623);
    return ret_val;
 
 // TRY TO FILL INDIRECT OBJECT SLOT IF THAT WAS THE PROBLEM.
 
 L4000:
-   if ((syntax_1.vflag & IndS) == 0 || pv_1.o2 != 0) {
+   if ((syntax.vflag & IndS) == 0 || pv.o2 != 0) {
       goto L6000;
    }
-   pv_1.o2 = gwim(syntax_1.iobj, syntax_1.ifw1, syntax_1.ifw2);
+   pv.o2 = gwim(syntax.iobj, syntax.ifw1, syntax.ifw2);
 // 						!GWIM.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH- IO GWIM= %I6", pv_1.o2); //F
+// if (dflag) print(" SYNMCH- IO GWIM= %I6", pv.o2); //F
 #endif
-   if (pv_1.o2 > 0) {
+   if (pv.o2 > 0) {
       goto L6000;
    }
-   if (pv_1.o1 == 0) {
-      pv_1.o1 = orphs_1.oflag & orphs_1.oslot;
+   if (pv.o1 == 0) {
+      pv.o1 = orphs.oflag & orphs.oslot;
    }
-   i__1 = syntax_1.dobj & PMaskV;
-   orphan(-1, pv_1.act, pv_1.o1, i__1, 0);
+   i__1 = syntax.dobj & PMaskV;
+   orphan(-1, pv.act, pv.o1, i__1, 0);
    rspeak(624);
    return ret_val;
 
@@ -184,31 +184,31 @@ L10000:
 // IN GENERAL CLEAN UP THE PARSE VECTOR.
 
 L6000:
-   if ((syntax_1.vflag & FlipS) == 0) {
+   if ((syntax.vflag & FlipS) == 0) {
       goto L5000;
    }
-   j = pv_1.o1;
+   j = pv.o1;
 // 						!YES.
-   pv_1.o1 = pv_1.o2;
-   pv_1.o2 = j;
+   pv.o1 = pv.o2;
+   pv.o2 = j;
 
 L5000:
-   prsvec_1.prsa = syntax_1.vflag & VMaskS;
-   prsvec_1.prso = pv_1.o1;
+   prsvec.prsa = syntax.vflag & VMaskS;
+   prsvec.prso = pv.o1;
 // 						!GET DIR OBJ.
-   prsvec_1.prsi = pv_1.o2;
+   prsvec.prsi = pv.o2;
 // 						!GET IND OBJ.
-   if (!takeit(prsvec_1.prso, syntax_1.dobj)) {
+   if (!takeit(prsvec.prso, syntax.dobj)) {
       return ret_val;
    }
 // 						!TRY TAKE.
-   if (!takeit(prsvec_1.prsi, syntax_1.iobj)) {
+   if (!takeit(prsvec.prsi, syntax.iobj)) {
       return ret_val;
    }
 // 						!TRY TAKE.
    ret_val = true;
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH- RESULTS %L1%6I7", ret_val, prsvec_1.prsa, prsvec_1.prso, prsvec_1.prsi, pv_1.act, pv_1.o1, pv_1.o2); //F
+// if (dflag) print(" SYNMCH- RESULTS %L1%6I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi, pv.act, pv.o1, pv.o2); //F
 #endif
    return ret_val;
 }
@@ -224,53 +224,53 @@ static int unpacks(int oldj) {
 // L10:
    }
 
-   syntax_1.vflag = vvoc[oldj - 1];
+   syntax.vflag = vvoc[oldj - 1];
    int j = oldj + 1;
-   if ((syntax_1.vflag & DirS) == 0) {
+   if ((syntax.vflag & DirS) == 0) {
       return j;
    }
-   syntax_1.dfl1 = -1;
+   syntax.dfl1 = -1;
 // 						!ASSUME STD.
-   syntax_1.dfl2 = -1;
-   if ((syntax_1.vflag & StdS) == 0) {
+   syntax.dfl2 = -1;
+   if ((syntax.vflag & StdS) == 0) {
       goto L100;
    }
-   syntax_1.dfw1 = -1;
+   syntax.dfw1 = -1;
 // 						!YES.
-   syntax_1.dfw2 = -1;
-   syntax_1.dobj = AbitV + RbitV + FbitV;
+   syntax.dfw2 = -1;
+   syntax.dobj = AbitV + RbitV + FbitV;
    goto L200;
 
 L100:
-   syntax_1.dobj = vvoc[j - 1];
+   syntax.dobj = vvoc[j - 1];
 // 						!NOT STD.
-   syntax_1.dfw1 = vvoc[j];
-   syntax_1.dfw2 = vvoc[j + 1];
+   syntax.dfw1 = vvoc[j];
+   syntax.dfw2 = vvoc[j + 1];
    j += 3;
-   if ((syntax_1.dobj & EbitV) == 0) {
+   if ((syntax.dobj & EbitV) == 0) {
       goto L200;
    }
-   syntax_1.dfl1 = syntax_1.dfw1;
+   syntax.dfl1 = syntax.dfw1;
 // 						!YES.
-   syntax_1.dfl2 = syntax_1.dfw2;
+   syntax.dfl2 = syntax.dfw2;
 
 L200:
-   if ((syntax_1.vflag & IndS) == 0) {
+   if ((syntax.vflag & IndS) == 0) {
       return j;
    }
-   syntax_1.ifl1 = -1;
+   syntax.ifl1 = -1;
 // 						!ASSUME STD.
-   syntax_1.ifl2 = -1;
-   syntax_1.iobj = vvoc[j - 1];
-   syntax_1.ifw1 = vvoc[j];
-   syntax_1.ifw2 = vvoc[j + 1];
+   syntax.ifl2 = -1;
+   syntax.iobj = vvoc[j - 1];
+   syntax.ifw1 = vvoc[j];
+   syntax.ifw2 = vvoc[j + 1];
    j += 3;
-   if ((syntax_1.iobj & EbitV) == 0) {
+   if ((syntax.iobj & EbitV) == 0) {
       return j;
    }
-   syntax_1.ifl1 = syntax_1.ifw1;
+   syntax.ifl1 = syntax.ifw1;
 // 						!YES.
-   syntax_1.ifl2 = syntax_1.ifw2;
+   syntax.ifl2 = syntax.ifw2;
    return j;
 }
 
@@ -283,7 +283,7 @@ static Bool syneql(int prep, int obj, int sprep, int sfl1, int sfl2) {
       goto L100;
    }
 // 						!ANY OBJECT?
-   ret_val = prep == (sprep & PMaskV) && (sfl1 & objcts_1.oflag1[obj - 1] | sfl2 & objcts_1.oflag2[obj - 1]) != 0;
+   ret_val = prep == (sprep & PMaskV) && (sfl1 & objcts.oflag1[obj - 1] | sfl2 & objcts.oflag2[obj - 1]) != 0;
    return ret_val;
 
 L100:
@@ -304,18 +304,18 @@ static Bool takeit(int obj, int sflag) {
 
    ret_val = false;
 // 						!ASSUME LOSES.
-   if (obj == 0 || obj > star_1.strbit) {
+   if (obj == 0 || obj > star.strbit) {
       goto L4000;
    }
 // 						!NULL/STARS WIN.
-   odo2 = objcts_1.odesc2[obj - 1];
+   odo2 = objcts.odesc2[obj - 1];
 // 						!GET DESC.
-   x = objcts_1.ocan[obj - 1];
+   x = objcts.ocan[obj - 1];
 // 						!GET CONTAINER.
    if (x == 0 || (sflag & FbitV) == 0) {
       goto L500;
    }
-   if ((objcts_1.oflag2[x - 1] & OpenO) != 0) {
+   if ((objcts.oflag2[x - 1] & OpenO) != 0) {
       goto L500;
    }
    rspsub(566, odo2);
@@ -332,14 +332,14 @@ L500:
 
 // SHOULD BE IN ROOM (RbitV NE 0) AND CAN BE TAKEN (TbitV NE 0)
 
-   if (schlst(0, 0, play_1.here, 0, 0, obj) <= 0) {
+   if (schlst(0, 0, play.here, 0, 0, obj) <= 0) {
       goto L4000;
    }
 // 						!IF NOT, OK.
 
 // ITS IN THE ROOM AND CAN BE TAKEN.
 
-   if ((objcts_1.oflag1[obj - 1] & TakeO) != 0 && (objcts_1.oflag2[obj - 1] & TryO) == 0) {
+   if ((objcts.oflag1[obj - 1] & TakeO) != 0 && (objcts.oflag2[obj - 1] & TryO) == 0) {
       goto L3000;
    }
 
@@ -359,7 +359,7 @@ L2000:
       goto L4000;
    }
 L1000:
-   if (schlst(0, 0, play_1.here, 0, 0, obj) <= 0) {
+   if (schlst(0, 0, play.here, 0, 0, obj) <= 0) {
       goto L4000;
    }
    rspsub(665, odo2);
@@ -373,7 +373,7 @@ L1000:
 // THE FOLLOWING CODE IS LIFTED FROM SUBROUTINE TAKE.
 
 L3000:
-   if (obj != advs_1.avehic[play_1.winner - 1]) {
+   if (obj != advs.avehic[play.winner - 1]) {
       goto L3500;
    }
 // 						!TAKE VEHICLE?
@@ -381,7 +381,7 @@ L3000:
    return ret_val;
 
 L3500:
-   if (x != 0 && objcts_1.oadv[x - 1] == play_1.winner || weight(0, obj, play_1.winner) + objcts_1.osize[obj - 1] <= state_1.mxload) {
+   if (x != 0 && objcts.oadv[x - 1] == play.winner || weight(0, obj, play.winner) + objcts.osize[obj - 1] <= state.mxload) {
       goto L3700;
    }
    rspeak(558);
@@ -389,11 +389,11 @@ L3500:
    return ret_val;
 
 L3700:
-   newsta(obj, 559, 0, 0, play_1.winner);
+   newsta(obj, 559, 0, 0, play.winner);
 // 						!DO TAKE.
-   objcts_1.oflag2[obj - 1] |= TChO;
-   scrupd(objcts_1.ofval[obj - 1]);
-   objcts_1.ofval[obj - 1] = 0;
+   objcts.oflag2[obj - 1] |= TChO;
+   scrupd(objcts.ofval[obj - 1]);
+   objcts.ofval[obj - 1] = 0;
 
 L4000:
    ret_val = true;
@@ -415,14 +415,14 @@ static int gwim(int sflag, int sfw1, int sfw2) {
 
    ret_val = -1;
 // 						!ASSUME LOSE.
-   av = advs_1.avehic[play_1.winner - 1];
+   av = advs.avehic[play.winner - 1];
    nobj = 0;
    nocare = (sflag & CbitV) == 0;
 
 // FIRST SEARCH ADVENTURER
 
    if ((sflag & AbitV) != 0) {
-      nobj = fwim(sfw1, sfw2, 0, 0, play_1.winner, nocare);
+      nobj = fwim(sfw1, sfw2, 0, 0, play.winner, nocare);
    }
    if ((sflag & RbitV) != 0) {
       goto L100;
@@ -434,7 +434,7 @@ L50:
 // ALSO SEARCH ROOM
 
 L100:
-   robj = fwim(sfw1, sfw2, play_1.here, 0, 0, nocare);
+   robj = fwim(sfw1, sfw2, play.here, 0, 0, nocare);
    if (robj < 0) {
       goto L500;
    } else if (robj == 0) {
@@ -447,10 +447,10 @@ L100:
 // ROBJ > 0
 
 L200:
-   if (av == 0 || robj == av || (objcts_1.oflag2[robj - 1] & FindO) != 0) {
+   if (av == 0 || robj == av || (objcts.oflag2[robj - 1] & FindO) != 0) {
       goto L300;
    }
-   if (objcts_1.ocan[robj - 1] != av) {
+   if (objcts.ocan[robj - 1] != av) {
       goto L50;
    }
 // 						!UNREACHABLE? TRY NOBJ

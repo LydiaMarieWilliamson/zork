@@ -14,7 +14,7 @@ Bool ghere(int obj, int rm) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   switch (obj - star_1.strbit) {
+   switch (obj - star.strbit) {
       case 1:
          goto L1000;
       case 2:
@@ -76,67 +76,67 @@ L1000:
 // 2000--	BIRD
 
 L2000:
-   ret_val = rm >= rindex_1.fore1 && rm < rindex_1.clear || rm == rindex_1.mtree;
+   ret_val = rm >= rindex_.fore1 && rm < rindex_.clear || rm == rindex_.mtree;
    return ret_val;
 
 // 3000--	TREE
 
 L3000:
-   ret_val = rm >= rindex_1.fore1 && rm < rindex_1.clear && rm != rindex_1.fore3;
+   ret_val = rm >= rindex_.fore1 && rm < rindex_.clear && rm != rindex_.fore3;
    return ret_val;
 
 // 4000--	NORTH WALL
 
 L4000:
-   ret_val = rm >= rindex_1.bkvw && rm <= rindex_1.bkbox || rm == rindex_1.cpuzz;
+   ret_val = rm >= rindex_.bkvw && rm <= rindex_.bkbox || rm == rindex_.cpuzz;
    return ret_val;
 
 // 5000--	EAST, SOUTH, WEST WALLS
 
 L5000:
-   ret_val = rm >= rindex_1.bkvw && rm < rindex_1.bkbox || rm == rindex_1.cpuzz;
+   ret_val = rm >= rindex_.bkvw && rm < rindex_.bkbox || rm == rindex_.cpuzz;
    return ret_val;
 
 // 6000--	GLOBAL WATER
 
 L6000:
-   ret_val = (rooms_1.rflag[rm - 1] & WaterR + FillR) != 0;
+   ret_val = (rooms.rflag[rm - 1] & WaterR + FillR) != 0;
    return ret_val;
 
 // 7000--	GLOBAL GUARDIANS
 
 L7000:
-   ret_val = rm >= rindex_1.mrc && rm <= rindex_1.mrd || rm >= rindex_1.mrce && rm <= rindex_1.mrdw || rm == rindex_1.inmir;
+   ret_val = rm >= rindex_.mrc && rm <= rindex_.mrd || rm >= rindex_.mrce && rm <= rindex_.mrdw || rm == rindex_.inmir;
    return ret_val;
 
 // 8000--	ROSE/CHANNEL
 
 L8000:
-   ret_val = rm >= rindex_1.mra && rm <= rindex_1.mrd || rm == rindex_1.inmir;
+   ret_val = rm >= rindex_.mra && rm <= rindex_.mrd || rm == rindex_.inmir;
    return ret_val;
 
 // 9000--	MIRROR
 // 9100		PANEL
 
 L9100:
-   if (rm == rindex_1.fdoor) {
+   if (rm == rindex_.fdoor) {
       return ret_val;
    }
 // 						!PANEL AT FDOOR.
 L9000:
-   ret_val = rm >= rindex_1.mra && rm <= rindex_1.mrc || rm >= rindex_1.mrae && rm <= rindex_1.mrcw;
+   ret_val = rm >= rindex_.mra && rm <= rindex_.mrc || rm >= rindex_.mrae && rm <= rindex_.mrcw;
    return ret_val;
 
 // 10000--	MASTER
 
 L10000:
-   ret_val = rm == rindex_1.fdoor || rm == rindex_1.ncorr || rm == rindex_1.parap || rm == rindex_1.cell;
+   ret_val = rm == rindex_.fdoor || rm == rindex_.ncorr || rm == rindex_.parap || rm == rindex_.cell;
    return ret_val;
 
 // 11000--	LADDER
 
 L11000:
-   ret_val = rm == rindex_1.cpuzz;
+   ret_val = rm == rindex_.cpuzz;
    return ret_val;
 }
 
@@ -147,7 +147,7 @@ int mrhere(int rm) {
 
 // MRHERE, PAGE 2
 
-   if (rm < rindex_1.mrae || rm > rindex_1.mrdw) {
+   if (rm < rindex_.mrae || rm > rindex_.mrdw) {
       goto L100;
    }
 
@@ -155,7 +155,7 @@ int mrhere(int rm) {
 
    ret_val = 1;
 // 						!ASSUME MIRROR 1 HERE.
-   if ((rm - rindex_1.mrae) % 2 == findex_1.mdir / 180) {
+   if ((rm - rindex_.mrae) % 2 == findex.mdir / 180) {
       ret_val = 2;
    }
    return ret_val;
@@ -165,14 +165,14 @@ int mrhere(int rm) {
 
 L100:
    ret_val = 0;
-   if ((i__1 = findex_1.mloc - rm, abs(i__1)) != 1 || findex_1.mdir % 180 == 0) {
+   if ((i__1 = findex.mloc - rm, abs(i__1)) != 1 || findex.mdir % 180 == 0) {
       return ret_val;
    }
 
 // RM IS WITHIN ONE OF MLOC, AND MDIR IS E-W
 
    ret_val = 1;
-   if (rm < findex_1.mloc && findex_1.mdir < 180 || rm > findex_1.mloc && findex_1.mdir > 180) {
+   if (rm < findex.mloc && findex.mdir < 180 || rm > findex.mloc && findex.mdir > 180) {
       ret_val = 2;
    }
    return ret_val;
