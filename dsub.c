@@ -2,59 +2,51 @@
 // All rights reserved, commercial usage strictly prohibited.
 // Written by R. M. Supnik.
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
+#include <stdio.h>
 #include "extern.h"
 #include "common.h"
 
 // Resident subroutines for dungeon
+#ifndef SEEK_SET
+#   define SEEK_SET (0)
+#endif
+
+extern FILE *dbfile;
+
+static void rspsb2nl(int, int, int, Bool);
 
 // Output random message routine
 // Called as:
 // 	rspeak(MsgNum);
 void rspeak(int n) {
-   rspsb2(n, 0, 0);
+   rspsb2nl(n, 0, 0, 1);
 }
 
 // Output random message with substitutable argument
 // Called as:
 // 	rspsub(MsgNum, SubNum);
 void rspsub(int n, int s1) {
-   rspsb2(n, s1, 0);
+   rspsb2nl(n, s1, 0, 1);
 }
 
 // Output random message with up to two substitutable arguments
 // Called as:
 // 	rspsb2(MsgNum, SubNum1, SubNum2);
 void rspsb2(int n, int s1, int s2) {
-// System generated locals
-   int i__1;
+   rspsb2nl(n, s1, s2, 1);
+}
 
-// Local variables
-   int i, j, x, y, z;
-   char b1[74], b2[74], b3[74];
-   int k1, k2, x1;
-   short jrec, oldrec, newrec;
+// Display a substitutable message with an optional newline
+static void rspsb2nl(int n, int y, int z, Bool nl) {
+   const char *zkey = "IanLanceTaylorJr";
+   long x;
 
-// CONVERT ALL ARGUMENTS FROM DICTIONARY NUMBERS (IF POSITIVE)
-// TO ABSOLUTE RECORD NUMBERS.
+   x = (long)n;
 
-   x = n;
-// 						!SET UP WORK VARIABLES.
-   y = s1;
-   z = s2;
    if (x > 0) {
       x = rmsg.rtext[x - 1];
    }
 // 						!IF >0, LOOK UP IN RTEXT.
-   if (y > 0) {
-      y = rmsg.rtext[y - 1];
-   }
-   if (z > 0) {
-      z = rmsg.rtext[z - 1];
-   }
-   x = abs(x);
-// 						!TAKE ABS VALUE.
-   y = abs(y);
-   z = abs(z);
    if (x == 0) {
       return;
    }
@@ -62,124 +54,42 @@ void rspsb2(int n, int s1, int s2) {
    play.telflg = true;
 // 						!SAID SOMETHING.
 
-// read(unit:chan.dbch, rec:x, &oldrec, b1); //F
-   BegInDU(chan.dbch, x), DoUio(1, &oldrec, sizeof oldrec), DoUio(1, b1, sizeof b1), EndInDU();
+   x = ((-x) - 1) * 8;
+   if (fseek(dbfile, x + (long)rmsg.mrloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
 
-L100:
-   for (i = 1; i <= 74; ++i) {
-      x1 = (x & 31) + i;
-      b1[i - 1] = (char)(b1[i - 1] ^ x1);
-// L150:
-   }
+   if (nl)
+      more_output(NULL);
 
-L200:
-   if (y == 0) {
-      goto L400;
-   }
-// 						!ANY SUBSTITUTABLE?
-   for (i = 1; i <= 74; ++i) {
-// 						!YES, LOOK FOR #.
-      if (b1[i - 1] == '#') {
-         goto L1000;
+   while (1) {
+      int i;
+
+      i = getc(dbfile);
+      if (i == EOF) {
+         fprintf(stderr, "Error reading database loc %d\n", x);
+         exit_();
       }
-// L300:
+      i ^= zkey[x & 0xf] ^ (x & 0xff);
+      x = x + 1;
+      if (i == '\0')
+         break;
+      else if (i == '\n') {
+         putchar('\n');
+         if (nl)
+            more_output(NULL);
+      } else if (i == '#' && y != 0) {
+         long iloc;
+
+         iloc = ftell(dbfile);
+         rspsb2nl(y, 0, 0, 0);
+         if (fseek(dbfile, iloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", iloc), exit_();
+         y = z;
+         z = 0;
+      } else
+         putchar(i);
    }
 
-L400:
-   for (i = 74; i >= 1; --i) {
-// 						!BACKSCAN FOR BLANKS.
-      if (b1[i - 1] != ' ') {
-         goto L600;
-      }
-// L500:
-   }
-
-L600:
-// write(chan.outch, "%1X%74A1", (b1[j - 1], j = 1, i)); //F
-   BegExSF(chan.outch, "(1x,74a1)");
-   i__1 = i;
-   for (j = 1; j <= i__1; ++j) DoFio(1, &b1[j - 1], 1*sizeof b1[0]);
-   EndExSF();
-   ++x;
-// 						!ON TO NEXT RECORD.
-// read(unit:chan.dbch, rec:1, &newrec, b1); //F
-   BegInDU(chan.dbch, x), DoUio(1, &newrec, sizeof newrec), DoUio(1, b1, sizeof b1), EndInDU();
-   if (oldrec == newrec) {
-      goto L100;
-   }
-// 						!CONTINUATION?
-   return;
-// 						!NO, EXIT.
-
-// SUBSTITUTION WITH SUBSTITUTABLE AVAILABLE.
-// I IS INDEX OF # IN B1.
-// Y IS NUMBER OF RECORD TO SUBSTITUTE.
-
-// PROCEDURE:
-//   1) COPY REST OF B1 TO B2
-//   2) READ SUBSTITUTABLE OVER B1
-//   3) RESTORE TAIL OF ORIGINAL B1
-
-// THE IMPLICIT ASSUMPTION HERE IS THAT THE SUBSTITUTABLE STRING
-// IS VERY SHORT (i.e. MUCH LESS THAN ONE RECORD).
-
-L1000:
-   k2 = 1;
-// 						!TO
-   for (k1 = i + 1; k1 <= 74; ++k1) {
-// 						!COPY REST OF B1.
-      b2[k2 - 1] = b1[k1 - 1];
-      ++k2;
-// L1100:
-   }
-
-//   READ SUBSTITUTE STRING INTO B3, AND DECRYPT IT:
-
-// read(unit:chan.dbch, rec:y, &jrec, b3); //F
-   BegInDU(chan.dbch, y), DoUio(1, &jrec, sizeof jrec), DoUio(1, b3, sizeof b3), EndInDU();
-   for (k1 = 1; k1 <= 74; ++k1) {
-      x1 = (y & 31) + k1;
-      b3[k1 - 1] = (char)(b3[k1 - 1] ^ x1);
-// L1150:
-   }
-
-//   FILL REMAINDER OF B1 WITH CHARACTERS FROM B3:
-
-   k2 = 1;
-   for (k1 = i; k1 <= 74; ++k1) {
-      b1[k1 - 1] = b3[k2 - 1];
-      ++k2;
-// L1180:
-   }
-
-//   FIND END OF SUBSTITUTE STRING IN B1:
-
-   for (j = 74; j >= 1; --j) {
-// 						!ELIM TRAILING BLANKS.
-      if (b1[j - 1] != ' ') {
-         goto L1300;
-      }
-// L1200:
-   }
-
-//   PUT TAIL END OF B1 (NOW IN B2) BACK INTO B1 AFTER SUBSTITUTE STRING:
-
-L1300:
-   k1 = 1;
-// 						!FROM
-   for (k2 = j + 1; k2 <= 74; ++k2) {
-// 						!COPY REST OF B1 BACK.
-      b1[k2 - 1] = b2[k1 - 1];
-      ++k1;
-// L1400:
-   }
-
-   y = z;
-// 						!SET UP FOR NEXT
-   z = 0;
-// 						!SUBSTITUTION AND
-   goto L200;
-// 						!RECHECK LINE.
+   if (nl)
+      putchar('\n');
 }
 
 // Apply objects from parse vector
@@ -221,9 +131,7 @@ void bug(int a, int b) {
 // Local variables
 
 // print(" PROGRAM ERROR %I2, PARAMETER=%I6", a, b); //F
-   BegExSF(6, "(\2 PROGRAM ERROR \2,i2,\2, PARAMETER=\2,i6)");
-   DoFio(1, &a, sizeof a), DoFio(1, &b, sizeof b);
-   EndExSF();
+   more_output(NULL), printf("PROGRAM ERROR %d, PARAMETER=%d\n", a, b);
    if (debug.dbgflg != 0) {
       return;
    }
@@ -330,7 +238,7 @@ L100:
       goto L900;
    }
 // 						!NO RECOVERY IN END GAME.
-#if 0
+#if 1
 // always exit for plopbot's purposes
    goto L1000;
 #else
@@ -447,7 +355,7 @@ L1100:
    score(false);
 // 						!TELL SCORE.
 // close(chan.dbch); //F
-   CloseF(chan.dbch);
+   (void)fclose(dbfile);
    exit_();
 }
 
@@ -546,14 +454,14 @@ L300:
       goto L600;
    }
 // 						!OBJ ONLY?
-   i = rooms.rdesc2 - play.here;
+   i = rooms.rdesc2[play.here - 1];
 // 						!ASSUME SHORT DESC.
 // The following comment, in the 1991 C translation, was inherited from a later version of the original Fortran source.
 // 2021/09/22 Darth Spectra
 // The next line means that when you request VERBOSE mode, you only get long room descriptions 20% of the time.
 // I don't either like or understand this, so the mod. ensures VERBOSE works all the time.
 // 1987/10/22 jmh@ukc.ac.uk
-#if 0
+#if 1
    if (full == 0 && (findex.superf || (rooms.rflag[play.here - 1] & SeenR) != 0 && findex.brieff)) {
       goto L400;
    }
