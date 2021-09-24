@@ -316,13 +316,7 @@ L2000:
    goto L3000;
 
 L2100:
-   if ((i__1 = def - 2) < 0) {
-      goto L2200;
-   } else if (i__1 == 0) {
-      goto L2300;
-   } else {
-      goto L2400;
-   }
+   if (def == 2) goto L2300; else if (def > 2) goto L2400;/* else if (def < 2) goto L2200; */
 // 						!DEF <2,=2,>2
 L2200:
    att = min(att, 3);

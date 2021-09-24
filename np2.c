@@ -39,13 +39,7 @@ int getobj(int oidx, int aidx, int spcobj) {
 #ifdef ALLOW_GDT
 // if (dflag) print(" SCHLST- ROOM SCH %I6", obj); //F
 #endif
-   if (obj < 0) {
-      goto L1000;
-   } else if (obj == 0) {
-      goto L200;
-   } else {
-      goto L100;
-   }
+   if (obj < 0) goto L1000; else if (obj == 0) goto L200;/* else if (obj > 0) goto L100;*/
 // 						!TEST RESULT.
 L100:
    if (av == 0 || av == obj || (objcts.oflag2[obj - 1] & FindO) != 0) {
@@ -68,13 +62,7 @@ L200:
 #ifdef ALLOW_GDT
 // if (dflag) print(" SCHLST- VEH SCH  %I6", nobj); //F
 #endif
-   if (nobj < 0) {
-      goto L1100;
-   } else if (nobj == 0) {
-      goto L400;
-   } else {
-      goto L300;
-   }
+   if (nobj < 0) goto L1100; else if (nobj == 0) goto L400;/* else if (nobj > 0) goto L300;*/
 // 						!TEST RESULT.
 L300:
    chomp = false;
@@ -95,13 +83,7 @@ L400:
 #ifdef ALLOW_GDT
 // if (dflag) print(" SCHLST- ADV SCH  %I6", nobj); //F
 #endif
-   if (nobj < 0) {
-      goto L1100;
-   } else if (nobj == 0) {
-      goto L600;
-   } else {
-      goto L500;
-   }
+   if (nobj < 0) goto L1100; else if (nobj == 0) goto L600;/* else if (nobj > 0) goto L500;*/
 // 						!TEST RESULT
 L500:
    if (obj != 0) {

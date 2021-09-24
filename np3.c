@@ -435,13 +435,7 @@ L50:
 
 L100:
    robj = fwim(sfw1, sfw2, play.here, 0, 0, nocare);
-   if (robj < 0) {
-      goto L500;
-   } else if (robj == 0) {
-      goto L50;
-   } else {
-      goto L200;
-   }
+   if (robj < 0) goto L500; else if (robj == 0) goto L50;/* else if (robj > 0) goto L200; */
 // 						!TEST RESULT.
 
 // ROBJ > 0
