@@ -29,7 +29,7 @@ L10:
    printf(">");
 // 						!PROMPT FOR GAME.
 L90:
-// read(char_1.inpch, "%78A1", buffer); //F
+// read(chan.inpch, "%78A1", buffer); //F
    (void)fflush(stdout);
    if (fgets(buffer, 78, stdin) == NULL) exit_();
    more_input();
