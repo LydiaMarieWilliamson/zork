@@ -433,7 +433,7 @@ L1925:
    more_output(NULL), printf("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
    goto L1975;
 L1950:
-// print(" I can't open ","dindx.dat","."); //F
+// print(" I can't open ","dtext.dat","."); //F
    more_output(NULL), printf("I can't open %s.\n", TEXTFILE);
 L1975:
 // print( //F
@@ -441,9 +441,9 @@ L1975:
 //    "you,%/ seeming to float in the air.  In a low, sorrowful voice", //F
 //    " he says,%/ \"Alas, the very nature of the world has changed, ", //F
 //    "and the dungeon%/ cannot be found.  All must now pass away.\"", //F
-//    "  Raising his oaken staff%/ in farewell, he fades into the " //F
-//    "spreading darkness.  In his place%/ appears a tastefully " //F
-//    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/", //F
+//    "  Raising his oaken staff%/ in farewell, he fades into the ", //F
+//    "spreading darkness.  In his place%/ appears a tastefully ", //F
+//    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/" //F
 //    " The darkness becomes all encompassing, and your vision fails." //F
 // ); //F
    more_output("Suddenly a sinister, wraithlike figure appears before you,");

@@ -241,7 +241,7 @@ L4100:
 // V74--	VERSION.  PRINT INFO.
 
 L5000:
-// write(chan.outch, " V%I1.%I2%A1", vers_2.vmaj, vers_2.vmin, vers_2.vedit); //F
+// write(chan.outch, " V%I1.%I2%A1", vmaj, vmin, vedit); //F
    more_output(NULL), printf("V%1d.%1d%c\n", vmaj, vmin, (int)vedit);
    play.telflg = true;
    return ret_val;
