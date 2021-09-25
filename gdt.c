@@ -49,7 +49,7 @@ void gdt(void) {
       goto L2000;
    }
 // 						!IF OK, SKIP.
-// write(chan.outch, " You are not an authorized user."); //F
+// write(outch, " You are not an authorized user."); //F
    more_output("You are not an authorized user.");
 // 						!NOT AN IMPLEMENTER.
    return;
@@ -60,10 +60,10 @@ void gdt(void) {
 // HERE TO GET NEXT COMMAND
 
 L2000:
-// write(chan.outch, " GDT>%$"); //F
+// write(outch, " GDT>%$"); //F
    printf("GDT>"), fflush(stdout);
 // 						!OUTPUT PROMPT.
-// read(chan.inpch, "%A2", cmd); //F
+// read(inpch, "%A2", cmd); //F
    fgets(buf, sizeof buf, stdin), more_input(), cmd[0] = ' ', cmd[1] = ' ', sscanf(buf, "%2s", cmd);
 // 						!GET COMMAND.
    if (cmd[0] == '\0')
@@ -83,7 +83,7 @@ L2000:
 // L2100:
    }
 L2200:
-// write(chan.outch, " ?"); //F
+// write(outch, " ?"); //F
    more_output("?");
 // 						!NO, LOSE.
    goto L2000;
@@ -110,20 +110,20 @@ L2300:
 // 						!ILLEGAL TYPE.
 
 L2700:
-// write(chan.outch, " Idx,Ary:  %$"); //F
+// write(outch, " Idx,Ary:  %$"); //F
    printf("Idx,Ary:  "), fflush(stdout);
 // 						!TYPE 3, REQUEST ARRAY COORDS.
-// read(chan.inpch, "%2I6", &j, &k); //F
+// read(inpch, "%2I6", &j, &k); //F
    fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++) if (*z == ',') *z = ' ';
    j = 0, k = 0, sscanf(buf, "%d %d", &j, &k);
    goto L2400;
 
 L2600:
-// write(chan.outch, " Limits:   %$"); //F
+// write(outch, " Limits:   %$"); //F
    printf("Limits:   "), fflush(stdout);
 // 						!TYPE 2, READ BOUNDS.
-// read(chan.inpch, "%2I6", &j, &k); //F
+// read(inpch, "%2I6", &j, &k); //F
    fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++) if (*z == ',') *z = ' ';
    j = 0, k = 0, sscanf(buf, "%d %d", &j, &k);
@@ -133,10 +133,10 @@ L2600:
    goto L2400;
 
 L2500:
-// write(chan.outch, " Entry:    %$"); //F
+// write(outch, " Entry:    %$"); //F
    printf("Entry:    "), fflush(stdout);
 // 						!TYPE 1, READ ENTRY NO.
-// read(chan.inpch, "%I6", &j); //F
+// read(inpch, "%I6", &j); //F
    fgets(buf, sizeof buf, stdin), more_input(), j = 0, sscanf(buf, "%d", &j);
 
 L2400:
@@ -229,12 +229,12 @@ L10000:
       goto L2200;
    }
 // 						!ARGS VALID?
-// write(chan.outch, " RM#  DESC1  EXITS ACTION  VALUE  FLAGS"); //F
+// write(outch, " RM#  DESC1  EXITS ACTION  VALUE  FLAGS"); //F
    more_output("RM#  DESC1  DESC2  EXITS ACTION  VALUE  FLAGS");
 // 						!COL HDRS.
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
-//    write(chan.outch, "%1X%I3%4(1X,I6)%1X%I6", i, (eqr(i, l), l = 1, 5)); //F
+//    write(outch, "%1X%I3%4(1X,I6)%1X%I6", i, (eqr(i, l), l = 1, 5)); //F
       more_output(NULL), printf("%3d", i);
       for (l = 1; l <= 6; ++l) printf(" %6d", eqr[i - 1 + 200 * (l - 1)]);
       printf("\n");
@@ -250,12 +250,12 @@ L11000:
       goto L2200;
    }
 // 						!ARGS VALID?
-// write(chan.outch, " OB# DESC1 DESC2 DESCO ACT FLAGS1 FLAGS2 FVL TVL SIZE CAPAC ROOM ADV CON  READ"); //F
+// write(outch, " OB# DESC1 DESC2 DESCO ACT FLAGS1 FLAGS2 FVL TVL SIZE CAPAC ROOM ADV CON  READ"); //F
    more_output("OB# DESC1 DESC2 DESCO ACT FLAGS1 FLAGS2 FVL TVL	  SIZE CAPAC ROOM ADV CON  READ");
 // 						!COL HDRS
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
-//    write(chan.outch, "%1X%I3%3I6%I4%2I7%2I4%2I6%1X%3I4%I6", i, (eqo(i, l), l = 1, 14)); //F
+//    write(outch, "%1X%I3%3I6%I4%2I7%2I4%2I6%1X%3I4%I6", i, (eqo(i, l), l = 1, 14)); //F
       more_output(NULL), printf("%3d%6d%6d%6d%4d%7d%7d%4d%4d%6d%6d %4d%4d%4d%6d\n", i,
          eqo[i - 1 + 220 * (1 - 1)], eqo[i - 1 + 220 * (2 - 1)], eqo[i - 1 + 220 * (3 - 1)],
          eqo[i - 1 + 220 * (4 - 1)], eqo[i - 1 + 220 * (5 - 1)], eqo[i - 1 + 220 * (6 - 1)],
@@ -275,11 +275,11 @@ L12000:
       goto L2200;
    }
 // 						!ARGS VALID?
-// write(chan.outch, " AD#   ROOM  SCORE  VEHIC OBJECT ACTION  STREN  FLAGS"); //F
+// write(outch, " AD#   ROOM  SCORE  VEHIC OBJECT ACTION  STREN  FLAGS"); //F
    more_output("AD#   ROOM  SCORE  VEHIC OBJECT ACTION  STREN  FLAGS");
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
-//    write(chan.outch, "%1X%I3%6(1X,I6)%1X%I6", i, (eqa(i, l), l = 1, 7)); //F
+//    write(outch, "%1X%I3%6(1X,I6)%1X%I6", i, (eqa(i, l), l = 1, 7)); //F
       more_output(NULL), printf("%3d", i);
       for (l = 1; l <= 7; ++l) printf(" %6d", eqa[i - 1 + ((l - 1) << 2)]);
       printf("\n");
@@ -294,11 +294,11 @@ L13000:
       goto L2200;
    }
 // 						!ARGS VALID?
-// write(chan.outch, " CL#   TICK ACTION  FLAG"); //F
+// write(outch, " CL#   TICK ACTION  FLAG"); //F
    more_output("CL#   TICK ACTION  FLAG");
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
-//    write(chan.outch, "%1X%I3%1X%I6%1X%I6%5X%L1", i, (eqc(i, l), l = 1, 2), cflag(i)); //F
+//    write(outch, "%1X%I3%1X%I6%1X%I6%5X%L1", i, (eqc(i, l), l = 1, 2), cflag(i)); //F
       more_output(NULL), printf("%3d %6d %6d     %c\n", i, eqc[i - 1 + 25 * (1 - 1)], eqc[i - 1 + 25 * (2 - 1)], cevent.cflag[i - 1] ? 'T' : 'F');
 // L13100:
    }
@@ -311,7 +311,7 @@ L14000:
       goto L2200;
    }
 // 						!ARGS VALID?
-// write(chan.outch, Format0); //F
+// write(outch, Format0); //F
    more_output(Format0);
 // 						!COL HDRS.
    i__1 = k;
@@ -321,7 +321,7 @@ L14000:
       i__2 = i + 9;
       l = min(i__2, k);
 // 						!COMPUTE END OF LINE.
-//    write(chan.outch, "%1X%I3-%I3%3X%10I7", i, l, (travel(l1), l1 = i, l)); //F
+//    write(outch, "%1X%I3-%I3%3X%10I7", i, l, (travel(l1), l1 = i, l)); //F
       more_output(NULL), printf("%3d-%3d  ", i, l);
       for (l1 = i; l1 <= l; ++l1) printf("%7d", exits.travel[l1 - 1]);
       printf("\n");
@@ -332,7 +332,7 @@ L14000:
 // DH-- DISPLAY HACKS
 
 L15000:
-// write(chan.outch, " THFPOS=%I6, THFFLG=%L2,THFACT=%L2%/ SWDACT=%L2, SWDSTA=%I2", thfpos, thfflg, thfact, swdact, swdsta); //F
+// write(outch, " THFPOS=%I6, THFFLG=%L2,THFACT=%L2%/ SWDACT=%L2, SWDSTA=%I2", thfpos, thfflg, thfact, swdact, swdsta); //F
    more_output(NULL), printf("THFPOS= %d, THFFLG= %c, THFACT= %c\n", hack.thfpos, hack.thfflg ? 'T' : 'F', hack.thfact ? 'T' : 'F');
    more_output(NULL), printf("SWDACT= %c, SWDSTA= %d\n", hack.swdact ? 'T' : 'F', hack.swdsta);
    goto L2000;
@@ -340,7 +340,7 @@ L15000:
 // DL-- DISPLAY LENGTHS
 
 L16000:
-// write(chan.outch, " R=%I6, X=%I6, O=%I6, C=%I6%/ V=%I6, A=%I6, M=%I6, R2=%I5%/ MBASE=%I6, STRBIT=%I6", rlnt, xlnt, olnt, clnt, vlnt, alnt, mlnt, r2lnt, mbase, strbit); //F
+// write(outch, " R=%I6, X=%I6, O=%I6, C=%I6%/ V=%I6, A=%I6, M=%I6, R2=%I5%/ MBASE=%I6, STRBIT=%I6", rlnt, xlnt, olnt, clnt, vlnt, alnt, mlnt, r2lnt, mbase, strbit); //F
    more_output(NULL), printf("R=%d, X=%d, O=%d, C=%d\n", rooms.rlnt, exits.xlnt, objcts.olnt, cevent.clnt);
    more_output(NULL), printf("V=%d, A=%d, M=%d, R2=%d\n", vill.vlnt, advs.alnt, rmsg.mlnt, oroom2_.r2lnt);
    more_output(NULL), printf("MBASE=%d, STRBIT=%d\n", star.mbase, star.strbit);
@@ -353,12 +353,12 @@ L17000:
       goto L2200;
    }
 // 						!ARGS VALID?
-// write(chan.outch, " VL# OBJECT   PROB   OPPS   BEST  MELEE"); //F
+// write(outch, " VL# OBJECT   PROB   OPPS   BEST  MELEE"); //F
    more_output("VL# OBJECT   PROB   OPPS   BEST  MELEE");
 // 						!COL HDRS
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
-//    write(chan.outch, "%1X%I3%5(1X,I6)", i, (eqv(i, l), l = 1, 5)); //F
+//    write(outch, "%1X%I3%5(1X,I6)", i, (eqv(i, l), l = 1, 5)); //F
       more_output(NULL), printf("%3d", i);
       for (l = 1; l <= 5; ++l) printf(" %6d", eqv[i - 1 + ((l - 1) << 2)]);
       printf("\n");
@@ -375,7 +375,7 @@ L18000:
 // 						!ARGS VALID?
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
-//    write(chan.outch, " Flag #%I2 = %L1", i, flags(i)); //F
+//    write(outch, " Flag #%I2 = %L1", i, flags(i)); //F
       more_output(NULL), printf("Flag #%-2d = %c\n", i, flags[i - 1] ? 'T' : 'F');
 // L18100:
    }
@@ -384,14 +384,14 @@ L18000:
 // DS-- DISPLAY STATE
 
 L19000:
-// write(chan.outch, " Parse vector=%3(1X,I6)%1X%L6%1X%I6", prsa, prso, prsi, prswon, prscon); //F
+// write(outch, " Parse vector=%3(1X,I6)%1X%L6%1X%I6", prsa, prso, prsi, prswon, prscon); //F
    more_output(NULL), printf("Parse vector= %6d %6d %6d      %c %6d\n", prsvec.prsa, prsvec.prso, prsvec.prsi, prsvec.prswon ? 'T' : 'F', prsvec.prscon);
-// write(chan.outch, " Play vector= %2(1X,I6)%1X%L6", winner, here, telflg); //F
+// write(outch, " Play vector= %2(1X,I6)%1X%L6", winner, here, telflg); //F
    more_output(NULL), printf("Play vector=  %6d %6d      %c\n", play.winner, play.here, play.telflg ? 'T' : 'F');
-// write(chan.outch, " State vector=%9(1X,I6)%/%14X%2(1X,I6)", moves, deaths, rwscor, mxscor, mxload, ltshft, bloc, mungrm, hs, egscor, egmxsc); //F
+// write(outch, " State vector=%9(1X,I6)%/%14X%2(1X,I6)", moves, deaths, rwscor, mxscor, mxload, ltshft, bloc, mungrm, hs, egscor, egmxsc); //F
    more_output(NULL), printf("State vector= %6d %6d %6d %6d %6d %6d %6d %6d %6d\n", state.moves, state.deaths, state.rwscor, state.mxscor, state.mxload, state.ltshft, state.bloc, state.mungrm, state.hs);
    more_output(NULL), printf("              %6d %6d\n", state.egscor, state.egmxsc);
-// write(chan.outch, " Scol vector= %1X%I6%2(1X,I6)", fromdr, scolrm, scolac); //F
+// write(outch, " Scol vector= %1X%I6%2(1X,I6)", fromdr, scolrm, scolac); //F
    more_output(NULL), printf("Scol vector=  %6d %6d %6d\n", screen.fromdr, screen.scolrm, screen.scolac);
    goto L2000;
 
@@ -404,10 +404,10 @@ L20000:
       goto L2200;
    }
 // 						!ENTRY NO VALID?
-// write(chan.outch, Format1, flags(j)); //F
+// write(outch, Format1, flags(j)); //F
    printf(Format1, flags[j - 1] ? 'T' : 'F'), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
-// read(chan.inpch, "%L1", &flags(j)); //F
+// read(inpch, "%L1", &flags(j)); //F
    fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++) {
       if (!isspace(*z)) {
@@ -423,7 +423,7 @@ L20000:
 // 21000-- HELP
 
 L21000:
-// write(chan.outch, //F
+// write(outch, //F
 //    " Valid commands are:%/" //F
 //    " AA- Alter ADVS%/"		" AC- Alter CEVENT%/"		" AF- Alter FINDEX%/" //F
 //    " AH- Alter HERE%/"		" AN- Alter switches%/"		" AO- Alter OBJCTS%/" //F
@@ -469,7 +469,7 @@ L22000:
    hack.thfact = false;
    newsta(ThiefOX, 0, 0, 0, 0);
 // 						!VANISH THIEF.
-// write(chan.outch, " No robber."); //F
+// write(outch, " No robber."); //F
    more_output("No robber.");
    goto L2000;
 
@@ -478,7 +478,7 @@ L22000:
 L23000:
    findex.trollf = true;
    newsta(TrollOX, 0, 0, 0, 0);
-// write(chan.outch, " No troll."); //F
+// write(outch, " No troll."); //F
    more_output("No troll.");
    goto L2000;
 
@@ -487,7 +487,7 @@ L23000:
 L24000:
    findex.cyclof = true;
    newsta(CycloOX, 0, 0, 0, 0);
-// write(chan.outch, " No cyclops."); //F
+// write(outch, " No cyclops."); //F
    more_output("No cyclops.");
    goto L2000;
 
@@ -495,7 +495,7 @@ L24000:
 
 L25000:
    debug.dbgflg = 1;
-// write(chan.outch, " No deaths."); //F
+// write(outch, " No deaths."); //F
    more_output("No deaths.");
    goto L2000;
 
@@ -503,7 +503,7 @@ L25000:
 
 L26000:
    hack.thfact = true;
-// write(chan.outch, " Restored robber."); //F
+// write(outch, " Restored robber."); //F
    more_output("Restored robber.");
    goto L2000;
 
@@ -512,7 +512,7 @@ L26000:
 L27000:
    findex.trollf = false;
    newsta(TrollOX, 0, MTrolRX, 0, 0);
-// write(chan.outch, " Restored troll."); //F
+// write(outch, " Restored troll."); //F
    more_output("Restored troll.");
    goto L2000;
 
@@ -522,7 +522,7 @@ L28000:
    findex.cyclof = false;
    findex.magicf = false;
    newsta(CycloOX, 0, MCyclRX, 0, 0);
-// write(chan.outch, " Restored cyclops."); //F
+// write(outch, " Restored cyclops."); //F
    more_output("Restored cyclops.");
    goto L2000;
 
@@ -530,7 +530,7 @@ L28000:
 
 L29000:
    debug.dbgflg = 0;
-// write(chan.outch, " Restored deaths."); //F
+// write(outch, " Restored deaths."); //F
    more_output("Restored deaths.");
    goto L2000;
 
@@ -545,7 +545,7 @@ L30000:
 // 						!VALID OBJECT?
    newsta(j, 0, 0, 0, play.winner);
 // 						!YES, TAKE OBJECT.
-// write(chan.outch, " Taken."); //F
+// write(outch, " Taken."); //F
    more_output("Taken.");
 // 						!TELL.
    goto L2000;
@@ -563,10 +563,10 @@ L32000:
       goto L2200;
    }
 // 						!INDICES VALID?
-// write(chan.outch, Format2, eqr(j, k)); //F
+// write(outch, Format2, eqr(j, k)); //F
    printf(Format2, eqr[j - 1 + 200 * (k - 1)]), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
-// read(chan.inpch, "%I6", &eqr(j, k)); //F
+// read(inpch, "%I6", &eqr(j, k)); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqr[j - 1 + 200 * (k - 1)]);
    goto L2000;
 
@@ -577,9 +577,9 @@ L33000:
       goto L2200;
    }
 // 						!INDICES VALID?
-// write(chan.outch, Format2, eqo(j, k)); //F
+// write(outch, Format2, eqo(j, k)); //F
    printf(Format2, eqo[j - 1 + 220 * (k - 1)]), fflush(stdout);
-// read(chan.inpch, "%I6", &eqo(j, k)); //F
+// read(inpch, "%I6", &eqo(j, k)); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqo[j - 1 + 220 * (k - 1)]);
    goto L2000;
 
@@ -590,9 +590,9 @@ L34000:
       goto L2200;
    }
 // 						!INDICES VALID?
-// write(chan.outch, Format2, eqa(j, k)); //F
+// write(outch, Format2, eqa(j, k)); //F
    printf(Format2, eqa[j - 1 + ((k - 1) << 2)]), fflush(stdout);
-// read(chan.inpch, "%I6", &eqa(j, k)); //F
+// read(inpch, "%I6", &eqa(j, k)); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqa[j - 1 + ((k - 1) << 2)]);
    goto L2000;
 
@@ -607,16 +607,16 @@ L35000:
       goto L35500;
    }
 // 						!FLAGS ENTRY?
-// write(chan.outch, Format2, eqc(j, k)); //F
+// write(outch, Format2, eqc(j, k)); //F
    printf(Format2, eqc[j - 1 + 25 * (k - 1)]), fflush(stdout);
-// read(chan.inpch, "%I6", &eqc(j, k)); //F
+// read(inpch, "%I6", &eqc(j, k)); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqc[j - 1 + 25 * (k - 1)]);
    goto L2000;
 
 L35500:
-// write(chan.outch, Format1, cflag(j)); //F
+// write(outch, Format1, cflag(j)); //F
    printf(Format1, cevent.cflag[j - 1] ? 'T' : 'F'), fflush(stdout);
-// read(chan.inpch, "%L1", &cevent.cflag); //F
+// read(inpch, "%L1", &cevent.cflag); //F
    fgets(buf, sizeof buf, stdin), more_input();
    for (z = buf; *z != '\0'; z++) {
       if (!isspace(*z)) {
@@ -637,9 +637,9 @@ L36000:
       goto L2200;
    }
 // 						!ENTRY NO VALID?
-// write(chan.outch, Format2, travel(j)); //F
+// write(outch, Format2, travel(j)); //F
    printf(Format2, exits.travel[j - 1]), fflush(stdout);
-// read(chan.inpch, "%I6", &exits.travel(j)); //F
+// read(inpch, "%I6", &exits.travel(j)); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &exits.travel[j - 1]);
    goto L2000;
 
@@ -650,9 +650,9 @@ L37000:
       goto L2200;
    }
 // 						!INDICES VALID?
-// write(chan.outch, Format2, eqv(j, k)); //F
+// write(outch, Format2, eqv(j, k)); //F
    printf(Format2, eqv[j - 1 + ((k - 1) << 2)]), fflush(stdout);
-// read(chan.inpch, "%I6", &eqv(j, k)); //F
+// read(inpch, "%I6", &eqv(j, k)); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &eqv[j - 1 + ((k - 1) << 2)]);
    goto L2000;
 
@@ -664,7 +664,7 @@ L38000:
    }
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
-//    write(chan.outch, " #%I2   Room=%I6   Obj=%I6", i, rroom2(i), oroom2(i)); //F
+//    write(outch, " #%I2   Room=%I6   Obj=%I6", i, rroom2(i), oroom2(i)); //F
       more_output(NULL), printf("#%2d   Room=%6d   Obj=%6d\n", i, oroom2_.rroom2[i - 1], oroom2_.oroom2[i - 1]);
 // L38100:
    }
@@ -679,7 +679,7 @@ L39000:
 // 						!VALID?
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
-//    write(chan.outch, " Switch #%I2 = %I6", i, switch_(i)); //F
+//    write(outch, " Switch #%I2 = %I6", i, switch_(i)); //F
       more_output(NULL), printf("Switch #%-2d = %d\n", i, switch_[i - 1]);
 // L39100:
    }
@@ -692,9 +692,9 @@ L40000:
       goto L2200;
    }
 // 						!VALID ENTRY?
-// write(chan.outch, Format2, switch_(j)); //F
+// write(outch, Format2, switch_(j)); //F
    printf(Format2, switch_[j - 1]), fflush(stdout);
-// read(chan.inpch, "%I6", &switch_(j)); //F
+// read(inpch, "%I6", &switch_(j)); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &switch_[j - 1]);
    goto L2000;
 
@@ -705,14 +705,14 @@ L41000:
       goto L2200;
    }
 // 						!VALID LIMITS?
-// write(chan.outch, Format0); //F
+// write(outch, Format0); //F
    more_output(Format0);
    i__1 = k;
    for (i = j; i <= i__1; i += 10) {
 // Computing MIN
       i__2 = i + 9;
       l = min(i__2, k);
-//    write(chan.outch, "%1X%I3"-%I3%3X%10(1X,I6)", i, l, (rtext(l1), l1 = i, l)); //F
+//    write(outch, "%1X%I3"-%I3%3X%10(1X,I6)", i, l, (rtext(l1), l1 = i, l)); //F
       more_output(NULL), printf("%3d-%3d  ", i, l);
       for (l1 = i; l1 <= l; ++l1) printf(" %6d", rmsg.rtext[l1 - 1]);
       printf("\n");
@@ -729,9 +729,9 @@ L42000:
 // AH--	ALTER HERE
 
 L43000:
-// write(chan.outch, Format2, here); //F
+// write(outch, Format2, here); //F
    printf(Format2, play.here), fflush(stdout);
-// read(chan.inpch, "%I6", &play.here); //F
+// read(inpch, "%I6", &play.here); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &play.here);
    eqa[0] = play.here;
    goto L2000;
@@ -739,7 +739,7 @@ L43000:
 // DP--	DISPLAY PARSER STATE
 
 L44000:
-// write(chan.outch, " ORPHS= %I7%I7%4I7%/ PV=    %I7%4I7%/ SYN=   %6I7%/%15X%5I7", orp, lastit, pvec, syn); //F
+// write(outch, " ORPHS= %I7%I7%4I7%/ PV=    %I7%4I7%/ SYN=   %6I7%/%15X%5I7", orp, lastit, pvec, syn); //F
    more_output(NULL), printf("ORPHS= %7d%7d%7d%7d%7d%7d\n", orp[0], orp[1], orp[2], orp[3], orp[4], last.lastit);
    more_output(NULL), printf("PV=    %7d%7d%7d%7d%7d\n", pvec[0], pvec[1], pvec[2], pvec[3], pvec[4]);
    more_output(NULL), printf("SYN=   %7d%7d%7d%7d%7d%7d\n", syn[0], syn[1], syn[2], syn[3], syn[4], syn[5]);
@@ -749,10 +749,10 @@ L44000:
 // PD--	PROGRAM DETAIL DEBUG
 
 L45000:
-// write(chan.outch, Format2, prsflg); //F
+// write(outch, Format2, prsflg); //F
    printf(Format2, debug.prsflg), fflush(stdout);
 // 						!TYPE OLD, GET NEW.
-// read(chan.inpch, "%I6", &debug.prsflg); //F
+// read(inpch, "%I6", &debug.prsflg); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &debug.prsflg);
    goto L2000;
 
@@ -761,7 +761,7 @@ L45000:
 L46000:
    for (i = 1; i <= 64; i += 8) {
 // 						!DISPLAY PUZZLE
-//    write(chan.outch, "%2X%8I3", (cpvec(j), j = i, i + 7)); //F
+//    write(outch, "%2X%8I3", (cpvec(j), j = i, i + 7)); //F
       more_output(NULL), printf(" ");
       for (j = i; j <= i + 7; ++j) printf("%3d", puzzle.cpvec[j - 1]);
       printf("\n");
@@ -776,10 +776,10 @@ L47000:
       goto L2200;
    }
 // 						!VALID ENTRY?
-// write(chan.outch, Format2, cpvec(j)); //F
+// write(outch, Format2, cpvec(j)); //F
    printf(Format2, puzzle.cpvec[j - 1]), fflush(stdout);
 // 						!OUTPUT OLD,
-// read(chan.inpch, "%I6", &puzzle.cpvec(j)); //F
+// read(inpch, "%I6", &puzzle.cpvec(j)); //F
    fgets(buf, sizeof buf, stdin), more_input(), sscanf(buf, "%d", &puzzle.cpvec[j - 1]);
    goto L2000;
 #endif

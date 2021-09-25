@@ -109,14 +109,14 @@ void score(Bool flg) {
    }
 // 						!ENDGAME?
 // if (flg) //F
-//    write(chan.outch, " Your score would be%$"); //F
+//    write(outch, " Your score would be%$"); //F
 // else //F
-//    write(chan.outch, " Your score is%$"); //F
+//    write(outch, " Your score is%$"); //F
    more_output(NULL), printf("Your score %s", flg? "would be": "is");
 // if (state.moves != 1) //F
-//    write(chan.outch, "%I4 [total of%I4 points], in%I5 moves."); //F
+//    write(outch, "%I4 [total of%I4 points], in%I5 moves."); //F
 // else //F
-//    write(chan.outch, "%I4 [total of%I4 points], in%I5 move."); //F
+//    write(outch, "%I4 [total of%I4 points], in%I5 move."); //F
    printf(" %d [total of %d points], in %d %s.\n", as, state.mxscor, state.moves, state.moves != 1? "moves": "move");
 
    for (i = 1; i <= 10; ++i) {
@@ -132,11 +132,11 @@ L50:
 
 L60:
 // if (flg) //F
-//    write(chan.outch, " Your score in the endgame would be%$"); //F
+//    write(outch, " Your score in the endgame would be%$"); //F
 // else //F
-//    write(chan.outch, " Your score in the endgame is%$"); //F
+//    write(outch, " Your score in the endgame is%$"); //F
    more_output(NULL), printf("Your score in the endgame %s", flg? "would be": "is");
-// write(chan.outch, "%I4 [total of%I4 points], in%I5 moves.", //F
+// write(outch, "%I4 [total of%I4 points], in%I5 moves.", //F
 //    state.egscor, state.egmxsc, state.moves //F
 // ); //F
    printf(" %d [total of %d points], in %d moves.\n", state.egscor, state.egmxsc, state.moves);

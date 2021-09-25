@@ -3,77 +3,77 @@
 // Written by R. M. Supnik.
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
-#ifdef __AMOS__
-#   include <amos.h>
-#endif
 #include "extern.h"
 #include "common.h"
 #include <stdlib.h> // For srand().
 
-FILE *dbfile;
+#ifdef __AMOS__
+#   include <amos.h>
+static FILE *OpenInF(const char *File, const char *Mode) { return fdopen(ropen(File, 0), Mode); }
+#else
+static FILE *OpenInF(const char *File, const char *Mode) { return fopen(File, Mode); }
+#endif
 
-#ifndef TEXTFILE
+FILE *StoryF;
+
+#ifndef StoryFile
 #   if defined __AMOS__
-#      define TEXTFILE "lib:dtextc.dat"
+#      define StoryFile "lib:dtextc.dat"
 #   elif defined unix
-#      define TEXTFILE "/usr/games/lib/dunlib/dtextc.dat"
+#      define StoryFile "/usr/share/games/dungeon/dtextc.dat"
 #   else
-#      error I need a definition for TEXTFILE
+#      error I need a definition for StoryFile
 #   endif
 #endif
-#ifndef LOCALTEXTFILE
-#   define LOCALTEXTFILE "dtextc.dat"
+#ifndef IndexFile
+#   define IndexFile StoryFile
 #endif
+#ifndef MyStoryFile
+#   define MyStoryFile "dtextc.dat"
+#endif
+#ifndef MyIndexFile
+#   define MyIndexFile MyStoryFile
+#endif
+
 // Read a single two byte int from the index file
-#define rdint(indxfile) (ch = getc(indxfile), 256*(ch > 127? ch - 256: (ch)) + getc(indxfile))
+static int GetWord(FILE *InF) {
+   int Ch = getc(InF); if (Ch > 0x7f) Ch -= 0x100;
+   return 0x100*Ch + getc(InF);
+}
 
 // Read a number of two byte integers from the index file
-static void rdints(int c, int *pi, FILE *indxfile) {
-   int ch; // Local variable for rdint
-
-   while (c-- != 0)
-      *pi++ = rdint(indxfile);
+static void GetWords(int Lim, int *WordP, FILE *InF) {
+   while (Lim-- > 0) *WordP++ = GetWord(InF);
 }
 
 // Read a partial array of integers.
 // These are stored as index,value pairs.
-static void rdpartialints(int c, int *pi, FILE *indxfile) {
-   int ch; // Local variable for rdint
-
-   while (1) {
-      int i;
-
-      if (c < 255) {
-         i = getc(indxfile);
-         if (i == 255)
-            return;
+static void GetPairs(int Lim, int *PairTab, FILE *InF) {
+   while (true) {
+      int p;
+      if (Lim < 0xff) {
+         p = getc(InF); if (p == 0xff) return;
       } else {
-         i = rdint(indxfile);
-         if (i == -1)
-            return;
+         p = GetWord(InF); if (p == -1) return;
       }
-
-      pi[i] = rdint(indxfile);
+      PairTab[p] = GetWord(InF);
    }
 }
 
 // Read a number of one byte flags from the index file
-static void rdflags(int c, Bool *pf, FILE *indxfile) {
-   while (c-- != 0)
-      *pf++ = getc(indxfile);
+static void GetFlags(int Lim, Bool *FlagP, FILE *InF) {
+   while (Lim-- > 0) *FlagP++ = getc(InF);
 }
 
 // Dungeon initialization subroutine
 Bool init(void/*int x*/) {
 // System generated locals
-   int i__1;
    Bool ret_val;
 
 // Local variables
    int xmax, r2max, dirmax, recno;
-   int i, j, k;
-   register int ch;
-   register FILE *indxfile;
+   int Maj, Min, Edit;
+   FILE *IndexF;
    int mmax, omax, rmax, vmax, amax, cmax, fmax, smax;
 
    more_init();
@@ -180,19 +180,17 @@ L10000:
 
 // INIT ALL ARRAYS.
 
-   i__1 = cmax;
-   for (i = 1; i <= i__1; ++i) {
+   for (int c = 0; c < cmax; c++) {
 // 						!CLEAR CLOCK EVENTS
-      cevent.cflag[i - 1] = false;
-      cevent.ctick[i - 1] = 0;
-      cevent.cactio[i - 1] = 0;
+      cevent.cflag[c] = false;
+      cevent.ctick[c] = 0;
+      cevent.cactio[c] = 0;
 // L5:
    }
 
-   i__1 = fmax;
-   for (i = 1; i <= i__1; ++i) {
+   for (int f = 0; f < fmax; f++) {
 // 						!CLEAR FLAGS.
-      flags[i - 1] = false;
+      flags[f] = false;
 // L10:
    }
    findex.buoyf = true;
@@ -202,10 +200,9 @@ L10000:
    findex.mr1f = true;
    findex.mr2f = true;
    findex.follwf = true;
-   i__1 = smax;
-   for (i = 1; i <= i__1; ++i) {
+   for (int s = 0; s < smax; s++) {
 // 						!CLEAR SWITCHES.
-      switch_[i - 1] = 0;
+      switch_[s] = 0;
 // L12:
    }
    findex.ormtch = 4;
@@ -216,81 +213,74 @@ L10000:
    findex.mloc = MrBrX;
    findex.cphere = 10;
 
-   i__1 = r2max;
-   for (i = 1; i <= i__1; ++i) {
+   for (int r2 = 0; r2 < r2max; r2++) {
 // 						!CLEAR ROOM 2 ARRAY.
-      oroom2_.rroom2[i - 1] = 0;
-      oroom2_.oroom2[i - 1] = 0;
+      oroom2_.rroom2[r2] = 0;
+      oroom2_.oroom2[r2] = 0;
 // L15:
    }
 
-   i__1 = xmax;
-   for (i = 1; i <= i__1; ++i) {
+   for (int x = 0; x < xmax; x++) {
 // 						!CLEAR TRAVEL ARRAY.
-      exits.travel[i - 1] = 0;
+      exits.travel[x] = 0;
 // L20:
    }
 
-   i__1 = vmax;
-   for (i = 1; i <= i__1; ++i) {
+   for (int v = 0; v < vmax; v++) {
 // 						!CLEAR VILLAINS ARRAYS.
-      vill.vopps[i - 1] = 0;
-      vill.vprob[i - 1] = 0;
-      vill.villns[i - 1] = 0;
-      vill.vbest[i - 1] = 0;
-      vill.vmelee[i - 1] = 0;
+      vill.vopps[v] = 0;
+      vill.vprob[v] = 0;
+      vill.villns[v] = 0;
+      vill.vbest[v] = 0;
+      vill.vmelee[v] = 0;
 // L30:
    }
 
-   i__1 = omax;
-   for (i = 1; i <= i__1; ++i) {
+   for (int o = 0; o < omax; o++) {
 // 						!CLEAR OBJECT ARRAYS.
-      objcts.odesc1[i - 1] = 0;
-      objcts.odesc2[i - 1] = 0;
-      objcts.odesco[i - 1] = 0;
-      objcts.oread[i - 1] = 0;
-      objcts.oactio[i - 1] = 0;
-      objcts.oflag1[i - 1] = 0;
-      objcts.oflag2[i - 1] = 0;
-      objcts.ofval[i - 1] = 0;
-      objcts.otval[i - 1] = 0;
-      objcts.osize[i - 1] = 0;
-      objcts.ocapac[i - 1] = 0;
-      objcts.ocan[i - 1] = 0;
-      objcts.oadv[i - 1] = 0;
-      objcts.oroom[i - 1] = 0;
+      objcts.odesc1[o] = 0;
+      objcts.odesc2[o] = 0;
+      objcts.odesco[o] = 0;
+      objcts.oread[o] = 0;
+      objcts.oactio[o] = 0;
+      objcts.oflag1[o] = 0;
+      objcts.oflag2[o] = 0;
+      objcts.ofval[o] = 0;
+      objcts.otval[o] = 0;
+      objcts.osize[o] = 0;
+      objcts.ocapac[o] = 0;
+      objcts.ocan[o] = 0;
+      objcts.oadv[o] = 0;
+      objcts.oroom[o] = 0;
 // L40:
    }
 
-   i__1 = rmax;
-   for (i = 1; i <= i__1; ++i) {
+   for (int r = 0; r < rmax; r++) {
 // 						!CLEAR ROOM ARRAYS.
-      rooms.rdesc1[i - 1] = 0;
-      rooms.rdesc2[i - 1] = 0;
-      rooms.ractio[i - 1] = 0;
-      rooms.rflag[i - 1] = 0;
-      rooms.rval[i - 1] = 0;
-      rooms.rexit[i - 1] = 0;
+      rooms.rdesc1[r] = 0;
+      rooms.rdesc2[r] = 0;
+      rooms.ractio[r] = 0;
+      rooms.rflag[r] = 0;
+      rooms.rval[r] = 0;
+      rooms.rexit[r] = 0;
 // L50:
    }
 
-   i__1 = mmax;
-   for (i = 1; i <= i__1; ++i) {
+   for (int m = 0; m < mmax; m++) {
 // 						!CLEAR MESSAGE DIRECTORY.
-      rmsg.rtext[i - 1] = 0;
+      rmsg.rtext[m] = 0;
 // L60:
    }
 
-   i__1 = amax;
-   for (i = 1; i <= i__1; ++i) {
+   for (int a = 0; a < amax; a++) {
 // 						!CLEAR ADVENTURER'S ARRAYS.
-      advs.aroom[i - 1] = 0;
-      advs.ascore[i - 1] = 0;
-      advs.avehic[i - 1] = 0;
-      advs.aobj[i - 1] = 0;
-      advs.aactio[i - 1] = 0;
-      advs.astren[i - 1] = 0;
-      advs.aflag[i - 1] = 0;
+      advs.aroom[a] = 0;
+      advs.ascore[a] = 0;
+      advs.avehic[a] = 0;
+      advs.aobj[a] = 0;
+      advs.aactio[a] = 0;
+      advs.astren[a] = 0;
+      advs.aflag[a] = 0;
 // L70:
    }
 
@@ -315,92 +305,69 @@ L10000:
 
 // NOW RESTORE FROM EXISTING INDEX FILE.
 
-#if 0
-// open(unit:1,file:"/usr/share/games/dungeon/dindx.dat", //F
-//    status:"OLD", form:"FORMATTED", access:"SEQUENTIAL", err:L1900 //F
-// ); //F
-#else
-// open(unit:1,file:"dindx.dat", //F
-//    status:"OLD", form:"FORMATTED", access:"SEQUENTIAL", err:L1900 //F
-// ); //F
-#endif
-#ifdef __AMOS__
-   if ((dbfile = fdopen(ropen(LOCALTEXTFILE, 0), BINREAD)) == NULL && (dbfile = fdopen(ropen(TEXTFILE, 0), BINREAD)) == NULL)
+// open(unit:1, file:MyIndexFile, status:"OLD", form:"FORMATTED", access:"SEQUENTIAL", err:L1900); //F
+   if ((IndexF = OpenInF(MyIndexFile, "rb")) == NULL && (IndexF = OpenInF(IndexFile, "rb")) == NULL)
       goto L1950;
-#else
-   if ((dbfile = fopen(LOCALTEXTFILE, BINREAD)) == NULL && (dbfile = fopen(TEXTFILE, BINREAD)) == NULL)
-      goto L1950;
-#endif
 
-   indxfile = dbfile;
-
-// read(1, "%I6", &i, &j, &k); //F
-   i = rdint(indxfile), j = rdint(indxfile), k = rdint(indxfile);
+// read(1, "%I6", &Maj, &Min, &Edit); //F
+   Maj = GetWord(IndexF), Min = GetWord(IndexF), Edit = GetWord(IndexF);
 // 						!GET VERSION.
-   if (i != vmaj || j != vmin) {
+   if (Maj != vmaj || Min != vmin) {
       goto L1925;
    }
-#if 0
-// open(unit:chan.dbch, file:"/usr/share/games/dungeon/dtext.dat", //F
-//    status:"old", form:"unformatted", access:"direct", //F
-//    recl:76, err:L1950 //F
-// ); //F
-#else
-// open(unit:chan.dbch, file:"dtext.dat", //F
-//    status:"old", form:"unformatted", access:"direct", //F
-//    recl:76, err:L1950 //F
-// ); //F
-#endif
+// open(unit:storych, file:MyStoryFile, status:"old", form:"unformatted", access:"direct", recl:76, err:L1950); //F
+   StoryF = IndexF;
+
 #ifdef ALLOW_GDT
-// print(" RESTORING FROM \"dindx.dat\""); //F
+// print(" RESTORING FROM \"" IndexFile "\""); //F
 #endif
 // // const char *Fmt = "%I8"; //F
 // const char *Fmt = "%I6"; //F
 // read(1, Fmt, &state.mxscor, &star.strbit, &state.egmxsc); //F
-   state.mxscor = rdint(indxfile), star.strbit = rdint(indxfile), state.egmxsc = rdint(indxfile);
+   state.mxscor = GetWord(IndexF), star.strbit = GetWord(IndexF), state.egmxsc = GetWord(IndexF);
 // read(1, Fmt, &rooms.rlnt, &rooms.rdesc2, rooms.rdesc1, rooms.rexit, rooms.ractio, rooms.rval, rooms.rflag); //F
-   rooms.rlnt = rdint(indxfile);
-   rdints(rooms.rlnt, rooms.rdesc1, indxfile), rdints(rooms.rlnt, rooms.rdesc2, indxfile);
-   rdints(rooms.rlnt, rooms.rexit, indxfile), rdpartialints(rooms.rlnt, rooms.ractio, indxfile);
-   rdpartialints(rooms.rlnt, rooms.rval, indxfile), rdints(rooms.rlnt, rooms.rflag, indxfile);
+   rooms.rlnt = GetWord(IndexF);
+   GetWords(rooms.rlnt, rooms.rdesc1, IndexF), GetWords(rooms.rlnt, rooms.rdesc2, IndexF);
+   GetWords(rooms.rlnt, rooms.rexit, IndexF), GetPairs(rooms.rlnt, rooms.ractio, IndexF);
+   GetPairs(rooms.rlnt, rooms.rval, IndexF), GetWords(rooms.rlnt, rooms.rflag, IndexF);
 // read(1, Fmt, &exits.xlnt, exits.travel); //F
-   exits.xlnt = rdint(indxfile), rdints(exits.xlnt, exits.travel, indxfile);
+   exits.xlnt = GetWord(IndexF), GetWords(exits.xlnt, exits.travel, IndexF);
 // read(1, Fmt, //F
 //    objcts.olnt, objcts.odesc1, objcts.odesc2, objcts.odesco, objcts.oactio, objcts.oflag1, objcts.oflag2, //F
 //    objcts.ofval, objcts.otval, objcts.osize, objcts.ocapac, objcts.oroom, objcts.oadv, objcts.ocan, objcts.oread //F
 // ); //F
-   objcts.olnt = rdint(indxfile);
-   rdints(objcts.olnt, objcts.odesc1, indxfile), rdints(objcts.olnt, objcts.odesc2, indxfile);
-   rdpartialints(objcts.olnt, objcts.odesco, indxfile), rdpartialints(objcts.olnt, objcts.oactio, indxfile);
-   rdints(objcts.olnt, objcts.oflag1, indxfile), rdpartialints(objcts.olnt, objcts.oflag2, indxfile);
-   rdpartialints(objcts.olnt, objcts.ofval, indxfile), rdpartialints(objcts.olnt, objcts.otval, indxfile);
-   rdints(objcts.olnt, objcts.osize, indxfile), rdpartialints(objcts.olnt, objcts.ocapac, indxfile);
-   rdints(objcts.olnt, objcts.oroom, indxfile), rdpartialints(objcts.olnt, objcts.oadv, indxfile);
-   rdpartialints(objcts.olnt, objcts.ocan, indxfile), rdpartialints(objcts.olnt, objcts.oread, indxfile);
+   objcts.olnt = GetWord(IndexF);
+   GetWords(objcts.olnt, objcts.odesc1, IndexF), GetWords(objcts.olnt, objcts.odesc2, IndexF);
+   GetPairs(objcts.olnt, objcts.odesco, IndexF), GetPairs(objcts.olnt, objcts.oactio, IndexF);
+   GetWords(objcts.olnt, objcts.oflag1, IndexF), GetPairs(objcts.olnt, objcts.oflag2, IndexF);
+   GetPairs(objcts.olnt, objcts.ofval, IndexF), GetPairs(objcts.olnt, objcts.otval, IndexF);
+   GetWords(objcts.olnt, objcts.osize, IndexF), GetPairs(objcts.olnt, objcts.ocapac, IndexF);
+   GetWords(objcts.olnt, objcts.oroom, IndexF), GetPairs(objcts.olnt, objcts.oadv, IndexF);
+   GetPairs(objcts.olnt, objcts.ocan, IndexF), GetPairs(objcts.olnt, objcts.oread, IndexF);
 // read(1, Fmt, &oroom2_.r2lnt, oroom2_.oroom2, oroom2_.rroom2); //F
-   oroom2_.r2lnt = rdint(indxfile);
-   rdints(oroom2_.r2lnt, oroom2_.oroom2, indxfile), rdints(oroom2_.r2lnt, oroom2_.rroom2, indxfile);
+   oroom2_.r2lnt = GetWord(IndexF);
+   GetWords(oroom2_.r2lnt, oroom2_.oroom2, IndexF), GetWords(oroom2_.r2lnt, oroom2_.rroom2, IndexF);
 // read(1, Fmt, &cevent.clnt, cevent.ctick, cevent.cactio); //F
-   cevent.clnt = rdint(indxfile);
-   rdints(cevent.clnt, cevent.ctick, indxfile), rdints(cevent.clnt, cevent.cactio, indxfile);
+   cevent.clnt = GetWord(IndexF);
+   GetWords(cevent.clnt, cevent.ctick, IndexF), GetWords(cevent.clnt, cevent.cactio, IndexF);
 // read(1, "%L4", cevent.cflag); //F
-   rdflags(cevent.clnt, cevent.cflag, indxfile);
+   GetFlags(cevent.clnt, cevent.cflag, IndexF);
 // read(1, Fmt, &vill.vlnt, vill.villns, vill.vprob, vill.vopps, vill.vbest, vill.vmelee); //F
-   vill.vlnt = rdint(indxfile), rdints(vill.vlnt, vill.villns, indxfile);
-   rdpartialints(vill.vlnt, vill.vprob, indxfile), rdpartialints(vill.vlnt, vill.vopps, indxfile);
-   rdints(vill.vlnt, vill.vbest, indxfile), rdints(vill.vlnt, vill.vmelee, indxfile);
+   vill.vlnt = GetWord(IndexF), GetWords(vill.vlnt, vill.villns, IndexF);
+   GetPairs(vill.vlnt, vill.vprob, IndexF), GetPairs(vill.vlnt, vill.vopps, IndexF);
+   GetWords(vill.vlnt, vill.vbest, IndexF), GetWords(vill.vlnt, vill.vmelee, IndexF);
 // read(1, Fmt, &advs.alnt, advs.aroom, advs.ascore, advs.avehic, advs.aobj, advs.aactio, advs.astren, advs.aflag); //F
-   advs.alnt = rdint(indxfile), rdints(advs.alnt, advs.aroom, indxfile);
-   rdpartialints(advs.alnt, advs.ascore, indxfile), rdpartialints(advs.alnt, advs.avehic, indxfile);
-   rdints(advs.alnt, advs.aobj, indxfile), rdints(advs.alnt, advs.aactio, indxfile);
-   rdints(advs.alnt, advs.astren, indxfile), rdpartialints(advs.alnt, advs.aflag, indxfile);
+   advs.alnt = GetWord(IndexF), GetWords(advs.alnt, advs.aroom, IndexF);
+   GetPairs(advs.alnt, advs.ascore, IndexF), GetPairs(advs.alnt, advs.avehic, IndexF);
+   GetWords(advs.alnt, advs.aobj, IndexF), GetWords(advs.alnt, advs.aactio, IndexF);
+   GetWords(advs.alnt, advs.astren, IndexF), GetPairs(advs.alnt, advs.aflag, IndexF);
 // read(1, Fmt, &star.mbase, &rmsg.mlnt, rmsg.rtext); //F
-   star.mbase = rdint(indxfile);
-   rmsg.mlnt = rdint(indxfile), rdints(rmsg.mlnt, rmsg.rtext, indxfile);
+   star.mbase = GetWord(IndexF);
+   rmsg.mlnt = GetWord(IndexF), GetWords(rmsg.mlnt, rmsg.rtext, IndexF);
 
 // Save location of start of message text
 // close(1); //F
-   rmsg.mrloc = ftell(indxfile);
+   rmsg.mrloc = ftell(IndexF);
 // 						!INIT DONE.
 
 // INIT, PAGE 5
@@ -425,16 +392,16 @@ L10000:
 
 L1925:
 // print(
-//    " \"dindx.dat\" is version %I1.%I1%A1.%/" //F
+//    " \"" MyIndexFile "\" is version %I1.%I1%A1.%/" //F
 //    "  I require version %I1.%I1%A1.", //F
-//    i, j, k, vmaj, vmin, vedit //F
+//    Maj, Min, Edit, vmaj, vmin, vedit //F
 // ); //F
-   more_output(NULL), printf("%s is version %1d.%1d%c.\n", TEXTFILE, i, j, k);
+   more_output(NULL), printf("%s is version %1d.%1d%c.\n", MyStoryFile, Maj, Min, Edit);
    more_output(NULL), printf("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
    goto L1975;
 L1950:
-// print(" I can't open ","dtext.dat","."); //F
-   more_output(NULL), printf("I can't open %s.\n", TEXTFILE);
+// print(" I can't open ",MyStoryFile,"."); //F
+   more_output(NULL), printf("I can't open %s.\n", MyStoryFile);
 L1975:
 // print( //F
 //    " Suddenly a sinister, wraithlike figure appears before ", //F

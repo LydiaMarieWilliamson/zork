@@ -15,7 +15,7 @@ void savegm(void) {
 // Note: save file format is different for PDP versus non-PDP versions
 
 // open(unit:1, file:"dsave.dat", access:"SEQUENTIAL", status:"UNKNOWN", form:"UNFORMATTED", err:L100); //F
-   FILE *ExF = fopen("dsave.dat", BINWRITE); if (ExF == NULL) goto L100;
+   FILE *ExF = fopen("dsave.dat", "wb"); if (ExF == NULL) goto L100;
 
    int PlTime = gttime();
 // 						!GET TIME.
@@ -38,8 +38,8 @@ void savegm(void) {
 // ); //F
    PutVar(PlTime), PutVar(state.moves), PutVar(state.deaths), PutVar(state.rwscor);
    PutVar(state.egscor), PutVar(state.mxload);
-   PutVar(state.ltshft), PutVar(state.bloc), PutVar(state.mungrm), PutVar(state.hs), PutVar(screen.fromdr);
-   PutVar(screen.scolrm), PutVar(screen.scolac);
+   PutVar(state.ltshft), PutVar(state.bloc), PutVar(state.mungrm), PutVar(state.hs);
+   PutVar(screen.fromdr), PutVar(screen.scolrm), PutVar(screen.scolac);
 // write(1, //F
 //   objcts.odesc1, objcts.odesc2, objcts.oflag1, objcts.oflag2, objcts.ofval, objcts.otval, //F
 //   objcts.osize, objcts.ocapac, objcts.oroom, objcts.oadv, objcts.ocan //F
@@ -72,7 +72,7 @@ void rstrgm(void) {
 // Note: save file format is different for PDP versus non-PDP versions
 
 // open(unit:1, file:"dsave.dat", access:"SEQUENTIAL", status:"OLD", form:"UNFORMATTED", err:L100); //F
-   FILE *InF = fopen("dsave.dat", BINREAD); if (InF == NULL) goto L100;
+   FILE *InF = fopen("dsave.dat", "rb"); if (InF == NULL) goto L100;
 
 #define GetVar(Var) (fread((void *)&(Var), sizeof (Var), (1), (InF)))
 #define GetArr(N, Buf) (fread((void *)(Buf), sizeof (Buf)[0], (N), (InF)))
@@ -112,7 +112,7 @@ void rstrgm(void) {
    GetArr(46, flags), GetArr(22, switch_), GetArr(4, vill.vprob), GetArr(25, cevent.cflag), GetArr(25, cevent.ctick);
 
 // close(unit:1); //F
-   (void)fclose(InF);
+   if (fclose(InF) == EOF) goto L100;
    rspeak(599);
    return;
 
@@ -125,7 +125,7 @@ L200:
    rspeak(600);
 // 						!OBSOLETE VERSION
 // close(unit:1); //F
-   (void)fclose(InF);
+   if (fclose(InF) == EOF) goto L100;
 }
 
 // Move in specified direction

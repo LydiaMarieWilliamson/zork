@@ -241,7 +241,7 @@ L4100:
 // V74--	VERSION.  PRINT INFO.
 
 L5000:
-// write(chan.outch, " V%I1.%I2%A1", vmaj, vmin, vedit); //F
+// write(outch, " V%I1.%I2%A1", vmaj, vmin, vedit); //F
    more_output(NULL), printf("V%1d.%1d%c\n", vmaj, vmin, (int)vedit);
    play.telflg = true;
    return ret_val;
@@ -393,8 +393,8 @@ L15000:
    }
 // 						!ASK FOR Y/N DECISION.
 #if 0
-// close(chan.dbch); //F
-   fclose(dbfile);
+// close(storych); //F
+   fclose(StoryF);
 #endif
    exit_();
 // 						!BYE.
@@ -563,18 +563,18 @@ L21000:
    i = k / 60;
    j = k % 60;
 
-// write(chan.outch, " You have been playing Dungeon for %$"); //F
+// write(outch, " You have been playing Dungeon for %$"); //F
    more_output(NULL), printf("You have been playing Dungeon for ");
-// if (i != 0) write(chan.outch, "+%I3 hour%$", i); //F
-// if (i >= 2) write(chan.outch, "+s and %$"); //F
-// if (i == 1) write(chan.outch, "+ and %$"); //F
+// if (i != 0) write(outch, "+%I3 hour%$", i); //F
+// if (i >= 2) write(outch, "+s and %$"); //F
+// if (i == 1) write(outch, "+ and %$"); //F
    if (i >= 1) {
       printf("%d ", i);
       if (i != 1) printf("hours"); else printf("hour");
       printf(" and ");
    }
-// if (j == 1) write(chan.outch, "+%I2 minute.", j); //F
-// if (j != 1) write(chan.outch, "+%I2 minutes.", j); //F
+// if (j == 1) write(outch, "+%I2 minute.", j); //F
+// if (j != 1) write(outch, "+%I2 minutes.", j); //F
    printf("%d ", j);
    if (j != 1) printf("minutes"); else printf("minute");
    printf(".\n");
@@ -693,7 +693,7 @@ L25000:
 // 						!COMPUTE WAIT.
 
    if (j != 0) {
-//    write(chan.outch, " You will be cured after %I3 moves.", I); //F
+//    write(outch, " You will be cured after %I3 moves.", I); //F
       more_output(NULL), printf("You will be cured after %d moves.\n", i);
    }
 
@@ -783,7 +783,7 @@ L26400:
    findex.spellf = true;
 // 						!TELL HIM.
    play.telflg = true;
-// write(chan.outch," A hollow voice replies:  \"%6A1%1X%6A1\".", pp1, ch); //F
+// write(outch," A hollow voice replies:  \"%6A1%1X%6A1\".", pp1, ch); //F
    more_output(NULL), printf("A hollow voice replies:  \"%.6s %.6s\".\n", pp1, ch);
 
    return ret_val;

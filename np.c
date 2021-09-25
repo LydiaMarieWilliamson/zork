@@ -25,11 +25,11 @@ L5:
    }
 // 						!SEE WHO TO PROMPT FOR.
 L10:
-// write(chan.outch, " >%$"); //F
+// write(outch, " >%$"); //F
    printf(">");
 // 						!PROMPT FOR GAME.
 L90:
-// read(chan.inpch, "%78A1", buffer); //F
+// read(inpch, "%78A1", buffer); //F
    (void)fflush(stdout);
    if (fgets(buffer, 78, stdin) == NULL) exit_();
    more_input();

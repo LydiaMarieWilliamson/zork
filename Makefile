@@ -82,7 +82,7 @@ dtextc.dat:
 	cat dtextc.uu1 dtextc.uu2 dtextc.uu3 dtextc.uu4 | uudecode
 
 dinit.o: dinit.c
-	$(CC) $(CFLAGS) $(GDTFLAG) -DTEXTFILE=\"$(LIBDIR)/dtextc.dat\" -c dinit.c
+	$(CC) $(CFLAGS) $(GDTFLAG) -DStoryFile=\"$(LIBDIR)/dtextc.dat\" -c dinit.c
 
 dgame.o: dgame.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c dgame.c

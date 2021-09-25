@@ -111,7 +111,7 @@ void cpinfo(int rmk, int st) {
    L100:
       ;
    }
-// write(chan.outch, //F
+// write(outch, //F
 //    "       |%A2%1X%A2%1X%A2|%/" //F
 //    " West  |%A2 .. %A2|  East%/" //F
 //    "       |%A2%1X%A2%1X%A2|", //F

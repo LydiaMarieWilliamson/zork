@@ -143,7 +143,7 @@ Bool yesno(int q, int y, int n) {
 L100:
    rspeak(q);
 // 						!ASK
-// read(chan.inpch, "%A1", &ans); //F
+// read(inpch, "%A1", &ans); //F
    (void)fflush(stdout), (void)fgets(ans, sizeof ans, stdin), more_input();
 // 						!GET ANSWER
    if (*ans == 'Y' || *ans == 'y') {

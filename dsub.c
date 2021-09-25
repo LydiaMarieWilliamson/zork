@@ -2,16 +2,12 @@
 // All rights reserved, commercial usage strictly prohibited.
 // Written by R. M. Supnik.
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
-#include <stdio.h>
+#include <stdio.h> // Particularly for: SEEK_SET and fseek().
 #include "extern.h"
 #include "common.h"
 
 // Resident subroutines for dungeon
-#ifndef SEEK_SET
-#   define SEEK_SET (0)
-#endif
-
-extern FILE *dbfile;
+extern FILE *StoryF;
 
 static void rspsb2nl(int, int, int, Bool);
 
@@ -55,7 +51,7 @@ static void rspsb2nl(int n, int y, int z, Bool nl) {
 // 						!SAID SOMETHING.
 
    x = ((-x) - 1) * 8;
-   if (fseek(dbfile, x + (long)rmsg.mrloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
+   if (fseek(StoryF, x + (long)rmsg.mrloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
 
    if (nl)
       more_output(NULL);
@@ -63,7 +59,7 @@ static void rspsb2nl(int n, int y, int z, Bool nl) {
    while (1) {
       int i;
 
-      i = getc(dbfile);
+      i = getc(StoryF);
       if (i == EOF) {
          fprintf(stderr, "Error reading database loc %d\n", x);
          exit_();
@@ -79,9 +75,9 @@ static void rspsb2nl(int n, int y, int z, Bool nl) {
       } else if (i == '#' && y != 0) {
          long iloc;
 
-         iloc = ftell(dbfile);
+         iloc = ftell(StoryF);
          rspsb2nl(y, 0, 0, 0);
-         if (fseek(dbfile, iloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", iloc), exit_();
+         if (fseek(StoryF, iloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", iloc), exit_();
          y = z;
          z = 0;
       } else
@@ -354,8 +350,8 @@ L1000:
 L1100:
    score(false);
 // 						!TELL SCORE.
-// close(chan.dbch); //F
-   (void)fclose(dbfile);
+// close(storych); //F
+   (void)fclose(StoryF);
    exit_();
 }
 

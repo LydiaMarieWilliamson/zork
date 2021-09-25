@@ -366,8 +366,13 @@ L57000:
 // 						!WALKIN?
    rspeak(726);
    score(false);
-// moved to exit routine	CLOSE(DBCH)
+#if 0
+// Moved to exit_() routine
+// close(storych); //F
+   fclose(StoryF);
+#else
    exit_();
+#endif
 
 // R58--	TOMB ROOM
 

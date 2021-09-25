@@ -11,9 +11,6 @@
 #include <stdbool.h>
 #include <stdlib.h> // For abs().
 
-#define BINREAD "rb"
-#define BINWRITE "wb"
-
 typedef int Bool;
 
 #define min(A, B)	((A) <= (B)? (A): (B))
