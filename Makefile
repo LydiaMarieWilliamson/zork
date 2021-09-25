@@ -91,9 +91,6 @@ gdt.o: gdt.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c gdt.c
 
 local.o: local.c
-	$(CC) $(CFLAGS) $(GDTFLAG) -c local.c
-
-rtim.o: rtim.c
-	$(CC) $(CFLAGS) $(TERMFLAG) -c rtim.c
+	$(CC) $(CFLAGS) $(GDTFLAG) $(TERMFLAG) -c local.c
 
 $(OBJS): extern.h common.h
