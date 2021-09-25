@@ -20,7 +20,6 @@ typedef int Bool;
 Bool protected_(void);
 Bool wizard(void);
 
-// supp.c:
 void more_init(void);
 void more_output(const char *);
 void more_input(void);

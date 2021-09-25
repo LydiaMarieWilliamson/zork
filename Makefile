@@ -56,7 +56,7 @@ CFLAGS = -g #-static
 OBJS =	common.o local.o \
 	actors.o ballop.o blkdata.o clockr.o demons.o dgame.o dinit.o dmain.o dso1.o dso2.o dso3.o \
 	dso4.o dso5.o dso6.o dso7.o dsub.o dverb1.o dverb2.o gdt.o lightp.o nobjs.o np1.o \
-	np2.o np3.o np.o nrooms.o objcts.o rooms.o sobjs.o supp.o sverbs.o verbs.o villns.o
+	np2.o np3.o np.o nrooms.o objcts.o rooms.o rtim.o sobjs.o sverbs.o verbs.o villns.o
 
 #APP = dungeon
 APP = Zork
@@ -93,7 +93,7 @@ gdt.o: gdt.c
 local.o: local.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c local.c
 
-supp.o: supp.c
-	$(CC) $(CFLAGS) $(TERMFLAG) -c supp.c
+rtim.o: rtim.c
+	$(CC) $(CFLAGS) $(TERMFLAG) -c rtim.c
 
 $(OBJS): extern.h common.h
