@@ -21,8 +21,8 @@ Bool protected_(void);
 Bool wizard(void);
 
 void more_init(void);
-void more_output(const char *);
-void more_input(void);
+void more_output(const char *, ...);
+char *more_input(char *, size_t);
 // The remnant of f2c.h (end)
 
 // actors.c:
@@ -129,7 +129,7 @@ int schlst(int, int, int, int, int, int);
 Bool synmch(void/*int*/);
 
 // np.c:
-void rdline(char *, int);
+void rdline(char *, size_t, int);
 Bool parse(char *, Bool);
 void orphan(int, int, int, int, int);
 

@@ -98,18 +98,18 @@ Bool init(void/*int x*/) {
 //    "commanding voice:%/%/%20X\"You shall not pass.\"%/%/ As ", //F
 //    "he grabs you by the neck all grows dim about you." //F
 // ); //F
-   more_output("There appears before you a threatening figure clad all over");
-   more_output("in heavy black armor.  His legs seem like the massive trunk");
-   more_output("of the oak tree.  His broad shoulders and helmeted head loom");
-   more_output("high over your own puny frame, and you realize that his powerful");
-   more_output("arms could easily crush the very life from your body.  There");
-   more_output("hangs from his belt a veritable arsenal of deadly weapons:");
-   more_output("sword, mace, ball and chain, dagger, lance, and trident.");
-   more_output("He speaks with a commanding voice:");
-   more_output("");
-   more_output("                    \"You shall not pass.\"");
-   more_output("");
-   more_output("As he grabs you by the neck all grows dim about you.");
+   more_output("There appears before you a threatening figure clad all over\n");
+   more_output("in heavy black armor.  His legs seem like the massive trunk\n");
+   more_output("of the oak tree.  His broad shoulders and helmeted head loom\n");
+   more_output("high over your own puny frame, and you realize that his powerful\n");
+   more_output("arms could easily crush the very life from your body.  There\n");
+   more_output("hangs from his belt a veritable arsenal of deadly weapons:\n");
+   more_output("sword, mace, ball and chain, dagger, lance, and trident.\n");
+   more_output("He speaks with a commanding voice:\n");
+   more_output("\n");
+   more_output("                    \"You shall not pass.\"\n");
+   more_output("\n");
+   more_output("As he grabs you by the neck all grows dim about you.\n");
    exit_();
 
 // NOW START INITIALIZATION PROPER
@@ -396,12 +396,12 @@ L1925:
 //    "  I require version %I1.%I1%A1.", //F
 //    Maj, Min, Edit, vmaj, vmin, vedit //F
 // ); //F
-   more_output(NULL), printf("%s is version %1d.%1d%c.\n", MyStoryFile, Maj, Min, Edit);
-   more_output(NULL), printf("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
+   more_output("%s is version %1d.%1d%c.\n", MyStoryFile, Maj, Min, Edit);
+   more_output("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
    goto L1975;
 L1950:
 // print(" I can't open ",MyStoryFile,"."); //F
-   more_output(NULL), printf("I can't open %s.\n", MyStoryFile);
+   more_output("I can't open %s.\n", MyStoryFile);
 L1975:
 // print( //F
 //    " Suddenly a sinister, wraithlike figure appears before ", //F
@@ -413,15 +413,15 @@ L1975:
 //    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/" //F
 //    " The darkness becomes all encompassing, and your vision fails." //F
 // ); //F
-   more_output("Suddenly a sinister, wraithlike figure appears before you,");
-   more_output("seeming to float in the air.  In a low, sorrowful voice he says,");
-   more_output("\"Alas, the very nature of the world has changed, and the dungeon");
-   more_output("cannot be found.  All must now pass away.\"  Raising his oaken staff");
-   more_output("in farewell, he fades into the spreading darkness.  In his place");
-   more_output("appears a tastefully lettered sign reading:");
-   more_output("");
-   more_output("                       INITIALIZATION FAILURE");
-   more_output("");
-   more_output("The darkness becomes all encompassing, and your vision fails.");
+   more_output("Suddenly a sinister, wraithlike figure appears before you,\n");
+   more_output("seeming to float in the air.  In a low, sorrowful voice he says,\n");
+   more_output("\"Alas, the very nature of the world has changed, and the dungeon\n");
+   more_output("cannot be found.  All must now pass away.\"  Raising his oaken staff\n");
+   more_output("in farewell, he fades into the spreading darkness.  In his place\n");
+   more_output("appears a tastefully lettered sign reading:\n");
+   more_output("\n");
+   more_output("                       INITIALIZATION FAILURE\n");
+   more_output("\n");
+   more_output("The darkness becomes all encompassing, and your vision fails.\n");
    return ret_val;
 }

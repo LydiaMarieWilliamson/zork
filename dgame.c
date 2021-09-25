@@ -33,7 +33,7 @@ L100:
    play.telflg = false;
 // 						!ASSUME NOTHING TOLD.
    if (prsvec.prscon <= 1) {
-      rdline(input.inbuf, 1);
+      rdline(input.inbuf, sizeof input.inbuf, 1);
    }
 
 #ifdef ALLOW_GDT
@@ -92,7 +92,7 @@ L900:
 // IF INPUT IS NOT 'ECHO' OR A DIRECTION, JUST ECHO.
 
 L1000:
-   rdline(input.inbuf, 0);
+   rdline(input.inbuf, sizeof input.inbuf, 0);
    ++state.moves;
 // 						!CHARGE FOR MOVES.
    if (strcmp(input.inbuf, "ECHO") != 0)
@@ -120,7 +120,7 @@ L1300:
 
 L1400:
 // write(outch, "%1X%78A1", (input.inbuf(j), j = 1, input.inlnt)); //F
-   more_output(input.inbuf);
+   more_output("%s\n", input.inbuf);
    play.telflg = true;
 // 						!INDICATE OUTPUT.
    goto L1000;

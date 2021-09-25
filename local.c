@@ -54,6 +54,7 @@ Bool wizard(void) {
 
 // Support routines for dungeon: in place of the f2c library functions.
 #include <stdio.h>
+#include <stdarg.h>
 
 // Terminal support routines for dungeon
 // By Ian Lance Taylor ian@airs.com or uunet!airs!ian
@@ -121,24 +122,26 @@ void more_init(void) {
 }
 
 // The program wants to output a line to the terminal.
-// If z is not NULL it is a simple string which is output here;
-// otherwise it needs some sort of formatting, and is output after this function returns
-// (if all computers had vprintf I would just use it, but they probably don't).
-void more_output(const char *z) {
+// If Format is not NULL it is a format string which controls the output here;
+// along with additional arguments, like printf();
+// making use of vprintf(), which is part of the C99 library declared in <stdio.h>, and is therefore assumed.
+void more_output(const char *Format, ...) {
 // Pager code remarked out to allow streamed input and output.
 #if 0
    if (crows > 0 && coutput > crows - 2) {
-      printf("Press return to continue: ");
-      (void)fflush(stdout);
+      printf("Press return to continue: "), fflush(stdout);
       while (getchar() != '\n');
       coutput = 0;
    }
 #endif
-   if (z != NULL) printf("%s\n", z);
+   if (Format != NULL) {
+      va_list AP; va_start(AP, Format), vfprintf(stdout, Format, AP), va_end(AP);
+   }
    coutput++;
 }
 
 // The terminal is waiting for input (clear the number of output lines)
-void more_input(void) {
+char *more_input(char *Buf, size_t N) {
    coutput = 0;
+   return fgets(Buf, N, stdin);
 }

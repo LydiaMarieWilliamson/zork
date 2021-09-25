@@ -112,12 +112,13 @@ void score(Bool flg) {
 //    write(outch, " Your score would be%$"); //F
 // else //F
 //    write(outch, " Your score is%$"); //F
-   more_output(NULL), printf("Your score %s", flg? "would be": "is");
 // if (state.moves != 1) //F
 //    write(outch, "%I4 [total of%I4 points], in%I5 moves."); //F
 // else //F
 //    write(outch, "%I4 [total of%I4 points], in%I5 move."); //F
-   printf(" %d [total of %d points], in %d %s.\n", as, state.mxscor, state.moves, state.moves != 1? "moves": "move");
+   more_output("Your score %s %d [total of %d points], in %d %s.\n",
+      flg? "would be": "is", as, state.mxscor, state.moves, state.moves != 1? "moves": "move"
+   );
 
    for (i = 1; i <= 10; ++i) {
       if (as * 20 / state.mxscor >= rank[i - 1]) {
@@ -135,11 +136,12 @@ L60:
 //    write(outch, " Your score in the endgame would be%$"); //F
 // else //F
 //    write(outch, " Your score in the endgame is%$"); //F
-   more_output(NULL), printf("Your score in the endgame %s", flg? "would be": "is");
 // write(outch, "%I4 [total of%I4 points], in%I5 moves.", //F
 //    state.egscor, state.egmxsc, state.moves //F
 // ); //F
-   printf(" %d [total of %d points], in %d moves.\n", state.egscor, state.egmxsc, state.moves);
+   more_output("Your score in the endgame %s %d [total of %d points], in %d moves.\n",
+      flg? "would be": "is", state.egscor, state.egmxsc, state.moves
+   );
    for (i = 1; i <= 5; ++i) {
       if (state.egscor * 20 / state.egmxsc >= erank[i - 1]) {
          goto L80;

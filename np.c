@@ -11,7 +11,7 @@
 static Bool lex(char *, int *, int *, Bool);
 
 // Read input line
-void rdline(char *buffer, int who) {
+void rdline(char *buffer, size_t length, int who) {
 // Local variables
    char *z, *zlast;
 
@@ -31,8 +31,7 @@ L10:
 L90:
 // read(inpch, "%78A1", buffer); //F
    (void)fflush(stdout);
-   if (fgets(buffer, 78, stdin) == NULL) exit_();
-   more_input();
+   if (more_input(buffer, length) == NULL) exit_();
 
    if (buffer[0] == '!') {
       system(buffer + 1);
