@@ -20,7 +20,7 @@
 #      include <time.h>
 #   endif
 #endif
-Bool protected_(void) {
+Bool protct(void/*int x*/) {
 #ifndef NONBUSINESS
    return true;
 #else
@@ -55,6 +55,43 @@ Bool wizard(void) {
 // Support routines for dungeon: in place of the f2c library functions.
 #include <stdio.h>
 #include <stdarg.h>
+
+#ifdef __AMOS__
+#   include <amos.h>
+FILE *OpenInF(const char *File, const char *Mode) { return fdopen(ropen(File, 0), Mode); }
+#else
+FILE *OpenInF(const char *File, const char *Mode) { return fopen(File, Mode); }
+#endif
+
+// Read a single two byte int from the index file
+int GetWord(FILE *InF) {
+   int Ch = getc(InF); if (Ch > 0x7f) Ch -= 0x100;
+   return 0x100*Ch + getc(InF);
+}
+
+// Read a number of two byte integers from the index file
+void GetWords(int Lim, int *WordP, FILE *InF) {
+   while (Lim-- > 0) *WordP++ = GetWord(InF);
+}
+
+// Read a partial array of integers.
+// These are stored as index,value pairs.
+void GetPairs(int Lim, int *PairTab, FILE *InF) {
+   while (true) {
+      int p;
+      if (Lim < 0xff) {
+         p = getc(InF); if (p == 0xff) return;
+      } else {
+         p = GetWord(InF); if (p == -1) return;
+      }
+      PairTab[p] = GetWord(InF);
+   }
+}
+
+// Read a number of one byte flags from the index file
+void GetFlags(int Lim, Bool *FlagP, FILE *InF) {
+   while (Lim-- > 0) *FlagP++ = getc(InF);
+}
 
 // Terminal support routines for dungeon
 // By Ian Lance Taylor ian@airs.com or uunet!airs!ian

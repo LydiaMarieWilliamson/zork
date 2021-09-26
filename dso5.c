@@ -9,7 +9,7 @@
 int gttime(void) {
    int h, m, s;
 
-   itime(&h, &m, &s);
+   intime(&h, &m, &s);
    int t = h * 60 + m - (time_.shour * 60 + time_.smin);
    if (t < 0) {
       t += 1440;

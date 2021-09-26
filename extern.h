@@ -10,15 +10,22 @@
 // That means: boolean types, function prototypes, "rb" and "wb" for fopen, "const", "void", etc.
 #include <stdbool.h>
 #include <stdlib.h> // For abs().
+#include <stdio.h>
 
-typedef int Bool;
+typedef int Bool; // Logical.
 
 #define min(A, B)	((A) <= (B)? (A): (B))
 #define max(A, B)	((A) >= (B)? (A): (B))
 
 // local.c:
-Bool protected_(void);
+Bool protct(void/*int*/);
 Bool wizard(void);
+
+FILE *OpenInF(const char *File, const char *Mode);
+int GetWord(FILE *InF);
+void GetWords(int Lim, int *WordP, FILE *InF);
+void GetPairs(int Lim, int *PairTab, FILE *InF);
+void GetFlags(int Lim, Bool *FlagP, FILE *InF);
 
 void more_init(void);
 void more_output(const char *, ...);
@@ -143,7 +150,8 @@ Bool oappli(int, int);
 Bool rappl1(int);
 
 // rtim.c:
-void itime(int *, int *, int *);
+void intime(int *, int *, int *);
+void inirnd(int);
 int rnd(int);
 void exit_(void);
 

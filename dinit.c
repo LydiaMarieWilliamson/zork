@@ -2,17 +2,8 @@
 // All rights reserved, commercial usage strictly prohibited.
 // Written by R. M. Supnik.
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
-#include <stdio.h>
 #include "extern.h"
 #include "common.h"
-#include <stdlib.h> // For srand().
-
-#ifdef __AMOS__
-#   include <amos.h>
-static FILE *OpenInF(const char *File, const char *Mode) { return fdopen(ropen(File, 0), Mode); }
-#else
-static FILE *OpenInF(const char *File, const char *Mode) { return fopen(File, Mode); }
-#endif
 
 FILE *StoryF;
 
@@ -35,36 +26,6 @@ FILE *StoryF;
 #   define MyIndexFile MyStoryFile
 #endif
 
-// Read a single two byte int from the index file
-static int GetWord(FILE *InF) {
-   int Ch = getc(InF); if (Ch > 0x7f) Ch -= 0x100;
-   return 0x100*Ch + getc(InF);
-}
-
-// Read a number of two byte integers from the index file
-static void GetWords(int Lim, int *WordP, FILE *InF) {
-   while (Lim-- > 0) *WordP++ = GetWord(InF);
-}
-
-// Read a partial array of integers.
-// These are stored as index,value pairs.
-static void GetPairs(int Lim, int *PairTab, FILE *InF) {
-   while (true) {
-      int p;
-      if (Lim < 0xff) {
-         p = getc(InF); if (p == 0xff) return;
-      } else {
-         p = GetWord(InF); if (p == -1) return;
-      }
-      PairTab[p] = GetWord(InF);
-   }
-}
-
-// Read a number of one byte flags from the index file
-static void GetFlags(int Lim, Bool *FlagP, FILE *InF) {
-   while (Lim-- > 0) *FlagP++ = getc(InF);
-}
-
 // Dungeon initialization subroutine
 Bool init(void/*int x*/) {
 // System generated locals
@@ -82,7 +43,7 @@ Bool init(void/*int x*/) {
 
 // FIRST CHECK FOR PROTECTION VIOLATION
 
-   if (protected_()) {
+   if (protct(/*x*/)) {
       goto L10000;
    }
 // 						!PROTECTION VIOLATION?
@@ -375,8 +336,8 @@ L10000:
 // THE INTERNAL DATA BASE IS NOW ESTABLISHED.
 // SET UP TO PLAY THE GAME.
 
-   itime(&time_.shour, &time_.smin, &time_.ssec);
-//    srand(time_.shour ^ (time_.smin ^ time_.ssec));
+   intime(&time_.shour, &time_.smin, &time_.ssec);
+   inirnd(time_.shour ^ time_.smin ^ time_.ssec);
 
    play.winner = PlayerAX;
    last.lastit = advs.aobj[PlayerAX - 1];

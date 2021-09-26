@@ -16,13 +16,29 @@ void exit_(void) {
 }
 
 // Get time in hours, minutes and seconds.
-void itime(int *hrptr, int *minptr, int *secptr) {
+void intime(int *hrptr, int *minptr, int *secptr) {
    time_t timebuf; time(&timebuf);
    struct tm *tmptr = localtime(&timebuf);
    *hrptr = tmptr->tm_hour, *minptr = tmptr->tm_min, *secptr = tmptr->tm_sec;
 }
 
+// common /random/
+static int seedy;
+
+void inirnd(int seed) {
+#if 1
+   seedy = seed;
+#else
+   srand((unsigned)(seedy = seed));
+#endif
+}
+
 // Random number generator.
 int rnd(int maxval) {
+#if 0
+   seedy = seedy * 1059 + 17 & 2147483647;
+   return seedy / 100 % maxval;
+#else
    return rand() % maxval;
+#endif
 }
