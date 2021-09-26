@@ -113,11 +113,11 @@ void score(Bool flg) {
 // else //F
 //    write(outch, " Your score is%$"); //F
 // if (state.moves != 1) //F
-//    write(outch, "%I4 [total of%I4 points], in%I5 moves."); //F
+//    write(outch, "%I4 [total of%I4 points], in%I5 moves.", as, state.mxscor, state.moves); //F
 // else //F
-//    write(outch, "%I4 [total of%I4 points], in%I5 move."); //F
+//    write(outch, "%I4 [total of%I4 points], in%I5 move.", as, state.mxscor, state.moves); //F
    more_output("Your score %s %d [total of %d points], in %d %s.\n",
-      flg? "would be": "is", as, state.mxscor, state.moves, state.moves != 1? "moves": "move"
+      flg ? "would be" : "is", as, state.mxscor, state.moves, state.moves != 1 ? "moves" : "move"
    );
 
    for (i = 1; i <= 10; ++i) {
@@ -140,7 +140,7 @@ L60:
 //    state.egscor, state.egmxsc, state.moves //F
 // ); //F
    more_output("Your score in the endgame %s %d [total of %d points], in %d moves.\n",
-      flg? "would be": "is", state.egscor, state.egmxsc, state.moves
+      flg ? "would be" : "is", state.egscor, state.egmxsc, state.moves
    );
    for (i = 1; i <= 5; ++i) {
       if (state.egscor * 20 / state.egmxsc >= erank[i - 1]) {

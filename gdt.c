@@ -36,7 +36,6 @@ void gdt(void) {
    char cmd[2];
    int fmax, smax;
    char buf[80];
-   char *z;
 
 // GDT, PAGE 2
 
@@ -115,8 +114,7 @@ L2700:
    printf("Idx,Ary:  "), fflush(stdout);
 // 						!TYPE 3, REQUEST ARRAY COORDS.
 // read(inpch, "%2I6", &j, &k); //F
-   more_input(buf, sizeof buf);
-   for (z = buf; *z != '\0'; z++) if (*z == ',') *z = ' ';
+   more_input(buf, sizeof buf); for (char *BP = buf; *BP != '\0'; BP++) if (*BP == ',') *BP = ' ';
    j = 0, k = 0, sscanf(buf, "%d %d", &j, &k);
    goto L2400;
 
@@ -125,8 +123,7 @@ L2600:
    printf("Limits:   "), fflush(stdout);
 // 						!TYPE 2, READ BOUNDS.
 // read(inpch, "%2I6", &j, &k); //F
-   more_input(buf, sizeof buf);
-   for (z = buf; *z != '\0'; z++) if (*z == ',') *z = ' ';
+   more_input(buf, sizeof buf); for (char *BP = buf; *BP != '\0'; BP++) if (*BP == ',') *BP = ' ';
    j = 0, k = 0, sscanf(buf, "%d %d", &j, &k);
    if (k == 0) {
       k = j;
@@ -236,10 +233,9 @@ L10000:
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
 //    write(outch, "%1X%I3%4(1X,I6)%1X%I6", i, (eqr(i, l), l = 1, 5)); //F
-      more_output("%3d", i);
-      for (l = 1; l <= 6; ++l) printf(" %6d", eqr[i - 1 + 200 * (l - 1)]);
-      putchar('\n');
-
+      printf("%3d", i);
+      for (l = 0; l < 6; l++) printf(" %6d", eqr[i - 1 + 200 * l]);
+      more_output("\n");
 // L10100:
    }
    goto L2000;
@@ -258,11 +254,13 @@ L11000:
    for (i = j; i <= i__1; ++i) {
 //    write(outch, "%1X%I3%3I6%I4%2I7%2I4%2I6%1X%3I4%I6", i, (eqo(i, l), l = 1, 14)); //F
       more_output("%3d%6d%6d%6d%4d%7d%7d%4d%4d%6d%6d %4d%4d%4d%6d\n", i,
-         eqo[i - 1 + 220 * (1 - 1)], eqo[i - 1 + 220 * (2 - 1)], eqo[i - 1 + 220 * (3 - 1)],
-         eqo[i - 1 + 220 * (4 - 1)], eqo[i - 1 + 220 * (5 - 1)], eqo[i - 1 + 220 * (6 - 1)],
-         eqo[i - 1 + 220 * (7 - 1)], eqo[i - 1 + 220 * (8 - 1)], eqo[i - 1 + 220 * (9 - 1)],
-         eqo[i - 1 + 220 * (10 - 1)], eqo[i - 1 + 220 * (11 - 1)], eqo[i - 1 + 220 * (12 - 1)],
-         eqo[i - 1 + 220 * (13 - 1)], eqo[i - 1 + 220 * (14 - 1)]
+         eqo[i - 1 + 220 * 0], eqo[i - 1 + 220 * 1], eqo[i - 1 + 220 * 2],
+         eqo[i - 1 + 220 * 3],
+         eqo[i - 1 + 220 * 4], eqo[i - 1 + 220 * 5],
+         eqo[i - 1 + 220 * 6], eqo[i - 1 + 220 * 7],
+         eqo[i - 1 + 220 * 8], eqo[i - 1 + 220 * 9],
+         eqo[i - 1 + 220 * 10], eqo[i - 1 + 220 * 11], eqo[i - 1 + 220 * 12],
+         eqo[i - 1 + 220 * 13]
       );
 
 // L11100:
@@ -281,9 +279,9 @@ L12000:
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
 //    write(outch, "%1X%I3%6(1X,I6)%1X%I6", i, (eqa(i, l), l = 1, 7)); //F
-      more_output("%3d", i);
-      for (l = 1; l <= 7; ++l) printf(" %6d", eqa[i - 1 + ((l - 1) << 2)]);
-      putchar('\n');
+      printf("%3d", i);
+      for (l = 0; l < 7; l++) printf(" %6d", eqa[i - 1 + (l << 2)]);
+      more_output("\n");
 // L12100:
    }
    goto L2000;
@@ -300,7 +298,7 @@ L13000:
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
 //    write(outch, "%1X%I3%1X%I6%1X%I6%5X%L1", i, (eqc(i, l), l = 1, 2), cflag(i)); //F
-      more_output("%3d %6d %6d     %c\n", i, eqc[i - 1 + 25 * (1 - 1)], eqc[i - 1 + 25 * (2 - 1)], cevent.cflag[i - 1] ? 'T' : 'F');
+      more_output("%3d %6d %6d     %c\n", i, eqc[i - 1 + 25 * 0], eqc[i - 1 + 25 * 1], cevent.cflag[i - 1] ? 'T' : 'F');
 // L13100:
    }
    goto L2000;
@@ -323,9 +321,9 @@ L14000:
       l = min(i__2, k);
 // 						!COMPUTE END OF LINE.
 //    write(outch, "%1X%I3-%I3%3X%10I7", i, l, (travel(l1), l1 = i, l)); //F
-      more_output("%3d-%3d  ", i, l);
+      printf("%3d-%3d  ", i, l);
       for (l1 = i; l1 <= l; ++l1) printf("%7d", exits.travel[l1 - 1]);
-      putchar('\n');
+      more_output("\n");
 // L14100:
    }
    goto L2000;
@@ -360,9 +358,9 @@ L17000:
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
 //    write(outch, "%1X%I3%5(1X,I6)", i, (eqv(i, l), l = 1, 5)); //F
-      more_output("%3d", i);
-      for (l = 1; l <= 5; ++l) printf(" %6d", eqv[i - 1 + ((l - 1) << 2)]);
-      putchar('\n');
+      printf("%3d", i);
+      for (l = 0; l < 5; l++) printf(" %6d", eqv[i - 1 + (l << 2)]);
+      more_output("\n");
 // L17100:
    }
    goto L2000;
@@ -410,15 +408,12 @@ L20000:
 // 						!TYPE OLD, GET NEW.
 // read(inpch, "%L1", &flags(j)); //F
    more_input(buf, sizeof buf);
-   for (z = buf; *z != '\0'; z++) {
-      if (!isspace(*z)) {
-         if (*z == 't' || *z == 'T')
-            flags[j - 1] = 1;
-         else if (*z == 'f' || *z == 'F')
-            flags[j - 1] = 0;
+   for (char *BP = buf, Ch; (Ch = tolower(*BP)) != '\0'; BP++)
+      if (!isspace(Ch)) {
+         if (Ch == 't') flags[j - 1] = true;
+         else if (Ch == 'f') flags[j - 1] = false;
          break;
       }
-   }
    goto L2000;
 
 // 21000-- HELP
@@ -619,15 +614,12 @@ L35500:
    printf(Format1, cevent.cflag[j - 1] ? 'T' : 'F'), fflush(stdout);
 // read(inpch, "%L1", &cevent.cflag); //F
    more_input(buf, sizeof buf);
-   for (z = buf; *z != '\0'; z++) {
-      if (!isspace(*z)) {
-         if (*z == 't' || *z == 'T')
-            cevent.cflag[j - 1] = 1;
-         else if (*z == 'f' || *z == 'F')
-            cevent.cflag[j - 1] = 0;
+   for (char *BP = buf, Ch; (Ch = tolower(*BP)) != '\0'; BP++)
+      if (!isspace(Ch)) {
+         if (Ch == 't') cevent.cflag[j - 1] = true;
+         else if (Ch == 'f') cevent.cflag[j - 1] = false;
          break;
       }
-   }
    goto L2000;
 // GDT, PAGE 6
 
@@ -714,9 +706,9 @@ L41000:
       i__2 = i + 9;
       l = min(i__2, k);
 //    write(outch, "%1X%I3"-%I3%3X%10(1X,I6)", i, l, (rtext(l1), l1 = i, l)); //F
-      more_output("%3d-%3d  ", i, l);
+      printf("%3d-%3d  ", i, l);
       for (l1 = i; l1 <= l; ++l1) printf(" %6d", rmsg.rtext[l1 - 1]);
-      putchar('\n');
+      more_output("\n");
 // L41100:
    }
    goto L2000;
@@ -763,9 +755,9 @@ L46000:
    for (i = 1; i <= 64; i += 8) {
 // 						!DISPLAY PUZZLE
 //    write(outch, "%2X%8I3", (cpvec(j), j = i, i + 7)); //F
-      more_output(" ");
+      printf(" ");
       for (j = i; j <= i + 7; ++j) printf("%3d", puzzle.cpvec[j - 1]);
-      putchar('\n');
+      more_output("\n");
 // L46100:
    }
    goto L2000;

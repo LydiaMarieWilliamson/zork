@@ -373,7 +373,7 @@ L2600:
       j = objcts.odesc2[dweap - 1];
    }
 #if 0
-// print(" BLOW 2650-- %5I7", res, mi, i, j, star_i.mbase); //F
+// print(" BLOW 2650-- %5I7", res, mi, i, j, star.mbase); //F
 #endif
    rspsub(i, j);
 // 						!PRESENT RESULT.

@@ -28,8 +28,8 @@ void GetPairs(int Lim, int *PairTab, FILE *InF);
 void GetFlags(int Lim, Bool *FlagP, FILE *InF);
 
 void more_init(void);
-void more_output(const char *, ...);
 char *more_input(char *, size_t);
+void more_output(const char *, ...);
 // The remnant of f2c.h (end)
 
 // actors.c:

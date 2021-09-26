@@ -564,14 +564,14 @@ L21000:
    j = k % 60;
 
 // write(outch, " You have been playing Dungeon for %$"); //F
-   more_output("You have been playing Dungeon for ");
+   printf("You have been playing Dungeon for ");
 // if (i != 0) write(outch, "+%I3 hour%$", i); //F
 // if (i >= 2) write(outch, "+s and %$"); //F
 // if (i == 1) write(outch, "+ and %$"); //F
-   if (i >= 1) printf("%d %s and ", i, i != 1? "hours": "hour");
+   if (i >= 1) printf("%d %s and ", i, i != 1 ? "hours" : "hour");
 // if (j == 1) write(outch, "+%I2 minute.", j); //F
 // if (j != 1) write(outch, "+%I2 minutes.", j); //F
-   printf("%d %s.\n", j, j != 1? "minutes": "minute");
+   more_output("%d %s.\n", j, j != 1 ? "minutes" : "minute");
    play.telflg = true;
    return ret_val;
 
@@ -687,7 +687,7 @@ L25000:
 // 						!COMPUTE WAIT.
 
    if (j != 0) {
-//    write(outch, " You will be cured after %I3 moves.", I); //F
+//    write(outch, " You will be cured after %I3 moves.", i); //F
       more_output("You will be cured after %d moves.\n", i);
    }
 

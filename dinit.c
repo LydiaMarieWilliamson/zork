@@ -371,7 +371,7 @@ L1975:
 //    "and the dungeon%/ cannot be found.  All must now pass away.\"", //F
 //    "  Raising his oaken staff%/ in farewell, he fades into the ", //F
 //    "spreading darkness.  In his place%/ appears a tastefully ", //F
-//    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/" //F
+//    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/", //F
 //    " The darkness becomes all encompassing, and your vision fails." //F
 // ); //F
    more_output("Suddenly a sinister, wraithlike figure appears before you,\n");

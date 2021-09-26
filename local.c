@@ -158,6 +158,12 @@ void more_init(void) {
 #endif
 }
 
+// The terminal is waiting for input (clear the number of output lines)
+char *more_input(char *Buf, size_t N) {
+   coutput = 0;
+   return fgets(Buf, N, stdin);
+}
+
 // The program wants to output a line to the terminal.
 // If Format is not NULL it is a format string which controls the output here;
 // along with additional arguments, like printf();
@@ -175,10 +181,4 @@ void more_output(const char *Format, ...) {
       va_list AP; va_start(AP, Format), vfprintf(stdout, Format, AP), va_end(AP);
    }
    coutput++;
-}
-
-// The terminal is waiting for input (clear the number of output lines)
-char *more_input(char *Buf, size_t N) {
-   coutput = 0;
-   return fgets(Buf, N, stdin);
 }
