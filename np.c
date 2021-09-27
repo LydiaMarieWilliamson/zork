@@ -4,16 +4,16 @@
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h> // For system(); // C99 is assumed.
 #include "extern.h"
 #include "common.h"
-#include <stdlib.h> // For system(); // C99 is assumed.
 
 static Bool lex(char *, int *, int *, Bool);
 
 // Read input line
 void rdline(char *buffer, size_t length, int who) {
-// Local variables
-   char *z, *zlast;
+// Local variable
+   char *zpast;
 
 // Function Body
 L5:
@@ -32,24 +32,36 @@ L90:
 // read(inpch, "%78A1", buffer); //F
    (void)fflush(stdout);
    if (more_input(buffer, length) == NULL) exit_();
+   zpast = buffer;
+   for (char *z = buffer; *z != '\0' && *z != '\n'; z++) {
+      if (*z != ' ') {
+         zpast = z + 1;
+      }
+// L200:
+   }
+   *zpast = '\0';
+   if (zpast == buffer) {
+      goto L5;
+// 						!TRY AGAIN.
+   }
 
+//L250:
+// 	check for shell escape here before things are
+// 	converted to upper case
+
+// NO SHELL ESCAPE /+TAA+/
    if (buffer[0] == '!') {
       system(buffer + 1);
       goto L5;
    }
 
-   zlast = buffer - 1;
-   for (z = buffer; *z != '\0' && *z != '\n'; z++) {
-      if (*z != ' ')
-         zlast = z;
-      if (islower(*z))
+//L300:
+// CONVERT TO UPPER CASE
+   for (char *z = buffer; *z != '\0' && *z != '\n'; z++) {
+      if (islower(*z)) {
          *z = toupper(*z);
+      }
    }
-   z = zlast + 1;
-   if (z == buffer)
-      goto L5;
-   *z = '\0';
-
    prsvec.prscon = 1;
 // 						!RESTART LEX SCAN.
 }

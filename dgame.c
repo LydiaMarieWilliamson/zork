@@ -37,7 +37,7 @@ L100:
    }
 
 #ifdef ALLOW_GDT
-   if (strcmp(input.inbuf + prsvec.prscon - 1, "GDT") == 0) {
+   if (strcmp(&input.inbuf[prsvec.prscon - 1], "GDT") == 0) {
 // 						!CALL ON GDT?
       gdt();
 // 						!YES, INVOKE.
@@ -95,8 +95,8 @@ L1000:
    rdline(input.inbuf, sizeof input.inbuf, 0);
    ++state.moves;
 // 						!CHARGE FOR MOVES.
-   if (strcmp(input.inbuf, "ECHO") != 0)
-      goto L1300;
+   if (strcmp(input.inbuf, "ECHO") != 0) goto L1300;
+// 						!INPUT = ECHO?
 
    rspeak(571);
 // 						!KILL THE ECHO.

@@ -74,7 +74,9 @@ test: $(APP)
 	./$(APP) <Test.in >Ex && diff -d Test.ex Ex && rm Ex
 
 clean:
-	rm -f $(OBJS) core dsave.dat *~
+	rm -f $(OBJS)
+	rm -f core dsave.dat *~
+	rm -f Ex
 clobber: clean
 	rm -f $(APP)
 
