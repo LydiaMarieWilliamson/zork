@@ -25,7 +25,7 @@ L5:
    }
 // 						!SEE WHO TO PROMPT FOR.
 L10:
-// write(outch, " >%$"); //F
+// write(outch, ">%$"); //F
    printf(">");
 // 						!PROMPT FOR GAME.
 L90:
@@ -125,7 +125,7 @@ L350:
 // 						!CLEAR ORPHANS.
 #ifdef ALLOW_GDT
 // if (dflag) write(0, *, "parse good"); //F
-// if (dflag) print(" PARSE RESULTS- %L7%3I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi); //F
+// if (dflag) print("PARSE RESULTS- %L7%3I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi); //F
 #endif
    return ret_val;
 
@@ -135,7 +135,7 @@ L100:
    prsvec.prscon = 1;
 #ifdef ALLOW_GDT
 // if (dflag) write(0, *, "parse failed"); //F
-// if (dflag) print(" PARSE RESULTS- %L7%3I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi); //F
+// if (dflag) print("PARSE RESULTS- %L7%3I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi); //F
 #endif
    return ret_val;
 }
@@ -240,7 +240,7 @@ L1000:
 // 						!ANY LAST WORD?
    ret_val = true;
 #ifdef ALLOW_GDT
-// if (dflag) print(" LEX RESULTS- %3I7%/%1X%10I7", cp, *op, prsvec.prscon, (outbuf[i - 1], i = 1, *op + 1)); //F
+// if (dflag) print("LEX RESULTS- %3I7%/%1X%10I7", cp, *op, prsvec.prscon, (outbuf[i - 1], i = 1, *op + 1)); //F
 #endif
    return ret_val;
 
@@ -249,7 +249,7 @@ L1000:
 L4000:
    j1 = j - dlimit[i + 1];
 #ifdef ALLOW_GDT
-// if (dflag) print(" LEX- CHAR= %A1%2I7", j, j1, cp); //F
+// if (dflag) print("LEX- CHAR= %A1%2I7", j, j1, cp); //F
 #endif
    if (cp >= 6) {
       goto L200;

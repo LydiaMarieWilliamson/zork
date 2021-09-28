@@ -54,14 +54,14 @@ L200:
    newj = unpacks(j);
 // 						!UNPACK SYNTAX.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH INPUTS TO SYNEQL- %5I7", pv.o1, pv.p1, syntax.dobj, syntax.dfl1, syntax.dfl2); //F
+// if (dflag) print("SYNMCH INPUTS TO SYNEQL- %5I7", pv.o1, pv.p1, syntax.dobj, syntax.dfl1, syntax.dfl2); //F
 #endif
    sprep = syntax.dobj & PMaskV;
    if (!syneql(pv.p1, pv.o1, syntax.dobj, syntax.dfl1, syntax.dfl2)) {
       goto L1000;
    }
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH INPUTS TO SYNEQL- %5I7", pv.o2, pv.p2, syntax.iobj, syntax.ifl1, syntax.ifl2); //F
+// if (dflag) print("SYNMCH INPUTS TO SYNEQL- %5I7", pv.o2, pv.p2, syntax.iobj, syntax.ifl1, syntax.ifl2); //F
 #endif
    sprep = syntax.iobj & PMaskV;
    if (syneql(pv.p2, pv.o2, syntax.iobj, syntax.ifl1, syntax.ifl2)) {
@@ -103,7 +103,7 @@ L3000:
 // ORPHANS OR GWIMS, OR MAKE NEW ORPHANS.
 
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH, DRIVE=%2I6", drive, dforce); //F
+// if (dflag) print("SYNMCH, DRIVE=%2I6", drive, dforce); //F
 #endif
    if (drive == 0) {
       drive = dforce;
@@ -139,7 +139,7 @@ L3500:
    pv.o1 = gwim(syntax.dobj, syntax.dfw1, syntax.dfw2);
 // 						!GET GWIM.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH- DO GWIM= %I6", pv.o1); //F
+// if (dflag) print("SYNMCH- DO GWIM= %I6", pv.o1); //F
 #endif
    if (pv.o1 > 0) {
       goto L4000;
@@ -159,7 +159,7 @@ L4000:
    pv.o2 = gwim(syntax.iobj, syntax.ifw1, syntax.ifw2);
 // 						!GWIM.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH- IO GWIM= %I6", pv.o2); //F
+// if (dflag) print("SYNMCH- IO GWIM= %I6", pv.o2); //F
 #endif
    if (pv.o2 > 0) {
       goto L6000;
@@ -208,7 +208,7 @@ L5000:
 // 						!TRY TAKE.
    ret_val = true;
 #ifdef ALLOW_GDT
-// if (dflag) print(" SYNMCH- RESULTS %L1%6I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi, pv.act, pv.o1, pv.o2); //F
+// if (dflag) print("SYNMCH- RESULTS %L1%6I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi, pv.act, pv.o1, pv.o2); //F
 #endif
    return ret_val;
 }

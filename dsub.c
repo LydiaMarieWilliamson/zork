@@ -126,7 +126,7 @@ L200:
 void bug(int a, int b) {
 // Local variables
 
-// print(" PROGRAM ERROR %I2, PARAMETER=%I6", a, b); //F
+// print("PROGRAM ERROR %I2, PARAMETER=%I6", a, b); //F
    more_output("PROGRAM ERROR %d, PARAMETER=%d\n", a, b);
    if (debug.dbgflg != 0) {
       return;

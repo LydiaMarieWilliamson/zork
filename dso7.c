@@ -86,8 +86,8 @@ void cpinfo(int rmk, int st) {
    char dgm[1 * 8];
 
 // Initialized data
-   static const int dgmoft[8] = { -9, -8, -7, -1, 1, 7, 8, 9 };
-   const char *pict = "S" "S" "S" " " "M";
+   const int dgmoft[8] = { -9, -8, -7, -1, 1, 7, 8, 9 };
+   const char pict[1 * 5] = "S" "S" "S" " " "M";
 
 // CPINFO, PAGE 2
 
@@ -118,7 +118,7 @@ void cpinfo(int rmk, int st) {
 //    dgm //F
 // ); //F
    more_output("       |%c%c %c%c %c%c|\n", dgm[0], dgm[0], dgm[1], dgm[1], dgm[2], dgm[2]);
-   more_output(" West  |%c%c .. %c%c| East\n", dgm[3], dgm[3], dgm[4], dgm[4]);
+   more_output(" West  |%c%c .. %c%c|  East\n", dgm[3], dgm[3], dgm[4], dgm[4]);
    more_output("       |%c%c %c%c %c%c|\n", dgm[5], dgm[5], dgm[6], dgm[6], dgm[7], dgm[7]);
 
    if (st == 10) {

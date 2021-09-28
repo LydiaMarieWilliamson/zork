@@ -88,7 +88,7 @@ void GetPairs(int Lim, int *PairTab, FILE *InF) {
    }
 }
 
-// Read a number of one byte flags from the index file
+// Read a number of boolean values from the index file
 void GetFlags(int Lim, Bool *FlagP, FILE *InF) {
    while (Lim-- > 0) *FlagP++ = getc(InF);
 }

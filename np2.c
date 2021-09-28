@@ -37,7 +37,7 @@ int getobj(int oidx, int aidx, int spcobj) {
    obj = schlst(oidx, aidx, play.here, 0, 0, spcobj);
 // 						!SEARCH ROOM.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SCHLST- ROOM SCH %I6", obj); //F
+// if (dflag) print("SCHLST- ROOM SCH %I6", obj); //F
 #endif
    if (obj < 0) goto L1000; else if (obj == 0) goto L200;/* else if (obj > 0) goto L100;*/
 // 						!TEST RESULT.
@@ -60,7 +60,7 @@ L200:
    nobj = schlst(oidx, aidx, 0, av, 0, spcobj);
 // 						!SEARCH VEHICLE.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SCHLST- VEH SCH  %I6", nobj); //F
+// if (dflag) print("SCHLST- VEH SCH  %I6", nobj); //F
 #endif
    if (nobj < 0) goto L1100; else if (nobj == 0) goto L400;/* else if (nobj > 0) goto L300;*/
 // 						!TEST RESULT.
@@ -81,7 +81,7 @@ L400:
    nobj = schlst(oidx, aidx, 0, 0, play.winner, spcobj);
 // 						!SEARCH ADVENTURER.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SCHLST- ADV SCH  %I6", nobj); //F
+// if (dflag) print("SCHLST- ADV SCH  %I6", nobj); //F
 #endif
    if (nobj < 0) goto L1100; else if (nobj == 0) goto L600;/* else if (nobj > 0) goto L500;*/
 // 						!TEST RESULT
@@ -129,7 +129,7 @@ L1000:
 L1500:
 // 						!END OF SEARCH.
 #ifdef ALLOW_GDT
-// if (dflag) print(" SCHLST- RESULT   %I6", ret_val); //F
+// if (dflag) print("SCHLST- RESULT   %I6", ret_val); //F
 #endif
    return ret_val;
 }

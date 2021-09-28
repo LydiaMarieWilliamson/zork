@@ -119,7 +119,7 @@ L1300:
 // 						!VALID EXIT?
 
 L1400:
-// write(outch, "%1X%78A1", (input.inbuf(j), j = 1, input.inlnt)); //F
+// write(outch, "%78A1", (input.inbuf(j), j = 1, input.inlnt)); //F
    more_output("%s\n", input.inbuf);
    play.telflg = true;
 // 						!INDICATE OUTPUT.

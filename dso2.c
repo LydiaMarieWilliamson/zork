@@ -109,9 +109,9 @@ void score(Bool flg) {
    }
 // 						!ENDGAME?
 // if (flg) //F
-//    write(outch, " Your score would be%$"); //F
+//    write(outch, "Your score would be%$"); //F
 // else //F
-//    write(outch, " Your score is%$"); //F
+//    write(outch, "Your score is%$"); //F
 // if (state.moves != 1) //F
 //    write(outch, "%I4 [total of%I4 points], in%I5 moves.", as, state.mxscor, state.moves); //F
 // else //F
@@ -133,9 +133,9 @@ L50:
 
 L60:
 // if (flg) //F
-//    write(outch, " Your score in the endgame would be%$"); //F
+//    write(outch, "Your score in the endgame would be%$"); //F
 // else //F
-//    write(outch, " Your score in the endgame is%$"); //F
+//    write(outch, "Your score in the endgame is%$"); //F
 // write(outch, "%I4 [total of%I4 points], in%I5 moves.", //F
 //    state.egscor, state.egmxsc, state.moves //F
 // ); //F

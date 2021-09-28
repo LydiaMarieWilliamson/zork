@@ -48,15 +48,15 @@ Bool init(void/*int x*/) {
    }
 // 						!PROTECTION VIOLATION?
 // print( //F
-//    " There appears before you a threatening figure clad ", //F
-//    "all over%/ in heavy black armor.  His legs seem like the ", //F
-//    "massive trunk%/ of the oak tree.  His broad shoulders and ", //F
-//    "helmeted head loom%/ high over your own puny frame, and ", //F
-//    "you realize that his powerful%/ arms could easily crush the ", //F
-//    "very life from your body.  There%/ hangs from his belt a ", //F
-//    "veritable arsenal of deadly weapons:%/ sword, mace, ball ", //F
-//    "and chain, dagger, lance, and trident.%/ He speaks with a ", //F
-//    "commanding voice:%/%/%20X\"You shall not pass.\"%/%/ As ", //F
+//    "There appears before you a threatening figure clad ", //F
+//    "all over%/in heavy black armor.  His legs seem like the ", //F
+//    "massive trunk%/of the oak tree.  His broad shoulders and ", //F
+//    "helmeted head loom%/high over your own puny frame, and ", //F
+//    "you realize that his powerful%/arms could easily crush the ", //F
+//    "very life from your body.  There%/hangs from his belt a ", //F
+//    "veritable arsenal of deadly weapons:%/sword, mace, ball ", //F
+//    "and chain, dagger, lance, and trident.%/He speaks with a ", //F
+//    "commanding voice:%/%/%20X\"You shall not pass.\"%/%/As ", //F
 //    "he grabs you by the neck all grows dim about you." //F
 // ); //F
    more_output("There appears before you a threatening figure clad all over\n");
@@ -280,7 +280,7 @@ L10000:
    StoryF = IndexF;
 
 #ifdef ALLOW_GDT
-// print(" RESTORING FROM \"" IndexFile "\""); //F
+// print("RESTORING FROM \"" IndexFile "\""); //F
 #endif
 // // const char *Fmt = "%I8"; //F
 // const char *Fmt = "%I6"; //F
@@ -352,27 +352,27 @@ L10000:
 // ERRORS-- INIT FAILS.
 
 L1925:
-// print(
-//    " \"" MyIndexFile "\" is version %I1.%I1%A1.%/" //F
-//    "  I require version %I1.%I1%A1.", //F
+// print( //F
+//    "\"" MyIndexFile "\" is version %I1.%I1%A1.%/" //F
+//    "I require version %I1.%I1%A1.", //F
 //    Maj, Min, Edit, vmaj, vmin, vedit //F
 // ); //F
-   more_output("%s is version %1d.%1d%c.\n", MyStoryFile, Maj, Min, Edit);
+   more_output("\"" MyStoryFile "\" is version %1d.%1d%c.\n", Maj, Min, Edit);
    more_output("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
    goto L1975;
 L1950:
-// print(" I can't open ",MyStoryFile,"."); //F
+// print("I can't open ", MyStoryFile, "."); //F
    more_output("I can't open %s.\n", MyStoryFile);
 L1975:
 // print( //F
-//    " Suddenly a sinister, wraithlike figure appears before ", //F
-//    "you,%/ seeming to float in the air.  In a low, sorrowful voice", //F
-//    " he says,%/ \"Alas, the very nature of the world has changed, ", //F
-//    "and the dungeon%/ cannot be found.  All must now pass away.\"", //F
-//    "  Raising his oaken staff%/ in farewell, he fades into the ", //F
-//    "spreading darkness.  In his place%/ appears a tastefully ", //F
+//    "Suddenly a sinister, wraithlike figure appears before ", //F
+//    "you,%/seeming to float in the air.  In a low, sorrowful voice", //F
+//    " he says,%/\"Alas, the very nature of the world has changed, ", //F
+//    "and the dungeon%/cannot be found.  All must now pass away.\"", //F
+//    "  Raising his oaken staff%/in farewell, he fades into the ", //F
+//    "spreading darkness.  In his place%/appears a tastefully ", //F
 //    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/", //F
-//    " The darkness becomes all encompassing, and your vision fails." //F
+//    "The darkness becomes all encompassing, and your vision fails." //F
 // ); //F
    more_output("Suddenly a sinister, wraithlike figure appears before you,\n");
    more_output("seeming to float in the air.  In a low, sorrowful voice he says,\n");

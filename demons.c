@@ -215,7 +215,7 @@ int blow(int h, int v, int rmk, Bool hflg, int out) {
    ret_val = rmiss;
 // 						!ASSUME NO RESULT.
 #if 0
-// print(" BLOW 10-- %3I7%L7%I7", h, v, rmk, hflg, out); //F
+// print("BLOW 10-- %3I7%L7%I7", h, v, rmk, hflg, out); //F
 #endif
    if (!(hflg)) {
       goto L1000;
@@ -302,7 +302,7 @@ L1200:
 
 L2000:
 #if 0
-// print(" BLOW 2050-- %5I7", att, oa, def, od, dweap); //F
+// print("BLOW 2050-- %5I7", att, oa, def, od, dweap); //F
 #endif
    if (def > 0) {
       goto L2100;
@@ -373,7 +373,7 @@ L2600:
       j = objcts.odesc2[dweap - 1];
    }
 #if 0
-// print(" BLOW 2650-- %5I7", res, mi, i, j, star.mbase); //F
+// print("BLOW 2650-- %5I7", res, mi, i, j, star.mbase); //F
 #endif
    rspsub(i, j);
 // 						!PRESENT RESULT.
