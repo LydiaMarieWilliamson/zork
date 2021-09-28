@@ -569,8 +569,8 @@ L21000:
 // if (i >= 2) write(outch, "+s and %$"); //F
 // if (i == 1) write(outch, "+ and %$"); //F
    if (i >= 1) printf("%d %s and ", i, i != 1 ? "hours" : "hour");
-// if (j == 1) write(outch, "+%2d minute.", j); //F
-// if (j != 1) write(outch, "+%2d minutes.", j); //F
+// if (j == 1) write(outch, "+%I2 minute.", j); //F
+// if (j != 1) write(outch, "+%I2 minutes.", j); //F
    more_output("%d %s.\n", j, j != 1 ? "minutes" : "minute");
    play.telflg = true;
    return ret_val;
