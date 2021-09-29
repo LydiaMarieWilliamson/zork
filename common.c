@@ -117,6 +117,10 @@ struct curxtCB curxt;
 // char inbuf[78];
 struct inputCB input;
 
+// common /chan/
+// enum chanCB; // Declared and defined in common.h.
+FILE *StoryF;
+
 // mindex.h:
 // common /rmsg/
 // int mlnt, mrloc, rtext[1050];

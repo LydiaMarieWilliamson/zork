@@ -4,22 +4,18 @@
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
 
 // Support routines for dungeon.
-#include <stdio.h>
+// C99 is now locked in and assumed.
 #include <time.h> // For time() and localtime().
 #include <stdlib.h> // For exit() and rand().
 #include "extern.h"
+#include "common.h"
 
-// Terminate the game.
-void exit_(void) {
-   fprintf(stderr, "The game is over.\n");
-   exit(0);
-}
-
-// Get time in hours, minutes and seconds.
-void intime(int *hrptr, int *minptr, int *secptr) {
-   time_t timebuf; time(&timebuf);
-   struct tm *tmptr = localtime(&timebuf);
-   *hrptr = tmptr->tm_hour, *minptr = tmptr->tm_min, *secptr = tmptr->tm_sec;
+// Get the time in hours, minutes and seconds.
+void intime(int *HourP, int *MinuteP, int *SecondP) {
+// gettim(*HourP, *MinuteP, *SecondP, Hundredths);
+   time_t Now; time(&Now);
+   struct tm *HereNow = localtime(&Now);
+   *HourP = HereNow->tm_hour, *MinuteP = HereNow->tm_min, *SecondP = HereNow->tm_sec;
 }
 
 // common /random/
@@ -41,4 +37,12 @@ int rnd(int maxval) {
 #else
    return rand() % maxval;
 #endif
+}
+
+// Terminate the game.
+void exit_(void) {
+// NO "CALL EXIT" HERE
+// stop(); //F
+   fprintf(stderr, "The game is over.\n");
+   exit(0);
 }

@@ -5,8 +5,6 @@
 #include "extern.h"
 #include "common.h"
 
-FILE *StoryF;
-
 #ifndef StoryFile
 #   if defined __AMOS__
 #      define StoryFile "lib:dtextc.dat"
@@ -252,7 +250,6 @@ L10000:
 // this way, the wizard doesn't have to recompile to use gdt
 
 #ifdef ALLOW_GDT
-// 	Changed by TAA so that always in wizard ID
    debug.gdtflg = wizard();
 #else
    debug.gdtflg = 0;
@@ -357,12 +354,12 @@ L1925:
 //    "I require version %I1.%I1%A1.", //F
 //    Maj, Min, Edit, vmaj, vmin, vedit //F
 // ); //F
-   more_output("\"" MyStoryFile "\" is version %1d.%1d%c.\n", Maj, Min, Edit);
+   more_output("\"" MyIndexFile "\" is version %1d.%1d%c.\n", Maj, Min, Edit);
    more_output("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
    goto L1975;
 L1950:
 // print("I can't open ", MyStoryFile, "."); //F
-   more_output("I can't open %s.\n", MyStoryFile);
+   more_output("I can't open " MyStoryFile ".\n");
 L1975:
 // print( //F
 //    "Suddenly a sinister, wraithlike figure appears before ", //F

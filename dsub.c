@@ -7,8 +7,6 @@
 #include "common.h"
 
 // Resident subroutines for dungeon
-extern FILE *StoryF;
-
 static void rspsb2nl(int, int, int, Bool);
 
 // Output random message routine

@@ -15,8 +15,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    const int r50wal = 36852;
 
 // System generated locals
-// (@) The ‟volatile” was to prevent reused integers from being optimized out.
-   volatile int ret_val, i__1, i__2;
+   int ret_val;
 
 // Local variables
    int i, j, adj;
@@ -56,8 +55,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 
 // NOW LOOP OVER INPUT BUFFER OF LEXICAL TOKENS.
 
-   i__1 = llnt;
-   for (i = 1; i <= i__1; i += 2) {
+   for (i = 1; i <= llnt; i += 2) {
 // 						!TWO WORDS/TOKEN.
       lbuf1 = lbuf[i];
 // 						!GET CURRENT TOKEN.
@@ -72,8 +70,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 
 // CHECK FOR BUZZ WORD
 
-      i__2 = buzlnt;
-      for (j = 1; j <= i__2; j += 2) {
+      for (j = 1; j <= buzlnt; j += 2) {
          if (lbuf1 == bvoc[j - 1] && lbuf2 == bvoc[j]) {
             goto L1000;
          }
@@ -110,8 +107,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
       if (pv.act != 0 && (vvoc[pv.act - 1] != r50wal || prep != 0)) {
          goto L200;
       }
-      i__2 = dirlnt;
-      for (j = 1; j <= i__2; j += 3) {
+      for (j = 1; j <= dirlnt; j += 3) {
 // 						!THEN CHK FOR DIR.
          if (lbuf1 == dvoc[j - 1] && lbuf2 == dvoc[j]) {
             goto L2000;
@@ -122,8 +118,7 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
 // NOT AN ACTION, CHECK FOR PREPOSITION, ADJECTIVE, OR OBJECT.
 
    L200:
-      i__2 = prplnt;
-      for (j = 1; j <= i__2; j += 3) {
+      for (j = 1; j <= prplnt; j += 3) {
 // 						!LOOK FOR PREPOSITION.
          if (lbuf1 == pvoc[j - 1] && lbuf2 == pvoc[j]) {
             goto L4000;

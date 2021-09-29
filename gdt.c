@@ -2,7 +2,6 @@
 // All rights reserved, commercial usage strictly prohibited.
 // Written by R. M. Supnik.
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
-#include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 #include "extern.h"
@@ -66,8 +65,9 @@ L2000:
 // read(inpch, "%A2", cmd); //F
    more_input(buf, sizeof buf), strncpy(cmd, buf, sizeof cmd);
 // 						!GET COMMAND.
-   if (cmd[0] == '\0')
+   if (cmd[0] == '\0' || strncmp(cmd, "  ", sizeof cmd) == 0) {
       goto L2000;
+   }
 // 						!IGNORE BLANKS.
    if (islower(cmd[0]))
       cmd[0] = toupper(cmd[0]);
@@ -136,7 +136,6 @@ L2500:
 // 						!TYPE 1, READ ENTRY NO.
 // read(inpch, "%I6", &j); //F
    more_input(buf, sizeof buf), j = 0, sscanf(buf, "%d", &j);
-
 L2400:
    switch (i) {
       case 1:
@@ -262,7 +261,6 @@ L11000:
          eqo[i - 1 + 220 * 10], eqo[i - 1 + 220 * 11], eqo[i - 1 + 220 * 12],
          eqo[i - 1 + 220 * 13]
       );
-
 // L11100:
    }
    goto L2000;
@@ -298,7 +296,9 @@ L13000:
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
 //    write(outch, "%I3%1X%I6%1X%I6%5X%L1", i, (eqc(i, l), l = 1, 2), cflag(i)); //F
-      more_output("%3d %6d %6d     %c\n", i, eqc[i - 1 + 25 * 0], eqc[i - 1 + 25 * 1], cevent.cflag[i - 1] ? 'T' : 'F');
+      printf("%3d", i);
+      for (l = 0; l < 2; l++) printf(" %6d", eqc[i - 1 + 25 * l]);
+      more_output("     %c\n", cevent.cflag[i - 1] ? 'T' : 'F');
 // L13100:
    }
    goto L2000;

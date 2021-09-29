@@ -10,6 +10,8 @@
 // Everything is collated together because it was never really modular in the first place:
 // most includes were included in most Fortran files.
 
+#include <stdio.h>
+
 // Unlisted:
 // common /star/
 extern struct starCB {
@@ -306,6 +308,14 @@ extern struct inputCB {
    int inlnt;
    char inbuf[78];
 } input;
+
+// common /chan/
+// LOGICAL UNIT NRS: 5=STDIN, 6=STDOUT
+// extern FILE *stdin;
+//                                              !TTY INPUT
+// extern FILE *stdout;
+extern FILE *StoryF;
+//                                              !DATA BASE.
 
 // screen.h:
 // Screen Of Light

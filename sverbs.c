@@ -2,7 +2,6 @@
 // All rights reserved, commercial usage strictly prohibited.
 // Written by R. M. Supnik.
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
-#include <stdio.h>
 #include "extern.h"
 #include "common.h"
 
@@ -17,8 +16,7 @@ Bool sverbs(int ri) {
       313, 5314, 5319, 324, 325, 883, 884, 120, 120, 0, 0, 0, 0
    };
    static const int answer[14] = {
-      0, 1, 2, 3, 4, 4, 4,
-      4, 5, 5, 5, 6, 7, 7
+      0, 1, 2, 3, 4, 4, 4, 4, 5, 5, 5, 6, 7, 7
    };
    static const char *const ansstr[14] = {
       "TEMPLE", "FOREST", "30003", "FLASK", "RUB", "FONDLE", "CARRES",
@@ -31,7 +29,6 @@ Bool sverbs(int ri) {
 
 // Local variables
    Bool f;
-   const char *z, *z2;
    int i, j;
    int k;
    int l;
@@ -718,7 +715,7 @@ L26000:
    if (prsvec.prscon <= 1) {
       goto L26300;
    }
-   for (z = input.inbuf + prsvec.prscon - 1; *z != '\0'; ++z) {
+   for (const char *z = input.inbuf + prsvec.prscon - 1; *z != '\0'; z++) {
 // 						!PARSE INPUT
       if (*z == ',') {
          goto L26300;
@@ -771,9 +768,12 @@ L26400:
       goto L26550;
    }
 // 						!HE'S TRYING TO LEARN.
+#if 1
+// The following line fixes a nice bug in the UNIX version! /+ TAA +/
    if ((rooms.rflag[TStrsRX - 1] & SeenR) == 0) {
       goto L26575;
    }
+#endif
    findex.spellf = true;
 // 						!TELL HIM.
    play.telflg = true;
@@ -834,14 +834,10 @@ L27100:
          goto L27300;
       }
 // 						!ONLY CHECK PROPER ANS.
-      z = ansstr[j - 1];
-      z2 = input.inbuf + prsvec.prscon - 1;
-      while (*z != '\0') {
-         while (*z2 == ' ')
-            z2++;
+      for (const char *z = ansstr[j - 1], *z2 = input.inbuf + prsvec.prscon - 1; *z != '\0'; ) {
+         for (; *z2 == ' '; z2++);
 // 						!STRIP INPUT BLANKS.
-         if (*z++ != *z2++)
-            goto L27300;
+         if (*z++ != *z2++) goto L27300;
       }
       goto L27500;
 // 						!RIGHT ANSWER.

@@ -2,7 +2,6 @@
 // All rights reserved, commercial usage strictly prohibited.
 // Written by R. M. Supnik.
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
-#include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h> // For system(); // C99 is assumed.
 #include "extern.h"
@@ -26,11 +25,10 @@ L5:
 // 						!SEE WHO TO PROMPT FOR.
 L10:
 // write(outch, ">%$"); //F
-   printf(">");
+   printf(">"), fflush(stdout);
 // 						!PROMPT FOR GAME.
 L90:
 // read(inpch, "%78A1", buffer); //F
-   (void)fflush(stdout);
    if (more_input(buffer, length) == NULL) exit_();
    zpast = buffer;
    for (char *z = buffer; *z != '\0' && *z != '\n'; z++) {
@@ -61,6 +59,7 @@ L90:
       if (islower(*z)) {
          *z = toupper(*z);
       }
+// L400:
    }
    prsvec.prscon = 1;
 // 						!RESTART LEX SCAN.
@@ -83,9 +82,6 @@ Bool parse(char *inbuf, Bool vbflag) {
 // dflag = (debug.prsflg & 1) != 0; //F
 #endif
 
-// Parameter adjustments
-   --inbuf;
-
 // Function Body
    ret_val = false;
 // 						!ASSUME FAILS.
@@ -94,7 +90,7 @@ Bool parse(char *inbuf, Bool vbflag) {
    prsvec.prsi = 0;
    prsvec.prso = 0;
 
-   if (!lex(inbuf + 1, outbuf, &outlnt, vbflag)) {
+   if (!lex(inbuf, outbuf, &outlnt, vbflag)) {
       goto L100;
    }
    SparseRet = sparse(outbuf, outlnt, vbflag);

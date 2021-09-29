@@ -2,33 +2,25 @@
 // All rights reserved, commercial usage strictly prohibited.
 // Written by R. M. Supnik.
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
+#include <string.h>
+#include <stdarg.h>
 #include "extern.h"
+#include "common.h"
 
 // Dungeon functions which need local definition.
 #ifdef __AMOS__
 #   include <moncal.h>
 #endif
 
-// This function should return true if it's OK for people to play the game, false otherwise.
-// If you have a working <time.h> library, you can define NONBUSINESS to disallow play Monday to Friday, 9-5
-// (this is only checked at the start of the game, though).
-// For more complex control you will have to write your own version of this function.
-#ifdef NONBUSINESS
-#   ifdef BSD4_2
-#      include <sys/timeb.h>
-#   else
-#      include <time.h>
-#   endif
-#endif
+// Check for user violation
+// This routine should be modified if you wish to add system dependent protection against abuse.
+// At the moment, play is permitted under all circumstances.
 Bool protct(void/*int x*/) {
-#ifndef NONBUSINESS
-   return true;
-#else
-// True if it's Sunday or Saturday or before 09:00 or after 17:00.
-   time_t t; (void)time(&t);
-   struct tm *q = localtime(&t);
-   return q->tm_wday == 0 || q->tm_wday == 6 || q->tm_hour < 9 || q->tm_hour >= 17;
-#endif
+// System generated locals
+   Bool ret_val;
+
+   ret_val = true;
+   return ret_val;
 }
 
 #ifdef ALLOW_GDT
@@ -41,6 +33,7 @@ Bool protct(void/*int x*/) {
 #   endif
 Bool wizard(void) {
 #   if 1
+// 	Changed by TAA so that always in wizard ID
    return true;
 #   elif defined __AMOS__
    return jobidx()->jobusr == 0x102;
@@ -53,15 +46,8 @@ Bool wizard(void) {
 #endif
 
 // Support routines for dungeon: in place of the f2c library functions.
-#include <stdio.h>
-#include <stdarg.h>
-
-#ifdef __AMOS__
-#   include <amos.h>
-FILE *OpenInF(const char *File, const char *Mode) { return fdopen(ropen(File, 0), Mode); }
-#else
+// C99 is assumed and locked in.
 FILE *OpenInF(const char *File, const char *Mode) { return fopen(File, Mode); }
-#endif
 
 // Read a single two byte int from the index file
 int GetWord(FILE *InF) {

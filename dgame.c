@@ -2,7 +2,6 @@
 // All rights reserved, commercial usage strictly prohibited.
 // Written by R. M. Supnik.
 // Revisions Copyright (c) 2021, Darth Spectra (Lydia Marie Williamson).
-#include <stdio.h>
 #include <string.h> // For strcmp().
 #include "extern.h"
 #include "common.h"
@@ -98,6 +97,18 @@ L1000:
    if (strcmp(input.inbuf, "ECHO") != 0) goto L1300;
 // 						!INPUT = ECHO?
 
+#if 0
+// Note:
+// ∙	The upper for loop was bound changed from 78 to input.inlnt,
+//	because rdline() no longer provides a 78 character buffer padded with blanks.
+   for (i = 5; i <= input.inlnt; ++i) {
+      if (input.inbuf[i - 1] != ' ') {
+         goto L1300;
+      }
+// L1200:
+   }
+#endif
+
    rspeak(571);
 // 						!KILL THE ECHO.
    findex.echof = true;
@@ -120,7 +131,11 @@ L1300:
 
 L1400:
 // write(outch, "%78A1", (input.inbuf(j), j = 1, input.inlnt)); //F
+#if 0
+   more_output("%.*s\n", input.inlnt, input.inbuf);
+#else
    more_output("%s\n", input.inbuf);
+#endif
    play.telflg = true;
 // 						!INDICATE OUTPUT.
    goto L1000;

@@ -22,6 +22,7 @@ typedef int Bool; // Logical.
 Bool protct(void/*int*/);
 Bool wizard(void);
 
+// The remnant of f2c.h (begin)
 FILE *OpenInF(const char *File, const char *Mode);
 int GetWord(FILE *InF);
 void GetWords(int Lim, int *WordP, FILE *InF);
