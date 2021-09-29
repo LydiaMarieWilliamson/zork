@@ -820,14 +820,15 @@ L27000:
 L27100:
    for (j = 1; j <= 14; j++) {
 // 						!CHECK ANSWERS.
-      if (findex.quesno != answer[j - 1]) {
-         goto L27300;
-      }
+      if (findex.quesno != answer[j - 1]) goto L27300;
 // 						!ONLY CHECK PROPER ANS.
-      for (const char *z = ansstr[j - 1], *z2 = input.inbuf + prsvec.prscon - 1; *z != '\0'; ) {
+      for (const char *z = ansstr[j - 1], *z2 = input.inbuf + prsvec.prscon - 1; *z != '\0'; z++, z2++) {
          for (; *z2 == ' '; z2++);
-// 						!STRIP INPUT BLANKS.
-         if (*z++ != *z2++) goto L27300;
+// 						!SKIP INPUT BLANKS.
+         if (*z2 == '\0') goto L27300;
+// 						!END OF INPUT? LOSE.
+	 else if (*z2 != *z) goto L27300;
+   // L27200:
       }
       goto L27500;
 // 						!RIGHT ANSWER.
