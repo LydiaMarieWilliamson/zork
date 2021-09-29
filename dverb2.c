@@ -14,7 +14,6 @@ void savegm(void) {
 // 						!DISABLE GAME.
 // Note: save file format is different for PDP versus non-PDP versions
 
-// open(unit:1, file:"dsave.dat", access:"SEQUENTIAL", status:"UNKNOWN", form:"UNFORMATTED", err:L100); //F
    FILE *ExF = fopen("dsave.dat", "wb"); if (ExF == NULL) goto L100;
 
    int PlTime = gttime();
@@ -23,39 +22,22 @@ void savegm(void) {
 #define PutVar(Var) (fwrite((const void *)&(Var), sizeof (Var), (1), (ExF)))
 #define PutArr(N, Buf) (fwrite((const void *)(Buf), sizeof (Buf)[0], (N), (ExF)))
 
-// write(1, vmaj, vmin, vedit); //F
 {  int Edit = vedit; PutVar(vmaj), PutVar(vmin), PutVar(Edit); }
-// write(1, //F
-//    play.winner, play.here, hack.thfpos, play.telflg, hack.thfflg, hack.thfact, //F
-//    hack.swdact, hack.swdsta, puzzle.cpvec //F
-// ); //F
    PutVar(play.winner), PutVar(play.here), PutVar(hack.thfpos);
    PutVar(play.telflg), PutVar(hack.thfflg), PutVar(hack.thfact);
    PutVar(hack.swdact), PutVar(hack.swdsta), PutArr(64, puzzle.cpvec);
-// write(1, //F
-//    PlTime, state.moves, state.deaths, state.rwscor, state.egscor, state.mxload, //F
-//    state.ltshft, state.bloc, state.mungrm, state.hs, screen.fromdr, screen.scolrm, screen.scolac //F
-// ); //F
    PutVar(PlTime), PutVar(state.moves), PutVar(state.deaths), PutVar(state.rwscor);
    PutVar(state.egscor), PutVar(state.mxload);
    PutVar(state.ltshft), PutVar(state.bloc), PutVar(state.mungrm), PutVar(state.hs);
    PutVar(screen.fromdr), PutVar(screen.scolrm), PutVar(screen.scolac);
-// write(1, //F
-//   objcts.odesc1, objcts.odesc2, objcts.oflag1, objcts.oflag2, objcts.ofval, objcts.otval, //F
-//   objcts.osize, objcts.ocapac, objcts.oroom, objcts.oadv, objcts.ocan //F
-// ); //F
    PutArr(220, objcts.odesc1), PutArr(220, objcts.odesc2), PutArr(220, objcts.oflag1), PutArr(220, objcts.oflag2);
    PutArr(220, objcts.ofval), PutArr(220, objcts.otval);
    PutArr(220, objcts.osize), PutArr(220, objcts.ocapac);
    PutArr(220, objcts.oroom), PutArr(220, objcts.oadv), PutArr(220, objcts.ocan);
-// write(1, rooms.rval, rooms.rflag); //F
    PutArr(200, rooms.rval), PutArr(200, rooms.rflag);
-// write(1, advs.aroom, advs.ascore, advs.avehic, advs.astren, advs.aflag); //F
    PutArr(4, advs.aroom), PutArr(4, advs.ascore), PutArr(4, advs.avehic), PutArr(4, advs.astren), PutArr(4, advs.aflag);
-// write(1, flags, switch_, vill.vprob, cevent.cflag, cevent.ctick); //F
    PutArr(46, flags), PutArr(22, switch_), PutArr(4, vill.vprob), PutArr(25, cevent.cflag), PutArr(25, cevent.ctick);
 
-// close(unit:1); //F
    if (fclose(ExF) == EOF) goto L100;
    rspeak(597);
    return;
@@ -71,47 +53,29 @@ void rstrgm(void) {
 // 						!DISABLE GAME.
 // Note: save file format is different for PDP versus non-PDP versions
 
-// open(unit:1, file:"dsave.dat", access:"SEQUENTIAL", status:"OLD", form:"UNFORMATTED", err:L100); //F
    FILE *InF = fopen("dsave.dat", "rb"); if (InF == NULL) goto L100;
 
 #define GetVar(Var) (fread((void *)&(Var), sizeof (Var), (1), (InF)))
 #define GetArr(N, Buf) (fread((void *)(Buf), sizeof (Buf)[0], (N), (InF)))
 
-// read(1, &Maj, &Min, &Edit); //F
    int Maj, Min, Edit; GetVar(Maj), GetVar(Min), GetVar(Edit);
    if (Maj != vmaj || Min != vmin) goto L200;
 
-// read(1, //F
-//    &play.winner, &play.here, &hack.thfpos, &play.telflg, &play.thfflg, &hack.thfflg, //F
-//    &hack.swdact, &hack.swdsta, &puzzle.cpvec //F
-// ); //F
    GetVar(play.winner), GetVar(play.here), GetVar(hack.thfpos);
    GetVar(play.telflg), GetVar(hack.thfflg), GetVar(hack.thfact);
    GetVar(hack.swdact), GetVar(hack.swdsta), GetArr(64, puzzle.cpvec);
-// read(1, //F
-//    &time_.pltime, &state.moves, &state.deaths, &state.rwscor, &state.egscor, &state.mxload, //F
-//    &state.ltshft, &state.bloc, &state.mungrm, &state.hs, &state.fromdr, &state.scolrm, &state.scolac //F
-// ); //F
    GetVar(time_.pltime), GetVar(state.moves), GetVar(state.deaths), GetVar(state.rwscor);
    GetVar(state.egscor), GetVar(state.mxload);
    GetVar(state.ltshft), GetVar(state.bloc), GetVar(state.mungrm), GetVar(state.hs), GetVar(screen.fromdr);
    GetVar(screen.scolrm), GetVar(screen.scolac);
-// read(1, //F
-//    &objcts.odesc1, &objcts.odesc2, &objcts.oflag1, &objcts.oflag2, &objcts.ofval, &objcts.otval, //F
-//    &objcts.osize, &objcts.ocapac, &objcts.oroom, &objcts.oadv, &objcts.ocan //F
-// ); //F
    GetArr(220, objcts.odesc1), GetArr(220, objcts.odesc2), GetArr(220, objcts.oflag1), GetArr(220, objcts.oflag2);
    GetArr(220, objcts.ofval), GetArr(220, objcts.otval);
    GetArr(220, objcts.osize), GetArr(220, objcts.ocapac);
    GetArr(220, objcts.oroom), GetArr(220, objcts.oadv), GetArr(220, objcts.ocan);
-// read(1, rooms.rval, rooms.rflag); //F
    GetArr(200, rooms.rval), GetArr(200, rooms.rflag);
-// read(1, &advs.aroom, &advs.ascore, &advs.avehic, &advs.astren, &advs.aflag); //F
    GetArr(4, advs.aroom), GetArr(4, advs.ascore), GetArr(4, advs.avehic), GetArr(4, advs.astren), GetArr(4, advs.aflag);
-// read(1, flags, switch_, &vill.vprob, cevent.cflag, cevent.ctick); //F
    GetArr(46, flags), GetArr(22, switch_), GetArr(4, vill.vprob), GetArr(25, cevent.cflag), GetArr(25, cevent.ctick);
 
-// close(unit:1); //F
    if (fclose(InF) == EOF) goto L100;
    rspeak(599);
    return;
@@ -124,7 +88,6 @@ L100:
 L200:
    rspeak(600);
 // 						!OBSOLETE VERSION
-// close(unit:1); //F
    if (fclose(InF) == EOF) goto L100;
 }
 

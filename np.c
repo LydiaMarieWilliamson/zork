@@ -24,11 +24,9 @@ L5:
    }
 // 						!SEE WHO TO PROMPT FOR.
 L10:
-// write(outch, ">%$"); //F
    printf(">"), fflush(stdout);
 // 						!PROMPT FOR GAME.
 L90:
-// read(inpch, "%78A1", buffer); //F
    if (more_input(buffer, length) == NULL) exit_();
    zpast = buffer;
    for (char *z = buffer; *z != '\0' && *z != '\n'; z++) {
@@ -78,8 +76,8 @@ Bool parse(char *inbuf, Bool vbflag) {
 #endif
    int outbuf[40], outlnt;
 
-#ifdef ALLOW_GDT
-// dflag = (debug.prsflg & 1) != 0; //F
+#if defined ALLOW_GDT && 0
+   dflag = (debug.prsflg & 1) != 0;
 #endif
 
 // Function Body
@@ -119,9 +117,9 @@ L300:
 L350:
    orphan(0, 0, 0, 0, 0);
 // 						!CLEAR ORPHANS.
-#ifdef ALLOW_GDT
-// if (dflag) write(0, *, "parse good"); //F
-// if (dflag) print("PARSE RESULTS- %L7%3I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("parse good\n");
+   if (dflag) more_output("PARSE RESULTS- %c %d %d %d\n", ret_val ? 'T' : 'F', prsvec.prsa, prsvec.prso, prsvec.prsi);
 #endif
    return ret_val;
 
@@ -129,9 +127,9 @@ L350:
 
 L100:
    prsvec.prscon = 1;
-#ifdef ALLOW_GDT
-// if (dflag) write(0, *, "parse failed"); //F
-// if (dflag) print("PARSE RESULTS- %L7%3I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("parse failed\n");
+   if (dflag) more_output("PARSE RESULTS- %c %d %d %d", ret_val ? 'T' : 'F', prsvec.prsa, prsvec.prso, prsvec.prsi);
 #endif
    return ret_val;
 }
@@ -172,8 +170,8 @@ static Bool lex(char *inbuf, int *outbuf, int *op, Bool vbflag) {
 // L100:
    }
 
-#ifdef ALLOW_GDT
-// dflag = (debug.prsflg & 2) != 0; //F
+#if defined ALLOW_GDT && 0
+   dflag = (debug.prsflg & 2) != 0;
 #endif
    ret_val = false;
 // 						!ASSUME LEX FAILS.
@@ -235,8 +233,12 @@ L1000:
    }
 // 						!ANY LAST WORD?
    ret_val = true;
-#ifdef ALLOW_GDT
-// if (dflag) print("LEX RESULTS- %3I7%/%1X%10I7", cp, *op, prsvec.prscon, (outbuf[i - 1], i = 1, *op + 1)); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) {
+      more_output("LEX RESULTS- %d %d %d\n", cp, *op, prsvec.prscon);
+      for (int i = 0; i < *op + 1; i++) printf(" %d", outbuf[i]);
+      more_output("\n");
+   }
 #endif
    return ret_val;
 
@@ -244,8 +246,8 @@ L1000:
 
 L4000:
    j1 = j - dlimit[i + 1];
-#ifdef ALLOW_GDT
-// if (dflag) print("LEX- CHAR= %A1%2I7", j, j1, cp); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("LEX- CHAR= %c %d %d\n", j, j1, cp);
 #endif
    if (cp >= 6) {
       goto L200;

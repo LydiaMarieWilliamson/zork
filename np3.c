@@ -28,9 +28,9 @@ Bool synmch(/*int x*/) {
    int drive, limit, qprep, sprep, dforce;
 
    ret_val = false;
-#ifdef ALLOW_GDT
-// dflag = (debug.prsflg & 16) != 0; //F
-// if (dflag) write(0, *, "synflags=", DirS, IndS, StdS, FlipS, DrivS, VMaskS); //F
+#if defined ALLOW_GDT && 0
+   dflag = (debug.prsflg & 16) != 0;
+   if (dflag) more_output(0, *, "synflags=%s%s%s%s%s%s\n", DirS, IndS, StdS, FlipS, DrivS, VMaskS);
 #endif
    j = pv.act;
 // 						!SET UP PTR TO SYNTAX.
@@ -53,15 +53,15 @@ L100:
 L200:
    newj = unpacks(j);
 // 						!UNPACK SYNTAX.
-#ifdef ALLOW_GDT
-// if (dflag) print("SYNMCH INPUTS TO SYNEQL- %5I7", pv.o1, pv.p1, syntax.dobj, syntax.dfl1, syntax.dfl2); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("SYNMCH INPUTS TO SYNEQL- %d %d %d %d %d\n", pv.o1, pv.p1, syntax.dobj, syntax.dfl1, syntax.dfl2);
 #endif
    sprep = syntax.dobj & PMaskV;
    if (!syneql(pv.p1, pv.o1, syntax.dobj, syntax.dfl1, syntax.dfl2)) {
       goto L1000;
    }
-#ifdef ALLOW_GDT
-// if (dflag) print("SYNMCH INPUTS TO SYNEQL- %5I7", pv.o2, pv.p2, syntax.iobj, syntax.ifl1, syntax.ifl2); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("SYNMCH INPUTS TO SYNEQL- %d %d %d %d %d\n", pv.o2, pv.p2, syntax.iobj, syntax.ifl1, syntax.ifl2);
 #endif
    sprep = syntax.iobj & PMaskV;
    if (syneql(pv.p2, pv.o2, syntax.iobj, syntax.ifl1, syntax.ifl2)) {
@@ -102,8 +102,8 @@ L3000:
 // MATCH HAS FAILED.  IF DEFAULT SYNTAX EXISTS, TRY TO SNARF
 // ORPHANS OR GWIMS, OR MAKE NEW ORPHANS.
 
-#ifdef ALLOW_GDT
-// if (dflag) print("SYNMCH, DRIVE=%2I6", drive, dforce); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("SYNMCH, DRIVE=%d %d\n", drive, dforce);
 #endif
    if (drive == 0) {
       drive = dforce;
@@ -138,8 +138,8 @@ L3000:
 L3500:
    pv.o1 = gwim(syntax.dobj, syntax.dfw1, syntax.dfw2);
 // 						!GET GWIM.
-#ifdef ALLOW_GDT
-// if (dflag) print("SYNMCH- DO GWIM= %I6", pv.o1); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("SYNMCH- DO GWIM= %d\n", pv.o1);
 #endif
    if (pv.o1 > 0) {
       goto L4000;
@@ -158,8 +158,8 @@ L4000:
    }
    pv.o2 = gwim(syntax.iobj, syntax.ifw1, syntax.ifw2);
 // 						!GWIM.
-#ifdef ALLOW_GDT
-// if (dflag) print("SYNMCH- IO GWIM= %I6", pv.o2); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("SYNMCH- IO GWIM= %d\n", pv.o2);
 #endif
    if (pv.o2 > 0) {
       goto L6000;
@@ -207,8 +207,8 @@ L5000:
    }
 // 						!TRY TAKE.
    ret_val = true;
-#ifdef ALLOW_GDT
-// if (dflag) print("SYNMCH- RESULTS %L1%6I7", ret_val, prsvec.prsa, prsvec.prso, prsvec.prsi, pv.act, pv.o1, pv.o2); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("SYNMCH- RESULTS %c %d %d %d %d %d %d\n", ret_val ? 'T' : 'F', prsvec.prsa, prsvec.prso, prsvec.prsi, pv.act, pv.o1, pv.o2);
 #endif
    return ret_val;
 }

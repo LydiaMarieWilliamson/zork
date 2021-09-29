@@ -45,18 +45,6 @@ Bool init(void/*int x*/) {
       goto L10000;
    }
 // 						!PROTECTION VIOLATION?
-// print( //F
-//    "There appears before you a threatening figure clad ", //F
-//    "all over%/in heavy black armor.  His legs seem like the ", //F
-//    "massive trunk%/of the oak tree.  His broad shoulders and ", //F
-//    "helmeted head loom%/high over your own puny frame, and ", //F
-//    "you realize that his powerful%/arms could easily crush the ", //F
-//    "very life from your body.  There%/hangs from his belt a ", //F
-//    "veritable arsenal of deadly weapons:%/sword, mace, ball ", //F
-//    "and chain, dagger, lance, and trident.%/He speaks with a ", //F
-//    "commanding voice:%/%/%20X\"You shall not pass.\"%/%/As ", //F
-//    "he grabs you by the neck all grows dim about you." //F
-// ); //F
    more_output("There appears before you a threatening figure clad all over\n");
    more_output("in heavy black armor.  His legs seem like the massive trunk\n");
    more_output("of the oak tree.  His broad shoulders and helmeted head loom\n");
@@ -263,37 +251,25 @@ L10000:
 
 // NOW RESTORE FROM EXISTING INDEX FILE.
 
-// open(unit:1, file:MyIndexFile, status:"OLD", form:"FORMATTED", access:"SEQUENTIAL", err:L1900); //F
    if ((IndexF = OpenInF(MyIndexFile, "rb")) == NULL && (IndexF = OpenInF(IndexFile, "rb")) == NULL)
       goto L1950;
 
-// read(1, "%I6", &Maj, &Min, &Edit); //F
    Maj = GetWord(IndexF), Min = GetWord(IndexF), Edit = GetWord(IndexF);
 // 						!GET VERSION.
    if (Maj != vmaj || Min != vmin) {
       goto L1925;
    }
-// open(unit:storych, file:MyStoryFile, status:"old", form:"unformatted", access:"direct", recl:76, err:L1950); //F
    StoryF = IndexF;
 
-#ifdef ALLOW_GDT
-// print("RESTORING FROM \"" IndexFile "\""); //F
+#if defined ALLOW_GDT && 0
+   more_output("RESTORING FROM \"" IndexFile "\"\n");
 #endif
-// // const char *Fmt = "%I8"; //F
-// const char *Fmt = "%I6"; //F
-// read(1, Fmt, &state.mxscor, &star.strbit, &state.egmxsc); //F
    state.mxscor = GetWord(IndexF), star.strbit = GetWord(IndexF), state.egmxsc = GetWord(IndexF);
-// read(1, Fmt, &rooms.rlnt, &rooms.rdesc2, rooms.rdesc1, rooms.rexit, rooms.ractio, rooms.rval, rooms.rflag); //F
    rooms.rlnt = GetWord(IndexF);
    GetWords(rooms.rlnt, rooms.rdesc1, IndexF), GetWords(rooms.rlnt, rooms.rdesc2, IndexF);
    GetWords(rooms.rlnt, rooms.rexit, IndexF), GetPairs(rooms.rlnt, rooms.ractio, IndexF);
    GetPairs(rooms.rlnt, rooms.rval, IndexF), GetWords(rooms.rlnt, rooms.rflag, IndexF);
-// read(1, Fmt, &exits.xlnt, exits.travel); //F
    exits.xlnt = GetWord(IndexF), GetWords(exits.xlnt, exits.travel, IndexF);
-// read(1, Fmt, //F
-//    objcts.olnt, objcts.odesc1, objcts.odesc2, objcts.odesco, objcts.oactio, objcts.oflag1, objcts.oflag2, //F
-//    objcts.ofval, objcts.otval, objcts.osize, objcts.ocapac, objcts.oroom, objcts.oadv, objcts.ocan, objcts.oread //F
-// ); //F
    objcts.olnt = GetWord(IndexF);
    GetWords(objcts.olnt, objcts.odesc1, IndexF), GetWords(objcts.olnt, objcts.odesc2, IndexF);
    GetPairs(objcts.olnt, objcts.odesco, IndexF), GetPairs(objcts.olnt, objcts.oactio, IndexF);
@@ -302,29 +278,22 @@ L10000:
    GetWords(objcts.olnt, objcts.osize, IndexF), GetPairs(objcts.olnt, objcts.ocapac, IndexF);
    GetWords(objcts.olnt, objcts.oroom, IndexF), GetPairs(objcts.olnt, objcts.oadv, IndexF);
    GetPairs(objcts.olnt, objcts.ocan, IndexF), GetPairs(objcts.olnt, objcts.oread, IndexF);
-// read(1, Fmt, &oroom2_.r2lnt, oroom2_.oroom2, oroom2_.rroom2); //F
    oroom2_.r2lnt = GetWord(IndexF);
    GetWords(oroom2_.r2lnt, oroom2_.oroom2, IndexF), GetWords(oroom2_.r2lnt, oroom2_.rroom2, IndexF);
-// read(1, Fmt, &cevent.clnt, cevent.ctick, cevent.cactio); //F
    cevent.clnt = GetWord(IndexF);
    GetWords(cevent.clnt, cevent.ctick, IndexF), GetWords(cevent.clnt, cevent.cactio, IndexF);
-// read(1, "%L4", cevent.cflag); //F
    GetFlags(cevent.clnt, cevent.cflag, IndexF);
-// read(1, Fmt, &vill.vlnt, vill.villns, vill.vprob, vill.vopps, vill.vbest, vill.vmelee); //F
    vill.vlnt = GetWord(IndexF), GetWords(vill.vlnt, vill.villns, IndexF);
    GetPairs(vill.vlnt, vill.vprob, IndexF), GetPairs(vill.vlnt, vill.vopps, IndexF);
    GetWords(vill.vlnt, vill.vbest, IndexF), GetWords(vill.vlnt, vill.vmelee, IndexF);
-// read(1, Fmt, &advs.alnt, advs.aroom, advs.ascore, advs.avehic, advs.aobj, advs.aactio, advs.astren, advs.aflag); //F
    advs.alnt = GetWord(IndexF), GetWords(advs.alnt, advs.aroom, IndexF);
    GetPairs(advs.alnt, advs.ascore, IndexF), GetPairs(advs.alnt, advs.avehic, IndexF);
    GetWords(advs.alnt, advs.aobj, IndexF), GetWords(advs.alnt, advs.aactio, IndexF);
    GetWords(advs.alnt, advs.astren, IndexF), GetPairs(advs.alnt, advs.aflag, IndexF);
-// read(1, Fmt, &star.mbase, &rmsg.mlnt, rmsg.rtext); //F
    star.mbase = GetWord(IndexF);
    rmsg.mlnt = GetWord(IndexF), GetWords(rmsg.mlnt, rmsg.rtext, IndexF);
 
 // Save location of start of message text
-// close(1); //F
    rmsg.mrloc = ftell(IndexF);
 // 						!INIT DONE.
 
@@ -334,6 +303,11 @@ L10000:
 // SET UP TO PLAY THE GAME.
 
    intime(&time_.shour, &time_.smin, &time_.ssec);
+// 						!GET TIME AND DATE.
+// Day: datarry[0], Month: datarry[1], Year: datarry[2].
+// idate(datarry);
+// inirnd(datarry[0] | datarry[1] | datarry[2] | shour | smin | ssec);
+// 	NEW WAY TO INITIALIZE /+TAA+/
    inirnd(time_.shour ^ time_.smin ^ time_.ssec);
 
    play.winner = PlayerAX;
@@ -343,34 +317,40 @@ L10000:
    state.bloc = objcts.oroom[BalloOX - 1];
    ret_val = true;
 
+#if defined ALLOW_GDT && 0
+   more_output("USED:\n");
+   more_output("%5d OF%5d ROOMS\n", rooms.rlnt, rmax);
+   more_output("%5d OF%5d EXITS\n", exits.xlnt, xmax);
+   more_output("%5d OF%5d OBJECTS\n", objcts.olnt, omax);
+   more_output("%5d OF%5d MESSAGES\n", rmsg.mlnt, mmax);
+   more_output("%5d OF%5d VILLAINS\n", vill.vlnt, vmax);
+   more_output("%5d OF%5d ADVENTURERS\n", advs.alnt, amax);
+   more_output("%5d OF%5d CLOCK EVENTS\n", cevent.clnt, cmax);
+   more_output("%5d OF%5d ROOM2 SLOTS", oroom2_.r2lnt, r2max);
+   more_output(
+      "MAX SCORE=%I5\n"		"EG SCORE=%I5\n"	"MAX RECNO=%I5\n"
+      "RDESC2 BASE=%I5\n"	"MELEE START=%I5\n"	"STAR MASK=%I7\n",
+      state.mxscor,		state.egmxsc,		recno,
+      rooms.rdesc2,		star.mbase,		star.strbit
+   );
+// Pause
+   printf("Press enter to continue:"), fflush(stdout);
+   for (int Ch; (Ch = getchar()) != '\n' && Ch != EOF; );
+   if (Ch == EOF) exit(1);
+#endif
+
    return ret_val;
 // INIT, PAGE 6
 
 // ERRORS-- INIT FAILS.
 
 L1925:
-// print( //F
-//    "\"" MyIndexFile "\" is version %I1.%I1%A1.%/" //F
-//    "I require version %I1.%I1%A1.", //F
-//    Maj, Min, Edit, vmaj, vmin, vedit //F
-// ); //F
    more_output("\"" MyIndexFile "\" is version %1d.%1d%c.\n", Maj, Min, Edit);
    more_output("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
    goto L1975;
 L1950:
-// print("I can't open ", MyStoryFile, "."); //F
    more_output("I can't open " MyStoryFile ".\n");
 L1975:
-// print( //F
-//    "Suddenly a sinister, wraithlike figure appears before ", //F
-//    "you,%/seeming to float in the air.  In a low, sorrowful voice", //F
-//    " he says,%/\"Alas, the very nature of the world has changed, ", //F
-//    "and the dungeon%/cannot be found.  All must now pass away.\"", //F
-//    "  Raising his oaken staff%/in farewell, he fades into the ", //F
-//    "spreading darkness.  In his place%/appears a tastefully ", //F
-//    "lettered sign reading:%/%/%23XINITIALIZATION FAILURE%/%/", //F
-//    "The darkness becomes all encompassing, and your vision fails." //F
-// ); //F
    more_output("Suddenly a sinister, wraithlike figure appears before you,\n");
    more_output("seeming to float in the air.  In a low, sorrowful voice he says,\n");
    more_output("\"Alas, the very nature of the world has changed, and the dungeon\n");

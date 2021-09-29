@@ -42,7 +42,6 @@ int rnd(int maxval) {
 // Terminate the game.
 void exit_(void) {
 // NO "CALL EXIT" HERE
-// stop(); //F
    fprintf(stderr, "The game is over.\n");
    exit(0);
 }

@@ -107,14 +107,6 @@ void score(Bool flg) {
       goto L60;
    }
 // 						!ENDGAME?
-// if (flg) //F
-//    write(outch, "Your score would be%$"); //F
-// else //F
-//    write(outch, "Your score is%$"); //F
-// if (state.moves != 1) //F
-//    write(outch, "%I4 [total of%I4 points], in%I5 moves.", as, state.mxscor, state.moves); //F
-// else //F
-//    write(outch, "%I4 [total of%I4 points], in%I5 move.", as, state.mxscor, state.moves); //F
    more_output("Your score %s %d [total of %d points], in %d %s.\n",
       flg ? "would be" : "is", as, state.mxscor, state.moves, state.moves != 1 ? "moves" : "move"
    );
@@ -131,13 +123,6 @@ L50:
    return;
 
 L60:
-// if (flg) //F
-//    write(outch, "Your score in the endgame would be%$"); //F
-// else //F
-//    write(outch, "Your score in the endgame is%$"); //F
-// write(outch, "%I4 [total of%I4 points], in%I5 moves.", //F
-//    state.egscor, state.egmxsc, state.moves //F
-// ); //F
    more_output("Your score in the endgame %s %d [total of %d points], in %d moves.\n",
       flg ? "would be" : "is", state.egscor, state.egmxsc, state.moves
    );

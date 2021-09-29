@@ -130,7 +130,6 @@ L1300:
 // 						!VALID EXIT?
 
 L1400:
-// write(outch, "%78A1", (input.inbuf(j), j = 1, input.inlnt)); //F
 #if 0
    more_output("%.*s\n", input.inlnt, input.inbuf);
 #else

@@ -44,8 +44,8 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    pv.o2 = 0;
    pv.p1 = 0;
    pv.p2 = 0;
-#ifdef ALLOW_GDT
-// dflag = (debug.prsflg & 4) != 0; //F
+#if defined ALLOW_GDT && 0
+   dflag = (debug.prsflg & 4) != 0;
 #endif
 
    buzlnt = 20;
@@ -60,8 +60,8 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
       lbuf1 = lbuf[i];
 // 						!GET CURRENT TOKEN.
       lbuf2 = lbuf[i + 1];
-#ifdef ALLOW_GDT
-//    if (dflag) write(0, *, "lbuf1=", lbuf1, " lbuf2=", lbuf2); //F
+#if defined ALLOW_GDT && 0
+      if (dflag) more_output("lbuf1=%d lbuf2=%d\n", lbuf1, lbuf2);
 #endif
       if (lbuf1 == 0) {
          goto L1500;
@@ -174,8 +174,8 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    L600:
       obj = getobj(j, adj, 0);
 // 						!IDENTIFY OBJECT.
-#ifdef ALLOW_GDT
-//    if (dflag) print("SPARSE- OBJ AT %I6  OBJ= %I6", 60, j, obj); //F
+#if defined ALLOW_GDT && 0
+      if (dflag) more_output("SPARSE- OBJ AT %d  OBJ= %d", j, obj);
 #endif
       if (obj <= 0) {
          goto L6000;
@@ -221,8 +221,8 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
       prsvec.prsa = WalkW;
       prsvec.prso = dvoc[j + 1];
       ret_val = 1;
-#ifdef ALLOW_GDT
-//    if (dflag) print("SPARSE- DIR AT %I6", j); //F
+#if defined ALLOW_GDT && 0
+      if (dflag) more_output("SPARSE- DIR AT %d\n", j);
 #endif
       return ret_val;
 
@@ -231,9 +231,9 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    L3000:
       pv.act = j;
       orphs.oact = 0;
-#ifdef ALLOW_GDT
-//    if (dflag) print("SPARSE- ACT AT %I6", j); //F
-//    if (dflag) write(0, *, "count=", vvoc[j + 1], " vnr=", vvoc[j + 2]); //F
+#if defined ALLOW_GDT && 0
+      if (dflag) more_output("SPARSE- ACT AT %d\n", j);
+      if (dflag) more_output("count=%d vnr=%d\n", vvoc[j + 1], vvoc[j + 2]);
 #endif
       goto L1000;
 
@@ -245,8 +245,8 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
       }
       prep = pvoc[j + 1];
       adj = 0;
-#ifdef ALLOW_GDT
-//    if (dflag) print("SPARSE- PREP AT %I6", j); //F
+#if defined ALLOW_GDT && 0
+      if (dflag) more_output("SPARSE- PREP AT %d\n", j);
 #endif
       goto L1000;
 
@@ -261,8 +261,8 @@ int sparse(const int *lbuf, int llnt, Bool vbflag) {
    L5000:
       adj = j;
       j = orphs.oname & orphs.oflag;
-#ifdef ALLOW_GDT
-//    if (dflag) print("SPARSE- ADJ AT %I6 ORPHAN= %I6", adj, j); //F
+#if defined ALLOW_GDT && 0
+      if (dflag) more_output("SPARSE- ADJ AT %d ORPHAN= %d\n", adj, j);
 #endif
       if (j != 0 && i >= llnt) {
          goto L600;
@@ -364,9 +364,9 @@ L1500:
 
 L1750:
 // 						!WIN.
-#ifdef ALLOW_GDT
-// if (dflag) print("SPARSE RESULTS- %5I7", pv.act, pv.o1, pv.o2, pv.p1, pv.p2); //F
-// if (dflag) write(0, *, "sparse=", sparse); //F
+#if defined ALLOW_GDT && 0
+   if (dflag) more_output("SPARSE RESULTS- %d %d %d %d %d\n", pv.act, pv.o1, pv.o2, pv.p1, pv.p2);
+   if (dflag) more_output("sparse=%d\n", sparse);
 #endif
    return ret_val;
 // 						!LOSE.

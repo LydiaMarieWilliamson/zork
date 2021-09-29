@@ -238,7 +238,6 @@ L4100:
 // V74--	VERSION.  PRINT INFO.
 
 L5000:
-// write(outch, "V%I1.%I2%A1", vmaj, vmin, vedit); //F
    more_output("V%1d.%1d%c\n", vmaj, vmin, (int)vedit);
    play.telflg = true;
    return ret_val;
@@ -390,7 +389,6 @@ L15000:
    }
 // 						!ASK FOR Y/N DECISION.
 #if 0
-// close(storych); //F
    fclose(StoryF);
 #endif
    exit_();
@@ -560,14 +558,8 @@ L21000:
    i = k / 60;
    j = k % 60;
 
-// write(outch, "You have been playing Dungeon for %$"); //F
    printf("You have been playing Dungeon for ");
-// if (i != 0) write(outch, "+%I3 hour%$", i); //F
-// if (i >= 2) write(outch, "+s and %$"); //F
-// if (i == 1) write(outch, "+ and %$"); //F
    if (i >= 1) printf("%d %s and ", i, i != 1 ? "hours" : "hour");
-// if (j == 1) write(outch, "+%I2 minute.", j); //F
-// if (j != 1) write(outch, "+%I2 minutes.", j); //F
    more_output("%d %s.\n", j, j != 1 ? "minutes" : "minute");
    play.telflg = true;
    return ret_val;
@@ -684,7 +676,6 @@ L25000:
 // 						!COMPUTE WAIT.
 
    if (j != 0) {
-//    write(outch, "You will be cured after %I3 moves.", i); //F
       more_output("You will be cured after %d moves.\n", i);
    }
 
@@ -777,7 +768,6 @@ L26400:
    findex.spellf = true;
 // 						!TELL HIM.
    play.telflg = true;
-// write(outch, "A hollow voice replies:  \"%6A1%1X%6A1\".", pp1, ch); //F
    more_output("A hollow voice replies:  \"%.6s %.6s\".\n", pp1, ch);
 
    return ret_val;

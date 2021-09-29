@@ -368,7 +368,6 @@ L57000:
    score(false);
 #if 0
 // Moved to exit_() routine
-// close(storych); //F
    fclose(StoryF);
 #else
    exit_();
