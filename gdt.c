@@ -232,7 +232,7 @@ L11000:
       goto L2200;
    }
 // 						!ARGS VALID?
-   more_output("OB# DESC1 DESC2 DESCO ACT FLAGS1 FLAGS2 FVL TVL	  SIZE CAPAC ROOM ADV CON  READ\n");
+   more_output("OB# DESC1 DESC2 DESCO ACT FLAGS1 FLAGS2 FVL TVL  SIZE CAPAC ROOM ADV CON  READ\n");
 // 						!COL HDRS
    i__1 = k;
    for (i = j; i <= i__1; ++i) {
