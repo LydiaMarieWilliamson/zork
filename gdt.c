@@ -63,6 +63,7 @@ L2000:
       goto L2000;
    }
 // 						!IGNORE BLANKS.
+// 	  check for lower case command, as well
    if (islower(cmd[0]))
       cmd[0] = toupper(cmd[0]);
    if (islower(cmd[1]))
@@ -386,25 +387,19 @@ L20000:
 
 L21000:
    more_output("Valid commands are:\n");
-   more_output("AA- Alter ADVS          DR- Display ROOMS\n");
-   more_output("AC- Alter CEVENT        DS- Display state\n");
-   more_output("AF- Alter FINDEX        DT- Display text\n");
-   more_output("AH- Alter HERE          DV- Display VILLS\n");
-   more_output("AN- Alter switches      DX- Display EXITS\n");
-   more_output("AO- Alter OBJCTS        DZ- Display PUZZLE\n");
-   more_output("AR- Alter ROOMS         D2- Display ROOM2\n");
-   more_output("AV- Alter VILLS         EX- Exit\n");
-   more_output("AX- Alter EXITS         HE- Type this message\n");
-   more_output("AZ- Alter PUZZLE        NC- No cyclops\n");
-   more_output("DA- Display ADVS        ND- No deaths\n");
-   more_output("DC- Display CEVENT      NR- No robber\n");
-   more_output("DF- Display FINDEX      NT- No troll\n");
-   more_output("DH- Display HACKS       PD- Program detail\n");
-   more_output("DL- Display lengths     RC- Restore cyclops\n");
-   more_output("DM- Display RTEXT       RD- Restore deaths\n");
-   more_output("DN- Display switches    RR- Restore robber\n");
-   more_output("DO- Display OBJCTS      RT- Restore troll\n");
-   more_output("DP- Display parser      TK- Take\n");
+   more_output("AA- Alter ADVS        AC- Alter CEVENT      AF- Alter FINDEX\n");
+   more_output("AH- Alter HERE        AN- Alter switches    AO- Alter OBJCTS\n");
+   more_output("AR- Alter ROOMS       AV- Alter VILLS       AX- Alter EXITS\n");
+   more_output("AZ- Alter PUZZLE      DA- Display ADVS      DC- Display CEVENT\n");
+   more_output("DF- Display FINDEX    DH- Display HACKS     DL- Display lengths\n");
+   more_output("DM- Display RTEXT     DN- Display switches  DO- Display OBJCTS\n");
+   more_output("DP- Display parser    DR- Display ROOMS     DS- Display state\n");
+   more_output("DT- Display text      DV- Display VILLS     DX- Display EXITS\n");
+   more_output("DZ- Display PUZZLE    D2- Display ROOM2     EX- Exit\n");
+   more_output("HE- Type this message NC- No cyclops        ND- No deaths\n");
+   more_output("NR- No robber         NT- No troll          PD- Program detail\n");
+   more_output("RC- Restore cyclops   RD- Restore deaths    RR- Restore robber\n");
+   more_output("RT- Restore troll     TK- Take.\n");
    goto L2000;
 
 // NR-- NO ROBBER

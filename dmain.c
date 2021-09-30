@@ -75,7 +75,7 @@ struct puzzleCB puzzle = (struct puzzleCB){
 const struct xparsCB xpars = (struct xparsCB){
    xrmask: 255, xdmask: 31744, xfmask: 3, xfshft: 256, xashft: 256,
    xelnt: { 1, 2, 3, 3 },
-   xnorm: 1, xno: 2, xcond: 3, xdoor: 4, xlflag: 32768
+   xnorm: 1, xno: 2, xcond: 3, xdoor: 4, xlflag: 0x8000
 };
 
 // oflags.h:

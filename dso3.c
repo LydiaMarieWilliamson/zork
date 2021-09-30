@@ -27,7 +27,7 @@ L100:
 // 						!GET ENTRY.
    curxt.xroom1 = i & xpars.xrmask;
 // mask to 16-bits to get rid of sign extension problems with 32-bit ints 
-   curxt.xtype = ((i & ~xpars.xlflag & 65535) / xpars.xfshft & xpars.xfmask) + 1;
+   curxt.xtype = ((i & ~xpars.xlflag & 0xffff) / xpars.xfshft & xpars.xfmask) + 1;
    switch (curxt.xtype) {
       case 1:
          goto L110;
