@@ -7,12 +7,12 @@
 
 static int unpacks(int);
 static int gwim(int, int, int);
-static Bool syneql(int, int, int, int, int);
-static Bool takeit(int, int);
+static bool syneql(int, int, int, int, int);
+static bool takeit(int, int);
 
 // Syntax matcher
 // This routine details on bit 4 of prsflg
-Bool synmch(/*int x*/) {
+bool synmch(/*int x*/) {
 // Initialized data
 //   The following data statement was originally:
 // 	DATA R50MIN/1RA/
@@ -20,7 +20,7 @@ Bool synmch(/*int x*/) {
 
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int j;
@@ -275,9 +275,9 @@ L200:
 }
 
 // Test for syntax equality
-static Bool syneql(int prep, int obj, int sprep, int sfl1, int sfl2) {
+static bool syneql(int prep, int obj, int sprep, int sfl1, int sfl2) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
    if (obj == 0) {
       goto L100;
@@ -292,9 +292,9 @@ L100:
 }
 
 // Parser based take of object
-static Bool takeit(int obj, int sflag) {
+static bool takeit(int obj, int sflag) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int x;
@@ -409,7 +409,7 @@ static int gwim(int sflag, int sfw1, int sfw2) {
 // Local variables
    int av;
    int nobj, robj;
-   Bool nocare;
+   bool nocare;
 
 // GWIM, PAGE 2
 

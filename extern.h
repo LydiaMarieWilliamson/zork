@@ -19,8 +19,8 @@ typedef int Bool; // Logical.
 #define max(A, B)	((A) >= (B)? (A): (B))
 
 // local.c:
-Bool protct(void/*int*/);
-Bool wizard(void);
+bool protct(void/*int*/);
+bool wizard(void);
 
 // The remnant of f2c.h (begin)
 FILE *OpenInF(const char *File, const char *Mode);
@@ -35,56 +35,56 @@ void more_output(const char *, ...);
 // The remnant of f2c.h (end)
 
 // actors.c:
-Bool aappli(int);
+bool aappli(int);
 void thiefd(void);
 
 // ballop.c:
-Bool ballop(int);
+bool ballop(int);
 
 // clockr.c:
 void cevapp(int);
 
 // demons.c:
 void fightd(void);
-int blow(int, int, int, Bool, int);
+int blow(int, int, int, bool, int);
 void swordd(void);
 
 // dgame.c:
 void game_(void);
 
 // dinit.c:
-Bool init(void/*int*/);
+bool init(void/*int*/);
 
 // dso1.c:
-void princr(Bool, int);
+void princr(bool, int);
 void invent(int);
 void princo(int, int);
 
 // dso2.c:
-Bool moveto(int, int);
-void score(Bool);
+bool moveto(int, int);
+void score(bool);
 void scrupd(int);
 
 // dso3.c:
-Bool findxt(int, int);
-int fwim(int, int, int, int, int, Bool);
-Bool yesno(int, int, int);
+bool findxt(int, int);
+int fwim(int, int, int, int, int, bool);
+bool yesno(int, int, int);
 
 // dso4.c:
 int robadv(int, int, int, int);
 int robrm(int, int, int, int, int);
-Bool winnin(int, int);
-int fights(int, Bool);
+bool winnin(int, int);
+int fights(int, bool);
 int vilstr(int);
 
 // dso5.c:
 int gttime(void);
-Bool opncls(int, int, int);
-Bool lit(int);
+bool opncls(int, int, int);
+bool lit(int);
 int weight(int, int, int);
 
 // dso6.c:
-Bool ghere(int, int);
+bool ghere(int, int);
 int mrhere(int);
 
 // dso7.c:
@@ -96,60 +96,60 @@ void cpinfo(int, int);
 void rspeak(int);
 void rspsub(int, int);
 void rspsb2(int, int, int);
-Bool objact(void/*int*/);
+bool objact(void/*int*/);
 void bug(int, int);
 void newsta(int, int, int, int, int);
-Bool qhere(int, int);
-Bool qempty(int);
+bool qhere(int, int);
+bool qempty(int);
 void jigsup(int);
 int oactor(int);
-Bool prob(int, int);
-Bool rmdesc(int);
-Bool rappli(int);
+bool prob(int, int);
+bool rmdesc(int);
+bool rappli(int);
 
 // dverb1.c:
-Bool take(Bool);
-Bool drop(void/*Bool*/);
-Bool put(void/*Bool*/);
+bool take(bool);
+bool drop(void/*bool*/);
+bool put(void/*bool*/);
 void valuac(int);
 
 // dverb2.c:
 void savegm(void);
 void rstrgm(void);
-Bool walk(void/*int*/);
+bool walk(void/*int*/);
 
 // gdt.c:
 void gdt(void);
 
 // lightp.c:
-Bool lightp(int);
+bool lightp(int);
 
 // nobjs.c:
-Bool nobjs(int/*, int*/);
+bool nobjs(int/*, int*/);
 
 // np1.c:
-int sparse(const int *, int, Bool);
+int sparse(const int *, int, bool);
 
 // np2.c:
 int getobj(int, int, int);
 int schlst(int, int, int, int, int, int);
 
 // np3.c:
-Bool synmch(void/*int*/);
+bool synmch(void/*int*/);
 
 // np.c:
 void rdline(char *, size_t, int);
-Bool parse(char *, Bool);
+bool parse(char *, bool);
 void orphan(int, int, int, int, int);
 
 // nrooms.c:
-Bool rappl2(int);
+bool rappl2(int);
 
 // objcts.c:
-Bool oappli(int, int);
+bool oappli(int, int);
 
 // rooms.c:
-Bool rappl1(int);
+bool rappl1(int);
 
 // rtim.c:
 void intime(int *, int *, int *);
@@ -158,16 +158,16 @@ int rnd(int);
 void exit_(void);
 
 // sobjs.c:
-Bool sobjs(int, int);
+bool sobjs(int, int);
 
 // sverbs.c:
-Bool sverbs(int);
+bool sverbs(int);
 
 // verbs.c:
-Bool vappli(int);
-Bool clockd(void/*int*/);
+bool vappli(int);
+bool clockd(void/*int*/);
 
 // villns.c:
-Bool trollp(void/*int*/);
-Bool cyclop(void/*int*/);
-Bool thiefp(void/*int*/);
+bool trollp(void/*int*/);
+bool cyclop(void/*int*/);
+bool thiefp(void/*int*/);

@@ -64,9 +64,9 @@ int robrm(int rm, int pr, int nr, int nc, int na) {
 }
 
 // See if villain is winning
-Bool winnin(int vl, int hr) {
+bool winnin(int vl, int hr) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int ps, vs;
@@ -100,7 +100,7 @@ Bool winnin(int vl, int hr) {
 }
 
 // Compute fight strength
-int fights(int h, Bool flg) {
+int fights(int h, bool flg) {
 // Initialized data
    const int smin = 2;
    const int smax = 7;
@@ -129,10 +129,10 @@ int vilstr(int v) {
    if (ret_val <= 0) {
       return ret_val;
    }
-   if (v != ThiefOX || !findex.thfenf) {
+   if (v != ThiefOX || !findex_0.thfenf) {
       goto L100;
    }
-   findex.thfenf = false;
+   findex_0.thfenf = false;
 // 						!THIEF UNENGROSSED.
    ret_val = min(ret_val, 2);
 // 						!NO BETTER THAN 2.

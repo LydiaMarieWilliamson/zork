@@ -17,7 +17,7 @@ void cevapp(int ri) {
    int i__1, i__2;
 
 // Local variables
-   Bool f;
+   bool f;
    int i, j, bc, br;
 
 // CEVAPP, PAGE 2
@@ -97,13 +97,13 @@ L1000:
 
 L2000:
    if (play.here == MaintRX) {
-      i__1 = findex.rvmnt / 2 + 71;
+      i__1 = findex_1.rvmnt / 2 + 71;
       rspeak(i__1);
    }
 // 						!DESCRIBE.
-   ++findex.rvmnt;
+   ++findex_1.rvmnt;
 // 						!RAISE WATER LEVEL.
-   if (findex.rvmnt <= 16) {
+   if (findex_1.rvmnt <= 16) {
       return;
    }
 // 						!IF NOT FULL, EXIT.
@@ -121,7 +121,7 @@ L2000:
 // CEV3--	LANTERN.  DESCRIBE GROWING DIMNESS.
 
 L3000:
-   litint(LampOX, &findex.orlamp, LntCX, lmptck, 12);
+   litint(LampOX, &findex_1.orlamp, LntCX, lmptck, 12);
 // 						!DO LIGHT INTERRUPT.
    return;
 
@@ -136,7 +136,7 @@ L4000:
 // CEV5--	CANDLE.  DESCRIBE GROWING DIMNESS.
 
 L5000:
-   litint(CandlOX, &findex.orcand, CndCX, cndtck, 10);
+   litint(CandlOX, &findex_1.orcand, CndCX, cndtck, 10);
 // 						!DO CANDLE INTERRUPT.
    return;
 // CEVAPP, PAGE 3
@@ -156,7 +156,7 @@ L6000:
       goto L6700;
    }
 // 						!ON LEDGE?
-   if ((objcts.oflag2[RecepOX - 1] & OpenO) != 0 && findex.binff != 0) {
+   if ((objcts.oflag2[RecepOX - 1] & OpenO) != 0 && findex_1.binff != 0) {
       goto L6500;
    }
 
@@ -183,7 +183,7 @@ L6000:
 L6200:
    f = moveto(state.bloc, play.winner);
 // 						!MOVE HIM.
-   if (findex.binff == 0) {
+   if (findex_1.binff == 0) {
       goto L6250;
    }
 // 						!IN BALLOON.  INFLATED?
@@ -203,8 +203,8 @@ L6250:
    cevent.cflag[BalCX - 1] = false;
 // 						!DISABLE INTERRUPTS.
    cevent.cflag[BrnCX - 1] = false;
-   findex.binff = 0;
-   findex.btief = 0;
+   findex_1.binff = 0;
+   findex_1.btief = 0;
    return;
 
 L6300:
@@ -239,8 +239,8 @@ L6500:
 // 						!AT VAIR4?
    cevent.ctick[BrnCX - 1] = 0;
    cevent.ctick[BalCX - 1] = 0;
-   findex.binff = 0;
-   findex.btief = 0;
+   findex_1.binff = 0;
+   findex_1.btief = 0;
    state.bloc = VlBotRX;
 // 						!FALL TO BOTTOM.
    newsta(BalloOX, 0, 0, 0, 0);
@@ -313,7 +313,7 @@ L6750:
 // AT BOTTOM, GO UP IF INFLATED, DO NOTHING IF DEFLATED.
 
 L6800:
-   if (findex.binff == 0 || !((objcts.oflag2[RecepOX - 1] & OpenO) != 0)) {
+   if (findex_1.binff == 0 || !((objcts.oflag2[RecepOX - 1] & OpenO) != 0)) {
       return;
    }
    state.bloc = Vair1RX;
@@ -354,7 +354,7 @@ L7000:
 L7200:
    newsta(i, 0, 0, 0, 0);
 // 						!VANISH OBJECT.
-   findex.binff = 0;
+   findex_1.binff = 0;
 // 						!UNINFLATED.
    if (play.here == state.bloc) {
       rspsub(292, objcts.odesc2[i - 1]);
@@ -410,7 +410,7 @@ L8100:
    newsta(SSlotOX, 0, 0, 0, 0);
 // 						!KILL SLOT.
    objcts.oflag2[SafeOX - 1] |= OpenO;
-   findex.safef = true;
+   findex_0.safef = true;
 // 						!INDICATE SAFE BLOWN.
    return;
 
@@ -469,7 +469,7 @@ L9100:
    return;
 
 L9200:
-   if (findex.btief != 0) {
+   if (findex_1.btief != 0) {
       goto L9300;
    }
 // 						!TIED TO LEDGE?
@@ -484,8 +484,8 @@ L9300:
 // 						!BALLOON & CONTENTS DIE.
    newsta(DBallOX, 0, state.bloc, 0, 0);
 // 						!INSERT DEAD BALLOON.
-   findex.btief = 0;
-   findex.binff = 0;
+   findex_1.btief = 0;
+   findex_1.binff = 0;
    cevent.cflag[BalCX - 1] = false;
    cevent.cflag[BrnCX - 1] = false;
    jigsup(113);
@@ -563,7 +563,7 @@ L14000:
 // CEV15--	END GAME HERALD.
 
 L15000:
-   findex.endgmf = true;
+   findex_0.endgmf = true;
 // 						!WE'RE IN ENDGAME.
    rspeak(119);
 // 						!INFORM OF ENDGAME.
@@ -620,7 +620,7 @@ L19000:
 // CEV20--	START OF ENDGAME
 
 L20000:
-   if (findex.spellf) {
+   if (findex_0.spellf) {
       goto L20200;
    }
 // 						!SPELL HIS WAY IN?
@@ -656,14 +656,14 @@ L20200:
    cevent.cflag[LntCX - 1] = false;
 // 						!LAMP IS GOOD AS NEW.
    cevent.ctick[LntCX - 1] = 350;
-   findex.orlamp = 0;
+   findex_1.orlamp = 0;
    objcts.oflag2[SwordOX - 1] |= TChO;
    hack.swdact = true;
    hack.swdsta = 0;
 
    hack.thfact = false;
 // 						!THIEF GONE.
-   findex.endgmf = true;
+   findex_0.endgmf = true;
 // 						!ENDGAME RUNNING.
    cevent.cflag[MatCX - 1] = false;
 // 						!MATCHES GONE,
@@ -685,9 +685,9 @@ L20200:
 // CEV21--	MIRROR CLOSES.
 
 L21000:
-   findex.mrpshf = false;
+   findex_0.mrpshf = false;
 // 						!BUTTON IS OUT.
-   findex.mropnf = false;
+   findex_0.mropnf = false;
 // 						!MIRROR IS CLOSED.
    if (play.here == MrAntRX) {
       rspeak(728);
@@ -702,11 +702,11 @@ L21000:
 // CEV22--	DOOR CLOSES.
 
 L22000:
-   if (findex.wdopnf) {
+   if (findex_0.wdopnf) {
       rspeak(730);
    }
 // 						!DESCRIBE.
-   findex.wdopnf = false;
+   findex_0.wdopnf = false;
 // 						!CLOSED.
    return;
 
@@ -718,7 +718,7 @@ L23000:
    }
 // 						!IF PLAYER LEFT, DIE.
    rspeak(769);
-   i__1 = findex.quesno + 770;
+   i__1 = findex_1.quesno + 770;
    rspeak(i__1);
    cevent.ctick[InqCX - 1] = 2;
    return;
@@ -733,15 +733,15 @@ L24000:
    if (play.here != CellRX && play.here != PCellRX) {
       goto L24100;
    }
-   if (findex.follwf) {
+   if (findex_0.follwf) {
       rspeak(811);
    }
 // 						!WONT GO TO CELLS.
-   findex.follwf = false;
+   findex_0.follwf = false;
    return;
 
 L24100:
-   findex.follwf = true;
+   findex_0.follwf = true;
 // 						!FOLLOWING.
    i = 812;
 // 						!ASSUME CATCHES UP.

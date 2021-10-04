@@ -18,10 +18,10 @@ int gttime(void) {
 }
 
 // Process open/close for doors
-Bool opncls(int obj, int so, int sc) {
+bool opncls(int obj, int so, int sc) {
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
    ret_val = true;
 // 						!ASSUME WINS.
@@ -63,10 +63,10 @@ L200:
 }
 
 // Is room lit?
-Bool lit(int rm) {
+bool lit(int rm) {
 // System generated locals
    int i__1, i__2;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i, j, oa;

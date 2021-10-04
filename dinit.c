@@ -25,9 +25,9 @@
 #endif
 
 // Dungeon initialization subroutine
-Bool init(void/*int x*/) {
+bool init(void/*int x*/) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int xmax, r2max;
@@ -137,25 +137,25 @@ L10000:
       flags[f] = false;
 // L10:
    }
-   findex.buoyf = true;
+   findex_0.buoyf = true;
 // 						!SOME START AS TRUE.
-   findex.egyptf = true;
-   findex.cagetf = true;
-   findex.mr1f = true;
-   findex.mr2f = true;
-   findex.follwf = true;
+   findex_0.egyptf = true;
+   findex_0.cagetf = true;
+   findex_0.mr1f = true;
+   findex_0.mr2f = true;
+   findex_0.follwf = true;
    for (int s = 0; s < smax; s++) {
 // 						!CLEAR SWITCHES.
       switch_[s] = 0;
 // L12:
    }
-   findex.ormtch = 4;
+   findex_1.ormtch = 4;
 // 						!NUMBER OF MATCHES.
-   findex.lcell = 1;
-   findex.pnumb = 1;
-   findex.mdir = 270;
-   findex.mloc = MrBrX;
-   findex.cphere = 10;
+   findex_1.lcell = 1;
+   findex_1.pnumb = 1;
+   findex_1.mdir = 270;
+   findex_1.mloc = MrBrX;
+   findex_1.cphere = 10;
 
    for (int r2 = 0; r2 < r2max; r2++) {
 // 						!CLEAR ROOM 2 ARRAY.

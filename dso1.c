@@ -6,7 +6,7 @@
 #include "common.h"
 
 // Print contents of room
-void princr(Bool full, int rm) {
+void princr(bool full, int rm) {
 // System generated locals
    int i__1, i__2;
 
@@ -23,7 +23,7 @@ void princr(Bool full, int rm) {
       if (!qhere(i, rm) || (objcts.oflag1[i - 1] & VisiO + NDscO) != VisiO || i == advs.avehic[play.winner - 1]) {
          goto L500;
       }
-      if (!(full) && (findex.superf || findex.brieff && (rooms.rflag[play.here - 1] & SeenR) != 0)) {
+      if (!(full) && (findex_0.superf || findex_0.brieff && (rooms.rflag[play.here - 1] & SeenR) != 0)) {
          goto L200;
       }
 
@@ -72,7 +72,7 @@ void princr(Bool full, int rm) {
       }
 // 						!TROPHY CASE?
       j = 574;
-      if ((findex.brieff || findex.superf) && !(full)) {
+      if ((findex_0.brieff || findex_0.superf) && !(full)) {
          goto L1000;
       }
    L600:

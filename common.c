@@ -25,7 +25,7 @@ struct timeCB time_;
 // parser.h:
 // common /prsvec/
 // int prsa, prsi, prso;
-// Bool prswon;
+// bool prswon;
 // int prscon;
 struct prsvecCB prsvec;
 
@@ -79,15 +79,16 @@ struct advsCB advs;
 // flags.h:
 // common /findex/
 // Bool trollf, cagesf, bucktf, caroff, carozf, lwtidf, domef, glacrf, echof, riddlf, lldf, cyclof, magicf, litldf, safef, gnomef, gnodrf, mirrmf, egyptf, onpolf, blabf, brieff, superf, buoyf, grunlf, gatef, rainbf, cagetf, empthf, deflaf, glacmf, frobzf, endgmf, badlkf, thfenf, singsf, mrpshf, mropnf, wdopnf, mr1f, mr2f, inqstf, follwf, spellf, cpoutf, cpushf;
+struct findexCB_0 findex_0;
 // int btief, binff, rvmnt, rvclr, rvcyc, rvsnd, rvgua, orrug, orcand, ormtch, orlamp, mdir, mloc, poleuf, quesno, nqatt, corrct, lcell, pnumb, acell, dcell, cphere;
-struct findexCB findex;
+struct findexCB_1 findex_1;
 
 // debug.h:
 // common /debug/
 // int dbgflg, prsflg, gdtflg;
 struct debugCB debug;
 #ifdef ALLOW_GDT
-Bool dflag;
+bool dflag;
 #endif
 
 // villians.h:

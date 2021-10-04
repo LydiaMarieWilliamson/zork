@@ -6,9 +6,9 @@
 #include "common.h"
 
 // Find exit from room
-Bool findxt(int dir, int rm) {
+bool findxt(int dir, int rm) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i, xi;
@@ -63,7 +63,7 @@ L1000:
 }
 
 // Find what I mean
-int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
+int fwim(int f1, int f2, int rm, int con, int adv, bool nocare) {
 // System generated locals
    int ret_val, i__1, i__2;
 
@@ -132,9 +132,9 @@ int fwim(int f1, int f2, int rm, int con, int adv, Bool nocare) {
 // Obtain yes/no answer
 // Called as:
 // 	YesIsTrue = yesno(Question, YesString, NoString);
-Bool yesno(int q, int y, int n) {
+bool yesno(int q, int y, int n) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    char buf[100];

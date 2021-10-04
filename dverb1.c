@@ -7,10 +7,10 @@
 
 // Basic take sequence
 // Take an object (for verbs take, put, drop, read, etc.)
-Bool take(Bool flg) {
+bool take(bool flg) {
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int x, oa;
@@ -92,12 +92,12 @@ L700:
 }
 
 // Drop verb processor
-Bool drop(/*Bool z*/) {
+bool drop(/*bool z*/) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
-   Bool f;
+   bool f;
    int i, x;
 
 // DROP, PAGE 2
@@ -177,9 +177,9 @@ L1000:
 }
 
 // Put verb processor
-Bool put(/*Bool flg*/) {
+bool put(/*bool flg*/) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int j;
@@ -317,9 +317,9 @@ void valuac(int v) {
    int i__1;
 
 // Local variables
-   Bool f;
+   bool f;
    int i;
-   Bool f1;
+   bool f1;
    int savep, saveh;
 
 // VALUAC, PAGE 2

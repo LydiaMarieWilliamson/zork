@@ -6,14 +6,14 @@
 #include "common.h"
 
 // Move player to new room
-Bool moveto(int nr, int who) {
+bool moveto(int nr, int who) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int j;
-   Bool lhr;
-   Bool lnr, nlv;
+   bool lhr;
+   bool lnr, nlv;
    int bits;
 
 // MOVETO, PAGE 2
@@ -88,7 +88,7 @@ L800:
 }
 
 // Print out current score
-void score(Bool flg) {
+void score(bool flg) {
 // Initialized data
    static const int rank[10] = { 20, 19, 18, 16, 12, 8, 4, 2, 1, 0 };
    static const int erank[5] = { 20, 15, 10, 5, 0 };
@@ -103,7 +103,7 @@ void score(Bool flg) {
 
    as = advs.ascore[play.winner - 1];
 
-   if (findex.endgmf) {
+   if (findex_0.endgmf) {
       goto L60;
    }
 // 						!ENDGAME?
@@ -139,7 +139,7 @@ L80:
 
 // Update winner's score
 void scrupd(int n) {
-   if (findex.endgmf) {
+   if (findex_0.endgmf) {
       goto L100;
    }
 // 						!ENDGAME?

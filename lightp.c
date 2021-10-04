@@ -6,9 +6,9 @@
 #include "common.h"
 
 // Light processor
-Bool lightp(int obj) {
+bool lightp(int obj) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int flobts;
@@ -23,11 +23,11 @@ Bool lightp(int obj) {
       goto L20000;
    }
 // 						!CANDLE?
-   if (findex.orcand != 0) {
+   if (findex_1.orcand != 0) {
       goto L19100;
    }
 // 						!FIRST REF?
-   findex.orcand = 1;
+   findex_1.orcand = 1;
 // 						!YES, CANDLES ARE
    cevent.ctick[CndCX - 1] = 50;
 // 						!BURNING WHEN SEEN.
@@ -119,7 +119,7 @@ L20000:
    if (prsvec.prsa != TrnOnW || prsvec.prso != MatchOX) {
       goto L20500;
    }
-   if (findex.ormtch != 0) {
+   if (findex_1.ormtch != 0) {
       goto L20100;
    }
 // 						!ANY MATCHES LEFT?
@@ -128,7 +128,7 @@ L20000:
    return ret_val;
 
 L20100:
-   --findex.ormtch;
+   --findex_1.ormtch;
 // 						!DECREMENT NO MATCHES.
    objcts.oflag1[MatchOX - 1] |= flobts;
    cevent.ctick[MatCX - 1] = 2;

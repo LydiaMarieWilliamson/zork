@@ -5,17 +5,17 @@
 #include "extern.h"
 #include "common.h"
 
-static Bool mirpan(int, Bool);
+static bool mirpan(int, bool);
 
 // New objects processor
 // Objects in this module cannot call rminfo(), jigsup(), major verbs, or other non-resident subroutines
-Bool nobjs(int ri/*, int arg*/) {
+bool nobjs(int ri/*, int arg*/) {
 // System generated locals
    int i__1, i__2;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
-   Bool f;
+   bool f;
    int target;
    int i;
    int j;
@@ -315,7 +315,7 @@ L5000:
    return ret_val;
 
 L5100:
-   if (!findex.singsf && (play.here == MTreeRX || play.here >= Fore1RX && play.here < ClearRX)) {
+   if (!findex_0.singsf && (play.here == MTreeRX || play.here >= Fore1RX && play.here < ClearRX)) {
       goto L5200;
    }
    rspeak(646);
@@ -323,7 +323,7 @@ L5100:
    return ret_val;
 
 L5200:
-   findex.singsf = true;
+   findex_0.singsf = true;
 // 						!SANG SONG.
    i = play.here;
    if (i == MTreeRX) {
@@ -346,7 +346,7 @@ L6000:
 // O38--	WALL
 
 L7000:
-   if ((i__1 = play.here - findex.mloc, abs(i__1)) != 1 || mrhere(play.here) != 0 || prsvec.prsa != PushW) {
+   if ((i__1 = play.here - findex_1.mloc, abs(i__1)) != 1 || mrhere(play.here) != 0 || prsvec.prsa != PushW) {
       goto L7100;
    }
    rspeak(860);
@@ -404,7 +404,7 @@ L9000:
 L9200:
    j = puzzle.cpwl[i];
 // 						!GET DIRECTIONAL OFFSET.
-   nxt = findex.cphere + j;
+   nxt = findex_1.cphere + j;
 // 						!GET NEXT STATE.
    wl = puzzle.cpvec[nxt - 1];
 // 						!GET C(NEXT STATE).
@@ -440,11 +440,11 @@ L9350:
 L9400:
    i = 878;
 // 						!ASSUME FIRST PUSH.
-   if (findex.cpushf) {
+   if (findex_0.cpushf) {
       i = 879;
    }
 // 						!NOT?
-   findex.cpushf = true;
+   findex_0.cpushf = true;
    puzzle.cpvec[nxt + j - 1] = wl;
 // 						!MOVE WALL.
    puzzle.cpvec[nxt - 1] = 0;
@@ -491,12 +491,12 @@ L10000:
 // 						!LIFT?
    i = 749;
 // 						!ASSUME UP.
-   if (findex.poleuf == 2) {
+   if (findex_1.poleuf == 2) {
       i = 750;
    }
 // 						!ALREADY UP?
    rspeak(i);
-   findex.poleuf = 2;
+   findex_1.poleuf = 2;
 // 						!POLE IS RAISED.
    return ret_val;
 
@@ -504,7 +504,7 @@ L10100:
    if (prsvec.prsa != LowerW && prsvec.prsa != PushW) {
       goto L10;
    }
-   if (findex.poleuf != 0) {
+   if (findex_1.poleuf != 0) {
       goto L10200;
    }
 // 						!ALREADY LOWERED?
@@ -513,30 +513,30 @@ L10100:
    return ret_val;
 
 L10200:
-   if (findex.mdir % 180 != 0) {
+   if (findex_1.mdir % 180 != 0) {
       goto L10300;
    }
 // 						!MIRROR N-S?
-   findex.poleuf = 0;
+   findex_1.poleuf = 0;
 // 						!YES, LOWER INTO
    rspeak(752);
 // 						!CHANNEL.
    return ret_val;
 
 L10300:
-   if (findex.mdir != 270 || findex.mloc != MrBrX) {
+   if (findex_1.mdir != 270 || findex_1.mloc != MrBrX) {
       goto L10400;
    }
-   findex.poleuf = 0;
+   findex_1.poleuf = 0;
 // 						!LOWER INTO HOLE.
    rspeak(753);
    return ret_val;
 
 L10400:
-   i__1 = findex.poleuf + 753;
+   i__1 = findex_1.poleuf + 753;
    rspeak(i__1);
 // 						!POLEUF = 1 OR 2.
-   findex.poleuf = 1;
+   findex_1.poleuf = 1;
 // 						!NOW ON FLOOR.
    return ret_val;
 
@@ -547,7 +547,7 @@ L11000:
       goto L10;
    }
 // 						!PUSH?
-   if (findex.mrpshf) {
+   if (findex_0.mrpshf) {
       goto L11300;
    }
 // 						!ALREADY PUSHED?
@@ -569,8 +569,8 @@ L11200:
    cevent.cflag[MrsCX - 1] = true;
 // 						!MIRROR OPENS.
    cevent.ctick[MrsCX - 1] = 7;
-   findex.mrpshf = true;
-   findex.mropnf = true;
+   findex_0.mrpshf = true;
+   findex_0.mropnf = true;
    return ret_val;
 
 L11300:
@@ -623,7 +623,7 @@ L12300:
 // O44--	BRONZE DOOR
 
 L13000:
-   if (play.here == NCellRX || findex.lcell == 4 && (play.here == CellRX || play.here == SCorrRX)) {
+   if (play.here == NCellRX || findex_1.lcell == 4 && (play.here == CellRX || play.here == SCorrRX)) {
       goto L13100;
    }
    rspeak(763);
@@ -655,22 +655,22 @@ L14100:
       goto L10;
    }
 // 						!KNOCK?
-   if (findex.inqstf) {
+   if (findex_0.inqstf) {
       goto L14200;
    }
 // 						!TRIED IT ALREADY?
-   findex.inqstf = true;
+   findex_0.inqstf = true;
 // 						!START INQUISITION.
    cevent.cflag[InqCX - 1] = true;
    cevent.ctick[InqCX - 1] = 2;
-   findex.quesno = rnd(8);
+   findex_1.quesno = rnd(8);
 // 						!SELECT QUESTION.
-   findex.nqatt = 0;
-   findex.corrct = 0;
+   findex_1.nqatt = 0;
+   findex_1.corrct = 0;
    rspeak(768);
 // 						!ANNOUNCE RULES.
    rspeak(769);
-   i__1 = findex.quesno + 770;
+   i__1 = findex_1.quesno + 770;
    rspeak(i__1);
 // 						!ASK QUESTION.
    return ret_val;
@@ -717,10 +717,10 @@ L17000:
    for (i = 1; i <= i__1; ++i) {
 // 						!RELOCATE OLD TO HYPER.
       if (objcts.oroom[i - 1] == CellRX && (objcts.oflag1[i - 1] & DoorO) == 0) {
-         i__2 = findex.lcell * hfactr;
+         i__2 = findex_1.lcell * hfactr;
          newsta(i, 0, i__2, 0, 0);
       }
-      if (objcts.oroom[i - 1] == findex.pnumb * hfactr) {
+      if (objcts.oroom[i - 1] == findex_1.pnumb * hfactr) {
          newsta(i, 0, CellRX, 0, 0);
       }
 // L17100:
@@ -729,7 +729,7 @@ L17000:
    objcts.oflag2[ODoorOX - 1] &= ~OpenO;
    objcts.oflag2[CDoorOX - 1] &= ~OpenO;
    objcts.oflag1[ODoorOX - 1] &= ~VisiO;
-   if (findex.pnumb == 4) {
+   if (findex_1.pnumb == 4) {
       objcts.oflag1[ODoorOX - 1] |= VisiO;
    }
 
@@ -737,7 +737,7 @@ L17000:
       goto L17400;
    }
 // 						!PLAYER IN CELL?
-   if (findex.lcell != 4) {
+   if (findex_1.lcell != 4) {
       goto L17200;
    }
 // 						!IN RIGHT CELL?
@@ -750,7 +750,7 @@ L17200:
 // 						!NO, MOVETO PCELL.
 
 L17400:
-   findex.lcell = findex.pnumb;
+   findex_1.lcell = findex_1.pnumb;
    return ret_val;
 // NOBJS, PAGE 10
 
@@ -761,10 +761,10 @@ L18000:
       goto L18100;
    }
 // 						!SPIN?
-   findex.pnumb = rnd(8) + 1;
+   findex_1.pnumb = rnd(8) + 1;
 // 						!WHEE
 // 						!
-   i__1 = findex.pnumb + 712;
+   i__1 = findex_1.pnumb + 712;
    rspsub(797, i__1);
    return ret_val;
 
@@ -789,9 +789,9 @@ L18200:
    return ret_val;
 
 L18300:
-   findex.pnumb = prsvec.prsi - Num1OX + 1;
+   findex_1.pnumb = prsvec.prsi - Num1OX + 1;
 // 						!SET UP NEW.
-   i__1 = findex.pnumb + 712;
+   i__1 = findex_1.pnumb + 712;
    rspsub(808, i__1);
    return ret_val;
 
@@ -831,7 +831,7 @@ L21000:
 // 						!PUT CARD IN SLIT?
    newsta(prsvec.prso, 863, 0, 0, 0);
 // 						!KILL CARD.
-   findex.cpoutf = true;
+   findex_0.cpoutf = true;
 // 						!OPEN DOOR.
    objcts.oflag1[StlDrOX - 1] &= ~VisiO;
    return ret_val;
@@ -854,10 +854,10 @@ L21200:
 }
 
 // Processor for global mirror/panel
-static Bool mirpan(int st, Bool pnf) {
+static bool mirpan(int st, bool pnf) {
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int num;
@@ -879,7 +879,7 @@ static Bool mirpan(int st, Bool pnf) {
 L100:
    mrbf = 0;
 // 						!ASSUME MIRROR OK.
-   if (num == 1 && !findex.mr1f || num == 2 && !findex.mr2f) {
+   if (num == 1 && !findex_0.mr1f || num == 2 && !findex_0.mr2f) {
       mrbf = 1;
    }
    if (prsvec.prsa != MoveW && prsvec.prsa != OpenW) {
@@ -908,10 +908,10 @@ L300:
    rspeak(i__1);
 // 						!DO IT.
    if (num == 1 && !(pnf)) {
-      findex.mr1f = false;
+      findex_0.mr1f = false;
    }
    if (num == 2 && !(pnf)) {
-      findex.mr2f = false;
+      findex_0.mr2f = false;
    }
    return ret_val;
 

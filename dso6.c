@@ -6,9 +6,9 @@
 #include "common.h"
 
 // Is global actually in this room?
-Bool ghere(int obj, int rm) {
+bool ghere(int obj, int rm) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // GHERE, PAGE 2
 
@@ -155,7 +155,7 @@ int mrhere(int rm) {
 
    ret_val = 1;
 // 						!ASSUME MIRROR 1 HERE.
-   if ((rm - MrAerX) % 2 == findex.mdir / 180) {
+   if ((rm - MrAerX) % 2 == findex_1.mdir / 180) {
       ret_val = 2;
    }
    return ret_val;
@@ -165,14 +165,14 @@ int mrhere(int rm) {
 
 L100:
    ret_val = 0;
-   if ((i__1 = findex.mloc - rm, abs(i__1)) != 1 || findex.mdir % 180 == 0) {
+   if ((i__1 = findex_1.mloc - rm, abs(i__1)) != 1 || findex_1.mdir % 180 == 0) {
       return ret_val;
    }
 
 // RM IS WITHIN ONE OF MLOC, AND MDIR IS E-W
 
    ret_val = 1;
-   if (rm < findex.mloc && findex.mdir < 180 || rm > findex.mloc && findex.mdir > 180) {
+   if (rm < findex_1.mloc && findex_1.mdir < 180 || rm > findex_1.mloc && findex_1.mdir > 180) {
       ret_val = 2;
    }
    return ret_val;

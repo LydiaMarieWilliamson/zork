@@ -6,9 +6,9 @@
 #include "common.h"
 
 // Balloon function
-Bool ballop(int arg) {
+bool ballop(int arg) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // BALLOP, PAGE 2
 
@@ -22,7 +22,7 @@ Bool ballop(int arg) {
       goto L10;
    }
 // 						!ONLY PROCESS LOOK.
-   if (findex.binff != 0) {
+   if (findex_1.binff != 0) {
       goto L50;
    }
 // 						!INFLATED?
@@ -30,10 +30,10 @@ Bool ballop(int arg) {
 // 						!NO.
    goto L100;
 L50:
-   rspsub(544, objcts.odesc2[findex.binff - 1]);
+   rspsub(544, objcts.odesc2[findex_1.binff - 1]);
 // 						!YES.
 L100:
-   if (findex.btief != 0) {
+   if (findex_1.btief != 0) {
       rspeak(545);
    }
 // 						!HOOKED?
@@ -57,7 +57,7 @@ L200:
    return ret_val;
 
 L250:
-   if (findex.btief == 0) {
+   if (findex_1.btief == 0) {
       goto L275;
    }
 // 						!TIED UP?
@@ -78,10 +78,10 @@ L10:
    return ret_val;
 
 L300:
-   if (prsvec.prsa != TakeW || prsvec.prso != findex.binff) {
+   if (prsvec.prsa != TakeW || prsvec.prso != findex_1.binff) {
       goto L350;
    }
-   rspsub(548, objcts.odesc2[findex.binff - 1]);
+   rspsub(548, objcts.odesc2[findex_1.binff - 1]);
 // 						!RECEP CONT TOO HOT.
    return ret_val;
 
@@ -96,7 +96,7 @@ L500:
    if (prsvec.prsa != UnboaW || (rooms.rflag[play.here - 1] & LandR) == 0) {
       goto L600;
    }
-   if (findex.binff != 0) {
+   if (findex_1.binff != 0) {
       cevent.ctick[BalCX - 1] = 3;
    }
 // 						!HE GOT OUT, START BALLOON.
@@ -110,20 +110,20 @@ L600:
 // 						!LIGHT FIRE IN RECEP.
    cevent.ctick[BrnCX - 1] = objcts.osize[prsvec.prso - 1] * 20;
    objcts.oflag1[prsvec.prso - 1] |= OnO + FlamO + LiteO & ~(TakeO + ReadO);
-   if (findex.binff != 0) {
+   if (findex_1.binff != 0) {
       return ret_val;
    }
-   if (!findex.blabf) {
+   if (!findex_0.blabf) {
       newsta(BlaBeOX, 0, 0, BalloOX, 0);
    }
-   findex.blabf = true;
-   findex.binff = prsvec.prso;
+   findex_0.blabf = true;
+   findex_1.binff = prsvec.prso;
    cevent.ctick[BalCX - 1] = 3;
    rspeak(551);
    return ret_val;
 
 L700:
-   if (prsvec.prsa == UnboaW && findex.binff != 0 && (rooms.rflag[play.here - 1] & LandR) != 0) {
+   if (prsvec.prsa == UnboaW && findex_1.binff != 0 && (rooms.rflag[play.here - 1] & LandR) != 0) {
       cevent.ctick[BalCX - 1] = 3;
    }
    goto L10;

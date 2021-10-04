@@ -9,13 +9,13 @@ static void lookto(int, int, int, int, int);
 static void ewtell(int, int);
 
 // Special purpose room routines, part 2
-Bool rappl2(int ri) {
+bool rappl2(int ri) {
 // Initialized data
    const int newrms = 38;
 
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i;
@@ -158,15 +158,15 @@ L46000:
 
    i = 689;
 // 						!ASSUME CASE 5.
-   if (findex.mdir == 270 && findex.mloc == MrBrX) {
-      i = min(findex.poleuf, 1) + 690;
+   if (findex_1.mdir == 270 && findex_1.mloc == MrBrX) {
+      i = min(findex_1.poleuf, 1) + 690;
    }
-   if (findex.mdir % 180 == 0) {
-      i = min(findex.poleuf, 1) + 692;
+   if (findex_1.mdir % 180 == 0) {
+      i = min(findex_1.poleuf, 1) + 692;
    }
    rspeak(i);
 // 						!DESCRIBE POLE.
-   i__1 = findex.mdir / 45 + 695;
+   i__1 = findex_1.mdir / 45 + 695;
    rspsub(694, i__1);
 // 						!DESCRIBE ARROW.
    return ret_val;
@@ -225,7 +225,7 @@ L49000:
    if ((objcts.oflag2[ODoorOX - 1] & OpenO) != 0) {
       i = 12;
    }
-   if (findex.lcell == 4) {
+   if (findex_1.lcell == 4) {
       rspsub(707, i);
    }
 // 						!DESCRIBE ODOOR IF THERE.
@@ -272,7 +272,7 @@ L51000:
 // 						!DESCRIBE SOUTH.
    i = 46;
 // 						!PANEL IS OPEN/CLOSED.
-   if (findex.inqstf) {
+   if (findex_0.inqstf) {
       i = 12;
    }
 // 						!OPEN IF INQ STARTED.
@@ -303,7 +303,7 @@ L52000:
 
 L53000:
    if (prsvec.prsa == LookW) {
-      i__1 = findex.pnumb + 712;
+      i__1 = findex_1.pnumb + 712;
       rspsub(712, i__1);
    }
    return ret_val;
@@ -326,7 +326,7 @@ L54000:
    if ((objcts.oflag2[ODoorOX - 1] & OpenO) != 0) {
       i = 12;
    }
-   if (findex.lcell == 4) {
+   if (findex_1.lcell == 4) {
       rspsub(723, i);
    }
 // 						!DESCRIBE.
@@ -397,7 +397,7 @@ L59000:
 // 						!LOOK?
    i = 861;
 // 						!ASSUME DOOR CLOSED.
-   if (findex.cpoutf) {
+   if (findex_0.cpoutf) {
       i = 862;
    }
 // 						!OPEN?
@@ -412,7 +412,7 @@ L60000:
       return ret_val;
    }
 // 						!LOOK?
-   if (findex.cpushf) {
+   if (findex_0.cpushf) {
       goto L60100;
    }
 // 						!STARTED PUZZLE?
@@ -424,7 +424,7 @@ L60000:
    return ret_val;
 
 L60100:
-   cpinfo(880, findex.cphere);
+   cpinfo(880, findex_1.cphere);
 // 						!DESCRIBE ROOM.
    return ret_val;
 }
@@ -447,18 +447,18 @@ static void lookto(int nrm, int srm, int nt, int st, int ht) {
 // 						!DESCRIBE SOUTH VIEW.
    dir = 0;
 // 						!ASSUME NO DIRECTION.
-   if ((i__1 = findex.mloc - play.here, abs(i__1)) != 1) {
+   if ((i__1 = findex_1.mloc - play.here, abs(i__1)) != 1) {
       goto L200;
    }
 // 						!MIRROR TO N OR S?
-   if (findex.mloc == nrm) {
+   if (findex_1.mloc == nrm) {
       dir = 695;
    }
-   if (findex.mloc == srm) {
+   if (findex_1.mloc == srm) {
       dir = 699;
    }
 // 						!DIR=N/S.
-   if (findex.mdir % 180 != 0) {
+   if (findex_1.mdir % 180 != 0) {
       goto L100;
    }
 // 						!MIRROR N-S?
@@ -473,13 +473,13 @@ L100:
 // 						!WHICH MIRROR?
    mrbf = 0;
 // 						!ASSUME INTACT.
-   if (m1 == 1 && !findex.mr1f || m1 == 2 && !findex.mr2f) {
+   if (m1 == 1 && !findex_0.mr1f || m1 == 2 && !findex_0.mr2f) {
       mrbf = 1;
    }
    i__1 = mrbf + 849;
    rspsub(i__1, dir);
 // 						!DESCRIBE.
-   if (m1 == 1 && findex.mropnf) {
+   if (m1 == 1 && findex_0.mropnf) {
       i__1 = mrbf + 823;
       rspeak(i__1);
    }
@@ -512,21 +512,21 @@ static void ewtell(int rm, int st) {
 
 // Local variables
    int i;
-   Bool m1;
+   bool m1;
 
 // EWTELL, PAGE 2
 
 // NOTE THAT WE ARE EAST OR WEST OF MIRROR, AND
 // MIRROR MUST BE N-S.
 
-   m1 = findex.mdir + (rm - MrAerX) % 2 * 180 == 180;
+   m1 = findex_1.mdir + (rm - MrAerX) % 2 * 180 == 180;
    i = (rm - MrAerX) % 2 + 819;
 // 						!GET BASIC E/W STRING.
-   if (m1 && !findex.mr1f || !m1 && !findex.mr2f) {
+   if (m1 && !findex_0.mr1f || !m1 && !findex_0.mr2f) {
       i += 2;
    }
    rspeak(i);
-   if (m1 && findex.mropnf) {
+   if (m1 && findex_0.mropnf) {
       i__1 = (i - 819) / 2 + 823;
       rspeak(i__1);
    }

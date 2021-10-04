@@ -6,9 +6,9 @@
 #include "common.h"
 
 // Troll function
-Bool trollp(/*int arg*/) {
+bool trollp(/*int arg*/) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i;
@@ -46,7 +46,7 @@ L1100:
       goto L1200;
    }
 // 						!DEAD?
-   findex.trollf = true;
+   findex_0.trollf = true;
 // 						!PERMIT EXITS.
    return ret_val;
 
@@ -55,7 +55,7 @@ L1200:
       goto L1300;
    }
 // 						!OUT?
-   findex.trollf = true;
+   findex_0.trollf = true;
 // 						!PERMIT EXITS.
    objcts.oflag1[AxeOX - 1] &= ~VisiO;
    objcts.odesc1[TrollOX - 1] = 435;
@@ -67,7 +67,7 @@ L1300:
       goto L1400;
    }
 // 						!WAKE UP?
-   findex.trollf = false;
+   findex_0.trollf = false;
 // 						!FORBID EXITS.
    objcts.oflag1[AxeOX - 1] |= VisiO;
    objcts.odesc1[TrollOX - 1] = 436;
@@ -97,7 +97,7 @@ L1500:
    objcts.ocapac[TrollOX - 1] = -objcts.ocapac[TrollOX - 1];
 // 						!YES, WAKE HIM.
    objcts.oflag1[AxeOX - 1] |= VisiO;
-   findex.trollf = false;
+   findex_0.trollf = false;
    objcts.odesc1[TrollOX - 1] = 436;
    rspeak(437);
 
@@ -146,7 +146,7 @@ L1900:
    return ret_val;
 
 L2000:
-   if (!findex.trollf || prsvec.prsa != HelloW) {
+   if (!findex_0.trollf || prsvec.prsa != HelloW) {
       goto L10;
    }
    rspeak(366);
@@ -160,10 +160,10 @@ L10:
 }
 
 // Cyclops function
-Bool cyclop(/*int arg*/) {
+bool cyclop(/*int arg*/) {
 // System generated locals
    int i__1, i__2;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i;
@@ -172,18 +172,18 @@ Bool cyclop(/*int arg*/) {
 
    ret_val = true;
 // 						!ASSUME WINS.
-   if (!findex.cyclof) {
+   if (!findex_0.cyclof) {
       goto L100;
    }
 // 						!ASLEEP?
    if (prsvec.prsa != AlarmW && prsvec.prsa != MungW && prsvec.prsa != HelloW && prsvec.prsa != BurnW && prsvec.prsa != KillW && prsvec.prsa != AttacW) {
       goto L10;
    }
-   findex.cyclof = false;
+   findex_0.cyclof = false;
 // 						!WAKE CYCLOPS.
    rspeak(187);
 // 						!DESCRIBE.
-   findex.rvcyc = abs(findex.rvcyc);
+   findex_1.rvcyc = abs(findex_1.rvcyc);
    objcts.oflag2[CycloOX - 1] = (objcts.oflag2[CycloOX - 1] | FiteO) & ~SlepO;
    return ret_val;
 
@@ -191,11 +191,11 @@ L100:
    if (prsvec.prsa == FightW || prsvec.prsa == FrstQW) {
       goto L10;
    }
-   if (abs(findex.rvcyc) <= 5) {
+   if (abs(findex_1.rvcyc) <= 5) {
       goto L200;
    }
 // 						!ANNOYED TOO MUCH?
-   findex.rvcyc = 0;
+   findex_1.rvcyc = 0;
 // 						!RESTART COUNT.
    jigsup(188);
 // 						!YES, EATS PLAYER.
@@ -206,15 +206,15 @@ L200:
       goto L500;
    }
 // 						!GIVE?
-   if (prsvec.prso != FoodOX || findex.rvcyc < 0) {
+   if (prsvec.prso != FoodOX || findex_1.rvcyc < 0) {
       goto L300;
    }
 // 						!FOOD WHEN HUNGRY?
    newsta(FoodOX, 189, 0, 0, 0);
 // 						!EATS PEPPERS.
 // Computing MIN
-   i__1 = -1, i__2 = -findex.rvcyc;
-   findex.rvcyc = min(i__1, i__2);
+   i__1 = -1, i__2 = -findex_1.rvcyc;
+   findex_1.rvcyc = min(i__1, i__2);
 // 						!GETS THIRSTY.
    return ret_val;
 
@@ -223,12 +223,12 @@ L300:
       goto L400;
    }
 // 						!DRINK WHEN THIRSTY?
-   if (findex.rvcyc >= 0) {
+   if (findex_1.rvcyc >= 0) {
       goto L350;
    }
    newsta(prsvec.prso, 190, 0, 0, 0);
 // 						!DRINKS AND
-   findex.cyclof = true;
+   findex_0.cyclof = true;
 // 						!FALLS ASLEEP.
    objcts.oflag2[CycloOX - 1] = (objcts.oflag2[CycloOX - 1] | SlepO) & ~FiteO;
    return ret_val;
@@ -251,14 +251,14 @@ L400:
 L450:
    rspeak(i);
 // 						!DISDAIN IT.
-   if (findex.rvcyc < 0) {
-      --findex.rvcyc;
+   if (findex_1.rvcyc < 0) {
+      --findex_1.rvcyc;
    }
-   if (findex.rvcyc >= 0) {
-      ++findex.rvcyc;
+   if (findex_1.rvcyc >= 0) {
+      ++findex_1.rvcyc;
    }
-   if (!findex.cyclof) {
-      i__1 = abs(findex.rvcyc) + 193;
+   if (!findex_0.cyclof) {
+      i__1 = abs(findex_1.rvcyc) + 193;
       rspeak(i__1);
    }
    return ret_val;
@@ -288,10 +288,10 @@ L500:
 }
 
 // Thief function
-Bool thiefp(/*int arg*/) {
+bool thiefp(/*int arg*/) {
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i, j;
@@ -494,7 +494,7 @@ L800:
 L900:
    rspsub(627, objcts.odesc2[prsvec.prso - 1]);
 // 						!THIEF ENGROSSED.
-   findex.thfenf = true;
+   findex_0.thfenf = true;
    return ret_val;
 
 L10:

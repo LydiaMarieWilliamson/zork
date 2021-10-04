@@ -67,7 +67,7 @@ void cpgoto(int st) {
    for (i = 1; i <= i__1; ++i) {
 // 						!RELOCATE OBJECTS.
       if (objcts.oroom[i - 1] == CPuzzRX && (objcts.oflag2[i - 1] & ActrO + VillO) == 0) {
-         i__2 = findex.cphere * hfactr;
+         i__2 = findex_1.cphere * hfactr;
          newsta(i, 0, i__2, 0, 0);
       }
       if (objcts.oroom[i - 1] == st * hfactr) {
@@ -75,7 +75,7 @@ void cpgoto(int st) {
       }
 // L100:
    }
-   findex.cphere = st;
+   findex_1.cphere = st;
 }
 
 // Describe puzzle room
@@ -124,7 +124,7 @@ void cpinfo(int rmk, int st) {
 // 						!AT NICHE?
    i = 872;
 // 						!DOOR OPEN?
-   if (findex.cpoutf) {
+   if (findex_0.cpoutf) {
       i = 873;
    }
    if (st == 52) {

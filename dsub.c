@@ -7,31 +7,31 @@
 #include "common.h"
 
 // Resident subroutines for dungeon
-static void rspsb2nl(int, int, int, Bool);
+static void rspsb2nl(int, int, int, bool);
 
 // Output random message routine
 // Called as:
 // 	rspeak(MsgNum);
 void rspeak(int n) {
-   rspsb2nl(n, 0, 0, 1);
+   rspsb2nl(n, 0, 0, true);
 }
 
 // Output random message with substitutable argument
 // Called as:
 // 	rspsub(MsgNum, SubNum);
 void rspsub(int n, int s1) {
-   rspsb2nl(n, s1, 0, 1);
+   rspsb2nl(n, s1, 0, true);
 }
 
 // Output random message with up to two substitutable arguments
 // Called as:
 // 	rspsb2(MsgNum, SubNum1, SubNum2);
 void rspsb2(int n, int s1, int s2) {
-   rspsb2nl(n, s1, s2, 1);
+   rspsb2nl(n, s1, s2, true);
 }
 
 // Display a substitutable message with an optional newline
-static void rspsb2nl(int n, int y, int z, Bool nl) {
+static void rspsb2nl(int n, int y, int z, bool nl) {
    const char *zkey = "IanLanceTaylorJr";
    long x;
 
@@ -74,7 +74,7 @@ static void rspsb2nl(int n, int y, int z, Bool nl) {
          long iloc;
 
          iloc = ftell(StoryF);
-         rspsb2nl(y, 0, 0, 0);
+         rspsb2nl(y, 0, 0, false);
          if (fseek(StoryF, iloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", iloc), exit_();
          y = z;
          z = 0;
@@ -87,9 +87,9 @@ static void rspsb2nl(int n, int y, int z, Bool nl) {
 }
 
 // Apply objects from parse vector
-Bool objact(/*int x*/) {
+bool objact(/*int x*/) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
    ret_val = true;
 // 						!ASSUME WINS.
@@ -142,10 +142,10 @@ void newsta(int o, int r, int rm, int cn, int ad) {
 }
 
 // Test for object in room
-Bool qhere(int obj, int rm) {
+bool qhere(int obj, int rm) {
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i;
@@ -169,10 +169,10 @@ Bool qhere(int obj, int rm) {
 }
 
 // Test for object empty
-Bool qempty(int obj) {
+bool qempty(int obj) {
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i;
@@ -201,7 +201,7 @@ void jigsup(int desc) {
 
 // Local variables
    int nonofl;
-   Bool f;
+   bool f;
    int i, j;
 
 // JIGSUP, PAGE 2
@@ -227,7 +227,7 @@ void jigsup(int desc) {
    return;
 
 L100:
-   if (findex.endgmf) {
+   if (findex_0.endgmf) {
       goto L900;
    }
 // 						!NO RECOVERY IN END GAME.
@@ -259,7 +259,7 @@ L100:
 // 						!CHARGE TEN POINTS.
    f = moveto(Fore1RX, play.winner);
 // 						!REPOSITION HIM.
-   findex.egyptf = true;
+   findex_0.egyptf = true;
 // 						!RESTORE COFFIN.
    if (objcts.oadv[CoffiOX - 1] == play.winner) {
       newsta(CoffiOX, 0, EgyptRX, 0, 0);
@@ -376,16 +376,16 @@ int oactor(int obj) {
 }
 
 // Compute probability
-Bool prob(int g, int b) {
+bool prob(int g, int b) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i;
 
    i = g;
 // 						!ASSUME GOOD LUCK.
-   if (findex.badlkf) {
+   if (findex_0.badlkf) {
       i = b;
    }
 // 						!IF BAD, TOO BAD.
@@ -397,9 +397,9 @@ Bool prob(int g, int b) {
 // Print room description
 // rmdesc() prints a description of the current room.
 // It is also the processor for verbs ‛LOOK’ and ‛EXAMINE’.
-Bool rmdesc(int full) {
+bool rmdesc(int full) {
 // System generated locals
-   Bool ret_val, L__1;
+   bool ret_val;
 
 // Local variables
    int i, ra;
@@ -454,11 +454,11 @@ L300:
 // I don't either like or understand this, so the mod. ensures VERBOSE works all the time.
 // 1987/10/22 jmh@ukc.ac.uk
 #if 1
-   if (full == 0 && (findex.superf || (rooms.rflag[play.here - 1] & SeenR) != 0 && findex.brieff)) {
+   if (full == 0 && (findex_0.superf || (rooms.rflag[play.here - 1] & SeenR) != 0 && findex_0.brieff)) {
       goto L400;
    }
 #else
-   if (full == 0 && (findex.superf || (rooms.rflag[play.here - 1] & SeenR) != 0 && (findex.brieff || prob(80, 80)))) {
+   if (full == 0 && (findex_0.superf || (rooms.rflag[play.here - 1] & SeenR) != 0 && (findex_0.brieff || prob(80, 80)))) {
       goto L400;
    }
 #endif
@@ -488,8 +488,7 @@ L500:
 
 L600:
    if (full != 2) {
-      L__1 = full != 0;
-      princr(L__1, play.here);
+      princr(full != 0, play.here);
    }
    rooms.rflag[play.here - 1] |= SeenR;
    if (full != 0 || ra == 0) {
@@ -507,12 +506,12 @@ L600:
 }
 
 // Routing routine for room applicables
-Bool rappli(int ri) {
+bool rappli(int ri) {
 // Initialized data
    const int newrms = 38;
 
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
    ret_val = true;
 // 						!ASSUME WINS.

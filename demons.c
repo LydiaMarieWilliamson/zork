@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-static Bool infest(int);
+static bool infest(int);
 
 // Intermove fight demon
 void fightd(void) {
@@ -16,7 +16,7 @@ void fightd(void) {
    int i__1, i__2;
 
 // Local variables
-   Bool f;
+   bool f;
    int i, j, ra;
    int obj;
    int res;
@@ -37,7 +37,7 @@ void fightd(void) {
          goto L2200;
       }
 // 						!ADVENTURER STILL HERE?
-      if (obj == ThiefOX && findex.thfenf) {
+      if (obj == ThiefOX && findex_0.thfenf) {
          goto L2400;
       }
 // 						!THIEF ENGROSSED?
@@ -99,7 +99,7 @@ void fightd(void) {
       f = oappli(ra, 0);
    L2300:
       if (obj == ThiefOX) {
-         findex.thfenf = false;
+         findex_0.thfenf = false;
       }
 // 						!TURN OFF ENGROSSED.
       advs.aflag[PlayerAX - 1] &= ~STagA;
@@ -165,7 +165,7 @@ L2600:
 }
 
 // Strike blow
-int blow(int h, int v, int rmk, Bool hflg, int out) {
+int blow(int h, int v, int rmk, bool hflg, int out) {
 // System generated locals
    int ret_val, i__1, i__2;
 
@@ -177,7 +177,7 @@ int blow(int h, int v, int rmk, Bool hflg, int out) {
    int pblose;
 
 // MISCELLANEOUS VARIABLES
-   Bool f;
+   bool f;
 
 // Initialized data
    const int rmiss = 0;
@@ -585,14 +585,14 @@ L500:
 }
 
 // Subroutine to test for infested room
-static Bool infest(int r) {
+static bool infest(int r) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
-   if (!findex.endgmf) {
+   if (!findex_0.endgmf) {
       ret_val = objcts.oroom[CycloOX - 1] == r || objcts.oroom[TrollOX - 1] == r || objcts.oroom[ThiefOX - 1] == r && hack.thfact;
    } else {
-      ret_val = r == MrGrX || r == MrGerX || r == MrGwrX || r == InMirRX && findex.mloc == MrGrX;
+      ret_val = r == MrGrX || r == MrGerX || r == MrGwrX || r == InMirRX && findex_1.mloc == MrGrX;
    }
    return ret_val;
 }

@@ -5,7 +5,7 @@
 #include "extern.h"
 #include "common.h"
 
-static Bool thisit(int, int, int, int);
+static bool thisit(int, int, int, int);
 
 // Find obj described by adj, name pair
 // This routine details on bit 3 of prsflg
@@ -17,7 +17,7 @@ int getobj(int oidx, int aidx, int spcobj) {
    int i, av;
    int obj;
    int nobj;
-   Bool chomp;
+   bool chomp;
 
 // GETOBJ, PAGE 2
 
@@ -220,14 +220,14 @@ L2000:
 }
 
 // Validate object versus description
-static Bool thisit(int oidx, int aidx, int obj, int spcobj) {
+static bool thisit(int oidx, int aidx, int obj, int spcobj) {
 // Initialized data
 //    The following data statement used radix-50 notation (r50min/1RA/)
 //       In radix-50 notation, an ‟A” in the first position is encoded as 1×40×40 = 1600.
    const int r50min = 1600;
 
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i;

@@ -6,12 +6,12 @@
 #include "common.h"
 
 // Applicables for adventurers
-Bool aappli(int ri) {
+bool aappli(int ri) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
-   Bool f;
+   bool f;
    int i;
 
 // AAPPLI, PAGE 2
@@ -55,7 +55,7 @@ L1000:
 // 						!INSTALL ROBOT IN ROOM.
    advs.aroom[RobotAX - 1] = CageRRX;
 // 						!ALSO MOVE ROBOT/ADV.
-   findex.cagesf = true;
+   findex_0.cagesf = true;
 // 						!CAGE SOLVED.
    objcts.oflag1[RobotOX - 1] &= ~NDscO;
    objcts.oflag1[SpherOX - 1] |= TakeO;
@@ -126,7 +126,7 @@ void thiefd(void) {
 
 // Local variables
    int i, j, nr;
-   Bool once;
+   bool once;
    int rhere;
 
 // THIEFD, PAGE 2
@@ -339,7 +339,7 @@ L1500:
 
 L1700:
    if (objcts.oadv[RopeOX - 1] == -ThiefOX) {
-      findex.domef = false;
+      findex_0.domef = false;
    }
    if (once) {
       goto L1800;

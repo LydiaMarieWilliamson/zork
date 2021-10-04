@@ -6,18 +6,18 @@
 #include "common.h"
 
 // Main verb processing routine
-Bool vappli(int ri) {
+bool vappli(int ri) {
 // Initialized data
    const int mxnop = 39;
    const int mxsmp = 99;
 
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int melee;
-   Bool f;
+   bool f;
    int i, j,/* x,*/ av;
    int rmk;
    int odi2 = 0, odo2 = 0;
@@ -1344,10 +1344,10 @@ L87500:
 }
 
 // Clock demon for intermove clock events
-Bool clockd(/*int x*/) {
+bool clockd(/*int x*/) {
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i;

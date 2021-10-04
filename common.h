@@ -39,7 +39,7 @@ extern const size_t batdrpN;
 // common /prsvec/
 extern struct prsvecCB {
    int prsa, prsi, prso;
-   Bool prswon;
+   bool prswon;
    int prscon;
 } prsvec;
 
@@ -117,7 +117,7 @@ extern struct roomsCB {
    int rlnt, rdesc1[200], rdesc2[200], rexit[200], ractio[200], rval[200], rflag[200];
 } rooms;
 #define eqr ((int *)&rooms + 1) // int eqr[5][200]; equivalence(rdesc1, eqr);
-#define rrand ((int *)&rooms + 601) // int rrand[200]; equivalence(rval, rrand);
+#define rrand (rooms.rval) // int rrand[200]; equivalence(rval, rrand);
 
 // rflag.h:
 // Room flags
@@ -250,12 +250,14 @@ enum vindexCB {
 // flags.h:
 // Flags
 // common /findex/
-extern struct findexCB {
+extern struct findexCB_0 {
    Bool trollf, cagesf, bucktf, caroff, carozf, lwtidf, domef, glacrf, echof, riddlf, lldf, cyclof, magicf, litldf, safef, gnomef, gnodrf, mirrmf, egyptf, onpolf, blabf, brieff, superf, buoyf, grunlf, gatef, rainbf, cagetf, empthf, deflaf, glacmf, frobzf, endgmf, badlkf, thfenf, singsf, mrpshf, mropnf, wdopnf, mr1f, mr2f, inqstf, follwf, spellf, cpoutf, cpushf;
+} findex_0;
+#define flags ((Bool *)&findex_0) // Bool flags[46]; equivalence(flags, trollf);
+extern struct findexCB_1 {
    int btief, binff, rvmnt, rvclr, rvcyc, rvsnd, rvgua, orrug, orcand, ormtch, orlamp, mdir, mloc, poleuf, quesno, nqatt, corrct, lcell, pnumb, acell, dcell, cphere;
-} findex;
-#define flags ((Bool *)&findex) // Bool flags[46]; equivalence(flags, trollf);
-#define switch_ ((int *)&findex + 46) // int switch_[22]; equivalence(switch_, btief);
+} findex_1;
+#define switch_ ((int *)&findex_1) // int switch_[22]; equivalence(switch_, btief);
 
 // debug.h:
 // common /debug/
@@ -263,7 +265,7 @@ extern struct debugCB {
    int dbgflg, prsflg, gdtflg;
 } debug;
 #ifdef ALLOW_GDT
-extern Bool dflag;
+extern bool dflag;
 #endif
 
 // villians.h:
@@ -293,7 +295,7 @@ extern struct stateCB {
 extern struct curxtCB {
    int xtype, xroom1, xstrng, xactio, xobj;
 } curxt;
-#define xflag ((int *)&curxt + 4) // int xflag; equivalence(xflag, xobj);
+#define xflag (curxt.xobj) // int xflag; equivalence(xflag, xobj);
 
 // xpars.h:
 // common /xpars/

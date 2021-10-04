@@ -416,7 +416,7 @@ L22000:
 // NT-- NO TROLL
 
 L23000:
-   findex.trollf = true;
+   findex_0.trollf = true;
    newsta(TrollOX, 0, 0, 0, 0);
    more_output("No troll.\n");
    goto L2000;
@@ -424,7 +424,7 @@ L23000:
 // NC-- NO CYCLOPS
 
 L24000:
-   findex.cyclof = true;
+   findex_0.cyclof = true;
    newsta(CycloOX, 0, 0, 0, 0);
    more_output("No cyclops.\n");
    goto L2000;
@@ -446,7 +446,7 @@ L26000:
 // RT-- RESTORE TROLL
 
 L27000:
-   findex.trollf = false;
+   findex_0.trollf = false;
    newsta(TrollOX, 0, MTrolRX, 0, 0);
    more_output("Restored troll.\n");
    goto L2000;
@@ -454,8 +454,8 @@ L27000:
 // RC-- RESTORE CYCLOPS
 
 L28000:
-   findex.cyclof = false;
-   findex.magicf = false;
+   findex_0.cyclof = false;
+   findex_0.magicf = false;
    newsta(CycloOX, 0, MCyclRX, 0, 0);
    more_output("Restored cyclops.\n");
    goto L2000;

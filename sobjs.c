@@ -7,13 +7,13 @@
 
 // Simple objects processor
 // Objects in this module cannot call rminfo(), jigsup(), major verbs, or other non-resident subroutines
-Bool sobjs(int ri, int arg) {
+bool sobjs(int ri, int arg) {
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
-   Bool f;
+   bool f;
    int i;
    int mroom;
    int av;
@@ -157,7 +157,7 @@ L6000:
       goto L6100;
    }
 // 						!IN DOME?
-   findex.domef = false;
+   findex_0.domef = false;
 // 						!NO,
    if (prsvec.prsa != UnTieW) {
       goto L6050;
@@ -180,11 +180,11 @@ L6100:
    if (prsvec.prsa != TieW || prsvec.prsi != RailiOX) {
       goto L6200;
    }
-   if (findex.domef) {
+   if (findex_0.domef) {
       goto L6150;
    }
 // 						!ALREADY TIED?
-   findex.domef = true;
+   findex_0.domef = true;
 // 						!NO, TIE IT.
    objcts.oflag1[RopeOX - 1] |= NDscO;
    objcts.oflag2[RopeOX - 1] |= ClmbO;
@@ -201,7 +201,7 @@ L6200:
       goto L6300;
    }
 // 						!UNTIE?
-   if (findex.domef) {
+   if (findex_0.domef) {
       goto L6250;
    }
 // 						!TIED?
@@ -210,7 +210,7 @@ L6200:
    return ret_val;
 
 L6250:
-   findex.domef = false;
+   findex_0.domef = false;
 // 						!YES, UNTIE IT.
    objcts.oflag1[RopeOX - 1] &= ~NDscO;
    objcts.oflag2[RopeOX - 1] &= ~ClmbO;
@@ -218,7 +218,7 @@ L6250:
    return ret_val;
 
 L6300:
-   if (findex.domef || prsvec.prsa != DropW) {
+   if (findex_0.domef || prsvec.prsa != DropW) {
       goto L6400;
    }
 // 						!DROP & UNTIED?
@@ -227,7 +227,7 @@ L6300:
    return ret_val;
 
 L6400:
-   if (prsvec.prsa != TakeW || !findex.domef) {
+   if (prsvec.prsa != TakeW || !findex_0.domef) {
       goto L10;
    }
    rspeak(141);
@@ -289,14 +289,14 @@ L9200:
       goto L9300;
    }
 // 						!MOVE?
-   i__1 = findex.orrug + 145;
+   i__1 = findex_1.orrug + 145;
    rspeak(i__1);
-   findex.orrug = 1;
+   findex_1.orrug = 1;
    objcts.oflag1[DoorOX - 1] |= VisiO;
    return ret_val;
 
 L9300:
-   if (prsvec.prsa != LookUW || findex.orrug != 0 || (objcts.oflag2[DoorOX - 1] & OpenO) != 0) {
+   if (prsvec.prsa != LookUW || findex_1.orrug != 0 || (objcts.oflag2[DoorOX - 1] & OpenO) != 0) {
       goto L10;
    }
    rspeak(345);
@@ -316,7 +316,7 @@ L13000:
 // O9--	MIRROR
 
 L14000:
-   if (findex.mirrmf || prsvec.prsa != RubW) {
+   if (findex_0.mirrmf || prsvec.prsa != RubW) {
       goto L14500;
    }
    mroom = play.here ^ 1;
@@ -345,7 +345,7 @@ L14500:
    }
    i = 164;
 // 						!MIRROR OK.
-   if (findex.mirrmf) {
+   if (findex_0.mirrmf) {
       i = 165;
    }
 // 						!MIRROR DEAD.
@@ -367,12 +367,12 @@ L14700:
    }
    i = 167;
 // 						!MIRROR BREAKS.
-   if (findex.mirrmf) {
+   if (findex_0.mirrmf) {
       i = 168;
    }
 // 						!MIRROR ALREADY BROKEN.
-   findex.mirrmf = true;
-   findex.badlkf = true;
+   findex_0.mirrmf = true;
+   findex_0.badlkf = true;
    rspeak(i);
    return ret_val;
 // SOBJS, PAGE 6
@@ -384,14 +384,14 @@ L16000:
       goto L16100;
    }
 // 						!RAISE?
-   if (findex.cagetf) {
+   if (findex_0.cagetf) {
       goto L16400;
    }
 // 						!ALREADY AT TOP?
    newsta(TBaskOX, 175, TShafRX, 0, 0);
 // 						!NO, RAISE BASKET.
    newsta(FBaskOX, 0, BShafRX, 0, 0);
-   findex.cagetf = true;
+   findex_0.cagetf = true;
 // 						!AT TOP.
    return ret_val;
 
@@ -400,14 +400,14 @@ L16100:
       goto L16200;
    }
 // 						!LOWER?
-   if (!findex.cagetf) {
+   if (!findex_0.cagetf) {
       goto L16400;
    }
 // 						!ALREADY AT BOTTOM?
    newsta(TBaskOX, 176, BShafRX, 0, 0);
 // 						!NO, LOWER BASKET.
    newsta(FBaskOX, 0, TShafRX, 0, 0);
-   findex.cagetf = false;
+   findex_0.cagetf = false;
    if (!lit(play.here)) {
       rspeak(406);
    }
@@ -498,7 +498,7 @@ L27000:
       goto L27500;
    }
 // 						!WITH WRENCH?
-   if (findex.gatef) {
+   if (findex_0.gatef) {
       goto L27100;
    }
 // 						!PROPER BUTTON PUSHED?
@@ -507,11 +507,11 @@ L27000:
    return ret_val;
 
 L27100:
-   if (findex.lwtidf) {
+   if (findex_0.lwtidf) {
       goto L27200;
    }
 // 						!LOW TIDE NOW?
-   findex.lwtidf = true;
+   findex_0.lwtidf = true;
 // 						!NO, EMPTY DAM.
    rspeak(211);
    objcts.oflag2[CoffiOX - 1] &= ~ScrDO;
@@ -520,7 +520,7 @@ L27100:
    return ret_val;
 
 L27200:
-   findex.lwtidf = false;
+   findex_0.lwtidf = false;
 // 						!YES, FILL DAM.
    rspeak(212);
    if (qhere(TrunkOX, ReserRX)) {
@@ -540,7 +540,7 @@ L28000:
    if (prsvec.prsa != OpenW && prsvec.prsa != CloseW) {
       goto L10;
    }
-   if (findex.grunlf) {
+   if (findex_0.grunlf) {
       goto L28200;
    }
 // 						!UNLOCKED?
@@ -676,14 +676,14 @@ L31600:
 // O20--	LEAK
 
 L33000:
-   if (prsvec.prso != LeakOX || prsvec.prsa != PlugW || findex.rvmnt <= 0) {
+   if (prsvec.prso != LeakOX || prsvec.prsa != PlugW || findex_1.rvmnt <= 0) {
       goto L10;
    }
    if (prsvec.prsi != PuttyOX) {
       goto L33100;
    }
 // 						!WITH PUTTY?
-   findex.rvmnt = -1;
+   findex_1.rvmnt = -1;
 // 						!DISABLE LEAK.
    cevent.ctick[MntCX - 1] = 0;
    rspeak(577);
@@ -724,25 +724,25 @@ L34100:
    return ret_val;
 
 L34200:
-   findex.gatef = true;
+   findex_0.gatef = true;
 // 						!RELEASE GATE.
    rspeak(232);
    return ret_val;
 
 L34300:
-   findex.gatef = false;
+   findex_0.gatef = false;
 // 						!INTERLOCK GATE.
    rspeak(232);
    return ret_val;
 
 L34400:
-   if (findex.rvmnt != 0) {
+   if (findex_1.rvmnt != 0) {
       goto L34500;
    }
 // 						!LEAK ALREADY STARTED?
    rspeak(233);
 // 						!NO, START LEAK.
-   findex.rvmnt = 1;
+   findex_1.rvmnt = 1;
    cevent.ctick[MntCX - 1] = -1;
    return ret_val;
 
@@ -775,7 +775,7 @@ L36100:
 // 						!KILL DEFL BOAT,
    newsta(RBoatOX, 236, play.here, 0, 0);
 // 						!REPL WITH INF.
-   findex.deflaf = false;
+   findex_0.deflaf = false;
    return ret_val;
 
 L36200:
@@ -827,7 +827,7 @@ L38000:
 // 						!KILL INFL BOAT,
    newsta(DBoatOX, 240, play.here, 0, 0);
 // 						!REPL WITH DEAD.
-   findex.deflaf = true;
+   findex_0.deflaf = true;
    return ret_val;
 
 L38100:
@@ -856,7 +856,7 @@ L38200:
 // 						!KILL INFL BOAT,
    newsta(IBoatOX, 241, play.here, 0, 0);
 // 						!REPL WITH DEFL.
-   findex.deflaf = true;
+   findex_0.deflaf = true;
    return ret_val;
 
 L38300:
@@ -875,7 +875,7 @@ L41000:
    if (prsvec.prsa != TieW || prsvec.prso != BRopeOX || prsvec.prsi != Hook1OX && prsvec.prsi != Hook2OX) {
       goto L41500;
    }
-   findex.btief = prsvec.prsi;
+   findex_1.btief = prsvec.prsi;
 // 						!RECORD LOCATION.
    cevent.cflag[BalCX - 1] = false;
 // 						!STALL ASCENT.
@@ -886,7 +886,7 @@ L41500:
    if (prsvec.prsa != UnTieW || prsvec.prso != BRopeOX) {
       goto L10;
    }
-   if (findex.btief != 0) {
+   if (findex_1.btief != 0) {
       goto L41600;
    }
 // 						!TIED UP?
@@ -896,7 +896,7 @@ L41500:
 
 L41600:
    rspeak(250);
-   findex.btief = 0;
+   findex_1.btief = 0;
 // 						!UNTIE.
    cevent.ctick[BalCX - 1] = 3;
 // 						!RESTART CLOCK.
@@ -912,19 +912,19 @@ L42000:
       i = 251;
    }
 // 						!TAKE?
-   if (prsvec.prsa == OpenW && findex.safef) {
+   if (prsvec.prsa == OpenW && findex_0.safef) {
       i = 253;
    }
 // 						!OPEN AFTER BLAST?
-   if (prsvec.prsa == OpenW && !findex.safef) {
+   if (prsvec.prsa == OpenW && !findex_0.safef) {
       i = 254;
    }
 // 						!OPEN BEFORE BLAST?
-   if (prsvec.prsa == CloseW && findex.safef) {
+   if (prsvec.prsa == CloseW && findex_0.safef) {
       i = 253;
    }
 // 						!CLOSE AFTER?
-   if (prsvec.prsa == CloseW && !findex.safef) {
+   if (prsvec.prsa == CloseW && !findex_0.safef) {
       i = 255;
    }
    if (i == 0) {
@@ -960,7 +960,7 @@ L44000:
    newsta(prsvec.prso, 0, 0, 0, 0);
    newsta(GnomeOX, 0, 0, 0, 0);
 // 						!VANISH GNOME.
-   findex.gnodrf = true;
+   findex_0.gnodrf = true;
    return ret_val;
 
 L44100:
@@ -972,11 +972,11 @@ L44100:
 L44500:
    rspeak(259);
 // 						!NERVOUS GNOME.
-   if (!findex.gnomef) {
+   if (!findex_0.gnomef) {
       cevent.ctick[GnoCX - 1] = 5;
    }
 // 						!SCHEDULE BYEBYE.
-   findex.gnomef = true;
+   findex_0.gnomef = true;
    return ret_val;
 
 // O29--	COKE BOTTLES

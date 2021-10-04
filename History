@@ -1,6 +1,6 @@
-Public Domain source code to the original DUNGEON game (Zork I).
-Released to the PD by Infocom.
-Includes source files, headers, and information.
+This is an upward revision based on the public domain source code to the original DUNGEON game (Zork I),
+which was released to the public domain by Infocom.
+It includes the source files, headers, and information.
 
 History of the C and Unix f77 Implementations of Dungeon
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -112,8 +112,8 @@ Suffice it to say that by leaving out the debugging package and not linking in t
 
 III. 1985/12: PDP to VAX
 ────────────────────────
-Based on the work of Randy, Lynn and Sig, Bill Randle folded in the full save/restore functions and the game debugging package (gdt)
-into the pdp version to create a Vax/Unix version.
+Based on the work of Randy, Lynn and Sig, Bill Randle folded in the full save/restore functions
+and the game debugging package (gdt) into the pdp version to create a Vax/Unix version.
 This version also uses f77 I/O, thus eliminating the extra speak and listen processes needed on the pdp.
 
 IV. 1986/12/11: Cleanup I
@@ -124,8 +124,8 @@ His efforts are greatly appreciated.
 
 V. 1987/02/09: Cleanup II
 ─────────────────────────
-Bill Randle (billr@tekred.tek.com) added the pdp dependencies back into the Vax source files
-with #ifdefs in order to have just one set of sources.
+Bill Randle (billr@tekred.tek.com) added the pdp dependencies back into the Vax source files with #ifdefs
+in order to have just one set of sources.
 Previously, there were two sets of source: one for the pdp and one for the Vax.
 In addition, a shell escape of the form !cmd was added and the wizard can enter the gdt without having to recompile the source.
 Finally, a man page was generated, based on the dungeon.doc file.
@@ -252,3 +252,13 @@ C99 (C2021) Translation & Upgrades
 		C1991 and Fortran/C2021 disagree on handling words starting in ‟PILE⋯”: resolved in favor of C1991.
 2021/10/01	Simplifications to ‟dinit.{c,f}” (‟dirmax”/‟DIRMAX” and ‟recno”/‟RECNO” are unused and were removed).
 2021/10/02	Recompilation of the history log.
+2021/10/03	Lifting type ‟Bool” to ‟bool”, except for the parameters and global variables involved in I/O:
+		∙	/play/ Bool telflg;
+		∙	/cevent/ Bool cflag[25];
+		∙	/hack/ Bool thfflg, thfact, swdact;
+		∙	/findex/ Bool flags[46];
+		∙	void GetFlags(int Lim, Bool *FlagP, FILE *InF);
+2021/10/03	Split /findex/ into /findex_0/ for Bool and /findex_1/ for int.
+		Reduced /findex/ flags to findex_0, and /findex/ switch_ to findex_1
+		Reduced /curxt/ xflag to curxt.xobj and /rooms/ rrand to rooms.rval
+		The other equivalences cannot be directly translated into C, but only into C++, using reference types.

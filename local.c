@@ -15,9 +15,9 @@
 // Check for user violation
 // This routine should be modified if you wish to add system dependent protection against abuse.
 // At the moment, play is permitted under all circumstances.
-Bool protct(void/*int x*/) {
+bool protct(void/*int x*/) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
    ret_val = true;
    return ret_val;
@@ -31,7 +31,7 @@ Bool protct(void/*int x*/) {
 #   ifndef WIZARDID
 #      define WIZARDID (0)
 #   endif
-Bool wizard(void) {
+bool wizard(void) {
 #   if 1
 // 	Changed by TAA so that always in wizard ID
    return true;

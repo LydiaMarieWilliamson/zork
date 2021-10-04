@@ -6,13 +6,13 @@
 #include "extern.h"
 #include "common.h"
 
-static void xendmv(Bool);
-static Bool xvehic(int);
+static void xendmv(bool);
+static bool xvehic(int);
 
 // Main command loop for dungeon
 void game_(void) {
 // Local variables
-   Bool f;
+   bool f;
    int i;
 
 // GAME, PAGE 2
@@ -69,7 +69,7 @@ L300:
    }
 // 						!VERB OK?
 L350:
-   if (!findex.echof && play.here == EchoRRX) {
+   if (!findex_0.echof && play.here == EchoRRX) {
       goto L1000;
    }
    f = rappli(rooms.ractio[play.here - 1]);
@@ -111,7 +111,7 @@ L1000:
 
    rspeak(571);
 // 						!KILL THE ECHO.
-   findex.echof = true;
+   findex_0.echof = true;
    objcts.oflag2[BarOX - 1] &= ~ScrDO;
    prsvec.prswon = true;
 // 						!FAKE OUT PARSER.
@@ -211,9 +211,9 @@ L2900:
 }
 
 // Execute end of move functions.
-static void xendmv(Bool flag) {
+static void xendmv(bool flag) {
 // Local variables
-   Bool f;
+   bool f;
 #if 0
    int x; //(@) Not actually used.
 #endif
@@ -245,9 +245,9 @@ static void xendmv(Bool flag) {
 }
 
 // Execute vehicle function
-static Bool xvehic(int n) {
+static bool xvehic(int n) {
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int av;

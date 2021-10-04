@@ -7,7 +7,7 @@
 
 // Simple verbs processor
 // All verbs in this routine must be independent of object actions
-Bool sverbs(int ri) {
+bool sverbs(int ri) {
 // Initialized data
    const int mxnop = 39;
    const int mxjoke = 64;
@@ -25,10 +25,10 @@ Bool sverbs(int ri) {
 
 // System generated locals
    int i__1, i__2;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
-   Bool f;
+   bool f;
    int i, j;
    int k;
    int l;
@@ -193,25 +193,25 @@ L69000:
 // V70--	BRIEF.  SET FLAG.
 
 L1000:
-   findex.brieff = true;
+   findex_0.brieff = true;
 // 						!BRIEF DESCRIPTIONS.
-   findex.superf = false;
+   findex_0.superf = false;
    rspeak(326);
    return ret_val;
 
 // V71--	VERBOSE.  CLEAR FLAGS.
 
 L2000:
-   findex.brieff = false;
+   findex_0.brieff = false;
 // 						!LONG DESCRIPTIONS.
-   findex.superf = false;
+   findex_0.superf = false;
    rspeak(327);
    return ret_val;
 
 // V72--	SUPERBRIEF.  SET FLAG.
 
 L3000:
-   findex.superf = true;
+   findex_0.superf = true;
    rspeak(328);
    return ret_val;
 
@@ -282,20 +282,20 @@ L8000:
 L8100:
    newsta(CycloOX, 337, 0, 0, 0);
 // 						!CYCLOPS FLEES.
-   findex.cyclof = true;
+   findex_0.cyclof = true;
 // 						!SET ALL FLAGS.
-   findex.magicf = true;
+   findex_0.magicf = true;
    objcts.oflag2[CycloOX - 1] &= ~FiteO;
    return ret_val;
 
 // V78--	WELL.  OPEN DOOR, ELSE JOKE.
 
 L9000:
-   if (findex.riddlf || play.here != RiddlRX) {
+   if (findex_0.riddlf || play.here != RiddlRX) {
       goto L9100;
    }
 // 						!IN RIDDLE ROOM?
-   findex.riddlf = true;
+   findex_0.riddlf = true;
 // 						!YES, SOLVED IT.
    rspeak(338);
    return ret_val;
@@ -592,7 +592,7 @@ L22200:
       goto L22300;
    }
 // 						!DOWN EXIT?
-   if (curxt.xtype == xpars.xno || curxt.xtype == xpars.xcond && !flags[*xflag - 1]) {
+   if (curxt.xtype == xpars.xno || curxt.xtype == xpars.xcond && !flags[xflag - 1]) {
       goto L22400;
    }
 L22300:
@@ -621,7 +621,7 @@ L23100:
    return ret_val;
 
 L23200:
-   findex.grunlf = false;
+   findex_0.grunlf = false;
 // 						!GRATE NOW LOCKED.
    rspeak(214);
    exits.travel[rooms.rexit[play.here - 1]] = 214;
@@ -643,7 +643,7 @@ L24000:
    return ret_val;
 
 L24200:
-   findex.grunlf = true;
+   findex_0.grunlf = true;
 // 						!UNLOCK GRATE.
    rspeak(217);
    exits.travel[rooms.rexit[play.here - 1]] = 217;
@@ -755,7 +755,7 @@ L26400:
    }
 // 						!TWO PHRASES?
 
-   if (findex.spellf) {
+   if (findex_0.spellf) {
       goto L26550;
    }
 // 						!HE'S TRYING TO LEARN.
@@ -765,7 +765,7 @@ L26400:
       goto L26575;
    }
 #endif
-   findex.spellf = true;
+   findex_0.spellf = true;
 // 						!TELL HIM.
    play.telflg = true;
    more_output("A hollow voice replies:  \"%.6s %.6s\".\n", pp1, ch);
@@ -793,7 +793,7 @@ L26600:
 // 						!WRONG.
 // L26700:
    }
-   findex.spellf = true;
+   findex_0.spellf = true;
 // 						!IT WORKS.
    rspeak(859);
    cevent.ctick[SteCX - 1] = 1;
@@ -809,7 +809,7 @@ L26800:
 // V96--	ANSWER
 
 L27000:
-   if (prsvec.prscon > 1 && play.here == FDoorRX && findex.inqstf) {
+   if (prsvec.prscon > 1 && play.here == FDoorRX && findex_0.inqstf) {
       goto L27100;
    }
    rspeak(799);
@@ -820,7 +820,7 @@ L27000:
 L27100:
    for (j = 1; j <= 14; j++) {
 // 						!CHECK ANSWERS.
-      if (findex.quesno != answer[j - 1]) goto L27300;
+      if (findex_1.quesno != answer[j - 1]) goto L27300;
 // 						!ONLY CHECK PROPER ANS.
       for (const char *z = ansstr[j - 1], *z2 = input.inbuf + prsvec.prscon - 1; *z != '\0'; z++, z2++) {
          for (; *z2 == ' '; z2++);
@@ -838,13 +838,13 @@ L27100:
 
    prsvec.prscon = 1;
 // 						!KILL REST OF LINE.
-   ++findex.nqatt;
+   ++findex_1.nqatt;
 // 						!WRONG, CRETIN.
-   if (findex.nqatt >= 5) {
+   if (findex_1.nqatt >= 5) {
       goto L27400;
    }
 // 						!TOO MANY WRONG?
-   i__1 = findex.nqatt + 800;
+   i__1 = findex_1.nqatt + 800;
    rspeak(i__1);
 // 						!NO, TRY AGAIN.
    return ret_val;
@@ -859,21 +859,21 @@ L27400:
 L27500:
    prsvec.prscon = 1;
 // 						!KILL REST OF LINE.
-   ++findex.corrct;
+   ++findex_1.corrct;
 // 						!GOT IT RIGHT.
    rspeak(800);
 // 						!HOORAY.
-   if (findex.corrct >= 3) {
+   if (findex_1.corrct >= 3) {
       goto L27600;
    }
 // 						!WON TOTALLY?
    cevent.ctick[InqCX - 1] = 2;
 // 						!NO, START AGAIN.
-   findex.quesno = (findex.quesno + 3) % 8;
-   findex.nqatt = 0;
+   findex_1.quesno = (findex_1.quesno + 3) % 8;
+   findex_1.nqatt = 0;
    rspeak(769);
 // 						!ASK NEXT QUESTION.
-   i__1 = findex.quesno + 770;
+   i__1 = findex_1.quesno + 770;
    rspeak(i__1);
    return ret_val;
 

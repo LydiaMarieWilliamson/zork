@@ -7,7 +7,7 @@
 #include "extern.h"
 #include "common.h"
 
-static Bool lex(char *, int *, int *, Bool);
+static bool lex(char *, int *, int *, bool);
 
 // Read input line
 void rdline(char *buffer, size_t length, int who) {
@@ -65,10 +65,10 @@ L90:
 
 // Top level parse routine
 // This routine details on bit 0 of prsflg
-Bool parse(char *inbuf, Bool vbflag) {
+bool parse(char *inbuf, bool vbflag) {
 // System generated locals
    int SparseRet;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
 #if 0
@@ -145,13 +145,13 @@ void orphan(int o1, int o2, int o3, int o4, int o5) {
 }
 
 // Lexical analyzer
-// This routine details on bit 1 of prsflag
-static Bool lex(char *inbuf, int *outbuf, int *op, Bool vbflag) {
+// This routine details on bit 1 of prsflg
+static bool lex(char *inbuf, int *outbuf, int *op, bool vbflag) {
 // Initialized data
    static const char dlimit[9] = { 'A', 'Z', 'A' - 1, '1', '9', '1' - 31, '-', '-', '-' - 27 };
 
 // System generated locals
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
    int i;

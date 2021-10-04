@@ -6,16 +6,16 @@
 #include "common.h"
 
 // Object special action routines
-Bool oappli(int ri, int arg) {
+bool oappli(int ri, int arg) {
 // Initialized data
    const int mxsmp = 99;
 
 // System generated locals
    int i__1;
-   Bool ret_val;
+   bool ret_val;
 
 // Local variables
-   Bool f;
+   bool f;
    int flobts, i;
    int j,/* x,*/ av, io, ir, iz;
    int odi2 = 0, odo2 = 0;
@@ -295,7 +295,7 @@ L10500:
    return ret_val;
 
 L10600:
-   if (prsvec.prsa != LookUW || findex.rvclr != 0) {
+   if (prsvec.prsa != LookUW || findex_1.rvclr != 0) {
       goto L10;
    }
    rspeak(344);
@@ -352,7 +352,7 @@ L15000:
    objcts.oflag1[TorchOX - 1] &= ~flobts;
    newsta(TorchOX, 0, StreaRX, 0, 0);
 // 						!MOVE TORCH.
-   findex.glacrf = true;
+   findex_0.glacrf = true;
 // 						!GLACIER GONE.
    if (!lit(play.here)) {
       rspeak(170);
@@ -377,7 +377,7 @@ L15500:
    return ret_val;
 
 L15600:
-   findex.glacmf = true;
+   findex_0.glacmf = true;
 // 						!PARTIAL MELT.
    if (prsvec.prsi != TorchOX) {
       goto L15700;
@@ -469,11 +469,11 @@ L32500:
    if (prsvec.prsa != BurnW && prsvec.prsa != MungW) {
       goto L10;
    }
-   if (findex.onpolf) {
+   if (findex_0.onpolf) {
       return ret_val;
    }
 // 						!BURN OR MUNG?
-   findex.onpolf = true;
+   findex_0.onpolf = true;
 // 						!SET HEAD ON POLE.
    newsta(HPoleOX, 0, Lld2RX, 0, 0);
    jigsup(229);
@@ -511,11 +511,11 @@ L39000:
 
 L39200:
    objcts.oflag1[PotOX - 1] |= VisiO;
-   findex.rainbf = !findex.rainbf;
+   findex_0.rainbf = !findex_0.rainbf;
 // 						!COMPLEMENT RAINBOW.
    i = 245;
 // 						!ASSUME OFF.
-   if (findex.rainbf) {
+   if (findex_0.rainbf) {
       i = 246;
    }
 // 						!IF ON, SOLID.
@@ -524,7 +524,7 @@ L39200:
    return ret_val;
 
 L39500:
-   findex.rainbf = false;
+   findex_0.rainbf = false;
 // 						!ON RAINBOW,
    jigsup(247);
 // 						!TAKE A FALL.
@@ -563,7 +563,7 @@ L45100:
 // O117--	SPHERE
 
 L47000:
-   if (findex.cagesf || prsvec.prsa != TakeW) {
+   if (findex_0.cagesf || prsvec.prsa != TakeW) {
       goto L10;
    }
 // 						!TAKE?
@@ -634,26 +634,26 @@ L48000:
 
 L48100:
    i = 267;
-   if (findex.carozf) {
+   if (findex_0.carozf) {
       i = 266;
    }
 // 						!SPEED UP?
-   findex.carozf = true;
+   findex_0.carozf = true;
    rspeak(i);
    return ret_val;
 
 L48200:
    i = 266;
 // 						!ASSUME NO CHANGE.
-   if (findex.carozf) {
+   if (findex_0.carozf) {
       i = 268;
    }
-   findex.carozf = false;
+   findex_0.carozf = false;
    rspeak(i);
    return ret_val;
 
 L48300:
-   findex.caroff = !findex.caroff;
+   findex_0.caroff = !findex_0.caroff;
 // 						!FLIP CAROUSEL.
    if (!qhere(IrBoxOX, CarouRX)) {
       return ret_val;
@@ -662,7 +662,7 @@ L48300:
    rspeak(269);
 // 						!YES, THUMP.
    objcts.oflag1[IrBoxOX - 1] ^= VisiO;
-   if (findex.caroff) {
+   if (findex_0.caroff) {
       rooms.rflag[CarouRX - 1] &= ~SeenR;
    }
    return ret_val;
@@ -693,10 +693,10 @@ L50000:
       goto L10;
    }
 // 						!READOUT?
-   if (objcts.ocan[WaterOX - 1] != BuckeOX || findex.bucktf) {
+   if (objcts.ocan[WaterOX - 1] != BuckeOX || findex_0.bucktf) {
       goto L50500;
    }
-   findex.bucktf = true;
+   findex_0.bucktf = true;
 // 						!BUCKET AT TOP.
    cevent.ctick[BucCX - 1] = 100;
 // 						!START COUNTDOWN.
@@ -706,10 +706,10 @@ L50000:
 // 						!FINISH UP.
 
 L50500:
-   if (objcts.ocan[WaterOX - 1] == BuckeOX || !findex.bucktf) {
+   if (objcts.ocan[WaterOX - 1] == BuckeOX || !findex_0.bucktf) {
       goto L10;
    }
-   findex.bucktf = false;
+   findex_0.bucktf = false;
    newsta(BuckeOX, 291, BWellRX, 0, 0);
 // 						!BUCKET AT BOTTOM.
 L50900:
@@ -874,13 +874,13 @@ L56000:
       goto L10;
    }
 // 						!PUSH?
-   if (findex.poleuf != 0) {
+   if (findex_1.poleuf != 0) {
       goto L56100;
    }
 // 						!SHORT POLE UP?
    i = 731;
 // 						!NO, WONT BUDGE.
-   if (findex.mdir % 180 == 0) {
+   if (findex_1.mdir % 180 == 0) {
       i = 732;
    }
 // 						!DIFF MSG IF N-S.
@@ -889,7 +889,7 @@ L56000:
    return ret_val;
 
 L56100:
-   if (findex.mloc != MrGrX) {
+   if (findex_1.mloc != MrGrX) {
       goto L56200;
    }
 // 						!IN GDN ROOM?
@@ -906,16 +906,16 @@ L56200:
    }
    rspeak(i);
 // 						!TELL DIRECTION.
-   findex.mdir = (findex.mdir + 45 + (i - 830) * 270) % 360;
+   findex_1.mdir = (findex_1.mdir + 45 + (i - 830) * 270) % 360;
 // 						!CALCULATE NEW DIR.
-   i__1 = findex.mdir / 45 + 695;
+   i__1 = findex_1.mdir / 45 + 695;
    rspsub(734, i__1);
 // 						!TELL NEW DIR.
-   if (findex.wdopnf) {
+   if (findex_0.wdopnf) {
       rspeak(730);
    }
 // 						!IF PANEL OPEN, CLOSE.
-   findex.wdopnf = false;
+   findex_0.wdopnf = false;
    return ret_val;
 // 						!DONE.
 
@@ -926,7 +926,7 @@ L57000:
       goto L10;
    }
 // 						!PUSH?
-   if (findex.mdir % 180 == 0) {
+   if (findex_1.mdir % 180 == 0) {
       goto L57100;
    }
 // 						!MIRROR N-S?
@@ -939,12 +939,12 @@ L57100:
       goto L57300;
    }
 // 						!PUSH PINE WALL?
-   if (findex.mloc == MrCrX && findex.mdir == 180 || findex.mloc == MrDrX && findex.mdir == 0 || findex.mloc == MrGrX) {
+   if (findex_1.mloc == MrCrX && findex_1.mdir == 180 || findex_1.mloc == MrDrX && findex_1.mdir == 0 || findex_1.mloc == MrGrX) {
       goto L57200;
    }
    rspeak(736);
 // 						!NO, OPENS.
-   findex.wdopnf = true;
+   findex_0.wdopnf = true;
 // 						!INDICATE OPEN.
    cevent.cflag[PinCX - 1] = true;
 // 						!TIME OPENING.
@@ -958,10 +958,10 @@ L57200:
    return ret_val;
 
 L57300:
-   nloc = findex.mloc - 1;
+   nloc = findex_1.mloc - 1;
 // 						!NEW LOC IF SOUTH.
-   if (findex.mdir == 0) {
-      nloc = findex.mloc + 1;
+   if (findex_1.mdir == 0) {
+      nloc = findex_1.mloc + 1;
    }
 // 						!NEW LOC IF NORTH.
    if (nloc >= MrArX && nloc <= MrDrX) {
@@ -974,33 +974,33 @@ L57300:
 L57400:
    i = 699;
 // 						!ASSUME SOUTH.
-   if (findex.mdir == 0) {
+   if (findex_1.mdir == 0) {
       i = 695;
    }
 // 						!NORTH.
    j = 739;
 // 						!ASSUME SMOOTH.
-   if (findex.poleuf != 0) {
+   if (findex_1.poleuf != 0) {
       j = 740;
    }
 // 						!POLE UP, WOBBLES.
    rspsub(j, i);
 // 						!DESCRIBE.
-   findex.mloc = nloc;
-   if (findex.mloc != MrGrX) {
+   findex_1.mloc = nloc;
+   if (findex_1.mloc != MrGrX) {
       return ret_val;
    }
 // 						!NOW IN GDN ROOM?
 
-   if (findex.poleuf != 0) {
+   if (findex_1.poleuf != 0) {
       goto L57500;
    }
 // 						!POLE UP, GDN SEES.
-   if (findex.mropnf || findex.wdopnf) {
+   if (findex_0.mropnf || findex_0.wdopnf) {
       goto L57600;
    }
 // 						!DOOR OPEN, GDN SEES.
-   if (findex.mr1f && findex.mr2f) {
+   if (findex_0.mr1f && findex_0.mr2f) {
       return ret_val;
    }
 // 						!MIRRORS INTACT, OK.
@@ -1081,7 +1081,7 @@ L60000:
 // O130--	CRYPT FUNCTION
 
 L61000:
-   if (!findex.endgmf) {
+   if (!findex_0.endgmf) {
       goto L45000;
    }
 // 						!IF NOT EG, DIE.
@@ -1118,7 +1118,7 @@ L61100:
 // O131--	GLOBAL LADDER
 
 L62000:
-   if (puzzle.cpvec[findex.cphere] == -2 || puzzle.cpvec[findex.cphere - 2] == -3) {
+   if (puzzle.cpvec[findex_1.cphere] == -2 || puzzle.cpvec[findex_1.cphere - 2] == -3) {
       goto L62100;
    }
    rspeak(865);
@@ -1134,7 +1134,7 @@ L62100:
    return ret_val;
 
 L62200:
-   if (findex.cphere == 10 && puzzle.cpvec[findex.cphere] == -2) {
+   if (findex_1.cphere == 10 && puzzle.cpvec[findex_1.cphere] == -2) {
       goto L62300;
    }
    rspeak(867);
