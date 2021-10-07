@@ -264,3 +264,8 @@ C99 (C2021) Translation & Upgrades
 		The other equivalences cannot be directly translated into C, but only into C++, using reference types.
 2021/10/05	Minor bug fix in rooms.{f,c}.
 2021/10/06	Reconciling the Makefiles between the 1991 and 2021 translations.
+2021/10/06	Upgrading ‟readit.c” to a decompiler for both ‟dindx.dat” and ‟dtext.dat”,
+		as a precursor to reconciling the database files with the ‟dtextc.dat” from the 1991 translation
+		and making a compiler for the database files.
+2021/10/07	Adding ‟readit.c” to the 1991 C translation and reconciling with the 2021 translation.
+		This might be remade into a run-time compiler to make possible dynamic databases and worlds.
