@@ -61,13 +61,16 @@ OBJS =	common.o local.o \
 #APP = dungeon
 APP = Zork
 
-$(APP): $(OBJS) dtextc.dat
+.c.o:
+	$(CC) $(CFLAGS) -c $<
+
+$(APP): $(OBJS)
 	$(CC) $(CFLAGS) -o $(APP) $(OBJS) $(LIBS)
 
-install: $(APP) dtextc.dat
-	mkdir -p $(BINDIR) $(LIBDIR) $(MANDIR)/man6
+install: $(APP)
 	cp $(APP) $(BINDIR)
 	cp dtextc.dat $(LIBDIR)
+	mkdir -p $(BINDIR) $(LIBDIR) $(MANDIR)/man6
 	cp $(APP).6 $(MANDIR)/man6/
 
 test: $(APP)
@@ -76,22 +79,20 @@ test: $(APP)
 clean:
 	rm -f $(OBJS)
 	rm -f core dsave.dat *~
+untest:
 	rm -f Ex
-clobber: clean
+clobber: clean untest
 	rm -f $(APP)
 
 dtextc.dat:
 	cat dtextc.uu1 dtextc.uu2 dtextc.uu3 dtextc.uu4 | uudecode
 
-dinit.o: dinit.c
+dinit.o: dinit.c dtextc.dat
 	$(CC) $(CFLAGS) $(GDTFLAG) -DStoryFile=\"$(LIBDIR)/dtextc.dat\" -c dinit.c
-
 dgame.o: dgame.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c dgame.c
-
 gdt.o: gdt.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c gdt.c
-
 local.o: local.c
 	$(CC) $(CFLAGS) $(GDTFLAG) $(TERMFLAG) -c local.c
 

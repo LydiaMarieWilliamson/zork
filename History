@@ -262,3 +262,5 @@ C99 (C2021) Translation & Upgrades
 		Reduced /findex/ flags to findex_0, and /findex/ switch_ to findex_1
 		Reduced /curxt/ xflag to curxt.xobj and /rooms/ rrand to rooms.rval
 		The other equivalences cannot be directly translated into C, but only into C++, using reference types.
+2021/10/05	Minor bug fix in rooms.{f,c}.
+2021/10/06	Reconciling the Makefiles between the 1991 and 2021 translations.
