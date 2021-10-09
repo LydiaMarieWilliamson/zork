@@ -1,5 +1,9 @@
 ## Makefile for Dungeon/Zork
 
+## The system link command (or else copy).
+#LN=cp
+#LN=ln -sf
+
 ## Where to install the program
 BINDIR = /usr/games
 
@@ -69,7 +73,8 @@ $(APP): $(OBJS)
 
 install: $(APP)
 	cp $(APP) $(BINDIR)
-	cp dtextc.dat $(LIBDIR)
+	cp dindx.dat $(LIBDIR)
+	cp dtext.dat $(LIBDIR)
 	mkdir -p $(BINDIR) $(LIBDIR) $(MANDIR)/man6
 	cp $(APP).6 $(MANDIR)/man6/
 
@@ -81,14 +86,20 @@ clean:
 	rm -f core dsave.dat *~
 untest:
 	rm -f Ex
-clobber: clean untest
+#undat:
+#	rm -f dindx.dat
+#	rm -f dtext.dat
+clobber: clean untest #undat
 	rm -f $(APP)
 
-dtextc.dat:
-	cat dtextc.uu1 dtextc.uu2 dtextc.uu3 dtextc.uu4 | uudecode
+## Temporary expedients.
+#dindx.dat:
+#	$(LN) ../dindx.dat .
+#dtext.dat:
+#	$(LN) ../dtext.dat .
 
-dinit.o: dinit.c dtextc.dat
-	$(CC) $(CFLAGS) $(GDTFLAG) -DStoryFile=\"$(LIBDIR)/dtextc.dat\" -c dinit.c
+dinit.o: dinit.c dindx.dat dtext.dat
+	$(CC) $(CFLAGS) $(GDTFLAG) -DIndexFile="\$(LIBDIR)/dindx.dat\" -DStoryFile=\"$(LIBDIR)/dtext.dat\" -c dinit.c
 dgame.o: dgame.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c dgame.c
 gdt.o: gdt.c
