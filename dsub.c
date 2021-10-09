@@ -49,7 +49,7 @@ static void rspsb2nl(int n, int y, int z, bool nl) {
 // 						!SAID SOMETHING.
 
    x = ((-x) - 1) * 8;
-   if (fseek(StoryF, x + (long)rmsg.mrloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
+   if (fseek(StoryF, x, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
 
    if (nl)
       more_output(NULL);

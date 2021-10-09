@@ -41,7 +41,7 @@ void PutMsg(int X) {
 
 // Dungeon initialization subroutine
 int main(void) {
-   const char *MyIndexFile = "dtextc.dat";
+   const char *MyIndexFile = "dindx.dat", *MyStoryFile = "dtext.dat";
 // Now, restore from the existing index file.
    FILE *IndexF = fopen(MyIndexFile, "r"); if (IndexF == NULL) { printf("I can't open %s.\n", MyIndexFile); return 1; }
 // /edit/:
@@ -141,24 +141,24 @@ int main(void) {
    int mlnt = GetWord(IndexF);
    int rtext[1050]; for (int m = 0; m < mmax; m++) rtext[m] = 0;
    GetWords(mlnt, rtext, IndexF);
-   int mrloc = ftell(IndexF);
-   printf("/rmsg/: mrloc: %d\n", mrloc);
+   fclose(IndexF);
+   FILE *StoryF = fopen(MyStoryFile, "r"); if (StoryF == NULL) { printf("I can't open %s.\n", MyStoryFile); return 1; }
    printf("%d of %d messages { text; }\n", mlnt, mmax);
    for (int m = 0; m < mlnt; m++) PutMsg(rtext[m]), printf(",\n");
 // Initialization done.
    printf("Message Table:\n");
    long X = 0L;
    const char *ZKey = "IanLanceTaylorJr";
-   if (fseek(IndexF, X + (long)mrloc, SEEK_SET) == EOF) { fprintf(stderr, "Error seeking database loc %d\n", X); return 1; }
+   if (fseek(StoryF, X, SEEK_SET) == EOF) { fprintf(stderr, "Error seeking database loc %d\n", X); return 1; }
    bool New = true;
    while (true) {
-      int Ch = getc(IndexF); if (Ch == EOF) break;
+      int Ch = getc(StoryF); if (Ch == EOF) break;
       Ch ^= ZKey[X&0xf]^(X&0xff);
       X++;
       if (Ch == '\0') {
          long X1 = (X + 7)/8*8;
          if (X1 > X) {
-            if (fseek(IndexF, X1 + (long)mrloc, SEEK_SET) == EOF) { fprintf(stderr, "Error seeking database loc %d\n", X1); return 1; }
+            if (fseek(StoryF, X1, SEEK_SET) == EOF) { fprintf(stderr, "Error seeking database loc %d\n", X1); return 1; }
             X = X1;
          }
          putchar('\n'), New = true;
@@ -168,6 +168,6 @@ int main(void) {
          if (Ch == '\n') printf("      :");
       }
    }
-   fclose(IndexF);
+   fclose(StoryF);
    return 0;
 }

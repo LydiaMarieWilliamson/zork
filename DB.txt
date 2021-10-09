@@ -1376,7 +1376,6 @@ Adventurer Table
 
 Message Table
 ─────────────
-/rmsg/: mrloc: 9000
 1022 of 1050 messages { text; }
 #00001,
 #00008,

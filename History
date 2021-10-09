@@ -273,3 +273,7 @@ C99 (C2021) Translation & Upgrades
 2021/10/08	Removing unused parameters and variables: in both C translations and in the Fortran version.
 2021/10/08	Revising documentation: README files (and the file manifest contained in one of them) and manual pages.
 		Further reconciling the Makefiles between the 1991 and 2021 translations.
+2021/10/09	Rolling back the database file format in C1991 to the format in the Fortran version:
+		‟dtextc.dat” is being split back into ‟dindx.dat” and ‟dtext.dat”.
+		This will break compatibility with the version of Zork distributed by Linux,
+		but it requires only splitting the files at the location given by ‟mrloc”.

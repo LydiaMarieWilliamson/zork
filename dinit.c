@@ -6,22 +6,28 @@
 #include "common.h"
 
 #ifndef StoryFile
-#   if defined __AMOS__
-#      define StoryFile "lib:dtextc.dat"
-#   elif defined unix
-#      define StoryFile "/usr/share/games/dungeon/dtextc.dat"
+#   if defined unix
+#      define StoryFile "/usr/share/games/dungeon/dtext.dat"
+#   elif defined __AMOS__
+#      define StoryFile "lib:dtext.dat"
 #   else
 #      error I need a definition for StoryFile
 #   endif
 #endif
 #ifndef IndexFile
-#   define IndexFile StoryFile
+#   if defined unix
+#      define IndexFile "/usr/share/games/dungeon/dindx.dat"
+#   elif defined __AMOS__
+#      define IndexFile "lib:dindx.dat"
+#   else
+#      error I need a definition for IndexFile
+#   endif
 #endif
 #ifndef MyStoryFile
-#   define MyStoryFile "dtextc.dat"
+#   define MyStoryFile "dtext.dat"
 #endif
 #ifndef MyIndexFile
-#   define MyIndexFile MyStoryFile
+#   define MyIndexFile "dindx.dat"
 #endif
 
 // Dungeon initialization subroutine
@@ -248,16 +254,14 @@ L10000:
 
 // NOW RESTORE FROM EXISTING INDEX FILE.
 
-   if ((IndexF = OpenInF(MyIndexFile, "rb")) == NULL && (IndexF = OpenInF(IndexFile, "rb")) == NULL)
-      goto L1950;
+   if ((IndexF = OpenInF(MyIndexFile, "rb")) == NULL && (IndexF = OpenInF(IndexFile, "rb")) == NULL) goto L1900;
 
    Maj = GetWord(IndexF), Min = GetWord(IndexF), Edit = GetWord(IndexF);
 // 						!GET VERSION.
    if (Maj != vmaj || Min != vmin) {
       goto L1925;
    }
-   StoryF = IndexF;
-
+   if ((StoryF = OpenInF(MyStoryFile, "rb")) == NULL && (StoryF = OpenInF(StoryFile, "rb")) == NULL) goto L1950;
 #if defined ALLOW_GDT && 0
    more_output("RESTORING FROM \"" IndexFile "\"\n");
 #endif
@@ -290,8 +294,7 @@ L10000:
    star.mbase = GetWord(IndexF);
    rmsg.mlnt = GetWord(IndexF), GetWords(rmsg.mlnt, rmsg.rtext, IndexF);
 
-// Save location of start of message text
-   rmsg.mrloc = ftell(IndexF);
+   fclose(IndexF);
 // 						!INIT DONE.
 
 // INIT, PAGE 5
@@ -342,6 +345,9 @@ L10000:
 
 // ERRORS-- INIT FAILS.
 
+L1900:
+   more_output("I can't open " MyIndexFile ".\n");
+   goto L1975;
 L1925:
    more_output("\"" MyIndexFile "\" is version %1d.%1d%c.\n", Maj, Min, Edit);
    more_output("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
