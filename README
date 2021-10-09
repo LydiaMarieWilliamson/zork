@@ -4,9 +4,9 @@ This is an upward revision based on the public domain source code to the origina
 which was released to the public domain by Infocom.
 It includes the source files, headers, and information.
 
-This revision branch of Zork has been used as a reference translation,
+This revised fork of Zork has been used as a reference translation,
 in conjunction with a second translation that was carried out from Fortran using a more up-to-date version of f2c;
-and has been subject to several rounds of recoding to bring it up to sync with the second C99 translation,
+and has been subject to several rounds of recoding to bring it up to sync with C99 and with the second C99 translation,
 and to reincorporate elements from the Fortran version.
 Both C translations are being merged.
 

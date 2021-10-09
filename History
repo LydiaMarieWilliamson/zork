@@ -271,3 +271,5 @@ C99 (C2021) Translation & Upgrades
 		This might be remade into a run-time compiler to make possible dynamic databases and worlds.
 2021/10/07	Trimmed the excess data from ‟dindx.dat” in the Fortran and C2021 versions.
 2021/10/08	Removing unused parameters and variables: in both C translations and in the Fortran version.
+2021/10/08	Revising documentation: README files (and the file manifest contained in one of them) and manual pages.
+		Further reconciling the Makefiles between the 1991 and 2021 translations.
