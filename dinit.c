@@ -25,7 +25,7 @@
 #endif
 
 // Dungeon initialization subroutine
-bool init(void/*int x*/) {
+bool init(void) {
 // System generated locals
    bool ret_val;
 
@@ -41,7 +41,7 @@ bool init(void/*int x*/) {
 
 // FIRST CHECK FOR PROTECTION VIOLATION
 
-   if (protct(/*x*/)) {
+   if (protct()) {
       goto L10000;
    }
 // 						!PROTECTION VIOLATION?

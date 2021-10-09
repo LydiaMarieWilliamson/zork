@@ -9,7 +9,7 @@ static bool mirpan(int, bool);
 
 // New objects processor
 // Objects in this module cannot call rminfo(), jigsup(), major verbs, or other non-resident subroutines
-bool nobjs(int ri/*, int arg*/) {
+bool nobjs(int ri) {
 // System generated locals
    int i__1, i__2;
    bool ret_val;

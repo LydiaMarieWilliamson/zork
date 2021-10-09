@@ -71,9 +71,6 @@ bool parse(char *inbuf, bool vbflag) {
    bool ret_val;
 
 // Local variables
-#if 0
-   int x; //(@) Actually unused.
-#endif
    int outbuf[40], outlnt;
 
 #if defined ALLOW_GDT && 0
@@ -102,7 +99,7 @@ L200:
       goto L350;
    }
 // 						!ECHO MODE, FORCE FAIL.
-   if (!synmch(/*x*/)) {
+   if (!synmch()) {
       goto L100;
    }
 // 						!DO SYN MATCH.

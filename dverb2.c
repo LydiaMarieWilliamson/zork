@@ -92,7 +92,7 @@ L200:
 }
 
 // Move in specified direction
-bool walk(/*int x*/) {
+bool walk(void) {
 // System generated locals
    bool ret_val;
 

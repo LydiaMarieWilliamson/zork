@@ -270,3 +270,4 @@ C99 (C2021) Translation & Upgrades
 2021/10/07	Adding ‟readit.c” to the 1991 C translation and reconciling with the 2021 translation.
 		This might be remade into a run-time compiler to make possible dynamic databases and worlds.
 2021/10/07	Trimmed the excess data from ‟dindx.dat” in the Fortran and C2021 versions.
+2021/10/08	Removing unused parameters and variables: in both C translations and in the Fortran version.

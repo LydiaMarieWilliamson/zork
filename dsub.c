@@ -87,7 +87,7 @@ static void rspsb2nl(int n, int y, int z, bool nl) {
 }
 
 // Apply objects from parse vector
-bool objact(/*int x*/) {
+bool objact(void) {
 // System generated locals
    bool ret_val;
 

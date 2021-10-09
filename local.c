@@ -15,7 +15,7 @@
 // Check for user violation
 // This routine should be modified if you wish to add system dependent protection against abuse.
 // At the moment, play is permitted under all circumstances.
-bool protct(void/*int x*/) {
+bool protct(void) {
 // System generated locals
    bool ret_val;
 

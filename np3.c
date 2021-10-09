@@ -12,7 +12,7 @@ static bool takeit(int, int);
 
 // Syntax matcher
 // This routine details on bit 4 of prsflg
-bool synmch(/*int x*/) {
+bool synmch(void) {
 // Initialized data
 //   The following data statement was originally:
 // 	DATA R50MIN/1RA/

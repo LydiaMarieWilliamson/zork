@@ -19,7 +19,7 @@ typedef int Bool; // Logical.
 #define max(A, B)	((A) >= (B)? (A): (B))
 
 // local.c:
-bool protct(void/*int*/);
+bool protct(void);
 bool wizard(void);
 
 // The remnant of f2c.h (begin)
@@ -53,7 +53,7 @@ void swordd(void);
 void game_(void);
 
 // dinit.c:
-bool init(void/*int*/);
+bool init(void);
 
 // dso1.c:
 void princr(bool, int);
@@ -96,7 +96,7 @@ void cpinfo(int, int);
 void rspeak(int);
 void rspsub(int, int);
 void rspsb2(int, int, int);
-bool objact(void/*int*/);
+bool objact(void);
 void bug(int, int);
 void newsta(int, int, int, int, int);
 bool qhere(int, int);
@@ -109,14 +109,14 @@ bool rappli(int);
 
 // dverb1.c:
 bool take(bool);
-bool drop(void/*bool*/);
-bool put(void/*bool*/);
+bool drop(void);
+bool put(void);
 void valuac(int);
 
 // dverb2.c:
 void savegm(void);
 void rstrgm(void);
-bool walk(void/*int*/);
+bool walk(void);
 
 // gdt.c:
 void gdt(void);
@@ -125,7 +125,7 @@ void gdt(void);
 bool lightp(int);
 
 // nobjs.c:
-bool nobjs(int/*, int*/);
+bool nobjs(int);
 
 // np1.c:
 int sparse(const int *, int, bool);
@@ -135,7 +135,7 @@ int getobj(int, int, int);
 int schlst(int, int, int, int, int, int);
 
 // np3.c:
-bool synmch(void/*int*/);
+bool synmch(void);
 
 // np.c:
 void rdline(char *, size_t, int);
@@ -165,9 +165,9 @@ bool sverbs(int);
 
 // verbs.c:
 bool vappli(int);
-bool clockd(void/*int*/);
+bool clockd(void);
 
 // villns.c:
-bool trollp(void/*int*/);
-bool cyclop(void/*int*/);
-bool thiefp(void/*int*/);
+bool trollp(void);
+bool cyclop(void);
+bool thiefp(void);

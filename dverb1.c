@@ -25,7 +25,7 @@ bool take(bool flg) {
       goto L100;
    }
 // 						!STAR?
-   ret_val = objact(/*x*/);
+   ret_val = objact();
 // 						!YES, LET IT HANDLE.
    return ret_val;
 
@@ -92,7 +92,7 @@ L700:
 }
 
 // Drop verb processor
-bool drop(/*bool z*/) {
+bool drop(void) {
 // System generated locals
    bool ret_val;
 
@@ -133,7 +133,7 @@ L300:
 // 						!IS HE IN VEHICLE?
    prsvec.prsi = advs.avehic[play.winner - 1];
 // 						!YES,
-   f = put(/*true*/);
+   f = put();
 // 						!DROP INTO VEHICLE.
    prsvec.prsi = 0;
 // 						!DISARM PARSER.
@@ -152,7 +152,7 @@ L400:
 // 						!CANT BE SCORED AGAIN.
    objcts.oflag2[prsvec.prso - 1] |= TChO;
 
-   if (objact(/*x*/)) {
+   if (objact()) {
       return ret_val;
    }
 // 						!DID IT HANDLE?
@@ -177,7 +177,7 @@ L1000:
 }
 
 // Put verb processor
-bool put(/*bool flg*/) {
+bool put(void) {
 // System generated locals
    bool ret_val;
 
@@ -194,7 +194,7 @@ bool put(/*bool flg*/) {
    if (prsvec.prso <= star.strbit && prsvec.prsi <= star.strbit) {
       goto L200;
    }
-   if (!objact(/*x*/)) {
+   if (!objact()) {
       rspeak(560);
    }
 // 						!STAR
@@ -301,7 +301,7 @@ L900:
 // 						!TEMPORARILY ON WINNER.
 
 L1000:
-   if (objact(/*x*/)) {
+   if (objact()) {
       return ret_val;
    }
 // 						!NO, GIVE OBJECT A SHOT.
@@ -376,7 +376,7 @@ L1000:
       }
       f = false;
       rspsub(580, objcts.odesc2[prsvec.prso - 1]);
-      f1 = drop(/*true*/);
+      f1 = drop();
       if (saveh != play.here) {
          return;
       }
@@ -398,7 +398,7 @@ L2000:
       }
       f = false;
       rspsub(580, objcts.odesc2[prsvec.prso - 1]);
-      f1 = put(/*true*/);
+      f1 = put();
       if (saveh != play.here) {
          return;
       }

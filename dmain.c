@@ -103,16 +103,12 @@ const int STagA = 0100000;
 
 // Main program: dungeo
 int main(void) {
-#if 0
-   int x; //(@) Not actually used.
-#endif
-
 // DUNGEON, PAGE 3
 
 // 1) INITIALIZE DATA STRUCTURES
 // 2) PLAY GAME
 
-   if (init(/*x*/)) {
+   if (init()) {
       game_();
    }
 // 						!IF INIT, PLAY GAME.

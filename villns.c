@@ -6,7 +6,7 @@
 #include "common.h"
 
 // Troll function
-bool trollp(/*int arg*/) {
+bool trollp(void) {
 // System generated locals
    bool ret_val;
 
@@ -160,7 +160,7 @@ L10:
 }
 
 // Cyclops function
-bool cyclop(/*int arg*/) {
+bool cyclop(void) {
 // System generated locals
    int i__1, i__2;
    bool ret_val;
@@ -288,7 +288,7 @@ L500:
 }
 
 // Thief function
-bool thiefp(/*int arg*/) {
+bool thiefp(void) {
 // System generated locals
    int i__1;
    bool ret_val;

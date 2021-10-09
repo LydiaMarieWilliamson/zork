@@ -199,7 +199,7 @@ const int avoc[] = {
 //	Bit <11>	If 1, adventurer must have object
 //	Bit <10>	If 1, qualifying bits (normally -1,-1) are same as fwim bits
 //	Bit <9>		If 1, object must be reachable
-//	Bits <8:0>	Preposition number for synmch
+//	Bits <8:0>	Preposition number for synmch()
 
 // The fwim words have the same format as the two object flag words.
 
