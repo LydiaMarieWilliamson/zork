@@ -73,7 +73,7 @@ struct puzzleCB puzzle = (struct puzzleCB){
 // xpars.h:
 // common /xpars/
 const struct xparsCB xpars = (struct xparsCB){
-   xrmask: 255, xdmask: 31744, xfmask: 3, xfshft: 256, xashft: 256,
+   xrmask: 0xff, xdmask: 0x7c00, xfmask: 0x03, xfshft: 0x100, xashft: 0x100,
    xelnt: { 1, 2, 3, 3 },
    xnorm: 1, xno: 2, xcond: 3, xdoor: 4, xlflag: 0x8000
 };
