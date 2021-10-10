@@ -99,7 +99,7 @@ clobber: clean untest #undat
 #	$(LN) ../dtext.dat .
 
 dinit.o: dinit.c dindx.dat dtext.dat
-	$(CC) $(CFLAGS) $(GDTFLAG) -DIndexFile="\$(LIBDIR)/dindx.dat\" -DStoryFile=\"$(LIBDIR)/dtext.dat\" -c dinit.c
+	$(CC) $(CFLAGS) $(GDTFLAG) -DIndexFile=\"$(LIBDIR)/dindx.dat\" -DStoryFile=\"$(LIBDIR)/dtext.dat\" -c dinit.c
 dgame.o: dgame.c
 	$(CC) $(CFLAGS) $(GDTFLAG) -c dgame.c
 gdt.o: gdt.c
