@@ -276,4 +276,6 @@ C99 (C2021) Translation & Upgrades
 2021/10/09	Rolling back the database file format in C1991 to the format in the Fortran version:
 		‟dtextc.dat” is being split back into ‟dindx.dat” and ‟dtext.dat”.
 		This will break compatibility with the version of Zork distributed by Linux,
-		but it requires only splitting the files at the location given by ‟mrloc”.
+		but it requires only splitting the files at the location given by ‟mrloc” originally in the 1991 C translation.
+2021/10/12	Reformatting dindx.txt in the Fortran and 2021 C translation to more closely match the 1991 C translation.
+		The rdesc2 pointer to an array of messages in the room table has been changed into an array of message pointers.
