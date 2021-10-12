@@ -279,3 +279,5 @@ C99 (C2021) Translation & Upgrades
 		but it requires only splitting the files at the location given by ‟mrloc” originally in the 1991 C translation.
 2021/10/12	Reformatting dindx.txt in the Fortran and 2021 C translation to more closely match the 1991 C translation.
 		The rdesc2 pointer to an array of messages in the room table has been changed into an array of message pointers.
+2021/10/12	Resizing the message table rtext[] and formatting dindx.txt (in the 2021 C translation and Fortran version).
+		This will be re-visited later, when the strings table is re-formatted.
