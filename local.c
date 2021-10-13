@@ -49,34 +49,27 @@ bool wizard(void) {
 // C99 is assumed and locked in.
 FILE *OpenInF(const char *File, const char *Mode) { return fopen(File, Mode); }
 
-// Read a single two byte int from the index file
+unsigned IOErrs = 0U;
+
+// Read an integer from a line in the index file
 int GetWord(FILE *InF) {
-   int Ch = getc(InF); if (Ch > 0x7f) Ch -= 0x100;
-   return 0x100*Ch + getc(InF);
+   int A = 0, n = fscanf(InF, "%d", &A);
+   if (n < 1) IOErrs++;
+   return A;
 }
 
-// Read a number of two byte integers from the index file
+// Read a number of integers from separate lines in the index file
 void GetWords(int Lim, int *WordP, FILE *InF) {
    while (Lim-- > 0) *WordP++ = GetWord(InF);
 }
 
-// Read a partial array of integers.
-// These are stored as index,value pairs.
-void GetPairs(int Lim, int *PairTab, FILE *InF) {
-   while (true) {
-      int p;
-      if (Lim < 0xff) {
-         p = getc(InF); if (p == 0xff) return;
-      } else {
-         p = GetWord(InF); if (p == -1) return;
-      }
-      PairTab[p] = GetWord(InF);
+// Read a number of boolean values from separate lines in the index file
+void GetFlags(int Lim, bool *FlagP, FILE *InF) {
+   while (Lim-- > 0) {
+      int Ch = '\0'; int n = fscanf(InF, " %c", &Ch);
+      if (n < 1 || (Ch != 'F' && Ch != 'T')) IOErrs++;
+      *FlagP++ = Ch != 'F';
    }
-}
-
-// Read a number of boolean values from the index file
-void GetFlags(int Lim, Bool *FlagP, FILE *InF) {
-   while (Lim-- > 0) *FlagP++ = getc(InF);
 }
 
 // Terminal support routines for dungeon

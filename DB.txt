@@ -1,4 +1,4 @@
-/edit/: 2.7.65
+/edit/: 2.8.65
 /state/: Max Score = 585, Eg Score = 100
 
 1660 clips
@@ -1376,7 +1376,7 @@ Adventurer Table
 
 Message Table
 ─────────────
-1022 of 1050 messages { text; }
+/rmsg/: 1022 of 1050 messages { text; }
 #00001,
 #00008,
 #00009,

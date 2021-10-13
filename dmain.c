@@ -20,7 +20,7 @@ struct starCB star;
 // DATA STATEMENTS FOR CONSTANT ARRAYS
 
 // common /vers/
-const int vmaj = 2, vmin = 7;
+const int vmaj = 2, vmin = 8;
 const char vedit = 'A';
 
 // common /bats/

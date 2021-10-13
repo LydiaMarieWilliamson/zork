@@ -205,7 +205,7 @@ enum oindexCB {
 // common /cevent/
 extern struct ceventCB {
    int clnt, ctick[25], cactio[25];
-   Bool cflag[25];
+   bool cflag[25];
 } cevent;
 #define eqc ((int *)&cevent + 1) // int eqc[2][25]; equivalence(ctick, eqc);
 

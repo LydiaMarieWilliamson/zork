@@ -281,3 +281,5 @@ C99 (C2021) Translation & Upgrades
 		The rdesc2 pointer to an array of messages in the room table has been changed into an array of message pointers.
 2021/10/12	Resizing the message table rtext[] and formatting dindx.txt (in the 2021 C translation and Fortran version).
 		This will be re-visited later, when the strings table is re-formatted.
+2021/10/12	Normalized the format of the database index file dindx.dat.
+		Moved the version number for the 1991 C translation up to 2.8A.

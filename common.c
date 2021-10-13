@@ -68,7 +68,7 @@ struct oroom2CB oroom2_;
 // clock.h:
 // common /cevent/
 // int clnt, ctick[25], cactio[25];
-// Bool cflag[25];
+// bool cflag[25];
 struct ceventCB cevent;
 
 // advers.h:

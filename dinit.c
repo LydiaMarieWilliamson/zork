@@ -254,7 +254,7 @@ L10000:
 
 // NOW RESTORE FROM EXISTING INDEX FILE.
 
-   if ((IndexF = OpenInF(MyIndexFile, "rb")) == NULL && (IndexF = OpenInF(IndexFile, "rb")) == NULL) goto L1900;
+   if ((IndexF = OpenInF(MyIndexFile, "r")) == NULL && (IndexF = OpenInF(IndexFile, "r")) == NULL) goto L1900;
 
    Maj = GetWord(IndexF), Min = GetWord(IndexF), Edit = GetWord(IndexF);
 // 						!GET VERSION.
@@ -265,43 +265,47 @@ L10000:
 #if defined ALLOW_GDT && 0
    more_output("RESTORING FROM \"" IndexFile "\"\n");
 #endif
-   state.mxscor = GetWord(IndexF), star.strbit = GetWord(IndexF), state.egmxsc = GetWord(IndexF);
+   state.mxscor = GetWord(IndexF), state.egmxsc = GetWord(IndexF);
    rooms.rlnt = GetWord(IndexF);
    GetWords(rooms.rlnt, rooms.rdesc1, IndexF), GetWords(rooms.rlnt, rooms.rdesc2, IndexF);
-   GetWords(rooms.rlnt, rooms.rexit, IndexF), GetPairs(rooms.rlnt, rooms.ractio, IndexF);
-   GetPairs(rooms.rlnt, rooms.rval, IndexF), GetWords(rooms.rlnt, rooms.rflag, IndexF);
+   GetWords(rooms.rlnt, rooms.rexit, IndexF), GetWords(rooms.rlnt, rooms.ractio, IndexF);
+   GetWords(rooms.rlnt, rooms.rval, IndexF), GetWords(rooms.rlnt, rooms.rflag, IndexF);
    exits.xlnt = GetWord(IndexF), GetWords(exits.xlnt, exits.travel, IndexF);
    objcts.olnt = GetWord(IndexF);
    GetWords(objcts.olnt, objcts.odesc1, IndexF), GetWords(objcts.olnt, objcts.odesc2, IndexF);
-   GetPairs(objcts.olnt, objcts.odesco, IndexF), GetPairs(objcts.olnt, objcts.oactio, IndexF);
-   GetWords(objcts.olnt, objcts.oflag1, IndexF), GetPairs(objcts.olnt, objcts.oflag2, IndexF);
-   GetPairs(objcts.olnt, objcts.ofval, IndexF), GetPairs(objcts.olnt, objcts.otval, IndexF);
-   GetWords(objcts.olnt, objcts.osize, IndexF), GetPairs(objcts.olnt, objcts.ocapac, IndexF);
-   GetWords(objcts.olnt, objcts.oroom, IndexF), GetPairs(objcts.olnt, objcts.oadv, IndexF);
-   GetPairs(objcts.olnt, objcts.ocan, IndexF), GetPairs(objcts.olnt, objcts.oread, IndexF);
+   GetWords(objcts.olnt, objcts.odesco, IndexF), GetWords(objcts.olnt, objcts.oactio, IndexF);
+   GetWords(objcts.olnt, objcts.oflag1, IndexF), GetWords(objcts.olnt, objcts.oflag2, IndexF);
+   GetWords(objcts.olnt, objcts.ofval, IndexF), GetWords(objcts.olnt, objcts.otval, IndexF);
+   GetWords(objcts.olnt, objcts.osize, IndexF), GetWords(objcts.olnt, objcts.ocapac, IndexF);
+   GetWords(objcts.olnt, objcts.oroom, IndexF), GetWords(objcts.olnt, objcts.oadv, IndexF);
+   GetWords(objcts.olnt, objcts.ocan, IndexF), GetWords(objcts.olnt, objcts.oread, IndexF);
    oroom2_.r2lnt = GetWord(IndexF);
    GetWords(oroom2_.r2lnt, oroom2_.oroom2, IndexF), GetWords(oroom2_.r2lnt, oroom2_.rroom2, IndexF);
    cevent.clnt = GetWord(IndexF);
    GetWords(cevent.clnt, cevent.ctick, IndexF), GetWords(cevent.clnt, cevent.cactio, IndexF);
    GetFlags(cevent.clnt, cevent.cflag, IndexF);
    vill.vlnt = GetWord(IndexF), GetWords(vill.vlnt, vill.villns, IndexF);
-   GetPairs(vill.vlnt, vill.vprob, IndexF), GetPairs(vill.vlnt, vill.vopps, IndexF);
+   GetWords(vill.vlnt, vill.vprob, IndexF), GetWords(vill.vlnt, vill.vopps, IndexF);
    GetWords(vill.vlnt, vill.vbest, IndexF), GetWords(vill.vlnt, vill.vmelee, IndexF);
    advs.alnt = GetWord(IndexF), GetWords(advs.alnt, advs.aroom, IndexF);
-   GetPairs(advs.alnt, advs.ascore, IndexF), GetPairs(advs.alnt, advs.avehic, IndexF);
+   GetWords(advs.alnt, advs.ascore, IndexF), GetWords(advs.alnt, advs.avehic, IndexF);
    GetWords(advs.alnt, advs.aobj, IndexF), GetWords(advs.alnt, advs.aactio, IndexF);
-   GetWords(advs.alnt, advs.astren, IndexF), GetPairs(advs.alnt, advs.aflag, IndexF);
-   star.mbase = GetWord(IndexF);
+   GetWords(advs.alnt, advs.astren, IndexF), GetWords(advs.alnt, advs.aflag, IndexF);
+   star.strbit = GetWord(IndexF), star.mbase = GetWord(IndexF);
    rmsg.mlnt = GetWord(IndexF), GetWords(rmsg.mlnt, rmsg.rtext, IndexF);
 
    fclose(IndexF);
 // 						!INIT DONE.
+   if (IOErrs > 0) {
+      goto L1940;
+   }
 
 // INIT, PAGE 5
 
 // THE INTERNAL DATA BASE IS NOW ESTABLISHED.
 // SET UP TO PLAY THE GAME.
 
+// L1025:
    intime(&time_.shour, &time_.smin, &time_.ssec);
 // 						!GET TIME AND DATE.
 // Day: datarry[0], Month: datarry[1], Year: datarry[2].
@@ -333,8 +337,8 @@ L10000:
    more_output("%5d OF%5d ROOM2 SLOTS\n", oroom2_.r2lnt, r2max);
    more_output("MAX SCORE=%5d\n", state.mxscor);
    more_output("EG SCORE=%5d\n", state.egmxsc);
-   more_output("MELEE START=%5d\n", star.mbase);
    more_output("STAR MASK=%7d\n", star.strbit);
+   more_output("MELEE START=%5d\n", star.mbase);
 // Pause
    printf("Press enter to continue:"), fflush(stdout);
    for (int Ch; (Ch = getchar()) != '\n'; ) if (Ch == EOF) exit(1);
@@ -351,6 +355,9 @@ L1900:
 L1925:
    more_output("\"" MyIndexFile "\" is version %1d.%1d%c.\n", Maj, Min, Edit);
    more_output("I require version %1d.%1d%c.\n", vmaj, vmin, (int)vedit);
+   goto L1975;
+L1940:
+   more_output("I can't read " MyIndexFile ": %1d error(s) found.", IOErrs);
    goto L1975;
 L1950:
    more_output("I can't open " MyStoryFile ".\n");
