@@ -7,40 +7,45 @@
 #include "common.h"
 
 // Resident subroutines for dungeon
-static void rspsb2nl(int, int, int, bool);
+// CONVERT ARGUMENT FROM DICTIONARY NUMBER (IF POSITIVE)
+// TO ABSOLUTE RECORD NUMBER.
+static long DeRef(int N) {
+   long X = N;
+// 						!SET UP WORK VARIABLE.
+   if (X > 0) {
+      X = rmsg.rtext[X - 1];
+   }
+// 						!IF >0, LOOK UP IN RTEXT.
+   return abs(X);
+// 						!TAKE ABS VALUE.
+}
+
+static void rspsb2nl(long, long, long, bool);
 
 // Output random message routine
 // Called as:
 // 	rspeak(MsgNum);
 void rspeak(int n) {
-   rspsb2nl(n, 0, 0, true);
+   rspsb2nl(DeRef(n), 0, 0, true);
 }
 
 // Output random message with substitutable argument
 // Called as:
 // 	rspsub(MsgNum, SubNum);
 void rspsub(int n, int s1) {
-   rspsb2nl(n, s1, 0, true);
+   rspsb2nl(DeRef(n), DeRef(s1), 0, true);
 }
 
 // Output random message with up to two substitutable arguments
 // Called as:
 // 	rspsb2(MsgNum, SubNum1, SubNum2);
 void rspsb2(int n, int s1, int s2) {
-   rspsb2nl(n, s1, s2, true);
+   rspsb2nl(DeRef(n), DeRef(s1), DeRef(s2), true);
 }
 
 // Display a substitutable message with an optional newline
-static void rspsb2nl(int n, int y, int z, bool nl) {
+static void rspsb2nl(long x, long y, long z, bool nl) {
    const char *zkey = "IanLanceTaylorJr";
-   long x;
-
-   x = (long)n;
-
-   if (x > 0) {
-      x = rmsg.rtext[x - 1];
-   }
-// 						!IF >0, LOOK UP IN RTEXT.
    if (x == 0) {
       return;
    }
@@ -48,7 +53,7 @@ static void rspsb2nl(int n, int y, int z, bool nl) {
    play.telflg = true;
 // 						!SAID SOMETHING.
 
-   x = ((-x) - 1) * 8;
+   x = (x - 1) * 8;
    if (fseek(StoryF, x, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
 
    if (nl)

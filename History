@@ -284,4 +284,5 @@ C99 (C2021) Translation & Upgrades
 2021/10/12	Normalized the format of the database index file dindx.dat.
 		Moved the version number for the 1991 C translation up to 2.8A.
 2021/10/13	Reconciling conditional code.
-2021/10/13	Updating the database file decompiler.
+2021/10/13	Updating the database decompiler: to bring out the references to absolute locations in the story file.
+2021/10/14-15	Normalizing the record format in the story file (the first of two rounds).
