@@ -64,7 +64,12 @@ int main(void) {
    for (int x = 0; x < xmax; x++) travel[x] = 0;
    GetWords(xlnt, travel, IndexF);
    printf("/exits/: %d of %d exits { travel; }\n", xlnt, xmax);
-   for (int x = 0; x < xlnt; x++) printf("%3u<<8|%3u,\n", ((unsigned)travel[x]&0xffff)>>8, (unsigned)travel[x]&0xff);
+   for (int x = 0; x < xlnt; x++) {
+      int T = travel[x];
+      if (T < 0 && T >= -0x4000) PutMsg(T);
+      else printf("%5u", (unsigned)T & 0xffff);
+      printf(",\n");
+   }
 // /objcts/: (eqo)
    printf("\n");
    printf("Object Table\n");
