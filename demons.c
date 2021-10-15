@@ -214,7 +214,7 @@ int blow(int h, int v, int rmk, bool hflg, int out) {
 // 						!DESCRIPTION.
    ret_val = rmiss;
 // 						!ASSUME NO RESULT.
-#if defined ALLOW_GDT && 0
+#if defined ALLOW_GDT
    more_output("BLOW 10-- %7d%7d%7d      %c%7d\n", h, v, rmk, hflg ? 'T' : 'F', out);
 #endif
    if (!(hflg)) {
@@ -301,7 +301,7 @@ L1200:
 // ATT MUST BE > 0.
 
 L2000:
-#if defined ALLOW_GDT && 0
+#if defined ALLOW_GDT
    more_output("BLOW 2050-- %7d%7d%7d%7d%7d\n", att, oa, def, od, dweap);
 #endif
    if (def > 0) {
@@ -373,7 +373,7 @@ L2600:
       j = objcts.odesc2[dweap - 1];
    }
 
-#if defined ALLOW_GDT && 0
+#if defined ALLOW_GDT
    more_output("BLOW 2650-- %7d%7d%7d%7d%7d\n", res, mi, i, j, star.mbase);
 #endif
    rspsub(i, j);

@@ -76,7 +76,7 @@ int main(void) {
    GetWords(olnt, odesc1, IndexF), GetWords(olnt, odesc2, IndexF), GetWords(olnt, odesco, IndexF), GetWords(olnt, oactio, IndexF), GetWords(olnt, oflag1, IndexF), GetWords(olnt, oflag2, IndexF), GetWords(olnt, ofval, IndexF), GetWords(olnt, otval, IndexF), GetWords(olnt, osize, IndexF), GetWords(olnt, ocapac, IndexF), GetWords(olnt, oroom, IndexF), GetWords(olnt, oadv, IndexF), GetWords(olnt, ocan, IndexF), GetWords(olnt, oread, IndexF);
    printf("/objcts/: %d of %d objects { desc1, desc2, desco, actio, flag1, flag2, fval, tval, size, capac, room, adv, can, read; }\n", olnt, omax);
    for (int o = 0; o < olnt; o++)
-      printf("{ "), PutMsg(odesc1[o]), printf(", "), PutMsg(odesc2[o]), printf(", "), PutMsg(odesco[o]), printf(", %3d, 0x%04x, 0x%04x, %2d, %2d, %5d, %5d, %5d, %d, %3d, ", oactio[o], (unsigned)oflag1[o]&0xffff, (unsigned)oflag2[o]&0xffff, ofval[o], otval[o], osize[o], ocapac[o], oroom[o], oadv[o], ocan[o]), PutMsg(oread[o]), printf(" },\n");
+      printf("{ "), PutMsg(odesc1[o]), printf(", "), PutMsg(odesc2[o]), printf(", "), PutMsg(odesco[o]), printf(", %3d, 0x%04x, 0x%04x, %2d, %2d, %5d, %5d, %5d, %d, %3d, ", oactio[o], (unsigned)oflag1[o] & 0xffff, (unsigned)oflag2[o] & 0xffff, ofval[o], otval[o], osize[o], ocapac[o], oroom[o], oadv[o], ocan[o]), PutMsg(oread[o]), printf(" },\n");
    bloc = oroom[BalloOX - 1];
    printf("/state/ bloc: %d = oroom[%d]\n", bloc, BalloOX);
 // /oroom2/:
@@ -147,7 +147,7 @@ int main(void) {
    bool New = true;
    while (true) {
       int Ch = getc(StoryF); if (Ch == EOF) break;
-      Ch ^= ZKey[X&0xf]^(X&0xff);
+      Ch ^= ZKey[X & 0xf]^(X & 0xff);
       X++;
       if (Ch == '\0') {
          long X1 = (X + 7)/8*8;

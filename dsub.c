@@ -54,7 +54,7 @@ static void rspsb2nl(int n, int y, int z, bool nl) {
    if (nl)
       more_output(NULL);
 
-   while (1) {
+   while (true) {
       int i;
 
       i = getc(StoryF);

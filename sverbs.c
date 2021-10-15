@@ -388,9 +388,7 @@ L15000:
       return ret_val;
    }
 // 						!ASK FOR Y/N DECISION.
-#if 0
    fclose(StoryF);
-#endif
    exit_();
 // 						!BYE.
 // SVERBS, PAGE 4
@@ -759,12 +757,10 @@ L26400:
       goto L26550;
    }
 // 						!HE'S TRYING TO LEARN.
-#if 1
 // The following line fixes a nice bug in the UNIX version! /+ TAA +/
    if ((rooms.rflag[TStrsRX - 1] & SeenR) == 0) {
       goto L26575;
    }
-#endif
    findex_0.spellf = true;
 // 						!TELL HIM.
    play.telflg = true;

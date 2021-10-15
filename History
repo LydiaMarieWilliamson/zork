@@ -283,3 +283,4 @@ C99 (C2021) Translation & Upgrades
 		This will be re-visited later, when the strings table is re-formatted.
 2021/10/12	Normalized the format of the database index file dindx.dat.
 		Moved the version number for the 1991 C translation up to 2.8A.
+2021/10/13	Reconciling conditional code.
