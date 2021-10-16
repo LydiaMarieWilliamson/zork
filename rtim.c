@@ -19,24 +19,13 @@ void intime(int *HourP, int *MinuteP, int *SecondP) {
 }
 
 // common /random/
-static int seedy;
-
 void inirnd(int seed) {
-#if 1
-   seedy = seed;
-#else
-   srand((unsigned)(seedy = seed));
-#endif
+   srand((unsigned)seed);
 }
 
 // Random number generator.
 int rnd(int maxval) {
-#if 0
-   seedy = seedy * 1059 + 17 & 2147483647;
-   return seedy / 100 % maxval;
-#else
    return rand() % maxval;
-#endif
 }
 
 // Terminate the game.

@@ -455,10 +455,10 @@ L300:
 // 						!ASSUME SHORT DESC.
 // The following comment, in the 1991 C translation, was inherited from a later version of the original Fortran source.
 // 2021/09/22 Darth Spectra
+#if 0
 // The next line means that when you request VERBOSE mode, you only get long room descriptions 20% of the time.
 // I don't either like or understand this, so the mod. ensures VERBOSE works all the time.
 // 1987/10/22 jmh@ukc.ac.uk
-#if 1
    if (full == 0 && (findex_0.superf || (rooms.rflag[play.here - 1] & SeenR) != 0 && findex_0.brieff)) {
       goto L400;
    }

@@ -285,4 +285,8 @@ C99 (C2021) Translation & Upgrades
 		Moved the version number for the 1991 C translation up to 2.8A.
 2021/10/13	Reconciling conditional code.
 2021/10/13	Updating the database decompiler: to bring out the references to absolute locations in the story file.
+2021/10/14	Reconciling the randomizer (the first of two rounds).
+		This will introduce variability of output in the 1991 translation, which arises, in part, from the use of srand().
+		Therefore, ‟make test” will not always produce an exact match for test outputs anymore.
+		This will be fixed for both C translations and the Fortran version later, when they are fully reconciled.
 2021/10/14-15	Normalizing the record format in the story file (the first of two rounds).
