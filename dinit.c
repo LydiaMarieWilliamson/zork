@@ -306,16 +306,19 @@ L10000:
 // SET UP TO PLAY THE GAME.
 
 // L1025:
+#if 0
+// Day: datarry[0], Month: datarry[1], Year: datarry[2].
+   idate(datarry);
+   inirnd(datarry[0] | datarry[1] | datarry[2] | time_.shour | time_.smin | time_.ssec);
+#else
    intime(&time_.shour, &time_.smin, &time_.ssec);
 // 						!GET TIME AND DATE.
-// Day: datarry[0], Month: datarry[1], Year: datarry[2].
-// idate(datarry);
-// inirnd(datarry[0] | datarry[1] | datarry[2] | shour | smin | ssec);
 // 	NEW WAY TO INITIALIZE /+TAA+/
-#if 1
-   inirnd(time_.shour ^ time_.smin ^ time_.ssec);
-#else
+#   if 0
    inirnd(time_.shour * 3600 + time_.smin * 60 + time_.ssec);
+#   else
+   inirnd(time_.shour ^ time_.smin ^ time_.ssec);
+#   endif
 #endif
 
    play.winner = PlayerAX;

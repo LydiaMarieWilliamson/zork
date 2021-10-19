@@ -243,8 +243,8 @@ L100:
    if (state.deaths >= 2) {
       goto L1000;
    }
-#endif
 // 						!DEAD TWICE? KICK HIM OFF.
+#endif
    if (!yesno(10, 9, 8)) {
       goto L1100;
    }
