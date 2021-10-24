@@ -295,3 +295,4 @@ C99 (C2021) Translation & Upgrades
 		Therefore, ‟make test” will not always produce an exact match for test outputs anymore.
 		This will be fixed for both C translations and the Fortran version later, when they are fully reconciled.
 2021/10/14-15	Normalizing the record format in the story file (the first of two rounds).
+2021/10/21	Revising the database decompiler to better reflect the structure of the exit table.

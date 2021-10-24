@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #define BalloOX 98
 
@@ -63,12 +64,20 @@ int main(void) {
    int travel[900];
    for (int x = 0; x < xmax; x++) travel[x] = 0;
    GetWords(xlnt, travel, IndexF);
-   printf("/exits/: %d of %d exits { travel; }\n", xlnt, xmax);
+   printf("/exits/: %d of %d exits (travel) { last:1, direction:5, type-1:2, room:8, message, action:8, object:8; }\n", xlnt, xmax);
+// travel[x+0]: last:1, direction:5, type-1:2, room:8 (type ∈ {1,2,3,4})
+// travel[x+1]: message (type ∈ {2,3,4})
+// travel[x+2]: action:8, object:8 (type ∈ {3,4})
    for (int x = 0; x < xlnt; x++) {
-      int T = travel[x];
-      if (T < 0 && T >= -0x4000) PutMsg(T);
-      else printf("%5u", (unsigned)T & 0xffff);
-      printf(",\n");
+      unsigned T = (unsigned)travel[x], last = (T>>15)&1, direction = (T>>10)&0x1f, type = 1 + ((T>>8)&3), room = (T&0xff);
+      printf("{%u, %2u, %u, %3u", last, direction, type, room);
+      if (type > 2 && x > xlnt - 3 || type > 1 && x > xlnt - 2) { printf("Format Error.\n"); return EXIT_FAILURE; }
+      if (type > 1) printf(", "), PutMsg(travel[++x]);
+      if (type > 2) {
+         unsigned T = (unsigned)travel[++x];
+         printf(", %2u, %3u", (T>>8)&0xff, T&0xff);
+      }
+      printf("},\n");
    }
 // /objcts/: (eqo)
    printf("\n");
