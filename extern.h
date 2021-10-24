@@ -153,7 +153,7 @@ bool rappl1(int);
 
 // rtim.c:
 void intime(int *, int *, int *);
-void inirnd(int);
+void inirnd(long);
 int rnd(int);
 void exit_(void);
 
