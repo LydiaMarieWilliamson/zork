@@ -32,6 +32,7 @@ bool sverbs(int ri) {
    int i, j;
    int k;
    int l;
+   long playtime;
    char ch[1 * 6];
    int cp, wp;
    char pp1[1 * 6], pp2[1 * 6];
@@ -551,14 +552,20 @@ L20000:
 // V90--	TIME.  PRINT OUT DURATION OF GAME.
 
 L21000:
-   k = gttime();
+   playtime = gttime();
 // 						!GET PLAY TIME.
-   i = k / 60;
-   j = k % 60;
+   i = playtime / 3600;
+   j = playtime % 3600 / 60;
+   k = playtime % 60;
 
    printf("You have been playing Dungeon for ");
-   if (i >= 1) printf("%d %s and ", i, i != 1 ? "hours" : "hour");
-   more_output("%d %s.\n", j, j != 1 ? "minutes" : "minute");
+   if (i >= 100) {
+      more_output("over 100 hours.\n"); 
+   } else {
+      printf("%2d hour(s), ", i);
+      printf("%2d minute(s), and ", j);
+      more_output("%2d second(s).\n", k);
+   }
    play.telflg = true;
    return ret_val;
 

@@ -10,12 +10,31 @@
 #include "extern.h"
 #include "common.h"
 
-// Get the time in hours, minutes and seconds.
-void intime(int *HourP, int *MinuteP, int *SecondP) {
-// gettim(*HourP, *MinuteP, *SecondP, Hundredths);
-   time_t Now; time(&Now);
-   struct tm *HereNow = localtime(&Now);
-   *HourP = HereNow->tm_hour, *MinuteP = HereNow->tm_min, *SecondP = HereNow->tm_sec;
+// The time since 2001 in seconds.
+long time2001(void) {
+#if 1
+// Portable programs, actually, should not rely on the return value of time().
+   const long _2001 = 11323 * 24 * 60 * 60;
+   time_t Now = time(NULL); return (long)(Now - _2001);
+#else
+// A fall-back version for implementations of C99 in which time() does not return the time-since-UNIX-epoch in seconds.
+   const int Leap2000 = 2000 / 4 - 2000 / 100 + 2000 / 400;
+   time_t Now; time(&Now); struct tm *DT = gmtime(&Now);
+   int Y = 1900 + DT->tm_year, M = 1 + DT->tm_mon, D = DT->tm_mday, Hr = DT->tm_hour, Mn = DT->tm_min, Sc = DT->tm_sec;
+   long T = 365 * (M - 1) / 12;
+   if (M < 8) T--;
+   if (M < 3) T += M;
+   else {
+      if (Y % 4 == 0 && (Y % 100 != 0 || Y % 400 == 0)) T++;
+   // if (Y % 4 == 0) T++;
+   // if (Y % 100 == 0) T--;
+   // if (Y % 400 == 0) T++;
+   }
+   T += D - 1;
+   Y--;
+   T += 365 * (Y - 2000) + Y / 4 - Y / 100 + Y / 400 - Leap2000;
+   return 60 * (60 * (24 * T + Hr) + Mn) + Sc;
+#endif
 }
 
 // common /random/ long Seed0; const long M0; const int A0, Q0, R0;

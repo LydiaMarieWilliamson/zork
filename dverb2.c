@@ -16,7 +16,7 @@ void savegm(void) {
 
    FILE *ExF = fopen("dsave.dat", "wb"); if (ExF == NULL) goto L100;
 
-   int PlTime = gttime();
+   long pltime = gttime();
 // 						!GET TIME.
 
 #define PutVar(Var) (fwrite((const void *)&(Var), sizeof (Var), (1), (ExF)))
@@ -26,7 +26,7 @@ void savegm(void) {
    PutVar(play.winner), PutVar(play.here), PutVar(hack.thfpos);
    PutVar(play.telflg), PutVar(hack.thfflg), PutVar(hack.thfact);
    PutVar(hack.swdact), PutVar(hack.swdsta), PutArr(64, puzzle.cpvec);
-   PutVar(PlTime), PutVar(state.moves), PutVar(state.deaths), PutVar(state.rwscor);
+   PutVar(pltime), PutVar(state.moves), PutVar(state.deaths), PutVar(state.rwscor);
    PutVar(state.egscor), PutVar(state.mxload);
    PutVar(state.ltshft), PutVar(state.bloc), PutVar(state.mungrm), PutVar(state.hs);
    PutVar(screen.fromdr), PutVar(screen.scolrm), PutVar(screen.scolac);

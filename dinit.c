@@ -101,7 +101,7 @@ L10000:
    state.rwscor = 0;
    state.deaths = 0;
    state.moves = 0;
-   time_.pltime = 0;
+   time_.pltime = 0L;
    state.mungrm = 0;
    state.hs = 0;
    prsvec.prsa = 0;
@@ -306,20 +306,8 @@ L10000:
 // SET UP TO PLAY THE GAME.
 
 // L1025:
-#if 0
-// Day: datarry[0], Month: datarry[1], Year: datarry[2].
-   idate(datarry);
-   inirnd(datarry[0] | datarry[1] | datarry[2] | time_.shour | time_.smin | time_.ssec);
-#else
-   intime(&time_.shour, &time_.smin, &time_.ssec);
-// 						!GET TIME AND DATE.
-// 	NEW WAY TO INITIALIZE /+TAA+/
-#   if 0
-   inirnd(time_.shour * 3600 + time_.smin * 60 + time_.ssec);
-#   else
-   inirnd(time_.shour ^ time_.smin ^ time_.ssec);
-#   endif
-#endif
+   time_.stime = time2001();
+   inirnd(time_.stime);
 
    play.winner = PlayerAX;
    last.lastit = advs.aobj[PlayerAX - 1];

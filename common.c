@@ -19,7 +19,7 @@
 
 // Unlisted:
 // common /time/
-// int pltime, shour, smin, ssec;
+// long pltime, stime;
 struct timeCB time_;
 
 // parser.h:

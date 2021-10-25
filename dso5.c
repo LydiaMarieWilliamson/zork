@@ -6,15 +6,8 @@
 #include "common.h"
 
 // Get total time played
-int gttime(void) {
-   int h, m, s;
-
-   intime(&h, &m, &s);
-   int t = h * 60 + m - (time_.shour * 60 + time_.smin);
-   if (t < 0) {
-      t += 1440;
-   }
-   return t += time_.pltime;
+long gttime(void) {
+   return time2001() - time_.stime + time_.pltime;
 }
 
 // Process open/close for doors

@@ -297,3 +297,5 @@ C99 (C2021) Translation & Upgrades
 2021/10/14-15	Normalizing the record format in the story file (the first of two rounds).
 2021/10/21	Revising the database decompiler to better reflect the structure of the exit table.
 2021/10/23	Reconciling and upgrading the random number generator.
+2021/10/24-25	Reconciling and upgrading the time-related functions and reseeding the random number generator with it.
+		This changes the format of the ‟dsave.dat” game-state file.

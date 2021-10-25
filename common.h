@@ -20,7 +20,7 @@ extern struct starCB {
 
 // common /time/
 extern struct timeCB {
-   int pltime, shour, smin, ssec;
+   long pltime, stime;
 } time_;
 
 // common /vers/

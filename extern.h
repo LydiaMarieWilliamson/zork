@@ -78,7 +78,7 @@ int fights(int, bool);
 int vilstr(int);
 
 // dso5.c:
-int gttime(void);
+long gttime(void);
 bool opncls(int, int, int);
 bool lit(int);
 int weight(int, int, int);
@@ -152,7 +152,7 @@ bool oappli(int, int);
 bool rappl1(int);
 
 // rtim.c:
-void intime(int *, int *, int *);
+long time2001(void);
 void inirnd(long);
 int rnd(int);
 void exit_(void);
