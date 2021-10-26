@@ -301,3 +301,4 @@ C99 (C2021) Translation & Upgrades
 		This changes the format of the ‟dsave.dat” game-state file.
 2021/10/25	Add command-line arguments and use this to control the randomizer for the test routines.
 		‟make test” is now fully operational.
+2021/10/26	Removed absolute references to the strings file in the index file to the message table, rtext[].

@@ -29,8 +29,8 @@ void GetFlags(int Lim, bool *FlagP, FILE *InF) {
 
 void PutMsg(int X) {
    if (X < 0) printf("#%05d", -X);
-   else if (X > 0) printf("?%05d", +X);
-   else printf("------");
+   else if (X > 0) printf("?%04d", +X);
+   else printf("-----");
 }
 
 // Dungeon initialization subroutine
@@ -144,9 +144,9 @@ int main(void) {
    printf("\n");
    printf("Message Table\n");
    printf("─────────────\n");
-   const int mmax = 1050;
+   const int mmax = 1820;
    int mlnt = GetWord(IndexF);
-   int rtext[1050]; for (int m = 0; m < mmax; m++) rtext[m] = 0;
+   int rtext[1820]; for (int m = 0; m < mmax; m++) rtext[m] = 0;
    GetWords(mlnt, rtext, IndexF);
    printf("/rmsg/: %d of %d messages { text; }\n", mlnt, mmax);
    for (int m = 0; m < mlnt; m++) PutMsg(rtext[m]), printf(",\n");
