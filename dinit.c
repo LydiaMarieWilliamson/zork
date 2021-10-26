@@ -31,11 +31,12 @@
 #endif
 
 // Dungeon initialization subroutine
-bool init(void) {
+bool init(int AC, char *AV[]) {
 // System generated locals
    bool ret_val;
 
 // Local variables
+   long seed;
    int xmax, r2max;
    int Maj, Min, Edit;
    FILE *IndexF;
@@ -307,7 +308,19 @@ L10000:
 
 // L1025:
    time_.stime = time2001();
-   inirnd(time_.stime);
+
+// Check for the number of inputs.
+   if (AC < 2) {
+      seed = time_.stime;
+   } else if (AC < 3) {
+   // Read in the and convert it to a long integer.
+      char *EndP = "";
+      seed = strtol(AV[1], &EndP, 10);
+      if (*EndP != '\0') goto L1850;
+   } else {
+      goto L1875;
+   }
+   inirnd(seed);
 
    play.winner = PlayerAX;
    last.lastit = advs.aobj[PlayerAX - 1];
@@ -340,6 +353,13 @@ L10000:
 
 // ERRORS-- INIT FAILS.
 
+L1850:
+   more_output("Invalid random number seed: %s.\n", AV[1]);
+   goto L1975;
+L1875:
+   more_output("Too many command line arguments %d.\n", AC);
+   more_output("Usage: %s [Seed].\n", AV[0]);
+   goto L1975;
 L1900:
    more_output("I can't open " MyIndexFile ".\n");
    goto L1975;

@@ -53,7 +53,7 @@ void swordd(void);
 void game_(void);
 
 // dinit.c:
-bool init(void);
+bool init(int AC, char *AV[]);
 
 // dso1.c:
 void princr(bool, int);

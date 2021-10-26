@@ -36,3 +36,4 @@ There is a pile of leaves on the ground.
 >Your score would be 5 [total of 585 points], in 14 moves.
 This gives you the rank of Beginner.
 Do you wish to leave the game?
+Game Over.

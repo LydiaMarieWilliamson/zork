@@ -102,13 +102,13 @@ const int STagA = 0100000;
 // enum vindexCB; // Declared and defined in common.h.
 
 // Main program: dungeo
-int main(void) {
+int main(int AC, char *AV[]) {
 // DUNGEON, PAGE 3
 
 // 1) INITIALIZE DATA STRUCTURES
 // 2) PLAY GAME
 
-   if (init()) {
+   if (init(AC, AV)) {
       game_();
    }
 // 						!IF INIT, PLAY GAME.

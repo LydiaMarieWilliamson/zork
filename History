@@ -299,3 +299,5 @@ C99 (C2021) Translation & Upgrades
 2021/10/23	Reconciling and upgrading the random number generator.
 2021/10/24-25	Reconciling and upgrading the time-related functions and reseeding the random number generator with it.
 		This changes the format of the ‟dsave.dat” game-state file.
+2021/10/25	Add command-line arguments and use this to control the randomizer for the test routines.
+		‟make test” is now fully operational.

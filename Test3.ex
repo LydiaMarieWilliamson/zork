@@ -9,8 +9,8 @@ There is a small mailbox here.
 front door.
 There is a small mailbox here.
 >You are in a forest, with trees in all directions around you.
->You are in a forest, with trees in all directions around you.
->You are in a forest, with trees in all directions around you.
+>Forest
+>Forest
 >You are in a dimly lit forest, with large trees all around.  One
 particularly large tree with some low branches stands here.
 >You are about ten feet above the ground nestled among some large
@@ -18,6 +18,7 @@ branches.  The nearest branch above you is beyond your reach.
 On the branch is a small birds nest.
 The birds nest contains:
   A jewel-encrusted egg.
+You hear in the distance the chirping of a song bird.
 >Taken.
 >You are in a dimly lit forest, with large trees all around.  One
 particularly large tree with some low branches stands here.

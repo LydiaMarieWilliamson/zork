@@ -79,7 +79,14 @@ install: $(APP)
 	cp $(APP).6 $(MANDIR)/man6/
 
 test: $(APP)
-	./$(APP) <Test.in >Ex && diff -d Test.ex Ex && rm Ex
+	@./$(APP) 655596513 <Test.in > Ex0 && diff -d Test0.ex Ex0 && rm Ex0 && \
+	./$(APP) 655596508 <Test.in > Ex1 && diff -d Test1.ex Ex1 && rm Ex1 && \
+	./$(APP) 655596587 <Test.in > Ex2 && diff -d Test2.ex Ex2 && rm Ex2 && \
+	./$(APP) 655596590 <Test.in > Ex3 && diff -d Test3.ex Ex3 && rm Ex3 && \
+	./$(APP) 655596594 <Test.in > Ex4 && diff -d Test4.ex Ex4 && rm Ex4 && \
+	./$(APP) 655596596 <Test.in > Ex5 && diff -d Test5.ex Ex5 && rm Ex5 && \
+	./$(APP) 655600000 <TestA.in > Ex6 && diff -d Test6.ex Ex6 && rm Ex6 && \
+	echo "Tests passed."
 
 clean:
 	rm -f $(OBJS)
