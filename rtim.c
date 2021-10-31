@@ -54,7 +54,7 @@ void _srand(long S0, long S1) {
 static long _rand(void) {
    const int A0 = 40014, Q0 = M0 / A0, R0 = M0 % A0;
    const int A1 = 40692, Q1 = M1 / A1, R1 = M1 % A1;
-// This requires:
+// This requires that:
 // ∙	(M0 - 1)/2 and (M1 - 1)/2 be relatively prime,
 // ∙	A0² < M0 and A1² < M1,
 // ∙	0 ≤ Seed0 < M0, 0 ≤ Seed1 < M1.

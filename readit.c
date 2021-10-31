@@ -144,9 +144,9 @@ int main(void) {
    printf("\n");
    printf("Message Table\n");
    printf("─────────────\n");
-   const int mmax = 1820;
+   const int mmax = 1700;
    int mlnt = GetWord(IndexF);
-   int rtext[1820]; for (int m = 0; m < mmax; m++) rtext[m] = 0;
+   int rtext[1700]; for (int m = 0; m < mmax; m++) rtext[m] = 0;
    GetWords(mlnt, rtext, IndexF);
    printf("/rmsg/: %d of %d messages { text; }\n", mlnt, mmax);
    for (int m = 0; m < mlnt; m++) PutMsg(rtext[m]), printf(",\n");

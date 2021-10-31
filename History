@@ -302,3 +302,15 @@ C99 (C2021) Translation & Upgrades
 2021/10/25	Add command-line arguments and use this to control the randomizer for the test routines.
 		‟make test” is now fully operational.
 2021/10/26	Removed absolute references to the strings file in the index file to the message table, rtext[].
+		This undoes the resizing of rtext[] in the 2021 version in 2021/10/12, and resizes it in the 1991 version instead.
+2021/10/28	Reindexed the message table rtext[] in dindx.dat and the string table in dtext.dat such that:
+		∙	duplicate relative indexes to rtext[] from the tables in ‟dindx.dat” are removed,
+			there are 149 duplicates in the 2021 version,
+		and
+		∙	duplicate strings in the string table are removed,
+			there are 158 duplicates in the 2021 version.
+		The ideal is to allow all duplicate indices in rtext[] to ‟dtext.dat”, there are 9 in the 1991 version.
+		They cannot be eliminated without analyzing the source code to find all the places where rtext[] indices occur.
+2021/10/30-31	Reindexed the string table in the story file; revised the version history contained in it.
+		This is now version 2.8B
+2021/10/31	Added the Zork.6 man page, from C1991, to C2021.

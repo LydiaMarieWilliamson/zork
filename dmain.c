@@ -21,7 +21,7 @@ struct starCB star;
 
 // common /vers/
 const int vmaj = 2, vmin = 8;
-const char vedit = 'A';
+const char vedit = 'B';
 
 // common /bats/
 const int batdrp[] = { 66, 67, 68, 69, 70, 71, 72, 65, 73 };
