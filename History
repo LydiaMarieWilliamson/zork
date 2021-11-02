@@ -314,3 +314,4 @@ C99 (C2021) Translation & Upgrades
 2021/10/30-31	Reindexed the string table in the story file; revised the version history contained in it.
 		This is now version 2.8B
 2021/10/31	Added the Zork.6 man page, from C1991, to C2021.
+2021/11/01	Reconciling more of the remaining differences in the Story file buffering & routines: dsub.c, dgame.c.

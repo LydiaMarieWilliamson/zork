@@ -20,33 +20,35 @@ static long DeRef(int N) {
 // 						!TAKE ABS VALUE.
 }
 
-static void rspsb2nl(long, long, long, bool);
+static void rspeak2(long, long, long);
 
 // Output random message routine
 // Called as:
 // 	rspeak(MsgNum);
 void rspeak(int n) {
-   rspsb2nl(DeRef(n), 0, 0, true);
+   rspeak2(DeRef(n), 0, 0);
 }
 
 // Output random message with substitutable argument
 // Called as:
 // 	rspsub(MsgNum, SubNum);
 void rspsub(int n, int s1) {
-   rspsb2nl(DeRef(n), DeRef(s1), 0, true);
+   rspeak2(DeRef(n), DeRef(s1), 0);
 }
 
 // Output random message with up to two substitutable arguments
 // Called as:
 // 	rspsb2(MsgNum, SubNum1, SubNum2);
 void rspsb2(int n, int s1, int s2) {
-   rspsb2nl(DeRef(n), DeRef(s1), DeRef(s2), true);
+   rspeak2(DeRef(n), DeRef(s1), DeRef(s2));
 }
 
-// Display a substitutable message with an optional newline
-static void rspsb2nl(long x, long y, long z, bool nl) {
+// Display a substitutable message.
+static void rspeak2(long x, long y, long z) {
    const char *zkey = "IanLanceTaylorJr";
-   if (x == 0) {
+   bool top = true; // Top level flag.
+   long w = 0L, iloc = 0L;
+   if (x == 0L) {
       return;
    }
 // 						!ANYTHING TO DO?
@@ -56,39 +58,38 @@ static void rspsb2nl(long x, long y, long z, bool nl) {
    x = (x - 1) * 8;
    if (fseek(StoryF, x, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
 
-   if (nl)
-      more_output(NULL);
+   more_output(NULL);
 
    while (true) {
       int i;
 
       i = getc(StoryF);
-      if (i == EOF) {
-         fprintf(stderr, "Error reading database loc %d\n", x);
-         exit_();
-      }
+      if (i == EOF) fprintf(stderr, "Error reading database loc %d\n", x), exit_();
       i ^= zkey[x & 0xf] ^ (x & 0xff);
       x = x + 1;
-      if (i == '\0')
-         break;
-      else if (i == '\n') {
-         putchar('\n');
-         if (nl)
-            more_output(NULL);
-      } else if (i == '#' && y != 0) {
-         long iloc;
-
-         iloc = ftell(StoryF);
-         rspsb2nl(y, 0, 0, false);
+      if (i == '\0') {
+         if (top) break; else top = true;
          if (fseek(StoryF, iloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", iloc), exit_();
          y = z;
-         z = 0;
+         z = 0L;
+         x = w;
+         w = 0L;
+         iloc = 0L;
+      } else if (i == '\n') {
+         putchar('\n');
+         if (top)
+            more_output(NULL);
+      } else if (i == '#' && top && y != 0L) {
+         top = false;
+         iloc = ftell(StoryF);
+         w = x;
+         x = (y - 1) * 8;
+         if (fseek(StoryF, x, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
       } else
          putchar(i);
    }
 
-   if (nl)
-      putchar('\n');
+   putchar('\n');
 }
 
 // Apply objects from parse vector
