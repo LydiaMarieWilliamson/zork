@@ -30,7 +30,7 @@ bool synmch(void) {
    ret_val = false;
 #if defined ALLOW_GDT && 0
    dflag = (debug.prsflg & 16) != 0;
-   if (dflag) more_output(0, *, "synflags=%s%s%s%s%s%s\n", DirS, IndS, StdS, FlipS, DrivS, VMaskS);
+   if (dflag) more_output("synflags=%s%s%s%s%s%s\n", DirS, IndS, StdS, FlipS, DrivS, VMaskS);
 #endif
    j = pv.act;
 // 						!SET UP PTR TO SYNTAX.

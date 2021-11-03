@@ -9,7 +9,8 @@ There is a small mailbox here.
 front door.
 There is a small mailbox here.
 >You are in a forest, with trees in all directions around you.
->You are in a forest, with trees in all directions around you.
+You hear in the distance the chirping of a song bird.
+>Forest
 >You are in a forest, with trees in all directions around you.
 >You are in a dimly lit forest, with large trees all around.  One
 particularly large tree with some low branches stands here.
@@ -21,6 +22,7 @@ The birds nest contains:
 >Taken.
 >You are in a dimly lit forest, with large trees all around.  One
 particularly large tree with some low branches stands here.
+You hear in the distance the chirping of a song bird.
 >You are in a clearing, with a forest surrounding you on the west
 and south.
 There is a pile of leaves on the ground.

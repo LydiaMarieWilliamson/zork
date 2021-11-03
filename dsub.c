@@ -58,8 +58,6 @@ static void rspeak2(long x, long y, long z) {
    x = (x - 1) * 8;
    if (fseek(StoryF, x, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
 
-   more_output(NULL);
-
    while (true) {
       int i;
 
@@ -70,26 +68,25 @@ static void rspeak2(long x, long y, long z) {
       if (i == '\0') {
          if (top) break; else top = true;
          if (fseek(StoryF, iloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", iloc), exit_();
-         y = z;
-         z = 0L;
          x = w;
          w = 0L;
          iloc = 0L;
       } else if (i == '\n') {
-         putchar('\n');
-         if (top)
-            more_output(NULL);
+         more_output("\n");
       } else if (i == '#' && top && y != 0L) {
          top = false;
          iloc = ftell(StoryF);
          w = x;
-         x = (y - 1) * 8;
+         x = y;
+         y = z;
+         z = 0L;
+         x = (x - 1) * 8;
          if (fseek(StoryF, x, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
       } else
          putchar(i);
    }
 
-   putchar('\n');
+   more_output("\n");
 }
 
 // Apply objects from parse vector
