@@ -1,0 +1,75 @@
+The results of translation from Fortran into C by f2c.
+
+Addenda (2021/09/17-2021/09/18):
+	The original Fortran source was a translation from MDL and contains translation errors in blkdata.f.
+	The encodings used for data initialization are in base 40 with:
+		‟1Rα”: 1600a,
+		‟2Rαβ”: 1600a + 40b,
+		‟3Rαβγ”: 1600a + 40b + c
+	where
+		(α,a), (β,b), (γ,c) ∈ { (' ',0), ('A',1), ⋯, ('Z',26), ('$',27), ('.',28), ('%',29), ('0',30), ('1',31), ⋯, ('9',39) }
+	which comprise the digits of the MOD40 representation of base-40 numerals;
+	a version of RADIX50 specialized for PDP-11/VAX. https://en.wikipedia.org/wiki/DEC_RADIX_50#16-bit_systems
+
+	In blkdata.f, there were mismatches in the following places:
+	∙	(1RS, 29560): Mismatched value (it should be 30400); 29560 corresponds to 2RRS.
+	∙	(3RPAP, 256656): Mismatched value (it should be 25656).
+	∙	(1RO, 0): Mismatched value (it should be 24000).
+	∙	(1RY, 4000): Mismatched value (it should be 40000).
+	∙	(3RMIN, 21175): Mismatched value (it should be 21174).
+
+	The first two of these inconsistencies were corrected by the 1991 translation to C,
+	and have been repaired here - both in the Fortran original and the new C translation.
+	The ‟1RS” in (1RS, 29560) was already changed to ‟2RRS”.
+	This involved words starting in ‟HOURS⋯”, but did not affect them, since the mistake was in the comment, not the code.
+	The 256656 in (3RPAP, 256656) was already changed to 25656, is for words beginning in ‟PAPER⋯” and affects the code.
+
+	The remaining inconsistencies, which affect words that start in ‟INTO⋯”, ‟CLAY⋯”, ‟CRIMIN⋯”, respectively,
+	and have all been inherited by the translations of Zork into C.
+	They were repaired in a later revision (2021/09/30).
+
+The following note (up to layout changes) was inserted by f2c into the translated files, but has been moved here:
+
+	Translated by f2c (version 20190311).
+	You must link the resulting object file with libf2c:
+	∙	on Microsoft Windows system, link with libf2c.lib;
+	∙	on Linux or Unix systems, link with .../path/to/libf2c.a -lm
+	∙	or, if you install libf2c.a in a standard place, with -lf2c -lm
+	-- in that order, at the end of the command line, as in
+		cc *.o -lf2c -lm
+	Source for libf2c is in /netlib/f2c/libf2c.zip, e.g.,
+		http://www.netlib.org/f2c/libf2c.zip
+
+as well as the following include:
+
+	#include "f2c.h"
+
+which was changed to
+
+	#include "F2C.h"
+
+with the system ‟f2c.h” directly added here and internalized as ‟F2C.h”, where it was whittled away.
+The system-dependent part of the original ‟f2c.h” had already been removed from ‟F2C.h”, since it's not used anywhere.
+Most of the ‟Fortran”-isms had also been removed from ‟F2C.h” and rendered in native C.
+The remnant of ‟F2C.h” has since been moved into ‟extern.h”.
+
+Unused Variables and Function
+─────────────────────────────
+Because the original Fortran source ‟D”-commented out the ‟GDB” debug code.
+	dflag:		actors.c, blkdata.c, dinit.c, dmain.c, dsub.c, gdt.c, np1.c, np2.c, np3.c, np.c
+	rlight:		demons.c
+	rser:		demons.c
+	gdtstr:		dgame.c
+	datarry:	dinit.c
+	sysbuf:		np.c
+	gdt():		dgame.c
+
+Initialized Block Data
+──────────────────────
+blkdata.c:	buzvoc, prpvoc, dirvoc, adjvoc, vrbvoc, objvoc
+dmain.c:	vers, hyper, bats, synflg, objflg, puzzle, screen,
+		aflags, aindex, cindex, oflags, oindex, rflag, rindex, vindex, xpars, xsrch,
+
+Functions
+─────────
+Separated out as ‟extern.h”.

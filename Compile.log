@@ -1,0 +1,163 @@
+f2c Library Functions
+━━━━━━━━━━━━━━━━━━━━━
+rtim.c:		itime(): nativized to time() and localtime().
+local.c:	do_{u,f}io(): nativized within the formats of calls to printf(), more_output(), scanf() and more_input().
+		more_input(): for s_r{s,d}{u,f}e(); do_fio(); ⋯; do_fio(); e_r{s,d}{u,f}e();
+		more_output(): for s_w{s,d}{u,f}e(); do_fio(); ⋯; do_fio(); e_w{s,d}{u,f}e();
+C99 library:	s_cmp(): nativized to strncmp().
+		f_open(): nativized to fopen().
+		f_clos(): nativized to fclose().
+		s_stop(): nativized to exit().
+
+Common Blocks
+━━━━━━━━━━━━━
+Except where otherwise noted, they are defined in common.c.
+
+Unlisted
+────────
+time_:		dinit dso5 dverb2
+
+Defined and used only in rtim.c:
+random_:	rtim
+
+Defined in dmain.c:
+star:		demons dinit dmain dso6 dverb1 gdt np2 np3 verbs
+vers:		dinit dmain dverb2 sverbs
+hyper:		dinit dmain dso7 nobjs
+bats:		dmain objcts rooms
+
+Parser Output (parser.h)
+────────────────────────
+prsvec:	actors ballop blkdata demons dgame dinit dmain dso4 dso5 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 np nrooms objcts rooms sobjs sverbs verbs villns
+
+Parser State (parser.h)
+───────────────────────
+orphs:		actors ballop blkdata demons dgame dinit dmain dso4 dso5 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 np nrooms objcts rooms sobjs sverbs verbs villns
+last:		actors ballop blkdata demons dgame dinit dmain dso4 dso5 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 np nrooms objcts rooms sobjs sverbs verbs villns
+C
+pv:		actors ballop blkdata demons dgame dinit dmain dso4 dso5 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 np nrooms objcts rooms sobjs sverbs verbs villns
+syntax:	actors ballop blkdata demons dgame dinit dmain dso4 dso5 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 np nrooms objcts rooms sobjs sverbs verbs villns
+
+Converted to enumerated types, defined in common.h:
+synflg:	actors ballop blkdata demons dgame dinit dmain dso4 dso5 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 np nrooms objcts rooms sobjs sverbs verbs villns
+objflg:	actors ballop blkdata demons dgame dinit dmain dso4 dso5 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 np nrooms objcts rooms sobjs sverbs verbs villns
+
+Vocabularies (vocab.h)
+──────────────────────
+Defined in blkdata.c:
+buzvoc:	blkdata np1 np2 np3
+prpvoc:	blkdata np1 np2 np3
+dirvoc:	blkdata np1 np2 np3
+adjvoc:	blkdata np1 np2 np3
+vrbvoc:	blkdata np1 np2 np3
+objvoc:	blkdata np1 np2 np3
+
+Game State (gamestat.h)
+───────────────────────
+play:		actors ballop blkdata clockr demons dgame dinit dmain dso1 dso2 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 nrooms objcts rooms sobjs sverbs verbs villns
+
+Rooms (rooms.h)
+───────────────
+rooms:		actors ballop clockr dgame dinit dmain dso1 dso2 dso3 dso5 dso6 dso7 dsub dverb2 gdt nobjs nrooms objcts rooms sobjs sverbs verbs
+
+(rflag.h)
+─────────
+Converted to an enumerated type, defined in common.h:
+rflag:		actors ballop clockr dinit dmain dso1 dso2 dso5 dso6 dso7 dsub dverb2 nobjs nrooms objcts rooms sobjs sverbs verbs
+
+(rindex.h)
+──────────
+Converted to an enumerated type, defined in common.h:
+rindex_:	actors clockr demons dgame dinit dmain dso6 dso7 dsub dverb1 dverb2 gdt nobjs nrooms objcts rooms sobjs sverbs verbs villns
+
+(xsrch.h)
+─────────
+Converted to an enumerated type, defined in common.h:
+xsrch:		actors clockr demons dmain dsub dverb2 np nrooms sverbs verbs
+
+Objects (objects.h)
+───────────────────
+objcts:	actors ballop blkdata clockr demons dgame dinit dmain dso1 dso2 dso3 dso4 dso5 dso7 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 nrooms objcts rooms sobjs sverbs verbs villns
+oroom2_:	actors ballop blkdata clockr demons dgame dinit dmain dso1 dso2 dso3 dso4 dso5 dso7 dsub dverb1 dverb2 gdt lightp nobjs np1 np2 np3 nrooms objcts rooms sobjs sverbs verbs villns
+
+(oflags.h)
+──────────
+Converted to an enumerated type, defined in common.h:
+oflags:	actors ballop clockr demons dgame dmain dso1 dso3 dso4 dso5 dso7 dsub dverb1 dverb2 lightp nobjs np2 np3 nrooms objcts rooms sobjs sverbs verbs villns
+
+(oindex.h)
+──────────
+Converted to an enumerated type, defined in common.h:
+oindex:	actors ballop blkdata clockr demons dgame dinit dmain dso1 dso2 dso4 dsub dverb2 gdt lightp nobjs np1 nrooms objcts rooms sobjs sverbs verbs villns
+
+Clock Interrupts (clock.h)
+──────────────────────────
+cevent:	actors ballop clockr demons dinit dmain dso2 dverb2 gdt lightp nobjs nrooms objcts rooms sobjs sverbs verbs villns
+
+Converted to an enumerated type, defined in common.h:
+cindex:	actors ballop clockr demons dinit dmain dso2 dverb2 gdt lightp nobjs nrooms objcts rooms sobjs sverbs verbs villns
+
+Adventurers (advers.h)
+──────────────────────
+advs:		actors blkdata clockr demons dgame dinit dmain dso1 dso2 dso4 dso5 dsub dverb1 dverb2 gdt nobjs np1 np2 np3 nrooms objcts rooms sobjs sverbs verbs
+
+Defined in dmain.c:
+aflags:	actors blkdata clockr demons dgame dinit dmain dso1 dso2 dso4 dso5 dsub dverb1 dverb2 gdt nobjs np1 np2 np3 nrooms objcts rooms sobjs sverbs verbs
+Converted to an enumerated type, defined in common.h:
+aindex:	actors blkdata clockr demons dgame dinit dmain dso1 dso2 dso4 dso5 dsub dverb1 dverb2 gdt nobjs np1 np2 np3 nrooms objcts rooms sobjs sverbs verbs
+
+Verbs (verbs.h)
+───────────────
+Converted to an enumerated type, defined in common.h:
+vindex:	actors ballop blkdata demons dgame dmain dso5 dsub dverb1 lightp nobjs np1 nrooms objcts rooms sobjs sverbs verbs villns
+
+Flags (flags.h)
+───────────────
+(Originally findex, later split into findex_0, findex_1)
+findex_0:	actors ballop clockr demons dgame dinit dso1 dso2 dso4 dso7 dsub dverb2 gdt nobjs nrooms objcts rooms sobjs sverbs villns
+findex_1:	ballop clockr demons dinit dso6 dso7 dverb2 lightp nobjs nrooms objcts rooms sobjs sverbs villns
+
+(debug.h)
+─────────
+debug:		actors blkdata dinit dmain dsub gdt np1 np2 np3 np
+
+Villains and Demons (villians.h)
+────────────────────────────────
+hack:		actors clockr demons dgame dinit dmain dso4 dverb2 gdt nobjs rooms sobjs villns
+vill:		actors clockr demons dgame dinit dmain dso4 dverb2 gdt nobjs rooms sobjs villns
+
+(state.h)
+─────────
+state:		ballop clockr dgame dinit dmain dso2 dso4 dsub dverb1 dverb2 gdt nobjs np3 nrooms objcts rooms sobjs sverbs verbs
+
+Current Exits (curxt.h)
+───────────────────────
+curxt:		ballop clockr demons dinit dmain dso3 dverb2 sverbs
+
+(xpars.h)
+─────────
+Defined in dmain.c:
+xpars:		ballop dinit dmain dso3 dverb2 sverbs
+
+I/O Variables (io.h)
+────────────────────
+input:		dgame dinit dmain dsub gdt np nrooms sverbs
+chan:		dgame dinit dmain dso2 dso3 dso7 dsub gdt np nrooms sverbs
+
+Screen of Light (screen.h)
+──────────────────────────
+Defined in dmain.c:
+screen:	dinit dmain dsub dverb2 gdt nobjs rooms sverbs
+
+Message Index (mindex.h)
+────────────────────────
+rmsg:		dinit dsub gdt
+
+Exits (exits.h)
+───────────────
+exits:		dinit dmain dso3 dverb2 gdt sverbs
+
+Puzzle Room State (puzzle.h)
+────────────────────────────
+Defined in dmain.c:
+puzzle:	dmain dso7 dverb2 gdt nobjs objcts
