@@ -26,7 +26,7 @@ Crowther and Woods, and the Dungeons and Dragons game of Gygax
 and Arneson.  The original version was written in MDL (alias MUDDLE).
 The current version was translated from MDL into FORTRAN IV by
 a somewhat paranoid DEC engineer who prefers to remain anonymous,
-and was later translated to C.
+and was later translated to C and then updated to C99.
 
    On-line information may be obtained with the commands HELP and INFO.
 >Closed.

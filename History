@@ -315,3 +315,14 @@ C99 (C2021) Translation & Upgrades
 		This is now version 2.8B
 2021/10/31	Added the Zork.6 man page, from C1991, to C2021.
 2021/11/01	Reconciling more of the remaining differences in the Story file buffering & routines: dsub.c, dgame.c.
+		Further changes and simplifications made to dsub.c in C1991.
+2021/11/02	Reconciling the Makefiles and ‟make test”, and sorting out the test files.
+2021/11/04	Updating the story file ‟dtext.dat” and reconciling the C1991 and C2021/Fortran versions with each other.
+		The dates in the story file have been changed to 2021-10-31, the timestamp for version 2.8B.
+		References for contact and maintenance were changed, for now, to the github repository site.
+		A reference to the Zork Library https://www.thezorklibrary.com/history/us_news_dungeon.html was added.
+2021/11/04	Reconciling the objects table in the index file ‟dindx.dat”, arbitrating with version 3.2B of the Fortran source.
+		Objects 67 (Wooden Door), 68 (Front Door), 69 (Stone Door), 164 (Pine Door): resolved in favor of the 1991 version.
+		Objects 172 (ODoor (Scorr-To-Cell)): resolved in favor of the 2021 version.
+		Set the door bit (0x1000) in oflag1 of objects 67, 68, 69, 164 and 172.
+		Clear the take bit (0x2000) in oflag1 of object 172.
