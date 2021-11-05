@@ -327,3 +327,4 @@ C99 (C2021) Translation & Upgrades
 		Set the door bit (0x1000) in oflag1 of objects 67, 68, 69, 164 and 172.
 		Clear the take bit (0x2000) in oflag1 of object 172.
 2021/11/05	Incremental modifications of the message output routine to bring both C translations into line.
+2021/11/05	Reformatted and reconciled the decoding/encoding and layout of the story file ‟dtext.dat”.
