@@ -326,3 +326,4 @@ C99 (C2021) Translation & Upgrades
 		Objects 172 (ODoor (Scorr-To-Cell)): resolved in favor of the 2021 version.
 		Set the door bit (0x1000) in oflag1 of objects 67, 68, 69, 164 and 172.
 		Clear the take bit (0x2000) in oflag1 of object 172.
+2021/11/05	Incremental modifications of the message output routine to bring both C translations into line.
