@@ -66,43 +66,29 @@ static void rspeak2(long x, long y, long z) {
       0xb9, 0x90, 0x9c, 0xbf, 0x95, 0x9b, 0x95, 0x92, 0xac, 0x98, 0x83, 0x97, 0x93, 0x8f, 0xb4, 0x8d
    };
    bool top = true; // Top level flag.
-   long iloc = 0L;
-   if (x == 0L) {
-      return;
-   }
+   long w = 0L;
+   if (x == 0L) return;
 // 						!ANYTHING TO DO?
    play.telflg = true;
 // 						!SAID SOMETHING.
-
-   x = (x - 1) * 8;
-   if (fseek(StoryF, x, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
-
+NextRecord:
+   if (fseek(StoryF, x = 8 * (x - 1), SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
    while (true) {
-      int i;
-
-      i = getc(StoryF);
+      int i = getc(StoryF);
       if (i == EOF) fprintf(stderr, "Error reading database loc %d\n", x), exit_();
       i ^= key[x & 0xff];
       x = x + 1;
       if (i == '\0') {
          if (top) break; else top = true;
-         if (fseek(StoryF, iloc, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", iloc), exit_();
-         x = iloc;
-         iloc = 0L;
-      } else if (i == '\n') {
-         more_output("\n");
-      } else if (i == '#' && top && y != 0L) {
+         if (fseek(StoryF, x = w, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", w), exit_();
+         w = 0L;
+      } else if (i == '\n') more_output("\n");
+      else if (i == '#' && top && y != 0L) {
          top = false;
-         iloc = ftell(StoryF);
-         x = y;
-         y = z;
-         z = 0L;
-         x = (x - 1) * 8;
-         if (fseek(StoryF, x, SEEK_SET) == EOF) fprintf(stderr, "Error seeking database loc %d\n", x), exit_();
-      } else
-         putchar(i);
+         w = x, x = y, y = z, z = 0L;
+         goto NextRecord;
+      } else putchar(i);
    }
-
    more_output("\n");
 }
 
