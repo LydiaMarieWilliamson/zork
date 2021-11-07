@@ -1,14 +1,20 @@
 Dungeon (Zork I)
 ━━━━━━━━━━━━━━━━
-This is an upward revision based on the public domain source code to the original DUNGEON game (Zork I),
-which was released to the public domain by Infocom.
-It includes the source files, headers, and information.
+This is the merger of:
+∙	a new translation into C99 of the Fortran source code in this archive, carried out with the aid of version 20190311 of f2c,
+and
+∙	an upward revision of an older translation into C,
+	based on the public domain source code to the original DUNGEON game (Zork I),
+	which was released to the public domain by Infocom, which includes the source files, headers, and information.
+The new and old translations are contained, respectively, under C2021 and C1991 of the zork-fortran archive,
+while the old translation is contained under the zork archive.
 
-This revised fork of Zork has been used as a reference translation,
-in conjunction with a second translation that was carried out from Fortran using a more up-to-date version of f2c;
-and has been subject to several rounds of recoding to bring it up to sync with C99 and with the second C99 translation,
-and to reincorporate elements from the Fortran version.
-Both C translations are being merged.
+The older translation to C had separately been done earlier in 1991, using a less-developed version of f2c,
+and was used as a reference translation, to serve as a guide and cross-check for the newer translation,
+while also subjecting it to several rounds of recoding to upgrade and reverse-cross-check it
+against the new translation and Fortran version, reincorporating elements from the Fortran version
+and bringing it up to sync with C99 and with the new translation.
+
+Both C translations have been progressively combined into one and their respective archives will soon be merged.
 
 Details on the history of the earlier versions and the new translation may be found in the file ‟History”.
-This archive has been integrated into the newer archive as a sub-module, and may be accessed from there, as well.

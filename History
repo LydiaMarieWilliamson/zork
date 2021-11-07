@@ -327,4 +327,9 @@ C99 (C2021) Translation & Upgrades
 		Set the door bit (0x1000) in oflag1 of objects 67, 68, 69, 164 and 172.
 		Clear the take bit (0x2000) in oflag1 of object 172.
 2021/11/05	Incremental modifications of the message output routine to bring both C translations into line.
-2021/11/05	Reformatted and reconciled the decoding/encoding and layout of the story file ‟dtext.dat”.
+2021/11/05	Fully reconciled the ‟README” files of the 1991 and 2021 C translations.
+2021/11/05-06	Reformatted and reconciled the decoding/encoding and layout of the story file ‟dtext.dat”.
+		Experimented with different formats and routines, before deciding on the resolution.
+2021/11/07	Reconciled the messaging routine in dsub.{c,f}.
+		Resolved partly in favor of the 1991 C translation: replaced record-based I/O by streaming I/O.
+		Resolved partly in favor of the 2021 C translation and Fortran version: replaced character I/O by buffered I/O.
