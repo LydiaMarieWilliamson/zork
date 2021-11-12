@@ -331,7 +331,7 @@ extern struct screenCB {
 // Message Index
 // common /rmsg/
 extern struct rmsgCB {
-   int mlnt, rtext[1700];
+   int mlnt; long rtext[1700];
 } rmsg;
 
 // exits.h:

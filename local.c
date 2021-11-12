@@ -58,9 +58,21 @@ int GetWord(FILE *InF) {
    return A;
 }
 
+// Read a long integer from a line in the index file
+long GetLong(FILE *InF) {
+   int A = 0; long n = fscanf(InF, "%ld", &A);
+   if (n < 1) IOErrs++;
+   return A;
+}
+
 // Read a number of integers from separate lines in the index file
 void GetWords(int Lim, int *WordP, FILE *InF) {
    while (Lim-- > 0) *WordP++ = GetWord(InF);
+}
+
+// Read a number of long integers from separate lines in the index file
+void GetLongs(int Lim, long *LongP, FILE *InF) {
+   while (Lim-- > 0) *LongP++ = GetLong(InF);
 }
 
 // Read a number of boolean values from separate lines in the index file

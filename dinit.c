@@ -219,7 +219,7 @@ L10000:
 
    for (int m = 0; m < mmax; m++) {
 // 						!CLEAR MESSAGE DIRECTORY.
-      rmsg.rtext[m] = 0;
+      rmsg.rtext[m] = 0L;
 // L60:
    }
 
@@ -293,7 +293,7 @@ L10000:
    GetWords(advs.alnt, advs.aobj, IndexF), GetWords(advs.alnt, advs.aactio, IndexF);
    GetWords(advs.alnt, advs.astren, IndexF), GetWords(advs.alnt, advs.aflag, IndexF);
    star.strbit = GetWord(IndexF), star.mbase = GetWord(IndexF);
-   rmsg.mlnt = GetWord(IndexF), GetWords(rmsg.mlnt, rmsg.rtext, IndexF);
+   rmsg.mlnt = GetWord(IndexF), GetLongs(rmsg.mlnt, rmsg.rtext, IndexF);
 
    fclose(IndexF);
 // 						!INIT DONE.

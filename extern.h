@@ -26,7 +26,9 @@ bool wizard(void);
 extern unsigned IOErrs;
 FILE *OpenInF(const char *File, const char *Mode);
 int GetWord(FILE *InF);
+long GetLong(FILE *InF);
 void GetWords(int Lim, int *WordP, FILE *InF);
+void GetLongs(int Lim, long *LongP, FILE *InF);
 void GetFlags(int Lim, bool *FlagP, FILE *InF);
 
 void more_init(void);

@@ -2,8 +2,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define BalloOX 98
-
+// From local.c: IOErrs, GetWord(), GetLong(), GetWords(), GetLongs().
 unsigned IOErrs = 0U;
 
 // Read an integer from a line in the index file
@@ -13,9 +12,21 @@ int GetWord(FILE *InF) {
    return A;
 }
 
+// Read a long integer from a line in the index file
+long GetLong(FILE *InF) {
+   int A = 0; long n = fscanf(InF, "%ld", &A);
+   if (n < 1) IOErrs++;
+   return A;
+}
+
 // Read a number of integers from separate lines in the index file
 void GetWords(int Lim, int *WordP, FILE *InF) {
    while (Lim-- > 0) *WordP++ = GetWord(InF);
+}
+
+// Read a number of long integers from separate lines in the index file
+void GetLongs(int Lim, long *LongP, FILE *InF) {
+   while (Lim-- > 0) *LongP++ = GetLong(InF);
 }
 
 // Read a number of boolean values from separate lines in the index file
@@ -27,9 +38,9 @@ void GetFlags(int Lim, bool *FlagP, FILE *InF) {
    }
 }
 
-void PutMsg(int X) {
-   if (X < 0) printf("#%06d", -X);
-   else if (X > 0) printf("?%04d", +X);
+void PutMsg(long X) {
+   if (X < 0) printf("#%06ld", -X);
+   else if (X > 0) printf("?%04ld", +X);
    else printf("-----");
 }
 
@@ -68,13 +79,14 @@ bool GetRec(FILE *InF, long *locp, size_t *np, char buf[]) {
    return last;
 }
 
+// parser, gamestat, state, screen, mindex, /star/, /vers/, io, debug, /hyper/, rooms, rflag, exits, curxt, xpars, objects, oindex, clock, villians, advers, flags
 int main(void) {
    const char *MyIndexFile = "dindx.dat";
 // Now, restore from the existing index file.
    FILE *IndexF = fopen(MyIndexFile, "r"); if (IndexF == NULL) { printf("I can't open %s.\n", MyIndexFile); return EXIT_FAILURE; }
-// /edit/:
+// /vers/:
    int Maj = GetWord(IndexF), Min = GetWord(IndexF), Edit = GetWord(IndexF);
-   printf("/edit/: %1d.%1d.%1d\n", Maj, Min, Edit);
+   printf("/vers/: %1d.%1d%c\n", Maj, Min, Edit);
 // /state/: (bloc will be set later).
    int mxscor = GetWord(IndexF), egmxsc = GetWord(IndexF), bloc = 0;
    printf("/state/: Max Score = %d, Eg Score = %d\n", mxscor, egmxsc);
@@ -98,20 +110,20 @@ int main(void) {
    int travel[900];
    for (int x = 0; x < xmax; x++) travel[x] = 0;
    GetWords(xlnt, travel, IndexF);
-   printf("/exits/: %d of %d exits (travel) { last:1, direction:5, type-1:2, room:8, message, action:8, object:8; }\n", xlnt, xmax);
-// travel[x+0]: last:1, direction:5, type-1:2, room:8 (type ∈ {1,2,3,4})
+   printf("/exits/: %d of %d exits (travel) { lastx:1, direction:5, type-1:2, room:8, message, action:8, object:8; }\n", xlnt, xmax);
+// travel[x+0]: lastx:1, direction:5, type-1:2, room:8 (type ∈ {1,2,3,4})
 // travel[x+1]: message (type ∈ {2,3,4})
 // travel[x+2]: action:8, object:8 (type ∈ {3,4})
    for (int x = 0; x < xlnt; x++) {
-      unsigned T = (unsigned)travel[x], last = (T>>15)&1, direction = (T>>10)&0x1f, type = 1 + ((T>>8)&3), room = (T&0xff);
-      printf("{%u, %2u, %u, %3u", last, direction, type, room);
-      if (type > 2 && x > xlnt - 3 || type > 1 && x > xlnt - 2) { printf("Format Error.\n"); return EXIT_FAILURE; }
+      unsigned T = (unsigned)travel[x], lastx = (T>>15)&1, direction = (T>>10)&0x1f, type = 1 + ((T>>8)&3), room = (T&0xff);
+      if (type > 2 && x > xlnt - 3 || type > 1 && x > xlnt - 2) { printf("Format error.\n"); return EXIT_FAILURE; }
+      printf("{ %u, %2u, %u, %3u", lastx, direction, type, room);
       if (type > 1) printf(", "), PutMsg(travel[++x]);
       if (type > 2) {
          unsigned T = (unsigned)travel[++x];
          printf(", %2u, %3u", (T>>8)&0xff, T&0xff);
       }
-      printf("},\n");
+      printf(" },\n");
    }
 // /objcts/: (eqo)
    printf("\n");
@@ -119,14 +131,32 @@ int main(void) {
    printf("────────────\n");
    const int omax = 220;
    int olnt = GetWord(IndexF);
-   int odesc1[220], odesc2[220], odesco[220], oactio[220], oflag1[220], oflag2[220], ofval[220], otval[220], osize[220], ocapac[220], oroom[220], oadv[220], ocan[220], oread[220];
-   for (int o = 0; o < omax; o++) odesc1[o] = 0, odesc2[o] = 0, odesco[o] = 0, oactio[o] = 0, oflag1[o] = 0, oflag2[o] = 0, ofval[o] = 0, otval[o] = 0, osize[o] = 0, ocapac[o] = 0, oroom[o] = 0, oadv[o] = 0, ocan[o] = 0, oread[o] = 0;
-   GetWords(olnt, odesc1, IndexF), GetWords(olnt, odesc2, IndexF), GetWords(olnt, odesco, IndexF), GetWords(olnt, oactio, IndexF), GetWords(olnt, oflag1, IndexF), GetWords(olnt, oflag2, IndexF), GetWords(olnt, ofval, IndexF), GetWords(olnt, otval, IndexF), GetWords(olnt, osize, IndexF), GetWords(olnt, ocapac, IndexF), GetWords(olnt, oroom, IndexF), GetWords(olnt, oadv, IndexF), GetWords(olnt, ocan, IndexF), GetWords(olnt, oread, IndexF);
+   int odesc1[220], odesc2[220], odesco[220];
+   int oactio[220], oflag1[220], oflag2[220];
+   int ofval[220], otval[220], osize[220], ocapac[220];
+   int oroom[220], oadv[220], ocan[220], oread[220];
+   for (int o = 0; o < omax; o++)
+      odesc1[o] = 0, odesc2[o] = 0, odesco[o] = 0,
+      oactio[o] = 0, oflag1[o] = 0, oflag2[o] = 0,
+      ofval[o] = 0, otval[o] = 0, osize[o] = 0, ocapac[o] = 0,
+      oroom[o] = 0, oadv[o] = 0, ocan[o] = 0, oread[o] = 0;
+   GetWords(olnt, odesc1, IndexF), GetWords(olnt, odesc2, IndexF), GetWords(olnt, odesco, IndexF),
+   GetWords(olnt, oactio, IndexF), GetWords(olnt, oflag1, IndexF), GetWords(olnt, oflag2, IndexF),
+   GetWords(olnt, ofval, IndexF), GetWords(olnt, otval, IndexF), GetWords(olnt, osize, IndexF), GetWords(olnt, ocapac, IndexF),
+   GetWords(olnt, oroom, IndexF), GetWords(olnt, oadv, IndexF), GetWords(olnt, ocan, IndexF), GetWords(olnt, oread, IndexF);
    printf("/objcts/: %d of %d objects { desc1, desc2, desco, actio, flag1, flag2, fval, tval, size, capac, room, adv, can, read; }\n", olnt, omax);
    for (int o = 0; o < olnt; o++)
-      printf("{ "), PutMsg(odesc1[o]), printf(", "), PutMsg(odesc2[o]), printf(", "), PutMsg(odesco[o]), printf(", %3d, 0x%04x, 0x%04x, %2d, %2d, %5d, %5d, %5d, %d, %3d, ", oactio[o], (unsigned)oflag1[o] & 0xffff, (unsigned)oflag2[o] & 0xffff, ofval[o], otval[o], osize[o], ocapac[o], oroom[o], oadv[o], ocan[o]), PutMsg(oread[o]), printf(" },\n");
+      printf("{ "), PutMsg(odesc1[o]), printf(", "), PutMsg(odesc2[o]), printf(", "), PutMsg(odesco[o]),
+      printf(", %3d, 0x%04x, 0x%04x, %2d, %2d, %5d, %5d, %5d, %d, %3d, ",
+         oactio[o], (unsigned)oflag1[o] & 0xffff, (unsigned)oflag2[o] & 0xffff,
+         ofval[o], otval[o], osize[o], ocapac[o],
+         oroom[o], oadv[o], ocan[o]
+      ), PutMsg(oread[o]), printf(" },\n");
+// /oindex/:
+   const int BalloOX = 98;
+// /state/ (continued):
    bloc = oroom[BalloOX - 1];
-   printf("/state/ bloc: %d = oroom[%d]\n", bloc, BalloOX);
+   printf("/state/ bloc: %d = oroom[%d-1]\n", bloc, BalloOX);
 // /oroom2/:
    printf("\n");
    printf("Room 2 Table\n");
@@ -167,8 +197,10 @@ int main(void) {
    const int amax = 4;
    int alnt = GetWord(IndexF);
    int aroom[4], ascore[4], avehic[4], aobj[4], aactio[4], astren[4], aflag[4];
-   for (int a = 0; a < amax; a++) aroom[a] = 0, ascore[a] = 0, avehic[a] = 0, aobj[a] = 0, aactio[a] = 0, astren[a] = 0, aflag[a] = 0;
-   GetWords(alnt, aroom, IndexF), GetWords(alnt, ascore, IndexF), GetWords(alnt, avehic, IndexF), GetWords(alnt, aobj, IndexF), GetWords(alnt, aactio, IndexF), GetWords(alnt, astren, IndexF), GetWords(alnt, aflag, IndexF);
+   for (int a = 0; a < amax; a++)
+      aroom[a] = 0, ascore[a] = 0, avehic[a] = 0, aobj[a] = 0, aactio[a] = 0, astren[a] = 0, aflag[a] = 0;
+   GetWords(alnt, aroom, IndexF), GetWords(alnt, ascore, IndexF), GetWords(alnt, avehic, IndexF),
+   GetWords(alnt, aobj, IndexF), GetWords(alnt, aactio, IndexF), GetWords(alnt, astren, IndexF), GetWords(alnt, aflag, IndexF);
    printf("/advs/: %d of %d adventurers { room, score, vehic, obj, actio, stren, flag; }\n", alnt, amax);
    for (int a = 0; a < alnt; a++) printf("{ %3d, %d, %d, %3d, %d, %d, 0x%02x },\n", aroom[a], ascore[a], avehic[a], aobj[a], aactio[a], astren[a], (unsigned)aflag[a]);
 // /star/:
@@ -180,8 +212,8 @@ int main(void) {
    printf("─────────────\n");
    const int mmax = 1700;
    int mlnt = GetWord(IndexF);
-   int rtext[1700]; for (int m = 0; m < mmax; m++) rtext[m] = 0;
-   GetWords(mlnt, rtext, IndexF);
+   long rtext[1700]; for (int m = 0; m < mmax; m++) rtext[m] = 0L;
+   GetLongs(mlnt, rtext, IndexF);
    printf("/rmsg/: %d of %d messages { text; }\n", mlnt, mmax);
    for (int m = 0; m < mlnt; m++) PutMsg(rtext[m]), printf(",\n");
 // Initialization done.
@@ -189,21 +221,23 @@ int main(void) {
    if (IOErrs > 0) { printf("I can't read %s: %d error(s) found.", MyIndexFile, IOErrs); return EXIT_FAILURE; }
    const char *MyStoryFile = "dtext.dat";
    FILE *StoryF = fopen(MyStoryFile, "rb"); if (StoryF == NULL) { printf("I can't open %s.\n", MyStoryFile); return EXIT_FAILURE; }
-   printf("Message Table:\n");
+   putchar('\n');
+   printf("String Table\n");
+   printf("────────────\n");
    long exx = 0L;
-   int ix; char buf[0x80];
+   char buf[0x80];
    const size_t bufn = sizeof buf;
    buf[bufn - 1] = '\0';
    for (int m = 0; m < mlnt; m++) {
       long x = rtext[m];
       if (x >= exx) continue; else exx = x, x = -x;
-      size_t n; bool last = true;
-      do {
-         if (last) printf("#%06ld", x); else printf("       ");
+      size_t n; bool first = true, last = false;
+      while (!last) {
+         if (first) printf("#%06ld", x), first = false; else printf("       ");
          last = GetRec(StoryF, &x, &n, buf);
          printf(":%s\n", buf);
          x++;
-      } while (!last);
+      }
    }
    fclose(StoryF);
    return EXIT_SUCCESS;

@@ -623,7 +623,7 @@ L41000:
       i__2 = i + 9;
       l = min(i__2, k);
       printf("%3d-%3d   ", i, l);
-      for (l1 = i; l1 <= l; ++l1) printf(" %6d", rmsg.rtext[l1 - 1]);
+      for (l1 = i; l1 <= l; ++l1) printf(" %6ld", rmsg.rtext[l1 - 1]);
       more_output("\n");
 // L41100:
    }

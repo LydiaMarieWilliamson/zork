@@ -333,3 +333,6 @@ C99 (C2021) Translation & Upgrades
 2021/11/07	Reconciled the messaging routine in dsub.{c,f}.
 		Resolved partly in favor of the 1991 C translation: replaced record-based I/O by streaming I/O.
 		Resolved partly in favor of the 2021 C translation and Fortran version: replaced character I/O by buffered I/O.
+2021/11/09	Upgraded the type of absolute references (e.g. in rtext[]/RTEXT and PutMsg()/PUTMSG) to long integer/INTEGER*4.
+2021/11/11	Completion of the Fortran version of the database decompiler.
+		Minor revisions in the C version of the database decompiler and output.

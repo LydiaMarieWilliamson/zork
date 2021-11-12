@@ -124,7 +124,7 @@ FILE *StoryF;
 
 // mindex.h:
 // common /rmsg/
-// int mlnt, rtext[1700];
+// int mlnt; long rtext[1700];
 struct rmsgCB rmsg;
 
 // exits.h:
